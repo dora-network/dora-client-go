@@ -9,5 +9,5 @@
 package doraclient
 
 type BalancesResponse struct {
-	Balances []interface{} `json:"balances,omitempty"`
+	Balances []Position `json:"balances,omitempty"`
 }

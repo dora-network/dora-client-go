@@ -9,5 +9,5 @@
 package doraclient
 
 type PositionResponse struct {
-	Position *interface{} `json:"position,omitempty"`
+	Portfolio *Portfolio `json:"portfolio,omitempty"`
 }

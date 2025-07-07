@@ -12,5 +12,5 @@ type SupplyResponse struct {
 	PositionId string `json:"position_id,omitempty"`
 	TransactionId string `json:"transaction_id,omitempty"`
 	AssetId string `json:"asset_id,omitempty"`
-	Decimal string `json:"decimal,omitempty"`
+	Quantity string `json:"quantity,omitempty"`
 }

@@ -21,70 +21,160 @@ All URIs are relative to *https://localhost:8080/v1*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*DefaultApi* | [**CreateAsset**](docs/DefaultApi.md#createasset) | **Post** /assets | Create an asset
-*DefaultApi* | [**CreateUser**](docs/DefaultApi.md#createuser) | **Post** /user | Create a new user
+*DefaultApi* | [**CancelAllOpenOrders**](docs/DefaultApi.md#cancelallopenorders) | **Delete** /orders | Cancel all open orders
+*DefaultApi* | [**CancelOrderById**](docs/DefaultApi.md#cancelorderbyid) | **Delete** /orders/{order_id} | Cancel an order by ID
+*DefaultApi* | [**CreateOrder**](docs/DefaultApi.md#createorder) | **Post** /orders | Create a new order
 *DefaultApi* | [**DeleteUser**](docs/DefaultApi.md#deleteuser) | **Delete** /user/{id} | Delete user by ID
+*DefaultApi* | [**GetAllAssetPrices**](docs/DefaultApi.md#getallassetprices) | **Get** /price | Get the current price of all assets
 *DefaultApi* | [**GetAssetById**](docs/DefaultApi.md#getassetbyid) | **Get** /assets/{id} | Get asset by ID
-*DefaultApi* | [**GetLedgerBalancesByUserID**](docs/DefaultApi.md#getledgerbalancesbyuserid) | **Get** /ledger/balances/{user_id} | Get a specific user&#x27;s available, locked, and borrowed assets
+*DefaultApi* | [**GetAssetPrice**](docs/DefaultApi.md#getassetprice) | **Get** /price/asset/{asset_id} | Get the current price of an asset
+*DefaultApi* | [**GetCandleData**](docs/DefaultApi.md#getcandledata) | **Get** /charts/candle/{orderbook} | Get candlestick data for an orderbook
+*DefaultApi* | [**GetCouponsByAssetId**](docs/DefaultApi.md#getcouponsbyassetid) | **Get** /assets/{id}/coupons | Get coupons for a bond asset
+*DefaultApi* | [**GetL3Depth**](docs/DefaultApi.md#getl3depth) | **Get** /orderbooks/{id}/orders | Get all open orders for a specific orderbook (L3 market depth)
+*DefaultApi* | [**GetL3Depth_0**](docs/DefaultApi.md#getl3depth_0) | **Get** /orderbooks/{id}/L3 | Get all open orders for a specific orderbook (L3 market depth)
 *DefaultApi* | [**GetLedgerBalancesSelf**](docs/DefaultApi.md#getledgerbalancesself) | **Get** /ledger/balances/self | Get your own available, locked, and borrowed assets
-*DefaultApi* | [**GetLedgerInterestByUserID**](docs/DefaultApi.md#getledgerinterestbyuserid) | **Get** /ledger/interest/{user_id} | Get a specific user&#x27;s interest
 *DefaultApi* | [**GetLedgerInterestSelf**](docs/DefaultApi.md#getledgerinterestself) | **Get** /ledger/interest/self | Get your own interest
 *DefaultApi* | [**GetLedgerModule**](docs/DefaultApi.md#getledgermodule) | **Get** /ledger/module | Get the entire module object, including unborrowed leverage assets and total leverage trackers
 *DefaultApi* | [**GetLedgerModuleByAsset**](docs/DefaultApi.md#getledgermodulebyasset) | **Get** /ledger/module/{asset_id} | Get the module object for a single asset ID
-*DefaultApi* | [**GetLedgerPositionsByUserID**](docs/DefaultApi.md#getledgerpositionsbyuserid) | **Get** /ledger/positions/{user_id} | Get a specific user&#x27;s positions
 *DefaultApi* | [**GetLedgerPositionsSelf**](docs/DefaultApi.md#getledgerpositionsself) | **Get** /ledger/positions/self | Get your own positions
-*DefaultApi* | [**GetLedgerValueByUserID**](docs/DefaultApi.md#getledgervaluebyuserid) | **Get** /ledger/value/{user_id} | Get a specific user&#x27;s available, locked, and borrowed USD value
-*DefaultApi* | [**GetLedgerValueSelf**](docs/DefaultApi.md#getledgervalueself) | **Get** /ledger/value/self | Get your own available, locked, and borrowed USD value
-*DefaultApi* | [**GetLeverageLiquidationTargets**](docs/DefaultApi.md#getleverageliquidationtargets) | **Get** /leverage/liquidation-targets | Get a list of users who are eligible for automatic liquidation
+*DefaultApi* | [**GetLedgerValueSelf**](docs/DefaultApi.md#getledgervalueself) | **Get** /ledger/value/self | Get your own available, locked, and borrowed USD value; and realized and unrealized PnL
+*DefaultApi* | [**GetOrderById**](docs/DefaultApi.md#getorderbyid) | **Get** /orders/{order_id} | Get order by ID
+*DefaultApi* | [**GetOrderbookById**](docs/DefaultApi.md#getorderbookbyid) | **Get** /orderbooks/{id} | Get orderbook by ID
+*DefaultApi* | [**GetOrderbookDepth**](docs/DefaultApi.md#getorderbookdepth) | **Get** /orderbooks/{id}/depth | Get the aggregated price levels for a specific orderbook (L2 market depth)
+*DefaultApi* | [**GetOrderbookDepth_0**](docs/DefaultApi.md#getorderbookdepth_0) | **Get** /orderbooks/{id}/L2 | Get the aggregated price levels for a specific orderbook (L2 market depth)
+*DefaultApi* | [**GetOrderbookSummary**](docs/DefaultApi.md#getorderbooksummary) | **Get** /orderbooks/{id}/summary | Get summary of an orderbook
+*DefaultApi* | [**GetOrderbookTop**](docs/DefaultApi.md#getorderbooktop) | **Get** /orderbooks/{id}/top | Get the top price levels for a specific orderbook (L1 market depth)
+*DefaultApi* | [**GetOrderbookTop_0**](docs/DefaultApi.md#getorderbooktop_0) | **Get** /orderbooks/{id}/L1 | Get the top price levels for a specific orderbook (L1 market depth)
+*DefaultApi* | [**GetPoolPrice**](docs/DefaultApi.md#getpoolprice) | **Get** /price/pool/{pool_id} | Get the current price of a pool
+*DefaultApi* | [**GetTradeById**](docs/DefaultApi.md#gettradebyid) | **Get** /trade/{id} | Get a trade by ID
+*DefaultApi* | [**GetTrades**](docs/DefaultApi.md#gettrades) | **Get** /trade | Get a filtered, paginated list of trades
 *DefaultApi* | [**GetTransactionById**](docs/DefaultApi.md#gettransactionbyid) | **Get** /transactions/{id} | Get a transaction by ID
 *DefaultApi* | [**GetTransactions**](docs/DefaultApi.md#gettransactions) | **Get** /transactions | Get a filtered, paginated list of transactions
 *DefaultApi* | [**GetUserById**](docs/DefaultApi.md#getuserbyid) | **Get** /user/{id} | Get user by ID
-*DefaultApi* | [**GetUsers**](docs/DefaultApi.md#getusers) | **Get** /user | Get all users (admin only)
+*DefaultApi* | [**GetUserLedgerStream**](docs/DefaultApi.md#getuserledgerstream) | **Get** /user/{id}/ledger/stream | Get a snapshot of user&#x27;s ledger updates since a specific time, and opens a stream for further updates
+*DefaultApi* | [**GetUserOrdersStream**](docs/DefaultApi.md#getuserordersstream) | **Get** /user/{id}/orders/stream | Get a snapshot of user&#x27;s order updates since a specific time, and opens a stream for further updates
+*DefaultApi* | [**GetUserTransactionsStream**](docs/DefaultApi.md#getusertransactionsstream) | **Get** /user/{id}/transactions/stream | Get a snapshot of user&#x27;s executed transactions since a specific time, and opens a stream for further updates
 *DefaultApi* | [**LedgerDeposit**](docs/DefaultApi.md#ledgerdeposit) | **Post** /ledger/deposit | Deposit assets into your account from the outside world
-*DefaultApi* | [**LedgerFund**](docs/DefaultApi.md#ledgerfund) | **Post** /ledger/fund | Add or remove funds from a user
 *DefaultApi* | [**LedgerWithdraw**](docs/DefaultApi.md#ledgerwithdraw) | **Post** /ledger/withdraw | Withdraw assets from your account to the outside world
 *DefaultApi* | [**LeverageBorrow**](docs/DefaultApi.md#leverageborrow) | **Post** /leverage/borrow | Directly borrow assets
+*DefaultApi* | [**LeverageIsolateCollateral**](docs/DefaultApi.md#leverageisolatecollateral) | **Post** /leverage/isolate_collateral | Create an isolated position by transferring collateral to the position from the user&#x27;s global collateral
+*DefaultApi* | [**LeverageIsolatePosition**](docs/DefaultApi.md#leverageisolateposition) | **Post** /leverage/isolate_position | Create an isolated position using all collateral, supplied_collateral, and borrows from the user&#x27;s global position
 *DefaultApi* | [**LeverageRepay**](docs/DefaultApi.md#leveragerepay) | **Post** /leverage/repay | Repay borrowed assets
 *DefaultApi* | [**LeverageSupply**](docs/DefaultApi.md#leveragesupply) | **Post** /leverage/supply | Supply leverage for a specific asset
+*DefaultApi* | [**LeverageUnite**](docs/DefaultApi.md#leverageunite) | **Post** /leverage/unite | Combines all isolated positions into a single global position
 *DefaultApi* | [**LeverageWithdraw**](docs/DefaultApi.md#leveragewithdraw) | **Post** /leverage/withdraw | Withdraw leverage for a specific asset
 *DefaultApi* | [**LiquidityAdd**](docs/DefaultApi.md#liquidityadd) | **Post** /liquidity/pool/{pool_id}/add | Add liquidity to a pool
 *DefaultApi* | [**LiquiditySubtract**](docs/DefaultApi.md#liquiditysubtract) | **Post** /liquidity/pool/{pool_id}/subtract | Subtract liquidity from a pool
 *DefaultApi* | [**ListAssets**](docs/DefaultApi.md#listassets) | **Get** /assets | List assets
-*DefaultApi* | [**UpdateAsset**](docs/DefaultApi.md#updateasset) | **Put** /assets/{id} | Update asset by ID
-*DefaultApi* | [**UpdateUser**](docs/DefaultApi.md#updateuser) | **Put** /user/{id} | Update user by ID (admin only)
+*DefaultApi* | [**ListOrderBooks**](docs/DefaultApi.md#listorderbooks) | **Get** /orderbooks | List order books
+*DefaultApi* | [**ListOrders**](docs/DefaultApi.md#listorders) | **Get** /orders | List all orders
+*DefaultApi* | [**StreamAssetPrices**](docs/DefaultApi.md#streamassetprices) | **Get** /price/stream | Get a snapshot of asset prices from a specific date and open a stream for real-time updates
+*DefaultApi* | [**StreamCandleData**](docs/DefaultApi.md#streamcandledata) | **Get** /charts/candle/stream/{orderbook} | Get a snapshot of candlestick data from date provided, and open a stream for real-time updates
+*DefaultApi* | [**StreamOrderBookBalances**](docs/DefaultApi.md#streamorderbookbalances) | **Get** /orderbooks/{id}/stream/balances | Get a snapshot of base and quote balances for an order book and open a stream for real-time updates
+*DefaultApi* | [**StreamOrderbookOpenOrders**](docs/DefaultApi.md#streamorderbookopenorders) | **Get** /orderbooks/{id}/stream/open | Get a snapshot of open orders in an order book and open a stream for real-time updates
+*DefaultApi* | [**StreamTrades**](docs/DefaultApi.md#streamtrades) | **Get** /trade/stream | Get a snapshot of trades from a specific date and open a stream for real-time updates
+*DefaultApi* | [**UpdateUserConfig**](docs/DefaultApi.md#updateuserconfig) | **Put** /user/{id}/config | Update user configuration by ID
+*DefaultApi* | [**VerifyUser**](docs/DefaultApi.md#verifyuser) | **Put** /user/{id}/verify | Verify a user by ID
 
 ## Documentation For Models
 
  - [Asset](docs/Asset.md)
+ - [AssetPrice](docs/AssetPrice.md)
  - [BalancesResponse](docs/BalancesResponse.md)
  - [Bond](docs/Bond.md)
+ - [Candle](docs/Candle.md)
+ - [CouponResponse](docs/CouponResponse.md)
  - [CreateAssetReq](docs/CreateAssetReq.md)
  - [CreateAssetReqCapabilities](docs/CreateAssetReqCapabilities.md)
  - [CreateBondReq](docs/CreateBondReq.md)
- - [CreateOrUpdateResponse](docs/CreateOrUpdateResponse.md)
+ - [CreateCouponReq](docs/CreateCouponReq.md)
+ - [CreateOrUpdateUserResponse](docs/CreateOrUpdateUserResponse.md)
+ - [CreateOrderBookRequest](docs/CreateOrderBookRequest.md)
+ - [CreateOrderBookResponse](docs/CreateOrderBookResponse.md)
+ - [CreateOrderRequest](docs/CreateOrderRequest.md)
  - [CreateUserRequest](docs/CreateUserRequest.md)
  - [FundUserRequest](docs/FundUserRequest.md)
  - [FundUserResponse](docs/FundUserResponse.md)
  - [InlineResponse200](docs/InlineResponse200.md)
  - [InlineResponse2001](docs/InlineResponse2001.md)
+ - [InlineResponse20010](docs/InlineResponse20010.md)
+ - [InlineResponse20011](docs/InlineResponse20011.md)
+ - [InlineResponse20012](docs/InlineResponse20012.md)
+ - [InlineResponse20013](docs/InlineResponse20013.md)
+ - [InlineResponse20014](docs/InlineResponse20014.md)
+ - [InlineResponse20015](docs/InlineResponse20015.md)
+ - [InlineResponse20015Data](docs/InlineResponse20015Data.md)
+ - [InlineResponse20016](docs/InlineResponse20016.md)
+ - [InlineResponse20017](docs/InlineResponse20017.md)
+ - [InlineResponse20018](docs/InlineResponse20018.md)
+ - [InlineResponse20019](docs/InlineResponse20019.md)
+ - [InlineResponse2002](docs/InlineResponse2002.md)
+ - [InlineResponse20020](docs/InlineResponse20020.md)
+ - [InlineResponse20021](docs/InlineResponse20021.md)
+ - [InlineResponse20022](docs/InlineResponse20022.md)
+ - [InlineResponse20023](docs/InlineResponse20023.md)
+ - [InlineResponse20024](docs/InlineResponse20024.md)
+ - [InlineResponse20025](docs/InlineResponse20025.md)
+ - [InlineResponse20026](docs/InlineResponse20026.md)
+ - [InlineResponse20027](docs/InlineResponse20027.md)
+ - [InlineResponse20028](docs/InlineResponse20028.md)
+ - [InlineResponse20029](docs/InlineResponse20029.md)
+ - [InlineResponse2003](docs/InlineResponse2003.md)
+ - [InlineResponse20030](docs/InlineResponse20030.md)
+ - [InlineResponse2004](docs/InlineResponse2004.md)
+ - [InlineResponse2005](docs/InlineResponse2005.md)
+ - [InlineResponse2006](docs/InlineResponse2006.md)
+ - [InlineResponse2007](docs/InlineResponse2007.md)
+ - [InlineResponse2008](docs/InlineResponse2008.md)
+ - [InlineResponse2009](docs/InlineResponse2009.md)
  - [InlineResponse201](docs/InlineResponse201.md)
- - [InlineResponse201Data](docs/InlineResponse201Data.md)
- - [InlineResponse404](docs/InlineResponse404.md)
+ - [InlineResponse2011](docs/InlineResponse2011.md)
+ - [InlineResponse2012](docs/InlineResponse2012.md)
+ - [InlineResponse2013](docs/InlineResponse2013.md)
+ - [InlineResponse2014](docs/InlineResponse2014.md)
+ - [InlineResponse2015](docs/InlineResponse2015.md)
+ - [InlineResponse2016](docs/InlineResponse2016.md)
+ - [InlineResponse204](docs/InlineResponse204.md)
+ - [InlineResponse400](docs/InlineResponse400.md)
+ - [IsolateCollateralRequest](docs/IsolateCollateralRequest.md)
+ - [IsolateCollateralResponse](docs/IsolateCollateralResponse.md)
+ - [IsolatePositionRequest](docs/IsolatePositionRequest.md)
+ - [IsolatePositionResponse](docs/IsolatePositionResponse.md)
  - [LeverageBalanceResponse](docs/LeverageBalanceResponse.md)
  - [LeverageModuleResponse](docs/LeverageModuleResponse.md)
  - [LiquidityRequest](docs/LiquidityRequest.md)
  - [LiquidityResponse](docs/LiquidityResponse.md)
  - [Metadata](docs/Metadata.md)
+ - [ModuleBalance](docs/ModuleBalance.md)
+ - [Order](docs/Order.md)
+ - [OrderBook](docs/OrderBook.md)
+ - [OrderBookDepth](docs/OrderBookDepth.md)
+ - [OrderBookSummary](docs/OrderBookSummary.md)
+ - [OrderBookTop](docs/OrderBookTop.md)
+ - [OrderId](docs/OrderId.md)
+ - [OrderbookBalance](docs/OrderbookBalance.md)
+ - [PoolPrice](docs/PoolPrice.md)
+ - [Portfolio](docs/Portfolio.md)
+ - [Position](docs/Position.md)
  - [PositionResponse](docs/PositionResponse.md)
+ - [PriceLevel](docs/PriceLevel.md)
  - [ResponseEnvelope](docs/ResponseEnvelope.md)
  - [SupplyRequest](docs/SupplyRequest.md)
  - [SupplyResponse](docs/SupplyResponse.md)
- - [TransactionResponse](docs/TransactionResponse.md)
+ - [Trade](docs/Trade.md)
+ - [TradeResponse](docs/TradeResponse.md)
+ - [Transaction](docs/Transaction.md)
+ - [TransformedAssets](docs/TransformedAssets.md)
+ - [UnitePositionRequest](docs/UnitePositionRequest.md)
+ - [UnitePositionResponse](docs/UnitePositionResponse.md)
  - [UpdateAssetReq](docs/UpdateAssetReq.md)
  - [UpdateBondReq](docs/UpdateBondReq.md)
  - [UpdateFieldDateTime](docs/UpdateFieldDateTime.md)
  - [UpdateFieldString](docs/UpdateFieldString.md)
  - [UpdateFieldUuid](docs/UpdateFieldUuid.md)
+ - [UpdateOrderBookRequest](docs/UpdateOrderBookRequest.md)
+ - [UpdateOrderBookResponse](docs/UpdateOrderBookResponse.md)
+ - [UpdateUserConfigRequest](docs/UpdateUserConfigRequest.md)
  - [UpdateUserRequest](docs/UpdateUserRequest.md)
  - [User](docs/User.md)
  - [UserInterestResponse](docs/UserInterestResponse.md)

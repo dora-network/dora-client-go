@@ -9,5 +9,6 @@
 package doraclient
 
 type LeverageModuleResponse struct {
-	LeverageModule *interface{} `json:"leverage_module,omitempty"`
+	// A map of asset IDs to their module balances
+	Balances map[string]ModuleBalance `json:"balances,omitempty"`
 }

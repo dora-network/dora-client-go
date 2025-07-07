@@ -4,6 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **UserId** | **string** |  | [optional] [default to null]
+**PositionId** | **string** |  | [optional] [default to null]
 **AssetId** | **string** |  | [optional] [default to null]
 **FinalAmount** | **string** |  | [optional] [default to null]
 

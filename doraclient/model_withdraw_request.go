@@ -11,5 +11,5 @@ package doraclient
 type WithdrawRequest struct {
 	PositionId string `json:"position_id,omitempty"`
 	AssetId string `json:"asset_id,omitempty"`
-	Decimal string `json:"decimal,omitempty"`
+	Quantity string `json:"quantity,omitempty"`
 }
