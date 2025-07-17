@@ -1,12 +1,14 @@
 openapi: 3.0.3
 info:
   title: DORA
-  version: 0.1.0
+  version: 1.0.0
 servers:
-- url: https://localhost:8080/v1
+- url: https://localhost:8084/v1
   description: local DORA server
+- url: https://dora-polished-pond-6585.fly.dev/
+  description: DORA staging server
 paths:
-  /assets:
+  /v1/assets:
     get:
       summary: List assets
       operationId: listAssets
@@ -105,7 +107,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
-  /assets/{id}:
+  /v1/assets/{id}:
     get:
       summary: Get asset by ID
       operationId: getAssetById
@@ -137,7 +139,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
-  /assets/{id}/coupons:
+  /v1/assets/{id}/coupons:
     get:
       summary: Get coupons for a bond asset
       operationId: getCouponsByAssetId
@@ -201,12 +203,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
-  /user/{id}:
+  /v1/user/{user_id}:
     get:
       summary: Get user by ID
       operationId: getUserById
       parameters:
-      - name: id
+      - name: user_id
         in: path
         required: true
         style: simple
@@ -243,7 +245,7 @@ paths:
       summary: Delete user by ID
       operationId: deleteUser
       parameters:
-      - name: id
+      - name: user_id
         in: path
         required: true
         style: simple
@@ -276,12 +278,42 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
-  /user/{id}/config:
+  /v1/user/self:
+    get:
+      summary: Get user details for the authenticated user
+      operationId: getUserSelf
+      parameters: []
+      responses:
+        "200":
+          description: User details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/inline_response_200_3"
+        "400":
+          description: "Bad request, e.g. invalid query parameters"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+        "404":
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+  /v1/user/{user_id}/config:
     put:
       summary: Update user configuration by ID
       operationId: updateUserConfig
       parameters:
-      - name: id
+      - name: user_id
         in: path
         required: true
         style: simple
@@ -320,12 +352,48 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
-  /user/{id}/verify:
+  /v1/user/config/self:
+    put:
+      summary: Update user configuration for the authenticated user
+      operationId: updateUserConfigSelf
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateUserConfigRequest"
+        required: true
+      responses:
+        "200":
+          description: User configuration updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/inline_response_200_5"
+        "400":
+          description: "Bad request, e.g. invalid query parameters"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+        "404":
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+  /v1/user/{user_id}/verify:
     put:
       summary: Verify a user by ID
       operationId: verifyUser
       parameters:
-      - name: id
+      - name: user_id
         in: path
         required: true
         style: simple
@@ -358,13 +426,75 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
-  /user/{id}/orders/stream:
+  /v1/user/{user_id}/orders/{orderbook_id}/stream:
+    get:
+      summary: "Get a snapshot of user's order updates for the given order book since\
+        \ a specific time, and opens a stream for further updates"
+      operationId: getUserOrdersStream
+      parameters:
+      - name: user_id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+      - name: orderbook_id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+      - name: since
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          format: date-time
+      responses:
+        "200":
+          description: User's orders stream
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/inline_response_200_6"
+        "400":
+          description: "Bad request, e.g. invalid query parameters"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+        "401":
+          description: "Unauthorized, user not logged in or does not have access to\
+            \ this orderbook"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+        "404":
+          description: User not found or no orders available
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+  /v1/user/{user_id}/orders/all/stream:
     get:
       summary: "Get a snapshot of user's order updates since a specific time, and\
         \ opens a stream for further updates"
-      operationId: getUserOrdersStream
+      operationId: getUserOrdersStreamAll
       parameters:
-      - name: id
+      - name: user_id
         in: path
         required: true
         style: simple
@@ -422,13 +552,13 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
-  /user/{id}/ledger/stream:
+  /v1/user/{user_id}/ledger/stream:
     get:
       summary: "Get a snapshot of user's ledger updates since a specific time, and\
         \ opens a stream for further updates"
       operationId: getUserLedgerStream
       parameters:
-      - name: id
+      - name: user_id
         in: path
         required: true
         style: simple
@@ -476,13 +606,13 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
-  /user/{id}/transactions/stream:
+  /v1/user/{user_id}/transactions/stream:
     get:
       summary: "Get a snapshot of user's executed transactions since a specific time,\
         \ and opens a stream for further updates"
       operationId: getUserTransactionsStream
       parameters:
-      - name: id
+      - name: user_id
         in: path
         required: true
         style: simple
@@ -530,27 +660,38 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
-  /orderbooks:
+  /v1/orderbooks:
     get:
       summary: List order books
       operationId: listOrderBooks
       parameters:
-      - name: created_after
+      - name: status
         in: query
         required: false
         style: form
         explode: true
         schema:
           type: string
-          format: date-time
-      - name: created_before
+          enum:
+          - OPEN
+          - CLOSED
+          - SUSPENDED
+      - name: base_asset_id
         in: query
         required: false
         style: form
         explode: true
         schema:
           type: string
-          format: date-time
+          format: uuid
+      - name: quote_asset_id
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          format: uuid
       - name: page
         in: query
         required: false
@@ -592,12 +733,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
-  /orderbooks/{id}:
+  /v1/orderbooks/{orderbook_id}:
     get:
       summary: Get orderbook by ID
       operationId: getOrderbookById
       parameters:
-      - name: id
+      - name: orderbook_id
         in: path
         required: true
         style: simple
@@ -624,12 +765,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
-  /orderbooks/{id}/orders:
+  /v1/orderbooks/{orderbook_id}/orders:
     get:
       summary: Get all open orders for a specific orderbook (L3 market depth)
-      operationId: getL3Depth
+      operationId: getOrderbookOrders
       parameters:
-      - name: id
+      - name: orderbook_id
         in: path
         required: true
         style: simple
@@ -669,13 +810,13 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
-  /orderbooks/{id}/depth:
+  /v1/orderbooks/{orderbook_id}/depth:
     get:
       summary: Get the aggregated price levels for a specific orderbook (L2 market
         depth)
       operationId: getOrderbookDepth
       parameters:
-      - name: id
+      - name: orderbook_id
         in: path
         required: true
         style: simple
@@ -708,12 +849,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
-  /orderbooks/{id}/top:
+  /v1/orderbooks/{orderbook_id}/bbo:
     get:
       summary: Get the top price levels for a specific orderbook (L1 market depth)
-      operationId: getOrderbookTop
+      operationId: getOrderbookBBO
       parameters:
-      - name: id
+      - name: orderbook_id
         in: path
         required: true
         style: simple
@@ -746,12 +887,50 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
-  /orderbooks/{id}/L3:
+  /v1/orderbooks/{orderbook_id}/top:
+    get:
+      summary: Get the top price levels for a specific orderbook (L1 market depth)
+      operationId: getOrderbookTop
+      parameters:
+      - name: orderbook_id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          description: Top price levels data
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/inline_response_200_12"
+        "400":
+          description: "Bad request, e.g. invalid query parameters"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+        "404":
+          description: Orderbook not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+  /v1/orderbooks/{orderbook_id}/L3:
     get:
       summary: Get all open orders for a specific orderbook (L3 market depth)
       operationId: getL3Depth
       parameters:
-      - name: id
+      - name: orderbook_id
         in: path
         required: true
         style: simple
@@ -791,13 +970,13 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
-  /orderbooks/{id}/L2:
+  /v1/orderbooks/{orderbook_id}/L2:
     get:
       summary: Get the aggregated price levels for a specific orderbook (L2 market
         depth)
-      operationId: getOrderbookDepth
+      operationId: getL2Depth
       parameters:
-      - name: id
+      - name: orderbook_id
         in: path
         required: true
         style: simple
@@ -830,12 +1009,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
-  /orderbooks/{id}/L1:
+  /v1/orderbooks/{orderbook_id}/L1:
     get:
       summary: Get the top price levels for a specific orderbook (L1 market depth)
-      operationId: getOrderbookTop
+      operationId: getL1Depth
       parameters:
-      - name: id
+      - name: orderbook_id
         in: path
         required: true
         style: simple
@@ -868,12 +1047,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
-  /orderbooks/{id}/summary:
+  /v1/orderbooks/{orderbook_id}/summary:
     get:
       summary: Get summary of an orderbook
       operationId: getOrderbookSummary
       parameters:
-      - name: id
+      - name: orderbook_id
         in: path
         required: true
         style: simple
@@ -906,13 +1085,13 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
-  /orderbooks/{id}/stream/open:
+  /v1/orderbooks/{orderbook_id}/stream/open:
     get:
       summary: Get a snapshot of open orders in an order book and open a stream for
         real-time updates
       operationId: streamOrderbookOpenOrders
       parameters:
-      - name: id
+      - name: orderbook_id
         in: path
         required: true
         style: simple
@@ -953,13 +1132,13 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
-  /orderbooks/{id}/stream/balances:
+  /v1/orderbooks/{orderbook_id}/stream/balances:
     get:
       summary: Get a snapshot of base and quote balances for an order book and open
         a stream for real-time updates
       operationId: streamOrderBookBalances
       parameters:
-      - name: id
+      - name: orderbook_id
         in: path
         required: true
         style: simple
@@ -1000,7 +1179,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
-  /orders:
+  /v1/orders:
     get:
       summary: List all orders
       operationId: listOrders
@@ -1168,7 +1347,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
-  /orders/{order_id}:
+  /v1/orders/{order_id}:
     get:
       summary: Get order by ID
       operationId: getOrderById
@@ -1257,7 +1436,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
-  /charts/candle/{orderbook}:
+  /v1/charts/candle/{orderbook}:
     get:
       summary: Get candlestick data for an orderbook
       operationId: getCandleData
@@ -1324,12 +1503,19 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
-  /charts/candle/stream/{orderbook}:
+  /v1/charts/candle/stream/{orderbook}:
     get:
       summary: "Get a snapshot of candlestick data from date provided, and open a\
         \ stream for real-time updates"
       operationId: streamCandleData
       parameters:
+      - name: orderbook
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
       - name: since
         in: query
         required: false
@@ -1377,7 +1563,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
-  /ledger/module:
+  /v1/ledger/module:
     get:
       summary: "Get the entire module object, including unborrowed leverage assets\
         \ and total leverage trackers"
@@ -1401,7 +1587,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
-  /ledger/module/{asset_id}:
+  /v1/ledger/module/{asset_id}:
     get:
       summary: Get the module object for a single asset ID
       operationId: getLedgerModuleByAsset
@@ -1439,7 +1625,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
-  /ledger/positions/self:
+  /v1/ledger/positions/self:
     get:
       summary: Get your own positions
       operationId: getLedgerPositionsSelf
@@ -1468,7 +1654,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
-  /ledger/balances/self:
+  /v1/ledger/balances/self:
     get:
       summary: "Get your own available, locked, and borrowed assets"
       operationId: getLedgerBalancesSelf
@@ -1497,7 +1683,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
-  /ledger/value/self:
+  /v1/ledger/value/self:
     get:
       summary: "Get your own available, locked, and borrowed USD value; and realized\
         \ and unrealized PnL"
@@ -1527,7 +1713,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
-  /ledger/interest/self:
+  /v1/ledger/interest/self:
     get:
       summary: Get your own interest
       operationId: getLedgerInterestSelf
@@ -1556,7 +1742,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
-  /ledger/deposit:
+  /v1/ledger/deposit:
     post:
       summary: Deposit assets into your account from the outside world
       description: "TODO: finish this when implementation has been completed"
@@ -1586,7 +1772,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
-  /ledger/withdraw:
+  /v1/ledger/withdraw:
     post:
       summary: Withdraw assets from your account to the outside world
       description: "TODO: Finish this when implementation has been completed"
@@ -1616,25 +1802,26 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
-  /leverage/supply:
+  /v1/leverage/collateralize:
     post:
-      summary: Supply leverage for a specific asset
-      operationId: leverageSupply
+      summary: "Move supplied and available to supplied_collateral and collateral,\
+        \ for a specified position"
+      operationId: leverageCollateralize
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/SupplyRequest"
+              $ref: "#/components/schemas/CollateralizeRequest"
         required: true
       responses:
         "201":
-          description: Supply successful
+          description: Collateralize successful
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/inline_response_201_1"
         "400":
-          description: "Bad request, e.g. insufficient collateral or invalid parameters"
+          description: "Bad request, e.g. insufficient available or invalid parameters"
           content:
             application/json:
               schema:
@@ -1651,19 +1838,20 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
-  /leverage/withdraw:
+  /v1/leverage/de-collateralize:
     post:
-      summary: Withdraw leverage for a specific asset
-      operationId: leverageWithdraw
+      summary: "Move collateral and supplied_collateral to available and supplied,\
+        \ for a specified position."
+      operationId: leverageDeCollateralize
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/WithdrawRequest"
+              $ref: "#/components/schemas/DeCollateralizeRequest"
         required: true
       responses:
         "201":
-          description: Withdraw successful
+          description: Collateralize successful
           content:
             application/json:
               schema:
@@ -1686,20 +1874,19 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
-  /leverage/borrow:
+  /v1/leverage/supply:
     post:
-      summary: Directly borrow assets
-      description: "TODO: Finish this when implementation has been completed"
-      operationId: leverageBorrow
+      summary: Supply leverage for a specific asset
+      operationId: leverageSupply
       requestBody:
         content:
           application/json:
             schema:
-              type: object
+              $ref: "#/components/schemas/SupplyRequest"
         required: true
       responses:
         "201":
-          description: Borrow successful
+          description: Supply successful
           content:
             application/json:
               schema:
@@ -1722,56 +1909,19 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
-  /leverage/repay:
+  /v1/leverage/withdraw:
     post:
-      summary: Repay borrowed assets
-      description: "TODO: Finish this when implementation has been completed"
-      operationId: leverageRepay
+      summary: Withdraw leverage for a specific asset
+      operationId: leverageWithdraw
       requestBody:
         content:
           application/json:
             schema:
-              type: object
+              $ref: "#/components/schemas/WithdrawRequest"
         required: true
       responses:
         "201":
-          description: Repay successful
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/inline_response_201_3"
-        "400":
-          description: "Bad request, e.g. insufficient collateral or invalid parameters"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ResponseEnvelope"
-        "401":
-          description: "Unauthorized, e.g. user not logged in or invalid credentials"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ResponseEnvelope"
-        "500":
-          description: Internal server error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ResponseEnvelope"
-  /leverage/isolate_collateral:
-    post:
-      summary: Create an isolated position by transferring collateral to the position
-        from the user's global collateral
-      operationId: leverageIsolateCollateral
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/IsolateCollateralRequest"
-        required: true
-      responses:
-        "201":
-          description: Leverage position isolated
+          description: Withdraw successful
           content:
             application/json:
               schema:
@@ -1788,8 +1938,38 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
-        "404":
-          description: Leverage position not found
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+  /v1/leverage/borrow:
+    post:
+      summary: Directly borrow assets
+      description: "TODO: Finish this when implementation has been completed"
+      operationId: leverageBorrow
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+        required: true
+      responses:
+        "201":
+          description: Borrow successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/inline_response_201_5"
+        "400":
+          description: "Bad request, e.g. insufficient collateral or invalid parameters"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+        "401":
+          description: "Unauthorized, e.g. user not logged in or invalid credentials"
           content:
             application/json:
               schema:
@@ -1800,16 +1980,52 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
-  /leverage/isolate_position:
+  /v1/leverage/repay:
     post:
-      summary: "Create an isolated position using all collateral, supplied_collateral,\
-        \ and borrows from the user's global position"
-      operationId: leverageIsolatePosition
+      summary: Repay borrowed assets
+      description: "TODO: Finish this when implementation has been completed"
+      operationId: leverageRepay
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/IsolatePositionRequest"
+              type: object
+        required: true
+      responses:
+        "201":
+          description: Repay successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/inline_response_201_5"
+        "400":
+          description: "Bad request, e.g. insufficient collateral or invalid parameters"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+        "401":
+          description: "Unauthorized, e.g. user not logged in or invalid credentials"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+  /v1/leverage/isolate_collateral:
+    post:
+      summary: Create an isolated position by transferring collateral to the position
+        from the user's global collateral
+      operationId: leverageIsolateCollateral
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/IsolateCollateralRequest"
         required: true
       responses:
         "201":
@@ -1817,7 +2033,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/inline_response_201_5"
+                $ref: "#/components/schemas/inline_response_201_6"
         "400":
           description: "Bad request, e.g. insufficient collateral or invalid parameters"
           content:
@@ -1842,7 +2058,49 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
-  /leverage/unite:
+  /v1/leverage/isolate_position:
+    post:
+      summary: "Create an isolated position using all collateral, supplied_collateral,\
+        \ and borrows from the user's global position"
+      operationId: leverageIsolatePosition
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/IsolatePositionRequest"
+        required: true
+      responses:
+        "201":
+          description: Leverage position isolated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/inline_response_201_7"
+        "400":
+          description: "Bad request, e.g. insufficient collateral or invalid parameters"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+        "401":
+          description: "Unauthorized, e.g. user not logged in or invalid credentials"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+        "404":
+          description: Leverage position not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+  /v1/leverage/unite:
     post:
       summary: Combines all isolated positions into a single global position
       description: "TODO: Finish this when implementation has been completed"
@@ -1884,7 +2142,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
-  /liquidity/pool/{pool_id}/add:
+  /v1/liquidity/pool/{pool_id}/add:
     post:
       summary: Add liquidity to a pool
       operationId: liquidityAdd
@@ -1909,7 +2167,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/inline_response_201_6"
+                $ref: "#/components/schemas/inline_response_201_8"
         "400":
           description: "Bad request, e.g. insufficient funds or invalid parameters"
           content:
@@ -1934,7 +2192,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
-  /liquidity/pool/{pool_id}/subtract:
+  /v1/liquidity/pool/{pool_id}/subtract:
     post:
       summary: Subtract liquidity from a pool
       operationId: liquiditySubtract
@@ -1959,7 +2217,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/inline_response_201_6"
+                $ref: "#/components/schemas/inline_response_201_8"
         "400":
           description: "Bad request, e.g. insufficient funds or invalid parameters"
           content:
@@ -1984,7 +2242,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
-  /transactions:
+  /v1/transactions:
     get:
       summary: "Get a filtered, paginated list of transactions"
       operationId: getTransactions
@@ -2017,6 +2275,27 @@ paths:
           type: array
           items:
             type: string
+            enum:
+            - ACCRUE_INTEREST
+            - ADD_LIQUIDITY
+            - BOND_MATURE
+            - CLAIM_INTEREST
+            - CREDIT
+            - DEBIT
+            - EXTERNAL_DEPOSIT
+            - EXTERNAL_WITHDRAW
+            - FILL
+            - LENDING_INTEREST_ACCRUAL
+            - LIQUIDATE
+            - MATCH_ORDER
+            - PAY_INTEREST
+            - SUBTRACT_LIQUIDITY
+            - REPAY
+            - SUPPLY
+            - WITHDRAW
+            - ISOLATE_COLLATERAL
+            - ISOLATE_POSITION
+            - UNITE_POSITION
       - name: start
         in: query
         required: false
@@ -2068,7 +2347,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
-  /transactions/{id}:
+  /v1/transactions/{id}:
     get:
       summary: Get a transaction by ID
       operationId: getTransactionById
@@ -2106,7 +2385,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
-  /trade:
+  /v1/trade:
     get:
       summary: "Get a filtered, paginated list of trades"
       operationId: getTrades
@@ -2187,12 +2466,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
-  /trade/{id}:
+  /v1/trade/{trade_id}:
     get:
       summary: Get a trade by ID
       operationId: getTradeById
       parameters:
-      - name: id
+      - name: trade_id
         in: path
         required: true
         style: simple
@@ -2225,12 +2504,20 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
-  /trade/stream:
+  /v1/trade/{orderbook_id}/stream:
     get:
       summary: Get a snapshot of trades from a specific date and open a stream for
         real-time updates
       operationId: streamTrades
       parameters:
+      - name: orderbookId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
       - name: since
         in: query
         required: false
@@ -2239,16 +2526,6 @@ paths:
         schema:
           type: string
           format: date-time
-      - name: orderbookIds
-        in: query
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: array
-          items:
-            type: string
-            format: uuid
       responses:
         "200":
           description: Real-time trade updates
@@ -2268,7 +2545,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
-  /price:
+  /v1/price:
     get:
       summary: Get the current price of all assets
       operationId: getAllAssetPrices
@@ -2285,7 +2562,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
-  /price/asset/{asset_id}:
+  /v1/price/asset/{asset_id}:
     get:
       summary: Get the current price of an asset
       operationId: getAssetPrice
@@ -2323,7 +2600,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
-  /price/pool/{pool_id}:
+  /v1/price/pool/{pool_id}:
     get:
       summary: Get the current price of a pool
       operationId: getPoolPrice
@@ -2361,7 +2638,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
-  /price/stream:
+  /v1/price/stream:
     get:
       summary: Get a snapshot of asset prices from a specific date and open a stream
         for real-time updates
@@ -2922,6 +3199,9 @@ components:
           format: decimal
         kind:
           type: string
+          enum:
+          - MARKET
+          - LIMIT
         side:
           type: string
           description: "Required: Must be either 'BUY' or 'SELL'"
@@ -2937,6 +3217,8 @@ components:
           type: array
           items:
             type: string
+            enum:
+            - MAX_BUY
     OrderId:
       type: object
       properties:
@@ -3065,6 +3347,30 @@ components:
           additionalProperties:
             type: string
         borrowed:
+          type: object
+          additionalProperties:
+            type: string
+        notional_long:
+          type: object
+          additionalProperties:
+            type: string
+        notional_short:
+          type: object
+          additionalProperties:
+            type: string
+        portfolio_value:
+          type: object
+          additionalProperties:
+            type: string
+        net_liquidation_value:
+          type: object
+          additionalProperties:
+            type: string
+        unrealized_pnl:
+          type: object
+          additionalProperties:
+            type: string
+        realized_pnl:
           type: object
           additionalProperties:
             type: string
@@ -3251,6 +3557,60 @@ components:
           type: string
           format: decimal
     WithdrawResponse:
+      type: object
+      properties:
+        position_id:
+          type: string
+          format: uuid
+        transaction_id:
+          type: string
+          format: uuid
+        asset_id:
+          type: string
+          format: uuid
+        quantity:
+          type: string
+          format: decimal
+    CollateralizeRequest:
+      type: object
+      properties:
+        position_id:
+          type: string
+          format: uuid
+        asset_id:
+          type: string
+          format: uuid
+        quantity:
+          type: string
+          format: decimal
+    CollateralizeResponse:
+      type: object
+      properties:
+        position_id:
+          type: string
+          format: uuid
+        transaction_id:
+          type: string
+          format: uuid
+        asset_id:
+          type: string
+          format: uuid
+        quantity:
+          type: string
+          format: decimal
+    DeCollateralizeRequest:
+      type: object
+      properties:
+        position_id:
+          type: string
+          format: uuid
+        asset_id:
+          type: string
+          format: uuid
+        quantity:
+          type: string
+          format: decimal
+    DeCollateralizeResponse:
       type: object
       properties:
         position_id:
@@ -3463,18 +3823,9 @@ components:
         best_bid:
           type: string
           format: decimal
-        best_bid_quantity:
-          type: string
-          format: decimal
         best_ask:
           type: string
           format: decimal
-        best_ask_quantity:
-          type: string
-          format: decimal
-        timestamp:
-          type: string
-          format: date-time
     inline_response_200:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
@@ -3653,26 +4004,38 @@ components:
       - $ref: "#/components/schemas/ResponseEnvelope"
       - properties:
           data:
-            $ref: "#/components/schemas/SupplyResponse"
+            $ref: "#/components/schemas/CollateralizeResponse"
     inline_response_201_2:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
       - properties:
           data:
-            $ref: "#/components/schemas/WithdrawResponse"
+            $ref: "#/components/schemas/DeCollateralizeResponse"
     inline_response_201_3:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
       - properties:
           data:
-            type: object
+            $ref: "#/components/schemas/SupplyResponse"
     inline_response_201_4:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
       - properties:
           data:
-            $ref: "#/components/schemas/IsolateCollateralResponse"
+            $ref: "#/components/schemas/WithdrawResponse"
     inline_response_201_5:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            type: object
+    inline_response_201_6:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            $ref: "#/components/schemas/IsolateCollateralResponse"
+    inline_response_201_7:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
       - properties:
@@ -3690,7 +4053,7 @@ components:
       - properties:
           error:
             type: string
-    inline_response_201_6:
+    inline_response_201_8:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
       - properties:

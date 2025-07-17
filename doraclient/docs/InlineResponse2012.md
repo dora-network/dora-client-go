@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Data** | [***WithdrawResponse**](WithdrawResponse.md) |  | [optional] [default to null]
+**Data** | [***DeCollateralizeResponse**](DeCollateralizeResponse.md) |  | [optional] [default to null]
 **Error_** | **string** | The error message. Present for error (non-2xx) responses. | [optional] [default to null]
 **Metadata** | [***Metadata**](Metadata.md) |  | [optional] [default to null]
 
