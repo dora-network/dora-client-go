@@ -13,7 +13,7 @@ import (
 
 type Bond struct {
 	Id string `json:"id,omitempty"`
-	Kind string `json:"kind,omitempty"`
+	Kind *BondKind `json:"kind,omitempty"`
 	CouponStartAt time.Time `json:"coupon_start_at,omitempty"`
 	CreatedAt time.Time `json:"created_at,omitempty"`
 	FinalCouponAt time.Time `json:"final_coupon_at,omitempty"`

@@ -12,10 +12,13 @@ type Order struct {
 	Id string `json:"id,omitempty"`
 	OrderBookId string `json:"order_book_id,omitempty"`
 	Quantity string `json:"quantity,omitempty"`
-	Kind string `json:"kind,omitempty"`
+	Kind *OrderKind `json:"kind,omitempty"`
 	Price string `json:"price,omitempty"`
-	Status string `json:"status,omitempty"`
+	InverseLeverage float64 `json:"inverse_leverage,omitempty"`
+	Side *Side `json:"side,omitempty"`
+	Status *OrderStatus `json:"status,omitempty"`
 	UserId string `json:"user_id,omitempty"`
 	UserText string `json:"user_text,omitempty"`
-	OrderModifiers []string `json:"order_modifiers,omitempty"`
+	OrderModifiers []OrderModifierKind `json:"order_modifiers,omitempty"`
+	PositionId string `json:"position_id,omitempty"`
 }

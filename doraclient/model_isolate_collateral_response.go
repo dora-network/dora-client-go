@@ -9,9 +9,8 @@
 package doraclient
 
 type IsolateCollateralResponse struct {
-	GlobalPositionId string `json:"global_position_id,omitempty"`
-	IsolatedPositionId string `json:"isolated_position_id,omitempty"`
-	TransactionId string `json:"transaction_id,omitempty"`
-	AssetId string `json:"asset_id,omitempty"`
-	Quantity string `json:"quantity,omitempty"`
+	Data *IsolatedCollateral `json:"data,omitempty"`
+	// The error message. Present for error (non-2xx) responses.
+	Error_ string `json:"error,omitempty"`
+	Metadata *Metadata `json:"metadata,omitempty"`
 }

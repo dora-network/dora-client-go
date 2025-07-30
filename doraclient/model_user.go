@@ -21,9 +21,10 @@ type User struct {
 	PhotoUrl string `json:"photo_url,omitempty"`
 	Provider string `json:"provider,omitempty"`
 	ProviderId string `json:"provider_id,omitempty"`
-	Roles []string `json:"roles,omitempty"`
+	Roles []UserRole `json:"roles,omitempty"`
 	// User's timezone, e.g., 'America/New_York', or an offset.
 	Timezone string `json:"timezone,omitempty"`
 	// timezone offset in seconds
 	TimezoneOffset int32 `json:"timezone_offset,omitempty"`
+	VerifiedAt time.Time `json:"verified_at,omitempty"`
 }

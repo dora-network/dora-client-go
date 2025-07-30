@@ -3,12 +3,9 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**OrderBookId** | **string** |  | [optional] [default to null]
-**PositionId** | **string** |  | [optional] [default to null]
-**TransactionId** | **string** |  | [optional] [default to null]
-**BaseQuantity** | **string** |  | [optional] [default to null]
-**QuoteQuantity** | **string** |  | [optional] [default to null]
-**SharesQuantity** | **string** |  | [optional] [default to null]
+**Data** | [***Liquidity**](Liquidity.md) |  | [optional] [default to null]
+**Error_** | **string** | The error message. Present for error (non-2xx) responses. | [optional] [default to null]
+**Metadata** | [***Metadata**](Metadata.md) |  | [optional] [default to null]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

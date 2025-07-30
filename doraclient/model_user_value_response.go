@@ -9,13 +9,8 @@
 package doraclient
 
 type UserValueResponse struct {
-	Available map[string]string `json:"available,omitempty"`
-	Locked map[string]string `json:"locked,omitempty"`
-	Borrowed map[string]string `json:"borrowed,omitempty"`
-	NotionalLong map[string]string `json:"notional_long,omitempty"`
-	NotionalShort map[string]string `json:"notional_short,omitempty"`
-	PortfolioValue map[string]string `json:"portfolio_value,omitempty"`
-	NetLiquidationValue map[string]string `json:"net_liquidation_value,omitempty"`
-	UnrealizedPnl map[string]string `json:"unrealized_pnl,omitempty"`
-	RealizedPnl map[string]string `json:"realized_pnl,omitempty"`
+	Data *UserValue `json:"data,omitempty"`
+	// The error message. Present for error (non-2xx) responses.
+	Error_ string `json:"error,omitempty"`
+	Metadata *Metadata `json:"metadata,omitempty"`
 }

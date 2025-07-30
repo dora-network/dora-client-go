@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 **QuoteQuantity** | **float64** |  | [optional] [default to null]
 **QuoteAssetId** | **string** |  | [optional] [default to null]
 **SharesQuantity** | **float64** |  | [optional] [default to null]
-**Status** | **string** |  | [optional] [default to null]
+**Status** | [***OrderBookStatus**](OrderBookStatus.md) |  | [optional] [default to null]
 **TickSize** | **float64** |  | [optional] [default to null]
 **UpdatedAt** | [**time.Time**](time.Time.md) |  | [optional] [default to null]
 **HaltedAt** | [**time.Time**](time.Time.md) |  | [optional] [default to null]

@@ -11,11 +11,11 @@ Method | HTTP request | Description
 [**GetAllAssetPrices**](DefaultApi.md#GetAllAssetPrices) | **Get** /v1/price | Get the current price of all assets
 [**GetAssetById**](DefaultApi.md#GetAssetById) | **Get** /v1/assets/{id} | Get asset by ID
 [**GetAssetPrice**](DefaultApi.md#GetAssetPrice) | **Get** /v1/price/asset/{asset_id} | Get the current price of an asset
-[**GetCandleData**](DefaultApi.md#GetCandleData) | **Get** /v1/charts/candle/{orderbook} | Get candlestick data for an orderbook
-[**GetCouponsByAssetId**](DefaultApi.md#GetCouponsByAssetId) | **Get** /v1/assets/{id}/coupons | Get coupons for a bond asset
-[**GetL1Depth**](DefaultApi.md#GetL1Depth) | **Get** /v1/orderbooks/{orderbook_id}/L1 | Get the top price levels for a specific orderbook (L1 market depth)
-[**GetL2Depth**](DefaultApi.md#GetL2Depth) | **Get** /v1/orderbooks/{orderbook_id}/L2 | Get the aggregated price levels for a specific orderbook (L2 market depth)
-[**GetL3Depth**](DefaultApi.md#GetL3Depth) | **Get** /v1/orderbooks/{orderbook_id}/L3 | Get all open orders for a specific orderbook (L3 market depth)
+[**GetCandleData**](DefaultApi.md#GetCandleData) | **Get** /v1/charts/{orderbook}/candle | Get candlestick data for an orderbook
+[**GetCouponPaymentsByAssetId**](DefaultApi.md#GetCouponPaymentsByAssetId) | **Get** /v1/assets/{id}/coupon_payments | Get coupon payments for a bond asset
+[**GetL1Depth**](DefaultApi.md#GetL1Depth) | **Get** /v1/orderbooks/{order_book_id}/L1 | Get the top price levels for a specific orderbook (L1 market depth)
+[**GetL2Depth**](DefaultApi.md#GetL2Depth) | **Get** /v1/orderbooks/{order_book_id}/L2 | Get the aggregated price levels for a specific orderbook (L2 market depth)
+[**GetL3Depth**](DefaultApi.md#GetL3Depth) | **Get** /v1/orderbooks/{order_book_id}/L3 | Get all open orders for a specific orderbook (L3 market depth)
 [**GetLedgerBalancesSelf**](DefaultApi.md#GetLedgerBalancesSelf) | **Get** /v1/ledger/balances/self | Get your own available, locked, and borrowed assets
 [**GetLedgerInterestSelf**](DefaultApi.md#GetLedgerInterestSelf) | **Get** /v1/ledger/interest/self | Get your own interest
 [**GetLedgerModule**](DefaultApi.md#GetLedgerModule) | **Get** /v1/ledger/module | Get the entire module object, including unborrowed leverage assets and total leverage trackers
@@ -23,21 +23,20 @@ Method | HTTP request | Description
 [**GetLedgerPositionsSelf**](DefaultApi.md#GetLedgerPositionsSelf) | **Get** /v1/ledger/positions/self | Get your own positions
 [**GetLedgerValueSelf**](DefaultApi.md#GetLedgerValueSelf) | **Get** /v1/ledger/value/self | Get your own available, locked, and borrowed USD value; and realized and unrealized PnL
 [**GetOrderById**](DefaultApi.md#GetOrderById) | **Get** /v1/orders/{order_id} | Get order by ID
-[**GetOrderbookBBO**](DefaultApi.md#GetOrderbookBBO) | **Get** /v1/orderbooks/{orderbook_id}/bbo | Get the top price levels for a specific orderbook (L1 market depth)
-[**GetOrderbookById**](DefaultApi.md#GetOrderbookById) | **Get** /v1/orderbooks/{orderbook_id} | Get orderbook by ID
-[**GetOrderbookDepth**](DefaultApi.md#GetOrderbookDepth) | **Get** /v1/orderbooks/{orderbook_id}/depth | Get the aggregated price levels for a specific orderbook (L2 market depth)
-[**GetOrderbookOrders**](DefaultApi.md#GetOrderbookOrders) | **Get** /v1/orderbooks/{orderbook_id}/orders | Get all open orders for a specific orderbook (L3 market depth)
-[**GetOrderbookSummary**](DefaultApi.md#GetOrderbookSummary) | **Get** /v1/orderbooks/{orderbook_id}/summary | Get summary of an orderbook
-[**GetOrderbookTop**](DefaultApi.md#GetOrderbookTop) | **Get** /v1/orderbooks/{orderbook_id}/top | Get the top price levels for a specific orderbook (L1 market depth)
+[**GetOrderbookById**](DefaultApi.md#GetOrderbookById) | **Get** /v1/orderbooks/{order_book_id} | Get orderbook by ID
+[**GetOrderbookDepth**](DefaultApi.md#GetOrderbookDepth) | **Get** /v1/orderbooks/{order_book_id}/depth | Get the aggregated price levels for a specific orderbook (L2 market depth)
+[**GetOrderbookOrders**](DefaultApi.md#GetOrderbookOrders) | **Get** /v1/orderbooks/{order_book_id}/orders | Get all open orders for a specific orderbook (L3 market depth)
+[**GetOrderbookSummary**](DefaultApi.md#GetOrderbookSummary) | **Get** /v1/orderbooks/{order_book_id}/summary | Get summary of an orderbook
+[**GetOrderbookTop**](DefaultApi.md#GetOrderbookTop) | **Get** /v1/orderbooks/{order_book_id}/top | Get the top price levels for a specific orderbook (L1 market depth)
 [**GetPoolPrice**](DefaultApi.md#GetPoolPrice) | **Get** /v1/price/pool/{pool_id} | Get the current price of a pool
 [**GetTradeById**](DefaultApi.md#GetTradeById) | **Get** /v1/trade/{trade_id} | Get a trade by ID
 [**GetTrades**](DefaultApi.md#GetTrades) | **Get** /v1/trade | Get a filtered, paginated list of trades
 [**GetTransactionById**](DefaultApi.md#GetTransactionById) | **Get** /v1/transactions/{id} | Get a transaction by ID
 [**GetTransactions**](DefaultApi.md#GetTransactions) | **Get** /v1/transactions | Get a filtered, paginated list of transactions
-[**GetUserById**](DefaultApi.md#GetUserById) | **Get** /v1/user/{user_id} | Get user by ID
+[**GetUserById**](DefaultApi.md#GetUserById) | **Get** /v1/user/{user_id} | Get user by ID (admin only)
 [**GetUserLedgerStream**](DefaultApi.md#GetUserLedgerStream) | **Get** /v1/user/{user_id}/ledger/stream | Get a snapshot of user&#x27;s ledger updates since a specific time, and opens a stream for further updates
-[**GetUserOrdersStream**](DefaultApi.md#GetUserOrdersStream) | **Get** /v1/user/{user_id}/orders/{orderbook_id}/stream | Get a snapshot of user&#x27;s order updates for the given order book since a specific time, and opens a stream for further updates
-[**GetUserOrdersStreamAll**](DefaultApi.md#GetUserOrdersStreamAll) | **Get** /v1/user/{user_id}/orders/all/stream | Get a snapshot of user&#x27;s order updates since a specific time, and opens a stream for further updates
+[**GetUserOrdersStream**](DefaultApi.md#GetUserOrdersStream) | **Get** /v1/user/{user_id}/orders/{order_book_id}/stream | Get a snapshot of user&#x27;s order updates for the given order book since a specific time, and opens a stream for further updates
+[**GetUserOrdersStreamAll**](DefaultApi.md#GetUserOrdersStreamAll) | **Get** /v1/user/{user_id}/orders/all/stream | Get a snapshot of user&#x27;s order updates across all order books since a specific time, and opens a stream for further updates
 [**GetUserSelf**](DefaultApi.md#GetUserSelf) | **Get** /v1/user/self | Get user details for the authenticated user
 [**GetUserTransactionsStream**](DefaultApi.md#GetUserTransactionsStream) | **Get** /v1/user/{user_id}/transactions/stream | Get a snapshot of user&#x27;s executed transactions since a specific time, and opens a stream for further updates
 [**LedgerDeposit**](DefaultApi.md#LedgerDeposit) | **Post** /v1/ledger/deposit | Deposit assets into your account from the outside world
@@ -57,16 +56,16 @@ Method | HTTP request | Description
 [**ListOrderBooks**](DefaultApi.md#ListOrderBooks) | **Get** /v1/orderbooks | List order books
 [**ListOrders**](DefaultApi.md#ListOrders) | **Get** /v1/orders | List all orders
 [**StreamAssetPrices**](DefaultApi.md#StreamAssetPrices) | **Get** /v1/price/stream | Get a snapshot of asset prices from a specific date and open a stream for real-time updates
-[**StreamCandleData**](DefaultApi.md#StreamCandleData) | **Get** /v1/charts/candle/stream/{orderbook} | Get a snapshot of candlestick data from date provided, and open a stream for real-time updates
-[**StreamOrderBookBalances**](DefaultApi.md#StreamOrderBookBalances) | **Get** /v1/orderbooks/{orderbook_id}/stream/balances | Get a snapshot of base and quote balances for an order book and open a stream for real-time updates
-[**StreamOrderbookOpenOrders**](DefaultApi.md#StreamOrderbookOpenOrders) | **Get** /v1/orderbooks/{orderbook_id}/stream/open | Get a snapshot of open orders in an order book and open a stream for real-time updates
-[**StreamTrades**](DefaultApi.md#StreamTrades) | **Get** /v1/trade/{orderbook_id}/stream | Get a snapshot of trades from a specific date and open a stream for real-time updates
+[**StreamCandleData**](DefaultApi.md#StreamCandleData) | **Get** /v1/charts/{orderbook}/candle/stream | Get a snapshot of candlestick data from date provided, and open a stream for real-time updates
+[**StreamOrderBookBalances**](DefaultApi.md#StreamOrderBookBalances) | **Get** /v1/orderbooks/{order_book_id}/stream/balances | Get a snapshot of base and quote balances for an order book and open a stream for real-time updates
+[**StreamOrderbookOpenOrders**](DefaultApi.md#StreamOrderbookOpenOrders) | **Get** /v1/orderbooks/{order_book_id}/stream/open | Get a snapshot of open orders in an order book and open a stream for real-time updates
+[**StreamTrades**](DefaultApi.md#StreamTrades) | **Get** /v1/trade/{order_book_id}/stream | Get a snapshot of trades executed on the given order book from a specific date and open a stream for real-time updates
 [**UpdateUserConfig**](DefaultApi.md#UpdateUserConfig) | **Put** /v1/user/{user_id}/config | Update user configuration by ID
 [**UpdateUserConfigSelf**](DefaultApi.md#UpdateUserConfigSelf) | **Put** /v1/user/config/self | Update user configuration for the authenticated user
 [**VerifyUser**](DefaultApi.md#VerifyUser) | **Put** /v1/user/{user_id}/verify | Verify a user by ID
 
 # **CancelAllOpenOrders**
-> InlineResponse20015 CancelAllOpenOrders(ctx, )
+> CancelOrdersResponse CancelAllOpenOrders(ctx, )
 Cancel all open orders
 
 ### Required Parameters
@@ -74,7 +73,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**InlineResponse20015**](inline_response_200_15.md)
+[**CancelOrdersResponse**](CancelOrdersResponse.md)
 
 ### Authorization
 
@@ -88,7 +87,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **CancelOrderById**
-> InlineResponse204 CancelOrderById(ctx, orderId)
+> OrderCancelledResponse CancelOrderById(ctx, orderId)
 Cancel an order by ID
 
 ### Required Parameters
@@ -100,7 +99,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse204**](inline_response_204.md)
+[**OrderCancelledResponse**](OrderCancelledResponse.md)
 
 ### Authorization
 
@@ -140,7 +139,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **DeleteUser**
-> InlineResponse2004 DeleteUser(ctx, userId)
+> UserDeletedResponse DeleteUser(ctx, userId)
 Delete user by ID
 
 ### Required Parameters
@@ -152,7 +151,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2004**](inline_response_200_4.md)
+[**UserDeletedResponse**](UserDeletedResponse.md)
 
 ### Authorization
 
@@ -166,7 +165,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetAllAssetPrices**
-> InlineResponse20028 GetAllAssetPrices(ctx, )
+> ListAssetPriceResponse GetAllAssetPrices(ctx, )
 Get the current price of all assets
 
 ### Required Parameters
@@ -174,7 +173,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**InlineResponse20028**](inline_response_200_28.md)
+[**ListAssetPriceResponse**](ListAssetPriceResponse.md)
 
 ### Authorization
 
@@ -188,7 +187,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetAssetById**
-> InlineResponse2001 GetAssetById(ctx, id)
+> GetAssetByIdResponse GetAssetById(ctx, id)
 Get asset by ID
 
 ### Required Parameters
@@ -200,7 +199,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2001**](inline_response_200_1.md)
+[**GetAssetByIdResponse**](GetAssetByIDResponse.md)
 
 ### Authorization
 
@@ -214,7 +213,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetAssetPrice**
-> InlineResponse20029 GetAssetPrice(ctx, assetId)
+> GetAssetPriceResponse GetAssetPrice(ctx, assetId)
 Get the current price of an asset
 
 ### Required Parameters
@@ -226,7 +225,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20029**](inline_response_200_29.md)
+[**GetAssetPriceResponse**](GetAssetPriceResponse.md)
 
 ### Authorization
 
@@ -240,7 +239,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetCandleData**
-> InlineResponse20017 GetCandleData(ctx, orderbook, optional)
+> ListCandlesResponse GetCandleData(ctx, orderbook, optional)
 Get candlestick data for an orderbook
 
 ### Required Parameters
@@ -258,11 +257,11 @@ Name | Type | Description  | Notes
 
  **start** | **optional.Time**|  | 
  **end** | **optional.Time**|  | 
- **resolution** | **optional.String**|  | 
+ **resolution** | [**optional.Interface of CandleResolution**](.md)|  | 
 
 ### Return type
 
-[**InlineResponse20017**](inline_response_200_17.md)
+[**ListCandlesResponse**](ListCandlesResponse.md)
 
 ### Authorization
 
@@ -275,9 +274,9 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **GetCouponsByAssetId**
-> InlineResponse2002 GetCouponsByAssetId(ctx, id, optional)
-Get coupons for a bond asset
+# **GetCouponPaymentsByAssetId**
+> ListCouponPaymentsResponse GetCouponPaymentsByAssetId(ctx, id)
+Get coupon payments for a bond asset
 
 ### Required Parameters
 
@@ -285,21 +284,10 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **id** | [**string**](.md)|  | 
- **optional** | ***DefaultApiGetCouponsByAssetIdOpts** | optional parameters | nil if no parameters
-
-### Optional Parameters
-Optional parameters are passed through a pointer to a DefaultApiGetCouponsByAssetIdOpts struct
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **start** | **optional.Time**|  | 
- **end** | **optional.Time**|  | 
- **page** | **optional.Int32**|  | [default to 1]
- **limit** | **optional.Int32**|  | [default to 100]
 
 ### Return type
 
-[**InlineResponse2002**](inline_response_200_2.md)
+[**ListCouponPaymentsResponse**](ListCouponPaymentsResponse.md)
 
 ### Authorization
 
@@ -313,7 +301,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetL1Depth**
-> InlineResponse20012 GetL1Depth(ctx, orderbookId)
+> GetTopOfBookResponse GetL1Depth(ctx, orderBookId)
 Get the top price levels for a specific orderbook (L1 market depth)
 
 ### Required Parameters
@@ -321,11 +309,11 @@ Get the top price levels for a specific orderbook (L1 market depth)
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **orderbookId** | [**string**](.md)|  | 
+  **orderBookId** | [**string**](.md)|  | 
 
 ### Return type
 
-[**InlineResponse20012**](inline_response_200_12.md)
+[**GetTopOfBookResponse**](GetTopOfBookResponse.md)
 
 ### Authorization
 
@@ -339,7 +327,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetL2Depth**
-> InlineResponse20011 GetL2Depth(ctx, orderbookId)
+> ListOrderBookDepthResponse GetL2Depth(ctx, orderBookId)
 Get the aggregated price levels for a specific orderbook (L2 market depth)
 
 ### Required Parameters
@@ -347,11 +335,11 @@ Get the aggregated price levels for a specific orderbook (L2 market depth)
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **orderbookId** | [**string**](.md)|  | 
+  **orderBookId** | [**string**](.md)|  | 
 
 ### Return type
 
-[**InlineResponse20011**](inline_response_200_11.md)
+[**ListOrderBookDepthResponse**](ListOrderBookDepthResponse.md)
 
 ### Authorization
 
@@ -365,7 +353,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetL3Depth**
-> InlineResponse2006 GetL3Depth(ctx, orderbookId)
+> ListOrdersResponse GetL3Depth(ctx, orderBookId)
 Get all open orders for a specific orderbook (L3 market depth)
 
 ### Required Parameters
@@ -373,11 +361,11 @@ Get all open orders for a specific orderbook (L3 market depth)
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **orderbookId** | [**string**](.md)|  | 
+  **orderBookId** | [**string**](.md)|  | 
 
 ### Return type
 
-[**InlineResponse2006**](inline_response_200_6.md)
+[**ListOrdersResponse**](ListOrdersResponse.md)
 
 ### Authorization
 
@@ -391,7 +379,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetLedgerBalancesSelf**
-> InlineResponse20021 GetLedgerBalancesSelf(ctx, )
+> UserBalanceResponse GetLedgerBalancesSelf(ctx, )
 Get your own available, locked, and borrowed assets
 
 ### Required Parameters
@@ -399,7 +387,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**InlineResponse20021**](inline_response_200_21.md)
+[**UserBalanceResponse**](UserBalanceResponse.md)
 
 ### Authorization
 
@@ -413,7 +401,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetLedgerInterestSelf**
-> InlineResponse20023 GetLedgerInterestSelf(ctx, )
+> UserInterestResponse GetLedgerInterestSelf(ctx, )
 Get your own interest
 
 ### Required Parameters
@@ -421,7 +409,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**InlineResponse20023**](inline_response_200_23.md)
+[**UserInterestResponse**](UserInterestResponse.md)
 
 ### Authorization
 
@@ -435,7 +423,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetLedgerModule**
-> InlineResponse20018 GetLedgerModule(ctx, )
+> LedgerModuleResponse GetLedgerModule(ctx, )
 Get the entire module object, including unborrowed leverage assets and total leverage trackers
 
 ### Required Parameters
@@ -443,7 +431,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**InlineResponse20018**](inline_response_200_18.md)
+[**LedgerModuleResponse**](LedgerModuleResponse.md)
 
 ### Authorization
 
@@ -457,7 +445,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetLedgerModuleByAsset**
-> InlineResponse20019 GetLedgerModuleByAsset(ctx, assetId)
+> LedgerModuleByAssetResponse GetLedgerModuleByAsset(ctx, assetId)
 Get the module object for a single asset ID
 
 ### Required Parameters
@@ -469,7 +457,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20019**](inline_response_200_19.md)
+[**LedgerModuleByAssetResponse**](LedgerModuleByAssetResponse.md)
 
 ### Authorization
 
@@ -483,7 +471,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetLedgerPositionsSelf**
-> InlineResponse20020 GetLedgerPositionsSelf(ctx, )
+> UserPositionResponse GetLedgerPositionsSelf(ctx, )
 Get your own positions
 
 ### Required Parameters
@@ -491,7 +479,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**InlineResponse20020**](inline_response_200_20.md)
+[**UserPositionResponse**](UserPositionResponse.md)
 
 ### Authorization
 
@@ -505,7 +493,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetLedgerValueSelf**
-> InlineResponse20022 GetLedgerValueSelf(ctx, )
+> UserValueResponse GetLedgerValueSelf(ctx, )
 Get your own available, locked, and borrowed USD value; and realized and unrealized PnL
 
 ### Required Parameters
@@ -513,7 +501,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**InlineResponse20022**](inline_response_200_22.md)
+[**UserValueResponse**](UserValueResponse.md)
 
 ### Authorization
 
@@ -527,7 +515,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetOrderById**
-> InlineResponse20016 GetOrderById(ctx, orderId)
+> GetOrderResponse GetOrderById(ctx, orderId)
 Get order by ID
 
 ### Required Parameters
@@ -539,33 +527,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20016**](inline_response_200_16.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **GetOrderbookBBO**
-> InlineResponse20012 GetOrderbookBBO(ctx, orderbookId)
-Get the top price levels for a specific orderbook (L1 market depth)
-
-### Required Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **orderbookId** | [**string**](.md)|  | 
-
-### Return type
-
-[**InlineResponse20012**](inline_response_200_12.md)
+[**GetOrderResponse**](GetOrderResponse.md)
 
 ### Authorization
 
@@ -579,7 +541,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetOrderbookById**
-> InlineResponse20010 GetOrderbookById(ctx, orderbookId)
+> GetOrderBookResponse GetOrderbookById(ctx, orderBookId)
 Get orderbook by ID
 
 ### Required Parameters
@@ -587,11 +549,11 @@ Get orderbook by ID
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **orderbookId** | [**string**](.md)|  | 
+  **orderBookId** | [**string**](.md)|  | 
 
 ### Return type
 
-[**InlineResponse20010**](inline_response_200_10.md)
+[**GetOrderBookResponse**](GetOrderBookResponse.md)
 
 ### Authorization
 
@@ -605,7 +567,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetOrderbookDepth**
-> InlineResponse20011 GetOrderbookDepth(ctx, orderbookId)
+> ListOrderBookDepthResponse GetOrderbookDepth(ctx, orderBookId)
 Get the aggregated price levels for a specific orderbook (L2 market depth)
 
 ### Required Parameters
@@ -613,11 +575,11 @@ Get the aggregated price levels for a specific orderbook (L2 market depth)
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **orderbookId** | [**string**](.md)|  | 
+  **orderBookId** | [**string**](.md)|  | 
 
 ### Return type
 
-[**InlineResponse20011**](inline_response_200_11.md)
+[**ListOrderBookDepthResponse**](ListOrderBookDepthResponse.md)
 
 ### Authorization
 
@@ -631,7 +593,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetOrderbookOrders**
-> InlineResponse2006 GetOrderbookOrders(ctx, orderbookId)
+> ListOrdersResponse GetOrderbookOrders(ctx, orderBookId)
 Get all open orders for a specific orderbook (L3 market depth)
 
 ### Required Parameters
@@ -639,11 +601,11 @@ Get all open orders for a specific orderbook (L3 market depth)
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **orderbookId** | [**string**](.md)|  | 
+  **orderBookId** | [**string**](.md)|  | 
 
 ### Return type
 
-[**InlineResponse2006**](inline_response_200_6.md)
+[**ListOrdersResponse**](ListOrdersResponse.md)
 
 ### Authorization
 
@@ -657,7 +619,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetOrderbookSummary**
-> InlineResponse20013 GetOrderbookSummary(ctx, orderbookId)
+> GetOrderBookSummaryResponse GetOrderbookSummary(ctx, orderBookId)
 Get summary of an orderbook
 
 ### Required Parameters
@@ -665,11 +627,11 @@ Get summary of an orderbook
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **orderbookId** | [**string**](.md)|  | 
+  **orderBookId** | [**string**](.md)|  | 
 
 ### Return type
 
-[**InlineResponse20013**](inline_response_200_13.md)
+[**GetOrderBookSummaryResponse**](GetOrderBookSummaryResponse.md)
 
 ### Authorization
 
@@ -683,7 +645,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetOrderbookTop**
-> InlineResponse20012 GetOrderbookTop(ctx, orderbookId)
+> GetTopOfBookResponse GetOrderbookTop(ctx, orderBookId)
 Get the top price levels for a specific orderbook (L1 market depth)
 
 ### Required Parameters
@@ -691,11 +653,11 @@ Get the top price levels for a specific orderbook (L1 market depth)
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **orderbookId** | [**string**](.md)|  | 
+  **orderBookId** | [**string**](.md)|  | 
 
 ### Return type
 
-[**InlineResponse20012**](inline_response_200_12.md)
+[**GetTopOfBookResponse**](GetTopOfBookResponse.md)
 
 ### Authorization
 
@@ -709,7 +671,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetPoolPrice**
-> InlineResponse20030 GetPoolPrice(ctx, poolId)
+> GetPoolPriceResponse GetPoolPrice(ctx, poolId)
 Get the current price of a pool
 
 ### Required Parameters
@@ -721,7 +683,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20030**](inline_response_200_30.md)
+[**GetPoolPriceResponse**](GetPoolPriceResponse.md)
 
 ### Authorization
 
@@ -735,7 +697,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetTradeById**
-> InlineResponse20027 GetTradeById(ctx, tradeId)
+> TradeResponse GetTradeById(ctx, tradeId)
 Get a trade by ID
 
 ### Required Parameters
@@ -747,7 +709,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20027**](inline_response_200_27.md)
+[**TradeResponse**](TradeResponse.md)
 
 ### Authorization
 
@@ -761,7 +723,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetTrades**
-> InlineResponse20026 GetTrades(ctx, optional)
+> ListTradeResponse GetTrades(ctx, optional)
 Get a filtered, paginated list of trades
 
 ### Required Parameters
@@ -784,7 +746,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20026**](inline_response_200_26.md)
+[**ListTradeResponse**](ListTradeResponse.md)
 
 ### Authorization
 
@@ -798,7 +760,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetTransactionById**
-> InlineResponse20025 GetTransactionById(ctx, id)
+> GetTransactionResponse GetTransactionById(ctx, id)
 Get a transaction by ID
 
 ### Required Parameters
@@ -810,7 +772,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20025**](inline_response_200_25.md)
+[**GetTransactionResponse**](GetTransactionResponse.md)
 
 ### Authorization
 
@@ -824,7 +786,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetTransactions**
-> InlineResponse2008 GetTransactions(ctx, optional)
+> ListTransactionsResponse GetTransactions(ctx, optional)
 Get a filtered, paginated list of transactions
 
 ### Required Parameters
@@ -840,7 +802,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **pools** | [**optional.Interface of []string**](string.md)|  | 
  **userIds** | [**optional.Interface of []string**](string.md)|  | 
- **txKinds** | [**optional.Interface of []string**](string.md)|  | 
+ **txKinds** | [**optional.Interface of []TransactionKind**](TransactionKind.md)|  | 
  **start** | **optional.Time**|  | 
  **end** | **optional.Time**|  | 
  **page** | **optional.Int32**|  | [default to 1]
@@ -848,7 +810,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2008**](inline_response_200_8.md)
+[**ListTransactionsResponse**](ListTransactionsResponse.md)
 
 ### Authorization
 
@@ -862,8 +824,8 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetUserById**
-> InlineResponse2003 GetUserById(ctx, userId)
-Get user by ID
+> GetUserResponse GetUserById(ctx, userId)
+Get user by ID (admin only)
 
 ### Required Parameters
 
@@ -874,7 +836,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2003**](inline_response_200_3.md)
+[**GetUserResponse**](GetUserResponse.md)
 
 ### Authorization
 
@@ -888,7 +850,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetUserLedgerStream**
-> InlineResponse2007 GetUserLedgerStream(ctx, userId, optional)
+> ListPositionsResponse GetUserLedgerStream(ctx, userId, optional)
 Get a snapshot of user's ledger updates since a specific time, and opens a stream for further updates
 
 ### Required Parameters
@@ -908,7 +870,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2007**](inline_response_200_7.md)
+[**ListPositionsResponse**](ListPositionsResponse.md)
 
 ### Authorization
 
@@ -922,7 +884,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetUserOrdersStream**
-> InlineResponse2006 GetUserOrdersStream(ctx, userId, orderbookId, optional)
+> ListOrdersResponse GetUserOrdersStream(ctx, userId, orderBookId, optional)
 Get a snapshot of user's order updates for the given order book since a specific time, and opens a stream for further updates
 
 ### Required Parameters
@@ -931,7 +893,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **userId** | [**string**](.md)|  | 
-  **orderbookId** | [**string**](.md)|  | 
+  **orderBookId** | [**string**](.md)|  | 
  **optional** | ***DefaultApiGetUserOrdersStreamOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
@@ -944,7 +906,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2006**](inline_response_200_6.md)
+[**ListOrdersResponse**](ListOrdersResponse.md)
 
 ### Authorization
 
@@ -958,8 +920,8 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetUserOrdersStreamAll**
-> InlineResponse2006 GetUserOrdersStreamAll(ctx, userId, optional)
-Get a snapshot of user's order updates since a specific time, and opens a stream for further updates
+> ListOrdersResponse GetUserOrdersStreamAll(ctx, userId, orderBookId, optional)
+Get a snapshot of user's order updates across all order books since a specific time, and opens a stream for further updates
 
 ### Required Parameters
 
@@ -967,6 +929,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **userId** | [**string**](.md)|  | 
+  **orderBookId** | [**string**](.md)|  | 
  **optional** | ***DefaultApiGetUserOrdersStreamAllOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
@@ -974,12 +937,12 @@ Optional parameters are passed through a pointer to a DefaultApiGetUserOrdersStr
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+
  **since** | **optional.Time**|  | 
- **orderbookIds** | [**optional.Interface of []string**](string.md)|  | 
 
 ### Return type
 
-[**InlineResponse2006**](inline_response_200_6.md)
+[**ListOrdersResponse**](ListOrdersResponse.md)
 
 ### Authorization
 
@@ -993,7 +956,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetUserSelf**
-> InlineResponse2003 GetUserSelf(ctx, )
+> GetUserResponse GetUserSelf(ctx, )
 Get user details for the authenticated user
 
 ### Required Parameters
@@ -1001,7 +964,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**InlineResponse2003**](inline_response_200_3.md)
+[**GetUserResponse**](GetUserResponse.md)
 
 ### Authorization
 
@@ -1015,7 +978,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetUserTransactionsStream**
-> InlineResponse2008 GetUserTransactionsStream(ctx, userId, optional)
+> ListTransactionsResponse GetUserTransactionsStream(ctx, userId, optional)
 Get a snapshot of user's executed transactions since a specific time, and opens a stream for further updates
 
 ### Required Parameters
@@ -1035,7 +998,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2008**](inline_response_200_8.md)
+[**ListTransactionsResponse**](ListTransactionsResponse.md)
 
 ### Authorization
 
@@ -1049,7 +1012,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **LedgerDeposit**
-> InlineResponse201 LedgerDeposit(ctx, body)
+> FundUserResponse LedgerDeposit(ctx, body)
 Deposit assets into your account from the outside world
 
 TODO: finish this when implementation has been completed
@@ -1063,7 +1026,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse201**](inline_response_201.md)
+[**FundUserResponse**](FundUserResponse.md)
 
 ### Authorization
 
@@ -1077,7 +1040,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **LedgerWithdraw**
-> InlineResponse201 LedgerWithdraw(ctx, body)
+> FundUserResponse LedgerWithdraw(ctx, body)
 Withdraw assets from your account to the outside world
 
 TODO: Finish this when implementation has been completed
@@ -1088,6 +1051,34 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **body** | [**FundUserRequest**](FundUserRequest.md)|  | 
+
+### Return type
+
+[**FundUserResponse**](FundUserResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **LeverageBorrow**
+> InlineResponse201 LeverageBorrow(ctx, body)
+Directly borrow assets
+
+TODO: Finish this when implementation has been completed
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **body** | [**interface{}**](interface{}.md)|  | 
 
 ### Return type
 
@@ -1104,36 +1095,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **LeverageBorrow**
-> InlineResponse2015 LeverageBorrow(ctx, body)
-Directly borrow assets
-
-TODO: Finish this when implementation has been completed
-
-### Required Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **body** | [**interface{}**](interface{}.md)|  | 
-
-### Return type
-
-[**InlineResponse2015**](inline_response_201_5.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **LeverageCollateralize**
-> InlineResponse2011 LeverageCollateralize(ctx, body)
+> CollateralizeResponse LeverageCollateralize(ctx, body)
 Move supplied and available to supplied_collateral and collateral, for a specified position
 
 ### Required Parameters
@@ -1145,7 +1108,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2011**](inline_response_201_1.md)
+[**CollateralizeResponse**](CollateralizeResponse.md)
 
 ### Authorization
 
@@ -1159,7 +1122,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **LeverageDeCollateralize**
-> InlineResponse2012 LeverageDeCollateralize(ctx, body)
+> DeCollateralizeResponse LeverageDeCollateralize(ctx, body)
 Move collateral and supplied_collateral to available and supplied, for a specified position.
 
 ### Required Parameters
@@ -1171,7 +1134,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2012**](inline_response_201_2.md)
+[**DeCollateralizeResponse**](DeCollateralizeResponse.md)
 
 ### Authorization
 
@@ -1185,7 +1148,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **LeverageIsolateCollateral**
-> InlineResponse2016 LeverageIsolateCollateral(ctx, body)
+> IsolateCollateralResponse LeverageIsolateCollateral(ctx, body)
 Create an isolated position by transferring collateral to the position from the user's global collateral
 
 ### Required Parameters
@@ -1197,7 +1160,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2016**](inline_response_201_6.md)
+[**IsolateCollateralResponse**](IsolateCollateralResponse.md)
 
 ### Authorization
 
@@ -1211,7 +1174,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **LeverageIsolatePosition**
-> InlineResponse2017 LeverageIsolatePosition(ctx, body)
+> IsolatePositionResponse LeverageIsolatePosition(ctx, body)
 Create an isolated position using all collateral, supplied_collateral, and borrows from the user's global position
 
 ### Required Parameters
@@ -1223,7 +1186,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2017**](inline_response_201_7.md)
+[**IsolatePositionResponse**](IsolatePositionResponse.md)
 
 ### Authorization
 
@@ -1237,7 +1200,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **LeverageRepay**
-> InlineResponse2015 LeverageRepay(ctx, body)
+> InlineResponse201 LeverageRepay(ctx, body)
 Repay borrowed assets
 
 TODO: Finish this when implementation has been completed
@@ -1251,7 +1214,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2015**](inline_response_201_5.md)
+[**InlineResponse201**](inline_response_201.md)
 
 ### Authorization
 
@@ -1265,7 +1228,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **LeverageSupply**
-> InlineResponse2013 LeverageSupply(ctx, body)
+> SupplyResponse LeverageSupply(ctx, body)
 Supply leverage for a specific asset
 
 ### Required Parameters
@@ -1277,7 +1240,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2013**](inline_response_201_3.md)
+[**SupplyResponse**](SupplyResponse.md)
 
 ### Authorization
 
@@ -1291,7 +1254,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **LeverageUnite**
-> InlineResponse20024 LeverageUnite(ctx, body)
+> UnitePositionResponse LeverageUnite(ctx, body)
 Combines all isolated positions into a single global position
 
 TODO: Finish this when implementation has been completed
@@ -1305,7 +1268,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20024**](inline_response_200_24.md)
+[**UnitePositionResponse**](UnitePositionResponse.md)
 
 ### Authorization
 
@@ -1319,7 +1282,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **LeverageWithdraw**
-> InlineResponse2014 LeverageWithdraw(ctx, body)
+> WithdrawResponse LeverageWithdraw(ctx, body)
 Withdraw leverage for a specific asset
 
 ### Required Parameters
@@ -1331,7 +1294,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2014**](inline_response_201_4.md)
+[**WithdrawResponse**](WithdrawResponse.md)
 
 ### Authorization
 
@@ -1345,7 +1308,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **LiquidityAdd**
-> InlineResponse2018 LiquidityAdd(ctx, body, poolId)
+> LiquidityResponse LiquidityAdd(ctx, body, poolId)
 Add liquidity to a pool
 
 ### Required Parameters
@@ -1358,7 +1321,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2018**](inline_response_201_8.md)
+[**LiquidityResponse**](LiquidityResponse.md)
 
 ### Authorization
 
@@ -1372,7 +1335,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **LiquiditySubtract**
-> InlineResponse2018 LiquiditySubtract(ctx, body, poolId)
+> LiquidityResponse LiquiditySubtract(ctx, body, poolId)
 Subtract liquidity from a pool
 
 ### Required Parameters
@@ -1385,7 +1348,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2018**](inline_response_201_8.md)
+[**LiquidityResponse**](LiquidityResponse.md)
 
 ### Authorization
 
@@ -1399,7 +1362,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ListAssets**
-> InlineResponse200 ListAssets(ctx, optional)
+> ListAssetsResponse ListAssets(ctx, optional)
 List assets
 
 ### Required Parameters
@@ -1415,7 +1378,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **createdAfter** | **optional.Time**|  | 
  **createdBefore** | **optional.Time**|  | 
- **assetKind** | **optional.String**| Asset kind (BOND, CURRENCY, INTEREST, POOL_SHARE) | 
+ **assetKind** | [**optional.Interface of AssetKind**](.md)| Asset kind (BOND, CURRENCY, INTEREST, POOL_SHARE) | 
  **canAddLiquidity** | **optional.Bool**|  | 
  **canDirectBorrow** | **optional.Bool**|  | 
  **canOnboard** | **optional.Bool**|  | 
@@ -1426,7 +1389,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse200**](inline_response_200.md)
+[**ListAssetsResponse**](ListAssetsResponse.md)
 
 ### Authorization
 
@@ -1440,7 +1403,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ListOrderBooks**
-> InlineResponse2009 ListOrderBooks(ctx, optional)
+> ListOrderBooksResponse ListOrderBooks(ctx, optional)
 List order books
 
 ### Required Parameters
@@ -1454,7 +1417,7 @@ Name | Type | Description  | Notes
 Optional parameters are passed through a pointer to a DefaultApiListOrderBooksOpts struct
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **status** | **optional.String**|  | 
+ **status** | [**optional.Interface of OrderBookStatus**](.md)|  | 
  **baseAssetId** | [**optional.Interface of string**](.md)|  | 
  **quoteAssetId** | [**optional.Interface of string**](.md)|  | 
  **page** | **optional.Int32**|  | [default to 1]
@@ -1462,7 +1425,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2009**](inline_response_200_9.md)
+[**ListOrderBooksResponse**](ListOrderBooksResponse.md)
 
 ### Authorization
 
@@ -1476,7 +1439,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ListOrders**
-> InlineResponse2006 ListOrders(ctx, optional)
+> ListOrdersResponse ListOrders(ctx, optional)
 List all orders
 
 ### Required Parameters
@@ -1490,10 +1453,10 @@ Name | Type | Description  | Notes
 Optional parameters are passed through a pointer to a DefaultApiListOrdersOpts struct
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **orderbookId** | [**optional.Interface of []string**](string.md)|  | 
- **kind** | **optional.String**|  | 
- **status** | **optional.String**|  | 
- **side** | **optional.String**|  | 
+ **orderBookId** | [**optional.Interface of []string**](string.md)|  | 
+ **kind** | [**optional.Interface of OrderKind**](.md)|  | 
+ **status** | [**optional.Interface of OrderStatus**](.md)|  | 
+ **side** | [**optional.Interface of Side**](.md)|  | 
  **from** | **optional.Time**|  | 
  **to** | **optional.Time**|  | 
  **page** | **optional.Int32**|  | [default to 1]
@@ -1501,7 +1464,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2006**](inline_response_200_6.md)
+[**ListOrdersResponse**](ListOrdersResponse.md)
 
 ### Authorization
 
@@ -1515,7 +1478,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **StreamAssetPrices**
-> InlineResponse20028 StreamAssetPrices(ctx, optional)
+> InlineResponse200 StreamAssetPrices(ctx, optional)
 Get a snapshot of asset prices from a specific date and open a stream for real-time updates
 
 ### Required Parameters
@@ -1533,7 +1496,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20028**](inline_response_200_28.md)
+[**InlineResponse200**](inline_response_200.md)
 
 ### Authorization
 
@@ -1547,7 +1510,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **StreamCandleData**
-> InlineResponse20017 StreamCandleData(ctx, orderbook, optional)
+> ListCandlesResponse StreamCandleData(ctx, orderbook, optional)
 Get a snapshot of candlestick data from date provided, and open a stream for real-time updates
 
 ### Required Parameters
@@ -1564,11 +1527,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **since** | **optional.Time**|  | 
- **resolution** | **optional.String**|  | 
+ **resolution** | [**optional.Interface of CandleResolution**](.md)|  | 
 
 ### Return type
 
-[**InlineResponse20017**](inline_response_200_17.md)
+[**ListCandlesResponse**](ListCandlesResponse.md)
 
 ### Authorization
 
@@ -1582,7 +1545,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **StreamOrderBookBalances**
-> InlineResponse20014 StreamOrderBookBalances(ctx, orderbookId, optional)
+> OrderBookBalanceResponse StreamOrderBookBalances(ctx, orderBookId, optional)
 Get a snapshot of base and quote balances for an order book and open a stream for real-time updates
 
 ### Required Parameters
@@ -1590,7 +1553,7 @@ Get a snapshot of base and quote balances for an order book and open a stream fo
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **orderbookId** | [**string**](.md)|  | 
+  **orderBookId** | [**string**](.md)|  | 
  **optional** | ***DefaultApiStreamOrderBookBalancesOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
@@ -1602,7 +1565,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20014**](inline_response_200_14.md)
+[**OrderBookBalanceResponse**](OrderBookBalanceResponse.md)
 
 ### Authorization
 
@@ -1616,7 +1579,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **StreamOrderbookOpenOrders**
-> InlineResponse2006 StreamOrderbookOpenOrders(ctx, orderbookId, optional)
+> ListOrdersResponse StreamOrderbookOpenOrders(ctx, orderBookId, optional)
 Get a snapshot of open orders in an order book and open a stream for real-time updates
 
 ### Required Parameters
@@ -1624,7 +1587,7 @@ Get a snapshot of open orders in an order book and open a stream for real-time u
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **orderbookId** | [**string**](.md)|  | 
+  **orderBookId** | [**string**](.md)|  | 
  **optional** | ***DefaultApiStreamOrderbookOpenOrdersOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
@@ -1636,7 +1599,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2006**](inline_response_200_6.md)
+[**ListOrdersResponse**](ListOrdersResponse.md)
 
 ### Authorization
 
@@ -1650,8 +1613,8 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **StreamTrades**
-> TradeResponse StreamTrades(ctx, orderbookId, optional)
-Get a snapshot of trades from a specific date and open a stream for real-time updates
+> ListTradeResponse StreamTrades(ctx, orderbookId, optional)
+Get a snapshot of trades executed on the given order book from a specific date and open a stream for real-time updates
 
 ### Required Parameters
 
@@ -1670,7 +1633,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**TradeResponse**](TradeResponse.md)
+[**ListTradeResponse**](ListTradeResponse.md)
 
 ### Authorization
 
@@ -1684,7 +1647,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **UpdateUserConfig**
-> InlineResponse2005 UpdateUserConfig(ctx, body, userId)
+> UserUpdatedResponse UpdateUserConfig(ctx, body, userId)
 Update user configuration by ID
 
 ### Required Parameters
@@ -1697,7 +1660,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2005**](inline_response_200_5.md)
+[**UserUpdatedResponse**](UserUpdatedResponse.md)
 
 ### Authorization
 
@@ -1711,7 +1674,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **UpdateUserConfigSelf**
-> InlineResponse2005 UpdateUserConfigSelf(ctx, body)
+> UserUpdatedResponse UpdateUserConfigSelf(ctx, body)
 Update user configuration for the authenticated user
 
 ### Required Parameters
@@ -1723,7 +1686,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2005**](inline_response_200_5.md)
+[**UserUpdatedResponse**](UserUpdatedResponse.md)
 
 ### Authorization
 
@@ -1737,7 +1700,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **VerifyUser**
-> InlineResponse2005 VerifyUser(ctx, userId)
+> UserUpdatedResponse VerifyUser(ctx, userId)
 Verify a user by ID
 
 ### Required Parameters
@@ -1749,7 +1712,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2005**](inline_response_200_5.md)
+[**UserUpdatedResponse**](UserUpdatedResponse.md)
 
 ### Authorization
 

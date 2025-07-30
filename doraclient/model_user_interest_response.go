@@ -9,6 +9,8 @@
 package doraclient
 
 type UserInterestResponse struct {
-	Available map[string]int32 `json:"available,omitempty"`
-	Value map[string]string `json:"value,omitempty"`
+	Data *UserInterest `json:"data,omitempty"`
+	// The error message. Present for error (non-2xx) responses.
+	Error_ string `json:"error,omitempty"`
+	Metadata *Metadata `json:"metadata,omitempty"`
 }

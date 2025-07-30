@@ -9,8 +9,8 @@
 package doraclient
 
 type WithdrawResponse struct {
-	PositionId string `json:"position_id,omitempty"`
-	TransactionId string `json:"transaction_id,omitempty"`
-	AssetId string `json:"asset_id,omitempty"`
-	Quantity string `json:"quantity,omitempty"`
+	Data *Withdraw `json:"data,omitempty"`
+	// The error message. Present for error (non-2xx) responses.
+	Error_ string `json:"error,omitempty"`
+	Metadata *Metadata `json:"metadata,omitempty"`
 }

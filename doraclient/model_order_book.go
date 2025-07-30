@@ -26,7 +26,7 @@ type OrderBook struct {
 	QuoteQuantity float64 `json:"quote_quantity,omitempty"`
 	QuoteAssetId string `json:"quote_asset_id,omitempty"`
 	SharesQuantity float64 `json:"shares_quantity,omitempty"`
-	Status string `json:"status,omitempty"`
+	Status *OrderBookStatus `json:"status,omitempty"`
 	TickSize float64 `json:"tick_size,omitempty"`
 	UpdatedAt time.Time `json:"updated_at,omitempty"`
 	HaltedAt time.Time `json:"halted_at,omitempty"`

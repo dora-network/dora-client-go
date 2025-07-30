@@ -5,7 +5,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | **string** |  | [optional] [default to null]
 **CreatedAt** | [**time.Time**](time.Time.md) |  | [optional] [default to null]
-**Kind** | **string** |  | [optional] [default to null]
+**Kind** | [***TransactionKind**](TransactionKind.md) |  | [optional] [default to null]
 **Asset0** | **string** |  | [optional] [default to null]
 **Quantity0** | **string** |  | [optional] [default to null]
 **Quantity1** | **string** |  | [optional] [default to null]

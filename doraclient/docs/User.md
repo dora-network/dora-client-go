@@ -12,9 +12,10 @@ Name | Type | Description | Notes
 **PhotoUrl** | **string** |  | [optional] [default to null]
 **Provider** | **string** |  | [optional] [default to null]
 **ProviderId** | **string** |  | [optional] [default to null]
-**Roles** | **[]string** |  | [optional] [default to null]
+**Roles** | [**[]UserRole**](UserRole.md) |  | [optional] [default to null]
 **Timezone** | **string** | User&#x27;s timezone, e.g., &#x27;America/New_York&#x27;, or an offset. | [optional] [default to null]
 **TimezoneOffset** | **int32** | timezone offset in seconds | [optional] [default to null]
+**VerifiedAt** | [**time.Time**](time.Time.md) |  | [optional] [default to null]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

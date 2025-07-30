@@ -13,12 +13,11 @@ type CreateOrderRequest struct {
 	// Required: Inverse leverage for the order, must be between 0 and 1 (inclusive)
 	InverseLeverage float64 `json:"inverse_leverage,omitempty"`
 	Price string `json:"price,omitempty"`
-	Kind string `json:"kind,omitempty"`
-	// Required: Must be either 'BUY' or 'SELL'
-	Side string `json:"side,omitempty"`
+	Kind *OrderKind `json:"kind,omitempty"`
+	Side *Side `json:"side,omitempty"`
 	// Required: the order book to submit the order to
 	OrderBookId string `json:"order_book_id,omitempty"`
 	// Optional: User-defined text for the order, e.g., 'buying dips'
 	UserText string `json:"user_text,omitempty"`
-	OrderModifiers []string `json:"order_modifiers,omitempty"`
+	OrderModifiers []OrderModifierKind `json:"order_modifiers,omitempty"`
 }

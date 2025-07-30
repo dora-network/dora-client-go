@@ -4,7 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | **string** |  | [optional] [default to null]
-**Kind** | **string** |  | [optional] [default to null]
+**Kind** | [***BondKind**](BondKind.md) |  | [optional] [default to null]
 **CouponStartAt** | [**time.Time**](time.Time.md) |  | [optional] [default to null]
 **CreatedAt** | [**time.Time**](time.Time.md) |  | [optional] [default to null]
 **FinalCouponAt** | [**time.Time**](time.Time.md) |  | [optional] [default to null]

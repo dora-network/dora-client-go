@@ -23,7 +23,7 @@ type Asset struct {
 	MaxUtilization int32 `json:"max_utilization,omitempty"`
 	Name string `json:"name,omitempty"`
 	Symbol string `json:"symbol,omitempty"`
-	Kind string `json:"kind,omitempty"`
+	Kind *AssetKind `json:"kind,omitempty"`
 	Yield float64 `json:"yield,omitempty"`
 	CanAddLiquidity bool `json:"can_add_liquidity,omitempty"`
 	CanDirectBorrow bool `json:"can_direct_borrow,omitempty"`

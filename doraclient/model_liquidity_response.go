@@ -9,10 +9,8 @@
 package doraclient
 
 type LiquidityResponse struct {
-	OrderBookId string `json:"order_book_id,omitempty"`
-	PositionId string `json:"position_id,omitempty"`
-	TransactionId string `json:"transaction_id,omitempty"`
-	BaseQuantity string `json:"base_quantity,omitempty"`
-	QuoteQuantity string `json:"quote_quantity,omitempty"`
-	SharesQuantity string `json:"shares_quantity,omitempty"`
+	Data *Liquidity `json:"data,omitempty"`
+	// The error message. Present for error (non-2xx) responses.
+	Error_ string `json:"error,omitempty"`
+	Metadata *Metadata `json:"metadata,omitempty"`
 }

@@ -14,7 +14,7 @@ import (
 type Transaction struct {
 	Id string `json:"id,omitempty"`
 	CreatedAt time.Time `json:"created_at,omitempty"`
-	Kind string `json:"kind,omitempty"`
+	Kind *TransactionKind `json:"kind,omitempty"`
 	Asset0 string `json:"asset0,omitempty"`
 	Quantity0 string `json:"quantity0,omitempty"`
 	Quantity1 string `json:"quantity1,omitempty"`

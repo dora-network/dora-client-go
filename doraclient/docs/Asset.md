@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 **MaxUtilization** | **int32** |  | [optional] [default to null]
 **Name** | **string** |  | [optional] [default to null]
 **Symbol** | **string** |  | [optional] [default to null]
-**Kind** | **string** |  | [optional] [default to null]
+**Kind** | [***AssetKind**](AssetKind.md) |  | [optional] [default to null]
 **Yield** | **float64** |  | [optional] [default to null]
 **CanAddLiquidity** | **bool** |  | [optional] [default to null]
 **CanDirectBorrow** | **bool** |  | [optional] [default to null]

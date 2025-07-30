@@ -9,6 +9,8 @@
 package doraclient
 
 type UnitePositionResponse struct {
-	GlobalPositionId string `json:"global_position_id,omitempty"`
-	TransactionIds []string `json:"transaction_ids,omitempty"`
+	Data *UnitedPosition `json:"data,omitempty"`
+	// The error message. Present for error (non-2xx) responses.
+	Error_ string `json:"error,omitempty"`
+	Metadata *Metadata `json:"metadata,omitempty"`
 }
