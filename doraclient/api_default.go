@@ -766,7 +766,7 @@ func (a *DefaultApiService) GetAssetPrice(ctx context.Context, assetId string) (
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 404 {
-			var v InlineResponse400
+			var v AssetRequestError
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -2828,7 +2828,7 @@ func (a *DefaultApiService) GetPoolPrice(ctx context.Context, poolId string) (Ge
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 404 {
-			var v InlineResponse400
+			var v PoolRequestError
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -2942,7 +2942,7 @@ func (a *DefaultApiService) GetTradeById(ctx context.Context, tradeId string) (T
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 404 {
-			var v InlineResponse400
+			var v TradeRequestError
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -3089,7 +3089,7 @@ func (a *DefaultApiService) GetTrades(ctx context.Context, localVarOptionals *De
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 404 {
-			var v InlineResponse400
+			var v TradeRequestError
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -3203,7 +3203,7 @@ func (a *DefaultApiService) GetTransactionById(ctx context.Context, id string) (
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 404 {
-			var v InlineResponse400
+			var v TransactionRequestError
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -4352,15 +4352,15 @@ DefaultApiService Directly borrow assets
 TODO: Finish this when implementation has been completed
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param body
-@return InlineResponse201
+@return BorrowResponse
 */
-func (a *DefaultApiService) LeverageBorrow(ctx context.Context, body interface{}) (InlineResponse201, *http.Response, error) {
+func (a *DefaultApiService) LeverageBorrow(ctx context.Context, body BorrowRequest) (BorrowResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse201
+		localVarReturnValue BorrowResponse
 	)
 
 	// create path and map variables
@@ -4419,7 +4419,7 @@ func (a *DefaultApiService) LeverageBorrow(ctx context.Context, body interface{}
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 201 {
-			var v InlineResponse201
+			var v BorrowResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -4948,15 +4948,15 @@ DefaultApiService Repay borrowed assets
 TODO: Finish this when implementation has been completed
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param body
-@return InlineResponse201
+@return RepayResponse
 */
-func (a *DefaultApiService) LeverageRepay(ctx context.Context, body interface{}) (InlineResponse201, *http.Response, error) {
+func (a *DefaultApiService) LeverageRepay(ctx context.Context, body RepayRequest) (RepayResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse201
+		localVarReturnValue RepayResponse
 	)
 
 	// create path and map variables
@@ -5015,7 +5015,7 @@ func (a *DefaultApiService) LeverageRepay(ctx context.Context, body interface{})
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 201 {
-			var v InlineResponse201
+			var v RepayResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -5256,7 +5256,7 @@ func (a *DefaultApiService) LeverageUnite(ctx context.Context, body UnitePositio
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 400 {
-			var v InlineResponse400
+			var v LeverageRequestError
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -5276,7 +5276,7 @@ func (a *DefaultApiService) LeverageUnite(ctx context.Context, body UnitePositio
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 404 {
-			var v InlineResponse400
+			var v LeverageRequestError
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -6140,20 +6140,20 @@ DefaultApiService Get a snapshot of asset prices from a specific date and open a
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param optional nil or *DefaultApiStreamAssetPricesOpts - Optional Parameters:
      * @param "Since" (optional.Time) - 
-@return InlineResponse200
+@return ListAssetPriceResponse
 */
 
 type DefaultApiStreamAssetPricesOpts struct {
     Since optional.Time
 }
 
-func (a *DefaultApiService) StreamAssetPrices(ctx context.Context, localVarOptionals *DefaultApiStreamAssetPricesOpts) (InlineResponse200, *http.Response, error) {
+func (a *DefaultApiService) StreamAssetPrices(ctx context.Context, localVarOptionals *DefaultApiStreamAssetPricesOpts) (ListAssetPriceResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse200
+		localVarReturnValue ListAssetPriceResponse
 	)
 
 	// create path and map variables
@@ -6213,7 +6213,7 @@ func (a *DefaultApiService) StreamAssetPrices(ctx context.Context, localVarOptio
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse200
+			var v ListAssetPriceResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()

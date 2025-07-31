@@ -8,9 +8,5 @@
  */
 package doraclient
 
-type InlineResponse200 struct {
-	Data []AssetPrice `json:"data,omitempty"`
-	// The error message. Present for error (non-2xx) responses.
-	Error_ string `json:"error,omitempty"`
-	Metadata *Metadata `json:"metadata,omitempty"`
+type RepayResponse struct {
 }

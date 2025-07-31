@@ -1853,7 +1853,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
+              $ref: "#/components/schemas/BorrowRequest"
         required: true
       responses:
         "201":
@@ -1861,7 +1861,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/inline_response_201"
+                $ref: "#/components/schemas/BorrowResponse"
         "400":
           description: "Bad request, e.g. insufficient collateral or invalid parameters"
           content:
@@ -1889,7 +1889,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
+              $ref: "#/components/schemas/RepayRequest"
         required: true
       responses:
         "201":
@@ -1897,7 +1897,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/inline_response_201"
+                $ref: "#/components/schemas/RepayResponse"
         "400":
           description: "Bad request, e.g. insufficient collateral or invalid parameters"
           content:
@@ -2023,7 +2023,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/inline_response_400"
+                $ref: "#/components/schemas/LeverageRequestError"
         "401":
           description: "Unauthorized, e.g. user not logged in or invalid credentials"
           content:
@@ -2035,7 +2035,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/inline_response_400"
+                $ref: "#/components/schemas/LeverageRequestError"
         "500":
           description: Internal server error
           content:
@@ -2257,7 +2257,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/inline_response_400"
+                $ref: "#/components/schemas/TransactionRequestError"
         "500":
           description: Internal server error
           content:
@@ -2338,7 +2338,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/inline_response_400"
+                $ref: "#/components/schemas/TradeRequestError"
         "500":
           description: Internal server error
           content:
@@ -2376,7 +2376,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/inline_response_400"
+                $ref: "#/components/schemas/TradeRequestError"
         "500":
           description: Internal server error
           content:
@@ -2472,7 +2472,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/inline_response_400"
+                $ref: "#/components/schemas/AssetRequestError"
         "500":
           description: Internal server error
           content:
@@ -2510,7 +2510,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/inline_response_400"
+                $ref: "#/components/schemas/PoolRequestError"
         "500":
           description: Internal server error
           content:
@@ -2538,7 +2538,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/inline_response_200"
+                $ref: "#/components/schemas/ListAssetPriceResponse"
         "400":
           description: "Bad request, e.g. invalid parameters"
           content:
@@ -3932,26 +3932,49 @@ components:
       - properties:
           data:
             $ref: "#/components/schemas/Collateral"
-    inline_response_201:
-      allOf:
-      - $ref: "#/components/schemas/ResponseEnvelope"
-      - properties:
-          data:
-            type: object
-    inline_response_400:
+    BorrowRequest:
+      type: object
+    BorrowResponse:
+      type: object
+    RepayRequest:
+      type: object
+    RepayResponse:
+      type: object
+    LeverageRequestError:
+      type: object
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
       - properties:
           error:
             type: string
-    inline_response_200:
+    TransactionRequestError:
+      type: object
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
       - properties:
-          data:
-            type: array
-            items:
-              $ref: "#/components/schemas/AssetPrice"
+          error:
+            type: string
+    TradeRequestError:
+      type: object
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          error:
+            type: string
+    AssetRequestError:
+      type: object
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          error:
+            type: string
+    PoolRequestError:
+      type: object
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          error:
+            type: string
     CancelOrdersResponse_data:
       type: object
       properties:

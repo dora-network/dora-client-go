@@ -1068,7 +1068,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **LeverageBorrow**
-> InlineResponse201 LeverageBorrow(ctx, body)
+> BorrowResponse LeverageBorrow(ctx, body)
 Directly borrow assets
 
 TODO: Finish this when implementation has been completed
@@ -1078,11 +1078,11 @@ TODO: Finish this when implementation has been completed
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **body** | [**interface{}**](interface{}.md)|  | 
+  **body** | [**BorrowRequest**](BorrowRequest.md)|  | 
 
 ### Return type
 
-[**InlineResponse201**](inline_response_201.md)
+[**BorrowResponse**](BorrowResponse.md)
 
 ### Authorization
 
@@ -1200,7 +1200,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **LeverageRepay**
-> InlineResponse201 LeverageRepay(ctx, body)
+> RepayResponse LeverageRepay(ctx, body)
 Repay borrowed assets
 
 TODO: Finish this when implementation has been completed
@@ -1210,11 +1210,11 @@ TODO: Finish this when implementation has been completed
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **body** | [**interface{}**](interface{}.md)|  | 
+  **body** | [**RepayRequest**](RepayRequest.md)|  | 
 
 ### Return type
 
-[**InlineResponse201**](inline_response_201.md)
+[**RepayResponse**](RepayResponse.md)
 
 ### Authorization
 
@@ -1478,7 +1478,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **StreamAssetPrices**
-> InlineResponse200 StreamAssetPrices(ctx, optional)
+> ListAssetPriceResponse StreamAssetPrices(ctx, optional)
 Get a snapshot of asset prices from a specific date and open a stream for real-time updates
 
 ### Required Parameters
@@ -1496,7 +1496,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse200**](inline_response_200.md)
+[**ListAssetPriceResponse**](ListAssetPriceResponse.md)
 
 ### Authorization
 

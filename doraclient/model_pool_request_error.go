@@ -8,7 +8,7 @@
  */
 package doraclient
 
-type InlineResponse400 struct {
+type PoolRequestError struct {
 	Error_ string `json:"error,omitempty"`
 	// The response data. Present for successful (2xx) responses.
 	Data *interface{} `json:"data,omitempty"`
