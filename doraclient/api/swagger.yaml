@@ -2635,7 +2635,9 @@ components:
       - $ref: "#/components/schemas/ResponseEnvelope"
       - properties:
           data:
-            $ref: "#/components/schemas/Asset"
+            type: array
+            items:
+              $ref: "#/components/schemas/Asset"
     GetAssetByIDResponse:
       type: object
       allOf:

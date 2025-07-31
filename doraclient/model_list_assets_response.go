@@ -9,7 +9,7 @@
 package doraclient
 
 type ListAssetsResponse struct {
-	Data *Asset `json:"data,omitempty"`
+	Data []Asset `json:"data,omitempty"`
 	// The error message. Present for error (non-2xx) responses.
 	Error_ string `json:"error,omitempty"`
 	Metadata *Metadata `json:"metadata,omitempty"`
