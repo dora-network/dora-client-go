@@ -3330,7 +3330,7 @@ components:
     FundUserRequest:
       type: object
       properties:
-        user_id:
+        position_id:
           type: string
           format: uuid
         asset_id:
