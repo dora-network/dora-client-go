@@ -9,14 +9,14 @@
 package doraclient
 
 type CreateOrderRequest struct {
-	Quantity string `json:"quantity,omitempty"`
+	Quantity string `json:"quantity"`
 	// Required: Inverse leverage for the order, must be between 0 and 1 (inclusive)
-	InverseLeverage float64 `json:"inverse_leverage,omitempty"`
-	Price string `json:"price,omitempty"`
-	Kind *OrderKind `json:"kind,omitempty"`
-	Side *Side `json:"side,omitempty"`
+	InverseLeverage float64 `json:"inverse_leverage"`
+	Price string `json:"price"`
+	Kind *OrderKind `json:"kind"`
+	Side *Side `json:"side"`
 	// Required: the order book to submit the order to
-	OrderBookId string `json:"order_book_id,omitempty"`
+	OrderBookId string `json:"order_book_id"`
 	// Optional: User-defined text for the order, e.g., 'buying dips'
 	UserText string `json:"user_text,omitempty"`
 	OrderModifiers []OrderModifierKind `json:"order_modifiers,omitempty"`

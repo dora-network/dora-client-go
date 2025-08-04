@@ -9,7 +9,6 @@
 package doraclient
 
 type LiquidityRequest struct {
-	OrderBookId string `json:"order_book_id,omitempty"`
-	PositionId string `json:"position_id,omitempty"`
-	Quantity string `json:"quantity,omitempty"`
+	PositionId string `json:"position_id"`
+	Quantity string `json:"quantity"`
 }

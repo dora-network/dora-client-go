@@ -9,5 +9,5 @@
 package doraclient
 
 type IsolatePositionRequest struct {
-	GlobalPositionId string `json:"global_position_id,omitempty"`
+	GlobalPositionId string `json:"global_position_id"`
 }

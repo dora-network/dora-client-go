@@ -2868,7 +2868,7 @@ func (a *DefaultApiService) GetTradeById(ctx context.Context, tradeId string) (T
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/v1/trade/{trade_id}"
+	localVarPath := a.client.cfg.BasePath + "/v1/trades/{trade_id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"trade_id"+"}", fmt.Sprintf("%v", tradeId), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -2998,7 +2998,7 @@ func (a *DefaultApiService) GetTrades(ctx context.Context, localVarOptionals *De
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/v1/trade"
+	localVarPath := a.client.cfg.BasePath + "/v1/trades"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -6647,7 +6647,7 @@ func (a *DefaultApiService) StreamTrades(ctx context.Context, orderbookId string
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/v1/trade/{order_book_id}/stream"
+	localVarPath := a.client.cfg.BasePath + "/v1/trades/{order_book_id}/stream"
 	localVarPath = strings.Replace(localVarPath, "{"+"orderbookId"+"}", fmt.Sprintf("%v", orderbookId), -1)
 
 	localVarHeaderParams := make(map[string]string)

@@ -11,6 +11,6 @@ package doraclient
 // A generic struct to handle optional updates for roles fields in user requests.
 type UpdateRolesString struct {
 	// Whether to update the field.
-	Update bool `json:"update,omitempty"`
+	Update bool `json:"update"`
 	Value *UserRole `json:"value,omitempty"`
 }

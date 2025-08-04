@@ -2264,7 +2264,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
-  /v1/trade:
+  /v1/trades:
     get:
       summary: "Get a filtered, paginated list of trades"
       operationId: getTrades
@@ -2345,7 +2345,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
-  /v1/trade/{trade_id}:
+  /v1/trades/{trade_id}:
     get:
       summary: Get a trade by ID
       operationId: getTradeById
@@ -2383,7 +2383,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
-  /v1/trade/{order_book_id}/stream:
+  /v1/trades/{order_book_id}/stream:
     get:
       summary: Get a snapshot of trades executed on the given order book from a specific
         date and open a stream for real-time updates
@@ -2787,6 +2787,9 @@ components:
           type: string
           format: date-time
     UpdateUserConfigRequest:
+      required:
+      - photo_url
+      - timezone
       type: object
       properties:
         photo_url:
@@ -2796,7 +2799,18 @@ components:
       description: "Request body for PUT /user/{id}/config: update a user changeable\
         \ details only. Other properties can only be changed by an admin following\
         \ a manual request by the user."
+    CreateOrUpdateUserResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID of the created or updated user.
+          format: uuid
+      description: "Response body for POST /user or PUT /user/{id}: contains the ID\
+        \ of the created or updated user."
     UpdateFieldString:
+      required:
+      - update
       type: object
       properties:
         update:
@@ -2808,6 +2822,8 @@ components:
       description: A generic struct to handle optional updates for string fields in
         user requests.
     UpdateRolesString:
+      required:
+      - update
       type: object
       properties:
         update:
@@ -2978,6 +2994,13 @@ components:
           data:
             $ref: "#/components/schemas/OrderId"
     CreateOrderRequest:
+      required:
+      - inverse_leverage
+      - kind
+      - order_book_id
+      - price
+      - quantity
+      - side
       type: object
       properties:
         quantity:
@@ -3244,6 +3267,10 @@ components:
         leverage_balance:
           type: object
     IsolateCollateralRequest:
+      required:
+      - asset_id
+      - global_position_id
+      - quantity
       type: object
       properties:
         global_position_id:
@@ -3281,6 +3308,8 @@ components:
           data:
             $ref: "#/components/schemas/IsolatedCollateral"
     IsolatePositionRequest:
+      required:
+      - global_position_id
       type: object
       properties:
         global_position_id:
@@ -3306,6 +3335,8 @@ components:
           data:
             $ref: "#/components/schemas/IsolatedPosition"
     UnitePositionRequest:
+      required:
+      - global_position_id
       type: object
       properties:
         global_position_id:
@@ -3330,6 +3361,10 @@ components:
           data:
             $ref: "#/components/schemas/UnitedPosition"
     FundUserRequest:
+      required:
+      - asset_id
+      - position_id
+      - quantity
       type: object
       properties:
         position_id:
@@ -3338,7 +3373,7 @@ components:
         asset_id:
           type: string
           format: uuid
-        amount:
+        quantity:
           type: string
     FundUser:
       type: object
@@ -3352,9 +3387,13 @@ components:
         asset_id:
           type: string
           format: uuid
-        final_amount:
+        final_quantity:
           type: string
     SupplyRequest:
+      required:
+      - asset_id
+      - position_id
+      - quantity
       type: object
       properties:
         position_id:
@@ -3389,6 +3428,10 @@ components:
           data:
             $ref: "#/components/schemas/Supply"
     WithdrawRequest:
+      required:
+      - asset_id
+      - position_id
+      - quantity
       type: object
       properties:
         position_id:
@@ -3423,6 +3466,10 @@ components:
           data:
             $ref: "#/components/schemas/Withdraw"
     CollateralizeRequest:
+      required:
+      - asset_id
+      - position_id
+      - quantity
       type: object
       properties:
         position_id:
@@ -3450,6 +3497,10 @@ components:
           type: string
           format: decimal
     DeCollateralizeRequest:
+      required:
+      - asset_id
+      - position_id
+      - quantity
       type: object
       properties:
         position_id:
@@ -3462,11 +3513,12 @@ components:
           type: string
           format: decimal
     LiquidityRequest:
+      required:
+      - order_book_id
+      - position_id
+      - quantity
       type: object
       properties:
-        order_book_id:
-          type: string
-          format: uuid
         position_id:
           type: string
           format: uuid

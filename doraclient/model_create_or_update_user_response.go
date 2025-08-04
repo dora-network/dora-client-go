@@ -8,8 +8,8 @@
  */
 package doraclient
 
-type FundUserRequest struct {
-	PositionId string `json:"position_id"`
-	AssetId string `json:"asset_id"`
-	Quantity string `json:"quantity"`
+// Response body for POST /user or PUT /user/{id}: contains the ID of the created or updated user.
+type CreateOrUpdateUserResponse struct {
+	// The ID of the created or updated user.
+	Id string `json:"id,omitempty"`
 }

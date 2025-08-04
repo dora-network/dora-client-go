@@ -10,6 +10,6 @@ package doraclient
 
 // Request body for PUT /user/{id}/config: update a user changeable details only. Other properties can only be changed by an admin following a manual request by the user.
 type UpdateUserConfigRequest struct {
-	PhotoUrl *UpdateFieldString `json:"photo_url,omitempty"`
-	Timezone *UpdateFieldString `json:"timezone,omitempty"`
+	PhotoUrl *UpdateFieldString `json:"photo_url"`
+	Timezone *UpdateFieldString `json:"timezone"`
 }

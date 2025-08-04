@@ -1,10 +1,9 @@
-# UpdateFieldString
+# CreateOrUpdateUserResponse
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Update** | **bool** | Whether to update the field. | [default to null]
-**Value** | **string** | The new value to set for the field. | [optional] [default to null]
+**Id** | **string** | The ID of the created or updated user. | [optional] [default to null]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

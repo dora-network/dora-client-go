@@ -9,5 +9,5 @@
 package doraclient
 
 type UnitePositionRequest struct {
-	GlobalPositionId string `json:"global_position_id,omitempty"`
+	GlobalPositionId string `json:"global_position_id"`
 }

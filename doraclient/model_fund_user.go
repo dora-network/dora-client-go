@@ -12,5 +12,5 @@ type FundUser struct {
 	UserId string `json:"user_id,omitempty"`
 	PositionId string `json:"position_id,omitempty"`
 	AssetId string `json:"asset_id,omitempty"`
-	FinalAmount string `json:"final_amount,omitempty"`
+	FinalQuantity string `json:"final_quantity,omitempty"`
 }

@@ -9,7 +9,7 @@
 package doraclient
 
 type SupplyRequest struct {
-	PositionId string `json:"position_id,omitempty"`
-	AssetId string `json:"asset_id,omitempty"`
-	Quantity string `json:"quantity,omitempty"`
+	PositionId string `json:"position_id"`
+	AssetId string `json:"asset_id"`
+	Quantity string `json:"quantity"`
 }

@@ -11,7 +11,7 @@ package doraclient
 // A generic struct to handle optional updates for string fields in user requests.
 type UpdateFieldString struct {
 	// Whether to update the field.
-	Update bool `json:"update,omitempty"`
+	Update bool `json:"update"`
 	// The new value to set for the field.
 	Value string `json:"value,omitempty"`
 }

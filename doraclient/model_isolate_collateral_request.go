@@ -9,7 +9,7 @@
 package doraclient
 
 type IsolateCollateralRequest struct {
-	GlobalPositionId string `json:"global_position_id,omitempty"`
-	AssetId string `json:"asset_id,omitempty"`
-	Quantity string `json:"quantity,omitempty"`
+	GlobalPositionId string `json:"global_position_id"`
+	AssetId string `json:"asset_id"`
+	Quantity string `json:"quantity"`
 }
