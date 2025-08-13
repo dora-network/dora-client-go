@@ -10,6 +10,6 @@ package doraclient
 
 type Portfolio struct {
 	UserId string `json:"user_id,omitempty"`
-	Position map[string]map[string]map[string]Position `json:"position,omitempty"`
+	Position map[string]map[string]Position `json:"position,omitempty"`
 	NetStablecoinEquivalence *TransformedAssets `json:"net_stablecoin_equivalence,omitempty"`
 }

@@ -3077,9 +3077,7 @@ components:
           additionalProperties:
             type: object
             additionalProperties:
-              type: object
-              additionalProperties:
-                $ref: "#/components/schemas/Position"
+              $ref: "#/components/schemas/Position"
         net_stablecoin_equivalence:
           $ref: "#/components/schemas/TransformedAssets"
     PositionType:
