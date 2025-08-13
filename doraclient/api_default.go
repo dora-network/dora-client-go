@@ -575,10 +575,10 @@ func (a *DefaultApiService) GetAllAssetPrices(ctx context.Context) (ListAssetPri
 /*
 DefaultApiService Get asset by ID
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param id
+ * @param assetId
 @return GetAssetByIdResponse
 */
-func (a *DefaultApiService) GetAssetById(ctx context.Context, id string) (GetAssetByIdResponse, *http.Response, error) {
+func (a *DefaultApiService) GetAssetById(ctx context.Context, assetId string) (GetAssetByIdResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
@@ -588,8 +588,8 @@ func (a *DefaultApiService) GetAssetById(ctx context.Context, id string) (GetAss
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/v1/assets/{id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", fmt.Sprintf("%v", id), -1)
+	localVarPath := a.client.cfg.BasePath + "/v1/assets/{asset_id}"
+	localVarPath = strings.Replace(localVarPath, "{"+"asset_id"+"}", fmt.Sprintf("%v", assetId), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -927,10 +927,10 @@ func (a *DefaultApiService) GetCandleData(ctx context.Context, orderbook string,
 /*
 DefaultApiService Get coupon payments for a bond asset
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param id
+ * @param assetId
 @return ListCouponPaymentsResponse
 */
-func (a *DefaultApiService) GetCouponPaymentsByAssetId(ctx context.Context, id string) (ListCouponPaymentsResponse, *http.Response, error) {
+func (a *DefaultApiService) GetCouponPaymentsByAssetId(ctx context.Context, assetId string) (ListCouponPaymentsResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
@@ -940,8 +940,8 @@ func (a *DefaultApiService) GetCouponPaymentsByAssetId(ctx context.Context, id s
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/v1/assets/{id}/coupon_payments"
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", fmt.Sprintf("%v", id), -1)
+	localVarPath := a.client.cfg.BasePath + "/v1/assets/{asset_id}/coupon_payments"
+	localVarPath = strings.Replace(localVarPath, "{"+"asset_id"+"}", fmt.Sprintf("%v", assetId), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -6627,7 +6627,7 @@ func (a *DefaultApiService) StreamOrderbookOpenOrders(ctx context.Context, order
 /*
 DefaultApiService Get a snapshot of trades executed on the given order book from a specific date and open a stream for real-time updates
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param orderbookId
+ * @param orderBookId
  * @param optional nil or *DefaultApiStreamTradesOpts - Optional Parameters:
      * @param "Since" (optional.Time) - 
 @return ListTradeResponse
@@ -6637,7 +6637,7 @@ type DefaultApiStreamTradesOpts struct {
     Since optional.Time
 }
 
-func (a *DefaultApiService) StreamTrades(ctx context.Context, orderbookId string, localVarOptionals *DefaultApiStreamTradesOpts) (ListTradeResponse, *http.Response, error) {
+func (a *DefaultApiService) StreamTrades(ctx context.Context, orderBookId string, localVarOptionals *DefaultApiStreamTradesOpts) (ListTradeResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
@@ -6648,7 +6648,7 @@ func (a *DefaultApiService) StreamTrades(ctx context.Context, orderbookId string
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/v1/trades/{order_book_id}/stream"
-	localVarPath = strings.Replace(localVarPath, "{"+"orderbookId"+"}", fmt.Sprintf("%v", orderbookId), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"order_book_id"+"}", fmt.Sprintf("%v", orderBookId), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

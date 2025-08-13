@@ -12,7 +12,9 @@ Name | Type | Description | Notes
 **IssuedAt** | [**time.Time**](time.Time.md) |  | [optional] [default to null]
 **Issuer** | **string** |  | [optional] [default to null]
 **MaturityAt** | [**time.Time**](time.Time.md) |  | [optional] [default to null]
+**PrincipalValue** | **string** |  | [optional] [default to null]
 **PaymentsPerYear** | **int32** |  | [optional] [default to null]
+**PaymentsEvery** | **int32** | Coupon payment frequency in nanoseconds (minimum 1000 i.e. 1 microsecond) | [optional] [default to null]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

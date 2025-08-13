@@ -14,7 +14,7 @@ type Order struct {
 	Quantity string `json:"quantity,omitempty"`
 	Kind *OrderKind `json:"kind,omitempty"`
 	Price string `json:"price,omitempty"`
-	InverseLeverage float64 `json:"inverse_leverage,omitempty"`
+	InverseLeverage string `json:"inverse_leverage,omitempty"`
 	Side *Side `json:"side,omitempty"`
 	Status *OrderStatus `json:"status,omitempty"`
 	UserId string `json:"user_id,omitempty"`

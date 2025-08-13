@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **Quantity** | **string** |  | [optional] [default to null]
 **Kind** | [***OrderKind**](OrderKind.md) |  | [optional] [default to null]
 **Price** | **string** |  | [optional] [default to null]
-**InverseLeverage** | **float64** |  | [optional] [default to null]
+**InverseLeverage** | **string** |  | [optional] [default to null]
 **Side** | [***Side**](Side.md) |  | [optional] [default to null]
 **Status** | [***OrderStatus**](OrderStatus.md) |  | [optional] [default to null]
 **UserId** | **string** |  | [optional] [default to null]

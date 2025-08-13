@@ -107,12 +107,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
-  /v1/assets/{id}:
+  /v1/assets/{asset_id}:
     get:
       summary: Get asset by ID
       operationId: getAssetById
       parameters:
-      - name: id
+      - name: asset_id
         in: path
         required: true
         style: simple
@@ -139,12 +139,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
-  /v1/assets/{id}/coupon_payments:
+  /v1/assets/{asset_id}/coupon_payments:
     get:
       summary: Get coupon payments for a bond asset
       operationId: getCouponPaymentsByAssetId
       parameters:
-      - name: id
+      - name: asset_id
         in: path
         required: true
         style: simple
@@ -2389,7 +2389,7 @@ paths:
         date and open a stream for real-time updates
       operationId: streamTrades
       parameters:
-      - name: orderbookId
+      - name: order_book_id
         in: path
         required: true
         style: simple
@@ -2627,8 +2627,16 @@ components:
         maturity_at:
           type: string
           format: date-time
+        principal_value:
+          type: string
+          format: decimal
         payments_per_year:
           type: integer
+        payments_every:
+          minimum: 1000
+          type: integer
+          description: Coupon payment frequency in nanoseconds (minimum 1000 i.e.
+            1 microsecond)
     ListAssetsResponse:
       type: object
       allOf:
@@ -2657,13 +2665,24 @@ components:
         start_at:
           type: string
           format: date-time
+        end_at:
+          type: string
+          format: date-time
         pay_at:
+          type: string
+          format: date-time
+        completed_at:
           type: string
           format: date-time
         created_at:
           type: string
           format: date-time
-        processed_at:
+        process_every:
+          minimum: 1000
+          type: integer
+          description: "Processing frequency for the coupon payment calculations in\
+            \ nanoseconds (minimum 1000, i.e. 1 microsecond)"
+        last_processed_at:
           type: string
           format: date-time
         yield:
@@ -2952,7 +2971,8 @@ components:
           type: string
           format: decimal
         inverse_leverage:
-          type: number
+          type: string
+          format: decimal
         side:
           $ref: "#/components/schemas/Side"
         status:
@@ -2998,6 +3018,7 @@ components:
       - inverse_leverage
       - kind
       - order_book_id
+      - position_id
       - price
       - quantity
       - side
@@ -3007,10 +3028,8 @@ components:
           type: string
           format: decimal
         inverse_leverage:
-          type: number
-          description: "Required: Inverse leverage for the order, must be between\
-            \ 0 and 1 (inclusive)"
-          nullable: true
+          type: string
+          format: decimal
         price:
           type: string
           format: decimal
@@ -3018,6 +3037,10 @@ components:
           $ref: "#/components/schemas/OrderKind"
         side:
           $ref: "#/components/schemas/Side"
+        position_id:
+          type: string
+          description: position ID to use for the order. required.
+          format: uuid
         order_book_id:
           type: string
           description: "Required: the order book to submit the order to"

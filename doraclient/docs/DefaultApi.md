@@ -9,10 +9,10 @@ Method | HTTP request | Description
 [**CreateOrder**](DefaultApi.md#CreateOrder) | **Post** /v1/orders | Create a new order
 [**DeleteUser**](DefaultApi.md#DeleteUser) | **Delete** /v1/user/{user_id} | Delete user by ID
 [**GetAllAssetPrices**](DefaultApi.md#GetAllAssetPrices) | **Get** /v1/price | Get the current price of all assets
-[**GetAssetById**](DefaultApi.md#GetAssetById) | **Get** /v1/assets/{id} | Get asset by ID
+[**GetAssetById**](DefaultApi.md#GetAssetById) | **Get** /v1/assets/{asset_id} | Get asset by ID
 [**GetAssetPrice**](DefaultApi.md#GetAssetPrice) | **Get** /v1/price/asset/{asset_id} | Get the current price of an asset
 [**GetCandleData**](DefaultApi.md#GetCandleData) | **Get** /v1/charts/{orderbook}/candle | Get candlestick data for an orderbook
-[**GetCouponPaymentsByAssetId**](DefaultApi.md#GetCouponPaymentsByAssetId) | **Get** /v1/assets/{id}/coupon_payments | Get coupon payments for a bond asset
+[**GetCouponPaymentsByAssetId**](DefaultApi.md#GetCouponPaymentsByAssetId) | **Get** /v1/assets/{asset_id}/coupon_payments | Get coupon payments for a bond asset
 [**GetL1Depth**](DefaultApi.md#GetL1Depth) | **Get** /v1/orderbooks/{order_book_id}/L1 | Get the top price levels for a specific orderbook (L1 market depth)
 [**GetL2Depth**](DefaultApi.md#GetL2Depth) | **Get** /v1/orderbooks/{order_book_id}/L2 | Get the aggregated price levels for a specific orderbook (L2 market depth)
 [**GetL3Depth**](DefaultApi.md#GetL3Depth) | **Get** /v1/orderbooks/{order_book_id}/L3 | Get all open orders for a specific orderbook (L3 market depth)
@@ -187,7 +187,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetAssetById**
-> GetAssetByIdResponse GetAssetById(ctx, id)
+> GetAssetByIdResponse GetAssetById(ctx, assetId)
 Get asset by ID
 
 ### Required Parameters
@@ -195,7 +195,7 @@ Get asset by ID
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **id** | [**string**](.md)|  | 
+  **assetId** | [**string**](.md)|  | 
 
 ### Return type
 
@@ -275,7 +275,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetCouponPaymentsByAssetId**
-> ListCouponPaymentsResponse GetCouponPaymentsByAssetId(ctx, id)
+> ListCouponPaymentsResponse GetCouponPaymentsByAssetId(ctx, assetId)
 Get coupon payments for a bond asset
 
 ### Required Parameters
@@ -283,7 +283,7 @@ Get coupon payments for a bond asset
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **id** | [**string**](.md)|  | 
+  **assetId** | [**string**](.md)|  | 
 
 ### Return type
 
@@ -1613,7 +1613,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **StreamTrades**
-> ListTradeResponse StreamTrades(ctx, orderbookId, optional)
+> ListTradeResponse StreamTrades(ctx, orderBookId, optional)
 Get a snapshot of trades executed on the given order book from a specific date and open a stream for real-time updates
 
 ### Required Parameters
@@ -1621,7 +1621,7 @@ Get a snapshot of trades executed on the given order book from a specific date a
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **orderbookId** | [**string**](.md)|  | 
+  **orderBookId** | [**string**](.md)|  | 
  **optional** | ***DefaultApiStreamTradesOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters

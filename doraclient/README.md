@@ -26,10 +26,10 @@ Class | Method | HTTP request | Description
 *DefaultApi* | [**CreateOrder**](docs/DefaultApi.md#createorder) | **Post** /v1/orders | Create a new order
 *DefaultApi* | [**DeleteUser**](docs/DefaultApi.md#deleteuser) | **Delete** /v1/user/{user_id} | Delete user by ID
 *DefaultApi* | [**GetAllAssetPrices**](docs/DefaultApi.md#getallassetprices) | **Get** /v1/price | Get the current price of all assets
-*DefaultApi* | [**GetAssetById**](docs/DefaultApi.md#getassetbyid) | **Get** /v1/assets/{id} | Get asset by ID
+*DefaultApi* | [**GetAssetById**](docs/DefaultApi.md#getassetbyid) | **Get** /v1/assets/{asset_id} | Get asset by ID
 *DefaultApi* | [**GetAssetPrice**](docs/DefaultApi.md#getassetprice) | **Get** /v1/price/asset/{asset_id} | Get the current price of an asset
 *DefaultApi* | [**GetCandleData**](docs/DefaultApi.md#getcandledata) | **Get** /v1/charts/{orderbook}/candle | Get candlestick data for an orderbook
-*DefaultApi* | [**GetCouponPaymentsByAssetId**](docs/DefaultApi.md#getcouponpaymentsbyassetid) | **Get** /v1/assets/{id}/coupon_payments | Get coupon payments for a bond asset
+*DefaultApi* | [**GetCouponPaymentsByAssetId**](docs/DefaultApi.md#getcouponpaymentsbyassetid) | **Get** /v1/assets/{asset_id}/coupon_payments | Get coupon payments for a bond asset
 *DefaultApi* | [**GetL1Depth**](docs/DefaultApi.md#getl1depth) | **Get** /v1/orderbooks/{order_book_id}/L1 | Get the top price levels for a specific orderbook (L1 market depth)
 *DefaultApi* | [**GetL2Depth**](docs/DefaultApi.md#getl2depth) | **Get** /v1/orderbooks/{order_book_id}/L2 | Get the aggregated price levels for a specific orderbook (L2 market depth)
 *DefaultApi* | [**GetL3Depth**](docs/DefaultApi.md#getl3depth) | **Get** /v1/orderbooks/{order_book_id}/L3 | Get all open orders for a specific orderbook (L3 market depth)

@@ -21,5 +21,8 @@ type Bond struct {
 	IssuedAt time.Time `json:"issued_at,omitempty"`
 	Issuer string `json:"issuer,omitempty"`
 	MaturityAt time.Time `json:"maturity_at,omitempty"`
+	PrincipalValue string `json:"principal_value,omitempty"`
 	PaymentsPerYear int32 `json:"payments_per_year,omitempty"`
+	// Coupon payment frequency in nanoseconds (minimum 1000 i.e. 1 microsecond)
+	PaymentsEvery int32 `json:"payments_every,omitempty"`
 }

@@ -15,8 +15,12 @@ type CouponPayment struct {
 	Id string `json:"id,omitempty"`
 	AssetId string `json:"asset_id,omitempty"`
 	StartAt time.Time `json:"start_at,omitempty"`
+	EndAt time.Time `json:"end_at,omitempty"`
 	PayAt time.Time `json:"pay_at,omitempty"`
+	CompletedAt time.Time `json:"completed_at,omitempty"`
 	CreatedAt time.Time `json:"created_at,omitempty"`
-	ProcessedAt time.Time `json:"processed_at,omitempty"`
+	// Processing frequency for the coupon payment calculations in nanoseconds (minimum 1000, i.e. 1 microsecond)
+	ProcessEvery int32 `json:"process_every,omitempty"`
+	LastProcessedAt time.Time `json:"last_processed_at,omitempty"`
 	Yield float64 `json:"yield,omitempty"`
 }
