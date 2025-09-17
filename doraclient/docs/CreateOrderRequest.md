@@ -5,12 +5,12 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Quantity** | **string** |  | [default to null]
 **InverseLeverage** | **string** |  | [default to null]
-**Price** | **string** |  | [default to null]
+**Price** | **string** |  | [optional] [default to null]
 **Kind** | [***OrderKind**](OrderKind.md) |  | [default to null]
 **Side** | [***Side**](Side.md) |  | [default to null]
 **PositionId** | **string** | position ID to use for the order. required. | [default to null]
 **OrderBookId** | **string** | Required: the order book to submit the order to | [default to null]
-**UserText** | **string** | Optional: User-defined text for the order, e.g., &#x27;buying dips&#x27; | [optional] [default to null]
+**OrderInfo** | **string** | Optional: User-defined text for the order, e.g., &#x27;buying dips&#x27; | [optional] [default to null]
 **OrderModifiers** | [**[]OrderModifierKind**](OrderModifierKind.md) |  | [optional] [default to null]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

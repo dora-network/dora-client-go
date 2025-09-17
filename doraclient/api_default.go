@@ -28,15 +28,15 @@ type DefaultApiService service
 /*
 DefaultApiService Cancel all open orders
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return CancelOrdersResponse
+@return ListOrdersResponse
 */
-func (a *DefaultApiService) CancelAllOpenOrders(ctx context.Context) (CancelOrdersResponse, *http.Response, error) {
+func (a *DefaultApiService) CancelAllOpenOrders(ctx context.Context) (ListOrdersResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Delete")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue CancelOrdersResponse
+		localVarReturnValue ListOrdersResponse
 	)
 
 	// create path and map variables
@@ -93,7 +93,7 @@ func (a *DefaultApiService) CancelAllOpenOrders(ctx context.Context) (CancelOrde
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v CancelOrdersResponse
+			var v ListOrdersResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -131,15 +131,15 @@ func (a *DefaultApiService) CancelAllOpenOrders(ctx context.Context) (CancelOrde
 DefaultApiService Cancel an order by ID
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param orderId
-@return OrderCancelledResponse
+@return CancelOrderResponse
 */
-func (a *DefaultApiService) CancelOrderById(ctx context.Context, orderId string) (OrderCancelledResponse, *http.Response, error) {
+func (a *DefaultApiService) CancelOrderById(ctx context.Context, orderId string) (CancelOrderResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Delete")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue OrderCancelledResponse
+		localVarReturnValue CancelOrderResponse
 	)
 
 	// create path and map variables
@@ -197,7 +197,7 @@ func (a *DefaultApiService) CancelOrderById(ctx context.Context, orderId string)
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 204 {
-			var v OrderCancelledResponse
+			var v CancelOrderResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -255,15 +255,15 @@ func (a *DefaultApiService) CancelOrderById(ctx context.Context, orderId string)
 DefaultApiService Create a new order
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param body
-@return OrderId
+@return CreateOrderResponse
 */
-func (a *DefaultApiService) CreateOrder(ctx context.Context, body CreateOrderRequest) (OrderId, *http.Response, error) {
+func (a *DefaultApiService) CreateOrder(ctx context.Context, body CreateOrderRequest) (CreateOrderResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue OrderId
+		localVarReturnValue CreateOrderResponse
 	)
 
 	// create path and map variables
@@ -322,7 +322,7 @@ func (a *DefaultApiService) CreateOrder(ctx context.Context, body CreateOrderReq
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 201 {
-			var v OrderId
+			var v CreateOrderResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -793,7 +793,7 @@ func (a *DefaultApiService) GetAssetPrice(ctx context.Context, assetId string) (
 /*
 DefaultApiService Get candlestick data for an orderbook
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param orderbook
+ * @param orderBookId
  * @param optional nil or *DefaultApiGetCandleDataOpts - Optional Parameters:
      * @param "Start" (optional.Time) - 
      * @param "End" (optional.Time) - 
@@ -807,7 +807,7 @@ type DefaultApiGetCandleDataOpts struct {
     Resolution optional.Interface
 }
 
-func (a *DefaultApiService) GetCandleData(ctx context.Context, orderbook string, localVarOptionals *DefaultApiGetCandleDataOpts) (ListCandlesResponse, *http.Response, error) {
+func (a *DefaultApiService) GetCandleData(ctx context.Context, orderBookId string, localVarOptionals *DefaultApiGetCandleDataOpts) (ListCandlesResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
@@ -817,8 +817,8 @@ func (a *DefaultApiService) GetCandleData(ctx context.Context, orderbook string,
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/v1/charts/{orderbook}/candle"
-	localVarPath = strings.Replace(localVarPath, "{"+"orderbook"+"}", fmt.Sprintf("%v", orderbook), -1)
+	localVarPath := a.client.cfg.BasePath + "/v1/charts/{order_book_id}/candle"
+	localVarPath = strings.Replace(localVarPath, "{"+"order_book_id"+"}", fmt.Sprintf("%v", orderBookId), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -3116,10 +3116,10 @@ func (a *DefaultApiService) GetTrades(ctx context.Context, localVarOptionals *De
 /*
 DefaultApiService Get a transaction by ID
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param id
+ * @param transactionId
 @return GetTransactionResponse
 */
-func (a *DefaultApiService) GetTransactionById(ctx context.Context, id string) (GetTransactionResponse, *http.Response, error) {
+func (a *DefaultApiService) GetTransactionById(ctx context.Context, transactionId string) (GetTransactionResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
@@ -3129,8 +3129,8 @@ func (a *DefaultApiService) GetTransactionById(ctx context.Context, id string) (
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/v1/transactions/{id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", fmt.Sprintf("%v", id), -1)
+	localVarPath := a.client.cfg.BasePath + "/v1/transactions/{transaction_id}"
+	localVarPath = strings.Replace(localVarPath, "{"+"transaction_id"+"}", fmt.Sprintf("%v", transactionId), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -3489,20 +3489,20 @@ DefaultApiService Get a snapshot of user&#x27;s ledger updates since a specific 
  * @param userId
  * @param optional nil or *DefaultApiGetUserLedgerStreamOpts - Optional Parameters:
      * @param "Since" (optional.Time) - 
-@return ListPositionsResponse
+@return []StreamPositionsEntry
 */
 
 type DefaultApiGetUserLedgerStreamOpts struct {
     Since optional.Time
 }
 
-func (a *DefaultApiService) GetUserLedgerStream(ctx context.Context, userId string, localVarOptionals *DefaultApiGetUserLedgerStreamOpts) (ListPositionsResponse, *http.Response, error) {
+func (a *DefaultApiService) GetUserLedgerStream(ctx context.Context, userId string, localVarOptionals *DefaultApiGetUserLedgerStreamOpts) ([]StreamPositionsEntry, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue ListPositionsResponse
+		localVarReturnValue []StreamPositionsEntry
 	)
 
 	// create path and map variables
@@ -3563,7 +3563,7 @@ func (a *DefaultApiService) GetUserLedgerStream(ctx context.Context, userId stri
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v ListPositionsResponse
+			var v []StreamPositionsEntry
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -3622,26 +3622,26 @@ DefaultApiService Get a snapshot of user&#x27;s order updates for the given orde
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param userId
  * @param orderBookId
- * @param optional nil or *DefaultApiGetUserOrdersStreamOpts - Optional Parameters:
+ * @param optional nil or *DefaultApiGetUserOrderUpdatesStreamOpts - Optional Parameters:
      * @param "Since" (optional.Time) - 
-@return ListOrdersResponse
+@return []StreamOrderUpdatesEntry
 */
 
-type DefaultApiGetUserOrdersStreamOpts struct {
+type DefaultApiGetUserOrderUpdatesStreamOpts struct {
     Since optional.Time
 }
 
-func (a *DefaultApiService) GetUserOrdersStream(ctx context.Context, userId string, orderBookId string, localVarOptionals *DefaultApiGetUserOrdersStreamOpts) (ListOrdersResponse, *http.Response, error) {
+func (a *DefaultApiService) GetUserOrderUpdatesStream(ctx context.Context, userId string, orderBookId string, localVarOptionals *DefaultApiGetUserOrderUpdatesStreamOpts) ([]StreamOrderUpdatesEntry, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue ListOrdersResponse
+		localVarReturnValue []StreamOrderUpdatesEntry
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/v1/user/{user_id}/orders/{order_book_id}/stream"
+	localVarPath := a.client.cfg.BasePath + "/v1/user/{user_id}/orders/{order_book_id}/updates/stream"
 	localVarPath = strings.Replace(localVarPath, "{"+"user_id"+"}", fmt.Sprintf("%v", userId), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"order_book_id"+"}", fmt.Sprintf("%v", orderBookId), -1)
 
@@ -3699,7 +3699,7 @@ func (a *DefaultApiService) GetUserOrdersStream(ctx context.Context, userId stri
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v ListOrdersResponse
+			var v []StreamOrderUpdatesEntry
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -3758,26 +3758,26 @@ DefaultApiService Get a snapshot of user&#x27;s order updates across all order b
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param userId
  * @param orderBookId
- * @param optional nil or *DefaultApiGetUserOrdersStreamAllOpts - Optional Parameters:
+ * @param optional nil or *DefaultApiGetUserOrdersUpdatesStreamAllOpts - Optional Parameters:
      * @param "Since" (optional.Time) - 
-@return ListOrdersResponse
+@return []StreamOrderUpdatesEntry
 */
 
-type DefaultApiGetUserOrdersStreamAllOpts struct {
+type DefaultApiGetUserOrdersUpdatesStreamAllOpts struct {
     Since optional.Time
 }
 
-func (a *DefaultApiService) GetUserOrdersStreamAll(ctx context.Context, userId string, orderBookId string, localVarOptionals *DefaultApiGetUserOrdersStreamAllOpts) (ListOrdersResponse, *http.Response, error) {
+func (a *DefaultApiService) GetUserOrdersUpdatesStreamAll(ctx context.Context, userId string, orderBookId string, localVarOptionals *DefaultApiGetUserOrdersUpdatesStreamAllOpts) ([]StreamOrderUpdatesEntry, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue ListOrdersResponse
+		localVarReturnValue []StreamOrderUpdatesEntry
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/v1/user/{user_id}/orders/all/stream"
+	localVarPath := a.client.cfg.BasePath + "/v1/user/{user_id}/orders/all/updates/stream"
 	localVarPath = strings.Replace(localVarPath, "{"+"user_id"+"}", fmt.Sprintf("%v", userId), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"order_book_id"+"}", fmt.Sprintf("%v", orderBookId), -1)
 
@@ -3835,7 +3835,7 @@ func (a *DefaultApiService) GetUserOrdersStreamAll(ctx context.Context, userId s
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v ListOrdersResponse
+			var v []StreamOrderUpdatesEntry
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -4007,20 +4007,20 @@ DefaultApiService Get a snapshot of user&#x27;s executed transactions since a sp
  * @param userId
  * @param optional nil or *DefaultApiGetUserTransactionsStreamOpts - Optional Parameters:
      * @param "Since" (optional.Time) - 
-@return ListTransactionsResponse
+@return []StreamTransactionsEntry
 */
 
 type DefaultApiGetUserTransactionsStreamOpts struct {
     Since optional.Time
 }
 
-func (a *DefaultApiService) GetUserTransactionsStream(ctx context.Context, userId string, localVarOptionals *DefaultApiGetUserTransactionsStreamOpts) (ListTransactionsResponse, *http.Response, error) {
+func (a *DefaultApiService) GetUserTransactionsStream(ctx context.Context, userId string, localVarOptionals *DefaultApiGetUserTransactionsStreamOpts) ([]StreamTransactionsEntry, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue ListTransactionsResponse
+		localVarReturnValue []StreamTransactionsEntry
 	)
 
 	// create path and map variables
@@ -4081,7 +4081,7 @@ func (a *DefaultApiService) GetUserTransactionsStream(ctx context.Context, userI
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v ListTransactionsResponse
+			var v []StreamTransactionsEntry
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -5973,8 +5973,8 @@ DefaultApiService List all orders
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param optional nil or *DefaultApiListOrdersOpts - Optional Parameters:
      * @param "OrderBookId" (optional.Interface of []string) - 
-     * @param "Kind" (optional.Interface of OrderKind) - 
-     * @param "Status" (optional.Interface of OrderStatus) - 
+     * @param "Kind" (optional.Interface of []OrderKind) - 
+     * @param "Status" (optional.Interface of []OrderStatus) - 
      * @param "Side" (optional.Interface of Side) - 
      * @param "From" (optional.Time) - 
      * @param "To" (optional.Time) - 
@@ -6014,10 +6014,10 @@ func (a *DefaultApiService) ListOrders(ctx context.Context, localVarOptionals *D
 		localVarQueryParams.Add("order_book_id", parameterToString(localVarOptionals.OrderBookId.Value(), "multi"))
 	}
 	if localVarOptionals != nil && localVarOptionals.Kind.IsSet() {
-		localVarQueryParams.Add("kind", parameterToString(localVarOptionals.Kind.Value(), ""))
+		localVarQueryParams.Add("kind", parameterToString(localVarOptionals.Kind.Value(), "multi"))
 	}
 	if localVarOptionals != nil && localVarOptionals.Status.IsSet() {
-		localVarQueryParams.Add("status", parameterToString(localVarOptionals.Status.Value(), ""))
+		localVarQueryParams.Add("status", parameterToString(localVarOptionals.Status.Value(), "multi"))
 	}
 	if localVarOptionals != nil && localVarOptionals.Side.IsSet() {
 		localVarQueryParams.Add("side", parameterToString(localVarOptionals.Side.Value(), ""))
@@ -6136,28 +6136,29 @@ func (a *DefaultApiService) ListOrders(ctx context.Context, localVarOptionals *D
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 /*
-DefaultApiService Get a snapshot of asset prices from a specific date and open a stream for real-time updates
+DefaultApiService Stream real-time asset prices as map objects
+Opens a WebSocket stream for real-time asset price updates. First message contains all current prices, subsequent messages contain only changed prices. Data is sent as JSON objects keyed by asset ID.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param optional nil or *DefaultApiStreamAssetPricesOpts - Optional Parameters:
      * @param "Since" (optional.Time) - 
-@return ListAssetPriceResponse
+@return map[string]interface{}
 */
 
 type DefaultApiStreamAssetPricesOpts struct {
     Since optional.Time
 }
 
-func (a *DefaultApiService) StreamAssetPrices(ctx context.Context, localVarOptionals *DefaultApiStreamAssetPricesOpts) (ListAssetPriceResponse, *http.Response, error) {
+func (a *DefaultApiService) StreamAssetPrices(ctx context.Context, localVarOptionals *DefaultApiStreamAssetPricesOpts) (map[string]interface{}, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue ListAssetPriceResponse
+		localVarReturnValue map[string]interface{}
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/v1/price/stream"
+	localVarPath := a.client.cfg.BasePath + "/v1/prices/stream"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -6213,7 +6214,7 @@ func (a *DefaultApiService) StreamAssetPrices(ctx context.Context, localVarOptio
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v ListAssetPriceResponse
+			var v map[string]interface{}
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -6250,11 +6251,11 @@ func (a *DefaultApiService) StreamAssetPrices(ctx context.Context, localVarOptio
 /*
 DefaultApiService Get a snapshot of candlestick data from date provided, and open a stream for real-time updates
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param orderbook
+ * @param orderBookId
  * @param optional nil or *DefaultApiStreamCandleDataOpts - Optional Parameters:
      * @param "Since" (optional.Time) - 
      * @param "Resolution" (optional.Interface of CandleResolution) - 
-@return ListCandlesResponse
+@return []StreamCandlesEntry
 */
 
 type DefaultApiStreamCandleDataOpts struct {
@@ -6262,18 +6263,18 @@ type DefaultApiStreamCandleDataOpts struct {
     Resolution optional.Interface
 }
 
-func (a *DefaultApiService) StreamCandleData(ctx context.Context, orderbook string, localVarOptionals *DefaultApiStreamCandleDataOpts) (ListCandlesResponse, *http.Response, error) {
+func (a *DefaultApiService) StreamCandleData(ctx context.Context, orderBookId string, localVarOptionals *DefaultApiStreamCandleDataOpts) ([]StreamCandlesEntry, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue ListCandlesResponse
+		localVarReturnValue []StreamCandlesEntry
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/v1/charts/{orderbook}/candle/stream"
-	localVarPath = strings.Replace(localVarPath, "{"+"orderbook"+"}", fmt.Sprintf("%v", orderbook), -1)
+	localVarPath := a.client.cfg.BasePath + "/v1/charts/{order_book_id}/candle/stream"
+	localVarPath = strings.Replace(localVarPath, "{"+"order_book_id"+"}", fmt.Sprintf("%v", orderBookId), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -6332,7 +6333,7 @@ func (a *DefaultApiService) StreamCandleData(ctx context.Context, orderbook stri
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v ListCandlesResponse
+			var v []StreamCandlesEntry
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -6382,24 +6383,24 @@ DefaultApiService Get a snapshot of base and quote balances for an order book an
  * @param orderBookId
  * @param optional nil or *DefaultApiStreamOrderBookBalancesOpts - Optional Parameters:
      * @param "Since" (optional.Time) - 
-@return OrderBookBalanceResponse
+@return []StreamOrderBookBalanceEntry
 */
 
 type DefaultApiStreamOrderBookBalancesOpts struct {
     Since optional.Time
 }
 
-func (a *DefaultApiService) StreamOrderBookBalances(ctx context.Context, orderBookId string, localVarOptionals *DefaultApiStreamOrderBookBalancesOpts) (OrderBookBalanceResponse, *http.Response, error) {
+func (a *DefaultApiService) StreamOrderBookBalances(ctx context.Context, orderBookId string, localVarOptionals *DefaultApiStreamOrderBookBalancesOpts) ([]StreamOrderBookBalanceEntry, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue OrderBookBalanceResponse
+		localVarReturnValue []StreamOrderBookBalanceEntry
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/v1/orderbooks/{order_book_id}/stream/balances"
+	localVarPath := a.client.cfg.BasePath + "/v1/orderbooks/{order_book_id}/balances/stream"
 	localVarPath = strings.Replace(localVarPath, "{"+"order_book_id"+"}", fmt.Sprintf("%v", orderBookId), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -6456,7 +6457,7 @@ func (a *DefaultApiService) StreamOrderBookBalances(ctx context.Context, orderBo
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v OrderBookBalanceResponse
+			var v []StreamOrderBookBalanceEntry
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -6506,24 +6507,24 @@ DefaultApiService Get a snapshot of open orders in an order book and open a stre
  * @param orderBookId
  * @param optional nil or *DefaultApiStreamOrderbookOpenOrdersOpts - Optional Parameters:
      * @param "Since" (optional.Time) - 
-@return ListOrdersResponse
+@return LiveOrderbook
 */
 
 type DefaultApiStreamOrderbookOpenOrdersOpts struct {
     Since optional.Time
 }
 
-func (a *DefaultApiService) StreamOrderbookOpenOrders(ctx context.Context, orderBookId string, localVarOptionals *DefaultApiStreamOrderbookOpenOrdersOpts) (ListOrdersResponse, *http.Response, error) {
+func (a *DefaultApiService) StreamOrderbookOpenOrders(ctx context.Context, orderBookId string, localVarOptionals *DefaultApiStreamOrderbookOpenOrdersOpts) (LiveOrderbook, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue ListOrdersResponse
+		localVarReturnValue LiveOrderbook
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/v1/orderbooks/{order_book_id}/stream/open"
+	localVarPath := a.client.cfg.BasePath + "/v1/orderbooks/{order_book_id}/open/stream"
 	localVarPath = strings.Replace(localVarPath, "{"+"order_book_id"+"}", fmt.Sprintf("%v", orderBookId), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -6580,7 +6581,7 @@ func (a *DefaultApiService) StreamOrderbookOpenOrders(ctx context.Context, order
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v ListOrdersResponse
+			var v LiveOrderbook
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -6630,20 +6631,20 @@ DefaultApiService Get a snapshot of trades executed on the given order book from
  * @param orderBookId
  * @param optional nil or *DefaultApiStreamTradesOpts - Optional Parameters:
      * @param "Since" (optional.Time) - 
-@return ListTradeResponse
+@return []StreamTradesEntry
 */
 
 type DefaultApiStreamTradesOpts struct {
     Since optional.Time
 }
 
-func (a *DefaultApiService) StreamTrades(ctx context.Context, orderBookId string, localVarOptionals *DefaultApiStreamTradesOpts) (ListTradeResponse, *http.Response, error) {
+func (a *DefaultApiService) StreamTrades(ctx context.Context, orderBookId string, localVarOptionals *DefaultApiStreamTradesOpts) ([]StreamTradesEntry, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue ListTradeResponse
+		localVarReturnValue []StreamTradesEntry
 	)
 
 	// create path and map variables
@@ -6704,7 +6705,7 @@ func (a *DefaultApiService) StreamTrades(ctx context.Context, orderBookId string
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v ListTradeResponse
+			var v []StreamTradesEntry
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()

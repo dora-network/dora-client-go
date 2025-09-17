@@ -3,7 +3,6 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**PositionId** | **string** |  | [default to null]
 **AssetId** | **string** |  | [default to null]
 **Quantity** | **string** |  | [default to null]
 

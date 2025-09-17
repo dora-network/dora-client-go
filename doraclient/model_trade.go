@@ -13,14 +13,14 @@ import (
 
 type Trade struct {
 	TransactionId string `json:"transaction_id,omitempty"`
-	UserId string `json:"user_id,omitempty"`
-	OrderId string `json:"order_id,omitempty"`
-	OrderSeq int32 `json:"order_seq,omitempty"`
-	OrderBookId string `json:"order_book_id,omitempty"`
-	AssetId string `json:"asset_id,omitempty"`
-	Quantity string `json:"quantity,omitempty"`
-	Price string `json:"price,omitempty"`
+	Asset0 string `json:"asset_0,omitempty"`
+	CreatedAt time.Time `json:"created_at,omitempty"`
 	FeeAssetId string `json:"fee_asset_id,omitempty"`
 	FeeQuantity string `json:"fee_quantity,omitempty"`
-	CreatedAt time.Time `json:"created_at,omitempty"`
+	OrderBookId string `json:"order_book_id,omitempty"`
+	OrderId string `json:"order_id,omitempty"`
+	OrderSeq int32 `json:"order_seq,omitempty"`
+	Price string `json:"price,omitempty"`
+	Quantity0 string `json:"quantity_0,omitempty"`
+	UserId string `json:"user_id,omitempty"`
 }

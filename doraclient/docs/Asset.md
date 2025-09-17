@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **CollateralWeight** | **float64** |  | [optional] [default to null]
 **CreatedAt** | [**time.Time**](time.Time.md) |  | [optional] [default to null]
 **Decimals** | **int32** |  | [optional] [default to null]
+**FractionalizedUnits** | **int32** |  | [optional] [default to null]
 **Description** | **string** |  | [optional] [default to null]
 **LiquidationThreshold** | **float64** |  | [optional] [default to null]
 **MaturityId** | **string** |  | [optional] [default to null]

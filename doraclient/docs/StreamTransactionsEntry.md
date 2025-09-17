@@ -1,9 +1,10 @@
-# CancelOrdersResponseData
+# StreamTransactionsEntry
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**CancelledOrderIds** | **[]string** |  | [optional] [default to null]
+**Val** | [***Transaction**](Transaction.md) |  | [optional] [default to null]
+**Time** | [**time.Time**](time.Time.md) | The timestamp when the data was created | [optional] [default to null]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

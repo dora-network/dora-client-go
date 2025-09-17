@@ -11,7 +11,7 @@ package doraclient
 type CreateOrderRequest struct {
 	Quantity string `json:"quantity"`
 	InverseLeverage string `json:"inverse_leverage"`
-	Price string `json:"price"`
+	Price string `json:"price,omitempty"`
 	Kind *OrderKind `json:"kind"`
 	Side *Side `json:"side"`
 	// position ID to use for the order. required.
@@ -19,6 +19,6 @@ type CreateOrderRequest struct {
 	// Required: the order book to submit the order to
 	OrderBookId string `json:"order_book_id"`
 	// Optional: User-defined text for the order, e.g., 'buying dips'
-	UserText string `json:"user_text,omitempty"`
+	OrderInfo string `json:"order_info,omitempty"`
 	OrderModifiers []OrderModifierKind `json:"order_modifiers,omitempty"`
 }

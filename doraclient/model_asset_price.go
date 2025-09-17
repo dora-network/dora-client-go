@@ -14,5 +14,5 @@ import (
 type AssetPrice struct {
 	AssetId string `json:"asset_id,omitempty"`
 	Price string `json:"price,omitempty"`
-	Timestamp time.Time `json:"timestamp,omitempty"`
+	Time time.Time `json:"time,omitempty"`
 }

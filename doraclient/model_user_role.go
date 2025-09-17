@@ -16,6 +16,6 @@ const (
 	SELF_UserRole UserRole = "SELF"
 	ADMIN_UserRole UserRole = "ADMIN"
 	BOND_PROVIDER_UserRole UserRole = "BOND_PROVIDER"
-	LIQUIDY_PROVIDER_UserRole UserRole = "LIQUIDY_PROVIDER"
+	LIQUIDITY_PROVIDER_UserRole UserRole = "LIQUIDITY_PROVIDER"
 	TRADER_UserRole UserRole = "TRADER"
 )

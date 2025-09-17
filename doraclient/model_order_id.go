@@ -9,5 +9,5 @@
 package doraclient
 
 type OrderId struct {
-	Id string `json:"id,omitempty"`
+	OrderId string `json:"order_id,omitempty"`
 }

@@ -16,6 +16,7 @@ type Asset struct {
 	CollateralWeight float64 `json:"collateral_weight,omitempty"`
 	CreatedAt time.Time `json:"created_at,omitempty"`
 	Decimals int32 `json:"decimals,omitempty"`
+	FractionalizedUnits int32 `json:"fractionalized_units,omitempty"`
 	Description string `json:"description,omitempty"`
 	LiquidationThreshold float64 `json:"liquidation_threshold,omitempty"`
 	MaturityId string `json:"maturity_id,omitempty"`

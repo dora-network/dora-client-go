@@ -14,5 +14,6 @@ type OrderStatus string
 const (
 	OPEN_OrderStatus OrderStatus = "OPEN"
 	FILLED_OrderStatus OrderStatus = "FILLED"
+	PARTIAL_FILL_OrderStatus OrderStatus = "PARTIAL_FILL"
 	CANCELLED_OrderStatus OrderStatus = "CANCELLED"
 )

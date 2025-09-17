@@ -12,6 +12,12 @@ type UserValue struct {
 	Available map[string]string `json:"available,omitempty"`
 	Locked map[string]string `json:"locked,omitempty"`
 	Borrowed map[string]string `json:"borrowed,omitempty"`
+	Supplied map[string]string `json:"supplied,omitempty"`
+	Collateral map[string]string `json:"collateral,omitempty"`
+	SuppliedCollateral map[string]string `json:"supplied_collateral,omitempty"`
+	ImpendingBorrows map[string]string `json:"impending_borrows,omitempty"`
+	BorrowLimit map[string]string `json:"borrow_limit,omitempty"`
+	LiquidationThreshold map[string]string `json:"liquidation_threshold,omitempty"`
 	NotionalLong map[string]string `json:"notional_long,omitempty"`
 	NotionalShort map[string]string `json:"notional_short,omitempty"`
 	PortfolioValue map[string]string `json:"portfolio_value,omitempty"`

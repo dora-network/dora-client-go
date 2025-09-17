@@ -9,7 +9,6 @@
 package doraclient
 
 type FundUserRequest struct {
-	PositionId string `json:"position_id"`
 	AssetId string `json:"asset_id"`
 	Quantity string `json:"quantity"`
 }

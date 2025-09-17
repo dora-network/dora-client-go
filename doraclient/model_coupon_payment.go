@@ -14,13 +14,14 @@ import (
 type CouponPayment struct {
 	Id string `json:"id,omitempty"`
 	AssetId string `json:"asset_id,omitempty"`
+	Yield float64 `json:"yield,omitempty"`
 	StartAt time.Time `json:"start_at,omitempty"`
 	EndAt time.Time `json:"end_at,omitempty"`
 	PayAt time.Time `json:"pay_at,omitempty"`
+	AvailableToPay string `json:"available_to_pay,omitempty"`
 	CompletedAt time.Time `json:"completed_at,omitempty"`
 	CreatedAt time.Time `json:"created_at,omitempty"`
-	// Processing frequency for the coupon payment calculations in nanoseconds (minimum 1000, i.e. 1 microsecond)
+	// Number of nanoseconds to wait between coupon payment processing, must be at least 1000 (1 microsecond)
 	ProcessEvery int32 `json:"process_every,omitempty"`
 	LastProcessedAt time.Time `json:"last_processed_at,omitempty"`
-	Yield float64 `json:"yield,omitempty"`
 }

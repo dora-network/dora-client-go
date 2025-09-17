@@ -28,7 +28,7 @@ Class | Method | HTTP request | Description
 *DefaultApi* | [**GetAllAssetPrices**](docs/DefaultApi.md#getallassetprices) | **Get** /v1/price | Get the current price of all assets
 *DefaultApi* | [**GetAssetById**](docs/DefaultApi.md#getassetbyid) | **Get** /v1/assets/{asset_id} | Get asset by ID
 *DefaultApi* | [**GetAssetPrice**](docs/DefaultApi.md#getassetprice) | **Get** /v1/price/asset/{asset_id} | Get the current price of an asset
-*DefaultApi* | [**GetCandleData**](docs/DefaultApi.md#getcandledata) | **Get** /v1/charts/{orderbook}/candle | Get candlestick data for an orderbook
+*DefaultApi* | [**GetCandleData**](docs/DefaultApi.md#getcandledata) | **Get** /v1/charts/{order_book_id}/candle | Get candlestick data for an orderbook
 *DefaultApi* | [**GetCouponPaymentsByAssetId**](docs/DefaultApi.md#getcouponpaymentsbyassetid) | **Get** /v1/assets/{asset_id}/coupon_payments | Get coupon payments for a bond asset
 *DefaultApi* | [**GetL1Depth**](docs/DefaultApi.md#getl1depth) | **Get** /v1/orderbooks/{order_book_id}/L1 | Get the top price levels for a specific orderbook (L1 market depth)
 *DefaultApi* | [**GetL2Depth**](docs/DefaultApi.md#getl2depth) | **Get** /v1/orderbooks/{order_book_id}/L2 | Get the aggregated price levels for a specific orderbook (L2 market depth)
@@ -48,12 +48,12 @@ Class | Method | HTTP request | Description
 *DefaultApi* | [**GetPoolPrice**](docs/DefaultApi.md#getpoolprice) | **Get** /v1/price/pool/{pool_id} | Get the current price of a pool
 *DefaultApi* | [**GetTradeById**](docs/DefaultApi.md#gettradebyid) | **Get** /v1/trades/{trade_id} | Get a trade by ID
 *DefaultApi* | [**GetTrades**](docs/DefaultApi.md#gettrades) | **Get** /v1/trades | Get a filtered, paginated list of trades
-*DefaultApi* | [**GetTransactionById**](docs/DefaultApi.md#gettransactionbyid) | **Get** /v1/transactions/{id} | Get a transaction by ID
+*DefaultApi* | [**GetTransactionById**](docs/DefaultApi.md#gettransactionbyid) | **Get** /v1/transactions/{transaction_id} | Get a transaction by ID
 *DefaultApi* | [**GetTransactions**](docs/DefaultApi.md#gettransactions) | **Get** /v1/transactions | Get a filtered, paginated list of transactions
 *DefaultApi* | [**GetUserById**](docs/DefaultApi.md#getuserbyid) | **Get** /v1/user/{user_id} | Get user by ID (admin only)
 *DefaultApi* | [**GetUserLedgerStream**](docs/DefaultApi.md#getuserledgerstream) | **Get** /v1/user/{user_id}/ledger/stream | Get a snapshot of user&#x27;s ledger updates since a specific time, and opens a stream for further updates
-*DefaultApi* | [**GetUserOrdersStream**](docs/DefaultApi.md#getuserordersstream) | **Get** /v1/user/{user_id}/orders/{order_book_id}/stream | Get a snapshot of user&#x27;s order updates for the given order book since a specific time, and opens a stream for further updates
-*DefaultApi* | [**GetUserOrdersStreamAll**](docs/DefaultApi.md#getuserordersstreamall) | **Get** /v1/user/{user_id}/orders/all/stream | Get a snapshot of user&#x27;s order updates across all order books since a specific time, and opens a stream for further updates
+*DefaultApi* | [**GetUserOrderUpdatesStream**](docs/DefaultApi.md#getuserorderupdatesstream) | **Get** /v1/user/{user_id}/orders/{order_book_id}/updates/stream | Get a snapshot of user&#x27;s order updates for the given order book since a specific time, and opens a stream for further updates
+*DefaultApi* | [**GetUserOrdersUpdatesStreamAll**](docs/DefaultApi.md#getuserordersupdatesstreamall) | **Get** /v1/user/{user_id}/orders/all/updates/stream | Get a snapshot of user&#x27;s order updates across all order books since a specific time, and opens a stream for further updates
 *DefaultApi* | [**GetUserSelf**](docs/DefaultApi.md#getuserself) | **Get** /v1/user/self | Get user details for the authenticated user
 *DefaultApi* | [**GetUserTransactionsStream**](docs/DefaultApi.md#getusertransactionsstream) | **Get** /v1/user/{user_id}/transactions/stream | Get a snapshot of user&#x27;s executed transactions since a specific time, and opens a stream for further updates
 *DefaultApi* | [**LedgerDeposit**](docs/DefaultApi.md#ledgerdeposit) | **Post** /v1/ledger/deposit | Deposit assets into your account from the outside world
@@ -72,10 +72,10 @@ Class | Method | HTTP request | Description
 *DefaultApi* | [**ListAssets**](docs/DefaultApi.md#listassets) | **Get** /v1/assets | List assets
 *DefaultApi* | [**ListOrderBooks**](docs/DefaultApi.md#listorderbooks) | **Get** /v1/orderbooks | List order books
 *DefaultApi* | [**ListOrders**](docs/DefaultApi.md#listorders) | **Get** /v1/orders | List all orders
-*DefaultApi* | [**StreamAssetPrices**](docs/DefaultApi.md#streamassetprices) | **Get** /v1/price/stream | Get a snapshot of asset prices from a specific date and open a stream for real-time updates
-*DefaultApi* | [**StreamCandleData**](docs/DefaultApi.md#streamcandledata) | **Get** /v1/charts/{orderbook}/candle/stream | Get a snapshot of candlestick data from date provided, and open a stream for real-time updates
-*DefaultApi* | [**StreamOrderBookBalances**](docs/DefaultApi.md#streamorderbookbalances) | **Get** /v1/orderbooks/{order_book_id}/stream/balances | Get a snapshot of base and quote balances for an order book and open a stream for real-time updates
-*DefaultApi* | [**StreamOrderbookOpenOrders**](docs/DefaultApi.md#streamorderbookopenorders) | **Get** /v1/orderbooks/{order_book_id}/stream/open | Get a snapshot of open orders in an order book and open a stream for real-time updates
+*DefaultApi* | [**StreamAssetPrices**](docs/DefaultApi.md#streamassetprices) | **Get** /v1/prices/stream | Stream real-time asset prices as map objects
+*DefaultApi* | [**StreamCandleData**](docs/DefaultApi.md#streamcandledata) | **Get** /v1/charts/{order_book_id}/candle/stream | Get a snapshot of candlestick data from date provided, and open a stream for real-time updates
+*DefaultApi* | [**StreamOrderBookBalances**](docs/DefaultApi.md#streamorderbookbalances) | **Get** /v1/orderbooks/{order_book_id}/balances/stream | Get a snapshot of base and quote balances for an order book and open a stream for real-time updates
+*DefaultApi* | [**StreamOrderbookOpenOrders**](docs/DefaultApi.md#streamorderbookopenorders) | **Get** /v1/orderbooks/{order_book_id}/open/stream | Get a snapshot of open orders in an order book and open a stream for real-time updates
 *DefaultApi* | [**StreamTrades**](docs/DefaultApi.md#streamtrades) | **Get** /v1/trades/{order_book_id}/stream | Get a snapshot of trades executed on the given order book from a specific date and open a stream for real-time updates
 *DefaultApi* | [**UpdateUserConfig**](docs/DefaultApi.md#updateuserconfig) | **Put** /v1/user/{user_id}/config | Update user configuration by ID
 *DefaultApi* | [**UpdateUserConfigSelf**](docs/DefaultApi.md#updateuserconfigself) | **Put** /v1/user/config/self | Update user configuration for the authenticated user
@@ -92,8 +92,7 @@ Class | Method | HTTP request | Description
  - [BondKind](docs/BondKind.md)
  - [BorrowRequest](docs/BorrowRequest.md)
  - [BorrowResponse](docs/BorrowResponse.md)
- - [CancelOrdersResponse](docs/CancelOrdersResponse.md)
- - [CancelOrdersResponseData](docs/CancelOrdersResponseData.md)
+ - [CancelOrderResponse](docs/CancelOrderResponse.md)
  - [Candle](docs/Candle.md)
  - [CandleResolution](docs/CandleResolution.md)
  - [Collateral](docs/Collateral.md)
@@ -102,6 +101,7 @@ Class | Method | HTTP request | Description
  - [CouponPayment](docs/CouponPayment.md)
  - [CreateOrUpdateUserResponse](docs/CreateOrUpdateUserResponse.md)
  - [CreateOrderRequest](docs/CreateOrderRequest.md)
+ - [CreateOrderResponse](docs/CreateOrderResponse.md)
  - [DeCollateralizeRequest](docs/DeCollateralizeRequest.md)
  - [DeCollateralizeResponse](docs/DeCollateralizeResponse.md)
  - [FundUser](docs/FundUser.md)
@@ -143,12 +143,12 @@ Class | Method | HTTP request | Description
  - [ListPositionsResponse](docs/ListPositionsResponse.md)
  - [ListTradeResponse](docs/ListTradeResponse.md)
  - [ListTransactionsResponse](docs/ListTransactionsResponse.md)
+ - [LiveOrderbook](docs/LiveOrderbook.md)
  - [Metadata](docs/Metadata.md)
  - [ModuleBalance](docs/ModuleBalance.md)
  - [Order](docs/Order.md)
  - [OrderBook](docs/OrderBook.md)
  - [OrderBookBalance](docs/OrderBookBalance.md)
- - [OrderBookBalanceResponse](docs/OrderBookBalanceResponse.md)
  - [OrderBookDepth](docs/OrderBookDepth.md)
  - [OrderBookHaltResponse](docs/OrderBookHaltResponse.md)
  - [OrderBookResumeResponse](docs/OrderBookResumeResponse.md)
@@ -156,7 +156,6 @@ Class | Method | HTTP request | Description
  - [OrderBookSummary](docs/OrderBookSummary.md)
  - [OrderBookTerminateResponse](docs/OrderBookTerminateResponse.md)
  - [OrderBookTop](docs/OrderBookTop.md)
- - [OrderCancelledResponse](docs/OrderCancelledResponse.md)
  - [OrderId](docs/OrderId.md)
  - [OrderKind](docs/OrderKind.md)
  - [OrderModifierKind](docs/OrderModifierKind.md)
@@ -172,6 +171,14 @@ Class | Method | HTTP request | Description
  - [RepayResponse](docs/RepayResponse.md)
  - [ResponseEnvelope](docs/ResponseEnvelope.md)
  - [Side](docs/Side.md)
+ - [StreamCandlesEntry](docs/StreamCandlesEntry.md)
+ - [StreamEntry](docs/StreamEntry.md)
+ - [StreamOrderBookBalanceEntry](docs/StreamOrderBookBalanceEntry.md)
+ - [StreamOrderUpdatesEntry](docs/StreamOrderUpdatesEntry.md)
+ - [StreamOrdersEntry](docs/StreamOrdersEntry.md)
+ - [StreamPositionsEntry](docs/StreamPositionsEntry.md)
+ - [StreamTradesEntry](docs/StreamTradesEntry.md)
+ - [StreamTransactionsEntry](docs/StreamTransactionsEntry.md)
  - [Supply](docs/Supply.md)
  - [SupplyRequest](docs/SupplyRequest.md)
  - [SupplyResponse](docs/SupplyResponse.md)

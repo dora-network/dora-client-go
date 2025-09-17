@@ -11,7 +11,7 @@ Method | HTTP request | Description
 [**GetAllAssetPrices**](DefaultApi.md#GetAllAssetPrices) | **Get** /v1/price | Get the current price of all assets
 [**GetAssetById**](DefaultApi.md#GetAssetById) | **Get** /v1/assets/{asset_id} | Get asset by ID
 [**GetAssetPrice**](DefaultApi.md#GetAssetPrice) | **Get** /v1/price/asset/{asset_id} | Get the current price of an asset
-[**GetCandleData**](DefaultApi.md#GetCandleData) | **Get** /v1/charts/{orderbook}/candle | Get candlestick data for an orderbook
+[**GetCandleData**](DefaultApi.md#GetCandleData) | **Get** /v1/charts/{order_book_id}/candle | Get candlestick data for an orderbook
 [**GetCouponPaymentsByAssetId**](DefaultApi.md#GetCouponPaymentsByAssetId) | **Get** /v1/assets/{asset_id}/coupon_payments | Get coupon payments for a bond asset
 [**GetL1Depth**](DefaultApi.md#GetL1Depth) | **Get** /v1/orderbooks/{order_book_id}/L1 | Get the top price levels for a specific orderbook (L1 market depth)
 [**GetL2Depth**](DefaultApi.md#GetL2Depth) | **Get** /v1/orderbooks/{order_book_id}/L2 | Get the aggregated price levels for a specific orderbook (L2 market depth)
@@ -31,12 +31,12 @@ Method | HTTP request | Description
 [**GetPoolPrice**](DefaultApi.md#GetPoolPrice) | **Get** /v1/price/pool/{pool_id} | Get the current price of a pool
 [**GetTradeById**](DefaultApi.md#GetTradeById) | **Get** /v1/trades/{trade_id} | Get a trade by ID
 [**GetTrades**](DefaultApi.md#GetTrades) | **Get** /v1/trades | Get a filtered, paginated list of trades
-[**GetTransactionById**](DefaultApi.md#GetTransactionById) | **Get** /v1/transactions/{id} | Get a transaction by ID
+[**GetTransactionById**](DefaultApi.md#GetTransactionById) | **Get** /v1/transactions/{transaction_id} | Get a transaction by ID
 [**GetTransactions**](DefaultApi.md#GetTransactions) | **Get** /v1/transactions | Get a filtered, paginated list of transactions
 [**GetUserById**](DefaultApi.md#GetUserById) | **Get** /v1/user/{user_id} | Get user by ID (admin only)
 [**GetUserLedgerStream**](DefaultApi.md#GetUserLedgerStream) | **Get** /v1/user/{user_id}/ledger/stream | Get a snapshot of user&#x27;s ledger updates since a specific time, and opens a stream for further updates
-[**GetUserOrdersStream**](DefaultApi.md#GetUserOrdersStream) | **Get** /v1/user/{user_id}/orders/{order_book_id}/stream | Get a snapshot of user&#x27;s order updates for the given order book since a specific time, and opens a stream for further updates
-[**GetUserOrdersStreamAll**](DefaultApi.md#GetUserOrdersStreamAll) | **Get** /v1/user/{user_id}/orders/all/stream | Get a snapshot of user&#x27;s order updates across all order books since a specific time, and opens a stream for further updates
+[**GetUserOrderUpdatesStream**](DefaultApi.md#GetUserOrderUpdatesStream) | **Get** /v1/user/{user_id}/orders/{order_book_id}/updates/stream | Get a snapshot of user&#x27;s order updates for the given order book since a specific time, and opens a stream for further updates
+[**GetUserOrdersUpdatesStreamAll**](DefaultApi.md#GetUserOrdersUpdatesStreamAll) | **Get** /v1/user/{user_id}/orders/all/updates/stream | Get a snapshot of user&#x27;s order updates across all order books since a specific time, and opens a stream for further updates
 [**GetUserSelf**](DefaultApi.md#GetUserSelf) | **Get** /v1/user/self | Get user details for the authenticated user
 [**GetUserTransactionsStream**](DefaultApi.md#GetUserTransactionsStream) | **Get** /v1/user/{user_id}/transactions/stream | Get a snapshot of user&#x27;s executed transactions since a specific time, and opens a stream for further updates
 [**LedgerDeposit**](DefaultApi.md#LedgerDeposit) | **Post** /v1/ledger/deposit | Deposit assets into your account from the outside world
@@ -55,17 +55,17 @@ Method | HTTP request | Description
 [**ListAssets**](DefaultApi.md#ListAssets) | **Get** /v1/assets | List assets
 [**ListOrderBooks**](DefaultApi.md#ListOrderBooks) | **Get** /v1/orderbooks | List order books
 [**ListOrders**](DefaultApi.md#ListOrders) | **Get** /v1/orders | List all orders
-[**StreamAssetPrices**](DefaultApi.md#StreamAssetPrices) | **Get** /v1/price/stream | Get a snapshot of asset prices from a specific date and open a stream for real-time updates
-[**StreamCandleData**](DefaultApi.md#StreamCandleData) | **Get** /v1/charts/{orderbook}/candle/stream | Get a snapshot of candlestick data from date provided, and open a stream for real-time updates
-[**StreamOrderBookBalances**](DefaultApi.md#StreamOrderBookBalances) | **Get** /v1/orderbooks/{order_book_id}/stream/balances | Get a snapshot of base and quote balances for an order book and open a stream for real-time updates
-[**StreamOrderbookOpenOrders**](DefaultApi.md#StreamOrderbookOpenOrders) | **Get** /v1/orderbooks/{order_book_id}/stream/open | Get a snapshot of open orders in an order book and open a stream for real-time updates
+[**StreamAssetPrices**](DefaultApi.md#StreamAssetPrices) | **Get** /v1/prices/stream | Stream real-time asset prices as map objects
+[**StreamCandleData**](DefaultApi.md#StreamCandleData) | **Get** /v1/charts/{order_book_id}/candle/stream | Get a snapshot of candlestick data from date provided, and open a stream for real-time updates
+[**StreamOrderBookBalances**](DefaultApi.md#StreamOrderBookBalances) | **Get** /v1/orderbooks/{order_book_id}/balances/stream | Get a snapshot of base and quote balances for an order book and open a stream for real-time updates
+[**StreamOrderbookOpenOrders**](DefaultApi.md#StreamOrderbookOpenOrders) | **Get** /v1/orderbooks/{order_book_id}/open/stream | Get a snapshot of open orders in an order book and open a stream for real-time updates
 [**StreamTrades**](DefaultApi.md#StreamTrades) | **Get** /v1/trades/{order_book_id}/stream | Get a snapshot of trades executed on the given order book from a specific date and open a stream for real-time updates
 [**UpdateUserConfig**](DefaultApi.md#UpdateUserConfig) | **Put** /v1/user/{user_id}/config | Update user configuration by ID
 [**UpdateUserConfigSelf**](DefaultApi.md#UpdateUserConfigSelf) | **Put** /v1/user/config/self | Update user configuration for the authenticated user
 [**VerifyUser**](DefaultApi.md#VerifyUser) | **Put** /v1/user/{user_id}/verify | Verify a user by ID
 
 # **CancelAllOpenOrders**
-> CancelOrdersResponse CancelAllOpenOrders(ctx, )
+> ListOrdersResponse CancelAllOpenOrders(ctx, )
 Cancel all open orders
 
 ### Required Parameters
@@ -73,7 +73,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**CancelOrdersResponse**](CancelOrdersResponse.md)
+[**ListOrdersResponse**](ListOrdersResponse.md)
 
 ### Authorization
 
@@ -87,7 +87,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **CancelOrderById**
-> OrderCancelledResponse CancelOrderById(ctx, orderId)
+> CancelOrderResponse CancelOrderById(ctx, orderId)
 Cancel an order by ID
 
 ### Required Parameters
@@ -99,7 +99,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OrderCancelledResponse**](OrderCancelledResponse.md)
+[**CancelOrderResponse**](CancelOrderResponse.md)
 
 ### Authorization
 
@@ -113,7 +113,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **CreateOrder**
-> OrderId CreateOrder(ctx, body)
+> CreateOrderResponse CreateOrder(ctx, body)
 Create a new order
 
 ### Required Parameters
@@ -125,7 +125,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OrderId**](OrderId.md)
+[**CreateOrderResponse**](CreateOrderResponse.md)
 
 ### Authorization
 
@@ -239,7 +239,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetCandleData**
-> ListCandlesResponse GetCandleData(ctx, orderbook, optional)
+> ListCandlesResponse GetCandleData(ctx, orderBookId, optional)
 Get candlestick data for an orderbook
 
 ### Required Parameters
@@ -247,7 +247,7 @@ Get candlestick data for an orderbook
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **orderbook** | **string**|  | 
+  **orderBookId** | **string**|  | 
  **optional** | ***DefaultApiGetCandleDataOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
@@ -760,7 +760,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetTransactionById**
-> GetTransactionResponse GetTransactionById(ctx, id)
+> GetTransactionResponse GetTransactionById(ctx, transactionId)
 Get a transaction by ID
 
 ### Required Parameters
@@ -768,7 +768,7 @@ Get a transaction by ID
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **id** | [**string**](.md)|  | 
+  **transactionId** | [**string**](.md)|  | 
 
 ### Return type
 
@@ -850,7 +850,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetUserLedgerStream**
-> ListPositionsResponse GetUserLedgerStream(ctx, userId, optional)
+> []StreamPositionsEntry GetUserLedgerStream(ctx, userId, optional)
 Get a snapshot of user's ledger updates since a specific time, and opens a stream for further updates
 
 ### Required Parameters
@@ -870,7 +870,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ListPositionsResponse**](ListPositionsResponse.md)
+[**[]StreamPositionsEntry**](array.md)
 
 ### Authorization
 
@@ -883,8 +883,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **GetUserOrdersStream**
-> ListOrdersResponse GetUserOrdersStream(ctx, userId, orderBookId, optional)
+# **GetUserOrderUpdatesStream**
+> []StreamOrderUpdatesEntry GetUserOrderUpdatesStream(ctx, userId, orderBookId, optional)
 Get a snapshot of user's order updates for the given order book since a specific time, and opens a stream for further updates
 
 ### Required Parameters
@@ -894,10 +894,10 @@ Name | Type | Description  | Notes
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **userId** | [**string**](.md)|  | 
   **orderBookId** | [**string**](.md)|  | 
- **optional** | ***DefaultApiGetUserOrdersStreamOpts** | optional parameters | nil if no parameters
+ **optional** | ***DefaultApiGetUserOrderUpdatesStreamOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
-Optional parameters are passed through a pointer to a DefaultApiGetUserOrdersStreamOpts struct
+Optional parameters are passed through a pointer to a DefaultApiGetUserOrderUpdatesStreamOpts struct
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
@@ -906,7 +906,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ListOrdersResponse**](ListOrdersResponse.md)
+[**[]StreamOrderUpdatesEntry**](array.md)
 
 ### Authorization
 
@@ -919,8 +919,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **GetUserOrdersStreamAll**
-> ListOrdersResponse GetUserOrdersStreamAll(ctx, userId, orderBookId, optional)
+# **GetUserOrdersUpdatesStreamAll**
+> []StreamOrderUpdatesEntry GetUserOrdersUpdatesStreamAll(ctx, userId, orderBookId, optional)
 Get a snapshot of user's order updates across all order books since a specific time, and opens a stream for further updates
 
 ### Required Parameters
@@ -930,10 +930,10 @@ Name | Type | Description  | Notes
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **userId** | [**string**](.md)|  | 
   **orderBookId** | [**string**](.md)|  | 
- **optional** | ***DefaultApiGetUserOrdersStreamAllOpts** | optional parameters | nil if no parameters
+ **optional** | ***DefaultApiGetUserOrdersUpdatesStreamAllOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
-Optional parameters are passed through a pointer to a DefaultApiGetUserOrdersStreamAllOpts struct
+Optional parameters are passed through a pointer to a DefaultApiGetUserOrdersUpdatesStreamAllOpts struct
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
@@ -942,7 +942,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ListOrdersResponse**](ListOrdersResponse.md)
+[**[]StreamOrderUpdatesEntry**](array.md)
 
 ### Authorization
 
@@ -978,7 +978,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetUserTransactionsStream**
-> ListTransactionsResponse GetUserTransactionsStream(ctx, userId, optional)
+> []StreamTransactionsEntry GetUserTransactionsStream(ctx, userId, optional)
 Get a snapshot of user's executed transactions since a specific time, and opens a stream for further updates
 
 ### Required Parameters
@@ -998,7 +998,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ListTransactionsResponse**](ListTransactionsResponse.md)
+[**[]StreamTransactionsEntry**](array.md)
 
 ### Authorization
 
@@ -1454,8 +1454,8 @@ Optional parameters are passed through a pointer to a DefaultApiListOrdersOpts s
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **orderBookId** | [**optional.Interface of []string**](string.md)|  | 
- **kind** | [**optional.Interface of OrderKind**](.md)|  | 
- **status** | [**optional.Interface of OrderStatus**](.md)|  | 
+ **kind** | [**optional.Interface of []OrderKind**](OrderKind.md)|  | 
+ **status** | [**optional.Interface of []OrderStatus**](OrderStatus.md)|  | 
  **side** | [**optional.Interface of Side**](.md)|  | 
  **from** | **optional.Time**|  | 
  **to** | **optional.Time**|  | 
@@ -1478,8 +1478,10 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **StreamAssetPrices**
-> ListAssetPriceResponse StreamAssetPrices(ctx, optional)
-Get a snapshot of asset prices from a specific date and open a stream for real-time updates
+> map[string]interface{} StreamAssetPrices(ctx, optional)
+Stream real-time asset prices as map objects
+
+Opens a WebSocket stream for real-time asset price updates. First message contains all current prices, subsequent messages contain only changed prices. Data is sent as JSON objects keyed by asset ID.
 
 ### Required Parameters
 
@@ -1496,7 +1498,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ListAssetPriceResponse**](ListAssetPriceResponse.md)
+[**map[string]interface{}**](map.md)
 
 ### Authorization
 
@@ -1510,7 +1512,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **StreamCandleData**
-> ListCandlesResponse StreamCandleData(ctx, orderbook, optional)
+> []StreamCandlesEntry StreamCandleData(ctx, orderBookId, optional)
 Get a snapshot of candlestick data from date provided, and open a stream for real-time updates
 
 ### Required Parameters
@@ -1518,7 +1520,7 @@ Get a snapshot of candlestick data from date provided, and open a stream for rea
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **orderbook** | **string**|  | 
+  **orderBookId** | **string**|  | 
  **optional** | ***DefaultApiStreamCandleDataOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
@@ -1531,7 +1533,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ListCandlesResponse**](ListCandlesResponse.md)
+[**[]StreamCandlesEntry**](array.md)
 
 ### Authorization
 
@@ -1545,7 +1547,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **StreamOrderBookBalances**
-> OrderBookBalanceResponse StreamOrderBookBalances(ctx, orderBookId, optional)
+> []StreamOrderBookBalanceEntry StreamOrderBookBalances(ctx, orderBookId, optional)
 Get a snapshot of base and quote balances for an order book and open a stream for real-time updates
 
 ### Required Parameters
@@ -1565,7 +1567,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OrderBookBalanceResponse**](OrderBookBalanceResponse.md)
+[**[]StreamOrderBookBalanceEntry**](array.md)
 
 ### Authorization
 
@@ -1579,7 +1581,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **StreamOrderbookOpenOrders**
-> ListOrdersResponse StreamOrderbookOpenOrders(ctx, orderBookId, optional)
+> LiveOrderbook StreamOrderbookOpenOrders(ctx, orderBookId, optional)
 Get a snapshot of open orders in an order book and open a stream for real-time updates
 
 ### Required Parameters
@@ -1599,7 +1601,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ListOrdersResponse**](ListOrdersResponse.md)
+[**LiveOrderbook**](LiveOrderbook.md)
 
 ### Authorization
 
@@ -1613,7 +1615,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **StreamTrades**
-> ListTradeResponse StreamTrades(ctx, orderBookId, optional)
+> []StreamTradesEntry StreamTrades(ctx, orderBookId, optional)
 Get a snapshot of trades executed on the given order book from a specific date and open a stream for real-time updates
 
 ### Required Parameters
@@ -1633,7 +1635,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ListTradeResponse**](ListTradeResponse.md)
+[**[]StreamTradesEntry**](array.md)
 
 ### Authorization
 

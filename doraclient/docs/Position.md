@@ -14,6 +14,8 @@ Name | Type | Description | Notes
 **SuppliedCollateral** | **string** | The balance that have been supplied to the leverage module and marked as collateral. The user remains entitled to this balance and can withdraw it into the collateral balance, or unmark them as collateral and move them to the supplied balance. | [optional] [default to null]
 **Borrowed** | **string** | The total amount of debt outstanding for this position. The position&#x27;s collateral + supplied_collateral must support a borrow limit sufficient to cover all borrowed assets. This position cannot be closed until all debt is fully repaid, i.e. borrowed &#x3D; 0. | [optional] [default to null]
 **ImpendingBorrows** | **string** | The equivalent of locked balances, but for leveraged orders. If a user has an active order that would borrow assets as part of its input, then their borrow limit must be reduced until the order is executed or cancelled. | [optional] [default to null]
+**AvgEntryPrice** | **string** | average cost per unit quantity that was paid (long positions) or received (short positions) for this asset. | [optional] [default to null]
+**CreatedAt** | [**time.Time**](time.Time.md) |  | [optional] [default to null]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -14,9 +14,9 @@ import (
 type Candle struct {
 	OrderBookId string `json:"order_book_id,omitempty"`
 	StartTimestamp time.Time `json:"start_timestamp,omitempty"`
-	Open float64 `json:"open,omitempty"`
-	High float64 `json:"high,omitempty"`
-	Low float64 `json:"low,omitempty"`
-	Close float64 `json:"close,omitempty"`
-	Volume int32 `json:"volume,omitempty"`
+	Open string `json:"open,omitempty"`
+	High string `json:"high,omitempty"`
+	Low string `json:"low,omitempty"`
+	Close string `json:"close,omitempty"`
+	Volume string `json:"volume,omitempty"`
 }

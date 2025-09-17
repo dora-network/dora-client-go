@@ -9,7 +9,12 @@
 package doraclient
 
 type OrderBookBalance struct {
+	// The ID of the order book.
 	OrderBookId string `json:"order_book_id,omitempty"`
-	BaseBalance string `json:"base_balance,omitempty"`
-	QuoteBalance string `json:"quote_balance,omitempty"`
+	// The quantity of the base asset.
+	BaseQuantity float64 `json:"base_quantity,omitempty"`
+	// The quantity of the quote asset.
+	QuoteQuantity float64 `json:"quote_quantity,omitempty"`
+	// The quantity of pool shares.
+	SharesQuantity float64 `json:"shares_quantity,omitempty"`
 }

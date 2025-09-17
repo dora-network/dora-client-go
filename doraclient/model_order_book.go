@@ -13,8 +13,6 @@ import (
 
 type OrderBook struct {
 	OrderBookId string `json:"order_book_id,omitempty"`
-	OrderBookSeq int32 `json:"order_book_seq,omitempty"`
-	AccumulatedFeesId string `json:"accumulated_fees_id,omitempty"`
 	BaseQuantity float64 `json:"base_quantity,omitempty"`
 	BaseAssetId string `json:"base_asset_id,omitempty"`
 	CreatedAt time.Time `json:"created_at,omitempty"`
@@ -22,7 +20,6 @@ type OrderBook struct {
 	FeeFactor float64 `json:"fee_factor,omitempty"`
 	InitialAssetsRatio float64 `json:"initial_assets_ratio,omitempty"`
 	MaturityAt time.Time `json:"maturity_at,omitempty"`
-	PriceDisplayMultiplier float64 `json:"price_display_multiplier,omitempty"`
 	QuoteQuantity float64 `json:"quote_quantity,omitempty"`
 	QuoteAssetId string `json:"quote_asset_id,omitempty"`
 	SharesQuantity float64 `json:"shares_quantity,omitempty"`
@@ -32,6 +29,5 @@ type OrderBook struct {
 	HaltedAt time.Time `json:"halted_at,omitempty"`
 	TerminatedAt time.Time `json:"terminated_at,omitempty"`
 	PoolUpdatedAt time.Time `json:"pool_updated_at,omitempty"`
-	PoolSeq int32 `json:"pool_seq,omitempty"`
 	SharesAssetId string `json:"shares_asset_id,omitempty"`
 }

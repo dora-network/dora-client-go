@@ -13,6 +13,6 @@ type ResponseEnvelope struct {
 	// The response data. Present for successful (2xx) responses.
 	Data *interface{} `json:"data,omitempty"`
 	// The error message. Present for error (non-2xx) responses.
-	Error_ string `json:"error,omitempty"`
+	Error string `json:"error,omitempty"`
 	Metadata *Metadata `json:"metadata,omitempty"`
 }

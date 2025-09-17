@@ -394,238 +394,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
-  /v1/user/{user_id}/orders/{order_book_id}/stream:
-    get:
-      summary: "Get a snapshot of user's order updates for the given order book since\
-        \ a specific time, and opens a stream for further updates"
-      operationId: getUserOrdersStream
-      parameters:
-      - name: user_id
-        in: path
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-          format: uuid
-      - name: order_book_id
-        in: path
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-          format: uuid
-      - name: since
-        in: query
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: string
-          format: date-time
-      responses:
-        "200":
-          description: User's orders stream
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ListOrdersResponse"
-        "400":
-          description: "Bad request, e.g. invalid query parameters"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ResponseEnvelope"
-        "401":
-          description: "Unauthorized, user not logged in or does not have access to\
-            \ this orderbook"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ResponseEnvelope"
-        "404":
-          description: User not found or no orders available
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ResponseEnvelope"
-        "500":
-          description: Internal server error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ResponseEnvelope"
-  /v1/user/{user_id}/orders/all/stream:
-    get:
-      summary: "Get a snapshot of user's order updates across all order books since\
-        \ a specific time, and opens a stream for further updates"
-      operationId: getUserOrdersStreamAll
-      parameters:
-      - name: user_id
-        in: path
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-          format: uuid
-      - name: order_book_id
-        in: path
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-          format: uuid
-      - name: since
-        in: query
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: string
-          format: date-time
-      responses:
-        "200":
-          description: User's orders stream
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ListOrdersResponse"
-        "400":
-          description: "Bad request, e.g. invalid query parameters"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ResponseEnvelope"
-        "401":
-          description: "Unauthorized, user not logged in or does not have access to\
-            \ this orderbook"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ResponseEnvelope"
-        "404":
-          description: User not found or no orders available
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ResponseEnvelope"
-        "500":
-          description: Internal server error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ResponseEnvelope"
-  /v1/user/{user_id}/ledger/stream:
-    get:
-      summary: "Get a snapshot of user's ledger updates since a specific time, and\
-        \ opens a stream for further updates"
-      operationId: getUserLedgerStream
-      parameters:
-      - name: user_id
-        in: path
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-          format: uuid
-      - name: since
-        in: query
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: string
-          format: date-time
-      responses:
-        "200":
-          description: User's ledger stream
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ListPositionsResponse"
-        "400":
-          description: "Bad request, e.g. invalid query parameters"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ResponseEnvelope"
-        "401":
-          description: "Unauthorized, user not logged in or does not have access to\
-            \ this ledger"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ResponseEnvelope"
-        "404":
-          description: User not found or no ledger entries available
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ResponseEnvelope"
-        "500":
-          description: Internal server error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ResponseEnvelope"
-  /v1/user/{user_id}/transactions/stream:
-    get:
-      summary: "Get a snapshot of user's executed transactions since a specific time,\
-        \ and opens a stream for further updates"
-      operationId: getUserTransactionsStream
-      parameters:
-      - name: user_id
-        in: path
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-          format: uuid
-      - name: since
-        in: query
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: string
-          format: date-time
-      responses:
-        "200":
-          description: User's transactions stream
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ListTransactionsResponse"
-        "400":
-          description: "Bad request, e.g. invalid query parameters"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ResponseEnvelope"
-        "401":
-          description: "Unauthorized, user not logged in or does not have access to\
-            \ this transactions"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ResponseEnvelope"
-        "404":
-          description: User not found or no transactions available
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ResponseEnvelope"
-        "500":
-          description: Internal server error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ResponseEnvelope"
   /v1/orderbooks:
     get:
       summary: List order books
@@ -1009,100 +777,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
-  /v1/orderbooks/{order_book_id}/stream/open:
-    get:
-      summary: Get a snapshot of open orders in an order book and open a stream for
-        real-time updates
-      operationId: streamOrderbookOpenOrders
-      parameters:
-      - name: order_book_id
-        in: path
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-          format: uuid
-      - name: since
-        in: query
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: string
-          format: date-time
-      responses:
-        "200":
-          description: Stream opened successfully
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ListOrdersResponse"
-        "400":
-          description: "Bad request, e.g. invalid order book ID format"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ResponseEnvelope"
-        "404":
-          description: Orderbook not found
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ResponseEnvelope"
-        "500":
-          description: Internal server error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ResponseEnvelope"
-  /v1/orderbooks/{order_book_id}/stream/balances:
-    get:
-      summary: Get a snapshot of base and quote balances for an order book and open
-        a stream for real-time updates
-      operationId: streamOrderBookBalances
-      parameters:
-      - name: order_book_id
-        in: path
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-          format: uuid
-      - name: since
-        in: query
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: string
-          format: date-time
-      responses:
-        "200":
-          description: Stream opened successfully
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/OrderBookBalanceResponse"
-        "400":
-          description: "Bad request, e.g. invalid order book ID format"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ResponseEnvelope"
-        "404":
-          description: Orderbook not found
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ResponseEnvelope"
-        "500":
-          description: Internal server error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ResponseEnvelope"
   /v1/orders:
     get:
       summary: List all orders
@@ -1124,14 +798,18 @@ paths:
         style: form
         explode: true
         schema:
-          $ref: "#/components/schemas/OrderKind"
+          type: array
+          items:
+            $ref: "#/components/schemas/OrderKind"
       - name: status
         in: query
         required: false
         style: form
         explode: true
         schema:
-          $ref: "#/components/schemas/OrderStatus"
+          type: array
+          items:
+            $ref: "#/components/schemas/OrderStatus"
       - name: side
         in: query
         required: false
@@ -1218,7 +896,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/OrderId"
+                $ref: "#/components/schemas/CreateOrderResponse"
         "400":
           description: "Bad request, e.g. missing required fields"
           content:
@@ -1247,7 +925,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/CancelOrdersResponse"
+                $ref: "#/components/schemas/ListOrdersResponse"
         "401":
           description: "Unauthorized, user not logged in or does not have access to\
             \ this orderbook"
@@ -1324,7 +1002,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/OrderCancelledResponse"
+                $ref: "#/components/schemas/CancelOrderResponse"
         "400":
           description: "Bad request, e.g. invalid order ID format"
           content:
@@ -1350,12 +1028,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
-  /v1/charts/{orderbook}/candle:
+  /v1/charts/{order_book_id}/candle:
     get:
       summary: Get candlestick data for an orderbook
       operationId: getCandleData
       parameters:
-      - name: orderbook
+      - name: order_book_id
         in: path
         required: true
         style: simple
@@ -1388,59 +1066,6 @@ paths:
       responses:
         "200":
           description: Candlestick data
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ListCandlesResponse"
-        "400":
-          description: "Bad request, e.g. invalid parameters"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ResponseEnvelope"
-        "404":
-          description: Orderbook not found
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ResponseEnvelope"
-        "500":
-          description: Internal server error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ResponseEnvelope"
-  /v1/charts/{orderbook}/candle/stream:
-    get:
-      summary: "Get a snapshot of candlestick data from date provided, and open a\
-        \ stream for real-time updates"
-      operationId: streamCandleData
-      parameters:
-      - name: orderbook
-        in: path
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-      - name: since
-        in: query
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: string
-          format: date-time
-      - name: resolution
-        in: query
-        required: false
-        style: form
-        explode: true
-        schema:
-          $ref: "#/components/schemas/CandleResolution"
-      responses:
-        "200":
-          description: Stream opened successfully
           content:
             application/json:
               schema:
@@ -2226,12 +1851,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
-  /v1/transactions/{id}:
+  /v1/transactions/{transaction_id}:
     get:
       summary: Get a transaction by ID
       operationId: getTransactionById
       parameters:
-      - name: id
+      - name: transaction_id
         in: path
         required: true
         style: simple
@@ -2383,47 +2008,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
-  /v1/trades/{order_book_id}/stream:
-    get:
-      summary: Get a snapshot of trades executed on the given order book from a specific
-        date and open a stream for real-time updates
-      operationId: streamTrades
-      parameters:
-      - name: order_book_id
-        in: path
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-          format: uuid
-      - name: since
-        in: query
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: string
-          format: date-time
-      responses:
-        "200":
-          description: Real-time trade updates
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ListTradeResponse"
-        "400":
-          description: "Bad request, e.g. invalid parameters"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ResponseEnvelope"
-        "500":
-          description: Internal server error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ResponseEnvelope"
   /v1/price:
     get:
       summary: Get the current price of all assets
@@ -2517,10 +2101,200 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
-  /v1/price/stream:
+  /v1/orderbooks/{order_book_id}/open/stream:
     get:
-      summary: Get a snapshot of asset prices from a specific date and open a stream
-        for real-time updates
+      summary: Get a snapshot of open orders in an order book and open a stream for
+        real-time updates
+      operationId: streamOrderbookOpenOrders
+      parameters:
+      - name: order_book_id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+      - name: since
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          format: date-time
+      responses:
+        "200":
+          description: Stream opened successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LiveOrderbook"
+        "400":
+          description: "Bad request, e.g. invalid order book ID format"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+        "404":
+          description: Orderbook not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+  /v1/orderbooks/{order_book_id}/balances/stream:
+    get:
+      summary: Get a snapshot of base and quote balances for an order book and open
+        a stream for real-time updates
+      operationId: streamOrderBookBalances
+      parameters:
+      - name: order_book_id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+      - name: since
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          format: date-time
+      responses:
+        "200":
+          description: Stream opened successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StreamOrderBookBalancesResponse"
+        "400":
+          description: "Bad request, e.g. invalid order book ID format"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+        "404":
+          description: Orderbook not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+  /v1/charts/{order_book_id}/candle/stream:
+    get:
+      summary: "Get a snapshot of candlestick data from date provided, and open a\
+        \ stream for real-time updates"
+      operationId: streamCandleData
+      parameters:
+      - name: order_book_id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: since
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          format: date-time
+      - name: resolution
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          $ref: "#/components/schemas/CandleResolution"
+      responses:
+        "200":
+          description: Stream opened successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StreamCandlesResponse"
+        "400":
+          description: "Bad request, e.g. invalid parameters"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+        "404":
+          description: Orderbook not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+  /v1/trades/{order_book_id}/stream:
+    get:
+      summary: Get a snapshot of trades executed on the given order book from a specific
+        date and open a stream for real-time updates
+      operationId: streamTrades
+      parameters:
+      - name: order_book_id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+      - name: since
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          format: date-time
+      responses:
+        "200":
+          description: Real-time trade updates
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StreamTradesResponse"
+        "400":
+          description: "Bad request, e.g. invalid parameters"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+  /v1/prices/stream:
+    get:
+      summary: Stream real-time asset prices as map objects
+      description: "Opens a WebSocket stream for real-time asset price updates. First\
+        \ message contains all current prices, subsequent messages contain only changed\
+        \ prices. Data is sent as JSON objects keyed by asset ID."
       operationId: streamAssetPrices
       parameters:
       - name: since
@@ -2533,14 +2307,246 @@ paths:
           format: date-time
       responses:
         "200":
-          description: Snapshot of asset prices updates since the specified date and
-            opens a stream for real-time updates
+          description: "Real-time stream of asset prices. First message: all current\
+            \ prices. Subsequent messages: only changed prices."
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ListAssetPriceResponse"
+                $ref: "#/components/schemas/StreamAssetPricesResponse"
         "400":
           description: "Bad request, e.g. invalid parameters"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+  /v1/user/{user_id}/orders/{order_book_id}/updates/stream:
+    get:
+      summary: "Get a snapshot of user's order updates for the given order book since\
+        \ a specific time, and opens a stream for further updates"
+      operationId: getUserOrderUpdatesStream
+      parameters:
+      - name: user_id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+      - name: order_book_id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+      - name: since
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          format: date-time
+      responses:
+        "200":
+          description: User's orders stream
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StreamOrderUpdatesResponse"
+        "400":
+          description: "Bad request, e.g. invalid query parameters"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+        "401":
+          description: "Unauthorized, user not logged in or does not have access to\
+            \ this orderbook"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+        "404":
+          description: User not found or no orders available
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+  /v1/user/{user_id}/orders/all/updates/stream:
+    get:
+      summary: "Get a snapshot of user's order updates across all order books since\
+        \ a specific time, and opens a stream for further updates"
+      operationId: getUserOrdersUpdatesStreamAll
+      parameters:
+      - name: user_id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+      - name: order_book_id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+      - name: since
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          format: date-time
+      responses:
+        "200":
+          description: User's orders stream
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StreamOrderUpdatesResponse"
+        "400":
+          description: "Bad request, e.g. invalid query parameters"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+        "401":
+          description: "Unauthorized, user not logged in or does not have access to\
+            \ this orderbook"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+        "404":
+          description: User not found or no orders available
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+  /v1/user/{user_id}/ledger/stream:
+    get:
+      summary: "Get a snapshot of user's ledger updates since a specific time, and\
+        \ opens a stream for further updates"
+      operationId: getUserLedgerStream
+      parameters:
+      - name: user_id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+      - name: since
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          format: date-time
+      responses:
+        "200":
+          description: User's ledger stream
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StreamPositionsResponse"
+        "400":
+          description: "Bad request, e.g. invalid query parameters"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+        "401":
+          description: "Unauthorized, user not logged in or does not have access to\
+            \ this ledger"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+        "404":
+          description: User not found or no ledger entries available
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+  /v1/user/{user_id}/transactions/stream:
+    get:
+      summary: "Get a snapshot of user's executed transactions since a specific time,\
+        \ and opens a stream for further updates"
+      operationId: getUserTransactionsStream
+      parameters:
+      - name: user_id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+      - name: since
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          format: date-time
+      responses:
+        "200":
+          description: User's transactions stream
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StreamTransactionsResponse"
+        "400":
+          description: "Bad request, e.g. invalid query parameters"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+        "401":
+          description: "Unauthorized, user not logged in or does not have access to\
+            \ this transactions"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+        "404":
+          description: User not found or no transactions available
           content:
             application/json:
               schema:
@@ -2565,6 +2571,8 @@ components:
           type: string
           format: date-time
         decimals:
+          type: integer
+        fractionalized_units:
           type: integer
         description:
           type: string
@@ -2662,6 +2670,8 @@ components:
         asset_id:
           type: string
           format: uuid
+        yield:
+          type: number
         start_at:
           type: string
           format: date-time
@@ -2671,6 +2681,9 @@ components:
         pay_at:
           type: string
           format: date-time
+        available_to_pay:
+          type: string
+          format: decimal
         completed_at:
           type: string
           format: date-time
@@ -2680,13 +2693,11 @@ components:
         process_every:
           minimum: 1000
           type: integer
-          description: "Processing frequency for the coupon payment calculations in\
-            \ nanoseconds (minimum 1000, i.e. 1 microsecond)"
+          description: "Number of nanoseconds to wait between coupon payment processing,\
+            \ must be at least 1000 (1 microsecond)"
         last_processed_at:
           type: string
           format: date-time
-        yield:
-          type: number
     ListCouponPaymentsResponse:
       type: object
       allOf:
@@ -2715,7 +2726,7 @@ components:
       - SELF
       - ADMIN
       - BOND_PROVIDER
-      - LIQUIDY_PROVIDER
+      - LIQUIDITY_PROVIDER
       - TRADER
     GetUserResponse:
       type: object
@@ -2864,11 +2875,6 @@ components:
         order_book_id:
           type: string
           format: uuid
-        order_book_seq:
-          type: integer
-        accumulated_fees_id:
-          type: string
-          format: uuid
         base_quantity:
           type: number
         base_asset_id:
@@ -2886,8 +2892,6 @@ components:
         maturity_at:
           type: string
           format: date-time
-        price_display_multiplier:
-          type: number
         quote_quantity:
           type: number
         quote_asset_id:
@@ -2911,8 +2915,6 @@ components:
         pool_updated_at:
           type: string
           format: date-time
-        pool_seq:
-          type: integer
         shares_asset_id:
           type: string
           format: uuid
@@ -2942,6 +2944,7 @@ components:
       enum:
       - OPEN
       - FILLED
+      - PARTIAL_FILL
       - CANCELLED
     OrderModifierKind:
       type: string
@@ -2956,20 +2959,44 @@ components:
     Order:
       type: object
       properties:
-        id:
+        order_id:
           type: string
           format: uuid
         order_book_id:
           type: string
           format: uuid
-        quantity:
-          type: string
-          format: decimal
         kind:
           $ref: "#/components/schemas/OrderKind"
-        price:
+        original_price:
+          type: string
+          description: "If Kind is LIMIT, this is the original limit price. If Kind\
+            \ is MARKET, this may be 0 or omitted."
+          format: decimal
+        avg_fill_price:
           type: string
           format: decimal
+        cancelled_quantity:
+          type: string
+          description: "Quantity that was cancelled, if any."
+          format: decimal
+        open_quantity:
+          type: string
+          description: "Quantity that is still open, i.e., not filled or cancelled."
+          format: decimal
+        original_quantity:
+          type: string
+          description: The original quantity of the order when it was created.
+          format: decimal
+        filled_quantity:
+          type: string
+          description: Quantity that has been filled so far.
+          format: decimal
+        last_update_at:
+          type: string
+          format: date-time
+        opened_at:
+          type: string
+          format: date-time
         inverse_leverage:
           type: string
           format: decimal
@@ -2980,9 +3007,6 @@ components:
         user_id:
           type: string
           format: uuid
-        user_text:
-          type: string
-          nullable: true
         order_modifiers:
           type: array
           items:
@@ -2999,6 +3023,29 @@ components:
             type: array
             items:
               $ref: "#/components/schemas/Order"
+    StreamOrdersEntry:
+      type: object
+      allOf:
+      - $ref: "#/components/schemas/StreamEntry"
+      - properties:
+          Val:
+            $ref: "#/components/schemas/Order"
+    StreamOrdersResponse:
+      type: array
+      items:
+        $ref: "#/components/schemas/StreamOrdersEntry"
+    StreamOrderUpdatesEntry:
+      type: object
+      allOf:
+      - $ref: "#/components/schemas/StreamEntry"
+      - properties:
+          Val:
+            $ref: "#/components/schemas/Order"
+    StreamOrderUpdatesResponse:
+      type: array
+      items:
+        $ref: "#/components/schemas/StreamOrderUpdatesEntry"
+      x-schema-name: StreamOrderUpdatesResponse
     GetOrderResponse:
       type: object
       allOf:
@@ -3006,20 +3053,12 @@ components:
       - properties:
           data:
             $ref: "#/components/schemas/Order"
-    OrderCancelledResponse:
-      type: object
-      allOf:
-      - $ref: "#/components/schemas/ResponseEnvelope"
-      - properties:
-          data:
-            $ref: "#/components/schemas/OrderId"
     CreateOrderRequest:
       required:
       - inverse_leverage
       - kind
       - order_book_id
       - position_id
-      - price
       - quantity
       - side
       type: object
@@ -3045,7 +3084,7 @@ components:
           type: string
           description: "Required: the order book to submit the order to"
           format: uuid
-        user_text:
+        order_info:
           type: string
           description: "Optional: User-defined text for the order, e.g., 'buying dips'"
           nullable: true
@@ -3056,11 +3095,16 @@ components:
     OrderId:
       type: object
       properties:
-        id:
+        order_id:
           type: string
           format: uuid
-      example:
-        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+    CreateOrderResponse:
+      type: object
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            $ref: "#/components/schemas/OrderId"
     PositionResponse:
       type: object
       properties:
@@ -3150,6 +3194,14 @@ components:
             \ input, then their borrow limit must be reduced until the order is executed\
             \ or cancelled."
           format: decimal
+        avg_entry_price:
+          type: string
+          description: average cost per unit quantity that was paid (long positions)
+            or received (short positions) for this asset.
+          format: decimal
+        created_at:
+          type: string
+          format: date-time
     ListPositionsResponse:
       type: object
       allOf:
@@ -3159,6 +3211,18 @@ components:
             type: array
             items:
               $ref: "#/components/schemas/Position"
+    StreamPositionsEntry:
+      type: object
+      allOf:
+      - $ref: "#/components/schemas/StreamEntry"
+      - properties:
+          Val:
+            $ref: "#/components/schemas/Position"
+    StreamPositionsResponse:
+      type: array
+      items:
+        $ref: "#/components/schemas/StreamPositionsEntry"
+      x-schema-name: StreamPositionsResponse
     TransformedAssets:
       type: object
       properties:
@@ -3197,6 +3261,30 @@ components:
           additionalProperties:
             type: string
         borrowed:
+          type: object
+          additionalProperties:
+            type: string
+        supplied:
+          type: object
+          additionalProperties:
+            type: string
+        collateral:
+          type: object
+          additionalProperties:
+            type: string
+        supplied_collateral:
+          type: object
+          additionalProperties:
+            type: string
+        impending_borrows:
+          type: object
+          additionalProperties:
+            type: string
+        borrow_limit:
+          type: object
+          additionalProperties:
+            type: string
+        liquidation_threshold:
           type: object
           additionalProperties:
             type: string
@@ -3384,13 +3472,9 @@ components:
     FundUserRequest:
       required:
       - asset_id
-      - position_id
       - quantity
       type: object
       properties:
-        position_id:
-          type: string
-          format: uuid
         asset_id:
           type: string
           format: uuid
@@ -3632,6 +3716,18 @@ components:
             type: array
             items:
               $ref: "#/components/schemas/Transaction"
+    StreamTransactionsEntry:
+      type: object
+      allOf:
+      - $ref: "#/components/schemas/StreamEntry"
+      - properties:
+          Val:
+            $ref: "#/components/schemas/Transaction"
+    StreamTransactionsResponse:
+      type: array
+      items:
+        $ref: "#/components/schemas/StreamTransactionsEntry"
+      x-schema-name: StreamTransactionsResponse
     GetTransactionResponse:
       type: object
       allOf:
@@ -3652,6 +3748,16 @@ components:
           $ref: "#/components/schemas/Metadata"
       description: "Standard response envelope. For 2xx responses, 'data' is set.\
         \ For errors, 'error' is set."
+    StreamEntry:
+      type: object
+      properties:
+        Val:
+          type: object
+          description: The data being streamed
+        Time:
+          type: string
+          description: The timestamp when the data was created
+          format: date-time
     Metadata:
       type: object
       properties:
@@ -3685,15 +3791,20 @@ components:
           type: string
           format: date-time
         open:
-          type: number
+          type: string
+          format: decimal
         high:
-          type: number
+          type: string
+          format: decimal
         low:
-          type: number
+          type: string
+          format: decimal
         close:
-          type: number
+          type: string
+          format: decimal
         volume:
-          type: integer
+          type: string
+          format: decimal
     TradeResponse:
       type: object
       allOf:
@@ -3707,7 +3818,19 @@ components:
         transaction_id:
           type: string
           format: uuid
-        user_id:
+        asset_0:
+          type: string
+          format: uuid
+        created_at:
+          type: string
+          format: date-time
+        fee_asset_id:
+          type: string
+          format: uuid
+        fee_quantity:
+          type: string
+          format: decimal
+        order_book_id:
           type: string
           format: uuid
         order_id:
@@ -3715,27 +3838,15 @@ components:
           format: uuid
         order_seq:
           type: integer
-        order_book_id:
-          type: string
-          format: uuid
-        asset_id:
-          type: string
-          format: uuid
-        quantity:
-          type: string
-          format: decimal
         price:
           type: string
           format: decimal
-        fee_asset_id:
-          type: string
-          format: uuid
-        fee_quantity:
+        quantity_0:
           type: string
           format: decimal
-        created_at:
+        user_id:
           type: string
-          format: date-time
+          format: uuid
     ListTradeResponse:
       type: object
       allOf:
@@ -3745,6 +3856,18 @@ components:
             type: array
             items:
               $ref: "#/components/schemas/Trade"
+    StreamTradesEntry:
+      type: object
+      allOf:
+      - $ref: "#/components/schemas/StreamEntry"
+      - properties:
+          Val:
+            $ref: "#/components/schemas/Trade"
+    StreamTradesResponse:
+      type: array
+      items:
+        $ref: "#/components/schemas/StreamTradesEntry"
+      x-schema-name: StreamTradesResponse
     AssetPrice:
       type: object
       properties:
@@ -3754,7 +3877,7 @@ components:
         price:
           type: string
           format: decimal
-        timestamp:
+        time:
           type: string
           format: date-time
     ListAssetPriceResponse:
@@ -3766,6 +3889,37 @@ components:
             type: array
             items:
               $ref: "#/components/schemas/AssetPrice"
+    StreamAssetPricesResponse:
+      type: object
+      additionalProperties:
+        required:
+        - asset_id
+        - price
+        - time
+        type: object
+        properties:
+          asset_id:
+            type: string
+            format: uuid
+          price:
+            type: string
+            format: decimal
+          time:
+            type: string
+            format: date-time
+      description: "Map of asset prices keyed by asset ID. Format: {\"asset_id\":\
+        \ {\"asset_id\": \"uuid\", \"price\": \"decimal\", \"time\": \"date-time\"\
+        }}"
+      example:
+        a1b2c3d4-e5f6-7890-abcd-ef1234567890:
+          asset_id: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+          price: "123.45"
+          time: 2025-01-01T00:00:00Z
+        b2c3d4e5-f6a7-8901-bcde-f23456789012:
+          asset_id: b2c3d4e5-f6a7-8901-bcde-f23456789012
+          price: "678.90"
+          time: 2025-01-01T00:00:00Z
+      x-schema-name: StreamAssetPricesResponse
     GetAssetPriceResponse:
       type: object
       allOf:
@@ -3797,20 +3951,32 @@ components:
       properties:
         order_book_id:
           type: string
+          description: The ID of the order book.
           format: uuid
-        base_balance:
-          type: string
-          format: decimal
-        quote_balance:
-          type: string
-          format: decimal
-    OrderBookBalanceResponse:
+        base_quantity:
+          type: number
+          description: The quantity of the base asset.
+          format: double
+        quote_quantity:
+          type: number
+          description: The quantity of the quote asset.
+          format: double
+        shares_quantity:
+          type: number
+          description: The quantity of pool shares.
+          format: double
+    StreamOrderBookBalanceEntry:
       type: object
       allOf:
-      - $ref: "#/components/schemas/ResponseEnvelope"
+      - $ref: "#/components/schemas/StreamEntry"
       - properties:
-          data:
+          Val:
             $ref: "#/components/schemas/OrderBookBalance"
+    StreamOrderBookBalancesResponse:
+      type: array
+      items:
+        $ref: "#/components/schemas/StreamOrderBookBalanceEntry"
+      x-schema-name: StreamOrderBookBalancesResponse
     PriceLevel:
       type: object
       properties:
@@ -3820,6 +3986,31 @@ components:
         quantity:
           type: string
           format: decimal
+      example:
+        quantity: quantity
+        price: price
+    LiveOrderbook:
+      type: object
+      properties:
+        bids:
+          type: array
+          description: sorted in desc order by price
+          items:
+            $ref: "#/components/schemas/PriceLevel"
+        asks:
+          type: array
+          description: sorted in asc order by price
+          items:
+            $ref: "#/components/schemas/PriceLevel"
+      example:
+        asks:
+        - null
+        - null
+        bids:
+        - quantity: quantity
+          price: price
+        - quantity: quantity
+          price: price
     OrderBookDepth:
       type: object
       properties:
@@ -3843,9 +4034,7 @@ components:
       - $ref: "#/components/schemas/ResponseEnvelope"
       - properties:
           data:
-            type: array
-            items:
-              $ref: "#/components/schemas/OrderBookDepth"
+            $ref: "#/components/schemas/OrderBookDepth"
     OrderBookTop:
       type: object
       properties:
@@ -3914,13 +4103,13 @@ components:
       - properties:
           data:
             type: boolean
-    CancelOrdersResponse:
+    CancelOrderResponse:
       type: object
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
       - properties:
           data:
-            $ref: "#/components/schemas/CancelOrdersResponse_data"
+            $ref: "#/components/schemas/Order"
     ListCandlesResponse:
       type: object
       allOf:
@@ -3930,6 +4119,18 @@ components:
             type: array
             items:
               $ref: "#/components/schemas/Candle"
+    StreamCandlesEntry:
+      type: object
+      allOf:
+      - $ref: "#/components/schemas/StreamEntry"
+      - properties:
+          Val:
+            $ref: "#/components/schemas/Candle"
+    StreamCandlesResponse:
+      type: array
+      items:
+        $ref: "#/components/schemas/StreamCandlesEntry"
+      x-schema-name: StreamCandlesResponse
     LedgerModuleResponse:
       type: object
       allOf:
@@ -4048,11 +4249,3 @@ components:
       - properties:
           error:
             type: string
-    CancelOrdersResponse_data:
-      type: object
-      properties:
-        cancelled_order_ids:
-          type: array
-          items:
-            type: string
-            format: uuid
