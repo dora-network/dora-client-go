@@ -68,7 +68,7 @@ Class | Method | HTTP request | Description
 *DefaultApi* | [**LeverageUnite**](docs/DefaultApi.md#leverageunite) | **Post** /v1/leverage/unite | Combines all isolated positions into a single global position
 *DefaultApi* | [**LeverageWithdraw**](docs/DefaultApi.md#leveragewithdraw) | **Post** /v1/leverage/withdraw | Withdraw leverage for a specific asset
 *DefaultApi* | [**LiquidityAdd**](docs/DefaultApi.md#liquidityadd) | **Post** /v1/liquidity/pool/{pool_id}/add | Add liquidity to a pool
-*DefaultApi* | [**LiquiditySubtract**](docs/DefaultApi.md#liquiditysubtract) | **Post** /v1/liquidity/pool/{pool_id}/subtract | Subtract liquidity from a pool
+*DefaultApi* | [**LiquiditySubtract**](docs/DefaultApi.md#liquiditysubtract) | **Post** /v1/liquidity/pool/{pool_id}/remove | Subtract liquidity from a pool
 *DefaultApi* | [**ListAssets**](docs/DefaultApi.md#listassets) | **Get** /v1/assets | List assets
 *DefaultApi* | [**ListOrderBooks**](docs/DefaultApi.md#listorderbooks) | **Get** /v1/orderbooks | List order books
 *DefaultApi* | [**ListOrders**](docs/DefaultApi.md#listorders) | **Get** /v1/orders | List all orders

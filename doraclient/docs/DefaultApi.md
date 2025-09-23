@@ -51,7 +51,7 @@ Method | HTTP request | Description
 [**LeverageUnite**](DefaultApi.md#LeverageUnite) | **Post** /v1/leverage/unite | Combines all isolated positions into a single global position
 [**LeverageWithdraw**](DefaultApi.md#LeverageWithdraw) | **Post** /v1/leverage/withdraw | Withdraw leverage for a specific asset
 [**LiquidityAdd**](DefaultApi.md#LiquidityAdd) | **Post** /v1/liquidity/pool/{pool_id}/add | Add liquidity to a pool
-[**LiquiditySubtract**](DefaultApi.md#LiquiditySubtract) | **Post** /v1/liquidity/pool/{pool_id}/subtract | Subtract liquidity from a pool
+[**LiquiditySubtract**](DefaultApi.md#LiquiditySubtract) | **Post** /v1/liquidity/pool/{pool_id}/remove | Subtract liquidity from a pool
 [**ListAssets**](DefaultApi.md#ListAssets) | **Get** /v1/assets | List assets
 [**ListOrderBooks**](DefaultApi.md#ListOrderBooks) | **Get** /v1/orderbooks | List order books
 [**ListOrders**](DefaultApi.md#ListOrders) | **Get** /v1/orders | List all orders
@@ -850,7 +850,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetUserLedgerStream**
-> []StreamPositionsEntry GetUserLedgerStream(ctx, userId, optional)
+> []StreamPositionsEntry GetUserLedgerStream(ctx, userId)
 Get a snapshot of user's ledger updates since a specific time, and opens a stream for further updates
 
 ### Required Parameters
@@ -859,14 +859,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **userId** | [**string**](.md)|  | 
- **optional** | ***DefaultApiGetUserLedgerStreamOpts** | optional parameters | nil if no parameters
-
-### Optional Parameters
-Optional parameters are passed through a pointer to a DefaultApiGetUserLedgerStreamOpts struct
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **since** | **optional.Time**|  | 
 
 ### Return type
 

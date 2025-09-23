@@ -1717,7 +1717,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
-  /v1/liquidity/pool/{pool_id}/subtract:
+  /v1/liquidity/pool/{pool_id}/remove:
     post:
       summary: Subtract liquidity from a pool
       operationId: liquiditySubtract
@@ -2463,14 +2463,6 @@ paths:
         schema:
           type: string
           format: uuid
-      - name: since
-        in: query
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: string
-          format: date-time
       responses:
         "200":
           description: User's ledger stream

@@ -3487,16 +3487,9 @@ func (a *DefaultApiService) GetUserById(ctx context.Context, userId string) (Get
 DefaultApiService Get a snapshot of user&#x27;s ledger updates since a specific time, and opens a stream for further updates
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param userId
- * @param optional nil or *DefaultApiGetUserLedgerStreamOpts - Optional Parameters:
-     * @param "Since" (optional.Time) - 
 @return []StreamPositionsEntry
 */
-
-type DefaultApiGetUserLedgerStreamOpts struct {
-    Since optional.Time
-}
-
-func (a *DefaultApiService) GetUserLedgerStream(ctx context.Context, userId string, localVarOptionals *DefaultApiGetUserLedgerStreamOpts) ([]StreamPositionsEntry, *http.Response, error) {
+func (a *DefaultApiService) GetUserLedgerStream(ctx context.Context, userId string) ([]StreamPositionsEntry, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
@@ -3513,9 +3506,6 @@ func (a *DefaultApiService) GetUserLedgerStream(ctx context.Context, userId stri
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
-	if localVarOptionals != nil && localVarOptionals.Since.IsSet() {
-		localVarQueryParams.Add("since", parameterToString(localVarOptionals.Since.Value(), ""))
-	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
 
@@ -5559,7 +5549,7 @@ func (a *DefaultApiService) LiquiditySubtract(ctx context.Context, body Liquidit
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/v1/liquidity/pool/{pool_id}/subtract"
+	localVarPath := a.client.cfg.BasePath + "/v1/liquidity/pool/{pool_id}/remove"
 	localVarPath = strings.Replace(localVarPath, "{"+"pool_id"+"}", fmt.Sprintf("%v", poolId), -1)
 
 	localVarHeaderParams := make(map[string]string)
