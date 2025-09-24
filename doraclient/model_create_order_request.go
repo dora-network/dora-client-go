@@ -18,7 +18,5 @@ type CreateOrderRequest struct {
 	PositionId string `json:"position_id"`
 	// Required: the order book to submit the order to
 	OrderBookId string `json:"order_book_id"`
-	// Optional: User-defined text for the order, e.g., 'buying dips'
-	OrderInfo string `json:"order_info,omitempty"`
 	OrderModifiers []OrderModifierKind `json:"order_modifiers,omitempty"`
 }

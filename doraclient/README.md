@@ -28,6 +28,7 @@ Class | Method | HTTP request | Description
 *DefaultApi* | [**GetAllAssetPrices**](docs/DefaultApi.md#getallassetprices) | **Get** /v1/price | Get the current price of all assets
 *DefaultApi* | [**GetAssetById**](docs/DefaultApi.md#getassetbyid) | **Get** /v1/assets/{asset_id} | Get asset by ID
 *DefaultApi* | [**GetAssetPrice**](docs/DefaultApi.md#getassetprice) | **Get** /v1/price/asset/{asset_id} | Get the current price of an asset
+*DefaultApi* | [**GetAssetsStream**](docs/DefaultApi.md#getassetsstream) | **Get** /v1/assets/stream | Get all inserts or updates for assets
 *DefaultApi* | [**GetCandleData**](docs/DefaultApi.md#getcandledata) | **Get** /v1/charts/{order_book_id}/candle | Get candlestick data for an orderbook
 *DefaultApi* | [**GetCouponPaymentsByAssetId**](docs/DefaultApi.md#getcouponpaymentsbyassetid) | **Get** /v1/assets/{asset_id}/coupon_payments | Get coupon payments for a bond asset
 *DefaultApi* | [**GetL1Depth**](docs/DefaultApi.md#getl1depth) | **Get** /v1/orderbooks/{order_book_id}/L1 | Get the top price levels for a specific orderbook (L1 market depth)
@@ -58,12 +59,10 @@ Class | Method | HTTP request | Description
 *DefaultApi* | [**GetUserTransactionsStream**](docs/DefaultApi.md#getusertransactionsstream) | **Get** /v1/user/{user_id}/transactions/stream | Get a snapshot of user&#x27;s executed transactions since a specific time, and opens a stream for further updates
 *DefaultApi* | [**LedgerDeposit**](docs/DefaultApi.md#ledgerdeposit) | **Post** /v1/ledger/deposit | Deposit assets into your account from the outside world
 *DefaultApi* | [**LedgerWithdraw**](docs/DefaultApi.md#ledgerwithdraw) | **Post** /v1/ledger/withdraw | Withdraw assets from your account to the outside world
-*DefaultApi* | [**LeverageBorrow**](docs/DefaultApi.md#leverageborrow) | **Post** /v1/leverage/borrow | Directly borrow assets
 *DefaultApi* | [**LeverageCollateralize**](docs/DefaultApi.md#leveragecollateralize) | **Post** /v1/leverage/collateralize | Move supplied and available to supplied_collateral and collateral, for a specified position
 *DefaultApi* | [**LeverageDeCollateralize**](docs/DefaultApi.md#leveragedecollateralize) | **Post** /v1/leverage/de-collateralize | Move collateral and supplied_collateral to available and supplied, for a specified position.
 *DefaultApi* | [**LeverageIsolateCollateral**](docs/DefaultApi.md#leverageisolatecollateral) | **Post** /v1/leverage/isolate_collateral | Create an isolated position by transferring collateral to the position from the user&#x27;s global collateral
 *DefaultApi* | [**LeverageIsolatePosition**](docs/DefaultApi.md#leverageisolateposition) | **Post** /v1/leverage/isolate_position | Create an isolated position using all collateral, supplied_collateral, and borrows from the user&#x27;s global position
-*DefaultApi* | [**LeverageRepay**](docs/DefaultApi.md#leveragerepay) | **Post** /v1/leverage/repay | Repay borrowed assets
 *DefaultApi* | [**LeverageSupply**](docs/DefaultApi.md#leveragesupply) | **Post** /v1/leverage/supply | Supply leverage for a specific asset
 *DefaultApi* | [**LeverageUnite**](docs/DefaultApi.md#leverageunite) | **Post** /v1/leverage/unite | Combines all isolated positions into a single global position
 *DefaultApi* | [**LeverageWithdraw**](docs/DefaultApi.md#leveragewithdraw) | **Post** /v1/leverage/withdraw | Withdraw leverage for a specific asset
@@ -171,6 +170,7 @@ Class | Method | HTTP request | Description
  - [RepayResponse](docs/RepayResponse.md)
  - [ResponseEnvelope](docs/ResponseEnvelope.md)
  - [Side](docs/Side.md)
+ - [StreamAssetsEntry](docs/StreamAssetsEntry.md)
  - [StreamCandlesEntry](docs/StreamCandlesEntry.md)
  - [StreamEntry](docs/StreamEntry.md)
  - [StreamOrderBookBalanceEntry](docs/StreamOrderBookBalanceEntry.md)

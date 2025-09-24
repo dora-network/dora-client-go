@@ -1469,78 +1469,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
-  /v1/leverage/borrow:
-    post:
-      summary: Directly borrow assets
-      description: "TODO: Finish this when implementation has been completed"
-      operationId: leverageBorrow
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/BorrowRequest"
-        required: true
-      responses:
-        "201":
-          description: Borrow successful
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/BorrowResponse"
-        "400":
-          description: "Bad request, e.g. insufficient collateral or invalid parameters"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ResponseEnvelope"
-        "401":
-          description: "Unauthorized, e.g. user not logged in or invalid credentials"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ResponseEnvelope"
-        "500":
-          description: Internal server error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ResponseEnvelope"
-  /v1/leverage/repay:
-    post:
-      summary: Repay borrowed assets
-      description: "TODO: Finish this when implementation has been completed"
-      operationId: leverageRepay
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/RepayRequest"
-        required: true
-      responses:
-        "201":
-          description: Repay successful
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/RepayResponse"
-        "400":
-          description: "Bad request, e.g. insufficient collateral or invalid parameters"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ResponseEnvelope"
-        "401":
-          description: "Unauthorized, e.g. user not logged in or invalid credentials"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ResponseEnvelope"
-        "500":
-          description: Internal server error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ResponseEnvelope"
   /v1/leverage/isolate_collateral:
     post:
       summary: Create an isolated position by transferring collateral to the position
@@ -1628,7 +1556,7 @@ paths:
   /v1/leverage/unite:
     post:
       summary: Combines all isolated positions into a single global position
-      description: "TODO: Finish this when implementation has been completed"
+      description: Combines all isolated positions into a single global position
       operationId: leverageUnite
       requestBody:
         content:
@@ -2401,14 +2329,6 @@ paths:
         schema:
           type: string
           format: uuid
-      - name: order_book_id
-        in: path
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-          format: uuid
       - name: since
         in: query
         required: false
@@ -2539,6 +2459,53 @@ paths:
                 $ref: "#/components/schemas/ResponseEnvelope"
         "404":
           description: User not found or no transactions available
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+  /v1/assets/stream:
+    get:
+      summary: Get all inserts or updates for assets
+      operationId: getAssetsStream
+      parameters:
+      - name: since
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          format: date-time
+      - name: until
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          format: date-time
+      responses:
+        "200":
+          description: Asset's stream
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StreamAssetsResponse"
+        "400":
+          description: "Bad request, e.g. invalid query parameters"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+        "401":
+          description: "Unauthorized, user not logged in or does not have access to\
+            \ this route"
           content:
             application/json:
               schema:
@@ -3076,10 +3043,6 @@ components:
           type: string
           description: "Required: the order book to submit the order to"
           format: uuid
-        order_info:
-          type: string
-          description: "Optional: User-defined text for the order, e.g., 'buying dips'"
-          nullable: true
         order_modifiers:
           type: array
           items:
@@ -3190,6 +3153,14 @@ components:
           type: string
           description: average cost per unit quantity that was paid (long positions)
             or received (short positions) for this asset.
+          format: decimal
+        borrow_limit:
+          type: string
+          description: The borrow limit
+          format: decimal
+        liquidation_threshold:
+          type: string
+          description: The borrow limit
           format: decimal
         created_at:
           type: string
@@ -3720,6 +3691,18 @@ components:
       items:
         $ref: "#/components/schemas/StreamTransactionsEntry"
       x-schema-name: StreamTransactionsResponse
+    StreamAssetsEntry:
+      type: object
+      allOf:
+      - $ref: "#/components/schemas/StreamEntry"
+      - properties:
+          Val:
+            $ref: "#/components/schemas/Asset"
+    StreamAssetsResponse:
+      type: array
+      items:
+        $ref: "#/components/schemas/StreamAssetsEntry"
+      x-schema-name: StreamAssetsResponse
     GetTransactionResponse:
       type: object
       allOf:

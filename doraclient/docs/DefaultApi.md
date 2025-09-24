@@ -11,6 +11,7 @@ Method | HTTP request | Description
 [**GetAllAssetPrices**](DefaultApi.md#GetAllAssetPrices) | **Get** /v1/price | Get the current price of all assets
 [**GetAssetById**](DefaultApi.md#GetAssetById) | **Get** /v1/assets/{asset_id} | Get asset by ID
 [**GetAssetPrice**](DefaultApi.md#GetAssetPrice) | **Get** /v1/price/asset/{asset_id} | Get the current price of an asset
+[**GetAssetsStream**](DefaultApi.md#GetAssetsStream) | **Get** /v1/assets/stream | Get all inserts or updates for assets
 [**GetCandleData**](DefaultApi.md#GetCandleData) | **Get** /v1/charts/{order_book_id}/candle | Get candlestick data for an orderbook
 [**GetCouponPaymentsByAssetId**](DefaultApi.md#GetCouponPaymentsByAssetId) | **Get** /v1/assets/{asset_id}/coupon_payments | Get coupon payments for a bond asset
 [**GetL1Depth**](DefaultApi.md#GetL1Depth) | **Get** /v1/orderbooks/{order_book_id}/L1 | Get the top price levels for a specific orderbook (L1 market depth)
@@ -41,12 +42,10 @@ Method | HTTP request | Description
 [**GetUserTransactionsStream**](DefaultApi.md#GetUserTransactionsStream) | **Get** /v1/user/{user_id}/transactions/stream | Get a snapshot of user&#x27;s executed transactions since a specific time, and opens a stream for further updates
 [**LedgerDeposit**](DefaultApi.md#LedgerDeposit) | **Post** /v1/ledger/deposit | Deposit assets into your account from the outside world
 [**LedgerWithdraw**](DefaultApi.md#LedgerWithdraw) | **Post** /v1/ledger/withdraw | Withdraw assets from your account to the outside world
-[**LeverageBorrow**](DefaultApi.md#LeverageBorrow) | **Post** /v1/leverage/borrow | Directly borrow assets
 [**LeverageCollateralize**](DefaultApi.md#LeverageCollateralize) | **Post** /v1/leverage/collateralize | Move supplied and available to supplied_collateral and collateral, for a specified position
 [**LeverageDeCollateralize**](DefaultApi.md#LeverageDeCollateralize) | **Post** /v1/leverage/de-collateralize | Move collateral and supplied_collateral to available and supplied, for a specified position.
 [**LeverageIsolateCollateral**](DefaultApi.md#LeverageIsolateCollateral) | **Post** /v1/leverage/isolate_collateral | Create an isolated position by transferring collateral to the position from the user&#x27;s global collateral
 [**LeverageIsolatePosition**](DefaultApi.md#LeverageIsolatePosition) | **Post** /v1/leverage/isolate_position | Create an isolated position using all collateral, supplied_collateral, and borrows from the user&#x27;s global position
-[**LeverageRepay**](DefaultApi.md#LeverageRepay) | **Post** /v1/leverage/repay | Repay borrowed assets
 [**LeverageSupply**](DefaultApi.md#LeverageSupply) | **Post** /v1/leverage/supply | Supply leverage for a specific asset
 [**LeverageUnite**](DefaultApi.md#LeverageUnite) | **Post** /v1/leverage/unite | Combines all isolated positions into a single global position
 [**LeverageWithdraw**](DefaultApi.md#LeverageWithdraw) | **Post** /v1/leverage/withdraw | Withdraw leverage for a specific asset
@@ -226,6 +225,39 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**GetAssetPriceResponse**](GetAssetPriceResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **GetAssetsStream**
+> []StreamAssetsEntry GetAssetsStream(ctx, optional)
+Get all inserts or updates for assets
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+ **optional** | ***DefaultApiGetAssetsStreamOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a DefaultApiGetAssetsStreamOpts struct
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **since** | **optional.Time**|  | 
+ **until** | **optional.Time**|  | 
+
+### Return type
+
+[**[]StreamAssetsEntry**](array.md)
 
 ### Authorization
 
@@ -912,7 +944,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetUserOrdersUpdatesStreamAll**
-> []StreamOrderUpdatesEntry GetUserOrdersUpdatesStreamAll(ctx, userId, orderBookId, optional)
+> []StreamOrderUpdatesEntry GetUserOrdersUpdatesStreamAll(ctx, userId, optional)
 Get a snapshot of user's order updates across all order books since a specific time, and opens a stream for further updates
 
 ### Required Parameters
@@ -921,14 +953,12 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **userId** | [**string**](.md)|  | 
-  **orderBookId** | [**string**](.md)|  | 
  **optional** | ***DefaultApiGetUserOrdersUpdatesStreamAllOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
 Optional parameters are passed through a pointer to a DefaultApiGetUserOrdersUpdatesStreamAllOpts struct
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-
 
  **since** | **optional.Time**|  | 
 
@@ -1059,34 +1089,6 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **LeverageBorrow**
-> BorrowResponse LeverageBorrow(ctx, body)
-Directly borrow assets
-
-TODO: Finish this when implementation has been completed
-
-### Required Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **body** | [**BorrowRequest**](BorrowRequest.md)|  | 
-
-### Return type
-
-[**BorrowResponse**](BorrowResponse.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **LeverageCollateralize**
 > CollateralizeResponse LeverageCollateralize(ctx, body)
 Move supplied and available to supplied_collateral and collateral, for a specified position
@@ -1191,34 +1193,6 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **LeverageRepay**
-> RepayResponse LeverageRepay(ctx, body)
-Repay borrowed assets
-
-TODO: Finish this when implementation has been completed
-
-### Required Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **body** | [**RepayRequest**](RepayRequest.md)|  | 
-
-### Return type
-
-[**RepayResponse**](RepayResponse.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **LeverageSupply**
 > SupplyResponse LeverageSupply(ctx, body)
 Supply leverage for a specific asset
@@ -1249,7 +1223,7 @@ No authorization required
 > UnitePositionResponse LeverageUnite(ctx, body)
 Combines all isolated positions into a single global position
 
-TODO: Finish this when implementation has been completed
+Combines all isolated positions into a single global position
 
 ### Required Parameters
 

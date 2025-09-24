@@ -33,5 +33,9 @@ type Position struct {
 	ImpendingBorrows string `json:"impending_borrows,omitempty"`
 	// average cost per unit quantity that was paid (long positions) or received (short positions) for this asset.
 	AvgEntryPrice string `json:"avg_entry_price,omitempty"`
+	// The borrow limit
+	BorrowLimit string `json:"borrow_limit,omitempty"`
+	// The borrow limit
+	LiquidationThreshold string `json:"liquidation_threshold,omitempty"`
 	CreatedAt time.Time `json:"created_at,omitempty"`
 }
