@@ -26,6 +26,8 @@ type Order struct {
 	OriginalQuantity string `json:"original_quantity,omitempty"`
 	// Quantity that has been filled so far.
 	FilledQuantity string `json:"filled_quantity,omitempty"`
+	// Quote quantity that has been filled so far.
+	FilledNotional string `json:"filled_notional,omitempty"`
 	LastUpdateAt time.Time `json:"last_update_at,omitempty"`
 	OpenedAt time.Time `json:"opened_at,omitempty"`
 	InverseLeverage string `json:"inverse_leverage,omitempty"`
@@ -34,4 +36,7 @@ type Order struct {
 	UserId string `json:"user_id,omitempty"`
 	OrderModifiers []OrderModifierKind `json:"order_modifiers,omitempty"`
 	PositionId string `json:"position_id,omitempty"`
+	OrderInfo string `json:"order_info,omitempty"`
+	GoodTillDate time.Time `json:"good_till_date,omitempty"`
+	TriggerPrice string `json:"trigger_price,omitempty"`
 }

@@ -23,4 +23,7 @@ type Trade struct {
 	Price string `json:"price,omitempty"`
 	Quantity0 string `json:"quantity_0,omitempty"`
 	UserId string `json:"user_id,omitempty"`
+	Side *Side `json:"side,omitempty"`
+	// If true, then this order is the aggressor (taker); otherwise it is the maker.
+	AggressorIndicator bool `json:"aggressor_indicator,omitempty"`
 }

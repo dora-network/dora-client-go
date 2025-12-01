@@ -4,8 +4,10 @@ All URIs are relative to *https://localhost:8084*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CancelAllOpenOrders**](DefaultApi.md#CancelAllOpenOrders) | **Delete** /v1/orders | Cancel all open orders
+[**CancelAllOpenOrders**](DefaultApi.md#CancelAllOpenOrders) | **Delete** /v1/orders | Cancel all open orders, if user passes orderbook on query param it will cancel all orders on specific orderbook, admin can cancel user&#x27;s orders on specific orderbook
 [**CancelOrderById**](DefaultApi.md#CancelOrderById) | **Delete** /v1/orders/{order_id} | Cancel an order by ID
+[**CheckUserEmailExists**](DefaultApi.md#CheckUserEmailExists) | **Get** /v1/user/{email}/exists | Check whether a user email exists
+[**CreateNewIsolatedPosition**](DefaultApi.md#CreateNewIsolatedPosition) | **Post** /v1/positions/new_isolated | Create a new isolated position for a user transferring available assets into the position
 [**CreateOrder**](DefaultApi.md#CreateOrder) | **Post** /v1/orders | Create a new order
 [**DeleteUser**](DefaultApi.md#DeleteUser) | **Delete** /v1/user/{user_id} | Delete user by ID
 [**GetAllAssetPrices**](DefaultApi.md#GetAllAssetPrices) | **Get** /v1/price | Get the current price of all assets
@@ -40,12 +42,7 @@ Method | HTTP request | Description
 [**GetUserOrdersUpdatesStreamAll**](DefaultApi.md#GetUserOrdersUpdatesStreamAll) | **Get** /v1/user/{user_id}/orders/all/updates/stream | Get a snapshot of user&#x27;s order updates across all order books since a specific time, and opens a stream for further updates
 [**GetUserSelf**](DefaultApi.md#GetUserSelf) | **Get** /v1/user/self | Get user details for the authenticated user
 [**GetUserTransactionsStream**](DefaultApi.md#GetUserTransactionsStream) | **Get** /v1/user/{user_id}/transactions/stream | Get a snapshot of user&#x27;s executed transactions since a specific time, and opens a stream for further updates
-[**LedgerDeposit**](DefaultApi.md#LedgerDeposit) | **Post** /v1/ledger/deposit | Deposit assets into your account from the outside world
-[**LedgerWithdraw**](DefaultApi.md#LedgerWithdraw) | **Post** /v1/ledger/withdraw | Withdraw assets from your account to the outside world
-[**LeverageCollateralize**](DefaultApi.md#LeverageCollateralize) | **Post** /v1/leverage/collateralize | Move supplied and available to supplied_collateral and collateral, for a specified position
-[**LeverageDeCollateralize**](DefaultApi.md#LeverageDeCollateralize) | **Post** /v1/leverage/de-collateralize | Move collateral and supplied_collateral to available and supplied, for a specified position.
 [**LeverageIsolateCollateral**](DefaultApi.md#LeverageIsolateCollateral) | **Post** /v1/leverage/isolate_collateral | Create an isolated position by transferring collateral to the position from the user&#x27;s global collateral
-[**LeverageIsolatePosition**](DefaultApi.md#LeverageIsolatePosition) | **Post** /v1/leverage/isolate_position | Create an isolated position using all collateral, supplied_collateral, and borrows from the user&#x27;s global position
 [**LeverageSupply**](DefaultApi.md#LeverageSupply) | **Post** /v1/leverage/supply | Supply leverage for a specific asset
 [**LeverageUnite**](DefaultApi.md#LeverageUnite) | **Post** /v1/leverage/unite | Combines all isolated positions into a single global position
 [**LeverageWithdraw**](DefaultApi.md#LeverageWithdraw) | **Post** /v1/leverage/withdraw | Withdraw leverage for a specific asset
@@ -59,16 +56,30 @@ Method | HTTP request | Description
 [**StreamOrderBookBalances**](DefaultApi.md#StreamOrderBookBalances) | **Get** /v1/orderbooks/{order_book_id}/balances/stream | Get a snapshot of base and quote balances for an order book and open a stream for real-time updates
 [**StreamOrderbookOpenOrders**](DefaultApi.md#StreamOrderbookOpenOrders) | **Get** /v1/orderbooks/{order_book_id}/open/stream | Get a snapshot of open orders in an order book and open a stream for real-time updates
 [**StreamTrades**](DefaultApi.md#StreamTrades) | **Get** /v1/trades/{order_book_id}/stream | Get a snapshot of trades executed on the given order book from a specific date and open a stream for real-time updates
+[**TransferAvailableBalances**](DefaultApi.md#TransferAvailableBalances) | **Post** /v1/positions/transfer_balances | Transfer available balance between a user&#x27;s accounts (e.g. global to isolated position)
 [**UpdateUserConfig**](DefaultApi.md#UpdateUserConfig) | **Put** /v1/user/{user_id}/config | Update user configuration by ID
 [**UpdateUserConfigSelf**](DefaultApi.md#UpdateUserConfigSelf) | **Put** /v1/user/config/self | Update user configuration for the authenticated user
+[**ValidateSubmitOrder**](DefaultApi.md#ValidateSubmitOrder) | **Post** /v1/orders/validate | Validate submit order request data
 [**VerifyUser**](DefaultApi.md#VerifyUser) | **Put** /v1/user/{user_id}/verify | Verify a user by ID
 
 # **CancelAllOpenOrders**
-> ListOrdersResponse CancelAllOpenOrders(ctx, )
-Cancel all open orders
+> ListOrdersResponse CancelAllOpenOrders(ctx, optional)
+Cancel all open orders, if user passes orderbook on query param it will cancel all orders on specific orderbook, admin can cancel user's orders on specific orderbook
 
 ### Required Parameters
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+ **optional** | ***DefaultApiCancelAllOpenOrdersOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a DefaultApiCancelAllOpenOrdersOpts struct
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **orderBookId** | **optional.String**|  | 
+ **userId** | [**optional.Interface of string**](.md)|  | 
+ **orderKind** | [**optional.Interface of OrderKind**](.md)|  | 
 
 ### Return type
 
@@ -107,6 +118,58 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **CheckUserEmailExists**
+> bool CheckUserEmailExists(ctx, email)
+Check whether a user email exists
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **email** | **string**|  | 
+
+### Return type
+
+**bool**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **CreateNewIsolatedPosition**
+> NewIsolatedPositionResponse CreateNewIsolatedPosition(ctx, body)
+Create a new isolated position for a user transferring available assets into the position
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **body** | [**NewIsolatedPositionRequest**](NewIsolatedPositionRequest.md)|  | 
+
+### Return type
+
+[**NewIsolatedPositionResponse**](NewIsolatedPositionResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -769,7 +832,7 @@ Name | Type | Description  | Notes
 Optional parameters are passed through a pointer to a DefaultApiGetTradesOpts struct
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **pools** | [**optional.Interface of []string**](string.md)|  | 
+ **orderBookIds** | [**optional.Interface of []string**](string.md)|  | 
  **userIds** | [**optional.Interface of []string**](string.md)|  | 
  **start** | **optional.Time**|  | 
  **end** | **optional.Time**|  | 
@@ -1033,114 +1096,6 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **LedgerDeposit**
-> FundUserResponse LedgerDeposit(ctx, body)
-Deposit assets into your account from the outside world
-
-TODO: finish this when implementation has been completed
-
-### Required Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **body** | [**FundUserRequest**](FundUserRequest.md)|  | 
-
-### Return type
-
-[**FundUserResponse**](FundUserResponse.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **LedgerWithdraw**
-> FundUserResponse LedgerWithdraw(ctx, body)
-Withdraw assets from your account to the outside world
-
-TODO: Finish this when implementation has been completed
-
-### Required Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **body** | [**FundUserRequest**](FundUserRequest.md)|  | 
-
-### Return type
-
-[**FundUserResponse**](FundUserResponse.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **LeverageCollateralize**
-> CollateralizeResponse LeverageCollateralize(ctx, body)
-Move supplied and available to supplied_collateral and collateral, for a specified position
-
-### Required Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **body** | [**CollateralizeRequest**](CollateralizeRequest.md)|  | 
-
-### Return type
-
-[**CollateralizeResponse**](CollateralizeResponse.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **LeverageDeCollateralize**
-> DeCollateralizeResponse LeverageDeCollateralize(ctx, body)
-Move collateral and supplied_collateral to available and supplied, for a specified position.
-
-### Required Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **body** | [**DeCollateralizeRequest**](DeCollateralizeRequest.md)|  | 
-
-### Return type
-
-[**DeCollateralizeResponse**](DeCollateralizeResponse.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **LeverageIsolateCollateral**
 > IsolateCollateralResponse LeverageIsolateCollateral(ctx, body)
 Create an isolated position by transferring collateral to the position from the user's global collateral
@@ -1155,32 +1110,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**IsolateCollateralResponse**](IsolateCollateralResponse.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **LeverageIsolatePosition**
-> IsolatePositionResponse LeverageIsolatePosition(ctx, body)
-Create an isolated position using all collateral, supplied_collateral, and borrows from the user's global position
-
-### Required Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **body** | [**IsolatePositionRequest**](IsolatePositionRequest.md)|  | 
-
-### Return type
-
-[**IsolatePositionResponse**](IsolatePositionResponse.md)
 
 ### Authorization
 
@@ -1614,6 +1543,32 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **TransferAvailableBalances**
+> TransferBalancesResponse TransferAvailableBalances(ctx, body)
+Transfer available balance between a user's accounts (e.g. global to isolated position)
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **body** | [**TransferBalancesRequest**](TransferBalancesRequest.md)|  | 
+
+### Return type
+
+[**TransferBalancesResponse**](TransferBalancesResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **UpdateUserConfig**
 > UserUpdatedResponse UpdateUserConfig(ctx, body, userId)
 Update user configuration by ID
@@ -1655,6 +1610,32 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**UserUpdatedResponse**](UserUpdatedResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **ValidateSubmitOrder**
+> ValidateSubmitOrderResponse ValidateSubmitOrder(ctx, body)
+Validate submit order request data
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **body** | [**ValidateSubmitOrderRequest**](ValidateSubmitOrderRequest.md)|  | 
+
+### Return type
+
+[**ValidateSubmitOrderResponse**](ValidateSubmitOrderResponse.md)
 
 ### Authorization
 

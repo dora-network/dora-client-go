@@ -8,9 +8,9 @@
  */
 package doraclient
 
-type FundUser struct {
-	UserId string `json:"user_id,omitempty"`
-	PositionId string `json:"position_id,omitempty"`
-	AssetId string `json:"asset_id,omitempty"`
-	FinalQuantity string `json:"final_quantity,omitempty"`
+type NewIsolatedPositionRequest struct {
+	GlobalPositionId string `json:"global_position_id"`
+	AssetId string `json:"asset_id"`
+	Quantity string `json:"quantity"`
+	PositionName string `json:"position_name,omitempty"`
 }

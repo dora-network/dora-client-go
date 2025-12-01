@@ -16,4 +16,5 @@ const (
 	FILLED_OrderStatus OrderStatus = "FILLED"
 	PARTIAL_FILL_OrderStatus OrderStatus = "PARTIAL_FILL"
 	CANCELLED_OrderStatus OrderStatus = "CANCELLED"
+	PENDING_OrderStatus OrderStatus = "PENDING"
 )

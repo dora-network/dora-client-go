@@ -38,4 +38,5 @@ type Position struct {
 	// The borrow limit
 	LiquidationThreshold string `json:"liquidation_threshold,omitempty"`
 	CreatedAt time.Time `json:"created_at,omitempty"`
+	PositionName string `json:"position_name,omitempty"`
 }

@@ -8,9 +8,6 @@
  */
 package doraclient
 
-type IsolatePositionResponse struct {
-	Data *IsolatedPosition `json:"data,omitempty"`
-	// The error message. Present for error (non-2xx) responses.
-	Error string `json:"error,omitempty"`
-	Metadata *Metadata `json:"metadata,omitempty"`
+type ValidateSubmitOrderResponse struct {
+	Data bool `json:"data,omitempty"`
 }

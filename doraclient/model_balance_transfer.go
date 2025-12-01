@@ -8,8 +8,8 @@
  */
 package doraclient
 
-type CollateralizeRequest struct {
-	PositionId string `json:"position_id"`
-	AssetId string `json:"asset_id"`
-	Quantity string `json:"quantity"`
+type BalanceTransfer struct {
+	FromPositionId string `json:"from_position_id,omitempty"`
+	ToPositionId string `json:"to_position_id,omitempty"`
+	TransactionId string `json:"transaction_id,omitempty"`
 }

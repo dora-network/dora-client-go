@@ -8,6 +8,9 @@
  */
 package doraclient
 
-type IsolatePositionRequest struct {
-	GlobalPositionId string `json:"global_position_id"`
+type TransferBalancesRequest struct {
+	FromPositionId string `json:"from_position_id"`
+	ToPositionId string `json:"to_position_id"`
+	AssetId string `json:"asset_id"`
+	Quantity string `json:"quantity"`
 }

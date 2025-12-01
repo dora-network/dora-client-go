@@ -18,4 +18,5 @@ const (
 	BOND_PROVIDER_UserRole UserRole = "BOND_PROVIDER"
 	LIQUIDITY_PROVIDER_UserRole UserRole = "LIQUIDITY_PROVIDER"
 	TRADER_UserRole UserRole = "TRADER"
+	INTEGRATOR_UserRole UserRole = "INTEGRATOR"
 )

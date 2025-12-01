@@ -1,9 +1,9 @@
-# FundUserResponse
+# NewIsolatedPositionResponse
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Data** | [***FundUser**](FundUser.md) |  | [optional] [default to null]
+**Data** | [***Position**](Position.md) |  | [optional] [default to null]
 **Error** | **string** | The error message. Present for error (non-2xx) responses. | [optional] [default to null]
 **Metadata** | [***Metadata**](Metadata.md) |  | [optional] [default to null]
 
