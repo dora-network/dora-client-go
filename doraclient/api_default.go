@@ -275,15 +275,15 @@ func (a *DefaultApiService) CancelOrderById(ctx context.Context, orderId string)
 DefaultApiService Check whether a user email exists
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param email
-@return bool
+@return EmailExistsResponse
 */
-func (a *DefaultApiService) CheckUserEmailExists(ctx context.Context, email string) (bool, *http.Response, error) {
+func (a *DefaultApiService) CheckUserEmailExists(ctx context.Context, email string) (EmailExistsResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue bool
+		localVarReturnValue EmailExistsResponse
 	)
 
 	// create path and map variables
@@ -341,7 +341,7 @@ func (a *DefaultApiService) CheckUserEmailExists(ctx context.Context, email stri
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v bool
+			var v EmailExistsResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()

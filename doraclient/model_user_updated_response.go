@@ -9,8 +9,4 @@
 package doraclient
 
 type UserUpdatedResponse struct {
-	Data *CreateOrUpdateUserResponse `json:"data,omitempty"`
-	// The error message. Present for error (non-2xx) responses.
-	Error string `json:"error,omitempty"`
-	Metadata *Metadata `json:"metadata,omitempty"`
 }

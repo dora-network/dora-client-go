@@ -2539,8 +2539,7 @@ paths:
           content:
             application/json:
               schema:
-                type: boolean
-                x-content-type: application/json
+                $ref: "#/components/schemas/EmailExistsResponse"
         "400":
           description: "Bad request, e.g. invalid path parameters"
           content:
@@ -2641,22 +2640,25 @@ components:
           type: integer
           description: Coupon payment frequency in nanoseconds (minimum 1000 i.e.
             1 microsecond)
-    ListAssetsResponse:
-      type: object
+    ResponseEnvelopeOfListAssets:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
-      - properties:
+      - type: object
+        properties:
           data:
             type: array
             items:
               $ref: "#/components/schemas/Asset"
-    GetAssetByIDResponse:
-      type: object
+    ListAssetsResponse:
+      $ref: "#/components/schemas/ResponseEnvelopeOfListAssets"
+    GetAssetByIDResponseEnvelope:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
       - properties:
           data:
             $ref: "#/components/schemas/Asset"
+    GetAssetByIDResponse:
+      $ref: "#/components/schemas/GetAssetByIDResponseEnvelope"
     CouponPayment:
       type: object
       properties:
@@ -2694,15 +2696,17 @@ components:
         last_processed_at:
           type: string
           format: date-time
-    ListCouponPaymentsResponse:
-      type: object
+    ListCouponPaymentsResponseEnvelope:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
-      - properties:
+      - type: object
+        properties:
           data:
             type: array
             items:
               $ref: "#/components/schemas/CouponPayment"
+    ListCouponPaymentsResponse:
+      $ref: "#/components/schemas/ListCouponPaymentsResponseEnvelope"
     AssetKind:
       type: string
       enum:
@@ -2725,35 +2729,39 @@ components:
       - LIQUIDITY_PROVIDER
       - TRADER
       - INTEGRATOR
-    GetUserResponse:
-      type: object
+    UserEnvelope:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
       - properties:
           data:
             $ref: "#/components/schemas/User"
-    UserUpdatedResponse:
-      type: object
+    GetUserResponse:
+      $ref: "#/components/schemas/UserEnvelope"
+    UserUpdatedResponseEnvelope:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
       - properties:
           data:
             $ref: "#/components/schemas/CreateOrUpdateUserResponse"
-    UserDeletedResponse:
-      type: object
+    UserUpdatedResponse:
+      $ref: "#/components/schemas/UserUpdatedResponseEnvelope"
+    UserDeletedResponseEnvelope:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
       - properties:
           data:
             type: string
             format: uuid
-    GetUserConfigResponse:
-      type: object
+    UserDeletedResponse:
+      $ref: "#/components/schemas/UserDeletedResponseEnvelope"
+    UserConfigResponseEnvelope:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
       - properties:
           data:
             $ref: "#/components/schemas/UserConfig"
+    GetUserConfigResponse:
+      $ref: "#/components/schemas/UserConfigResponseEnvelope"
     User:
       type: object
       properties:
@@ -2915,22 +2923,25 @@ components:
         shares_asset_id:
           type: string
           format: uuid
-    GetOrderBookResponse:
-      type: object
+    OrderBookResponseEnvelope:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
       - properties:
           data:
             $ref: "#/components/schemas/OrderBook"
-    ListOrderBooksResponse:
-      type: object
+    GetOrderBookResponse:
+      $ref: "#/components/schemas/OrderBookResponseEnvelope"
+    ListOrderbookResponseEnvelope:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
-      - properties:
+      - type: object
+        properties:
           data:
             type: array
             items:
               $ref: "#/components/schemas/OrderBook"
+    ListOrderBooksResponse:
+      $ref: "#/components/schemas/ListOrderbookResponseEnvelope"
     OrderKind:
       type: string
       enum:
@@ -3025,15 +3036,17 @@ components:
         trigger_price:
           type: string
           format: decimal
-    ListOrdersResponse:
-      type: object
+    ListOrdersResponseEnvelope:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
-      - properties:
+      - type: object
+        properties:
           data:
             type: array
             items:
               $ref: "#/components/schemas/Order"
+    ListOrdersResponse:
+      $ref: "#/components/schemas/ListOrdersResponseEnvelope"
     StreamOrdersEntry:
       type: object
       allOf:
@@ -3057,13 +3070,14 @@ components:
       items:
         $ref: "#/components/schemas/StreamOrderUpdatesEntry"
       x-schema-name: StreamOrderUpdatesResponse
-    GetOrderResponse:
-      type: object
+    OrderResponseEnvelope:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
       - properties:
           data:
             $ref: "#/components/schemas/Order"
+    GetOrderResponse:
+      $ref: "#/components/schemas/OrderResponseEnvelope"
     CreateOrderRequest:
       required:
       - inverse_leverage
@@ -3153,13 +3167,22 @@ components:
           type: boolean
       example:
         data: true
-    CreateOrderResponse:
-      type: object
+    EmailExistsResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            type: boolean
+    EmailExistsResponse:
+      $ref: "#/components/schemas/EmailExistsResponseEnvelope"
+    CreateOrderResponseEnvelope:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
       - properties:
           data:
             $ref: "#/components/schemas/OrderId"
+    CreateOrderResponse:
+      $ref: "#/components/schemas/CreateOrderResponseEnvelope"
     PositionResponse:
       type: object
       properties:
@@ -3512,13 +3535,14 @@ components:
           items:
             type: string
             format: uuid
-    UnitePositionResponse:
-      type: object
+    UnitePositionResponseEnvelope:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
       - properties:
           data:
             $ref: "#/components/schemas/UnitedPosition"
+    UnitePositionResponse:
+      $ref: "#/components/schemas/UnitePositionResponseEnvelope"
     SupplyRequest:
       required:
       - asset_id
@@ -3550,13 +3574,14 @@ components:
         quantity:
           type: string
           format: decimal
-    SupplyResponse:
-      type: object
+    SupplyResponseEnvelope:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
       - properties:
           data:
             $ref: "#/components/schemas/Supply"
+    SupplyResponse:
+      $ref: "#/components/schemas/SupplyResponseEnvelope"
     WithdrawRequest:
       required:
       - asset_id
@@ -3588,13 +3613,14 @@ components:
         quantity:
           type: string
           format: decimal
-    WithdrawResponse:
-      type: object
+    WithdrawResponseEnvelope:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
       - properties:
           data:
             $ref: "#/components/schemas/Withdraw"
+    WithdrawResponse:
+      $ref: "#/components/schemas/WithdrawResponseEnvelope"
     Collateral:
       type: object
       properties:
@@ -3643,13 +3669,14 @@ components:
         shares_quantity:
           type: string
           format: decimal
-    LiquidityResponse:
-      type: object
+    LiquidityResponseEnvelope:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
       - properties:
           data:
             $ref: "#/components/schemas/Liquidity"
+    LiquidityResponse:
+      $ref: "#/components/schemas/LiquidityResponseEnvelope"
     TransactionKind:
       type: string
       enum:
@@ -3700,15 +3727,17 @@ components:
         user_id:
           type: string
           format: uuid
-    ListTransactionsResponse:
-      type: object
+    ListTransactionsResponseEnvelope:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
-      - properties:
+      - type: object
+        properties:
           data:
             type: array
             items:
               $ref: "#/components/schemas/Transaction"
+    ListTransactionsResponse:
+      $ref: "#/components/schemas/ListTransactionsResponseEnvelope"
     StreamTransactionsEntry:
       type: object
       allOf:
@@ -3733,13 +3762,14 @@ components:
       items:
         $ref: "#/components/schemas/StreamAssetsEntry"
       x-schema-name: StreamAssetsResponse
-    GetTransactionResponse:
-      type: object
+    TransactionResponseEnvelope:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
       - properties:
           data:
             $ref: "#/components/schemas/Transaction"
+    GetTransactionResponse:
+      $ref: "#/components/schemas/TransactionResponseEnvelope"
     ResponseEnvelope:
       type: object
       properties:
@@ -3810,13 +3840,14 @@ components:
         volume:
           type: string
           format: decimal
-    TradeResponse:
-      type: object
+    TradeResponseEnvelope:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
       - properties:
           data:
             $ref: "#/components/schemas/Trade"
+    TradeResponse:
+      $ref: "#/components/schemas/TradeResponseEnvelope"
     Trade:
       type: object
       properties:
@@ -3858,15 +3889,17 @@ components:
           type: boolean
           description: "If true, then this order is the aggressor (taker); otherwise\
             \ it is the maker."
-    ListTradeResponse:
-      type: object
+    ListTradeResponseEnvelope:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
-      - properties:
+      - type: object
+        properties:
           data:
             type: array
             items:
               $ref: "#/components/schemas/Trade"
+    ListTradeResponse:
+      $ref: "#/components/schemas/ListTradeResponseEnvelope"
     StreamTradesEntry:
       type: object
       allOf:
@@ -3891,15 +3924,17 @@ components:
         time:
           type: string
           format: date-time
-    ListAssetPriceResponse:
-      type: object
+    ListAssetPriceResponseEnvelope:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
-      - properties:
+      - type: object
+        properties:
           data:
             type: array
             items:
               $ref: "#/components/schemas/AssetPrice"
+    ListAssetPriceResponse:
+      $ref: "#/components/schemas/ListAssetPriceResponseEnvelope"
     StreamAssetPricesResponse:
       type: object
       additionalProperties:
@@ -3931,13 +3966,14 @@ components:
           price: "678.90"
           time: 2025-01-01T00:00:00Z
       x-schema-name: StreamAssetPricesResponse
-    GetAssetPriceResponse:
-      type: object
+    AssetPriceResponseEnvelope:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
       - properties:
           data:
             $ref: "#/components/schemas/AssetPrice"
+    GetAssetPriceResponse:
+      $ref: "#/components/schemas/AssetPriceResponseEnvelope"
     PoolPrice:
       type: object
       properties:
@@ -3950,13 +3986,14 @@ components:
         timestamp:
           type: string
           format: date-time
-    GetPoolPriceResponse:
-      type: object
+    PoolPriceResponseEnvelope:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
       - properties:
           data:
             $ref: "#/components/schemas/PoolPrice"
+    GetPoolPriceResponse:
+      $ref: "#/components/schemas/PoolPriceResponseEnvelope"
     OrderBookBalance:
       type: object
       properties:
@@ -4039,13 +4076,14 @@ components:
         timestamp:
           type: string
           format: date-time
-    ListOrderBookDepthResponse:
-      type: object
+    ListOrderBookDepthResponseEnvelope:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
       - properties:
           data:
             $ref: "#/components/schemas/OrderBookDepth"
+    ListOrderBookDepthResponse:
+      $ref: "#/components/schemas/ListOrderBookDepthResponseEnvelope"
     OrderBookTop:
       type: object
       properties:
@@ -4061,13 +4099,14 @@ components:
         timestamp:
           type: string
           format: date-time
-    GetTopOfBookResponse:
-      type: object
+    GetTopOfBookResponseEnvelope:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
       - properties:
           data:
             $ref: "#/components/schemas/OrderBookTop"
+    GetTopOfBookResponse:
+      $ref: "#/components/schemas/GetTopOfBookResponseEnvelope"
     OrderBookSummary:
       type: object
       properties:
@@ -4086,50 +4125,57 @@ components:
         best_ask:
           type: string
           format: decimal
-    GetOrderBookSummaryResponse:
-      type: object
+    OrderBookSummaryResponseEnvelope:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
       - properties:
           data:
             $ref: "#/components/schemas/OrderBookSummary"
+    GetOrderBookSummaryResponse:
+      $ref: "#/components/schemas/OrderBookSummaryResponseEnvelope"
+    OrderBookHaltResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            type: boolean
     OrderBookHaltResponse:
-      type: object
+      $ref: "#/components/schemas/OrderBookHaltResponseEnvelope"
+    OrderBookResumeResponseEnvelope:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
       - properties:
           data:
             type: boolean
     OrderBookResumeResponse:
-      type: object
+      $ref: "#/components/schemas/OrderBookResumeResponseEnvelope"
+    OrderBookTerminateResponseEnvelope:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
       - properties:
           data:
             type: boolean
     OrderBookTerminateResponse:
-      type: object
-      allOf:
-      - $ref: "#/components/schemas/ResponseEnvelope"
-      - properties:
-          data:
-            type: boolean
-    CancelOrderResponse:
-      type: object
+      $ref: "#/components/schemas/OrderBookTerminateResponseEnvelope"
+    CancelOrderResponseEnvelope:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
       - properties:
           data:
             $ref: "#/components/schemas/Order"
-    ListCandlesResponse:
-      type: object
+    CancelOrderResponse:
+      $ref: "#/components/schemas/CancelOrderResponseEnvelope"
+    ListCandlesResponseEnvelope:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
-      - properties:
+      - type: object
+        properties:
           data:
             type: array
             items:
               $ref: "#/components/schemas/Candle"
+    ListCandlesResponse:
+      $ref: "#/components/schemas/ListCandlesResponseEnvelope"
     StreamCandlesEntry:
       type: object
       allOf:
@@ -4142,8 +4188,7 @@ components:
       items:
         $ref: "#/components/schemas/StreamCandlesEntry"
       x-schema-name: StreamCandlesResponse
-    LedgerModuleResponse:
-      type: object
+    LedgerModuleResponseEnvelope:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
       - properties:
@@ -4151,51 +4196,60 @@ components:
             type: array
             items:
               $ref: "#/components/schemas/LeverageModuleResponse"
-    LedgerModuleByAssetResponse:
-      type: object
+    LedgerModuleResponse:
+      $ref: "#/components/schemas/LedgerModuleResponseEnvelope"
+    LedgerModuleByAssetResponseEnvelope:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
       - properties:
           data:
             $ref: "#/components/schemas/ModuleBalance"
-    UserPositionResponse:
-      type: object
+    LedgerModuleByAssetResponse:
+      $ref: "#/components/schemas/LedgerModuleByAssetResponseEnvelope"
+    UserPositionResponseEnvelope:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
       - properties:
           data:
             $ref: "#/components/schemas/PositionResponse"
-    UserBalanceResponse:
-      type: object
+    UserPositionResponse:
+      $ref: "#/components/schemas/UserPositionResponseEnvelope"
+    UserBalanceResponseEnvelope:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
       - properties:
           data:
             $ref: "#/components/schemas/BalancesResponse"
-    UserValueResponse:
-      type: object
+    UserBalanceResponse:
+      $ref: "#/components/schemas/UserBalanceResponseEnvelope"
+    UserValueResponseEnvelope:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
       - properties:
           data:
             $ref: "#/components/schemas/UserValue"
-    UserInterestResponse:
-      type: object
+    UserValueResponse:
+      $ref: "#/components/schemas/UserValueResponseEnvelope"
+    UserInterestResponseEnvelope:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
       - properties:
           data:
             $ref: "#/components/schemas/UserInterest"
-    LiquidationTargetsResponse:
-      type: object
+    UserInterestResponse:
+      $ref: "#/components/schemas/UserInterestResponseEnvelope"
+    LiquidationTargetsResponseEnvelope:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
-      - properties:
+      - type: object
+        properties:
           data:
             type: array
             items:
               type: string
               format: uuid
+    LiquidationTargetsResponse:
+      $ref: "#/components/schemas/LiquidationTargetsResponseEnvelope"
     BorrowRequest:
       type: object
     BorrowResponse:
@@ -4257,13 +4311,14 @@ components:
           format: decimal
         position_name:
           type: string
-    NewIsolatedPositionResponse:
-      type: object
+    NewIsolatedPositionResponseEnvelope:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
       - properties:
           data:
             $ref: "#/components/schemas/Position"
+    NewIsolatedPositionResponse:
+      $ref: "#/components/schemas/NewIsolatedPositionResponseEnvelope"
     TransferBalancesRequest:
       required:
       - asset_id
@@ -4296,13 +4351,14 @@ components:
         transaction_id:
           type: string
           format: uuid
-    TransferBalancesResponse:
-      type: object
+    TransferBalancesResponseEnvelope:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
       - properties:
           data:
             $ref: "#/components/schemas/BalanceTransfer"
+    TransferBalancesResponse:
+      $ref: "#/components/schemas/TransferBalancesResponseEnvelope"
   securitySchemes:
     BearerAuth:
       type: http
