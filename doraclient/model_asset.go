@@ -31,5 +31,6 @@ type Asset struct {
 	CanOnboard bool `json:"can_onboard,omitempty"`
 	CanTrade bool `json:"can_trade,omitempty"`
 	CanVirtualBorrow bool `json:"can_virtual_borrow,omitempty"`
+	MaxLeverage float64 `json:"max_leverage,omitempty"`
 	Bond *Bond `json:"bond,omitempty"`
 }

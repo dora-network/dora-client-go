@@ -280,6 +280,37 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
+  /v1/user/self/position_accounts:
+    get:
+      summary: List all position accounts for the authenticated user
+      operationId: listPositionAccountsSelf
+      parameters: []
+      responses:
+        "200":
+          description: "List of position accounts including the position id, the position\
+            \ name, and global account indicator"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListPositionAccountsResponse"
+        "400":
+          description: "Bad request, e.g. invalid query parameters"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+        "404":
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
   /v1/user/{user_id}/config:
     put:
       summary: Update user configuration by ID
@@ -2520,19 +2551,18 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
-  /v1/user/{email}/exists:
+  /v1/user/exists:
     get:
       summary: Check whether a user email exists
       operationId: checkUserEmailExists
       parameters:
       - name: email
-        in: path
+        in: query
         required: true
-        style: simple
-        explode: false
+        style: form
+        explode: true
         schema:
           type: string
-          format: email
       responses:
         "200":
           description: "True if the email exists, false otherwise"
@@ -2599,6 +2629,8 @@ components:
           type: boolean
         can_virtual_borrow:
           type: boolean
+        max_leverage:
+          type: number
         bond:
           $ref: "#/components/schemas/Bond"
     Bond:
@@ -2640,6 +2672,9 @@ components:
           type: integer
           description: Coupon payment frequency in nanoseconds (minimum 1000 i.e.
             1 microsecond)
+        next_coupon_payment:
+          type: string
+          format: date-time
     ResponseEnvelopeOfListAssets:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
@@ -2748,7 +2783,8 @@ components:
     UserDeletedResponseEnvelope:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
-      - properties:
+      - type: object
+        properties:
           data:
             type: string
             format: uuid
@@ -3170,7 +3206,8 @@ components:
     EmailExistsResponseEnvelope:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
-      - properties:
+      - type: object
+        properties:
           data:
             type: boolean
     EmailExistsResponse:
@@ -4136,7 +4173,8 @@ components:
     OrderBookHaltResponseEnvelope:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
-      - properties:
+      - type: object
+        properties:
           data:
             type: boolean
     OrderBookHaltResponse:
@@ -4144,7 +4182,8 @@ components:
     OrderBookResumeResponseEnvelope:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
-      - properties:
+      - type: object
+        properties:
           data:
             type: boolean
     OrderBookResumeResponse:
@@ -4152,7 +4191,8 @@ components:
     OrderBookTerminateResponseEnvelope:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
-      - properties:
+      - type: object
+        properties:
           data:
             type: boolean
     OrderBookTerminateResponse:
@@ -4160,7 +4200,8 @@ components:
     CancelOrderResponseEnvelope:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
-      - properties:
+      - type: object
+        properties:
           data:
             $ref: "#/components/schemas/Order"
     CancelOrderResponse:
@@ -4359,6 +4400,33 @@ components:
             $ref: "#/components/schemas/BalanceTransfer"
     TransferBalancesResponse:
       $ref: "#/components/schemas/TransferBalancesResponseEnvelope"
+    PositionAccount:
+      type: object
+      properties:
+        position_id:
+          type: string
+          description: The ID of the position account
+          format: uuid
+        position_name:
+          type: string
+          description: The name of the position account
+        is_global:
+          type: boolean
+          description: Whether the position account is the global or an isolated account
+    PositionAccounts:
+      type: array
+      items:
+        $ref: "#/components/schemas/PositionAccount"
+      x-schema-name: PositionAccounts
+    ListPositionAccountsResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - type: object
+        properties:
+          data:
+            $ref: "#/components/schemas/PositionAccounts"
+    ListPositionAccountsResponse:
+      $ref: "#/components/schemas/ListPositionAccountsResponseEnvelope"
   securitySchemes:
     BearerAuth:
       type: http

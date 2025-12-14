@@ -25,4 +25,5 @@ type Bond struct {
 	PaymentsPerYear int32 `json:"payments_per_year,omitempty"`
 	// Coupon payment frequency in nanoseconds (minimum 1000 i.e. 1 microsecond)
 	PaymentsEvery int32 `json:"payments_every,omitempty"`
+	NextCouponPayment time.Time `json:"next_coupon_payment,omitempty"`
 }
