@@ -8,5 +8,8 @@
  */
 package doraclient
 
-type RevokeApiKeyResponse struct {
+type CreateApiKeyData struct {
+	KeyId string `json:"key_id,omitempty"`
+	ApiKey string `json:"api_key,omitempty"`
+	Label string `json:"label,omitempty"`
 }

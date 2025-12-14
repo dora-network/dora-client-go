@@ -4549,6 +4549,14 @@ components:
           format: date-time
           nullable: true
     CreateAPIKeyResponse:
+      $ref: "#/components/schemas/CreateAPIKeyResponseEnvelope"
+    CreateAPIKeyResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            $ref: "#/components/schemas/CreateAPIKeyData"
+    CreateAPIKeyData:
       type: object
       properties:
         key_id:
@@ -4557,11 +4565,15 @@ components:
           type: string
         label:
           type: string
-      example:
-        key_id: key_id
-        api_key: api_key
-        label: label
     RevokeAPIKeyResponse:
+      $ref: "#/components/schemas/RevokeAPIKeyResponseEnvelope"
+    RevokeAPIKeyResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            $ref: "#/components/schemas/RevokeAPIKeyData"
+    RevokeAPIKeyData:
       type: object
       properties:
         user_id:
@@ -4573,11 +4585,6 @@ components:
           type: string
         is_active:
           type: boolean
-      example:
-        is_active: true
-        user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        key_id: key_id
-        label: label
   securitySchemes:
     BearerAuth:
       type: http
