@@ -2582,6 +2582,91 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
+  /v1/user/apikey:
+    get:
+      summary: Get user's api keys
+      operationId: getUsersAPIKeys
+      parameters: []
+      responses:
+        "200":
+          description: A list of existing api-keys
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetAPIKeyResponse"
+        "400":
+          description: "Bad request, e.g. invalid path parameters"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+    post:
+      summary: Create apikey for a user
+      operationId: createAPIKeyForUser
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateAPIKeyRequest"
+        required: true
+      responses:
+        "201":
+          description: APIKey created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreateAPIKeyResponse"
+        "404":
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+  /v1/user/apikey/{key_id}/revoke:
+    put:
+      summary: Revoke apikey for a user
+      operationId: revokeAPIKeyForUser
+      parameters:
+      - name: key_id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: text
+      responses:
+        "200":
+          description: APIKey revoked
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RevokeAPIKeyResponse"
+        "404":
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
 components:
   schemas:
     Asset:
@@ -4427,6 +4512,72 @@ components:
             $ref: "#/components/schemas/PositionAccounts"
     ListPositionAccountsResponse:
       $ref: "#/components/schemas/ListPositionAccountsResponseEnvelope"
+    APIKeyResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - type: object
+        properties:
+          data:
+            type: array
+            items:
+              $ref: "#/components/schemas/APIKeyResponse"
+    GetAPIKeyResponse:
+      $ref: "#/components/schemas/APIKeyResponseEnvelope"
+    APIKeyResponse:
+      type: object
+      properties:
+        user_id:
+          type: string
+          format: uuid
+        key_id:
+          type: string
+        label:
+          type: string
+        expires_at:
+          type: string
+          format: date-time
+        is_active:
+          type: boolean
+    CreateAPIKeyRequest:
+      type: object
+      properties:
+        label:
+          type: string
+        expires:
+          type: string
+          description: Date at which the api-key will expire
+          format: date-time
+          nullable: true
+    CreateAPIKeyResponse:
+      type: object
+      properties:
+        key_id:
+          type: string
+        api_key:
+          type: string
+        label:
+          type: string
+      example:
+        key_id: key_id
+        api_key: api_key
+        label: label
+    RevokeAPIKeyResponse:
+      type: object
+      properties:
+        user_id:
+          type: string
+          format: uuid
+        key_id:
+          type: string
+        label:
+          type: string
+        is_active:
+          type: boolean
+      example:
+        is_active: true
+        user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        key_id: key_id
+        label: label
   securitySchemes:
     BearerAuth:
       type: http

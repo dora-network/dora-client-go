@@ -24,6 +24,7 @@ Class | Method | HTTP request | Description
 *DefaultApi* | [**CancelAllOpenOrders**](docs/DefaultApi.md#cancelallopenorders) | **Delete** /v1/orders | Cancel all open orders, if user passes orderbook on query param it will cancel all orders on specific orderbook, admin can cancel user&#x27;s orders on specific orderbook
 *DefaultApi* | [**CancelOrderById**](docs/DefaultApi.md#cancelorderbyid) | **Delete** /v1/orders/{order_id} | Cancel an order by ID
 *DefaultApi* | [**CheckUserEmailExists**](docs/DefaultApi.md#checkuseremailexists) | **Get** /v1/user/exists | Check whether a user email exists
+*DefaultApi* | [**CreateAPIKeyForUser**](docs/DefaultApi.md#createapikeyforuser) | **Post** /v1/user/apikey | Create apikey for a user
 *DefaultApi* | [**CreateNewIsolatedPosition**](docs/DefaultApi.md#createnewisolatedposition) | **Post** /v1/positions/new_isolated | Create a new isolated position for a user transferring available assets into the position
 *DefaultApi* | [**CreateOrder**](docs/DefaultApi.md#createorder) | **Post** /v1/orders | Create a new order
 *DefaultApi* | [**DeleteUser**](docs/DefaultApi.md#deleteuser) | **Delete** /v1/user/{user_id} | Delete user by ID
@@ -59,6 +60,7 @@ Class | Method | HTTP request | Description
 *DefaultApi* | [**GetUserOrdersUpdatesStreamAll**](docs/DefaultApi.md#getuserordersupdatesstreamall) | **Get** /v1/user/{user_id}/orders/all/updates/stream | Get a snapshot of user&#x27;s order updates across all order books since a specific time, and opens a stream for further updates
 *DefaultApi* | [**GetUserSelf**](docs/DefaultApi.md#getuserself) | **Get** /v1/user/self | Get user details for the authenticated user
 *DefaultApi* | [**GetUserTransactionsStream**](docs/DefaultApi.md#getusertransactionsstream) | **Get** /v1/user/{user_id}/transactions/stream | Get a snapshot of user&#x27;s executed transactions since a specific time, and opens a stream for further updates
+*DefaultApi* | [**GetUsersAPIKeys**](docs/DefaultApi.md#getusersapikeys) | **Get** /v1/user/apikey | Get user&#x27;s api keys
 *DefaultApi* | [**LeverageIsolateCollateral**](docs/DefaultApi.md#leverageisolatecollateral) | **Post** /v1/leverage/isolate_collateral | Create an isolated position by transferring collateral to the position from the user&#x27;s global collateral
 *DefaultApi* | [**LeverageSupply**](docs/DefaultApi.md#leveragesupply) | **Post** /v1/leverage/supply | Supply leverage for a specific asset
 *DefaultApi* | [**LeverageUnite**](docs/DefaultApi.md#leverageunite) | **Post** /v1/leverage/unite | Combines all isolated positions into a single global position
@@ -69,6 +71,7 @@ Class | Method | HTTP request | Description
 *DefaultApi* | [**ListOrderBooks**](docs/DefaultApi.md#listorderbooks) | **Get** /v1/orderbooks | List order books
 *DefaultApi* | [**ListOrders**](docs/DefaultApi.md#listorders) | **Get** /v1/orders | List all orders
 *DefaultApi* | [**ListPositionAccountsSelf**](docs/DefaultApi.md#listpositionaccountsself) | **Get** /v1/user/self/position_accounts | List all position accounts for the authenticated user
+*DefaultApi* | [**RevokeAPIKeyForUser**](docs/DefaultApi.md#revokeapikeyforuser) | **Put** /v1/user/apikey/{key_id}/revoke | Revoke apikey for a user
 *DefaultApi* | [**StreamAssetPrices**](docs/DefaultApi.md#streamassetprices) | **Get** /v1/prices/stream | Stream real-time asset prices as map objects
 *DefaultApi* | [**StreamCandleData**](docs/DefaultApi.md#streamcandledata) | **Get** /v1/charts/{order_book_id}/candle/stream | Get a snapshot of candlestick data from date provided, and open a stream for real-time updates
 *DefaultApi* | [**StreamOrderBookBalances**](docs/DefaultApi.md#streamorderbookbalances) | **Get** /v1/orderbooks/{order_book_id}/balances/stream | Get a snapshot of base and quote balances for an order book and open a stream for real-time updates
@@ -82,6 +85,8 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Models
 
+ - [ApiKeyResponse](docs/ApiKeyResponse.md)
+ - [ApiKeyResponseEnvelope](docs/ApiKeyResponseEnvelope.md)
  - [Asset](docs/Asset.md)
  - [AssetKind](docs/AssetKind.md)
  - [AssetPrice](docs/AssetPrice.md)
@@ -99,12 +104,15 @@ Class | Method | HTTP request | Description
  - [CandleResolution](docs/CandleResolution.md)
  - [Collateral](docs/Collateral.md)
  - [CouponPayment](docs/CouponPayment.md)
+ - [CreateApiKeyRequest](docs/CreateApiKeyRequest.md)
+ - [CreateApiKeyResponse](docs/CreateApiKeyResponse.md)
  - [CreateOrUpdateUserResponse](docs/CreateOrUpdateUserResponse.md)
  - [CreateOrderRequest](docs/CreateOrderRequest.md)
  - [CreateOrderResponse](docs/CreateOrderResponse.md)
  - [CreateOrderResponseEnvelope](docs/CreateOrderResponseEnvelope.md)
  - [EmailExistsResponse](docs/EmailExistsResponse.md)
  - [EmailExistsResponseEnvelope](docs/EmailExistsResponseEnvelope.md)
+ - [GetApiKeyResponse](docs/GetApiKeyResponse.md)
  - [GetAssetByIdResponse](docs/GetAssetByIdResponse.md)
  - [GetAssetByIdResponseEnvelope](docs/GetAssetByIdResponseEnvelope.md)
  - [GetAssetPriceResponse](docs/GetAssetPriceResponse.md)
@@ -194,6 +202,7 @@ Class | Method | HTTP request | Description
  - [RepayResponse](docs/RepayResponse.md)
  - [ResponseEnvelope](docs/ResponseEnvelope.md)
  - [ResponseEnvelopeOfListAssets](docs/ResponseEnvelopeOfListAssets.md)
+ - [RevokeApiKeyResponse](docs/RevokeApiKeyResponse.md)
  - [Side](docs/Side.md)
  - [StreamAssetsEntry](docs/StreamAssetsEntry.md)
  - [StreamCandlesEntry](docs/StreamCandlesEntry.md)
