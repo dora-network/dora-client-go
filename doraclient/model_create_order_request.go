@@ -17,11 +17,12 @@ type CreateOrderRequest struct {
 	Price string `json:"price,omitempty"`
 	Kind *OrderKind `json:"kind"`
 	Side *Side `json:"side"`
-	// position ID to use for the order. required.
-	PositionId string `json:"position_id"`
+	// use global position for the order or isolated. required.
+	FromGlobalPosition bool `json:"from_global_position"`
 	// Required: the order book to submit the order to
 	OrderBookId string `json:"order_book_id"`
 	OrderModifiers []OrderModifierKind `json:"order_modifiers,omitempty"`
 	GoodTillDate time.Time `json:"good_till_date,omitempty"`
 	TriggerPrice string `json:"trigger_price,omitempty"`
+	TriggerType *TriggerType `json:"trigger_type,omitempty"`
 }

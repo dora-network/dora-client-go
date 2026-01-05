@@ -8,9 +8,10 @@
  */
 package doraclient
 
-type ApiKeyResponseEnvelope struct {
-	Data *ApiKeys `json:"data,omitempty"`
-	// The error message. Present for error (non-2xx) responses.
-	Error string `json:"error,omitempty"`
-	Metadata *Metadata `json:"metadata,omitempty"`
-}
+type TriggerType string
+
+// List of TriggerType
+const (
+	STOP_LOSS_TriggerType TriggerType = "STOP_LOSS"
+	TAKE_PROFIT_TriggerType TriggerType = "TAKE_PROFIT"
+)

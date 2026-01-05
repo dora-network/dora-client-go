@@ -1,9 +1,9 @@
-# ApiKeyResponseEnvelope
+# CurrentLeverageAccruedInterestResponseEnvelope
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Data** | [***ApiKeys**](APIKeys.md) |  | [optional] [default to null]
+**Data** | [***CurrentLeverageAccruedInterest**](CurrentLeverageAccruedInterest.md) |  | [optional] [default to null]
 **Error** | **string** | The error message. Present for error (non-2xx) responses. | [optional] [default to null]
 **Metadata** | [***Metadata**](Metadata.md) |  | [optional] [default to null]
 

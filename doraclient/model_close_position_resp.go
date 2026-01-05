@@ -8,9 +8,6 @@
  */
 package doraclient
 
-type ApiKeyResponseEnvelope struct {
-	Data *ApiKeys `json:"data,omitempty"`
-	// The error message. Present for error (non-2xx) responses.
-	Error string `json:"error,omitempty"`
-	Metadata *Metadata `json:"metadata,omitempty"`
+type ClosePositionResp struct {
+	OrderId string `json:"order_id,omitempty"`
 }

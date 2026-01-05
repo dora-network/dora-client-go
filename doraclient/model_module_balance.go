@@ -15,8 +15,6 @@ type ModuleBalance struct {
 	Available string `json:"available,omitempty"`
 	// The total amount supplied to the module for this asset
 	Supplied string `json:"supplied,omitempty"`
-	// The amount supplied as collateral from user balances in the module for this asset
-	SuppliedCollateral string `json:"supplied_collateral,omitempty"`
 	// Assets minted by virtual-borrowing, but not yet repaid
 	Virtual string `json:"virtual,omitempty"`
 	// The total amount borrowed from the supplied but not yet repaid

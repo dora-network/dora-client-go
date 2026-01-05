@@ -23,4 +23,12 @@ type ValidateSubmitOrderRequest struct {
 	InverseLeverage string `json:"inverse_leverage"`
 	// User balance used to ensure they can afford the requested quantity
 	UserBalance string `json:"user_balance"`
+	// base asset of orderbook
+	BaseAssetId string `json:"base_asset_id,omitempty"`
+	// quote asset of orderbook
+	QuoteAssetId string `json:"quote_asset_id,omitempty"`
+	// Full list of assets in the position with their price and collateral weight, required when inverse_leverage < 1 for leverage health checks
+	PositionAssets []ValidateSubmitOrderRequestPositionAssets `json:"position_assets,omitempty"`
+	// Configuration for the assets in the order
+	AssetsConfig []ValidateSubmitOrderRequestAssetsConfig `json:"assets_config,omitempty"`
 }

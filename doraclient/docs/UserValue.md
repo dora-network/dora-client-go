@@ -7,8 +7,6 @@ Name | Type | Description | Notes
 **Locked** | **map[string]string** |  | [optional] [default to null]
 **Borrowed** | **map[string]string** |  | [optional] [default to null]
 **Supplied** | **map[string]string** |  | [optional] [default to null]
-**Collateral** | **map[string]string** |  | [optional] [default to null]
-**SuppliedCollateral** | **map[string]string** |  | [optional] [default to null]
 **ImpendingBorrows** | **map[string]string** |  | [optional] [default to null]
 **BorrowLimit** | **map[string]string** |  | [optional] [default to null]
 **LiquidationThreshold** | **map[string]string** |  | [optional] [default to null]

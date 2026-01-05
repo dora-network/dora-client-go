@@ -39,4 +39,5 @@ type Order struct {
 	OrderInfo string `json:"order_info,omitempty"`
 	GoodTillDate time.Time `json:"good_till_date,omitempty"`
 	TriggerPrice string `json:"trigger_price,omitempty"`
+	TriggerType *TriggerType `json:"trigger_type,omitempty"`
 }

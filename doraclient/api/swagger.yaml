@@ -11,6 +11,7 @@ servers:
   description: local DORA WebSocket server
 security:
 - bearerAuth: []
+- apiKeyAuthHeader: []
 paths:
   /v1/assets:
     get:
@@ -111,6 +112,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
+      security: []
   /v1/assets/{asset_id}:
     get:
       summary: Get asset by ID
@@ -143,6 +145,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
+      security: []
   /v1/assets/{asset_id}/coupon_payments:
     get:
       summary: Get coupon payments for a bond asset
@@ -175,6 +178,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
+      security: []
   /v1/user/{user_id}:
     get:
       summary: Get user by ID (admin only)
@@ -530,6 +534,41 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
+  /v1/orderbooks/{order_book_id}/stats:
+    get:
+      summary: Get orderbook stats
+      operationId: getOrderbookStats
+      parameters:
+      - name: order_book_id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          description: Orderbook stats details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetOrderbookStatsResponse"
+        "204":
+          description: No Content
+        "400":
+          description: "Bad request, e.g. invalid query parameters"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+        "404":
+          description: Orderbook not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+      security: []
   /v1/orderbooks/{order_book_id}/orders:
     get:
       summary: Get all open orders for a specific orderbook (L3 market depth)
@@ -575,6 +614,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
+      security: []
   /v1/orderbooks/{order_book_id}/depth:
     get:
       summary: Get the aggregated price levels for a specific orderbook (L2 market
@@ -614,6 +654,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
+      security: []
   /v1/orderbooks/{order_book_id}/top:
     get:
       summary: Get the top price levels for a specific orderbook (L1 market depth)
@@ -652,6 +693,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
+      security: []
   /v1/orderbooks/{order_book_id}/L3:
     get:
       summary: Get all open orders for a specific orderbook (L3 market depth)
@@ -697,6 +739,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
+      security: []
   /v1/orderbooks/{order_book_id}/L2:
     get:
       summary: Get the aggregated price levels for a specific orderbook (L2 market
@@ -736,6 +779,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
+      security: []
   /v1/orderbooks/{order_book_id}/L1:
     get:
       summary: Get the top price levels for a specific orderbook (L1 market depth)
@@ -774,6 +818,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
+      security: []
   /v1/orderbooks/{order_book_id}/summary:
     get:
       summary: Get summary of an orderbook
@@ -1080,6 +1125,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
+      security: []
     delete:
       summary: Cancel an order by ID
       operationId: cancelOrderById
@@ -1184,6 +1230,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
+      security: []
   /v1/ledger/module:
     get:
       summary: "Get the entire module object, including unborrowed leverage assets\
@@ -1351,6 +1398,48 @@ paths:
                 $ref: "#/components/schemas/ResponseEnvelope"
         "409":
           description: "Conflict, e.g. the requested amount is not available to transfer"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+  /v1/positions/close:
+    post:
+      summary: "Close isolated positions, repaying the borrowed"
+      operationId: closeIsolatedPosition
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ClosePositionRequest"
+        required: true
+      responses:
+        "201":
+          description: Isolated Position Closed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClosePositionResponse"
+        "400":
+          description: "Bad request, e.g. missing required fields"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+        "401":
+          description: "Unauthorized, user not logged in or does not have access to\
+            \ this route"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+        "404":
+          description: "Not found, e.g. order_book or position not found"
           content:
             application/json:
               schema:
@@ -1618,6 +1707,124 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
+  /v1/leverage/accrued_interest/self:
+    get:
+      summary: Get current accrued leverage interest for the user
+      operationId: leverageGetAccruedInterestByUser
+      parameters:
+      - name: asset_id
+        in: query
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+          format: uuid
+      - name: position_id
+        in: query
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          description: Current leverage accrued interest retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CurrentLeverageAccruedInterestResponse"
+        "400":
+          description: "Bad request, e.g. invalid parameters"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+        "401":
+          description: "Unauthorized, e.g. user not logged in or invalid credentials"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+  /v1/leverage/accrued_interest/pay:
+    post:
+      summary: Pay current accrued leverage interest for a specific user
+      operationId: payLeverageGetAccruedInterest
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PayLeverageAccruedInterestRequest"
+        required: true
+      responses:
+        "200":
+          description: Current leverage accrued interest paid successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PayLeverageAccruedInterestResponse"
+        "400":
+          description: "Bad request, e.g. invalid parameters"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+        "401":
+          description: "Unauthorized, e.g. user not logged in or invalid credentials"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+  /v1/leverage/accrued_interest/claim:
+    post:
+      summary: Claim current accrued leverage interest for a specific user
+      operationId: claimLeverageGetAccruedInterest
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ClaimLeverageAccruedInterestRequest"
+        required: true
+      responses:
+        "200":
+          description: Current leverage accrued interest claimed successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClaimLeverageAccruedInterestResponse"
+        "400":
+          description: "Bad request, e.g. invalid parameters"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+        "401":
+          description: "Unauthorized, e.g. user not logged in or invalid credentials"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
   /v1/liquidity/pool/{pool_id}/add:
     post:
       summary: Add liquidity to a pool
@@ -1814,6 +2021,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
+      security: []
   /v1/transactions/{transaction_id}:
     get:
       summary: Get a transaction by ID
@@ -1852,6 +2060,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
+      security: []
   /v1/trades:
     get:
       summary: "Get a filtered, paginated list of trades"
@@ -1971,6 +2180,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
+      security: []
   /v1/price:
     get:
       summary: Get the current price of all assets
@@ -2111,6 +2321,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
+      security:
+      - apiKeyAuthQuery: []
   /v1/orderbooks/{order_book_id}/balances/stream:
     get:
       summary: Get a snapshot of base and quote balances for an order book and open
@@ -2158,6 +2370,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
+      security:
+      - apiKeyAuthQuery: []
   /v1/charts/{order_book_id}/candle/stream:
     get:
       summary: "Get a snapshot of candlestick data from date provided, and open a\
@@ -2211,6 +2425,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
+      security:
+      - apiKeyAuthQuery: []
   /v1/trades/{order_book_id}/stream:
     get:
       summary: Get a snapshot of trades executed on the given order book from a specific
@@ -2252,6 +2468,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
+      security:
+      - apiKeyAuthQuery: []
   /v1/prices/stream:
     get:
       summary: Stream real-time asset prices as map objects
@@ -2268,6 +2486,14 @@ paths:
         schema:
           type: string
           format: date-time
+      - name: asset_id
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          format: uuid
       responses:
         "200":
           description: "Real-time stream of asset prices. First message: all current\
@@ -2288,6 +2514,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
+      security:
+      - apiKeyAuthQuery: []
   /v1/user/{user_id}/orders/{order_book_id}/updates/stream:
     get:
       summary: "Get a snapshot of user's order updates for the given order book since\
@@ -2350,6 +2578,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
+      security:
+      - apiKeyAuthQuery: []
   /v1/user/{user_id}/orders/all/updates/stream:
     get:
       summary: "Get a snapshot of user's order updates across all order books since\
@@ -2404,6 +2634,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
+      security:
+      - apiKeyAuthQuery: []
   /v1/user/{user_id}/ledger/stream:
     get:
       summary: "Get a snapshot of user's ledger updates since a specific time, and\
@@ -2450,6 +2682,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
+      security:
+      - apiKeyAuthQuery: []
   /v1/user/{user_id}/transactions/stream:
     get:
       summary: "Get a snapshot of user's executed transactions since a specific time,\
@@ -2504,6 +2738,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
+      security:
+      - apiKeyAuthQuery: []
   /v1/assets/stream:
     get:
       summary: Get all inserts or updates for assets
@@ -2551,6 +2787,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
+      security:
+      - apiKeyAuthQuery: []
   /v1/user/exists:
     get:
       summary: Check whether a user email exists
@@ -3086,6 +3324,11 @@ components:
       enum:
       - BUY
       - SELL
+    TriggerType:
+      type: string
+      enum:
+      - STOP_LOSS
+      - TAKE_PROFIT
     Order:
       type: object
       properties:
@@ -3157,6 +3400,8 @@ components:
         trigger_price:
           type: string
           format: decimal
+        trigger_type:
+          $ref: "#/components/schemas/TriggerType"
     ListOrdersResponseEnvelope:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
@@ -3201,10 +3446,10 @@ components:
       $ref: "#/components/schemas/OrderResponseEnvelope"
     CreateOrderRequest:
       required:
+      - from_global_position
       - inverse_leverage
       - kind
       - order_book_id
-      - position_id
       - quantity
       - side
       type: object
@@ -3222,10 +3467,9 @@ components:
           $ref: "#/components/schemas/OrderKind"
         side:
           $ref: "#/components/schemas/Side"
-        position_id:
-          type: string
-          description: position ID to use for the order. required.
-          format: uuid
+        from_global_position:
+          type: boolean
+          description: use global position for the order or isolated. required.
         order_book_id:
           type: string
           description: "Required: the order book to submit the order to"
@@ -3240,8 +3484,11 @@ components:
         trigger_price:
           type: string
           format: decimal
+        trigger_type:
+          $ref: "#/components/schemas/TriggerType"
     ValidateSubmitOrderRequest:
       required:
+      - asset_id
       - inverse_leverage
       - kind
       - price
@@ -3275,6 +3522,25 @@ components:
           type: string
           description: User balance used to ensure they can afford the requested quantity
           format: decimal
+        base_asset_id:
+          type: string
+          description: base asset of orderbook
+          format: uuid
+        quote_asset_id:
+          type: string
+          description: quote asset of orderbook
+          format: uuid
+        position_assets:
+          type: array
+          description: "Full list of assets in the position with their price and collateral\
+            \ weight, required when inverse_leverage < 1 for leverage health checks"
+          items:
+            $ref: "#/components/schemas/ValidateSubmitOrderRequest_position_assets"
+        assets_config:
+          type: array
+          description: Configuration for the assets in the order
+          items:
+            $ref: "#/components/schemas/ValidateSubmitOrderRequest_assets_config"
     OrderId:
       type: object
       properties:
@@ -3288,6 +3554,54 @@ components:
           type: boolean
       example:
         data: true
+    OrderbookStats:
+      type: object
+      properties:
+        order_book_id:
+          type: string
+          format: uuid
+        open_price:
+          type: string
+          description: Open price of the orderbook
+          format: decimal
+        last_price:
+          type: string
+          description: Price of the most recent executed trade.
+          format: decimal
+        high_24h:
+          type: string
+          description: Highest price of the orderbook in the last 24 hours.
+          format: decimal
+        low_24h:
+          type: string
+          description: Lowest price of the orderbook in the last 24 hours.
+          format: decimal
+        change_24h:
+          type: string
+          description: Change in price of the orderbook in the last 24 hours.
+          format: decimal
+        change_pct_24h:
+          type: string
+          description: Change percentage in price of the orderbook in the last 24
+            hours.
+          format: decimal
+        volume_24h_base:
+          type: string
+          description: Total volume of the orderbook in the last 24 hours.
+          format: decimal
+        volume_24h_usd:
+          type: string
+          description: Total volume of the orderbook in the last 24 hours in USD.
+          format: decimal
+    OrderbookStatsResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - type: object
+        properties:
+          data:
+            $ref: "#/components/schemas/OrderbookStats"
+    GetOrderbookStatsResponse:
+      $ref: "#/components/schemas/OrderbookStatsResponseEnvelope"
     EmailExistsResponseEnvelope:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
@@ -3366,26 +3680,11 @@ components:
             The user remains entitled to these assets and can withdraw them into their
             available balance.
           format: decimal
-        collateral:
-          type: string
-          description: "The balance that has been locked or supplied, but are marked\
-            \ as collateral to support borrow limits and can be consumed in case of\
-            \ liquidation. When unmarked as collateral, the balance returns to the\
-            \ available balance."
-          format: decimal
-        supplied_collateral:
-          type: string
-          description: "The balance that have been supplied to the leverage module\
-            \ and marked as collateral. The user remains entitled to this balance\
-            \ and can withdraw it into the collateral balance, or unmark them as collateral\
-            \ and move them to the supplied balance."
-          format: decimal
         borrowed:
           type: string
-          description: "The total amount of debt outstanding for this position. The\
-            \ position's collateral + supplied_collateral must support a borrow limit\
-            \ sufficient to cover all borrowed assets. This position cannot be closed\
-            \ until all debt is fully repaid, i.e. borrowed = 0."
+          description: "The total amount of debt outstanding for this position. This\
+            \ position cannot be closed until all debt is fully repaid, i.e. borrowed\
+            \ = 0."
           format: decimal
         impending_borrows:
           type: string
@@ -3478,14 +3777,6 @@ components:
           type: object
           additionalProperties:
             type: string
-        collateral:
-          type: object
-          additionalProperties:
-            type: string
-        supplied_collateral:
-          type: object
-          additionalProperties:
-            type: string
         impending_borrows:
           type: object
           additionalProperties:
@@ -3566,11 +3857,6 @@ components:
         supplied:
           type: string
           description: The total amount supplied to the module for this asset
-          format: decimal
-        supplied_collateral:
-          type: string
-          description: The amount supplied as collateral from user balances in the
-            module for this asset
           format: decimal
         virtual:
           type: string
@@ -3758,6 +4044,134 @@ components:
         quantity:
           type: string
           format: decimal
+    PayLeverageAccruedInterestRequest:
+      type: object
+      properties:
+        asset_id:
+          type: string
+          format: uuid
+        position_id:
+          type: string
+          format: uuid
+        quantity:
+          type: string
+          format: decimal
+    PayLeverageAccruedInterest:
+      type: object
+      properties:
+        transaction_id:
+          type: string
+          format: uuid
+        asset_id:
+          type: string
+          format: uuid
+        position_id:
+          type: string
+          format: uuid
+        current_accrued_interest:
+          type: string
+          format: decimal
+    PayLeverageAccruedInterestResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - type: object
+        properties:
+          data:
+            $ref: "#/components/schemas/PayLeverageAccruedInterest"
+    PayLeverageAccruedInterestResponse:
+      $ref: "#/components/schemas/PayLeverageAccruedInterestResponseEnvelope"
+    ClaimLeverageAccruedInterestRequest:
+      type: object
+      properties:
+        asset_id:
+          type: string
+          format: uuid
+        position_id:
+          type: string
+          format: uuid
+        quantity:
+          type: string
+          format: decimal
+    ClaimLeverageAccruedInterest:
+      type: object
+      properties:
+        transaction_id:
+          type: string
+          format: uuid
+        asset_id:
+          type: string
+          format: uuid
+        position_id:
+          type: string
+          format: uuid
+        current_accrued_interest:
+          type: string
+          format: decimal
+    ClaimLeverageAccruedInterestResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - type: object
+        properties:
+          data:
+            $ref: "#/components/schemas/ClaimLeverageAccruedInterest"
+    ClaimLeverageAccruedInterestResponse:
+      $ref: "#/components/schemas/ClaimLeverageAccruedInterestResponseEnvelope"
+    PayLeverageAccruedInterestReq:
+      required:
+      - asset_id
+      - position_id
+      - quantity
+      type: object
+      properties:
+        position_id:
+          type: string
+          format: uuid
+        asset_id:
+          type: string
+          format: uuid
+        quantity:
+          type: string
+          format: decimal
+    ClaimLeverageAccruedInterestReq:
+      required:
+      - asset_id
+      - position_id
+      - quantity
+      type: object
+      properties:
+        position_id:
+          type: string
+          format: uuid
+        asset_id:
+          type: string
+          format: uuid
+        quantity:
+          type: string
+          format: decimal
+    CurrentLeverageAccruedInterest:
+      type: object
+      properties:
+        user_id:
+          type: string
+          format: uuid
+        asset_id:
+          type: string
+          format: uuid
+        position_id:
+          type: string
+          format: uuid
+        current_accrued_interest:
+          type: string
+          format: decimal
+    CurrentLeverageAccruedInterestResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - type: object
+        properties:
+          data:
+            $ref: "#/components/schemas/CurrentLeverageAccruedInterest"
+    CurrentLeverageAccruedInterestResponse:
+      $ref: "#/components/schemas/CurrentLeverageAccruedInterestResponseEnvelope"
     LiquidityRequest:
       required:
       - order_book_id
@@ -4518,9 +4932,14 @@ components:
       - type: object
         properties:
           data:
-            type: array
-            items:
-              $ref: "#/components/schemas/APIKeyResponse"
+            $ref: "#/components/schemas/APIKeys"
+    APIKeys:
+      type: object
+      properties:
+        api_keys:
+          type: array
+          items:
+            $ref: "#/components/schemas/APIKeyResponse"
     GetAPIKeyResponse:
       $ref: "#/components/schemas/APIKeyResponseEnvelope"
     APIKeyResponse:
@@ -4585,7 +5004,88 @@ components:
           type: string
         is_active:
           type: boolean
+    ClosePositionResponse:
+      $ref: "#/components/schemas/ClosePositionResponseEnvelope"
+    ClosePositionRequest:
+      required:
+      - order_book_id
+      - position_id
+      type: object
+      properties:
+        position_id:
+          type: string
+          format: uuid
+        order_book_id:
+          type: string
+          format: uuid
+    ClosePositionResp:
+      type: object
+      properties:
+        order_id:
+          type: string
+          format: uuid
+    ClosePositionResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            $ref: "#/components/schemas/ClosePositionResp"
+    ValidateSubmitOrderRequest_position_assets:
+      required:
+      - asset_id
+      - available
+      - borrowed
+      - impending_borrows
+      - kind
+      - locked
+      type: object
+      properties:
+        asset_id:
+          type: string
+          format: uuid
+        kind:
+          $ref: "#/components/schemas/AssetKind"
+        borrowed:
+          type: string
+          format: decimal
+        impending_borrows:
+          type: string
+          format: decimal
+        available:
+          type: string
+          format: decimal
+        locked:
+          type: string
+          format: decimal
+    ValidateSubmitOrderRequest_assets_config:
+      required:
+      - asset_id
+      - price
+      type: object
+      properties:
+        asset_id:
+          type: string
+          format: uuid
+        price:
+          type: string
+          description: "if an asset is a CURRENCY, set 1 USD price,If an asset is\
+            \ a BOND and the price isn't found, set to 0 USD \n You can find price\
+            \ details on /price/asset/{asset_id} route"
+          format: decimal
   securitySchemes:
-    BearerAuth:
+    bearerAuth:
       type: http
       scheme: bearer
+      bearerFormat: JWT
+    apiKeyAuthHeader:
+      type: apiKey
+      description: "API Key should be provided in the 'Authorization' header as 'ApiKey\
+        \ {your-api-key}'"
+      name: Authorization
+      in: header
+    apiKeyAuthQuery:
+      type: apiKey
+      description: API Key should be provided as a query parameter 'x-api-key' for
+        streaming endpoints
+      name: x-api-key
+      in: query

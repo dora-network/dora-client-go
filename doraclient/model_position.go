@@ -23,11 +23,7 @@ type Position struct {
 	Locked string `json:"locked,omitempty"`
 	// The balance that user has supplied to the leverage module. The user remains entitled to these assets and can withdraw them into their available balance.
 	Supplied string `json:"supplied,omitempty"`
-	// The balance that has been locked or supplied, but are marked as collateral to support borrow limits and can be consumed in case of liquidation. When unmarked as collateral, the balance returns to the available balance.
-	Collateral string `json:"collateral,omitempty"`
-	// The balance that have been supplied to the leverage module and marked as collateral. The user remains entitled to this balance and can withdraw it into the collateral balance, or unmark them as collateral and move them to the supplied balance.
-	SuppliedCollateral string `json:"supplied_collateral,omitempty"`
-	// The total amount of debt outstanding for this position. The position's collateral + supplied_collateral must support a borrow limit sufficient to cover all borrowed assets. This position cannot be closed until all debt is fully repaid, i.e. borrowed = 0.
+	// The total amount of debt outstanding for this position. This position cannot be closed until all debt is fully repaid, i.e. borrowed = 0.
 	Borrowed string `json:"borrowed,omitempty"`
 	// The equivalent of locked balances, but for leveraged orders. If a user has an active order that would borrow assets as part of its input, then their borrow limit must be reduced until the order is executed or cancelled.
 	ImpendingBorrows string `json:"impending_borrows,omitempty"`
