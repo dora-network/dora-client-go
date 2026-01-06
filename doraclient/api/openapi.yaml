@@ -1,0 +1,5600 @@
+openapi: 3.0.3
+info:
+  title: DORA
+  version: 1.0.0
+servers:
+- description: local DORA server
+  url: https://localhost:8084
+- description: DORA staging server
+  url: https://dora-staging.fly.dev
+- description: local DORA WebSocket server
+  url: ws://localhost:8085
+security:
+- bearerAuth: []
+paths:
+  /v1/assets:
+    get:
+      operationId: listAssets
+      parameters:
+      - explode: true
+        in: query
+        name: created_after
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: created_before
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      - description: "Asset kind (BOND, CURRENCY, INTEREST, POOL_SHARE)"
+        explode: true
+        in: query
+        name: asset_kind
+        required: false
+        schema:
+          $ref: "#/components/schemas/AssetKind"
+        style: form
+      - explode: true
+        in: query
+        name: can_add_liquidity
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - explode: true
+        in: query
+        name: can_direct_borrow
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - explode: true
+        in: query
+        name: can_onboard
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - explode: true
+        in: query
+        name: can_trade
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - explode: true
+        in: query
+        name: can_virtual_borrow
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 100
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListAssetsResponse"
+          description: A list of assets
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. invalid query parameters"
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: List assets
+  /v1/assets/{asset_id}:
+    get:
+      operationId: getAssetById
+      parameters:
+      - explode: false
+        in: path
+        name: asset_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetAssetByIDResponse"
+          description: Asset details
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. invalid query parameters"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Asset not found
+      summary: Get asset by ID
+  /v1/assets/{asset_id}/coupon_payments:
+    get:
+      operationId: getCouponPaymentsByAssetId
+      parameters:
+      - explode: false
+        in: path
+        name: asset_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListCouponPaymentsResponse"
+          description: List of coupon payments
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. invalid query parameters"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Asset not found or no coupon payments available
+      summary: Get coupon payments for a bond asset
+  /v1/user/{user_id}:
+    delete:
+      operationId: deleteUser
+      parameters:
+      - explode: false
+        in: path
+        name: user_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserDeletedResponse"
+          description: User deleted
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Unauthorized, only admin can delete users"
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Forbidden, only admin can delete users"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: User not found
+      summary: Delete user by ID
+    get:
+      operationId: getUserById
+      parameters:
+      - explode: false
+        in: path
+        name: user_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetUserResponse"
+          description: User details
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. invalid query parameters"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: User not found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Get user by ID (admin only)
+  /v1/user/self:
+    get:
+      operationId: getUserSelf
+      parameters: []
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetUserResponse"
+          description: User details
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. invalid query parameters"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: User not found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Get user details for the authenticated user
+  /v1/user/self/position_accounts:
+    get:
+      operationId: listPositionAccountsSelf
+      parameters: []
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListPositionAccountsResponse"
+          description: "List of position accounts including the position id, the position\
+            \ name, and global account indicator"
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. invalid query parameters"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: User not found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: List all position accounts for the authenticated user
+  /v1/user/{user_id}/config:
+    put:
+      operationId: updateUserConfig
+      parameters:
+      - explode: false
+        in: path
+        name: user_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateUserConfigRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserUpdatedResponse"
+          description: User configuration updated
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. invalid query parameters"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: User not found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Update user configuration by ID
+  /v1/user/config/self:
+    put:
+      operationId: updateUserConfigSelf
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateUserConfigRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserUpdatedResponse"
+          description: User configuration updated
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. invalid query parameters"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: User not found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Update user configuration for the authenticated user
+  /v1/user/{user_id}/verify:
+    put:
+      operationId: verifyUser
+      parameters:
+      - explode: false
+        in: path
+        name: user_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserUpdatedResponse"
+          description: User verified
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. invalid query parameters"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: User not found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Verify a user by ID
+  /v1/orderbooks:
+    get:
+      operationId: listOrderBooks
+      parameters:
+      - explode: true
+        in: query
+        name: status
+        required: false
+        schema:
+          $ref: "#/components/schemas/OrderBookStatus"
+        style: form
+      - explode: true
+        in: query
+        name: base_asset_id
+        required: false
+        schema:
+          format: uuid
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: quote_asset_id
+        required: false
+        schema:
+          format: uuid
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 100
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListOrderBooksResponse"
+          description: A list of orderbooks
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. invalid query parameters"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: No orderbooks found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: List order books
+  /v1/orderbooks/{order_book_id}:
+    get:
+      operationId: getOrderbookById
+      parameters:
+      - explode: false
+        in: path
+        name: order_book_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetOrderBookResponse"
+          description: Orderbook details
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. invalid query parameters"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Orderbook not found
+      summary: Get orderbook by ID
+  /v1/orderbooks/{order_book_id}/orders:
+    get:
+      operationId: getOrderbookOrders
+      parameters:
+      - explode: false
+        in: path
+        name: order_book_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListOrdersResponse"
+          description: List of orders for the orderbook
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. invalid query parameters"
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Unauthorized, user not logged in or does not have access to\
+            \ this orderbook"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Orderbook not found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Get all open orders for a specific orderbook (L3 market depth)
+  /v1/orderbooks/{order_book_id}/depth:
+    get:
+      operationId: getOrderbookDepth
+      parameters:
+      - explode: false
+        in: path
+        name: order_book_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListOrderBookDepthResponse"
+          description: Order book depth data
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. invalid query parameters"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Orderbook not found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Get the aggregated price levels for a specific orderbook (L2 market
+        depth)
+  /v1/orderbooks/{order_book_id}/top:
+    get:
+      operationId: getOrderbookTop
+      parameters:
+      - explode: false
+        in: path
+        name: order_book_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetTopOfBookResponse"
+          description: Top price levels data
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. invalid query parameters"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Orderbook not found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Get the top price levels for a specific orderbook (L1 market depth)
+  /v1/orderbooks/{order_book_id}/L3:
+    get:
+      operationId: getL3Depth
+      parameters:
+      - explode: false
+        in: path
+        name: order_book_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListOrdersResponse"
+          description: List of orders for the orderbook
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. invalid query parameters"
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Unauthorized, user not logged in or does not have access to\
+            \ this orderbook"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Orderbook not found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Get all open orders for a specific orderbook (L3 market depth)
+  /v1/orderbooks/{order_book_id}/L2:
+    get:
+      operationId: getL2Depth
+      parameters:
+      - explode: false
+        in: path
+        name: order_book_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListOrderBookDepthResponse"
+          description: Order book depth data
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. invalid query parameters"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Orderbook not found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Get the aggregated price levels for a specific orderbook (L2 market
+        depth)
+  /v1/orderbooks/{order_book_id}/L1:
+    get:
+      operationId: getL1Depth
+      parameters:
+      - explode: false
+        in: path
+        name: order_book_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetTopOfBookResponse"
+          description: Top price levels data
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. invalid query parameters"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Orderbook not found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Get the top price levels for a specific orderbook (L1 market depth)
+  /v1/orderbooks/{order_book_id}/summary:
+    get:
+      operationId: getOrderbookSummary
+      parameters:
+      - explode: false
+        in: path
+        name: order_book_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetOrderBookSummaryResponse"
+          description: Orderbook summary data
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. invalid query parameters"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Orderbook not found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Get summary of an orderbook
+  /v1/orders:
+    delete:
+      operationId: cancelAllOpenOrders
+      parameters:
+      - explode: true
+        in: query
+        name: order_book_id
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: user_id
+        required: false
+        schema:
+          format: uuid
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: order_kind
+        required: false
+        schema:
+          $ref: "#/components/schemas/OrderKind"
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListOrdersResponse"
+          description: All open orders have been cancelled
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Unauthorized, user not logged in or does not have access to\
+            \ this orderbook"
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: "Cancel all open orders, if user passes orderbook on query param it\
+        \ will cancel all orders on specific orderbook, admin can cancel user's orders\
+        \ on specific orderbook"
+    get:
+      operationId: listOrders
+      parameters:
+      - explode: true
+        in: query
+        name: order_book_id
+        required: false
+        schema:
+          items:
+            format: uuid
+            type: string
+          type: array
+        style: form
+      - explode: true
+        in: query
+        name: kind
+        required: false
+        schema:
+          items:
+            $ref: "#/components/schemas/OrderKind"
+          type: array
+        style: form
+      - explode: true
+        in: query
+        name: status
+        required: false
+        schema:
+          items:
+            $ref: "#/components/schemas/OrderStatus"
+          type: array
+        style: form
+      - explode: true
+        in: query
+        name: side
+        required: false
+        schema:
+          $ref: "#/components/schemas/Side"
+        style: form
+      - explode: true
+        in: query
+        name: from
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: to
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 100
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListOrdersResponse"
+          description: A list of orders
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. invalid query parameters"
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Unauthorized, user not logged in or does not have access to\
+            \ this orderbook"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: No orders found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: List all orders
+    post:
+      operationId: createOrder
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateOrderRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreateOrderResponse"
+          description: Order created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. missing required fields"
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Unauthorized, user not logged in or does not have access to\
+            \ this orderbook"
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Create a new order
+  /v1/orders/validate:
+    post:
+      operationId: validateSubmitOrder
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ValidateSubmitOrderRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidateSubmitOrderResponse"
+          description: Validated submit order request
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. missing required fields"
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Unauthorized, user not logged in or does not have access to\
+            \ this orderbook"
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Validate submit order request data
+  /v1/orders/{order_id}:
+    delete:
+      operationId: cancelOrderById
+      parameters:
+      - explode: false
+        in: path
+        name: order_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "204":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CancelOrderResponse"
+          description: Order cancelled successfully
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. invalid order ID format"
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Unauthorized, user not logged in or does not have access to\
+            \ this order"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Order not found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Cancel an order by ID
+    get:
+      operationId: getOrderById
+      parameters:
+      - explode: false
+        in: path
+        name: order_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetOrderResponse"
+          description: Order details
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. invalid order ID format"
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Unauthorized, user not logged in or does not have access to\
+            \ this order"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Order not found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Get order by ID
+  /v1/charts/{order_book_id}/candle:
+    get:
+      operationId: getCandleData
+      parameters:
+      - explode: false
+        in: path
+        name: order_book_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: start
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: end
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: resolution
+        required: false
+        schema:
+          $ref: "#/components/schemas/CandleResolution"
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListCandlesResponse"
+          description: Candlestick data
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. invalid parameters"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Orderbook not found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Get candlestick data for an orderbook
+  /v1/ledger/module:
+    get:
+      operationId: getLedgerModule
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LedgerModuleResponse"
+          description: Leverage module object
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Module not found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: "Get the entire module object, including unborrowed leverage assets\
+        \ and total leverage trackers"
+  /v1/ledger/module/{asset_id}:
+    get:
+      operationId: getLedgerModuleByAsset
+      parameters:
+      - explode: false
+        in: path
+        name: asset_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LedgerModuleByAssetResponse"
+          description: Leverage module balance for asset
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. invalid asset ID format"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Asset not found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Get the module object for a single asset ID
+  /v1/ledger/positions/self:
+    get:
+      operationId: getLedgerPositionsSelf
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserPositionResponse"
+          description: User positions
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. invalid user ID format"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: User not found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Get your own positions
+  /v1/positions/new_isolated:
+    post:
+      operationId: createNewIsolatedPosition
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NewIsolatedPositionRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NewIsolatedPositionResponse"
+          description: Isolated Position Created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. missing required fields"
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Unauthorized, user not logged in or does not have access to\
+            \ this orderbook"
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Conflict, e.g. the requested amount is not available to transfer"
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Create a new isolated position for a user transferring available assets
+        into the position
+  /v1/positions/transfer_balances:
+    post:
+      operationId: transferAvailableBalances
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TransferBalancesRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TransferBalancesResponse"
+          description: Isolated Position Created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. missing required fields"
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Unauthorized, user not logged in or does not have access to\
+            \ this orderbook"
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Conflict, e.g. the requested amount is not available to transfer"
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Transfer available balance between a user's accounts (e.g. global to
+        isolated position)
+  /v1/ledger/balances/self:
+    get:
+      operationId: getLedgerBalancesSelf
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserBalanceResponse"
+          description: User balances
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. invalid user ID format"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: User not found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: "Get your own available, locked, and borrowed assets"
+  /v1/ledger/value/self:
+    get:
+      operationId: getLedgerValueSelf
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserValueResponse"
+          description: User value
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. invalid user ID format"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: User not found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: "Get your own available, locked, and borrowed USD value; and realized\
+        \ and unrealized PnL"
+  /v1/ledger/interest/self:
+    get:
+      operationId: getLedgerInterestSelf
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserInterestResponse"
+          description: User interest
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. invalid user ID format"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: User not found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Get your own interest
+  /v1/leverage/supply:
+    post:
+      operationId: leverageSupply
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SupplyRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SupplyResponse"
+          description: Supply successful
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. insufficient collateral or invalid parameters"
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Unauthorized, e.g. user not logged in or invalid credentials"
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Supply leverage for a specific asset
+  /v1/leverage/withdraw:
+    post:
+      operationId: leverageWithdraw
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WithdrawRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WithdrawResponse"
+          description: Withdraw successful
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. insufficient collateral or invalid parameters"
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Unauthorized, e.g. user not logged in or invalid credentials"
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Withdraw leverage for a specific asset
+  /v1/leverage/isolate_collateral:
+    post:
+      deprecated: true
+      operationId: leverageIsolateCollateral
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/IsolateCollateralRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/IsolateCollateralResponse"
+          description: Leverage position isolated
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. insufficient collateral or invalid parameters"
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Unauthorized, e.g. user not logged in or invalid credentials"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Leverage position not found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Conflict, e.g. the requested amount is not available to transfer"
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Create an isolated position by transferring collateral to the position
+        from the user's global collateral
+      x-deprecated-reason: "Use /v1/positions/new_isolated instead, to create an isolated\
+        \ position with available balance, then collateralize it in a separate step."
+  /v1/leverage/unite:
+    post:
+      description: Combines all isolated positions into a single global position
+      operationId: leverageUnite
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UnitePositionRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnitePositionResponse"
+          description: Leverage position combined
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LeverageRequestError"
+          description: "Bad request, e.g. insufficient collateral or invalid parameters"
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Unauthorized, e.g. user not logged in or invalid credentials"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LeverageRequestError"
+          description: Leverage position not found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Conflict, e.g. the requested amount is not available to transfer"
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Combines all isolated positions into a single global position
+  /v1/liquidity/pool/{pool_id}/add:
+    post:
+      operationId: liquidityAdd
+      parameters:
+      - explode: false
+        in: path
+        name: pool_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LiquidityRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LiquidityResponse"
+          description: Liquidity added
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. insufficient funds or invalid parameters"
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Unauthorized, e.g. user not logged in or invalid credentials"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Pool not found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Conflict, e.g. the requested amount is not available to transfer"
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Add liquidity to a pool
+  /v1/liquidity/pool/{pool_id}/remove:
+    post:
+      operationId: liquiditySubtract
+      parameters:
+      - explode: false
+        in: path
+        name: pool_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LiquidityRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LiquidityResponse"
+          description: Liquidity subtracted
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. insufficient funds or invalid parameters"
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Unauthorized, e.g. user not logged in or invalid credentials"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Pool not found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Conflict, e.g. the requested amount is not available to transfer"
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Subtract liquidity from a pool
+  /v1/transactions:
+    get:
+      operationId: getTransactions
+      parameters:
+      - explode: true
+        in: query
+        name: pools
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - explode: true
+        in: query
+        name: user_ids
+        required: false
+        schema:
+          items:
+            format: uuid
+            type: string
+          type: array
+        style: form
+      - explode: true
+        in: query
+        name: tx_kinds
+        required: false
+        schema:
+          items:
+            $ref: "#/components/schemas/TransactionKind"
+          type: array
+        style: form
+      - explode: true
+        in: query
+        name: start
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: end
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 100
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListTransactionsResponse"
+          description: List of transactions
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. insufficient funds or invalid parameters"
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: "Get a filtered, paginated list of transactions"
+  /v1/transactions/{transaction_id}:
+    get:
+      operationId: getTransactionById
+      parameters:
+      - explode: false
+        in: path
+        name: transaction_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetTransactionResponse"
+          description: Transaction details
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. invalid ID format"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TransactionRequestError"
+          description: Transaction not found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Get a transaction by ID
+  /v1/trades:
+    get:
+      operationId: getTrades
+      parameters:
+      - explode: true
+        in: query
+        name: order_book_ids
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - explode: true
+        in: query
+        name: user_ids
+        required: false
+        schema:
+          items:
+            format: uuid
+            type: string
+          type: array
+        style: form
+      - explode: true
+        in: query
+        name: start
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: end
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 100
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListTradeResponse"
+          description: List of trades
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. invalid parameters"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TradeRequestError"
+          description: No trades found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: "Get a filtered, paginated list of trades"
+  /v1/trades/{trade_id}:
+    get:
+      operationId: getTradeById
+      parameters:
+      - explode: false
+        in: path
+        name: trade_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TradeResponse"
+          description: Trade details
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. invalid ID format"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TradeRequestError"
+          description: Trade not found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Get a trade by ID
+  /v1/price:
+    get:
+      operationId: getAllAssetPrices
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListAssetPriceResponse"
+          description: Current prices of all assets
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Get the current price of all assets
+  /v1/price/asset/{asset_id}:
+    get:
+      operationId: getAssetPrice
+      parameters:
+      - explode: false
+        in: path
+        name: asset_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetAssetPriceResponse"
+          description: Current price of the asset
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. invalid ID format"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AssetRequestError"
+          description: Asset not found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Get the current price of an asset
+  /v1/price/pool/{pool_id}:
+    get:
+      operationId: getPoolPrice
+      parameters:
+      - explode: false
+        in: path
+        name: pool_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetPoolPriceResponse"
+          description: Current price of the pool
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. invalid ID format"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PoolRequestError"
+          description: Pool not found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Get the current price of a pool
+  /v1/orderbooks/{order_book_id}/open/stream:
+    get:
+      operationId: streamOrderbookOpenOrders
+      parameters:
+      - explode: false
+        in: path
+        name: order_book_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: since
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LiveOrderbook"
+          description: Stream opened successfully
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. invalid order book ID format"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Orderbook not found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Get a snapshot of open orders in an order book and open a stream for
+        real-time updates
+  /v1/orderbooks/{order_book_id}/balances/stream:
+    get:
+      operationId: streamOrderBookBalances
+      parameters:
+      - explode: false
+        in: path
+        name: order_book_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: since
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StreamOrderBookBalancesResponse"
+          description: Stream opened successfully
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. invalid order book ID format"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Orderbook not found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Get a snapshot of base and quote balances for an order book and open
+        a stream for real-time updates
+  /v1/charts/{order_book_id}/candle/stream:
+    get:
+      operationId: streamCandleData
+      parameters:
+      - explode: false
+        in: path
+        name: order_book_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: since
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: resolution
+        required: false
+        schema:
+          $ref: "#/components/schemas/CandleResolution"
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StreamCandlesResponse"
+          description: Stream opened successfully
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. invalid parameters"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Orderbook not found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: "Get a snapshot of candlestick data from date provided, and open a\
+        \ stream for real-time updates"
+  /v1/trades/{order_book_id}/stream:
+    get:
+      operationId: streamTrades
+      parameters:
+      - explode: false
+        in: path
+        name: order_book_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: since
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StreamTradesResponse"
+          description: Real-time trade updates
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. invalid parameters"
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Get a snapshot of trades executed on the given order book from a specific
+        date and open a stream for real-time updates
+  /v1/prices/stream:
+    get:
+      description: "Opens a WebSocket stream for real-time asset price updates. First\
+        \ message contains all current prices, subsequent messages contain only changed\
+        \ prices. Data is sent as JSON objects keyed by asset ID."
+      operationId: streamAssetPrices
+      parameters:
+      - explode: true
+        in: query
+        name: since
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StreamAssetPricesResponse"
+          description: "Real-time stream of asset prices. First message: all current\
+            \ prices. Subsequent messages: only changed prices."
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. invalid parameters"
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Stream real-time asset prices as map objects
+  /v1/user/{user_id}/orders/{order_book_id}/updates/stream:
+    get:
+      operationId: getUserOrderUpdatesStream
+      parameters:
+      - explode: false
+        in: path
+        name: user_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: order_book_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: since
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StreamOrderUpdatesResponse"
+          description: User's orders stream
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. invalid query parameters"
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Unauthorized, user not logged in or does not have access to\
+            \ this orderbook"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: User not found or no orders available
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: "Get a snapshot of user's order updates for the given order book since\
+        \ a specific time, and opens a stream for further updates"
+  /v1/user/{user_id}/orders/all/updates/stream:
+    get:
+      operationId: getUserOrdersUpdatesStreamAll
+      parameters:
+      - explode: false
+        in: path
+        name: user_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: since
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StreamOrderUpdatesResponse"
+          description: User's orders stream
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. invalid query parameters"
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Unauthorized, user not logged in or does not have access to\
+            \ this orderbook"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: User not found or no orders available
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: "Get a snapshot of user's order updates across all order books since\
+        \ a specific time, and opens a stream for further updates"
+  /v1/user/{user_id}/ledger/stream:
+    get:
+      operationId: getUserLedgerStream
+      parameters:
+      - explode: false
+        in: path
+        name: user_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StreamPositionsResponse"
+          description: User's ledger stream
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. invalid query parameters"
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Unauthorized, user not logged in or does not have access to\
+            \ this ledger"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: User not found or no ledger entries available
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: "Get a snapshot of user's ledger updates since a specific time, and\
+        \ opens a stream for further updates"
+  /v1/user/{user_id}/transactions/stream:
+    get:
+      operationId: getUserTransactionsStream
+      parameters:
+      - explode: false
+        in: path
+        name: user_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: since
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StreamTransactionsResponse"
+          description: User's transactions stream
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. invalid query parameters"
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Unauthorized, user not logged in or does not have access to\
+            \ this transactions"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: User not found or no transactions available
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: "Get a snapshot of user's executed transactions since a specific time,\
+        \ and opens a stream for further updates"
+  /v1/assets/stream:
+    get:
+      operationId: getAssetsStream
+      parameters:
+      - explode: true
+        in: query
+        name: since
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: until
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StreamAssetsResponse"
+          description: Asset's stream
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. invalid query parameters"
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Unauthorized, user not logged in or does not have access to\
+            \ this route"
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Get all inserts or updates for assets
+  /v1/user/exists:
+    get:
+      operationId: checkUserEmailExists
+      parameters:
+      - explode: true
+        in: query
+        name: email
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EmailExistsResponse"
+          description: "True if the email exists, false otherwise"
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. invalid path parameters"
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Check whether a user email exists
+  /v1/user/apikey:
+    get:
+      operationId: getUsersAPIKeys
+      parameters: []
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetAPIKeyResponse"
+          description: A list of existing api-keys
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. invalid path parameters"
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Get user's api keys
+    post:
+      operationId: createAPIKeyForUser
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateAPIKeyRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreateAPIKeyResponse"
+          description: APIKey created
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: User not found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Create apikey for a user
+  /v1/user/apikey/{key_id}/revoke:
+    put:
+      operationId: revokeAPIKeyForUser
+      parameters:
+      - explode: false
+        in: path
+        name: key_id
+        required: true
+        schema:
+          format: text
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RevokeAPIKeyResponse"
+          description: APIKey revoked
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: User not found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Revoke apikey for a user
+components:
+  schemas:
+    Asset:
+      example:
+        symbol: symbol
+        can_add_liquidity: true
+        max_leverage: 3.616076749251911
+        fractionalized_units: 5
+        kind: BOND
+        can_onboard: true
+        maturity_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        can_virtual_borrow: true
+        created_at: 2000-01-23T04:56:07.000+00:00
+        description: description
+        bond:
+          kind: COUPON-PAYING
+          payments_per_year: 2
+          created_at: 2000-01-23T04:56:07.000+00:00
+          issued_at: 2000-01-23T04:56:07.000+00:00
+          issuer: issuer
+          maturity_at: 2000-01-23T04:56:07.000+00:00
+          coupon_start_at: 2000-01-23T04:56:07.000+00:00
+          next_coupon_payment: 2000-01-23T04:56:07.000+00:00
+          principal_value: principal_value
+          payments_every: 1000
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          final_coupon_at: 2000-01-23T04:56:07.000+00:00
+          isin: isin
+        max_utilization: 7
+        collateral_weight: 6.027456183070403
+        decimals: 1
+        yield: 9.301444243932576
+        max_supply: 2
+        name: name
+        liquidation_threshold: 5.637376656633329
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        can_direct_borrow: true
+        can_trade: true
+      properties:
+        id:
+          format: uuid
+          type: string
+        collateral_weight:
+          type: number
+        created_at:
+          format: date-time
+          type: string
+        decimals:
+          type: integer
+        fractionalized_units:
+          type: integer
+        description:
+          type: string
+        liquidation_threshold:
+          type: number
+        maturity_id:
+          format: uuid
+          nullable: true
+          type: string
+        max_supply:
+          type: integer
+        max_utilization:
+          type: integer
+        name:
+          type: string
+        symbol:
+          type: string
+        kind:
+          $ref: "#/components/schemas/AssetKind"
+        yield:
+          type: number
+        can_add_liquidity:
+          type: boolean
+        can_direct_borrow:
+          type: boolean
+        can_onboard:
+          type: boolean
+        can_trade:
+          type: boolean
+        can_virtual_borrow:
+          type: boolean
+        max_leverage:
+          type: number
+        bond:
+          $ref: "#/components/schemas/Bond"
+      type: object
+    Bond:
+      example:
+        kind: COUPON-PAYING
+        payments_per_year: 2
+        created_at: 2000-01-23T04:56:07.000+00:00
+        issued_at: 2000-01-23T04:56:07.000+00:00
+        issuer: issuer
+        maturity_at: 2000-01-23T04:56:07.000+00:00
+        coupon_start_at: 2000-01-23T04:56:07.000+00:00
+        next_coupon_payment: 2000-01-23T04:56:07.000+00:00
+        principal_value: principal_value
+        payments_every: 1000
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        final_coupon_at: 2000-01-23T04:56:07.000+00:00
+        isin: isin
+      properties:
+        id:
+          format: uuid
+          type: string
+        kind:
+          $ref: "#/components/schemas/BondKind"
+        coupon_start_at:
+          format: date-time
+          nullable: true
+          type: string
+        created_at:
+          format: date-time
+          type: string
+        final_coupon_at:
+          format: date-time
+          nullable: true
+          type: string
+        isin:
+          type: string
+        issued_at:
+          format: date-time
+          type: string
+        issuer:
+          type: string
+        maturity_at:
+          format: date-time
+          type: string
+        principal_value:
+          format: decimal
+          type: string
+        payments_per_year:
+          type: integer
+        payments_every:
+          description: Coupon payment frequency in nanoseconds (minimum 1000 i.e.
+            1 microsecond)
+          minimum: 1000
+          type: integer
+        next_coupon_payment:
+          format: date-time
+          type: string
+      type: object
+    ResponseEnvelopeOfListAssets:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            items:
+              $ref: "#/components/schemas/Asset"
+            type: array
+        type: object
+      example:
+        metadata:
+          trace_id: trace_id
+          status_code: 0
+          request_id: request_id
+        data:
+        - symbol: symbol
+          can_add_liquidity: true
+          max_leverage: 3.616076749251911
+          fractionalized_units: 5
+          kind: BOND
+          can_onboard: true
+          maturity_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          can_virtual_borrow: true
+          created_at: 2000-01-23T04:56:07.000+00:00
+          description: description
+          bond:
+            kind: COUPON-PAYING
+            payments_per_year: 2
+            created_at: 2000-01-23T04:56:07.000+00:00
+            issued_at: 2000-01-23T04:56:07.000+00:00
+            issuer: issuer
+            maturity_at: 2000-01-23T04:56:07.000+00:00
+            coupon_start_at: 2000-01-23T04:56:07.000+00:00
+            next_coupon_payment: 2000-01-23T04:56:07.000+00:00
+            principal_value: principal_value
+            payments_every: 1000
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            final_coupon_at: 2000-01-23T04:56:07.000+00:00
+            isin: isin
+          max_utilization: 7
+          collateral_weight: 6.027456183070403
+          decimals: 1
+          yield: 9.301444243932576
+          max_supply: 2
+          name: name
+          liquidation_threshold: 5.637376656633329
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          can_direct_borrow: true
+          can_trade: true
+        - symbol: symbol
+          can_add_liquidity: true
+          max_leverage: 3.616076749251911
+          fractionalized_units: 5
+          kind: BOND
+          can_onboard: true
+          maturity_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          can_virtual_borrow: true
+          created_at: 2000-01-23T04:56:07.000+00:00
+          description: description
+          bond:
+            kind: COUPON-PAYING
+            payments_per_year: 2
+            created_at: 2000-01-23T04:56:07.000+00:00
+            issued_at: 2000-01-23T04:56:07.000+00:00
+            issuer: issuer
+            maturity_at: 2000-01-23T04:56:07.000+00:00
+            coupon_start_at: 2000-01-23T04:56:07.000+00:00
+            next_coupon_payment: 2000-01-23T04:56:07.000+00:00
+            principal_value: principal_value
+            payments_every: 1000
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            final_coupon_at: 2000-01-23T04:56:07.000+00:00
+            isin: isin
+          max_utilization: 7
+          collateral_weight: 6.027456183070403
+          decimals: 1
+          yield: 9.301444243932576
+          max_supply: 2
+          name: name
+          liquidation_threshold: 5.637376656633329
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          can_direct_borrow: true
+          can_trade: true
+        error: error
+    ListAssetsResponse:
+      $ref: "#/components/schemas/ResponseEnvelopeOfListAssets"
+    GetAssetByIDResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            $ref: "#/components/schemas/GetAssetByIDResponseEnvelope_allOf_data"
+      example:
+        metadata:
+          trace_id: trace_id
+          status_code: 0
+          request_id: request_id
+        data: null
+        error: error
+    GetAssetByIDResponse:
+      $ref: "#/components/schemas/GetAssetByIDResponseEnvelope"
+    CouponPayment:
+      example:
+        end_at: 2000-01-23T04:56:07.000+00:00
+        completed_at: 2000-01-23T04:56:07.000+00:00
+        pay_at: 2000-01-23T04:56:07.000+00:00
+        last_processed_at: 2000-01-23T04:56:07.000+00:00
+        yield: 0.8008281904610115
+        created_at: 2000-01-23T04:56:07.000+00:00
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        start_at: 2000-01-23T04:56:07.000+00:00
+        available_to_pay: available_to_pay
+        process_every: 1000
+      properties:
+        id:
+          format: uuid
+          type: string
+        asset_id:
+          format: uuid
+          type: string
+        yield:
+          type: number
+        start_at:
+          format: date-time
+          type: string
+        end_at:
+          format: date-time
+          type: string
+        pay_at:
+          format: date-time
+          type: string
+        available_to_pay:
+          format: decimal
+          type: string
+        completed_at:
+          format: date-time
+          type: string
+        created_at:
+          format: date-time
+          type: string
+        process_every:
+          description: "Number of nanoseconds to wait between coupon payment processing,\
+            \ must be at least 1000 (1 microsecond)"
+          minimum: 1000
+          type: integer
+        last_processed_at:
+          format: date-time
+          type: string
+      type: object
+    ListCouponPaymentsResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            items:
+              $ref: "#/components/schemas/CouponPayment"
+            type: array
+        type: object
+      example:
+        metadata:
+          trace_id: trace_id
+          status_code: 0
+          request_id: request_id
+        data:
+        - end_at: 2000-01-23T04:56:07.000+00:00
+          completed_at: 2000-01-23T04:56:07.000+00:00
+          pay_at: 2000-01-23T04:56:07.000+00:00
+          last_processed_at: 2000-01-23T04:56:07.000+00:00
+          yield: 0.8008281904610115
+          created_at: 2000-01-23T04:56:07.000+00:00
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          start_at: 2000-01-23T04:56:07.000+00:00
+          available_to_pay: available_to_pay
+          process_every: 1000
+        - end_at: 2000-01-23T04:56:07.000+00:00
+          completed_at: 2000-01-23T04:56:07.000+00:00
+          pay_at: 2000-01-23T04:56:07.000+00:00
+          last_processed_at: 2000-01-23T04:56:07.000+00:00
+          yield: 0.8008281904610115
+          created_at: 2000-01-23T04:56:07.000+00:00
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          start_at: 2000-01-23T04:56:07.000+00:00
+          available_to_pay: available_to_pay
+          process_every: 1000
+        error: error
+    ListCouponPaymentsResponse:
+      $ref: "#/components/schemas/ListCouponPaymentsResponseEnvelope"
+    AssetKind:
+      enum:
+      - BOND
+      - CURRENCY
+      - INTEREST
+      - POOL_SHARE
+      type: string
+    BondKind:
+      enum:
+      - COUPON-PAYING
+      - PRINCIPAL-ONLY
+      type: string
+    UserRole:
+      enum:
+      - PUBLIC
+      - SELF
+      - ADMIN
+      - BOND_PROVIDER
+      - LIQUIDITY_PROVIDER
+      - TRADER
+      - INTEGRATOR
+      type: string
+    UserEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            $ref: "#/components/schemas/GetAssetByIDResponseEnvelope_allOf_data"
+      example:
+        metadata:
+          trace_id: trace_id
+          status_code: 0
+          request_id: request_id
+        data: null
+        error: error
+    GetUserResponse:
+      $ref: "#/components/schemas/UserEnvelope"
+    UserUpdatedResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            $ref: "#/components/schemas/GetAssetByIDResponseEnvelope_allOf_data"
+      example:
+        metadata:
+          trace_id: trace_id
+          status_code: 0
+          request_id: request_id
+        data: null
+        error: error
+    UserUpdatedResponse:
+      $ref: "#/components/schemas/UserUpdatedResponseEnvelope"
+    UserDeletedResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            format: uuid
+            type: string
+        type: object
+      example:
+        metadata:
+          trace_id: trace_id
+          status_code: 0
+          request_id: request_id
+        data: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        error: error
+    UserDeletedResponse:
+      $ref: "#/components/schemas/UserDeletedResponseEnvelope"
+    UserConfigResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            $ref: "#/components/schemas/GetAssetByIDResponseEnvelope_allOf_data"
+    GetUserConfigResponse:
+      $ref: "#/components/schemas/UserConfigResponseEnvelope"
+    User:
+      properties:
+        id:
+          format: uuid
+          type: string
+        closed_at:
+          format: date-time
+          nullable: true
+          type: string
+        disabled_at:
+          format: date-time
+          nullable: true
+          type: string
+        email:
+          type: string
+        name:
+          type: string
+        native_asset_id:
+          format: uuid
+          type: string
+        photo_url:
+          type: string
+        provider:
+          type: string
+        provider_id:
+          format: uuid
+          type: string
+        roles:
+          items:
+            $ref: "#/components/schemas/UserRole"
+          type: array
+        timezone:
+          description: "User's timezone, e.g., 'America/New_York', or an offset."
+          type: string
+        timezone_offset:
+          description: timezone offset in seconds
+          type: integer
+        verified_at:
+          format: date-time
+          nullable: true
+          type: string
+      type: object
+    UserConfig:
+      properties:
+        id:
+          format: uuid
+          type: string
+        photo_url:
+          type: string
+        timezone:
+          description: "User's timezone, e.g., 'America/New_York', or an offset."
+          type: string
+        created_at:
+          format: date-time
+          type: string
+        updated_at:
+          format: date-time
+          type: string
+      type: object
+    UpdateUserConfigRequest:
+      description: "Request body for PUT /user/{id}/config: update a user changeable\
+        \ details only. Other properties can only be changed by an admin following\
+        \ a manual request by the user."
+      example:
+        timezone:
+          update: true
+          value: value
+        photo_url:
+          update: true
+          value: value
+      properties:
+        photo_url:
+          $ref: "#/components/schemas/UpdateFieldString"
+        timezone:
+          $ref: "#/components/schemas/UpdateFieldString"
+      required:
+      - photo_url
+      - timezone
+      type: object
+    CreateOrUpdateUserResponse:
+      description: "Response body for POST /user or PUT /user/{id}: contains the ID\
+        \ of the created or updated user."
+      properties:
+        id:
+          description: The ID of the created or updated user.
+          format: uuid
+          type: string
+      type: object
+    UpdateFieldString:
+      description: A generic struct to handle optional updates for string fields in
+        user requests.
+      example:
+        update: true
+        value: value
+      properties:
+        update:
+          description: Whether to update the field.
+          type: boolean
+        value:
+          description: The new value to set for the field.
+          type: string
+      required:
+      - update
+      type: object
+    UpdateRolesString:
+      description: A generic struct to handle optional updates for roles fields in
+        user requests.
+      properties:
+        update:
+          description: Whether to update the field.
+          type: boolean
+        value:
+          $ref: "#/components/schemas/UserRole"
+      required:
+      - update
+      type: object
+    OrderBookStatus:
+      enum:
+      - CLOSED
+      - OPEN
+      - SUSPENDED
+      type: string
+    OrderBook:
+      example:
+        base_quantity: 0.8008281904610115
+        quote_asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        halted_at: 2000-01-23T04:56:07.000+00:00
+        shares_quantity: 5.637376656633329
+        created_at: 2000-01-23T04:56:07.000+00:00
+        base_asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        display_name: display_name
+        tick_size: 2.3021358869347655
+        maturity_at: 2000-01-23T04:56:07.000+00:00
+        updated_at: 2000-01-23T04:56:07.000+00:00
+        fee_factor: 6.027456183070403
+        initial_assets_ratio: 1.4658129805029452
+        pool_updated_at: 2000-01-23T04:56:07.000+00:00
+        quote_quantity: 5.962133916683182
+        order_book_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        terminated_at: 2000-01-23T04:56:07.000+00:00
+        status: CLOSED
+        shares_asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        order_book_id:
+          format: uuid
+          type: string
+        base_quantity:
+          type: number
+        base_asset_id:
+          format: uuid
+          type: string
+        created_at:
+          format: date-time
+          type: string
+        display_name:
+          type: string
+        fee_factor:
+          type: number
+        initial_assets_ratio:
+          type: number
+        maturity_at:
+          format: date-time
+          type: string
+        quote_quantity:
+          type: number
+        quote_asset_id:
+          format: uuid
+          type: string
+        shares_quantity:
+          type: number
+        status:
+          $ref: "#/components/schemas/OrderBookStatus"
+        tick_size:
+          type: number
+        updated_at:
+          format: date-time
+          type: string
+        halted_at:
+          format: date-time
+          type: string
+        terminated_at:
+          format: date-time
+          type: string
+        pool_updated_at:
+          format: date-time
+          type: string
+        shares_asset_id:
+          format: uuid
+          type: string
+      type: object
+    OrderBookResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            $ref: "#/components/schemas/GetAssetByIDResponseEnvelope_allOf_data"
+      example:
+        metadata:
+          trace_id: trace_id
+          status_code: 0
+          request_id: request_id
+        data: null
+        error: error
+    GetOrderBookResponse:
+      $ref: "#/components/schemas/OrderBookResponseEnvelope"
+    ListOrderbookResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            items:
+              $ref: "#/components/schemas/OrderBook"
+            type: array
+        type: object
+      example:
+        metadata:
+          trace_id: trace_id
+          status_code: 0
+          request_id: request_id
+        data:
+        - base_quantity: 0.8008281904610115
+          quote_asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          halted_at: 2000-01-23T04:56:07.000+00:00
+          shares_quantity: 5.637376656633329
+          created_at: 2000-01-23T04:56:07.000+00:00
+          base_asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          display_name: display_name
+          tick_size: 2.3021358869347655
+          maturity_at: 2000-01-23T04:56:07.000+00:00
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          fee_factor: 6.027456183070403
+          initial_assets_ratio: 1.4658129805029452
+          pool_updated_at: 2000-01-23T04:56:07.000+00:00
+          quote_quantity: 5.962133916683182
+          order_book_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          terminated_at: 2000-01-23T04:56:07.000+00:00
+          status: CLOSED
+          shares_asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - base_quantity: 0.8008281904610115
+          quote_asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          halted_at: 2000-01-23T04:56:07.000+00:00
+          shares_quantity: 5.637376656633329
+          created_at: 2000-01-23T04:56:07.000+00:00
+          base_asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          display_name: display_name
+          tick_size: 2.3021358869347655
+          maturity_at: 2000-01-23T04:56:07.000+00:00
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          fee_factor: 6.027456183070403
+          initial_assets_ratio: 1.4658129805029452
+          pool_updated_at: 2000-01-23T04:56:07.000+00:00
+          quote_quantity: 5.962133916683182
+          order_book_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          terminated_at: 2000-01-23T04:56:07.000+00:00
+          status: CLOSED
+          shares_asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        error: error
+    ListOrderBooksResponse:
+      $ref: "#/components/schemas/ListOrderbookResponseEnvelope"
+    OrderKind:
+      enum:
+      - LIMIT
+      - MARKET
+      type: string
+    OrderStatus:
+      enum:
+      - OPEN
+      - FILLED
+      - PARTIAL_FILL
+      - CANCELLED
+      - PENDING
+      type: string
+    OrderModifierKind:
+      enum:
+      - LIQUIDATION
+      - MAX_BUY
+      type: string
+    Side:
+      enum:
+      - BUY
+      - SELL
+      type: string
+    Order:
+      example:
+        original_price: original_price
+        side: BUY
+        original_quantity: original_quantity
+        kind: LIMIT
+        good_till_date: 2000-01-23T04:56:07.000+00:00
+        avg_fill_price: avg_fill_price
+        order_info: order_info
+        opened_at: 2000-01-23T04:56:07.000+00:00
+        filled_notional: filled_notional
+        trigger_price: trigger_price
+        user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        last_update_at: 2000-01-23T04:56:07.000+00:00
+        inverse_leverage: inverse_leverage
+        cancelled_quantity: cancelled_quantity
+        filled_quantity: filled_quantity
+        order_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        order_book_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        open_quantity: open_quantity
+        status: OPEN
+        order_modifiers:
+        - LIQUIDATION
+        - LIQUIDATION
+        position_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        order_id:
+          format: uuid
+          type: string
+        order_book_id:
+          format: uuid
+          type: string
+        kind:
+          $ref: "#/components/schemas/OrderKind"
+        original_price:
+          description: "If Kind is LIMIT, this is the original limit price. If Kind\
+            \ is MARKET, this may be 0 or omitted."
+          format: decimal
+          type: string
+        avg_fill_price:
+          format: decimal
+          type: string
+        cancelled_quantity:
+          description: "Quantity that was cancelled, if any."
+          format: decimal
+          type: string
+        open_quantity:
+          description: "Quantity that is still open, i.e., not filled or cancelled."
+          format: decimal
+          type: string
+        original_quantity:
+          description: The original quantity of the order when it was created.
+          format: decimal
+          type: string
+        filled_quantity:
+          description: Quantity that has been filled so far.
+          format: decimal
+          type: string
+        filled_notional:
+          description: Quote quantity that has been filled so far.
+          format: decimal
+          type: string
+        last_update_at:
+          format: date-time
+          type: string
+        opened_at:
+          format: date-time
+          type: string
+        inverse_leverage:
+          format: decimal
+          type: string
+        side:
+          $ref: "#/components/schemas/Side"
+        status:
+          $ref: "#/components/schemas/OrderStatus"
+        user_id:
+          format: uuid
+          type: string
+        order_modifiers:
+          items:
+            $ref: "#/components/schemas/OrderModifierKind"
+          type: array
+        position_id:
+          format: uuid
+          type: string
+        order_info:
+          format: text
+          type: string
+        good_till_date:
+          format: date-time
+          type: string
+        trigger_price:
+          format: decimal
+          type: string
+      type: object
+    ListOrdersResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            items:
+              $ref: "#/components/schemas/Order"
+            type: array
+        type: object
+      example:
+        metadata:
+          trace_id: trace_id
+          status_code: 0
+          request_id: request_id
+        data:
+        - original_price: original_price
+          side: BUY
+          original_quantity: original_quantity
+          kind: LIMIT
+          good_till_date: 2000-01-23T04:56:07.000+00:00
+          avg_fill_price: avg_fill_price
+          order_info: order_info
+          opened_at: 2000-01-23T04:56:07.000+00:00
+          filled_notional: filled_notional
+          trigger_price: trigger_price
+          user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          last_update_at: 2000-01-23T04:56:07.000+00:00
+          inverse_leverage: inverse_leverage
+          cancelled_quantity: cancelled_quantity
+          filled_quantity: filled_quantity
+          order_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          order_book_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          open_quantity: open_quantity
+          status: OPEN
+          order_modifiers:
+          - LIQUIDATION
+          - LIQUIDATION
+          position_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - original_price: original_price
+          side: BUY
+          original_quantity: original_quantity
+          kind: LIMIT
+          good_till_date: 2000-01-23T04:56:07.000+00:00
+          avg_fill_price: avg_fill_price
+          order_info: order_info
+          opened_at: 2000-01-23T04:56:07.000+00:00
+          filled_notional: filled_notional
+          trigger_price: trigger_price
+          user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          last_update_at: 2000-01-23T04:56:07.000+00:00
+          inverse_leverage: inverse_leverage
+          cancelled_quantity: cancelled_quantity
+          filled_quantity: filled_quantity
+          order_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          order_book_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          open_quantity: open_quantity
+          status: OPEN
+          order_modifiers:
+          - LIQUIDATION
+          - LIQUIDATION
+          position_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        error: error
+    ListOrdersResponse:
+      $ref: "#/components/schemas/ListOrdersResponseEnvelope"
+    StreamOrdersEntry:
+      allOf:
+      - $ref: "#/components/schemas/StreamEntry"
+      - properties:
+          Val:
+            $ref: "#/components/schemas/Order"
+      type: object
+    StreamOrdersResponse:
+      items:
+        $ref: "#/components/schemas/StreamOrdersEntry"
+      type: array
+    StreamOrderUpdatesEntry:
+      allOf:
+      - $ref: "#/components/schemas/StreamEntry"
+      - properties:
+          Val:
+            $ref: "#/components/schemas/Order"
+      example:
+        Val:
+          original_price: original_price
+          side: BUY
+          original_quantity: original_quantity
+          kind: LIMIT
+          good_till_date: 2000-01-23T04:56:07.000+00:00
+          avg_fill_price: avg_fill_price
+          order_info: order_info
+          opened_at: 2000-01-23T04:56:07.000+00:00
+          filled_notional: filled_notional
+          trigger_price: trigger_price
+          user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          last_update_at: 2000-01-23T04:56:07.000+00:00
+          inverse_leverage: inverse_leverage
+          cancelled_quantity: cancelled_quantity
+          filled_quantity: filled_quantity
+          order_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          order_book_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          open_quantity: open_quantity
+          status: OPEN
+          order_modifiers:
+          - LIQUIDATION
+          - LIQUIDATION
+          position_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        Time: 2000-01-23T04:56:07.000+00:00
+      type: object
+    StreamOrderUpdatesResponse:
+      items:
+        $ref: "#/components/schemas/StreamOrderUpdatesEntry"
+      type: array
+    OrderResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            $ref: "#/components/schemas/GetAssetByIDResponseEnvelope_allOf_data"
+      example:
+        metadata:
+          trace_id: trace_id
+          status_code: 0
+          request_id: request_id
+        data: null
+        error: error
+    GetOrderResponse:
+      $ref: "#/components/schemas/OrderResponseEnvelope"
+    CreateOrderRequest:
+      example:
+        side: BUY
+        quantity: quantity
+        trigger_price: trigger_price
+        price: price
+        kind: LIMIT
+        inverse_leverage: inverse_leverage
+        good_till_date: 2000-01-23T04:56:07.000+00:00
+        order_book_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        position_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        order_modifiers:
+        - LIQUIDATION
+        - LIQUIDATION
+      properties:
+        quantity:
+          format: decimal
+          type: string
+        inverse_leverage:
+          format: decimal
+          type: string
+        price:
+          format: decimal
+          type: string
+        kind:
+          $ref: "#/components/schemas/OrderKind"
+        side:
+          $ref: "#/components/schemas/Side"
+        position_id:
+          description: position ID to use for the order. required.
+          format: uuid
+          type: string
+        order_book_id:
+          description: "Required: the order book to submit the order to"
+          format: uuid
+          type: string
+        order_modifiers:
+          items:
+            $ref: "#/components/schemas/OrderModifierKind"
+          type: array
+        good_till_date:
+          format: date-time
+          type: string
+        trigger_price:
+          format: decimal
+          type: string
+      required:
+      - inverse_leverage
+      - kind
+      - order_book_id
+      - position_id
+      - quantity
+      - side
+      type: object
+    ValidateSubmitOrderRequest:
+      example:
+        user_balance: user_balance
+        side: BUY
+        quantity: quantity
+        kind: LIMIT
+        price: price
+        inverse_leverage: inverse_leverage
+        tick: tick
+        good_till_date: 2000-01-23T04:56:07.000+00:00
+      properties:
+        quantity:
+          format: decimal
+          type: string
+        tick:
+          description: Minimum tradable increment for the selected order book
+          format: decimal
+          type: string
+        kind:
+          $ref: "#/components/schemas/OrderKind"
+        side:
+          $ref: "#/components/schemas/Side"
+        price:
+          description: "If kind is LIMIT, must be > 0; if MARKET it must be 0 or omitted"
+          format: decimal
+          type: string
+        good_till_date:
+          format: date-time
+          type: string
+        inverse_leverage:
+          format: decimal
+          type: string
+        user_balance:
+          description: User balance used to ensure they can afford the requested quantity
+          format: decimal
+          type: string
+      required:
+      - inverse_leverage
+      - kind
+      - price
+      - quantity
+      - tick
+      - user_balance
+      type: object
+    OrderId:
+      properties:
+        order_id:
+          format: uuid
+          type: string
+      type: object
+    ValidateSubmitOrderResponse:
+      example:
+        data: true
+      properties:
+        data:
+          type: boolean
+      type: object
+    EmailExistsResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            type: boolean
+        type: object
+      example:
+        metadata:
+          trace_id: trace_id
+          status_code: 0
+          request_id: request_id
+        data: true
+        error: error
+    EmailExistsResponse:
+      $ref: "#/components/schemas/EmailExistsResponseEnvelope"
+    CreateOrderResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            $ref: "#/components/schemas/GetAssetByIDResponseEnvelope_allOf_data"
+      example:
+        metadata:
+          trace_id: trace_id
+          status_code: 0
+          request_id: request_id
+        data: null
+        error: error
+    CreateOrderResponse:
+      $ref: "#/components/schemas/CreateOrderResponseEnvelope"
+    PositionResponse:
+      properties:
+        portfolio:
+          $ref: "#/components/schemas/Portfolio"
+      type: object
+    Portfolio:
+      properties:
+        user_id:
+          format: uuid
+          type: string
+        position:
+          additionalProperties:
+            additionalProperties:
+              $ref: "#/components/schemas/Position"
+            type: object
+          type: object
+        net_stablecoin_equivalence:
+          $ref: "#/components/schemas/TransformedAssets"
+      type: object
+    PositionType:
+      enum:
+      - Owned
+      - Locked
+      - Supplied
+      - Stablecoin Equivalents
+      - Inactive
+      - Interest Sources
+      type: string
+    Position:
+      example:
+        supplied: supplied
+        impending_borrows: impending_borrows
+        available: available
+        position_name: position_name
+        is_global: true
+        created_at: 2000-01-23T04:56:07.000+00:00
+        asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        avg_entry_price: avg_entry_price
+        borrow_limit: borrow_limit
+        supplied_collateral: supplied_collateral
+        liquidation_threshold: liquidation_threshold
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        locked: locked
+        collateral: collateral
+        seq: 0
+        borrowed: borrowed
+      properties:
+        id:
+          description: "The unique identifier for the position. Used, for example,\
+            \ when creating an order from a position, or deciding collateral should\
+            \ be transferred from position A to position B."
+          format: uuid
+          type: string
+        asset_id:
+          format: uuid
+          type: string
+        seq:
+          type: integer
+        is_global:
+          type: boolean
+        available:
+          description: "The available balance in the position for this asset that\
+            \ are not locked, supplied, or used as collateral"
+          format: decimal
+          type: string
+        locked:
+          description: "The balance that has been reserved for a current order. If\
+            \ spent by the order, they are removed. If the order is cancelled, they\
+            \ are returned to the position's available balance."
+          format: decimal
+          type: string
+        supplied:
+          description: The balance that user has supplied to the leverage module.
+            The user remains entitled to these assets and can withdraw them into their
+            available balance.
+          format: decimal
+          type: string
+        collateral:
+          description: "The balance that has been locked or supplied, but are marked\
+            \ as collateral to support borrow limits and can be consumed in case of\
+            \ liquidation. When unmarked as collateral, the balance returns to the\
+            \ available balance."
+          format: decimal
+          type: string
+        supplied_collateral:
+          description: "The balance that have been supplied to the leverage module\
+            \ and marked as collateral. The user remains entitled to this balance\
+            \ and can withdraw it into the collateral balance, or unmark them as collateral\
+            \ and move them to the supplied balance."
+          format: decimal
+          type: string
+        borrowed:
+          description: "The total amount of debt outstanding for this position. The\
+            \ position's collateral + supplied_collateral must support a borrow limit\
+            \ sufficient to cover all borrowed assets. This position cannot be closed\
+            \ until all debt is fully repaid, i.e. borrowed = 0."
+          format: decimal
+          type: string
+        impending_borrows:
+          description: "The equivalent of locked balances, but for leveraged orders.\
+            \ If a user has an active order that would borrow assets as part of its\
+            \ input, then their borrow limit must be reduced until the order is executed\
+            \ or cancelled."
+          format: decimal
+          type: string
+        avg_entry_price:
+          description: average cost per unit quantity that was paid (long positions)
+            or received (short positions) for this asset.
+          format: decimal
+          type: string
+        borrow_limit:
+          description: The borrow limit
+          format: decimal
+          type: string
+        liquidation_threshold:
+          description: The borrow limit
+          format: decimal
+          type: string
+        created_at:
+          format: date-time
+          type: string
+        position_name:
+          type: string
+      type: object
+    ListPositionsResponse:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            items:
+              $ref: "#/components/schemas/Position"
+            type: array
+      type: object
+    StreamPositionsEntry:
+      allOf:
+      - $ref: "#/components/schemas/StreamEntry"
+      - properties:
+          Val:
+            $ref: "#/components/schemas/Position"
+      example:
+        Val:
+          supplied: supplied
+          impending_borrows: impending_borrows
+          available: available
+          position_name: position_name
+          is_global: true
+          created_at: 2000-01-23T04:56:07.000+00:00
+          asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          avg_entry_price: avg_entry_price
+          borrow_limit: borrow_limit
+          supplied_collateral: supplied_collateral
+          liquidation_threshold: liquidation_threshold
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          locked: locked
+          collateral: collateral
+          seq: 0
+          borrowed: borrowed
+        Time: 2000-01-23T04:56:07.000+00:00
+      type: object
+    StreamPositionsResponse:
+      items:
+        $ref: "#/components/schemas/StreamPositionsEntry"
+      type: array
+    TransformedAssets:
+      properties:
+        gained:
+          additionalProperties:
+            format: decimal
+            type: string
+          description: Assets that have been gained by stablecoin equivalence transformations.
+            They cannot be withdrawn from the platform until converted back to the
+            original asset.
+          type: object
+        lost:
+          additionalProperties:
+            format: decimal
+            type: string
+          description: Assets that have been lost by stablecoin equivalence transformations.
+            They can be recovered by converting back any assets gained by stablecoin
+            equivalence transformations.
+          type: object
+      type: object
+    BalancesResponse:
+      properties:
+        balances:
+          items:
+            $ref: "#/components/schemas/Position"
+          type: array
+      type: object
+    UserValue:
+      properties:
+        available:
+          additionalProperties:
+            type: string
+          type: object
+        locked:
+          additionalProperties:
+            type: string
+          type: object
+        borrowed:
+          additionalProperties:
+            type: string
+          type: object
+        supplied:
+          additionalProperties:
+            type: string
+          type: object
+        collateral:
+          additionalProperties:
+            type: string
+          type: object
+        supplied_collateral:
+          additionalProperties:
+            type: string
+          type: object
+        impending_borrows:
+          additionalProperties:
+            type: string
+          type: object
+        borrow_limit:
+          additionalProperties:
+            type: string
+          type: object
+        liquidation_threshold:
+          additionalProperties:
+            type: string
+          type: object
+        notional_long:
+          additionalProperties:
+            type: string
+          type: object
+        notional_short:
+          additionalProperties:
+            type: string
+          type: object
+        portfolio_value:
+          additionalProperties:
+            type: string
+          type: object
+        net_liquidation_value:
+          additionalProperties:
+            type: string
+          type: object
+        unrealized_pnl:
+          additionalProperties:
+            type: string
+          type: object
+        realized_pnl:
+          additionalProperties:
+            type: string
+          type: object
+      type: object
+    UserInterest:
+      properties:
+        available:
+          additionalProperties:
+            type: integer
+          type: object
+        value:
+          additionalProperties:
+            type: string
+          type: object
+      type: object
+    LeverageType:
+      enum:
+      - Balances
+      - Supplied
+      - Virtual
+      - Borrowed
+      - Coupon Funds
+      - Coupon Fund Sources
+      - Snapshots
+      type: string
+    LeverageModuleResponse:
+      example:
+        balances:
+          key:
+            virtual: virtual
+            supplied: supplied
+            available: available
+            supplied_collateral: supplied_collateral
+            asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            seq: 0
+            borrowed: borrowed
+      properties:
+        balances:
+          additionalProperties:
+            $ref: "#/components/schemas/ModuleBalance"
+          description: A map of asset IDs to their module balances
+          type: object
+      type: object
+    ModuleBalance:
+      example:
+        virtual: virtual
+        supplied: supplied
+        available: available
+        supplied_collateral: supplied_collateral
+        asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        seq: 0
+        borrowed: borrowed
+      properties:
+        asset_id:
+          format: uuid
+          type: string
+        seq:
+          type: integer
+        available:
+          description: The available balance in the module for this asset
+          format: decimal
+          type: string
+        supplied:
+          description: The total amount supplied to the module for this asset
+          format: decimal
+          type: string
+        supplied_collateral:
+          description: The amount supplied as collateral from user balances in the
+            module for this asset
+          format: decimal
+          type: string
+        virtual:
+          description: "Assets minted by virtual-borrowing, but not yet repaid"
+          format: decimal
+          type: string
+        borrowed:
+          description: The total amount borrowed from the supplied but not yet repaid
+          format: decimal
+          type: string
+      type: object
+    LeverageBalanceResponse:
+      properties:
+        leverage_balance:
+          type: object
+      type: object
+    IsolateCollateralRequest:
+      example:
+        global_position_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        quantity: quantity
+        asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        global_position_id:
+          format: uuid
+          type: string
+        asset_id:
+          format: uuid
+          type: string
+        quantity:
+          format: decimal
+          type: string
+      required:
+      - asset_id
+      - global_position_id
+      - quantity
+      type: object
+    IsolatedCollateral:
+      example:
+        transaction_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        global_position_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        quantity: quantity
+        isolated_position_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        global_position_id:
+          format: uuid
+          type: string
+        isolated_position_id:
+          format: uuid
+          type: string
+        transaction_id:
+          format: uuid
+          type: string
+        asset_id:
+          format: uuid
+          type: string
+        quantity:
+          format: decimal
+          type: string
+      type: object
+    IsolateCollateralResponse:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            $ref: "#/components/schemas/IsolatedCollateral"
+      example:
+        metadata:
+          trace_id: trace_id
+          status_code: 0
+          request_id: request_id
+        data:
+          transaction_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          global_position_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          quantity: quantity
+          isolated_position_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        error: error
+      type: object
+    IsolatedPosition:
+      properties:
+        global_position_id:
+          format: uuid
+          type: string
+        isolated_position_id:
+          format: uuid
+          type: string
+        transaction_id:
+          format: uuid
+          type: string
+      type: object
+    UnitePositionRequest:
+      example:
+        global_position_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        global_position_id:
+          format: uuid
+          type: string
+      required:
+      - global_position_id
+      type: object
+    UnitedPosition:
+      properties:
+        global_position_id:
+          format: uuid
+          type: string
+        transaction_ids:
+          items:
+            format: uuid
+            type: string
+          type: array
+      type: object
+    UnitePositionResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            $ref: "#/components/schemas/GetAssetByIDResponseEnvelope_allOf_data"
+      example:
+        metadata:
+          trace_id: trace_id
+          status_code: 0
+          request_id: request_id
+        data: null
+        error: error
+    UnitePositionResponse:
+      $ref: "#/components/schemas/UnitePositionResponseEnvelope"
+    SupplyRequest:
+      example:
+        quantity: quantity
+        asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        position_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        position_id:
+          format: uuid
+          type: string
+        asset_id:
+          format: uuid
+          type: string
+        quantity:
+          format: decimal
+          type: string
+      required:
+      - asset_id
+      - position_id
+      - quantity
+      type: object
+    Supply:
+      properties:
+        position_id:
+          format: uuid
+          type: string
+        transaction_id:
+          format: uuid
+          type: string
+        asset_id:
+          format: uuid
+          type: string
+        quantity:
+          format: decimal
+          type: string
+      type: object
+    SupplyResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            $ref: "#/components/schemas/GetAssetByIDResponseEnvelope_allOf_data"
+      example:
+        metadata:
+          trace_id: trace_id
+          status_code: 0
+          request_id: request_id
+        data: null
+        error: error
+    SupplyResponse:
+      $ref: "#/components/schemas/SupplyResponseEnvelope"
+    WithdrawRequest:
+      example:
+        quantity: quantity
+        asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        position_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        position_id:
+          format: uuid
+          type: string
+        asset_id:
+          format: uuid
+          type: string
+        quantity:
+          format: decimal
+          type: string
+      required:
+      - asset_id
+      - position_id
+      - quantity
+      type: object
+    Withdraw:
+      properties:
+        position_id:
+          format: uuid
+          type: string
+        transaction_id:
+          format: uuid
+          type: string
+        asset_id:
+          format: uuid
+          type: string
+        quantity:
+          format: decimal
+          type: string
+      type: object
+    WithdrawResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            $ref: "#/components/schemas/GetAssetByIDResponseEnvelope_allOf_data"
+      example:
+        metadata:
+          trace_id: trace_id
+          status_code: 0
+          request_id: request_id
+        data: null
+        error: error
+    WithdrawResponse:
+      $ref: "#/components/schemas/WithdrawResponseEnvelope"
+    Collateral:
+      properties:
+        position_id:
+          format: uuid
+          type: string
+        transaction_id:
+          format: uuid
+          type: string
+        asset_id:
+          format: uuid
+          type: string
+        quantity:
+          format: decimal
+          type: string
+      type: object
+    LiquidityRequest:
+      example:
+        quantity: quantity
+        position_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        position_id:
+          format: uuid
+          type: string
+        quantity:
+          type: string
+      required:
+      - order_book_id
+      - position_id
+      - quantity
+      type: object
+    Liquidity:
+      properties:
+        order_book_id:
+          format: uuid
+          type: string
+        position_id:
+          format: uuid
+          type: string
+        transaction_id:
+          format: uuid
+          type: string
+        base_quantity:
+          format: decimal
+          type: string
+        quote_quantity:
+          format: decimal
+          type: string
+        shares_quantity:
+          format: decimal
+          type: string
+      type: object
+    LiquidityResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            $ref: "#/components/schemas/GetAssetByIDResponseEnvelope_allOf_data"
+      example:
+        metadata:
+          trace_id: trace_id
+          status_code: 0
+          request_id: request_id
+        data: null
+        error: error
+    LiquidityResponse:
+      $ref: "#/components/schemas/LiquidityResponseEnvelope"
+    TransactionKind:
+      enum:
+      - ACCRUE_INTEREST
+      - ADD_LIQUIDITY
+      - BOND_MATURE
+      - CLAIM_INTEREST
+      - CREDIT
+      - DEBIT
+      - EXTERNAL_DEPOSIT
+      - EXTERNAL_WITHDRAW
+      - FILL
+      - LENDING_INTEREST_ACCRUAL
+      - LIQUIDATE
+      - MATCH_ORDER
+      - PAY_INTEREST
+      - SUBTRACT_LIQUIDITY
+      - REPAY
+      - SUPPLY
+      - WITHDRAW
+      - ISOLATE_COLLATERAL
+      - ISOLATE_POSITION
+      - UNITE_POSITION
+      - COLLATERALIZE
+      - DE-COLLATERALIZE
+      - COUPON_PAYMENT
+      type: string
+    Transaction:
+      example:
+        asset0: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        quantity0: quantity0
+        asset1: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        quantity1: quantity1
+        user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        kind: ACCRUE_INTEREST
+        created_at: 2000-01-23T04:56:07.000+00:00
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        id:
+          format: uuid
+          type: string
+        created_at:
+          format: date-time
+          type: string
+        kind:
+          $ref: "#/components/schemas/TransactionKind"
+        asset0:
+          format: uuid
+          type: string
+        quantity0:
+          type: string
+        quantity1:
+          type: string
+        asset1:
+          format: uuid
+          type: string
+        user_id:
+          format: uuid
+          type: string
+      type: object
+    ListTransactionsResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            items:
+              $ref: "#/components/schemas/Transaction"
+            type: array
+        type: object
+      example:
+        metadata:
+          trace_id: trace_id
+          status_code: 0
+          request_id: request_id
+        data:
+        - asset0: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          quantity0: quantity0
+          asset1: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          quantity1: quantity1
+          user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          kind: ACCRUE_INTEREST
+          created_at: 2000-01-23T04:56:07.000+00:00
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - asset0: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          quantity0: quantity0
+          asset1: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          quantity1: quantity1
+          user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          kind: ACCRUE_INTEREST
+          created_at: 2000-01-23T04:56:07.000+00:00
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        error: error
+    ListTransactionsResponse:
+      $ref: "#/components/schemas/ListTransactionsResponseEnvelope"
+    StreamTransactionsEntry:
+      allOf:
+      - $ref: "#/components/schemas/StreamEntry"
+      - properties:
+          Val:
+            $ref: "#/components/schemas/Transaction"
+      example:
+        Val:
+          asset0: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          quantity0: quantity0
+          asset1: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          quantity1: quantity1
+          user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          kind: ACCRUE_INTEREST
+          created_at: 2000-01-23T04:56:07.000+00:00
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        Time: 2000-01-23T04:56:07.000+00:00
+      type: object
+    StreamTransactionsResponse:
+      items:
+        $ref: "#/components/schemas/StreamTransactionsEntry"
+      type: array
+    StreamAssetsEntry:
+      allOf:
+      - $ref: "#/components/schemas/StreamEntry"
+      - properties:
+          Val:
+            $ref: "#/components/schemas/Asset"
+      example:
+        Val:
+          symbol: symbol
+          can_add_liquidity: true
+          max_leverage: 3.616076749251911
+          fractionalized_units: 5
+          kind: BOND
+          can_onboard: true
+          maturity_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          can_virtual_borrow: true
+          created_at: 2000-01-23T04:56:07.000+00:00
+          description: description
+          bond:
+            kind: COUPON-PAYING
+            payments_per_year: 2
+            created_at: 2000-01-23T04:56:07.000+00:00
+            issued_at: 2000-01-23T04:56:07.000+00:00
+            issuer: issuer
+            maturity_at: 2000-01-23T04:56:07.000+00:00
+            coupon_start_at: 2000-01-23T04:56:07.000+00:00
+            next_coupon_payment: 2000-01-23T04:56:07.000+00:00
+            principal_value: principal_value
+            payments_every: 1000
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            final_coupon_at: 2000-01-23T04:56:07.000+00:00
+            isin: isin
+          max_utilization: 7
+          collateral_weight: 6.027456183070403
+          decimals: 1
+          yield: 9.301444243932576
+          max_supply: 2
+          name: name
+          liquidation_threshold: 5.637376656633329
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          can_direct_borrow: true
+          can_trade: true
+        Time: 2000-01-23T04:56:07.000+00:00
+      type: object
+    StreamAssetsResponse:
+      items:
+        $ref: "#/components/schemas/StreamAssetsEntry"
+      type: array
+    TransactionResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            $ref: "#/components/schemas/GetAssetByIDResponseEnvelope_allOf_data"
+      example:
+        metadata:
+          trace_id: trace_id
+          status_code: 0
+          request_id: request_id
+        data: null
+        error: error
+    GetTransactionResponse:
+      $ref: "#/components/schemas/TransactionResponseEnvelope"
+    ResponseEnvelope:
+      description: "Standard response envelope. For 2xx responses, 'data' is set.\
+        \ For errors, 'error' is set."
+      example:
+        metadata:
+          trace_id: trace_id
+          status_code: 0
+          request_id: request_id
+        data: "{}"
+        error: error
+      properties:
+        data:
+          description: The response data. Present for successful (2xx) responses.
+          type: object
+        error:
+          description: The error message. Present for error (non-2xx) responses.
+          type: string
+        metadata:
+          $ref: "#/components/schemas/Metadata"
+      type: object
+    StreamEntry:
+      properties:
+        Val:
+          description: The data being streamed
+          type: object
+        Time:
+          description: The timestamp when the data was created
+          format: date-time
+          type: string
+      type: object
+    Metadata:
+      description: "Metadata about the response, including status code and tracing\
+        \ information."
+      example:
+        trace_id: trace_id
+        status_code: 0
+        request_id: request_id
+      properties:
+        status_code:
+          description: HTTP status code for the response.
+          type: integer
+        trace_id:
+          description: Trace ID for distributed tracing.
+          type: string
+        request_id:
+          description: Request ID for correlating logs and debugging.
+          type: string
+      type: object
+    CandleResolution:
+      enum:
+      - 1m
+      - 5m
+      - 15m
+      - 1h
+      - 4h
+      - 1d
+      type: string
+    Candle:
+      example:
+        volume: volume
+        high: high
+        start_timestamp: 2000-01-23T04:56:07.000+00:00
+        low: low
+        close: close
+        order_book_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        open: open
+      properties:
+        order_book_id:
+          format: uuid
+          type: string
+        start_timestamp:
+          format: date-time
+          type: string
+        open:
+          format: decimal
+          type: string
+        high:
+          format: decimal
+          type: string
+        low:
+          format: decimal
+          type: string
+        close:
+          format: decimal
+          type: string
+        volume:
+          format: decimal
+          type: string
+      type: object
+    TradeResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            $ref: "#/components/schemas/GetAssetByIDResponseEnvelope_allOf_data"
+      example:
+        metadata:
+          trace_id: trace_id
+          status_code: 0
+          request_id: request_id
+        data: null
+        error: error
+    TradeResponse:
+      $ref: "#/components/schemas/TradeResponseEnvelope"
+    Trade:
+      example:
+        transaction_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        order_seq: 0
+        fee_asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        side: BUY
+        created_at: 2000-01-23T04:56:07.000+00:00
+        aggressor_indicator: true
+        fee_quantity: fee_quantity
+        user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        price: price
+        asset_0: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        order_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        quantity_0: quantity_0
+        order_book_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        transaction_id:
+          format: uuid
+          type: string
+        asset_0:
+          format: uuid
+          type: string
+        created_at:
+          format: date-time
+          type: string
+        fee_asset_id:
+          format: uuid
+          type: string
+        fee_quantity:
+          format: decimal
+          type: string
+        order_book_id:
+          format: uuid
+          type: string
+        order_id:
+          format: uuid
+          type: string
+        order_seq:
+          type: integer
+        price:
+          format: decimal
+          type: string
+        quantity_0:
+          format: decimal
+          type: string
+        user_id:
+          format: uuid
+          type: string
+        side:
+          $ref: "#/components/schemas/Side"
+        aggressor_indicator:
+          description: "If true, then this order is the aggressor (taker); otherwise\
+            \ it is the maker."
+          type: boolean
+      type: object
+    ListTradeResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            items:
+              $ref: "#/components/schemas/Trade"
+            type: array
+        type: object
+      example:
+        metadata:
+          trace_id: trace_id
+          status_code: 0
+          request_id: request_id
+        data:
+        - transaction_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          order_seq: 0
+          fee_asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          side: BUY
+          created_at: 2000-01-23T04:56:07.000+00:00
+          aggressor_indicator: true
+          fee_quantity: fee_quantity
+          user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          price: price
+          asset_0: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          order_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          quantity_0: quantity_0
+          order_book_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - transaction_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          order_seq: 0
+          fee_asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          side: BUY
+          created_at: 2000-01-23T04:56:07.000+00:00
+          aggressor_indicator: true
+          fee_quantity: fee_quantity
+          user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          price: price
+          asset_0: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          order_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          quantity_0: quantity_0
+          order_book_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        error: error
+    ListTradeResponse:
+      $ref: "#/components/schemas/ListTradeResponseEnvelope"
+    StreamTradesEntry:
+      allOf:
+      - $ref: "#/components/schemas/StreamEntry"
+      - properties:
+          Val:
+            $ref: "#/components/schemas/Trade"
+      example:
+        Val:
+          transaction_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          order_seq: 0
+          fee_asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          side: BUY
+          created_at: 2000-01-23T04:56:07.000+00:00
+          aggressor_indicator: true
+          fee_quantity: fee_quantity
+          user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          price: price
+          asset_0: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          order_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          quantity_0: quantity_0
+          order_book_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        Time: 2000-01-23T04:56:07.000+00:00
+      type: object
+    StreamTradesResponse:
+      items:
+        $ref: "#/components/schemas/StreamTradesEntry"
+      type: array
+    AssetPrice:
+      example:
+        price: price
+        asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        time: 2000-01-23T04:56:07.000+00:00
+      properties:
+        asset_id:
+          format: uuid
+          type: string
+        price:
+          format: decimal
+          type: string
+        time:
+          format: date-time
+          type: string
+      type: object
+    ListAssetPriceResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            items:
+              $ref: "#/components/schemas/AssetPrice"
+            type: array
+        type: object
+      example:
+        metadata:
+          trace_id: trace_id
+          status_code: 0
+          request_id: request_id
+        data:
+        - price: price
+          asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          time: 2000-01-23T04:56:07.000+00:00
+        - price: price
+          asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          time: 2000-01-23T04:56:07.000+00:00
+        error: error
+    ListAssetPriceResponse:
+      $ref: "#/components/schemas/ListAssetPriceResponseEnvelope"
+    StreamAssetPricesResponse:
+      additionalProperties:
+        $ref: "#/components/schemas/StreamAssetPricesResponse_value"
+      description: "Map of asset prices keyed by asset ID. Format: {\"asset_id\":\
+        \ {\"asset_id\": \"uuid\", \"price\": \"decimal\", \"time\": \"date-time\"\
+        }}"
+      example:
+        a1b2c3d4-e5f6-7890-abcd-ef1234567890:
+          asset_id: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+          price: "123.45"
+          time: 2025-01-01T00:00:00Z
+        b2c3d4e5-f6a7-8901-bcde-f23456789012:
+          asset_id: b2c3d4e5-f6a7-8901-bcde-f23456789012
+          price: "678.90"
+          time: 2025-01-01T00:00:00Z
+      type: object
+    AssetPriceResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            $ref: "#/components/schemas/GetAssetByIDResponseEnvelope_allOf_data"
+      example:
+        metadata:
+          trace_id: trace_id
+          status_code: 0
+          request_id: request_id
+        data: null
+        error: error
+    GetAssetPriceResponse:
+      $ref: "#/components/schemas/AssetPriceResponseEnvelope"
+    PoolPrice:
+      properties:
+        pool_id:
+          format: uuid
+          type: string
+        price:
+          format: decimal
+          type: string
+        timestamp:
+          format: date-time
+          type: string
+      type: object
+    PoolPriceResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            $ref: "#/components/schemas/GetAssetByIDResponseEnvelope_allOf_data"
+      example:
+        metadata:
+          trace_id: trace_id
+          status_code: 0
+          request_id: request_id
+        data: null
+        error: error
+    GetPoolPriceResponse:
+      $ref: "#/components/schemas/PoolPriceResponseEnvelope"
+    OrderBookBalance:
+      example:
+        base_quantity: 0.8008281904610115
+        shares_quantity: 1.4658129805029452
+        quote_quantity: 6.027456183070403
+        order_book_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        order_book_id:
+          description: The ID of the order book.
+          format: uuid
+          type: string
+        base_quantity:
+          description: The quantity of the base asset.
+          format: double
+          type: number
+        quote_quantity:
+          description: The quantity of the quote asset.
+          format: double
+          type: number
+        shares_quantity:
+          description: The quantity of pool shares.
+          format: double
+          type: number
+      type: object
+    StreamOrderBookBalanceEntry:
+      allOf:
+      - $ref: "#/components/schemas/StreamEntry"
+      - properties:
+          Val:
+            $ref: "#/components/schemas/OrderBookBalance"
+      example:
+        Val:
+          base_quantity: 0.8008281904610115
+          shares_quantity: 1.4658129805029452
+          quote_quantity: 6.027456183070403
+          order_book_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        Time: 2000-01-23T04:56:07.000+00:00
+      type: object
+    StreamOrderBookBalancesResponse:
+      items:
+        $ref: "#/components/schemas/StreamOrderBookBalanceEntry"
+      type: array
+    PriceLevel:
+      example:
+        quantity: quantity
+        price: price
+      properties:
+        price:
+          format: decimal
+          type: string
+        quantity:
+          format: decimal
+          type: string
+      type: object
+    LiveOrderbook:
+      example:
+        asks:
+        - quantity: quantity
+          price: price
+        - quantity: quantity
+          price: price
+        bids:
+        - quantity: quantity
+          price: price
+        - quantity: quantity
+          price: price
+      properties:
+        bids:
+          description: sorted in desc order by price
+          items:
+            $ref: "#/components/schemas/PriceLevel"
+          type: array
+        asks:
+          description: sorted in asc order by price
+          items:
+            $ref: "#/components/schemas/PriceLevel"
+          type: array
+      type: object
+    OrderBookDepth:
+      properties:
+        order_book_id:
+          format: uuid
+          type: string
+        bids:
+          items:
+            $ref: "#/components/schemas/PriceLevel"
+          type: array
+        asks:
+          items:
+            $ref: "#/components/schemas/PriceLevel"
+          type: array
+        timestamp:
+          format: date-time
+          type: string
+      type: object
+    ListOrderBookDepthResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            $ref: "#/components/schemas/GetAssetByIDResponseEnvelope_allOf_data"
+      example:
+        metadata:
+          trace_id: trace_id
+          status_code: 0
+          request_id: request_id
+        data: null
+        error: error
+    ListOrderBookDepthResponse:
+      $ref: "#/components/schemas/ListOrderBookDepthResponseEnvelope"
+    OrderBookTop:
+      properties:
+        order_book_id:
+          format: uuid
+          type: string
+        best_bid:
+          format: decimal
+          type: string
+        best_ask:
+          format: decimal
+          type: string
+        timestamp:
+          format: date-time
+          type: string
+      type: object
+    GetTopOfBookResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            $ref: "#/components/schemas/GetAssetByIDResponseEnvelope_allOf_data"
+      example:
+        metadata:
+          trace_id: trace_id
+          status_code: 0
+          request_id: request_id
+        data: null
+        error: error
+    GetTopOfBookResponse:
+      $ref: "#/components/schemas/GetTopOfBookResponseEnvelope"
+    OrderBookSummary:
+      properties:
+        order_book_id:
+          format: uuid
+          type: string
+        mid_price:
+          format: decimal
+          type: string
+        spread:
+          format: decimal
+          type: string
+        best_bid:
+          format: decimal
+          type: string
+        best_ask:
+          format: decimal
+          type: string
+      type: object
+    OrderBookSummaryResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            $ref: "#/components/schemas/GetAssetByIDResponseEnvelope_allOf_data"
+      example:
+        metadata:
+          trace_id: trace_id
+          status_code: 0
+          request_id: request_id
+        data: null
+        error: error
+    GetOrderBookSummaryResponse:
+      $ref: "#/components/schemas/OrderBookSummaryResponseEnvelope"
+    OrderBookHaltResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            type: boolean
+        type: object
+    OrderBookHaltResponse:
+      $ref: "#/components/schemas/OrderBookHaltResponseEnvelope"
+    OrderBookResumeResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            type: boolean
+        type: object
+    OrderBookResumeResponse:
+      $ref: "#/components/schemas/OrderBookResumeResponseEnvelope"
+    OrderBookTerminateResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            type: boolean
+        type: object
+    OrderBookTerminateResponse:
+      $ref: "#/components/schemas/OrderBookTerminateResponseEnvelope"
+    CancelOrderResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            $ref: "#/components/schemas/Order"
+        type: object
+      example:
+        metadata:
+          trace_id: trace_id
+          status_code: 0
+          request_id: request_id
+        data:
+          original_price: original_price
+          side: BUY
+          original_quantity: original_quantity
+          kind: LIMIT
+          good_till_date: 2000-01-23T04:56:07.000+00:00
+          avg_fill_price: avg_fill_price
+          order_info: order_info
+          opened_at: 2000-01-23T04:56:07.000+00:00
+          filled_notional: filled_notional
+          trigger_price: trigger_price
+          user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          last_update_at: 2000-01-23T04:56:07.000+00:00
+          inverse_leverage: inverse_leverage
+          cancelled_quantity: cancelled_quantity
+          filled_quantity: filled_quantity
+          order_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          order_book_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          open_quantity: open_quantity
+          status: OPEN
+          order_modifiers:
+          - LIQUIDATION
+          - LIQUIDATION
+          position_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        error: error
+    CancelOrderResponse:
+      $ref: "#/components/schemas/CancelOrderResponseEnvelope"
+    ListCandlesResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            items:
+              $ref: "#/components/schemas/Candle"
+            type: array
+        type: object
+      example:
+        metadata:
+          trace_id: trace_id
+          status_code: 0
+          request_id: request_id
+        data:
+        - volume: volume
+          high: high
+          start_timestamp: 2000-01-23T04:56:07.000+00:00
+          low: low
+          close: close
+          order_book_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          open: open
+        - volume: volume
+          high: high
+          start_timestamp: 2000-01-23T04:56:07.000+00:00
+          low: low
+          close: close
+          order_book_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          open: open
+        error: error
+    ListCandlesResponse:
+      $ref: "#/components/schemas/ListCandlesResponseEnvelope"
+    StreamCandlesEntry:
+      allOf:
+      - $ref: "#/components/schemas/StreamEntry"
+      - properties:
+          Val:
+            $ref: "#/components/schemas/Candle"
+      example:
+        Val:
+          volume: volume
+          high: high
+          start_timestamp: 2000-01-23T04:56:07.000+00:00
+          low: low
+          close: close
+          order_book_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          open: open
+        Time: 2000-01-23T04:56:07.000+00:00
+      type: object
+    StreamCandlesResponse:
+      items:
+        $ref: "#/components/schemas/StreamCandlesEntry"
+      type: array
+    LedgerModuleResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            items:
+              $ref: "#/components/schemas/LeverageModuleResponse"
+            type: array
+      example:
+        metadata:
+          trace_id: trace_id
+          status_code: 0
+          request_id: request_id
+        data:
+        - balances:
+            key:
+              virtual: virtual
+              supplied: supplied
+              available: available
+              supplied_collateral: supplied_collateral
+              asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              seq: 0
+              borrowed: borrowed
+        - balances:
+            key:
+              virtual: virtual
+              supplied: supplied
+              available: available
+              supplied_collateral: supplied_collateral
+              asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              seq: 0
+              borrowed: borrowed
+        error: error
+    LedgerModuleResponse:
+      $ref: "#/components/schemas/LedgerModuleResponseEnvelope"
+    LedgerModuleByAssetResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            $ref: "#/components/schemas/GetAssetByIDResponseEnvelope_allOf_data"
+      example:
+        metadata:
+          trace_id: trace_id
+          status_code: 0
+          request_id: request_id
+        data: null
+        error: error
+    LedgerModuleByAssetResponse:
+      $ref: "#/components/schemas/LedgerModuleByAssetResponseEnvelope"
+    UserPositionResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            $ref: "#/components/schemas/GetAssetByIDResponseEnvelope_allOf_data"
+      example:
+        metadata:
+          trace_id: trace_id
+          status_code: 0
+          request_id: request_id
+        data: null
+        error: error
+    UserPositionResponse:
+      $ref: "#/components/schemas/UserPositionResponseEnvelope"
+    UserBalanceResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            $ref: "#/components/schemas/GetAssetByIDResponseEnvelope_allOf_data"
+      example:
+        metadata:
+          trace_id: trace_id
+          status_code: 0
+          request_id: request_id
+        data: null
+        error: error
+    UserBalanceResponse:
+      $ref: "#/components/schemas/UserBalanceResponseEnvelope"
+    UserValueResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            $ref: "#/components/schemas/GetAssetByIDResponseEnvelope_allOf_data"
+      example:
+        metadata:
+          trace_id: trace_id
+          status_code: 0
+          request_id: request_id
+        data: null
+        error: error
+    UserValueResponse:
+      $ref: "#/components/schemas/UserValueResponseEnvelope"
+    UserInterestResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            $ref: "#/components/schemas/GetAssetByIDResponseEnvelope_allOf_data"
+      example:
+        metadata:
+          trace_id: trace_id
+          status_code: 0
+          request_id: request_id
+        data: null
+        error: error
+    UserInterestResponse:
+      $ref: "#/components/schemas/UserInterestResponseEnvelope"
+    LiquidationTargetsResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            items:
+              format: uuid
+              type: string
+            type: array
+        type: object
+    LiquidationTargetsResponse:
+      $ref: "#/components/schemas/LiquidationTargetsResponseEnvelope"
+    BorrowRequest:
+      type: object
+    BorrowResponse:
+      type: object
+    RepayRequest:
+      type: object
+    RepayResponse:
+      type: object
+    LeverageRequestError:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          error:
+            type: string
+      example:
+        metadata:
+          trace_id: trace_id
+          status_code: 0
+          request_id: request_id
+        data: "{}"
+        error: error
+      type: object
+    TransactionRequestError:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          error:
+            type: string
+      example:
+        metadata:
+          trace_id: trace_id
+          status_code: 0
+          request_id: request_id
+        data: "{}"
+        error: error
+      type: object
+    TradeRequestError:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          error:
+            type: string
+      example:
+        metadata:
+          trace_id: trace_id
+          status_code: 0
+          request_id: request_id
+        data: "{}"
+        error: error
+      type: object
+    AssetRequestError:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          error:
+            type: string
+      example:
+        metadata:
+          trace_id: trace_id
+          status_code: 0
+          request_id: request_id
+        data: "{}"
+        error: error
+      type: object
+    PoolRequestError:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          error:
+            type: string
+      example:
+        metadata:
+          trace_id: trace_id
+          status_code: 0
+          request_id: request_id
+        data: "{}"
+        error: error
+      type: object
+    NewIsolatedPositionRequest:
+      example:
+        global_position_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        quantity: quantity
+        position_name: position_name
+        asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        global_position_id:
+          format: uuid
+          type: string
+        asset_id:
+          format: uuid
+          type: string
+        quantity:
+          format: decimal
+          type: string
+        position_name:
+          type: string
+      required:
+      - asset_id
+      - global_position_id
+      - quantity
+      type: object
+    NewIsolatedPositionResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            $ref: "#/components/schemas/GetAssetByIDResponseEnvelope_allOf_data"
+      example:
+        metadata:
+          trace_id: trace_id
+          status_code: 0
+          request_id: request_id
+        data: null
+        error: error
+    NewIsolatedPositionResponse:
+      $ref: "#/components/schemas/NewIsolatedPositionResponseEnvelope"
+    TransferBalancesRequest:
+      example:
+        quantity: quantity
+        to_position_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        from_position_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        from_position_id:
+          format: uuid
+          type: string
+        to_position_id:
+          format: uuid
+          type: string
+        asset_id:
+          format: uuid
+          type: string
+        quantity:
+          format: decimal
+          type: string
+      required:
+      - asset_id
+      - from_position_id
+      - quantity
+      - to_position_id
+      type: object
+    BalanceTransfer:
+      properties:
+        from_position_id:
+          format: uuid
+          type: string
+        to_position_id:
+          format: uuid
+          type: string
+        transaction_id:
+          format: uuid
+          type: string
+      type: object
+    TransferBalancesResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            $ref: "#/components/schemas/GetAssetByIDResponseEnvelope_allOf_data"
+      example:
+        metadata:
+          trace_id: trace_id
+          status_code: 0
+          request_id: request_id
+        data: null
+        error: error
+    TransferBalancesResponse:
+      $ref: "#/components/schemas/TransferBalancesResponseEnvelope"
+    PositionAccount:
+      example:
+        position_name: position_name
+        is_global: true
+        position_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        position_id:
+          description: The ID of the position account
+          format: uuid
+          type: string
+        position_name:
+          description: The name of the position account
+          type: string
+        is_global:
+          description: Whether the position account is the global or an isolated account
+          type: boolean
+      type: object
+    PositionAccounts:
+      items:
+        $ref: "#/components/schemas/PositionAccount"
+      type: array
+    ListPositionAccountsResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            $ref: "#/components/schemas/PositionAccounts"
+        type: object
+      example:
+        metadata:
+          trace_id: trace_id
+          status_code: 0
+          request_id: request_id
+        data:
+        - position_name: position_name
+          is_global: true
+          position_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - position_name: position_name
+          is_global: true
+          position_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        error: error
+    ListPositionAccountsResponse:
+      $ref: "#/components/schemas/ListPositionAccountsResponseEnvelope"
+    APIKeyResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            items:
+              $ref: "#/components/schemas/APIKeyResponse"
+            type: array
+        type: object
+      example:
+        metadata:
+          trace_id: trace_id
+          status_code: 0
+          request_id: request_id
+        data:
+        - expires_at: 2000-01-23T04:56:07.000+00:00
+          is_active: true
+          user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          key_id: key_id
+          label: label
+        - expires_at: 2000-01-23T04:56:07.000+00:00
+          is_active: true
+          user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          key_id: key_id
+          label: label
+        error: error
+    GetAPIKeyResponse:
+      $ref: "#/components/schemas/APIKeyResponseEnvelope"
+    APIKeyResponse:
+      example:
+        expires_at: 2000-01-23T04:56:07.000+00:00
+        is_active: true
+        user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        key_id: key_id
+        label: label
+      properties:
+        user_id:
+          format: uuid
+          type: string
+        key_id:
+          type: string
+        label:
+          type: string
+        expires_at:
+          format: date-time
+          type: string
+        is_active:
+          type: boolean
+      type: object
+    CreateAPIKeyRequest:
+      example:
+        expires: 2000-01-23T04:56:07.000+00:00
+        label: label
+      properties:
+        label:
+          type: string
+        expires:
+          description: Date at which the api-key will expire
+          format: date-time
+          nullable: true
+          type: string
+      type: object
+    CreateAPIKeyResponse:
+      $ref: "#/components/schemas/CreateAPIKeyResponseEnvelope"
+    CreateAPIKeyResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            $ref: "#/components/schemas/GetAssetByIDResponseEnvelope_allOf_data"
+      example:
+        metadata:
+          trace_id: trace_id
+          status_code: 0
+          request_id: request_id
+        data: null
+        error: error
+    CreateAPIKeyData:
+      properties:
+        key_id:
+          type: string
+        api_key:
+          type: string
+        label:
+          type: string
+      type: object
+    RevokeAPIKeyResponse:
+      $ref: "#/components/schemas/RevokeAPIKeyResponseEnvelope"
+    RevokeAPIKeyResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            $ref: "#/components/schemas/GetAssetByIDResponseEnvelope_allOf_data"
+      example:
+        metadata:
+          trace_id: trace_id
+          status_code: 0
+          request_id: request_id
+        data: null
+        error: error
+    RevokeAPIKeyData:
+      properties:
+        user_id:
+          format: uuid
+          type: string
+        key_id:
+          type: string
+        label:
+          type: string
+        is_active:
+          type: boolean
+      type: object
+    GetAssetByIDResponseEnvelope_allOf_data:
+      type: object
+    StreamAssetPricesResponse_value:
+      properties:
+        asset_id:
+          format: uuid
+          type: string
+        price:
+          format: decimal
+          type: string
+        time:
+          format: date-time
+          type: string
+      required:
+      - asset_id
+      - price
+      - time
+      type: object
+  securitySchemes:
+    BearerAuth:
+      scheme: bearer
+      type: http
