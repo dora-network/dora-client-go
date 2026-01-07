@@ -1819,7 +1819,7 @@ func (r ApiGetAssetsStreamRequest) Until(until time.Time) ApiGetAssetsStreamRequ
 	return r
 }
 
-func (r ApiGetAssetsStreamRequest) Execute() (*StreamAssetsResponse, *http.Response, error) {
+func (r ApiGetAssetsStreamRequest) Execute() ([]StreamAssetsEntry, *http.Response, error) {
 	return r.ApiService.GetAssetsStreamExecute(r)
 }
 
@@ -1837,13 +1837,13 @@ func (a *DefaultAPIService) GetAssetsStream(ctx context.Context) ApiGetAssetsStr
 }
 
 // Execute executes the request
-//  @return StreamAssetsResponse
-func (a *DefaultAPIService) GetAssetsStreamExecute(r ApiGetAssetsStreamRequest) (*StreamAssetsResponse, *http.Response, error) {
+//  @return []StreamAssetsEntry
+func (a *DefaultAPIService) GetAssetsStreamExecute(r ApiGetAssetsStreamRequest) ([]StreamAssetsEntry, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *StreamAssetsResponse
+		localVarReturnValue  []StreamAssetsEntry
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DefaultAPIService.GetAssetsStream")
@@ -5612,7 +5612,7 @@ type ApiGetUserLedgerStreamRequest struct {
 	userId string
 }
 
-func (r ApiGetUserLedgerStreamRequest) Execute() (*StreamPositionsResponse, *http.Response, error) {
+func (r ApiGetUserLedgerStreamRequest) Execute() ([]StreamPositionsEntry, *http.Response, error) {
 	return r.ApiService.GetUserLedgerStreamExecute(r)
 }
 
@@ -5632,13 +5632,13 @@ func (a *DefaultAPIService) GetUserLedgerStream(ctx context.Context, userId stri
 }
 
 // Execute executes the request
-//  @return StreamPositionsResponse
-func (a *DefaultAPIService) GetUserLedgerStreamExecute(r ApiGetUserLedgerStreamRequest) (*StreamPositionsResponse, *http.Response, error) {
+//  @return []StreamPositionsEntry
+func (a *DefaultAPIService) GetUserLedgerStreamExecute(r ApiGetUserLedgerStreamRequest) ([]StreamPositionsEntry, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *StreamPositionsResponse
+		localVarReturnValue  []StreamPositionsEntry
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DefaultAPIService.GetUserLedgerStream")
@@ -5777,7 +5777,7 @@ func (r ApiGetUserOrderUpdatesStreamRequest) Since(since time.Time) ApiGetUserOr
 	return r
 }
 
-func (r ApiGetUserOrderUpdatesStreamRequest) Execute() (*StreamOrderUpdatesResponse, *http.Response, error) {
+func (r ApiGetUserOrderUpdatesStreamRequest) Execute() ([]StreamOrderUpdatesEntry, *http.Response, error) {
 	return r.ApiService.GetUserOrderUpdatesStreamExecute(r)
 }
 
@@ -5799,13 +5799,13 @@ func (a *DefaultAPIService) GetUserOrderUpdatesStream(ctx context.Context, userI
 }
 
 // Execute executes the request
-//  @return StreamOrderUpdatesResponse
-func (a *DefaultAPIService) GetUserOrderUpdatesStreamExecute(r ApiGetUserOrderUpdatesStreamRequest) (*StreamOrderUpdatesResponse, *http.Response, error) {
+//  @return []StreamOrderUpdatesEntry
+func (a *DefaultAPIService) GetUserOrderUpdatesStreamExecute(r ApiGetUserOrderUpdatesStreamRequest) ([]StreamOrderUpdatesEntry, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *StreamOrderUpdatesResponse
+		localVarReturnValue  []StreamOrderUpdatesEntry
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DefaultAPIService.GetUserOrderUpdatesStream")
@@ -5947,7 +5947,7 @@ func (r ApiGetUserOrdersUpdatesStreamAllRequest) Since(since time.Time) ApiGetUs
 	return r
 }
 
-func (r ApiGetUserOrdersUpdatesStreamAllRequest) Execute() (*StreamOrderUpdatesResponse, *http.Response, error) {
+func (r ApiGetUserOrdersUpdatesStreamAllRequest) Execute() ([]StreamOrderUpdatesEntry, *http.Response, error) {
 	return r.ApiService.GetUserOrdersUpdatesStreamAllExecute(r)
 }
 
@@ -5967,13 +5967,13 @@ func (a *DefaultAPIService) GetUserOrdersUpdatesStreamAll(ctx context.Context, u
 }
 
 // Execute executes the request
-//  @return StreamOrderUpdatesResponse
-func (a *DefaultAPIService) GetUserOrdersUpdatesStreamAllExecute(r ApiGetUserOrdersUpdatesStreamAllRequest) (*StreamOrderUpdatesResponse, *http.Response, error) {
+//  @return []StreamOrderUpdatesEntry
+func (a *DefaultAPIService) GetUserOrdersUpdatesStreamAllExecute(r ApiGetUserOrdersUpdatesStreamAllRequest) ([]StreamOrderUpdatesEntry, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *StreamOrderUpdatesResponse
+		localVarReturnValue  []StreamOrderUpdatesEntry
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DefaultAPIService.GetUserOrdersUpdatesStreamAll")
@@ -6257,7 +6257,7 @@ func (r ApiGetUserTransactionsStreamRequest) Since(since time.Time) ApiGetUserTr
 	return r
 }
 
-func (r ApiGetUserTransactionsStreamRequest) Execute() (*StreamTransactionsResponse, *http.Response, error) {
+func (r ApiGetUserTransactionsStreamRequest) Execute() ([]StreamTransactionsEntry, *http.Response, error) {
 	return r.ApiService.GetUserTransactionsStreamExecute(r)
 }
 
@@ -6277,13 +6277,13 @@ func (a *DefaultAPIService) GetUserTransactionsStream(ctx context.Context, userI
 }
 
 // Execute executes the request
-//  @return StreamTransactionsResponse
-func (a *DefaultAPIService) GetUserTransactionsStreamExecute(r ApiGetUserTransactionsStreamRequest) (*StreamTransactionsResponse, *http.Response, error) {
+//  @return []StreamTransactionsEntry
+func (a *DefaultAPIService) GetUserTransactionsStreamExecute(r ApiGetUserTransactionsStreamRequest) ([]StreamTransactionsEntry, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *StreamTransactionsResponse
+		localVarReturnValue  []StreamTransactionsEntry
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DefaultAPIService.GetUserTransactionsStream")
@@ -8851,7 +8851,7 @@ func (r ApiStreamAssetPricesRequest) AssetId(assetId string) ApiStreamAssetPrice
 	return r
 }
 
-func (r ApiStreamAssetPricesRequest) Execute() (*StreamAssetPricesResponse, *http.Response, error) {
+func (r ApiStreamAssetPricesRequest) Execute() (*map[string]StreamedAssetPrice, *http.Response, error) {
 	return r.ApiService.StreamAssetPricesExecute(r)
 }
 
@@ -8871,13 +8871,13 @@ func (a *DefaultAPIService) StreamAssetPrices(ctx context.Context) ApiStreamAsse
 }
 
 // Execute executes the request
-//  @return StreamAssetPricesResponse
-func (a *DefaultAPIService) StreamAssetPricesExecute(r ApiStreamAssetPricesRequest) (*StreamAssetPricesResponse, *http.Response, error) {
+//  @return map[string]StreamedAssetPrice
+func (a *DefaultAPIService) StreamAssetPricesExecute(r ApiStreamAssetPricesRequest) (*map[string]StreamedAssetPrice, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *StreamAssetPricesResponse
+		localVarReturnValue  *map[string]StreamedAssetPrice
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DefaultAPIService.StreamAssetPrices")
@@ -8990,7 +8990,7 @@ func (r ApiStreamCandleDataRequest) Resolution(resolution CandleResolution) ApiS
 	return r
 }
 
-func (r ApiStreamCandleDataRequest) Execute() (*StreamCandlesResponse, *http.Response, error) {
+func (r ApiStreamCandleDataRequest) Execute() ([]StreamCandlesEntry, *http.Response, error) {
 	return r.ApiService.StreamCandleDataExecute(r)
 }
 
@@ -9010,13 +9010,13 @@ func (a *DefaultAPIService) StreamCandleData(ctx context.Context, orderBookId st
 }
 
 // Execute executes the request
-//  @return StreamCandlesResponse
-func (a *DefaultAPIService) StreamCandleDataExecute(r ApiStreamCandleDataRequest) (*StreamCandlesResponse, *http.Response, error) {
+//  @return []StreamCandlesEntry
+func (a *DefaultAPIService) StreamCandleDataExecute(r ApiStreamCandleDataRequest) ([]StreamCandlesEntry, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *StreamCandlesResponse
+		localVarReturnValue  []StreamCandlesEntry
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DefaultAPIService.StreamCandleData")
@@ -9135,7 +9135,7 @@ func (r ApiStreamOrderBookBalancesRequest) Since(since time.Time) ApiStreamOrder
 	return r
 }
 
-func (r ApiStreamOrderBookBalancesRequest) Execute() (*StreamOrderBookBalancesResponse, *http.Response, error) {
+func (r ApiStreamOrderBookBalancesRequest) Execute() ([]StreamOrderBookBalanceEntry, *http.Response, error) {
 	return r.ApiService.StreamOrderBookBalancesExecute(r)
 }
 
@@ -9155,13 +9155,13 @@ func (a *DefaultAPIService) StreamOrderBookBalances(ctx context.Context, orderBo
 }
 
 // Execute executes the request
-//  @return StreamOrderBookBalancesResponse
-func (a *DefaultAPIService) StreamOrderBookBalancesExecute(r ApiStreamOrderBookBalancesRequest) (*StreamOrderBookBalancesResponse, *http.Response, error) {
+//  @return []StreamOrderBookBalanceEntry
+func (a *DefaultAPIService) StreamOrderBookBalancesExecute(r ApiStreamOrderBookBalancesRequest) ([]StreamOrderBookBalanceEntry, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *StreamOrderBookBalancesResponse
+		localVarReturnValue  []StreamOrderBookBalanceEntry
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DefaultAPIService.StreamOrderBookBalances")
@@ -9419,7 +9419,7 @@ func (r ApiStreamTradesRequest) Since(since time.Time) ApiStreamTradesRequest {
 	return r
 }
 
-func (r ApiStreamTradesRequest) Execute() (*StreamTradesResponse, *http.Response, error) {
+func (r ApiStreamTradesRequest) Execute() ([]StreamTradesEntry, *http.Response, error) {
 	return r.ApiService.StreamTradesExecute(r)
 }
 
@@ -9439,13 +9439,13 @@ func (a *DefaultAPIService) StreamTrades(ctx context.Context, orderBookId string
 }
 
 // Execute executes the request
-//  @return StreamTradesResponse
-func (a *DefaultAPIService) StreamTradesExecute(r ApiStreamTradesRequest) (*StreamTradesResponse, *http.Response, error) {
+//  @return []StreamTradesEntry
+func (a *DefaultAPIService) StreamTradesExecute(r ApiStreamTradesRequest) ([]StreamTradesEntry, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *StreamTradesResponse
+		localVarReturnValue  []StreamTradesEntry
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DefaultAPIService.StreamTrades")
