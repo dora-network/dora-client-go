@@ -20,12 +20,12 @@ type PositionType string
 
 // List of PositionType
 const (
-	OWNED PositionType = "Owned"
-	LOCKED PositionType = "Locked"
-	SUPPLIED PositionType = "Supplied"
-	STABLECOIN_EQUIVALENTS PositionType = "Stablecoin Equivalents"
-	INACTIVE PositionType = "Inactive"
-	INTEREST_SOURCES PositionType = "Interest Sources"
+	POSITIONTYPE_OWNED PositionType = "Owned"
+	POSITIONTYPE_LOCKED PositionType = "Locked"
+	POSITIONTYPE_SUPPLIED PositionType = "Supplied"
+	POSITIONTYPE_STABLECOIN_EQUIVALENTS PositionType = "Stablecoin Equivalents"
+	POSITIONTYPE_INACTIVE PositionType = "Inactive"
+	POSITIONTYPE_INTEREST_SOURCES PositionType = "Interest Sources"
 )
 
 // All allowed values of PositionType enum

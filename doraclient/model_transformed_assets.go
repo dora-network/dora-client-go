@@ -20,9 +20,9 @@ var _ MappedNullable = &TransformedAssets{}
 // TransformedAssets struct for TransformedAssets
 type TransformedAssets struct {
 	// Assets that have been gained by stablecoin equivalence transformations. They cannot be withdrawn from the platform until converted back to the original asset.
-	Gained *map[string]float64 `json:"gained,omitempty"`
+	Gained map[string]string `json:"gained,omitempty"`
 	// Assets that have been lost by stablecoin equivalence transformations. They can be recovered by converting back any assets gained by stablecoin equivalence transformations.
-	Lost *map[string]float64 `json:"lost,omitempty"`
+	Lost map[string]string `json:"lost,omitempty"`
 }
 
 // NewTransformedAssets instantiates a new TransformedAssets object
@@ -43,19 +43,19 @@ func NewTransformedAssetsWithDefaults() *TransformedAssets {
 }
 
 // GetGained returns the Gained field value if set, zero value otherwise.
-func (o *TransformedAssets) GetGained() map[string]float64 {
+func (o *TransformedAssets) GetGained() map[string]string {
 	if o == nil || IsNil(o.Gained) {
-		var ret map[string]float64
+		var ret map[string]string
 		return ret
 	}
-	return *o.Gained
+	return o.Gained
 }
 
 // GetGainedOk returns a tuple with the Gained field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *TransformedAssets) GetGainedOk() (*map[string]float64, bool) {
+func (o *TransformedAssets) GetGainedOk() (map[string]string, bool) {
 	if o == nil || IsNil(o.Gained) {
-		return nil, false
+		return map[string]string{}, false
 	}
 	return o.Gained, true
 }
@@ -69,25 +69,25 @@ func (o *TransformedAssets) HasGained() bool {
 	return false
 }
 
-// SetGained gets a reference to the given map[string]float64 and assigns it to the Gained field.
-func (o *TransformedAssets) SetGained(v map[string]float64) {
-	o.Gained = &v
+// SetGained gets a reference to the given map[string]string and assigns it to the Gained field.
+func (o *TransformedAssets) SetGained(v map[string]string) {
+	o.Gained = v
 }
 
 // GetLost returns the Lost field value if set, zero value otherwise.
-func (o *TransformedAssets) GetLost() map[string]float64 {
+func (o *TransformedAssets) GetLost() map[string]string {
 	if o == nil || IsNil(o.Lost) {
-		var ret map[string]float64
+		var ret map[string]string
 		return ret
 	}
-	return *o.Lost
+	return o.Lost
 }
 
 // GetLostOk returns a tuple with the Lost field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *TransformedAssets) GetLostOk() (*map[string]float64, bool) {
+func (o *TransformedAssets) GetLostOk() (map[string]string, bool) {
 	if o == nil || IsNil(o.Lost) {
-		return nil, false
+		return map[string]string{}, false
 	}
 	return o.Lost, true
 }
@@ -101,9 +101,9 @@ func (o *TransformedAssets) HasLost() bool {
 	return false
 }
 
-// SetLost gets a reference to the given map[string]float64 and assigns it to the Lost field.
-func (o *TransformedAssets) SetLost(v map[string]float64) {
-	o.Lost = &v
+// SetLost gets a reference to the given map[string]string and assigns it to the Lost field.
+func (o *TransformedAssets) SetLost(v map[string]string) {
+	o.Lost = v
 }
 
 func (o TransformedAssets) MarshalJSON() ([]byte, error) {

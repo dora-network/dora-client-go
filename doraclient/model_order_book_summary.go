@@ -20,10 +20,10 @@ var _ MappedNullable = &OrderBookSummary{}
 // OrderBookSummary struct for OrderBookSummary
 type OrderBookSummary struct {
 	OrderBookId *string `json:"order_book_id,omitempty"`
-	MidPrice *float64 `json:"mid_price,omitempty"`
-	Spread *float64 `json:"spread,omitempty"`
-	BestBid *float64 `json:"best_bid,omitempty"`
-	BestAsk *float64 `json:"best_ask,omitempty"`
+	MidPrice *string `json:"mid_price,omitempty"`
+	Spread *string `json:"spread,omitempty"`
+	BestBid *string `json:"best_bid,omitempty"`
+	BestAsk *string `json:"best_ask,omitempty"`
 }
 
 // NewOrderBookSummary instantiates a new OrderBookSummary object
@@ -76,9 +76,9 @@ func (o *OrderBookSummary) SetOrderBookId(v string) {
 }
 
 // GetMidPrice returns the MidPrice field value if set, zero value otherwise.
-func (o *OrderBookSummary) GetMidPrice() float64 {
+func (o *OrderBookSummary) GetMidPrice() string {
 	if o == nil || IsNil(o.MidPrice) {
-		var ret float64
+		var ret string
 		return ret
 	}
 	return *o.MidPrice
@@ -86,7 +86,7 @@ func (o *OrderBookSummary) GetMidPrice() float64 {
 
 // GetMidPriceOk returns a tuple with the MidPrice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *OrderBookSummary) GetMidPriceOk() (*float64, bool) {
+func (o *OrderBookSummary) GetMidPriceOk() (*string, bool) {
 	if o == nil || IsNil(o.MidPrice) {
 		return nil, false
 	}
@@ -102,15 +102,15 @@ func (o *OrderBookSummary) HasMidPrice() bool {
 	return false
 }
 
-// SetMidPrice gets a reference to the given float64 and assigns it to the MidPrice field.
-func (o *OrderBookSummary) SetMidPrice(v float64) {
+// SetMidPrice gets a reference to the given string and assigns it to the MidPrice field.
+func (o *OrderBookSummary) SetMidPrice(v string) {
 	o.MidPrice = &v
 }
 
 // GetSpread returns the Spread field value if set, zero value otherwise.
-func (o *OrderBookSummary) GetSpread() float64 {
+func (o *OrderBookSummary) GetSpread() string {
 	if o == nil || IsNil(o.Spread) {
-		var ret float64
+		var ret string
 		return ret
 	}
 	return *o.Spread
@@ -118,7 +118,7 @@ func (o *OrderBookSummary) GetSpread() float64 {
 
 // GetSpreadOk returns a tuple with the Spread field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *OrderBookSummary) GetSpreadOk() (*float64, bool) {
+func (o *OrderBookSummary) GetSpreadOk() (*string, bool) {
 	if o == nil || IsNil(o.Spread) {
 		return nil, false
 	}
@@ -134,15 +134,15 @@ func (o *OrderBookSummary) HasSpread() bool {
 	return false
 }
 
-// SetSpread gets a reference to the given float64 and assigns it to the Spread field.
-func (o *OrderBookSummary) SetSpread(v float64) {
+// SetSpread gets a reference to the given string and assigns it to the Spread field.
+func (o *OrderBookSummary) SetSpread(v string) {
 	o.Spread = &v
 }
 
 // GetBestBid returns the BestBid field value if set, zero value otherwise.
-func (o *OrderBookSummary) GetBestBid() float64 {
+func (o *OrderBookSummary) GetBestBid() string {
 	if o == nil || IsNil(o.BestBid) {
-		var ret float64
+		var ret string
 		return ret
 	}
 	return *o.BestBid
@@ -150,7 +150,7 @@ func (o *OrderBookSummary) GetBestBid() float64 {
 
 // GetBestBidOk returns a tuple with the BestBid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *OrderBookSummary) GetBestBidOk() (*float64, bool) {
+func (o *OrderBookSummary) GetBestBidOk() (*string, bool) {
 	if o == nil || IsNil(o.BestBid) {
 		return nil, false
 	}
@@ -166,15 +166,15 @@ func (o *OrderBookSummary) HasBestBid() bool {
 	return false
 }
 
-// SetBestBid gets a reference to the given float64 and assigns it to the BestBid field.
-func (o *OrderBookSummary) SetBestBid(v float64) {
+// SetBestBid gets a reference to the given string and assigns it to the BestBid field.
+func (o *OrderBookSummary) SetBestBid(v string) {
 	o.BestBid = &v
 }
 
 // GetBestAsk returns the BestAsk field value if set, zero value otherwise.
-func (o *OrderBookSummary) GetBestAsk() float64 {
+func (o *OrderBookSummary) GetBestAsk() string {
 	if o == nil || IsNil(o.BestAsk) {
-		var ret float64
+		var ret string
 		return ret
 	}
 	return *o.BestAsk
@@ -182,7 +182,7 @@ func (o *OrderBookSummary) GetBestAsk() float64 {
 
 // GetBestAskOk returns a tuple with the BestAsk field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *OrderBookSummary) GetBestAskOk() (*float64, bool) {
+func (o *OrderBookSummary) GetBestAskOk() (*string, bool) {
 	if o == nil || IsNil(o.BestAsk) {
 		return nil, false
 	}
@@ -198,8 +198,8 @@ func (o *OrderBookSummary) HasBestAsk() bool {
 	return false
 }
 
-// SetBestAsk gets a reference to the given float64 and assigns it to the BestAsk field.
-func (o *OrderBookSummary) SetBestAsk(v float64) {
+// SetBestAsk gets a reference to the given string and assigns it to the BestAsk field.
+func (o *OrderBookSummary) SetBestAsk(v string) {
 	o.BestAsk = &v
 }
 

@@ -21,8 +21,8 @@ var _ MappedNullable = &OrderBookTop{}
 // OrderBookTop struct for OrderBookTop
 type OrderBookTop struct {
 	OrderBookId *string `json:"order_book_id,omitempty"`
-	BestBid *float64 `json:"best_bid,omitempty"`
-	BestAsk *float64 `json:"best_ask,omitempty"`
+	BestBid *string `json:"best_bid,omitempty"`
+	BestAsk *string `json:"best_ask,omitempty"`
 	Timestamp *time.Time `json:"timestamp,omitempty"`
 }
 
@@ -76,9 +76,9 @@ func (o *OrderBookTop) SetOrderBookId(v string) {
 }
 
 // GetBestBid returns the BestBid field value if set, zero value otherwise.
-func (o *OrderBookTop) GetBestBid() float64 {
+func (o *OrderBookTop) GetBestBid() string {
 	if o == nil || IsNil(o.BestBid) {
-		var ret float64
+		var ret string
 		return ret
 	}
 	return *o.BestBid
@@ -86,7 +86,7 @@ func (o *OrderBookTop) GetBestBid() float64 {
 
 // GetBestBidOk returns a tuple with the BestBid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *OrderBookTop) GetBestBidOk() (*float64, bool) {
+func (o *OrderBookTop) GetBestBidOk() (*string, bool) {
 	if o == nil || IsNil(o.BestBid) {
 		return nil, false
 	}
@@ -102,15 +102,15 @@ func (o *OrderBookTop) HasBestBid() bool {
 	return false
 }
 
-// SetBestBid gets a reference to the given float64 and assigns it to the BestBid field.
-func (o *OrderBookTop) SetBestBid(v float64) {
+// SetBestBid gets a reference to the given string and assigns it to the BestBid field.
+func (o *OrderBookTop) SetBestBid(v string) {
 	o.BestBid = &v
 }
 
 // GetBestAsk returns the BestAsk field value if set, zero value otherwise.
-func (o *OrderBookTop) GetBestAsk() float64 {
+func (o *OrderBookTop) GetBestAsk() string {
 	if o == nil || IsNil(o.BestAsk) {
-		var ret float64
+		var ret string
 		return ret
 	}
 	return *o.BestAsk
@@ -118,7 +118,7 @@ func (o *OrderBookTop) GetBestAsk() float64 {
 
 // GetBestAskOk returns a tuple with the BestAsk field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *OrderBookTop) GetBestAskOk() (*float64, bool) {
+func (o *OrderBookTop) GetBestAskOk() (*string, bool) {
 	if o == nil || IsNil(o.BestAsk) {
 		return nil, false
 	}
@@ -134,8 +134,8 @@ func (o *OrderBookTop) HasBestAsk() bool {
 	return false
 }
 
-// SetBestAsk gets a reference to the given float64 and assigns it to the BestAsk field.
-func (o *OrderBookTop) SetBestAsk(v float64) {
+// SetBestAsk gets a reference to the given string and assigns it to the BestAsk field.
+func (o *OrderBookTop) SetBestAsk(v string) {
 	o.BestAsk = &v
 }
 

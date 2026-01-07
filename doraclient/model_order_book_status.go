@@ -20,9 +20,9 @@ type OrderBookStatus string
 
 // List of OrderBookStatus
 const (
-	CLOSED OrderBookStatus = "CLOSED"
-	OPEN OrderBookStatus = "OPEN"
-	SUSPENDED OrderBookStatus = "SUSPENDED"
+	ORDERBOOKSTATUS_CLOSED OrderBookStatus = "CLOSED"
+	ORDERBOOKSTATUS_OPEN OrderBookStatus = "OPEN"
+	ORDERBOOKSTATUS_SUSPENDED OrderBookStatus = "SUSPENDED"
 )
 
 // All allowed values of OrderBookStatus enum

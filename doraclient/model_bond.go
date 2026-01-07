@@ -22,14 +22,14 @@ var _ MappedNullable = &Bond{}
 type Bond struct {
 	Id *string `json:"id,omitempty"`
 	Kind *BondKind `json:"kind,omitempty"`
-	CouponStartAt NullableTime `json:"coupon_start_at,omitempty"`
+	CouponStartAt *time.Time `json:"coupon_start_at,omitempty"`
 	CreatedAt *time.Time `json:"created_at,omitempty"`
-	FinalCouponAt NullableTime `json:"final_coupon_at,omitempty"`
+	FinalCouponAt *time.Time `json:"final_coupon_at,omitempty"`
 	Isin *string `json:"isin,omitempty"`
 	IssuedAt *time.Time `json:"issued_at,omitempty"`
 	Issuer *string `json:"issuer,omitempty"`
 	MaturityAt *time.Time `json:"maturity_at,omitempty"`
-	PrincipalValue *float64 `json:"principal_value,omitempty"`
+	PrincipalValue *string `json:"principal_value,omitempty"`
 	PaymentsPerYear *int32 `json:"payments_per_year,omitempty"`
 	// Coupon payment frequency in nanoseconds (minimum 1000 i.e. 1 microsecond)
 	PaymentsEvery *int32 `json:"payments_every,omitempty"`
@@ -117,46 +117,36 @@ func (o *Bond) SetKind(v BondKind) {
 	o.Kind = &v
 }
 
-// GetCouponStartAt returns the CouponStartAt field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetCouponStartAt returns the CouponStartAt field value if set, zero value otherwise.
 func (o *Bond) GetCouponStartAt() time.Time {
-	if o == nil || IsNil(o.CouponStartAt.Get()) {
+	if o == nil || IsNil(o.CouponStartAt) {
 		var ret time.Time
 		return ret
 	}
-	return *o.CouponStartAt.Get()
+	return *o.CouponStartAt
 }
 
 // GetCouponStartAtOk returns a tuple with the CouponStartAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Bond) GetCouponStartAtOk() (*time.Time, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.CouponStartAt) {
 		return nil, false
 	}
-	return o.CouponStartAt.Get(), o.CouponStartAt.IsSet()
+	return o.CouponStartAt, true
 }
 
 // HasCouponStartAt returns a boolean if a field has been set.
 func (o *Bond) HasCouponStartAt() bool {
-	if o != nil && o.CouponStartAt.IsSet() {
+	if o != nil && !IsNil(o.CouponStartAt) {
 		return true
 	}
 
 	return false
 }
 
-// SetCouponStartAt gets a reference to the given NullableTime and assigns it to the CouponStartAt field.
+// SetCouponStartAt gets a reference to the given time.Time and assigns it to the CouponStartAt field.
 func (o *Bond) SetCouponStartAt(v time.Time) {
-	o.CouponStartAt.Set(&v)
-}
-// SetCouponStartAtNil sets the value for CouponStartAt to be an explicit nil
-func (o *Bond) SetCouponStartAtNil() {
-	o.CouponStartAt.Set(nil)
-}
-
-// UnsetCouponStartAt ensures that no value is present for CouponStartAt, not even an explicit nil
-func (o *Bond) UnsetCouponStartAt() {
-	o.CouponStartAt.Unset()
+	o.CouponStartAt = &v
 }
 
 // GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
@@ -191,46 +181,36 @@ func (o *Bond) SetCreatedAt(v time.Time) {
 	o.CreatedAt = &v
 }
 
-// GetFinalCouponAt returns the FinalCouponAt field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetFinalCouponAt returns the FinalCouponAt field value if set, zero value otherwise.
 func (o *Bond) GetFinalCouponAt() time.Time {
-	if o == nil || IsNil(o.FinalCouponAt.Get()) {
+	if o == nil || IsNil(o.FinalCouponAt) {
 		var ret time.Time
 		return ret
 	}
-	return *o.FinalCouponAt.Get()
+	return *o.FinalCouponAt
 }
 
 // GetFinalCouponAtOk returns a tuple with the FinalCouponAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Bond) GetFinalCouponAtOk() (*time.Time, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.FinalCouponAt) {
 		return nil, false
 	}
-	return o.FinalCouponAt.Get(), o.FinalCouponAt.IsSet()
+	return o.FinalCouponAt, true
 }
 
 // HasFinalCouponAt returns a boolean if a field has been set.
 func (o *Bond) HasFinalCouponAt() bool {
-	if o != nil && o.FinalCouponAt.IsSet() {
+	if o != nil && !IsNil(o.FinalCouponAt) {
 		return true
 	}
 
 	return false
 }
 
-// SetFinalCouponAt gets a reference to the given NullableTime and assigns it to the FinalCouponAt field.
+// SetFinalCouponAt gets a reference to the given time.Time and assigns it to the FinalCouponAt field.
 func (o *Bond) SetFinalCouponAt(v time.Time) {
-	o.FinalCouponAt.Set(&v)
-}
-// SetFinalCouponAtNil sets the value for FinalCouponAt to be an explicit nil
-func (o *Bond) SetFinalCouponAtNil() {
-	o.FinalCouponAt.Set(nil)
-}
-
-// UnsetFinalCouponAt ensures that no value is present for FinalCouponAt, not even an explicit nil
-func (o *Bond) UnsetFinalCouponAt() {
-	o.FinalCouponAt.Unset()
+	o.FinalCouponAt = &v
 }
 
 // GetIsin returns the Isin field value if set, zero value otherwise.
@@ -362,9 +342,9 @@ func (o *Bond) SetMaturityAt(v time.Time) {
 }
 
 // GetPrincipalValue returns the PrincipalValue field value if set, zero value otherwise.
-func (o *Bond) GetPrincipalValue() float64 {
+func (o *Bond) GetPrincipalValue() string {
 	if o == nil || IsNil(o.PrincipalValue) {
-		var ret float64
+		var ret string
 		return ret
 	}
 	return *o.PrincipalValue
@@ -372,7 +352,7 @@ func (o *Bond) GetPrincipalValue() float64 {
 
 // GetPrincipalValueOk returns a tuple with the PrincipalValue field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Bond) GetPrincipalValueOk() (*float64, bool) {
+func (o *Bond) GetPrincipalValueOk() (*string, bool) {
 	if o == nil || IsNil(o.PrincipalValue) {
 		return nil, false
 	}
@@ -388,8 +368,8 @@ func (o *Bond) HasPrincipalValue() bool {
 	return false
 }
 
-// SetPrincipalValue gets a reference to the given float64 and assigns it to the PrincipalValue field.
-func (o *Bond) SetPrincipalValue(v float64) {
+// SetPrincipalValue gets a reference to the given string and assigns it to the PrincipalValue field.
+func (o *Bond) SetPrincipalValue(v string) {
 	o.PrincipalValue = &v
 }
 
@@ -505,14 +485,14 @@ func (o Bond) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Kind) {
 		toSerialize["kind"] = o.Kind
 	}
-	if o.CouponStartAt.IsSet() {
-		toSerialize["coupon_start_at"] = o.CouponStartAt.Get()
+	if !IsNil(o.CouponStartAt) {
+		toSerialize["coupon_start_at"] = o.CouponStartAt
 	}
 	if !IsNil(o.CreatedAt) {
 		toSerialize["created_at"] = o.CreatedAt
 	}
-	if o.FinalCouponAt.IsSet() {
-		toSerialize["final_coupon_at"] = o.FinalCouponAt.Get()
+	if !IsNil(o.FinalCouponAt) {
+		toSerialize["final_coupon_at"] = o.FinalCouponAt
 	}
 	if !IsNil(o.Isin) {
 		toSerialize["isin"] = o.Isin

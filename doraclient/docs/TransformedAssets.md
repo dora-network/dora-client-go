@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Gained** | Pointer to **map[string]float64** | Assets that have been gained by stablecoin equivalence transformations. They cannot be withdrawn from the platform until converted back to the original asset. | [optional] 
-**Lost** | Pointer to **map[string]float64** | Assets that have been lost by stablecoin equivalence transformations. They can be recovered by converting back any assets gained by stablecoin equivalence transformations. | [optional] 
+**Gained** | Pointer to **map[string]string** | Assets that have been gained by stablecoin equivalence transformations. They cannot be withdrawn from the platform until converted back to the original asset. | [optional] 
+**Lost** | Pointer to **map[string]string** | Assets that have been lost by stablecoin equivalence transformations. They can be recovered by converting back any assets gained by stablecoin equivalence transformations. | [optional] 
 
 ## Methods
 
@@ -28,20 +28,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetGained
 
-`func (o *TransformedAssets) GetGained() map[string]float64`
+`func (o *TransformedAssets) GetGained() map[string]string`
 
 GetGained returns the Gained field if non-nil, zero value otherwise.
 
 ### GetGainedOk
 
-`func (o *TransformedAssets) GetGainedOk() (*map[string]float64, bool)`
+`func (o *TransformedAssets) GetGainedOk() (*map[string]string, bool)`
 
 GetGainedOk returns a tuple with the Gained field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetGained
 
-`func (o *TransformedAssets) SetGained(v map[string]float64)`
+`func (o *TransformedAssets) SetGained(v map[string]string)`
 
 SetGained sets Gained field to given value.
 
@@ -53,20 +53,20 @@ HasGained returns a boolean if a field has been set.
 
 ### GetLost
 
-`func (o *TransformedAssets) GetLost() map[string]float64`
+`func (o *TransformedAssets) GetLost() map[string]string`
 
 GetLost returns the Lost field if non-nil, zero value otherwise.
 
 ### GetLostOk
 
-`func (o *TransformedAssets) GetLostOk() (*map[string]float64, bool)`
+`func (o *TransformedAssets) GetLostOk() (*map[string]string, bool)`
 
 GetLostOk returns a tuple with the Lost field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetLost
 
-`func (o *TransformedAssets) SetLost(v map[string]float64)`
+`func (o *TransformedAssets) SetLost(v map[string]string)`
 
 SetLost sets Lost field to given value.
 

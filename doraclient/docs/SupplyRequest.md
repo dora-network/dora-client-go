@@ -6,13 +6,13 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **PositionId** | **string** |  | 
 **AssetId** | **string** |  | 
-**Quantity** | **float64** |  | 
+**Quantity** | **string** |  | 
 
 ## Methods
 
 ### NewSupplyRequest
 
-`func NewSupplyRequest(positionId string, assetId string, quantity float64, ) *SupplyRequest`
+`func NewSupplyRequest(positionId string, assetId string, quantity string, ) *SupplyRequest`
 
 NewSupplyRequest instantiates a new SupplyRequest object
 This constructor will assign default values to properties that have it defined,
@@ -69,20 +69,20 @@ SetAssetId sets AssetId field to given value.
 
 ### GetQuantity
 
-`func (o *SupplyRequest) GetQuantity() float64`
+`func (o *SupplyRequest) GetQuantity() string`
 
 GetQuantity returns the Quantity field if non-nil, zero value otherwise.
 
 ### GetQuantityOk
 
-`func (o *SupplyRequest) GetQuantityOk() (*float64, bool)`
+`func (o *SupplyRequest) GetQuantityOk() (*string, bool)`
 
 GetQuantityOk returns a tuple with the Quantity field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetQuantity
 
-`func (o *SupplyRequest) SetQuantity(v float64)`
+`func (o *SupplyRequest) SetQuantity(v string)`
 
 SetQuantity sets Quantity field to given value.
 

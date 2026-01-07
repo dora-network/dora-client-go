@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Data** | Pointer to [**[]LeverageModuleResponse**](LeverageModuleResponse.md) |  | [optional] 
+**Data** | Pointer to **interface{}** |  | [optional] 
 **Error** | Pointer to **string** | The error message. Present for error (non-2xx) responses. | [optional] 
-**Metadata** | Pointer to [**Metadata**](Metadata.md) |  | [optional] 
+**Metadata** | Pointer to [**Metadata**](Metadata.md) | Metadata about the response, including status code and trace information. | [optional] 
 
 ## Methods
 
@@ -29,20 +29,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetData
 
-`func (o *LedgerModuleResponseEnvelope) GetData() []LeverageModuleResponse`
+`func (o *LedgerModuleResponseEnvelope) GetData() interface{}`
 
 GetData returns the Data field if non-nil, zero value otherwise.
 
 ### GetDataOk
 
-`func (o *LedgerModuleResponseEnvelope) GetDataOk() (*[]LeverageModuleResponse, bool)`
+`func (o *LedgerModuleResponseEnvelope) GetDataOk() (*interface{}, bool)`
 
 GetDataOk returns a tuple with the Data field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetData
 
-`func (o *LedgerModuleResponseEnvelope) SetData(v []LeverageModuleResponse)`
+`func (o *LedgerModuleResponseEnvelope) SetData(v interface{})`
 
 SetData sets Data field to given value.
 
@@ -52,6 +52,16 @@ SetData sets Data field to given value.
 
 HasData returns a boolean if a field has been set.
 
+### SetDataNil
+
+`func (o *LedgerModuleResponseEnvelope) SetDataNil(b bool)`
+
+ SetDataNil sets the value for Data to be an explicit nil
+
+### UnsetData
+`func (o *LedgerModuleResponseEnvelope) UnsetData()`
+
+UnsetData ensures that no value is present for Data, not even an explicit nil
 ### GetError
 
 `func (o *LedgerModuleResponseEnvelope) GetError() string`

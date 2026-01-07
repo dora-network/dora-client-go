@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Update** | **bool** | Whether to update the field. | 
-**Value** | Pointer to [**UserRole**](UserRole.md) |  | [optional] 
+**Value** | Pointer to [**UserRole**](UserRole.md) | The new value to set for the field. | [optional] 
 
 ## Methods
 

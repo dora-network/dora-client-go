@@ -19,9 +19,10 @@ var _ MappedNullable = &GetAssetByIDResponseEnvelope{}
 
 // GetAssetByIDResponseEnvelope struct for GetAssetByIDResponseEnvelope
 type GetAssetByIDResponseEnvelope struct {
-	Data interface{} `json:"data,omitempty"`
+	Data *Asset `json:"data,omitempty"`
 	// The error message. Present for error (non-2xx) responses.
 	Error *string `json:"error,omitempty"`
+	// Metadata about the response, including status code and trace information.
 	Metadata *Metadata `json:"metadata,omitempty"`
 }
 
@@ -43,19 +44,19 @@ func NewGetAssetByIDResponseEnvelopeWithDefaults() *GetAssetByIDResponseEnvelope
 }
 
 // GetData returns the Data field value if set, zero value otherwise.
-func (o *GetAssetByIDResponseEnvelope) GetData() interface{} {
+func (o *GetAssetByIDResponseEnvelope) GetData() Asset {
 	if o == nil || IsNil(o.Data) {
-		var ret interface{}
+		var ret Asset
 		return ret
 	}
-	return o.Data
+	return *o.Data
 }
 
 // GetDataOk returns a tuple with the Data field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetAssetByIDResponseEnvelope) GetDataOk() (interface{}, bool) {
+func (o *GetAssetByIDResponseEnvelope) GetDataOk() (*Asset, bool) {
 	if o == nil || IsNil(o.Data) {
-		return interface{}{}, false
+		return nil, false
 	}
 	return o.Data, true
 }
@@ -69,9 +70,9 @@ func (o *GetAssetByIDResponseEnvelope) HasData() bool {
 	return false
 }
 
-// SetData gets a reference to the given interface{} and assigns it to the Data field.
-func (o *GetAssetByIDResponseEnvelope) SetData(v interface{}) {
-	o.Data = v
+// SetData gets a reference to the given Asset and assigns it to the Data field.
+func (o *GetAssetByIDResponseEnvelope) SetData(v Asset) {
+	o.Data = &v
 }
 
 // GetError returns the Error field value if set, zero value otherwise.

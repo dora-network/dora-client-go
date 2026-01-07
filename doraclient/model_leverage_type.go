@@ -20,13 +20,13 @@ type LeverageType string
 
 // List of LeverageType
 const (
-	BALANCES LeverageType = "Balances"
-	SUPPLIED LeverageType = "Supplied"
-	VIRTUAL LeverageType = "Virtual"
-	BORROWED LeverageType = "Borrowed"
-	COUPON_FUNDS LeverageType = "Coupon Funds"
-	COUPON_FUND_SOURCES LeverageType = "Coupon Fund Sources"
-	SNAPSHOTS LeverageType = "Snapshots"
+	LEVERAGETYPE_BALANCES LeverageType = "Balances"
+	LEVERAGETYPE_SUPPLIED LeverageType = "Supplied"
+	LEVERAGETYPE_VIRTUAL LeverageType = "Virtual"
+	LEVERAGETYPE_BORROWED LeverageType = "Borrowed"
+	LEVERAGETYPE_COUPON_FUNDS LeverageType = "Coupon Funds"
+	LEVERAGETYPE_COUPON_FUND_SOURCES LeverageType = "Coupon Fund Sources"
+	LEVERAGETYPE_SNAPSHOTS LeverageType = "Snapshots"
 )
 
 // All allowed values of LeverageType enum

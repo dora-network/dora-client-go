@@ -22,6 +22,7 @@ type PoolRequestError struct {
 	// The response data. Present for successful (2xx) responses.
 	Data interface{} `json:"data,omitempty"`
 	Error *string `json:"error,omitempty"`
+	// Metadata about the response, including status code and trace information.
 	Metadata *Metadata `json:"metadata,omitempty"`
 }
 

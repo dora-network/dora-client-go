@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **PositionId** | Pointer to **string** |  | [optional] 
 **TransactionId** | Pointer to **string** |  | [optional] 
 **AssetId** | Pointer to **string** |  | [optional] 
-**Quantity** | Pointer to **float64** |  | [optional] 
+**Quantity** | Pointer to **string** |  | [optional] 
 
 ## Methods
 
@@ -105,20 +105,20 @@ HasAssetId returns a boolean if a field has been set.
 
 ### GetQuantity
 
-`func (o *Withdraw) GetQuantity() float64`
+`func (o *Withdraw) GetQuantity() string`
 
 GetQuantity returns the Quantity field if non-nil, zero value otherwise.
 
 ### GetQuantityOk
 
-`func (o *Withdraw) GetQuantityOk() (*float64, bool)`
+`func (o *Withdraw) GetQuantityOk() (*string, bool)`
 
 GetQuantityOk returns a tuple with the Quantity field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetQuantity
 
-`func (o *Withdraw) SetQuantity(v float64)`
+`func (o *Withdraw) SetQuantity(v string)`
 
 SetQuantity sets Quantity field to given value.
 

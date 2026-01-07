@@ -19,8 +19,8 @@ var _ MappedNullable = &PriceLevel{}
 
 // PriceLevel struct for PriceLevel
 type PriceLevel struct {
-	Price *float64 `json:"price,omitempty"`
-	Quantity *float64 `json:"quantity,omitempty"`
+	Price *string `json:"price,omitempty"`
+	Quantity *string `json:"quantity,omitempty"`
 }
 
 // NewPriceLevel instantiates a new PriceLevel object
@@ -41,9 +41,9 @@ func NewPriceLevelWithDefaults() *PriceLevel {
 }
 
 // GetPrice returns the Price field value if set, zero value otherwise.
-func (o *PriceLevel) GetPrice() float64 {
+func (o *PriceLevel) GetPrice() string {
 	if o == nil || IsNil(o.Price) {
-		var ret float64
+		var ret string
 		return ret
 	}
 	return *o.Price
@@ -51,7 +51,7 @@ func (o *PriceLevel) GetPrice() float64 {
 
 // GetPriceOk returns a tuple with the Price field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PriceLevel) GetPriceOk() (*float64, bool) {
+func (o *PriceLevel) GetPriceOk() (*string, bool) {
 	if o == nil || IsNil(o.Price) {
 		return nil, false
 	}
@@ -67,15 +67,15 @@ func (o *PriceLevel) HasPrice() bool {
 	return false
 }
 
-// SetPrice gets a reference to the given float64 and assigns it to the Price field.
-func (o *PriceLevel) SetPrice(v float64) {
+// SetPrice gets a reference to the given string and assigns it to the Price field.
+func (o *PriceLevel) SetPrice(v string) {
 	o.Price = &v
 }
 
 // GetQuantity returns the Quantity field value if set, zero value otherwise.
-func (o *PriceLevel) GetQuantity() float64 {
+func (o *PriceLevel) GetQuantity() string {
 	if o == nil || IsNil(o.Quantity) {
-		var ret float64
+		var ret string
 		return ret
 	}
 	return *o.Quantity
@@ -83,7 +83,7 @@ func (o *PriceLevel) GetQuantity() float64 {
 
 // GetQuantityOk returns a tuple with the Quantity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PriceLevel) GetQuantityOk() (*float64, bool) {
+func (o *PriceLevel) GetQuantityOk() (*string, bool) {
 	if o == nil || IsNil(o.Quantity) {
 		return nil, false
 	}
@@ -99,8 +99,8 @@ func (o *PriceLevel) HasQuantity() bool {
 	return false
 }
 
-// SetQuantity gets a reference to the given float64 and assigns it to the Quantity field.
-func (o *PriceLevel) SetQuantity(v float64) {
+// SetQuantity gets a reference to the given string and assigns it to the Quantity field.
+func (o *PriceLevel) SetQuantity(v string) {
 	o.Quantity = &v
 }
 

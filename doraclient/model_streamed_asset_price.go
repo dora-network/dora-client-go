@@ -17,40 +17,40 @@ import (
 	"fmt"
 )
 
-// checks if the StreamAssetPricesResponseValue type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &StreamAssetPricesResponseValue{}
+// checks if the StreamedAssetPrice type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &StreamedAssetPrice{}
 
-// StreamAssetPricesResponseValue struct for StreamAssetPricesResponseValue
-type StreamAssetPricesResponseValue struct {
+// StreamedAssetPrice struct for StreamedAssetPrice
+type StreamedAssetPrice struct {
 	AssetId string `json:"asset_id"`
-	Price float64 `json:"price"`
+	Price string `json:"price"`
 	Time time.Time `json:"time"`
 }
 
-type _StreamAssetPricesResponseValue StreamAssetPricesResponseValue
+type _StreamedAssetPrice StreamedAssetPrice
 
-// NewStreamAssetPricesResponseValue instantiates a new StreamAssetPricesResponseValue object
+// NewStreamedAssetPrice instantiates a new StreamedAssetPrice object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewStreamAssetPricesResponseValue(assetId string, price float64, time time.Time) *StreamAssetPricesResponseValue {
-	this := StreamAssetPricesResponseValue{}
+func NewStreamedAssetPrice(assetId string, price string, time time.Time) *StreamedAssetPrice {
+	this := StreamedAssetPrice{}
 	this.AssetId = assetId
 	this.Price = price
 	this.Time = time
 	return &this
 }
 
-// NewStreamAssetPricesResponseValueWithDefaults instantiates a new StreamAssetPricesResponseValue object
+// NewStreamedAssetPriceWithDefaults instantiates a new StreamedAssetPrice object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewStreamAssetPricesResponseValueWithDefaults() *StreamAssetPricesResponseValue {
-	this := StreamAssetPricesResponseValue{}
+func NewStreamedAssetPriceWithDefaults() *StreamedAssetPrice {
+	this := StreamedAssetPrice{}
 	return &this
 }
 
 // GetAssetId returns the AssetId field value
-func (o *StreamAssetPricesResponseValue) GetAssetId() string {
+func (o *StreamedAssetPrice) GetAssetId() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -61,7 +61,7 @@ func (o *StreamAssetPricesResponseValue) GetAssetId() string {
 
 // GetAssetIdOk returns a tuple with the AssetId field value
 // and a boolean to check if the value has been set.
-func (o *StreamAssetPricesResponseValue) GetAssetIdOk() (*string, bool) {
+func (o *StreamedAssetPrice) GetAssetIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -69,14 +69,14 @@ func (o *StreamAssetPricesResponseValue) GetAssetIdOk() (*string, bool) {
 }
 
 // SetAssetId sets field value
-func (o *StreamAssetPricesResponseValue) SetAssetId(v string) {
+func (o *StreamedAssetPrice) SetAssetId(v string) {
 	o.AssetId = v
 }
 
 // GetPrice returns the Price field value
-func (o *StreamAssetPricesResponseValue) GetPrice() float64 {
+func (o *StreamedAssetPrice) GetPrice() string {
 	if o == nil {
-		var ret float64
+		var ret string
 		return ret
 	}
 
@@ -85,7 +85,7 @@ func (o *StreamAssetPricesResponseValue) GetPrice() float64 {
 
 // GetPriceOk returns a tuple with the Price field value
 // and a boolean to check if the value has been set.
-func (o *StreamAssetPricesResponseValue) GetPriceOk() (*float64, bool) {
+func (o *StreamedAssetPrice) GetPriceOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -93,12 +93,12 @@ func (o *StreamAssetPricesResponseValue) GetPriceOk() (*float64, bool) {
 }
 
 // SetPrice sets field value
-func (o *StreamAssetPricesResponseValue) SetPrice(v float64) {
+func (o *StreamedAssetPrice) SetPrice(v string) {
 	o.Price = v
 }
 
 // GetTime returns the Time field value
-func (o *StreamAssetPricesResponseValue) GetTime() time.Time {
+func (o *StreamedAssetPrice) GetTime() time.Time {
 	if o == nil {
 		var ret time.Time
 		return ret
@@ -109,7 +109,7 @@ func (o *StreamAssetPricesResponseValue) GetTime() time.Time {
 
 // GetTimeOk returns a tuple with the Time field value
 // and a boolean to check if the value has been set.
-func (o *StreamAssetPricesResponseValue) GetTimeOk() (*time.Time, bool) {
+func (o *StreamedAssetPrice) GetTimeOk() (*time.Time, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -117,11 +117,11 @@ func (o *StreamAssetPricesResponseValue) GetTimeOk() (*time.Time, bool) {
 }
 
 // SetTime sets field value
-func (o *StreamAssetPricesResponseValue) SetTime(v time.Time) {
+func (o *StreamedAssetPrice) SetTime(v time.Time) {
 	o.Time = v
 }
 
-func (o StreamAssetPricesResponseValue) MarshalJSON() ([]byte, error) {
+func (o StreamedAssetPrice) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -129,7 +129,7 @@ func (o StreamAssetPricesResponseValue) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o StreamAssetPricesResponseValue) ToMap() (map[string]interface{}, error) {
+func (o StreamedAssetPrice) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["asset_id"] = o.AssetId
 	toSerialize["price"] = o.Price
@@ -137,7 +137,7 @@ func (o StreamAssetPricesResponseValue) ToMap() (map[string]interface{}, error) 
 	return toSerialize, nil
 }
 
-func (o *StreamAssetPricesResponseValue) UnmarshalJSON(data []byte) (err error) {
+func (o *StreamedAssetPrice) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -161,53 +161,53 @@ func (o *StreamAssetPricesResponseValue) UnmarshalJSON(data []byte) (err error) 
 		}
 	}
 
-	varStreamAssetPricesResponseValue := _StreamAssetPricesResponseValue{}
+	varStreamedAssetPrice := _StreamedAssetPrice{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
 	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varStreamAssetPricesResponseValue)
+	err = decoder.Decode(&varStreamedAssetPrice)
 
 	if err != nil {
 		return err
 	}
 
-	*o = StreamAssetPricesResponseValue(varStreamAssetPricesResponseValue)
+	*o = StreamedAssetPrice(varStreamedAssetPrice)
 
 	return err
 }
 
-type NullableStreamAssetPricesResponseValue struct {
-	value *StreamAssetPricesResponseValue
+type NullableStreamedAssetPrice struct {
+	value *StreamedAssetPrice
 	isSet bool
 }
 
-func (v NullableStreamAssetPricesResponseValue) Get() *StreamAssetPricesResponseValue {
+func (v NullableStreamedAssetPrice) Get() *StreamedAssetPrice {
 	return v.value
 }
 
-func (v *NullableStreamAssetPricesResponseValue) Set(val *StreamAssetPricesResponseValue) {
+func (v *NullableStreamedAssetPrice) Set(val *StreamedAssetPrice) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableStreamAssetPricesResponseValue) IsSet() bool {
+func (v NullableStreamedAssetPrice) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableStreamAssetPricesResponseValue) Unset() {
+func (v *NullableStreamedAssetPrice) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableStreamAssetPricesResponseValue(val *StreamAssetPricesResponseValue) *NullableStreamAssetPricesResponseValue {
-	return &NullableStreamAssetPricesResponseValue{value: val, isSet: true}
+func NewNullableStreamedAssetPrice(val *StreamedAssetPrice) *NullableStreamedAssetPrice {
+	return &NullableStreamedAssetPrice{value: val, isSet: true}
 }
 
-func (v NullableStreamAssetPricesResponseValue) MarshalJSON() ([]byte, error) {
+func (v NullableStreamedAssetPrice) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableStreamAssetPricesResponseValue) UnmarshalJSON(src []byte) error {
+func (v *NullableStreamedAssetPrice) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

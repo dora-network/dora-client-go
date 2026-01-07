@@ -27,7 +27,7 @@ type Asset struct {
 	FractionalizedUnits *int32 `json:"fractionalized_units,omitempty"`
 	Description *string `json:"description,omitempty"`
 	LiquidationThreshold *float32 `json:"liquidation_threshold,omitempty"`
-	MaturityId NullableString `json:"maturity_id,omitempty"`
+	MaturityId *string `json:"maturity_id,omitempty"`
 	MaxSupply *int32 `json:"max_supply,omitempty"`
 	MaxUtilization *int32 `json:"max_utilization,omitempty"`
 	Name *string `json:"name,omitempty"`
@@ -284,46 +284,36 @@ func (o *Asset) SetLiquidationThreshold(v float32) {
 	o.LiquidationThreshold = &v
 }
 
-// GetMaturityId returns the MaturityId field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetMaturityId returns the MaturityId field value if set, zero value otherwise.
 func (o *Asset) GetMaturityId() string {
-	if o == nil || IsNil(o.MaturityId.Get()) {
+	if o == nil || IsNil(o.MaturityId) {
 		var ret string
 		return ret
 	}
-	return *o.MaturityId.Get()
+	return *o.MaturityId
 }
 
 // GetMaturityIdOk returns a tuple with the MaturityId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Asset) GetMaturityIdOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.MaturityId) {
 		return nil, false
 	}
-	return o.MaturityId.Get(), o.MaturityId.IsSet()
+	return o.MaturityId, true
 }
 
 // HasMaturityId returns a boolean if a field has been set.
 func (o *Asset) HasMaturityId() bool {
-	if o != nil && o.MaturityId.IsSet() {
+	if o != nil && !IsNil(o.MaturityId) {
 		return true
 	}
 
 	return false
 }
 
-// SetMaturityId gets a reference to the given NullableString and assigns it to the MaturityId field.
+// SetMaturityId gets a reference to the given string and assigns it to the MaturityId field.
 func (o *Asset) SetMaturityId(v string) {
-	o.MaturityId.Set(&v)
-}
-// SetMaturityIdNil sets the value for MaturityId to be an explicit nil
-func (o *Asset) SetMaturityIdNil() {
-	o.MaturityId.Set(nil)
-}
-
-// UnsetMaturityId ensures that no value is present for MaturityId, not even an explicit nil
-func (o *Asset) UnsetMaturityId() {
-	o.MaturityId.Unset()
+	o.MaturityId = &v
 }
 
 // GetMaxSupply returns the MaxSupply field value if set, zero value otherwise.
@@ -773,8 +763,8 @@ func (o Asset) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.LiquidationThreshold) {
 		toSerialize["liquidation_threshold"] = o.LiquidationThreshold
 	}
-	if o.MaturityId.IsSet() {
-		toSerialize["maturity_id"] = o.MaturityId.Get()
+	if !IsNil(o.MaturityId) {
+		toSerialize["maturity_id"] = o.MaturityId
 	}
 	if !IsNil(o.MaxSupply) {
 		toSerialize["max_supply"] = o.MaxSupply

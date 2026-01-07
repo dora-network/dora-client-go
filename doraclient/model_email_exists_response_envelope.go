@@ -22,6 +22,7 @@ type EmailExistsResponseEnvelope struct {
 	Data *bool `json:"data,omitempty"`
 	// The error message. Present for error (non-2xx) responses.
 	Error *string `json:"error,omitempty"`
+	// Metadata about the response, including status code and trace information.
 	Metadata *Metadata `json:"metadata,omitempty"`
 }
 

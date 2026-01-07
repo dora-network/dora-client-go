@@ -60,6 +60,30 @@ func Test_doraclient_DefaultAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test DefaultAPIService ClaimLeverageGetAccruedInterest", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.DefaultAPI.ClaimLeverageGetAccruedInterest(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DefaultAPIService CloseIsolatedPosition", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.DefaultAPI.CloseIsolatedPosition(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test DefaultAPIService CreateAPIKeyForUser", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -362,6 +386,34 @@ func Test_doraclient_DefaultAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test DefaultAPIService GetOrderbookStats", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var orderBookId string
+
+		resp, httpRes, err := apiClient.DefaultAPI.GetOrderbookStats(context.Background(), orderBookId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DefaultAPIService GetOrderbookStatsStream", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var orderBookId string
+
+		resp, httpRes, err := apiClient.DefaultAPI.GetOrderbookStatsStream(context.Background(), orderBookId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test DefaultAPIService GetOrderbookSummary", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -551,6 +603,18 @@ func Test_doraclient_DefaultAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test DefaultAPIService LeverageGetAccruedInterestByUser", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.DefaultAPI.LeverageGetAccruedInterestByUser(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test DefaultAPIService LeverageIsolateCollateral", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -668,6 +732,18 @@ func Test_doraclient_DefaultAPIService(t *testing.T) {
 		t.Skip("skip test")  // remove to run test
 
 		resp, httpRes, err := apiClient.DefaultAPI.ListPositionAccountsSelf(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DefaultAPIService PayLeverageGetAccruedInterest", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.DefaultAPI.PayLeverageGetAccruedInterest(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

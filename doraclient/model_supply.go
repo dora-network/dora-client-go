@@ -22,7 +22,7 @@ type Supply struct {
 	PositionId *string `json:"position_id,omitempty"`
 	TransactionId *string `json:"transaction_id,omitempty"`
 	AssetId *string `json:"asset_id,omitempty"`
-	Quantity *float64 `json:"quantity,omitempty"`
+	Quantity *string `json:"quantity,omitempty"`
 }
 
 // NewSupply instantiates a new Supply object
@@ -139,9 +139,9 @@ func (o *Supply) SetAssetId(v string) {
 }
 
 // GetQuantity returns the Quantity field value if set, zero value otherwise.
-func (o *Supply) GetQuantity() float64 {
+func (o *Supply) GetQuantity() string {
 	if o == nil || IsNil(o.Quantity) {
-		var ret float64
+		var ret string
 		return ret
 	}
 	return *o.Quantity
@@ -149,7 +149,7 @@ func (o *Supply) GetQuantity() float64 {
 
 // GetQuantityOk returns a tuple with the Quantity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Supply) GetQuantityOk() (*float64, bool) {
+func (o *Supply) GetQuantityOk() (*string, bool) {
 	if o == nil || IsNil(o.Quantity) {
 		return nil, false
 	}
@@ -165,8 +165,8 @@ func (o *Supply) HasQuantity() bool {
 	return false
 }
 
-// SetQuantity gets a reference to the given float64 and assigns it to the Quantity field.
-func (o *Supply) SetQuantity(v float64) {
+// SetQuantity gets a reference to the given string and assigns it to the Quantity field.
+func (o *Supply) SetQuantity(v string) {
 	o.Quantity = &v
 }
 

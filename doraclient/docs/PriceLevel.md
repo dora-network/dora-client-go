@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Price** | Pointer to **float64** |  | [optional] 
-**Quantity** | Pointer to **float64** |  | [optional] 
+**Price** | Pointer to **string** |  | [optional] 
+**Quantity** | Pointer to **string** |  | [optional] 
 
 ## Methods
 
@@ -28,20 +28,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetPrice
 
-`func (o *PriceLevel) GetPrice() float64`
+`func (o *PriceLevel) GetPrice() string`
 
 GetPrice returns the Price field if non-nil, zero value otherwise.
 
 ### GetPriceOk
 
-`func (o *PriceLevel) GetPriceOk() (*float64, bool)`
+`func (o *PriceLevel) GetPriceOk() (*string, bool)`
 
 GetPriceOk returns a tuple with the Price field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPrice
 
-`func (o *PriceLevel) SetPrice(v float64)`
+`func (o *PriceLevel) SetPrice(v string)`
 
 SetPrice sets Price field to given value.
 
@@ -53,20 +53,20 @@ HasPrice returns a boolean if a field has been set.
 
 ### GetQuantity
 
-`func (o *PriceLevel) GetQuantity() float64`
+`func (o *PriceLevel) GetQuantity() string`
 
 GetQuantity returns the Quantity field if non-nil, zero value otherwise.
 
 ### GetQuantityOk
 
-`func (o *PriceLevel) GetQuantityOk() (*float64, bool)`
+`func (o *PriceLevel) GetQuantityOk() (*string, bool)`
 
 GetQuantityOk returns a tuple with the Quantity field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetQuantity
 
-`func (o *PriceLevel) SetQuantity(v float64)`
+`func (o *PriceLevel) SetQuantity(v string)`
 
 SetQuantity sets Quantity field to given value.
 

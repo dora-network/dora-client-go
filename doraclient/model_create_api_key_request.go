@@ -22,7 +22,7 @@ var _ MappedNullable = &CreateAPIKeyRequest{}
 type CreateAPIKeyRequest struct {
 	Label *string `json:"label,omitempty"`
 	// Date at which the api-key will expire
-	Expires NullableTime `json:"expires,omitempty"`
+	Expires *time.Time `json:"expires,omitempty"`
 }
 
 // NewCreateAPIKeyRequest instantiates a new CreateAPIKeyRequest object
@@ -74,46 +74,36 @@ func (o *CreateAPIKeyRequest) SetLabel(v string) {
 	o.Label = &v
 }
 
-// GetExpires returns the Expires field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetExpires returns the Expires field value if set, zero value otherwise.
 func (o *CreateAPIKeyRequest) GetExpires() time.Time {
-	if o == nil || IsNil(o.Expires.Get()) {
+	if o == nil || IsNil(o.Expires) {
 		var ret time.Time
 		return ret
 	}
-	return *o.Expires.Get()
+	return *o.Expires
 }
 
 // GetExpiresOk returns a tuple with the Expires field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAPIKeyRequest) GetExpiresOk() (*time.Time, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Expires) {
 		return nil, false
 	}
-	return o.Expires.Get(), o.Expires.IsSet()
+	return o.Expires, true
 }
 
 // HasExpires returns a boolean if a field has been set.
 func (o *CreateAPIKeyRequest) HasExpires() bool {
-	if o != nil && o.Expires.IsSet() {
+	if o != nil && !IsNil(o.Expires) {
 		return true
 	}
 
 	return false
 }
 
-// SetExpires gets a reference to the given NullableTime and assigns it to the Expires field.
+// SetExpires gets a reference to the given time.Time and assigns it to the Expires field.
 func (o *CreateAPIKeyRequest) SetExpires(v time.Time) {
-	o.Expires.Set(&v)
-}
-// SetExpiresNil sets the value for Expires to be an explicit nil
-func (o *CreateAPIKeyRequest) SetExpiresNil() {
-	o.Expires.Set(nil)
-}
-
-// UnsetExpires ensures that no value is present for Expires, not even an explicit nil
-func (o *CreateAPIKeyRequest) UnsetExpires() {
-	o.Expires.Unset()
+	o.Expires = &v
 }
 
 func (o CreateAPIKeyRequest) MarshalJSON() ([]byte, error) {
@@ -129,8 +119,8 @@ func (o CreateAPIKeyRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Label) {
 		toSerialize["label"] = o.Label
 	}
-	if o.Expires.IsSet() {
-		toSerialize["expires"] = o.Expires.Get()
+	if !IsNil(o.Expires) {
+		toSerialize["expires"] = o.Expires
 	}
 	return toSerialize, nil
 }

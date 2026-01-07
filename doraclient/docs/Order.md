@@ -7,16 +7,16 @@ Name | Type | Description | Notes
 **OrderId** | Pointer to **string** |  | [optional] 
 **OrderBookId** | Pointer to **string** |  | [optional] 
 **Kind** | Pointer to [**OrderKind**](OrderKind.md) |  | [optional] 
-**OriginalPrice** | Pointer to **float64** | If Kind is LIMIT, this is the original limit price. If Kind is MARKET, this may be 0 or omitted. | [optional] 
-**AvgFillPrice** | Pointer to **float64** |  | [optional] 
-**CancelledQuantity** | Pointer to **float64** | Quantity that was cancelled, if any. | [optional] 
-**OpenQuantity** | Pointer to **float64** | Quantity that is still open, i.e., not filled or cancelled. | [optional] 
-**OriginalQuantity** | Pointer to **float64** | The original quantity of the order when it was created. | [optional] 
-**FilledQuantity** | Pointer to **float64** | Quantity that has been filled so far. | [optional] 
-**FilledNotional** | Pointer to **float64** | Quote quantity that has been filled so far. | [optional] 
+**OriginalPrice** | Pointer to **string** | If Kind is LIMIT, this is the original limit price. If Kind is MARKET, this may be 0 or omitted. | [optional] 
+**AvgFillPrice** | Pointer to **string** |  | [optional] 
+**CancelledQuantity** | Pointer to **string** | Quantity that was cancelled, if any. | [optional] 
+**OpenQuantity** | Pointer to **string** | Quantity that is still open, i.e., not filled or cancelled. | [optional] 
+**OriginalQuantity** | Pointer to **string** | The original quantity of the order when it was created. | [optional] 
+**FilledQuantity** | Pointer to **string** | Quantity that has been filled so far. | [optional] 
+**FilledNotional** | Pointer to **string** | Quote quantity that has been filled so far. | [optional] 
 **LastUpdateAt** | Pointer to **time.Time** |  | [optional] 
 **OpenedAt** | Pointer to **time.Time** |  | [optional] 
-**InverseLeverage** | Pointer to **float64** |  | [optional] 
+**InverseLeverage** | Pointer to **string** |  | [optional] 
 **Side** | Pointer to [**Side**](Side.md) |  | [optional] 
 **Status** | Pointer to [**OrderStatus**](OrderStatus.md) |  | [optional] 
 **UserId** | Pointer to **string** |  | [optional] 
@@ -24,7 +24,8 @@ Name | Type | Description | Notes
 **PositionId** | Pointer to **string** |  | [optional] 
 **OrderInfo** | Pointer to **string** |  | [optional] 
 **GoodTillDate** | Pointer to **time.Time** |  | [optional] 
-**TriggerPrice** | Pointer to **float64** |  | [optional] 
+**TriggerPrice** | Pointer to **string** |  | [optional] 
+**TriggerType** | Pointer to [**TriggerType**](TriggerType.md) |  | [optional] 
 
 ## Methods
 
@@ -122,20 +123,20 @@ HasKind returns a boolean if a field has been set.
 
 ### GetOriginalPrice
 
-`func (o *Order) GetOriginalPrice() float64`
+`func (o *Order) GetOriginalPrice() string`
 
 GetOriginalPrice returns the OriginalPrice field if non-nil, zero value otherwise.
 
 ### GetOriginalPriceOk
 
-`func (o *Order) GetOriginalPriceOk() (*float64, bool)`
+`func (o *Order) GetOriginalPriceOk() (*string, bool)`
 
 GetOriginalPriceOk returns a tuple with the OriginalPrice field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetOriginalPrice
 
-`func (o *Order) SetOriginalPrice(v float64)`
+`func (o *Order) SetOriginalPrice(v string)`
 
 SetOriginalPrice sets OriginalPrice field to given value.
 
@@ -147,20 +148,20 @@ HasOriginalPrice returns a boolean if a field has been set.
 
 ### GetAvgFillPrice
 
-`func (o *Order) GetAvgFillPrice() float64`
+`func (o *Order) GetAvgFillPrice() string`
 
 GetAvgFillPrice returns the AvgFillPrice field if non-nil, zero value otherwise.
 
 ### GetAvgFillPriceOk
 
-`func (o *Order) GetAvgFillPriceOk() (*float64, bool)`
+`func (o *Order) GetAvgFillPriceOk() (*string, bool)`
 
 GetAvgFillPriceOk returns a tuple with the AvgFillPrice field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAvgFillPrice
 
-`func (o *Order) SetAvgFillPrice(v float64)`
+`func (o *Order) SetAvgFillPrice(v string)`
 
 SetAvgFillPrice sets AvgFillPrice field to given value.
 
@@ -172,20 +173,20 @@ HasAvgFillPrice returns a boolean if a field has been set.
 
 ### GetCancelledQuantity
 
-`func (o *Order) GetCancelledQuantity() float64`
+`func (o *Order) GetCancelledQuantity() string`
 
 GetCancelledQuantity returns the CancelledQuantity field if non-nil, zero value otherwise.
 
 ### GetCancelledQuantityOk
 
-`func (o *Order) GetCancelledQuantityOk() (*float64, bool)`
+`func (o *Order) GetCancelledQuantityOk() (*string, bool)`
 
 GetCancelledQuantityOk returns a tuple with the CancelledQuantity field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCancelledQuantity
 
-`func (o *Order) SetCancelledQuantity(v float64)`
+`func (o *Order) SetCancelledQuantity(v string)`
 
 SetCancelledQuantity sets CancelledQuantity field to given value.
 
@@ -197,20 +198,20 @@ HasCancelledQuantity returns a boolean if a field has been set.
 
 ### GetOpenQuantity
 
-`func (o *Order) GetOpenQuantity() float64`
+`func (o *Order) GetOpenQuantity() string`
 
 GetOpenQuantity returns the OpenQuantity field if non-nil, zero value otherwise.
 
 ### GetOpenQuantityOk
 
-`func (o *Order) GetOpenQuantityOk() (*float64, bool)`
+`func (o *Order) GetOpenQuantityOk() (*string, bool)`
 
 GetOpenQuantityOk returns a tuple with the OpenQuantity field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetOpenQuantity
 
-`func (o *Order) SetOpenQuantity(v float64)`
+`func (o *Order) SetOpenQuantity(v string)`
 
 SetOpenQuantity sets OpenQuantity field to given value.
 
@@ -222,20 +223,20 @@ HasOpenQuantity returns a boolean if a field has been set.
 
 ### GetOriginalQuantity
 
-`func (o *Order) GetOriginalQuantity() float64`
+`func (o *Order) GetOriginalQuantity() string`
 
 GetOriginalQuantity returns the OriginalQuantity field if non-nil, zero value otherwise.
 
 ### GetOriginalQuantityOk
 
-`func (o *Order) GetOriginalQuantityOk() (*float64, bool)`
+`func (o *Order) GetOriginalQuantityOk() (*string, bool)`
 
 GetOriginalQuantityOk returns a tuple with the OriginalQuantity field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetOriginalQuantity
 
-`func (o *Order) SetOriginalQuantity(v float64)`
+`func (o *Order) SetOriginalQuantity(v string)`
 
 SetOriginalQuantity sets OriginalQuantity field to given value.
 
@@ -247,20 +248,20 @@ HasOriginalQuantity returns a boolean if a field has been set.
 
 ### GetFilledQuantity
 
-`func (o *Order) GetFilledQuantity() float64`
+`func (o *Order) GetFilledQuantity() string`
 
 GetFilledQuantity returns the FilledQuantity field if non-nil, zero value otherwise.
 
 ### GetFilledQuantityOk
 
-`func (o *Order) GetFilledQuantityOk() (*float64, bool)`
+`func (o *Order) GetFilledQuantityOk() (*string, bool)`
 
 GetFilledQuantityOk returns a tuple with the FilledQuantity field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetFilledQuantity
 
-`func (o *Order) SetFilledQuantity(v float64)`
+`func (o *Order) SetFilledQuantity(v string)`
 
 SetFilledQuantity sets FilledQuantity field to given value.
 
@@ -272,20 +273,20 @@ HasFilledQuantity returns a boolean if a field has been set.
 
 ### GetFilledNotional
 
-`func (o *Order) GetFilledNotional() float64`
+`func (o *Order) GetFilledNotional() string`
 
 GetFilledNotional returns the FilledNotional field if non-nil, zero value otherwise.
 
 ### GetFilledNotionalOk
 
-`func (o *Order) GetFilledNotionalOk() (*float64, bool)`
+`func (o *Order) GetFilledNotionalOk() (*string, bool)`
 
 GetFilledNotionalOk returns a tuple with the FilledNotional field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetFilledNotional
 
-`func (o *Order) SetFilledNotional(v float64)`
+`func (o *Order) SetFilledNotional(v string)`
 
 SetFilledNotional sets FilledNotional field to given value.
 
@@ -347,20 +348,20 @@ HasOpenedAt returns a boolean if a field has been set.
 
 ### GetInverseLeverage
 
-`func (o *Order) GetInverseLeverage() float64`
+`func (o *Order) GetInverseLeverage() string`
 
 GetInverseLeverage returns the InverseLeverage field if non-nil, zero value otherwise.
 
 ### GetInverseLeverageOk
 
-`func (o *Order) GetInverseLeverageOk() (*float64, bool)`
+`func (o *Order) GetInverseLeverageOk() (*string, bool)`
 
 GetInverseLeverageOk returns a tuple with the InverseLeverage field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetInverseLeverage
 
-`func (o *Order) SetInverseLeverage(v float64)`
+`func (o *Order) SetInverseLeverage(v string)`
 
 SetInverseLeverage sets InverseLeverage field to given value.
 
@@ -547,20 +548,20 @@ HasGoodTillDate returns a boolean if a field has been set.
 
 ### GetTriggerPrice
 
-`func (o *Order) GetTriggerPrice() float64`
+`func (o *Order) GetTriggerPrice() string`
 
 GetTriggerPrice returns the TriggerPrice field if non-nil, zero value otherwise.
 
 ### GetTriggerPriceOk
 
-`func (o *Order) GetTriggerPriceOk() (*float64, bool)`
+`func (o *Order) GetTriggerPriceOk() (*string, bool)`
 
 GetTriggerPriceOk returns a tuple with the TriggerPrice field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTriggerPrice
 
-`func (o *Order) SetTriggerPrice(v float64)`
+`func (o *Order) SetTriggerPrice(v string)`
 
 SetTriggerPrice sets TriggerPrice field to given value.
 
@@ -569,6 +570,31 @@ SetTriggerPrice sets TriggerPrice field to given value.
 `func (o *Order) HasTriggerPrice() bool`
 
 HasTriggerPrice returns a boolean if a field has been set.
+
+### GetTriggerType
+
+`func (o *Order) GetTriggerType() TriggerType`
+
+GetTriggerType returns the TriggerType field if non-nil, zero value otherwise.
+
+### GetTriggerTypeOk
+
+`func (o *Order) GetTriggerTypeOk() (*TriggerType, bool)`
+
+GetTriggerTypeOk returns a tuple with the TriggerType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTriggerType
+
+`func (o *Order) SetTriggerType(v TriggerType)`
+
+SetTriggerType sets TriggerType field to given value.
+
+### HasTriggerType
+
+`func (o *Order) HasTriggerType() bool`
+
+HasTriggerType returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

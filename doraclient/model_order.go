@@ -24,21 +24,21 @@ type Order struct {
 	OrderBookId *string `json:"order_book_id,omitempty"`
 	Kind *OrderKind `json:"kind,omitempty"`
 	// If Kind is LIMIT, this is the original limit price. If Kind is MARKET, this may be 0 or omitted.
-	OriginalPrice *float64 `json:"original_price,omitempty"`
-	AvgFillPrice *float64 `json:"avg_fill_price,omitempty"`
+	OriginalPrice *string `json:"original_price,omitempty"`
+	AvgFillPrice *string `json:"avg_fill_price,omitempty"`
 	// Quantity that was cancelled, if any.
-	CancelledQuantity *float64 `json:"cancelled_quantity,omitempty"`
+	CancelledQuantity *string `json:"cancelled_quantity,omitempty"`
 	// Quantity that is still open, i.e., not filled or cancelled.
-	OpenQuantity *float64 `json:"open_quantity,omitempty"`
+	OpenQuantity *string `json:"open_quantity,omitempty"`
 	// The original quantity of the order when it was created.
-	OriginalQuantity *float64 `json:"original_quantity,omitempty"`
+	OriginalQuantity *string `json:"original_quantity,omitempty"`
 	// Quantity that has been filled so far.
-	FilledQuantity *float64 `json:"filled_quantity,omitempty"`
+	FilledQuantity *string `json:"filled_quantity,omitempty"`
 	// Quote quantity that has been filled so far.
-	FilledNotional *float64 `json:"filled_notional,omitempty"`
+	FilledNotional *string `json:"filled_notional,omitempty"`
 	LastUpdateAt *time.Time `json:"last_update_at,omitempty"`
 	OpenedAt *time.Time `json:"opened_at,omitempty"`
-	InverseLeverage *float64 `json:"inverse_leverage,omitempty"`
+	InverseLeverage *string `json:"inverse_leverage,omitempty"`
 	Side *Side `json:"side,omitempty"`
 	Status *OrderStatus `json:"status,omitempty"`
 	UserId *string `json:"user_id,omitempty"`
@@ -46,7 +46,8 @@ type Order struct {
 	PositionId *string `json:"position_id,omitempty"`
 	OrderInfo *string `json:"order_info,omitempty"`
 	GoodTillDate *time.Time `json:"good_till_date,omitempty"`
-	TriggerPrice *float64 `json:"trigger_price,omitempty"`
+	TriggerPrice *string `json:"trigger_price,omitempty"`
+	TriggerType *TriggerType `json:"trigger_type,omitempty"`
 }
 
 // NewOrder instantiates a new Order object
@@ -163,9 +164,9 @@ func (o *Order) SetKind(v OrderKind) {
 }
 
 // GetOriginalPrice returns the OriginalPrice field value if set, zero value otherwise.
-func (o *Order) GetOriginalPrice() float64 {
+func (o *Order) GetOriginalPrice() string {
 	if o == nil || IsNil(o.OriginalPrice) {
-		var ret float64
+		var ret string
 		return ret
 	}
 	return *o.OriginalPrice
@@ -173,7 +174,7 @@ func (o *Order) GetOriginalPrice() float64 {
 
 // GetOriginalPriceOk returns a tuple with the OriginalPrice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Order) GetOriginalPriceOk() (*float64, bool) {
+func (o *Order) GetOriginalPriceOk() (*string, bool) {
 	if o == nil || IsNil(o.OriginalPrice) {
 		return nil, false
 	}
@@ -189,15 +190,15 @@ func (o *Order) HasOriginalPrice() bool {
 	return false
 }
 
-// SetOriginalPrice gets a reference to the given float64 and assigns it to the OriginalPrice field.
-func (o *Order) SetOriginalPrice(v float64) {
+// SetOriginalPrice gets a reference to the given string and assigns it to the OriginalPrice field.
+func (o *Order) SetOriginalPrice(v string) {
 	o.OriginalPrice = &v
 }
 
 // GetAvgFillPrice returns the AvgFillPrice field value if set, zero value otherwise.
-func (o *Order) GetAvgFillPrice() float64 {
+func (o *Order) GetAvgFillPrice() string {
 	if o == nil || IsNil(o.AvgFillPrice) {
-		var ret float64
+		var ret string
 		return ret
 	}
 	return *o.AvgFillPrice
@@ -205,7 +206,7 @@ func (o *Order) GetAvgFillPrice() float64 {
 
 // GetAvgFillPriceOk returns a tuple with the AvgFillPrice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Order) GetAvgFillPriceOk() (*float64, bool) {
+func (o *Order) GetAvgFillPriceOk() (*string, bool) {
 	if o == nil || IsNil(o.AvgFillPrice) {
 		return nil, false
 	}
@@ -221,15 +222,15 @@ func (o *Order) HasAvgFillPrice() bool {
 	return false
 }
 
-// SetAvgFillPrice gets a reference to the given float64 and assigns it to the AvgFillPrice field.
-func (o *Order) SetAvgFillPrice(v float64) {
+// SetAvgFillPrice gets a reference to the given string and assigns it to the AvgFillPrice field.
+func (o *Order) SetAvgFillPrice(v string) {
 	o.AvgFillPrice = &v
 }
 
 // GetCancelledQuantity returns the CancelledQuantity field value if set, zero value otherwise.
-func (o *Order) GetCancelledQuantity() float64 {
+func (o *Order) GetCancelledQuantity() string {
 	if o == nil || IsNil(o.CancelledQuantity) {
-		var ret float64
+		var ret string
 		return ret
 	}
 	return *o.CancelledQuantity
@@ -237,7 +238,7 @@ func (o *Order) GetCancelledQuantity() float64 {
 
 // GetCancelledQuantityOk returns a tuple with the CancelledQuantity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Order) GetCancelledQuantityOk() (*float64, bool) {
+func (o *Order) GetCancelledQuantityOk() (*string, bool) {
 	if o == nil || IsNil(o.CancelledQuantity) {
 		return nil, false
 	}
@@ -253,15 +254,15 @@ func (o *Order) HasCancelledQuantity() bool {
 	return false
 }
 
-// SetCancelledQuantity gets a reference to the given float64 and assigns it to the CancelledQuantity field.
-func (o *Order) SetCancelledQuantity(v float64) {
+// SetCancelledQuantity gets a reference to the given string and assigns it to the CancelledQuantity field.
+func (o *Order) SetCancelledQuantity(v string) {
 	o.CancelledQuantity = &v
 }
 
 // GetOpenQuantity returns the OpenQuantity field value if set, zero value otherwise.
-func (o *Order) GetOpenQuantity() float64 {
+func (o *Order) GetOpenQuantity() string {
 	if o == nil || IsNil(o.OpenQuantity) {
-		var ret float64
+		var ret string
 		return ret
 	}
 	return *o.OpenQuantity
@@ -269,7 +270,7 @@ func (o *Order) GetOpenQuantity() float64 {
 
 // GetOpenQuantityOk returns a tuple with the OpenQuantity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Order) GetOpenQuantityOk() (*float64, bool) {
+func (o *Order) GetOpenQuantityOk() (*string, bool) {
 	if o == nil || IsNil(o.OpenQuantity) {
 		return nil, false
 	}
@@ -285,15 +286,15 @@ func (o *Order) HasOpenQuantity() bool {
 	return false
 }
 
-// SetOpenQuantity gets a reference to the given float64 and assigns it to the OpenQuantity field.
-func (o *Order) SetOpenQuantity(v float64) {
+// SetOpenQuantity gets a reference to the given string and assigns it to the OpenQuantity field.
+func (o *Order) SetOpenQuantity(v string) {
 	o.OpenQuantity = &v
 }
 
 // GetOriginalQuantity returns the OriginalQuantity field value if set, zero value otherwise.
-func (o *Order) GetOriginalQuantity() float64 {
+func (o *Order) GetOriginalQuantity() string {
 	if o == nil || IsNil(o.OriginalQuantity) {
-		var ret float64
+		var ret string
 		return ret
 	}
 	return *o.OriginalQuantity
@@ -301,7 +302,7 @@ func (o *Order) GetOriginalQuantity() float64 {
 
 // GetOriginalQuantityOk returns a tuple with the OriginalQuantity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Order) GetOriginalQuantityOk() (*float64, bool) {
+func (o *Order) GetOriginalQuantityOk() (*string, bool) {
 	if o == nil || IsNil(o.OriginalQuantity) {
 		return nil, false
 	}
@@ -317,15 +318,15 @@ func (o *Order) HasOriginalQuantity() bool {
 	return false
 }
 
-// SetOriginalQuantity gets a reference to the given float64 and assigns it to the OriginalQuantity field.
-func (o *Order) SetOriginalQuantity(v float64) {
+// SetOriginalQuantity gets a reference to the given string and assigns it to the OriginalQuantity field.
+func (o *Order) SetOriginalQuantity(v string) {
 	o.OriginalQuantity = &v
 }
 
 // GetFilledQuantity returns the FilledQuantity field value if set, zero value otherwise.
-func (o *Order) GetFilledQuantity() float64 {
+func (o *Order) GetFilledQuantity() string {
 	if o == nil || IsNil(o.FilledQuantity) {
-		var ret float64
+		var ret string
 		return ret
 	}
 	return *o.FilledQuantity
@@ -333,7 +334,7 @@ func (o *Order) GetFilledQuantity() float64 {
 
 // GetFilledQuantityOk returns a tuple with the FilledQuantity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Order) GetFilledQuantityOk() (*float64, bool) {
+func (o *Order) GetFilledQuantityOk() (*string, bool) {
 	if o == nil || IsNil(o.FilledQuantity) {
 		return nil, false
 	}
@@ -349,15 +350,15 @@ func (o *Order) HasFilledQuantity() bool {
 	return false
 }
 
-// SetFilledQuantity gets a reference to the given float64 and assigns it to the FilledQuantity field.
-func (o *Order) SetFilledQuantity(v float64) {
+// SetFilledQuantity gets a reference to the given string and assigns it to the FilledQuantity field.
+func (o *Order) SetFilledQuantity(v string) {
 	o.FilledQuantity = &v
 }
 
 // GetFilledNotional returns the FilledNotional field value if set, zero value otherwise.
-func (o *Order) GetFilledNotional() float64 {
+func (o *Order) GetFilledNotional() string {
 	if o == nil || IsNil(o.FilledNotional) {
-		var ret float64
+		var ret string
 		return ret
 	}
 	return *o.FilledNotional
@@ -365,7 +366,7 @@ func (o *Order) GetFilledNotional() float64 {
 
 // GetFilledNotionalOk returns a tuple with the FilledNotional field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Order) GetFilledNotionalOk() (*float64, bool) {
+func (o *Order) GetFilledNotionalOk() (*string, bool) {
 	if o == nil || IsNil(o.FilledNotional) {
 		return nil, false
 	}
@@ -381,8 +382,8 @@ func (o *Order) HasFilledNotional() bool {
 	return false
 }
 
-// SetFilledNotional gets a reference to the given float64 and assigns it to the FilledNotional field.
-func (o *Order) SetFilledNotional(v float64) {
+// SetFilledNotional gets a reference to the given string and assigns it to the FilledNotional field.
+func (o *Order) SetFilledNotional(v string) {
 	o.FilledNotional = &v
 }
 
@@ -451,9 +452,9 @@ func (o *Order) SetOpenedAt(v time.Time) {
 }
 
 // GetInverseLeverage returns the InverseLeverage field value if set, zero value otherwise.
-func (o *Order) GetInverseLeverage() float64 {
+func (o *Order) GetInverseLeverage() string {
 	if o == nil || IsNil(o.InverseLeverage) {
-		var ret float64
+		var ret string
 		return ret
 	}
 	return *o.InverseLeverage
@@ -461,7 +462,7 @@ func (o *Order) GetInverseLeverage() float64 {
 
 // GetInverseLeverageOk returns a tuple with the InverseLeverage field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Order) GetInverseLeverageOk() (*float64, bool) {
+func (o *Order) GetInverseLeverageOk() (*string, bool) {
 	if o == nil || IsNil(o.InverseLeverage) {
 		return nil, false
 	}
@@ -477,8 +478,8 @@ func (o *Order) HasInverseLeverage() bool {
 	return false
 }
 
-// SetInverseLeverage gets a reference to the given float64 and assigns it to the InverseLeverage field.
-func (o *Order) SetInverseLeverage(v float64) {
+// SetInverseLeverage gets a reference to the given string and assigns it to the InverseLeverage field.
+func (o *Order) SetInverseLeverage(v string) {
 	o.InverseLeverage = &v
 }
 
@@ -707,9 +708,9 @@ func (o *Order) SetGoodTillDate(v time.Time) {
 }
 
 // GetTriggerPrice returns the TriggerPrice field value if set, zero value otherwise.
-func (o *Order) GetTriggerPrice() float64 {
+func (o *Order) GetTriggerPrice() string {
 	if o == nil || IsNil(o.TriggerPrice) {
-		var ret float64
+		var ret string
 		return ret
 	}
 	return *o.TriggerPrice
@@ -717,7 +718,7 @@ func (o *Order) GetTriggerPrice() float64 {
 
 // GetTriggerPriceOk returns a tuple with the TriggerPrice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Order) GetTriggerPriceOk() (*float64, bool) {
+func (o *Order) GetTriggerPriceOk() (*string, bool) {
 	if o == nil || IsNil(o.TriggerPrice) {
 		return nil, false
 	}
@@ -733,9 +734,41 @@ func (o *Order) HasTriggerPrice() bool {
 	return false
 }
 
-// SetTriggerPrice gets a reference to the given float64 and assigns it to the TriggerPrice field.
-func (o *Order) SetTriggerPrice(v float64) {
+// SetTriggerPrice gets a reference to the given string and assigns it to the TriggerPrice field.
+func (o *Order) SetTriggerPrice(v string) {
 	o.TriggerPrice = &v
+}
+
+// GetTriggerType returns the TriggerType field value if set, zero value otherwise.
+func (o *Order) GetTriggerType() TriggerType {
+	if o == nil || IsNil(o.TriggerType) {
+		var ret TriggerType
+		return ret
+	}
+	return *o.TriggerType
+}
+
+// GetTriggerTypeOk returns a tuple with the TriggerType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Order) GetTriggerTypeOk() (*TriggerType, bool) {
+	if o == nil || IsNil(o.TriggerType) {
+		return nil, false
+	}
+	return o.TriggerType, true
+}
+
+// HasTriggerType returns a boolean if a field has been set.
+func (o *Order) HasTriggerType() bool {
+	if o != nil && !IsNil(o.TriggerType) {
+		return true
+	}
+
+	return false
+}
+
+// SetTriggerType gets a reference to the given TriggerType and assigns it to the TriggerType field.
+func (o *Order) SetTriggerType(v TriggerType) {
+	o.TriggerType = &v
 }
 
 func (o Order) MarshalJSON() ([]byte, error) {
@@ -810,6 +843,9 @@ func (o Order) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.TriggerPrice) {
 		toSerialize["trigger_price"] = o.TriggerPrice
+	}
+	if !IsNil(o.TriggerType) {
+		toSerialize["trigger_type"] = o.TriggerType
 	}
 	return toSerialize, nil
 }

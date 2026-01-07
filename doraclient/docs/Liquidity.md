@@ -7,9 +7,9 @@ Name | Type | Description | Notes
 **OrderBookId** | Pointer to **string** |  | [optional] 
 **PositionId** | Pointer to **string** |  | [optional] 
 **TransactionId** | Pointer to **string** |  | [optional] 
-**BaseQuantity** | Pointer to **float64** |  | [optional] 
-**QuoteQuantity** | Pointer to **float64** |  | [optional] 
-**SharesQuantity** | Pointer to **float64** |  | [optional] 
+**BaseQuantity** | Pointer to **string** |  | [optional] 
+**QuoteQuantity** | Pointer to **string** |  | [optional] 
+**SharesQuantity** | Pointer to **string** |  | [optional] 
 
 ## Methods
 
@@ -107,20 +107,20 @@ HasTransactionId returns a boolean if a field has been set.
 
 ### GetBaseQuantity
 
-`func (o *Liquidity) GetBaseQuantity() float64`
+`func (o *Liquidity) GetBaseQuantity() string`
 
 GetBaseQuantity returns the BaseQuantity field if non-nil, zero value otherwise.
 
 ### GetBaseQuantityOk
 
-`func (o *Liquidity) GetBaseQuantityOk() (*float64, bool)`
+`func (o *Liquidity) GetBaseQuantityOk() (*string, bool)`
 
 GetBaseQuantityOk returns a tuple with the BaseQuantity field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetBaseQuantity
 
-`func (o *Liquidity) SetBaseQuantity(v float64)`
+`func (o *Liquidity) SetBaseQuantity(v string)`
 
 SetBaseQuantity sets BaseQuantity field to given value.
 
@@ -132,20 +132,20 @@ HasBaseQuantity returns a boolean if a field has been set.
 
 ### GetQuoteQuantity
 
-`func (o *Liquidity) GetQuoteQuantity() float64`
+`func (o *Liquidity) GetQuoteQuantity() string`
 
 GetQuoteQuantity returns the QuoteQuantity field if non-nil, zero value otherwise.
 
 ### GetQuoteQuantityOk
 
-`func (o *Liquidity) GetQuoteQuantityOk() (*float64, bool)`
+`func (o *Liquidity) GetQuoteQuantityOk() (*string, bool)`
 
 GetQuoteQuantityOk returns a tuple with the QuoteQuantity field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetQuoteQuantity
 
-`func (o *Liquidity) SetQuoteQuantity(v float64)`
+`func (o *Liquidity) SetQuoteQuantity(v string)`
 
 SetQuoteQuantity sets QuoteQuantity field to given value.
 
@@ -157,20 +157,20 @@ HasQuoteQuantity returns a boolean if a field has been set.
 
 ### GetSharesQuantity
 
-`func (o *Liquidity) GetSharesQuantity() float64`
+`func (o *Liquidity) GetSharesQuantity() string`
 
 GetSharesQuantity returns the SharesQuantity field if non-nil, zero value otherwise.
 
 ### GetSharesQuantityOk
 
-`func (o *Liquidity) GetSharesQuantityOk() (*float64, bool)`
+`func (o *Liquidity) GetSharesQuantityOk() (*string, bool)`
 
 GetSharesQuantityOk returns a tuple with the SharesQuantity field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSharesQuantity
 
-`func (o *Liquidity) SetSharesQuantity(v float64)`
+`func (o *Liquidity) SetSharesQuantity(v string)`
 
 SetSharesQuantity sets SharesQuantity field to given value.
 

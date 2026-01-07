@@ -23,7 +23,7 @@ var _ MappedNullable = &SupplyRequest{}
 type SupplyRequest struct {
 	PositionId string `json:"position_id"`
 	AssetId string `json:"asset_id"`
-	Quantity float64 `json:"quantity"`
+	Quantity string `json:"quantity"`
 }
 
 type _SupplyRequest SupplyRequest
@@ -32,7 +32,7 @@ type _SupplyRequest SupplyRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSupplyRequest(positionId string, assetId string, quantity float64) *SupplyRequest {
+func NewSupplyRequest(positionId string, assetId string, quantity string) *SupplyRequest {
 	this := SupplyRequest{}
 	this.PositionId = positionId
 	this.AssetId = assetId
@@ -97,9 +97,9 @@ func (o *SupplyRequest) SetAssetId(v string) {
 }
 
 // GetQuantity returns the Quantity field value
-func (o *SupplyRequest) GetQuantity() float64 {
+func (o *SupplyRequest) GetQuantity() string {
 	if o == nil {
-		var ret float64
+		var ret string
 		return ret
 	}
 
@@ -108,7 +108,7 @@ func (o *SupplyRequest) GetQuantity() float64 {
 
 // GetQuantityOk returns a tuple with the Quantity field value
 // and a boolean to check if the value has been set.
-func (o *SupplyRequest) GetQuantityOk() (*float64, bool) {
+func (o *SupplyRequest) GetQuantityOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -116,7 +116,7 @@ func (o *SupplyRequest) GetQuantityOk() (*float64, bool) {
 }
 
 // SetQuantity sets field value
-func (o *SupplyRequest) SetQuantity(v float64) {
+func (o *SupplyRequest) SetQuantity(v string) {
 	o.Quantity = v
 }
 

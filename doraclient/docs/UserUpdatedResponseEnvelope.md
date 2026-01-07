@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Data** | Pointer to **interface{}** |  | [optional] 
+**Data** | Pointer to [**CreateOrUpdateUserResponse**](CreateOrUpdateUserResponse.md) |  | [optional] 
 **Error** | Pointer to **string** | The error message. Present for error (non-2xx) responses. | [optional] 
-**Metadata** | Pointer to [**Metadata**](Metadata.md) |  | [optional] 
+**Metadata** | Pointer to [**Metadata**](Metadata.md) | Metadata about the response, including status code and trace information. | [optional] 
 
 ## Methods
 
@@ -29,20 +29,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetData
 
-`func (o *UserUpdatedResponseEnvelope) GetData() interface{}`
+`func (o *UserUpdatedResponseEnvelope) GetData() CreateOrUpdateUserResponse`
 
 GetData returns the Data field if non-nil, zero value otherwise.
 
 ### GetDataOk
 
-`func (o *UserUpdatedResponseEnvelope) GetDataOk() (*interface{}, bool)`
+`func (o *UserUpdatedResponseEnvelope) GetDataOk() (*CreateOrUpdateUserResponse, bool)`
 
 GetDataOk returns a tuple with the Data field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetData
 
-`func (o *UserUpdatedResponseEnvelope) SetData(v interface{})`
+`func (o *UserUpdatedResponseEnvelope) SetData(v CreateOrUpdateUserResponse)`
 
 SetData sets Data field to given value.
 

@@ -8,12 +8,12 @@ Name | Type | Description | Notes
 **Asset0** | Pointer to **string** |  | [optional] 
 **CreatedAt** | Pointer to **time.Time** |  | [optional] 
 **FeeAssetId** | Pointer to **string** |  | [optional] 
-**FeeQuantity** | Pointer to **float64** |  | [optional] 
+**FeeQuantity** | Pointer to **string** |  | [optional] 
 **OrderBookId** | Pointer to **string** |  | [optional] 
 **OrderId** | Pointer to **string** |  | [optional] 
 **OrderSeq** | Pointer to **int32** |  | [optional] 
-**Price** | Pointer to **float64** |  | [optional] 
-**Quantity0** | Pointer to **float64** |  | [optional] 
+**Price** | Pointer to **string** |  | [optional] 
+**Quantity0** | Pointer to **string** |  | [optional] 
 **UserId** | Pointer to **string** |  | [optional] 
 **Side** | Pointer to [**Side**](Side.md) |  | [optional] 
 **AggressorIndicator** | Pointer to **bool** | If true, then this order is the aggressor (taker); otherwise it is the maker. | [optional] 
@@ -139,20 +139,20 @@ HasFeeAssetId returns a boolean if a field has been set.
 
 ### GetFeeQuantity
 
-`func (o *Trade) GetFeeQuantity() float64`
+`func (o *Trade) GetFeeQuantity() string`
 
 GetFeeQuantity returns the FeeQuantity field if non-nil, zero value otherwise.
 
 ### GetFeeQuantityOk
 
-`func (o *Trade) GetFeeQuantityOk() (*float64, bool)`
+`func (o *Trade) GetFeeQuantityOk() (*string, bool)`
 
 GetFeeQuantityOk returns a tuple with the FeeQuantity field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetFeeQuantity
 
-`func (o *Trade) SetFeeQuantity(v float64)`
+`func (o *Trade) SetFeeQuantity(v string)`
 
 SetFeeQuantity sets FeeQuantity field to given value.
 
@@ -239,20 +239,20 @@ HasOrderSeq returns a boolean if a field has been set.
 
 ### GetPrice
 
-`func (o *Trade) GetPrice() float64`
+`func (o *Trade) GetPrice() string`
 
 GetPrice returns the Price field if non-nil, zero value otherwise.
 
 ### GetPriceOk
 
-`func (o *Trade) GetPriceOk() (*float64, bool)`
+`func (o *Trade) GetPriceOk() (*string, bool)`
 
 GetPriceOk returns a tuple with the Price field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPrice
 
-`func (o *Trade) SetPrice(v float64)`
+`func (o *Trade) SetPrice(v string)`
 
 SetPrice sets Price field to given value.
 
@@ -264,20 +264,20 @@ HasPrice returns a boolean if a field has been set.
 
 ### GetQuantity0
 
-`func (o *Trade) GetQuantity0() float64`
+`func (o *Trade) GetQuantity0() string`
 
 GetQuantity0 returns the Quantity0 field if non-nil, zero value otherwise.
 
 ### GetQuantity0Ok
 
-`func (o *Trade) GetQuantity0Ok() (*float64, bool)`
+`func (o *Trade) GetQuantity0Ok() (*string, bool)`
 
 GetQuantity0Ok returns a tuple with the Quantity0 field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetQuantity0
 
-`func (o *Trade) SetQuantity0(v float64)`
+`func (o *Trade) SetQuantity0(v string)`
 
 SetQuantity0 sets Quantity0 field to given value.
 

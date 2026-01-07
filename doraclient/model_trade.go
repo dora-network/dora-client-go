@@ -24,12 +24,12 @@ type Trade struct {
 	Asset0 *string `json:"asset_0,omitempty"`
 	CreatedAt *time.Time `json:"created_at,omitempty"`
 	FeeAssetId *string `json:"fee_asset_id,omitempty"`
-	FeeQuantity *float64 `json:"fee_quantity,omitempty"`
+	FeeQuantity *string `json:"fee_quantity,omitempty"`
 	OrderBookId *string `json:"order_book_id,omitempty"`
 	OrderId *string `json:"order_id,omitempty"`
 	OrderSeq *int32 `json:"order_seq,omitempty"`
-	Price *float64 `json:"price,omitempty"`
-	Quantity0 *float64 `json:"quantity_0,omitempty"`
+	Price *string `json:"price,omitempty"`
+	Quantity0 *string `json:"quantity_0,omitempty"`
 	UserId *string `json:"user_id,omitempty"`
 	Side *Side `json:"side,omitempty"`
 	// If true, then this order is the aggressor (taker); otherwise it is the maker.
@@ -182,9 +182,9 @@ func (o *Trade) SetFeeAssetId(v string) {
 }
 
 // GetFeeQuantity returns the FeeQuantity field value if set, zero value otherwise.
-func (o *Trade) GetFeeQuantity() float64 {
+func (o *Trade) GetFeeQuantity() string {
 	if o == nil || IsNil(o.FeeQuantity) {
-		var ret float64
+		var ret string
 		return ret
 	}
 	return *o.FeeQuantity
@@ -192,7 +192,7 @@ func (o *Trade) GetFeeQuantity() float64 {
 
 // GetFeeQuantityOk returns a tuple with the FeeQuantity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Trade) GetFeeQuantityOk() (*float64, bool) {
+func (o *Trade) GetFeeQuantityOk() (*string, bool) {
 	if o == nil || IsNil(o.FeeQuantity) {
 		return nil, false
 	}
@@ -208,8 +208,8 @@ func (o *Trade) HasFeeQuantity() bool {
 	return false
 }
 
-// SetFeeQuantity gets a reference to the given float64 and assigns it to the FeeQuantity field.
-func (o *Trade) SetFeeQuantity(v float64) {
+// SetFeeQuantity gets a reference to the given string and assigns it to the FeeQuantity field.
+func (o *Trade) SetFeeQuantity(v string) {
 	o.FeeQuantity = &v
 }
 
@@ -310,9 +310,9 @@ func (o *Trade) SetOrderSeq(v int32) {
 }
 
 // GetPrice returns the Price field value if set, zero value otherwise.
-func (o *Trade) GetPrice() float64 {
+func (o *Trade) GetPrice() string {
 	if o == nil || IsNil(o.Price) {
-		var ret float64
+		var ret string
 		return ret
 	}
 	return *o.Price
@@ -320,7 +320,7 @@ func (o *Trade) GetPrice() float64 {
 
 // GetPriceOk returns a tuple with the Price field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Trade) GetPriceOk() (*float64, bool) {
+func (o *Trade) GetPriceOk() (*string, bool) {
 	if o == nil || IsNil(o.Price) {
 		return nil, false
 	}
@@ -336,15 +336,15 @@ func (o *Trade) HasPrice() bool {
 	return false
 }
 
-// SetPrice gets a reference to the given float64 and assigns it to the Price field.
-func (o *Trade) SetPrice(v float64) {
+// SetPrice gets a reference to the given string and assigns it to the Price field.
+func (o *Trade) SetPrice(v string) {
 	o.Price = &v
 }
 
 // GetQuantity0 returns the Quantity0 field value if set, zero value otherwise.
-func (o *Trade) GetQuantity0() float64 {
+func (o *Trade) GetQuantity0() string {
 	if o == nil || IsNil(o.Quantity0) {
-		var ret float64
+		var ret string
 		return ret
 	}
 	return *o.Quantity0
@@ -352,7 +352,7 @@ func (o *Trade) GetQuantity0() float64 {
 
 // GetQuantity0Ok returns a tuple with the Quantity0 field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Trade) GetQuantity0Ok() (*float64, bool) {
+func (o *Trade) GetQuantity0Ok() (*string, bool) {
 	if o == nil || IsNil(o.Quantity0) {
 		return nil, false
 	}
@@ -368,8 +368,8 @@ func (o *Trade) HasQuantity0() bool {
 	return false
 }
 
-// SetQuantity0 gets a reference to the given float64 and assigns it to the Quantity0 field.
-func (o *Trade) SetQuantity0(v float64) {
+// SetQuantity0 gets a reference to the given string and assigns it to the Quantity0 field.
+func (o *Trade) SetQuantity0(v string) {
 	o.Quantity0 = &v
 }
 

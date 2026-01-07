@@ -20,8 +20,8 @@ type OrderKind string
 
 // List of OrderKind
 const (
-	LIMIT OrderKind = "LIMIT"
-	MARKET OrderKind = "MARKET"
+	ORDERKIND_LIMIT OrderKind = "LIMIT"
+	ORDERKIND_MARKET OrderKind = "MARKET"
 )
 
 // All allowed values of OrderKind enum

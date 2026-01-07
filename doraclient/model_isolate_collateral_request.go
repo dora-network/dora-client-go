@@ -23,7 +23,7 @@ var _ MappedNullable = &IsolateCollateralRequest{}
 type IsolateCollateralRequest struct {
 	GlobalPositionId string `json:"global_position_id"`
 	AssetId string `json:"asset_id"`
-	Quantity float64 `json:"quantity"`
+	Quantity string `json:"quantity"`
 }
 
 type _IsolateCollateralRequest IsolateCollateralRequest
@@ -32,7 +32,7 @@ type _IsolateCollateralRequest IsolateCollateralRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewIsolateCollateralRequest(globalPositionId string, assetId string, quantity float64) *IsolateCollateralRequest {
+func NewIsolateCollateralRequest(globalPositionId string, assetId string, quantity string) *IsolateCollateralRequest {
 	this := IsolateCollateralRequest{}
 	this.GlobalPositionId = globalPositionId
 	this.AssetId = assetId
@@ -97,9 +97,9 @@ func (o *IsolateCollateralRequest) SetAssetId(v string) {
 }
 
 // GetQuantity returns the Quantity field value
-func (o *IsolateCollateralRequest) GetQuantity() float64 {
+func (o *IsolateCollateralRequest) GetQuantity() string {
 	if o == nil {
-		var ret float64
+		var ret string
 		return ret
 	}
 
@@ -108,7 +108,7 @@ func (o *IsolateCollateralRequest) GetQuantity() float64 {
 
 // GetQuantityOk returns a tuple with the Quantity field value
 // and a boolean to check if the value has been set.
-func (o *IsolateCollateralRequest) GetQuantityOk() (*float64, bool) {
+func (o *IsolateCollateralRequest) GetQuantityOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -116,7 +116,7 @@ func (o *IsolateCollateralRequest) GetQuantityOk() (*float64, bool) {
 }
 
 // SetQuantity sets field value
-func (o *IsolateCollateralRequest) SetQuantity(v float64) {
+func (o *IsolateCollateralRequest) SetQuantity(v string) {
 	o.Quantity = v
 }
 

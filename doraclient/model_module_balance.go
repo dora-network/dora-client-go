@@ -22,15 +22,13 @@ type ModuleBalance struct {
 	AssetId *string `json:"asset_id,omitempty"`
 	Seq *int32 `json:"seq,omitempty"`
 	// The available balance in the module for this asset
-	Available *float64 `json:"available,omitempty"`
+	Available *string `json:"available,omitempty"`
 	// The total amount supplied to the module for this asset
-	Supplied *float64 `json:"supplied,omitempty"`
-	// The amount supplied as collateral from user balances in the module for this asset
-	SuppliedCollateral *float64 `json:"supplied_collateral,omitempty"`
+	Supplied *string `json:"supplied,omitempty"`
 	// Assets minted by virtual-borrowing, but not yet repaid
-	Virtual *float64 `json:"virtual,omitempty"`
+	Virtual *string `json:"virtual,omitempty"`
 	// The total amount borrowed from the supplied but not yet repaid
-	Borrowed *float64 `json:"borrowed,omitempty"`
+	Borrowed *string `json:"borrowed,omitempty"`
 }
 
 // NewModuleBalance instantiates a new ModuleBalance object
@@ -115,9 +113,9 @@ func (o *ModuleBalance) SetSeq(v int32) {
 }
 
 // GetAvailable returns the Available field value if set, zero value otherwise.
-func (o *ModuleBalance) GetAvailable() float64 {
+func (o *ModuleBalance) GetAvailable() string {
 	if o == nil || IsNil(o.Available) {
-		var ret float64
+		var ret string
 		return ret
 	}
 	return *o.Available
@@ -125,7 +123,7 @@ func (o *ModuleBalance) GetAvailable() float64 {
 
 // GetAvailableOk returns a tuple with the Available field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ModuleBalance) GetAvailableOk() (*float64, bool) {
+func (o *ModuleBalance) GetAvailableOk() (*string, bool) {
 	if o == nil || IsNil(o.Available) {
 		return nil, false
 	}
@@ -141,15 +139,15 @@ func (o *ModuleBalance) HasAvailable() bool {
 	return false
 }
 
-// SetAvailable gets a reference to the given float64 and assigns it to the Available field.
-func (o *ModuleBalance) SetAvailable(v float64) {
+// SetAvailable gets a reference to the given string and assigns it to the Available field.
+func (o *ModuleBalance) SetAvailable(v string) {
 	o.Available = &v
 }
 
 // GetSupplied returns the Supplied field value if set, zero value otherwise.
-func (o *ModuleBalance) GetSupplied() float64 {
+func (o *ModuleBalance) GetSupplied() string {
 	if o == nil || IsNil(o.Supplied) {
-		var ret float64
+		var ret string
 		return ret
 	}
 	return *o.Supplied
@@ -157,7 +155,7 @@ func (o *ModuleBalance) GetSupplied() float64 {
 
 // GetSuppliedOk returns a tuple with the Supplied field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ModuleBalance) GetSuppliedOk() (*float64, bool) {
+func (o *ModuleBalance) GetSuppliedOk() (*string, bool) {
 	if o == nil || IsNil(o.Supplied) {
 		return nil, false
 	}
@@ -173,47 +171,15 @@ func (o *ModuleBalance) HasSupplied() bool {
 	return false
 }
 
-// SetSupplied gets a reference to the given float64 and assigns it to the Supplied field.
-func (o *ModuleBalance) SetSupplied(v float64) {
+// SetSupplied gets a reference to the given string and assigns it to the Supplied field.
+func (o *ModuleBalance) SetSupplied(v string) {
 	o.Supplied = &v
 }
 
-// GetSuppliedCollateral returns the SuppliedCollateral field value if set, zero value otherwise.
-func (o *ModuleBalance) GetSuppliedCollateral() float64 {
-	if o == nil || IsNil(o.SuppliedCollateral) {
-		var ret float64
-		return ret
-	}
-	return *o.SuppliedCollateral
-}
-
-// GetSuppliedCollateralOk returns a tuple with the SuppliedCollateral field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ModuleBalance) GetSuppliedCollateralOk() (*float64, bool) {
-	if o == nil || IsNil(o.SuppliedCollateral) {
-		return nil, false
-	}
-	return o.SuppliedCollateral, true
-}
-
-// HasSuppliedCollateral returns a boolean if a field has been set.
-func (o *ModuleBalance) HasSuppliedCollateral() bool {
-	if o != nil && !IsNil(o.SuppliedCollateral) {
-		return true
-	}
-
-	return false
-}
-
-// SetSuppliedCollateral gets a reference to the given float64 and assigns it to the SuppliedCollateral field.
-func (o *ModuleBalance) SetSuppliedCollateral(v float64) {
-	o.SuppliedCollateral = &v
-}
-
 // GetVirtual returns the Virtual field value if set, zero value otherwise.
-func (o *ModuleBalance) GetVirtual() float64 {
+func (o *ModuleBalance) GetVirtual() string {
 	if o == nil || IsNil(o.Virtual) {
-		var ret float64
+		var ret string
 		return ret
 	}
 	return *o.Virtual
@@ -221,7 +187,7 @@ func (o *ModuleBalance) GetVirtual() float64 {
 
 // GetVirtualOk returns a tuple with the Virtual field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ModuleBalance) GetVirtualOk() (*float64, bool) {
+func (o *ModuleBalance) GetVirtualOk() (*string, bool) {
 	if o == nil || IsNil(o.Virtual) {
 		return nil, false
 	}
@@ -237,15 +203,15 @@ func (o *ModuleBalance) HasVirtual() bool {
 	return false
 }
 
-// SetVirtual gets a reference to the given float64 and assigns it to the Virtual field.
-func (o *ModuleBalance) SetVirtual(v float64) {
+// SetVirtual gets a reference to the given string and assigns it to the Virtual field.
+func (o *ModuleBalance) SetVirtual(v string) {
 	o.Virtual = &v
 }
 
 // GetBorrowed returns the Borrowed field value if set, zero value otherwise.
-func (o *ModuleBalance) GetBorrowed() float64 {
+func (o *ModuleBalance) GetBorrowed() string {
 	if o == nil || IsNil(o.Borrowed) {
-		var ret float64
+		var ret string
 		return ret
 	}
 	return *o.Borrowed
@@ -253,7 +219,7 @@ func (o *ModuleBalance) GetBorrowed() float64 {
 
 // GetBorrowedOk returns a tuple with the Borrowed field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ModuleBalance) GetBorrowedOk() (*float64, bool) {
+func (o *ModuleBalance) GetBorrowedOk() (*string, bool) {
 	if o == nil || IsNil(o.Borrowed) {
 		return nil, false
 	}
@@ -269,8 +235,8 @@ func (o *ModuleBalance) HasBorrowed() bool {
 	return false
 }
 
-// SetBorrowed gets a reference to the given float64 and assigns it to the Borrowed field.
-func (o *ModuleBalance) SetBorrowed(v float64) {
+// SetBorrowed gets a reference to the given string and assigns it to the Borrowed field.
+func (o *ModuleBalance) SetBorrowed(v string) {
 	o.Borrowed = &v
 }
 
@@ -295,9 +261,6 @@ func (o ModuleBalance) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Supplied) {
 		toSerialize["supplied"] = o.Supplied
-	}
-	if !IsNil(o.SuppliedCollateral) {
-		toSerialize["supplied_collateral"] = o.SuppliedCollateral
 	}
 	if !IsNil(o.Virtual) {
 		toSerialize["virtual"] = o.Virtual

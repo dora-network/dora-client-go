@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **StartAt** | Pointer to **time.Time** |  | [optional] 
 **EndAt** | Pointer to **time.Time** |  | [optional] 
 **PayAt** | Pointer to **time.Time** |  | [optional] 
-**AvailableToPay** | Pointer to **float64** |  | [optional] 
+**AvailableToPay** | Pointer to **string** |  | [optional] 
 **CompletedAt** | Pointer to **time.Time** |  | [optional] 
 **CreatedAt** | Pointer to **time.Time** |  | [optional] 
 **ProcessEvery** | Pointer to **int32** | Number of nanoseconds to wait between coupon payment processing, must be at least 1000 (1 microsecond) | [optional] 
@@ -187,20 +187,20 @@ HasPayAt returns a boolean if a field has been set.
 
 ### GetAvailableToPay
 
-`func (o *CouponPayment) GetAvailableToPay() float64`
+`func (o *CouponPayment) GetAvailableToPay() string`
 
 GetAvailableToPay returns the AvailableToPay field if non-nil, zero value otherwise.
 
 ### GetAvailableToPayOk
 
-`func (o *CouponPayment) GetAvailableToPayOk() (*float64, bool)`
+`func (o *CouponPayment) GetAvailableToPayOk() (*string, bool)`
 
 GetAvailableToPayOk returns a tuple with the AvailableToPay field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAvailableToPay
 
-`func (o *CouponPayment) SetAvailableToPay(v float64)`
+`func (o *CouponPayment) SetAvailableToPay(v string)`
 
 SetAvailableToPay sets AvailableToPay field to given value.
 

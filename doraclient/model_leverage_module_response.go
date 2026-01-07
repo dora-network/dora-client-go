@@ -20,7 +20,7 @@ var _ MappedNullable = &LeverageModuleResponse{}
 // LeverageModuleResponse struct for LeverageModuleResponse
 type LeverageModuleResponse struct {
 	// A map of asset IDs to their module balances
-	Balances *map[string]ModuleBalance `json:"balances,omitempty"`
+	Balances map[string]ModuleBalance `json:"balances,omitempty"`
 }
 
 // NewLeverageModuleResponse instantiates a new LeverageModuleResponse object
@@ -46,14 +46,14 @@ func (o *LeverageModuleResponse) GetBalances() map[string]ModuleBalance {
 		var ret map[string]ModuleBalance
 		return ret
 	}
-	return *o.Balances
+	return o.Balances
 }
 
 // GetBalancesOk returns a tuple with the Balances field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *LeverageModuleResponse) GetBalancesOk() (*map[string]ModuleBalance, bool) {
+func (o *LeverageModuleResponse) GetBalancesOk() (map[string]ModuleBalance, bool) {
 	if o == nil || IsNil(o.Balances) {
-		return nil, false
+		return map[string]ModuleBalance{}, false
 	}
 	return o.Balances, true
 }
@@ -69,7 +69,7 @@ func (o *LeverageModuleResponse) HasBalances() bool {
 
 // SetBalances gets a reference to the given map[string]ModuleBalance and assigns it to the Balances field.
 func (o *LeverageModuleResponse) SetBalances(v map[string]ModuleBalance) {
-	o.Balances = &v
+	o.Balances = v
 }
 
 func (o LeverageModuleResponse) MarshalJSON() ([]byte, error) {

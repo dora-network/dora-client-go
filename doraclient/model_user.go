@@ -21,8 +21,8 @@ var _ MappedNullable = &User{}
 // User struct for User
 type User struct {
 	Id *string `json:"id,omitempty"`
-	ClosedAt NullableTime `json:"closed_at,omitempty"`
-	DisabledAt NullableTime `json:"disabled_at,omitempty"`
+	ClosedAt *time.Time `json:"closed_at,omitempty"`
+	DisabledAt *time.Time `json:"disabled_at,omitempty"`
 	Email *string `json:"email,omitempty"`
 	Name *string `json:"name,omitempty"`
 	NativeAssetId *string `json:"native_asset_id,omitempty"`
@@ -34,7 +34,7 @@ type User struct {
 	Timezone *string `json:"timezone,omitempty"`
 	// timezone offset in seconds
 	TimezoneOffset *int32 `json:"timezone_offset,omitempty"`
-	VerifiedAt NullableTime `json:"verified_at,omitempty"`
+	VerifiedAt *time.Time `json:"verified_at,omitempty"`
 }
 
 // NewUser instantiates a new User object
@@ -86,88 +86,68 @@ func (o *User) SetId(v string) {
 	o.Id = &v
 }
 
-// GetClosedAt returns the ClosedAt field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetClosedAt returns the ClosedAt field value if set, zero value otherwise.
 func (o *User) GetClosedAt() time.Time {
-	if o == nil || IsNil(o.ClosedAt.Get()) {
+	if o == nil || IsNil(o.ClosedAt) {
 		var ret time.Time
 		return ret
 	}
-	return *o.ClosedAt.Get()
+	return *o.ClosedAt
 }
 
 // GetClosedAtOk returns a tuple with the ClosedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *User) GetClosedAtOk() (*time.Time, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.ClosedAt) {
 		return nil, false
 	}
-	return o.ClosedAt.Get(), o.ClosedAt.IsSet()
+	return o.ClosedAt, true
 }
 
 // HasClosedAt returns a boolean if a field has been set.
 func (o *User) HasClosedAt() bool {
-	if o != nil && o.ClosedAt.IsSet() {
+	if o != nil && !IsNil(o.ClosedAt) {
 		return true
 	}
 
 	return false
 }
 
-// SetClosedAt gets a reference to the given NullableTime and assigns it to the ClosedAt field.
+// SetClosedAt gets a reference to the given time.Time and assigns it to the ClosedAt field.
 func (o *User) SetClosedAt(v time.Time) {
-	o.ClosedAt.Set(&v)
-}
-// SetClosedAtNil sets the value for ClosedAt to be an explicit nil
-func (o *User) SetClosedAtNil() {
-	o.ClosedAt.Set(nil)
+	o.ClosedAt = &v
 }
 
-// UnsetClosedAt ensures that no value is present for ClosedAt, not even an explicit nil
-func (o *User) UnsetClosedAt() {
-	o.ClosedAt.Unset()
-}
-
-// GetDisabledAt returns the DisabledAt field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetDisabledAt returns the DisabledAt field value if set, zero value otherwise.
 func (o *User) GetDisabledAt() time.Time {
-	if o == nil || IsNil(o.DisabledAt.Get()) {
+	if o == nil || IsNil(o.DisabledAt) {
 		var ret time.Time
 		return ret
 	}
-	return *o.DisabledAt.Get()
+	return *o.DisabledAt
 }
 
 // GetDisabledAtOk returns a tuple with the DisabledAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *User) GetDisabledAtOk() (*time.Time, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.DisabledAt) {
 		return nil, false
 	}
-	return o.DisabledAt.Get(), o.DisabledAt.IsSet()
+	return o.DisabledAt, true
 }
 
 // HasDisabledAt returns a boolean if a field has been set.
 func (o *User) HasDisabledAt() bool {
-	if o != nil && o.DisabledAt.IsSet() {
+	if o != nil && !IsNil(o.DisabledAt) {
 		return true
 	}
 
 	return false
 }
 
-// SetDisabledAt gets a reference to the given NullableTime and assigns it to the DisabledAt field.
+// SetDisabledAt gets a reference to the given time.Time and assigns it to the DisabledAt field.
 func (o *User) SetDisabledAt(v time.Time) {
-	o.DisabledAt.Set(&v)
-}
-// SetDisabledAtNil sets the value for DisabledAt to be an explicit nil
-func (o *User) SetDisabledAtNil() {
-	o.DisabledAt.Set(nil)
-}
-
-// UnsetDisabledAt ensures that no value is present for DisabledAt, not even an explicit nil
-func (o *User) UnsetDisabledAt() {
-	o.DisabledAt.Unset()
+	o.DisabledAt = &v
 }
 
 // GetEmail returns the Email field value if set, zero value otherwise.
@@ -458,46 +438,36 @@ func (o *User) SetTimezoneOffset(v int32) {
 	o.TimezoneOffset = &v
 }
 
-// GetVerifiedAt returns the VerifiedAt field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetVerifiedAt returns the VerifiedAt field value if set, zero value otherwise.
 func (o *User) GetVerifiedAt() time.Time {
-	if o == nil || IsNil(o.VerifiedAt.Get()) {
+	if o == nil || IsNil(o.VerifiedAt) {
 		var ret time.Time
 		return ret
 	}
-	return *o.VerifiedAt.Get()
+	return *o.VerifiedAt
 }
 
 // GetVerifiedAtOk returns a tuple with the VerifiedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *User) GetVerifiedAtOk() (*time.Time, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.VerifiedAt) {
 		return nil, false
 	}
-	return o.VerifiedAt.Get(), o.VerifiedAt.IsSet()
+	return o.VerifiedAt, true
 }
 
 // HasVerifiedAt returns a boolean if a field has been set.
 func (o *User) HasVerifiedAt() bool {
-	if o != nil && o.VerifiedAt.IsSet() {
+	if o != nil && !IsNil(o.VerifiedAt) {
 		return true
 	}
 
 	return false
 }
 
-// SetVerifiedAt gets a reference to the given NullableTime and assigns it to the VerifiedAt field.
+// SetVerifiedAt gets a reference to the given time.Time and assigns it to the VerifiedAt field.
 func (o *User) SetVerifiedAt(v time.Time) {
-	o.VerifiedAt.Set(&v)
-}
-// SetVerifiedAtNil sets the value for VerifiedAt to be an explicit nil
-func (o *User) SetVerifiedAtNil() {
-	o.VerifiedAt.Set(nil)
-}
-
-// UnsetVerifiedAt ensures that no value is present for VerifiedAt, not even an explicit nil
-func (o *User) UnsetVerifiedAt() {
-	o.VerifiedAt.Unset()
+	o.VerifiedAt = &v
 }
 
 func (o User) MarshalJSON() ([]byte, error) {
@@ -513,11 +483,11 @@ func (o User) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
-	if o.ClosedAt.IsSet() {
-		toSerialize["closed_at"] = o.ClosedAt.Get()
+	if !IsNil(o.ClosedAt) {
+		toSerialize["closed_at"] = o.ClosedAt
 	}
-	if o.DisabledAt.IsSet() {
-		toSerialize["disabled_at"] = o.DisabledAt.Get()
+	if !IsNil(o.DisabledAt) {
+		toSerialize["disabled_at"] = o.DisabledAt
 	}
 	if !IsNil(o.Email) {
 		toSerialize["email"] = o.Email
@@ -546,8 +516,8 @@ func (o User) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TimezoneOffset) {
 		toSerialize["timezone_offset"] = o.TimezoneOffset
 	}
-	if o.VerifiedAt.IsSet() {
-		toSerialize["verified_at"] = o.VerifiedAt.Get()
+	if !IsNil(o.VerifiedAt) {
+		toSerialize["verified_at"] = o.VerifiedAt
 	}
 	return toSerialize, nil
 }

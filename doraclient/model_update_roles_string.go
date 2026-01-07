@@ -23,6 +23,7 @@ var _ MappedNullable = &UpdateRolesString{}
 type UpdateRolesString struct {
 	// Whether to update the field.
 	Update bool `json:"update"`
+	// The new value to set for the field.
 	Value *UserRole `json:"value,omitempty"`
 }
 

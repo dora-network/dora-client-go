@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AssetId** | Pointer to **string** |  | [optional] 
-**Price** | Pointer to **float64** |  | [optional] 
+**Price** | Pointer to **string** |  | [optional] 
 **Time** | Pointer to **time.Time** |  | [optional] 
 
 ## Methods
@@ -54,20 +54,20 @@ HasAssetId returns a boolean if a field has been set.
 
 ### GetPrice
 
-`func (o *AssetPrice) GetPrice() float64`
+`func (o *AssetPrice) GetPrice() string`
 
 GetPrice returns the Price field if non-nil, zero value otherwise.
 
 ### GetPriceOk
 
-`func (o *AssetPrice) GetPriceOk() (*float64, bool)`
+`func (o *AssetPrice) GetPriceOk() (*string, bool)`
 
 GetPriceOk returns a tuple with the Price field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPrice
 
-`func (o *AssetPrice) SetPrice(v float64)`
+`func (o *AssetPrice) SetPrice(v string)`
 
 SetPrice sets Price field to given value.
 

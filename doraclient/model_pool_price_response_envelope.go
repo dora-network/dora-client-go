@@ -19,9 +19,10 @@ var _ MappedNullable = &PoolPriceResponseEnvelope{}
 
 // PoolPriceResponseEnvelope struct for PoolPriceResponseEnvelope
 type PoolPriceResponseEnvelope struct {
-	Data interface{} `json:"data,omitempty"`
+	Data *PoolPrice `json:"data,omitempty"`
 	// The error message. Present for error (non-2xx) responses.
 	Error *string `json:"error,omitempty"`
+	// Metadata about the response, including status code and trace information.
 	Metadata *Metadata `json:"metadata,omitempty"`
 }
 
@@ -43,19 +44,19 @@ func NewPoolPriceResponseEnvelopeWithDefaults() *PoolPriceResponseEnvelope {
 }
 
 // GetData returns the Data field value if set, zero value otherwise.
-func (o *PoolPriceResponseEnvelope) GetData() interface{} {
+func (o *PoolPriceResponseEnvelope) GetData() PoolPrice {
 	if o == nil || IsNil(o.Data) {
-		var ret interface{}
+		var ret PoolPrice
 		return ret
 	}
-	return o.Data
+	return *o.Data
 }
 
 // GetDataOk returns a tuple with the Data field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PoolPriceResponseEnvelope) GetDataOk() (interface{}, bool) {
+func (o *PoolPriceResponseEnvelope) GetDataOk() (*PoolPrice, bool) {
 	if o == nil || IsNil(o.Data) {
-		return interface{}{}, false
+		return nil, false
 	}
 	return o.Data, true
 }
@@ -69,9 +70,9 @@ func (o *PoolPriceResponseEnvelope) HasData() bool {
 	return false
 }
 
-// SetData gets a reference to the given interface{} and assigns it to the Data field.
-func (o *PoolPriceResponseEnvelope) SetData(v interface{}) {
-	o.Data = v
+// SetData gets a reference to the given PoolPrice and assigns it to the Data field.
+func (o *PoolPriceResponseEnvelope) SetData(v PoolPrice) {
+	o.Data = &v
 }
 
 // GetError returns the Error field value if set, zero value otherwise.

@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Data** | Pointer to **string** |  | [optional] 
 **Error** | Pointer to **string** | The error message. Present for error (non-2xx) responses. | [optional] 
-**Metadata** | Pointer to [**Metadata**](Metadata.md) |  | [optional] 
+**Metadata** | Pointer to [**Metadata**](Metadata.md) | Metadata about the response, including status code and trace information. | [optional] 
 
 ## Methods
 

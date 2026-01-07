@@ -20,12 +20,12 @@ type CandleResolution string
 
 // List of CandleResolution
 const (
-	_1M CandleResolution = "1m"
-	_5M CandleResolution = "5m"
-	_15M CandleResolution = "15m"
-	_1H CandleResolution = "1h"
-	_4H CandleResolution = "4h"
-	_1D CandleResolution = "1d"
+	CANDLERESOLUTION__1M CandleResolution = "1m"
+	CANDLERESOLUTION__5M CandleResolution = "5m"
+	CANDLERESOLUTION__15M CandleResolution = "15m"
+	CANDLERESOLUTION__1H CandleResolution = "1h"
+	CANDLERESOLUTION__4H CandleResolution = "4h"
+	CANDLERESOLUTION__1D CandleResolution = "1d"
 )
 
 // All allowed values of CandleResolution enum

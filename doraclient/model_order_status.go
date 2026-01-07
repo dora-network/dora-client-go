@@ -20,11 +20,11 @@ type OrderStatus string
 
 // List of OrderStatus
 const (
-	OPEN OrderStatus = "OPEN"
-	FILLED OrderStatus = "FILLED"
-	PARTIAL_FILL OrderStatus = "PARTIAL_FILL"
-	CANCELLED OrderStatus = "CANCELLED"
-	PENDING OrderStatus = "PENDING"
+	ORDERSTATUS_OPEN OrderStatus = "OPEN"
+	ORDERSTATUS_FILLED OrderStatus = "FILLED"
+	ORDERSTATUS_PARTIAL_FILL OrderStatus = "PARTIAL_FILL"
+	ORDERSTATUS_CANCELLED OrderStatus = "CANCELLED"
+	ORDERSTATUS_PENDING OrderStatus = "PENDING"
 )
 
 // All allowed values of OrderStatus enum

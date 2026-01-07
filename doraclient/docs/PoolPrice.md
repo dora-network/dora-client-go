@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **PoolId** | Pointer to **string** |  | [optional] 
-**Price** | Pointer to **float64** |  | [optional] 
+**Price** | Pointer to **string** |  | [optional] 
 **Timestamp** | Pointer to **time.Time** |  | [optional] 
 
 ## Methods
@@ -54,20 +54,20 @@ HasPoolId returns a boolean if a field has been set.
 
 ### GetPrice
 
-`func (o *PoolPrice) GetPrice() float64`
+`func (o *PoolPrice) GetPrice() string`
 
 GetPrice returns the Price field if non-nil, zero value otherwise.
 
 ### GetPriceOk
 
-`func (o *PoolPrice) GetPriceOk() (*float64, bool)`
+`func (o *PoolPrice) GetPriceOk() (*string, bool)`
 
 GetPriceOk returns a tuple with the Price field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPrice
 
-`func (o *PoolPrice) SetPrice(v float64)`
+`func (o *PoolPrice) SetPrice(v string)`
 
 SetPrice sets Price field to given value.
 

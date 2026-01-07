@@ -19,9 +19,10 @@ var _ MappedNullable = &UnitePositionResponseEnvelope{}
 
 // UnitePositionResponseEnvelope struct for UnitePositionResponseEnvelope
 type UnitePositionResponseEnvelope struct {
-	Data interface{} `json:"data,omitempty"`
+	Data *UnitedPosition `json:"data,omitempty"`
 	// The error message. Present for error (non-2xx) responses.
 	Error *string `json:"error,omitempty"`
+	// Metadata about the response, including status code and trace information.
 	Metadata *Metadata `json:"metadata,omitempty"`
 }
 
@@ -43,19 +44,19 @@ func NewUnitePositionResponseEnvelopeWithDefaults() *UnitePositionResponseEnvelo
 }
 
 // GetData returns the Data field value if set, zero value otherwise.
-func (o *UnitePositionResponseEnvelope) GetData() interface{} {
+func (o *UnitePositionResponseEnvelope) GetData() UnitedPosition {
 	if o == nil || IsNil(o.Data) {
-		var ret interface{}
+		var ret UnitedPosition
 		return ret
 	}
-	return o.Data
+	return *o.Data
 }
 
 // GetDataOk returns a tuple with the Data field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UnitePositionResponseEnvelope) GetDataOk() (interface{}, bool) {
+func (o *UnitePositionResponseEnvelope) GetDataOk() (*UnitedPosition, bool) {
 	if o == nil || IsNil(o.Data) {
-		return interface{}{}, false
+		return nil, false
 	}
 	return o.Data, true
 }
@@ -69,9 +70,9 @@ func (o *UnitePositionResponseEnvelope) HasData() bool {
 	return false
 }
 
-// SetData gets a reference to the given interface{} and assigns it to the Data field.
-func (o *UnitePositionResponseEnvelope) SetData(v interface{}) {
-	o.Data = v
+// SetData gets a reference to the given UnitedPosition and assigns it to the Data field.
+func (o *UnitePositionResponseEnvelope) SetData(v UnitedPosition) {
+	o.Data = &v
 }
 
 // GetError returns the Error field value if set, zero value otherwise.

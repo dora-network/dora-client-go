@@ -23,7 +23,7 @@ var _ MappedNullable = &WithdrawRequest{}
 type WithdrawRequest struct {
 	PositionId string `json:"position_id"`
 	AssetId string `json:"asset_id"`
-	Quantity float64 `json:"quantity"`
+	Quantity string `json:"quantity"`
 }
 
 type _WithdrawRequest WithdrawRequest
@@ -32,7 +32,7 @@ type _WithdrawRequest WithdrawRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewWithdrawRequest(positionId string, assetId string, quantity float64) *WithdrawRequest {
+func NewWithdrawRequest(positionId string, assetId string, quantity string) *WithdrawRequest {
 	this := WithdrawRequest{}
 	this.PositionId = positionId
 	this.AssetId = assetId
@@ -97,9 +97,9 @@ func (o *WithdrawRequest) SetAssetId(v string) {
 }
 
 // GetQuantity returns the Quantity field value
-func (o *WithdrawRequest) GetQuantity() float64 {
+func (o *WithdrawRequest) GetQuantity() string {
 	if o == nil {
-		var ret float64
+		var ret string
 		return ret
 	}
 
@@ -108,7 +108,7 @@ func (o *WithdrawRequest) GetQuantity() float64 {
 
 // GetQuantityOk returns a tuple with the Quantity field value
 // and a boolean to check if the value has been set.
-func (o *WithdrawRequest) GetQuantityOk() (*float64, bool) {
+func (o *WithdrawRequest) GetQuantityOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -116,7 +116,7 @@ func (o *WithdrawRequest) GetQuantityOk() (*float64, bool) {
 }
 
 // SetQuantity sets field value
-func (o *WithdrawRequest) SetQuantity(v float64) {
+func (o *WithdrawRequest) SetQuantity(v string) {
 	o.Quantity = v
 }
 

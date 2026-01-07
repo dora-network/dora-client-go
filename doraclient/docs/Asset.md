@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **FractionalizedUnits** | Pointer to **int32** |  | [optional] 
 **Description** | Pointer to **string** |  | [optional] 
 **LiquidationThreshold** | Pointer to **float32** |  | [optional] 
-**MaturityId** | Pointer to **NullableString** |  | [optional] 
+**MaturityId** | Pointer to **string** |  | [optional] 
 **MaxSupply** | Pointer to **int32** |  | [optional] 
 **MaxUtilization** | Pointer to **int32** |  | [optional] 
 **Name** | Pointer to **string** |  | [optional] 
@@ -245,16 +245,6 @@ SetMaturityId sets MaturityId field to given value.
 
 HasMaturityId returns a boolean if a field has been set.
 
-### SetMaturityIdNil
-
-`func (o *Asset) SetMaturityIdNil(b bool)`
-
- SetMaturityIdNil sets the value for MaturityId to be an explicit nil
-
-### UnsetMaturityId
-`func (o *Asset) UnsetMaturityId()`
-
-UnsetMaturityId ensures that no value is present for MaturityId, not even an explicit nil
 ### GetMaxSupply
 
 `func (o *Asset) GetMaxSupply() int32`

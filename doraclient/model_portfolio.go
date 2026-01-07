@@ -20,7 +20,7 @@ var _ MappedNullable = &Portfolio{}
 // Portfolio struct for Portfolio
 type Portfolio struct {
 	UserId *string `json:"user_id,omitempty"`
-	Position *map[string]map[string]Position `json:"position,omitempty"`
+	Position map[string]map[string]Position `json:"position,omitempty"`
 	NetStablecoinEquivalence *TransformedAssets `json:"net_stablecoin_equivalence,omitempty"`
 }
 
@@ -79,14 +79,14 @@ func (o *Portfolio) GetPosition() map[string]map[string]Position {
 		var ret map[string]map[string]Position
 		return ret
 	}
-	return *o.Position
+	return o.Position
 }
 
 // GetPositionOk returns a tuple with the Position field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Portfolio) GetPositionOk() (*map[string]map[string]Position, bool) {
+func (o *Portfolio) GetPositionOk() (map[string]map[string]Position, bool) {
 	if o == nil || IsNil(o.Position) {
-		return nil, false
+		return map[string]map[string]Position{}, false
 	}
 	return o.Position, true
 }
@@ -102,7 +102,7 @@ func (o *Portfolio) HasPosition() bool {
 
 // SetPosition gets a reference to the given map[string]map[string]Position and assigns it to the Position field.
 func (o *Portfolio) SetPosition(v map[string]map[string]Position) {
-	o.Position = &v
+	o.Position = v
 }
 
 // GetNetStablecoinEquivalence returns the NetStablecoinEquivalence field value if set, zero value otherwise.

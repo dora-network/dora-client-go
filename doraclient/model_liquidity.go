@@ -22,9 +22,9 @@ type Liquidity struct {
 	OrderBookId *string `json:"order_book_id,omitempty"`
 	PositionId *string `json:"position_id,omitempty"`
 	TransactionId *string `json:"transaction_id,omitempty"`
-	BaseQuantity *float64 `json:"base_quantity,omitempty"`
-	QuoteQuantity *float64 `json:"quote_quantity,omitempty"`
-	SharesQuantity *float64 `json:"shares_quantity,omitempty"`
+	BaseQuantity *string `json:"base_quantity,omitempty"`
+	QuoteQuantity *string `json:"quote_quantity,omitempty"`
+	SharesQuantity *string `json:"shares_quantity,omitempty"`
 }
 
 // NewLiquidity instantiates a new Liquidity object
@@ -141,9 +141,9 @@ func (o *Liquidity) SetTransactionId(v string) {
 }
 
 // GetBaseQuantity returns the BaseQuantity field value if set, zero value otherwise.
-func (o *Liquidity) GetBaseQuantity() float64 {
+func (o *Liquidity) GetBaseQuantity() string {
 	if o == nil || IsNil(o.BaseQuantity) {
-		var ret float64
+		var ret string
 		return ret
 	}
 	return *o.BaseQuantity
@@ -151,7 +151,7 @@ func (o *Liquidity) GetBaseQuantity() float64 {
 
 // GetBaseQuantityOk returns a tuple with the BaseQuantity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Liquidity) GetBaseQuantityOk() (*float64, bool) {
+func (o *Liquidity) GetBaseQuantityOk() (*string, bool) {
 	if o == nil || IsNil(o.BaseQuantity) {
 		return nil, false
 	}
@@ -167,15 +167,15 @@ func (o *Liquidity) HasBaseQuantity() bool {
 	return false
 }
 
-// SetBaseQuantity gets a reference to the given float64 and assigns it to the BaseQuantity field.
-func (o *Liquidity) SetBaseQuantity(v float64) {
+// SetBaseQuantity gets a reference to the given string and assigns it to the BaseQuantity field.
+func (o *Liquidity) SetBaseQuantity(v string) {
 	o.BaseQuantity = &v
 }
 
 // GetQuoteQuantity returns the QuoteQuantity field value if set, zero value otherwise.
-func (o *Liquidity) GetQuoteQuantity() float64 {
+func (o *Liquidity) GetQuoteQuantity() string {
 	if o == nil || IsNil(o.QuoteQuantity) {
-		var ret float64
+		var ret string
 		return ret
 	}
 	return *o.QuoteQuantity
@@ -183,7 +183,7 @@ func (o *Liquidity) GetQuoteQuantity() float64 {
 
 // GetQuoteQuantityOk returns a tuple with the QuoteQuantity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Liquidity) GetQuoteQuantityOk() (*float64, bool) {
+func (o *Liquidity) GetQuoteQuantityOk() (*string, bool) {
 	if o == nil || IsNil(o.QuoteQuantity) {
 		return nil, false
 	}
@@ -199,15 +199,15 @@ func (o *Liquidity) HasQuoteQuantity() bool {
 	return false
 }
 
-// SetQuoteQuantity gets a reference to the given float64 and assigns it to the QuoteQuantity field.
-func (o *Liquidity) SetQuoteQuantity(v float64) {
+// SetQuoteQuantity gets a reference to the given string and assigns it to the QuoteQuantity field.
+func (o *Liquidity) SetQuoteQuantity(v string) {
 	o.QuoteQuantity = &v
 }
 
 // GetSharesQuantity returns the SharesQuantity field value if set, zero value otherwise.
-func (o *Liquidity) GetSharesQuantity() float64 {
+func (o *Liquidity) GetSharesQuantity() string {
 	if o == nil || IsNil(o.SharesQuantity) {
-		var ret float64
+		var ret string
 		return ret
 	}
 	return *o.SharesQuantity
@@ -215,7 +215,7 @@ func (o *Liquidity) GetSharesQuantity() float64 {
 
 // GetSharesQuantityOk returns a tuple with the SharesQuantity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Liquidity) GetSharesQuantityOk() (*float64, bool) {
+func (o *Liquidity) GetSharesQuantityOk() (*string, bool) {
 	if o == nil || IsNil(o.SharesQuantity) {
 		return nil, false
 	}
@@ -231,8 +231,8 @@ func (o *Liquidity) HasSharesQuantity() bool {
 	return false
 }
 
-// SetSharesQuantity gets a reference to the given float64 and assigns it to the SharesQuantity field.
-func (o *Liquidity) SetSharesQuantity(v float64) {
+// SetSharesQuantity gets a reference to the given string and assigns it to the SharesQuantity field.
+func (o *Liquidity) SetSharesQuantity(v string) {
 	o.SharesQuantity = &v
 }
 

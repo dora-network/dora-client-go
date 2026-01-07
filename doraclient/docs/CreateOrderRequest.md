@@ -4,22 +4,23 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Quantity** | **float64** |  | 
-**InverseLeverage** | **float64** |  | 
-**Price** | Pointer to **float64** |  | [optional] 
+**Quantity** | **string** |  | 
+**InverseLeverage** | **string** |  | 
+**Price** | Pointer to **string** |  | [optional] 
 **Kind** | [**OrderKind**](OrderKind.md) |  | 
-**Side** | [**Side**](Side.md) |  | 
-**PositionId** | **string** | position ID to use for the order. required. | 
+**Side** | [**Side**](Side.md) | Required: Must be either &#39;BUY&#39; or &#39;SELL&#39; | 
+**FromGlobalPosition** | **bool** | use global position for the order or isolated. required. | 
 **OrderBookId** | **string** | Required: the order book to submit the order to | 
 **OrderModifiers** | Pointer to [**[]OrderModifierKind**](OrderModifierKind.md) |  | [optional] 
 **GoodTillDate** | Pointer to **time.Time** |  | [optional] 
-**TriggerPrice** | Pointer to **float64** |  | [optional] 
+**TriggerPrice** | Pointer to **string** |  | [optional] 
+**TriggerType** | Pointer to [**TriggerType**](TriggerType.md) |  | [optional] 
 
 ## Methods
 
 ### NewCreateOrderRequest
 
-`func NewCreateOrderRequest(quantity float64, inverseLeverage float64, kind OrderKind, side Side, positionId string, orderBookId string, ) *CreateOrderRequest`
+`func NewCreateOrderRequest(quantity string, inverseLeverage string, kind OrderKind, side Side, fromGlobalPosition bool, orderBookId string, ) *CreateOrderRequest`
 
 NewCreateOrderRequest instantiates a new CreateOrderRequest object
 This constructor will assign default values to properties that have it defined,
@@ -36,60 +37,60 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetQuantity
 
-`func (o *CreateOrderRequest) GetQuantity() float64`
+`func (o *CreateOrderRequest) GetQuantity() string`
 
 GetQuantity returns the Quantity field if non-nil, zero value otherwise.
 
 ### GetQuantityOk
 
-`func (o *CreateOrderRequest) GetQuantityOk() (*float64, bool)`
+`func (o *CreateOrderRequest) GetQuantityOk() (*string, bool)`
 
 GetQuantityOk returns a tuple with the Quantity field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetQuantity
 
-`func (o *CreateOrderRequest) SetQuantity(v float64)`
+`func (o *CreateOrderRequest) SetQuantity(v string)`
 
 SetQuantity sets Quantity field to given value.
 
 
 ### GetInverseLeverage
 
-`func (o *CreateOrderRequest) GetInverseLeverage() float64`
+`func (o *CreateOrderRequest) GetInverseLeverage() string`
 
 GetInverseLeverage returns the InverseLeverage field if non-nil, zero value otherwise.
 
 ### GetInverseLeverageOk
 
-`func (o *CreateOrderRequest) GetInverseLeverageOk() (*float64, bool)`
+`func (o *CreateOrderRequest) GetInverseLeverageOk() (*string, bool)`
 
 GetInverseLeverageOk returns a tuple with the InverseLeverage field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetInverseLeverage
 
-`func (o *CreateOrderRequest) SetInverseLeverage(v float64)`
+`func (o *CreateOrderRequest) SetInverseLeverage(v string)`
 
 SetInverseLeverage sets InverseLeverage field to given value.
 
 
 ### GetPrice
 
-`func (o *CreateOrderRequest) GetPrice() float64`
+`func (o *CreateOrderRequest) GetPrice() string`
 
 GetPrice returns the Price field if non-nil, zero value otherwise.
 
 ### GetPriceOk
 
-`func (o *CreateOrderRequest) GetPriceOk() (*float64, bool)`
+`func (o *CreateOrderRequest) GetPriceOk() (*string, bool)`
 
 GetPriceOk returns a tuple with the Price field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPrice
 
-`func (o *CreateOrderRequest) SetPrice(v float64)`
+`func (o *CreateOrderRequest) SetPrice(v string)`
 
 SetPrice sets Price field to given value.
 
@@ -139,24 +140,24 @@ and a boolean to check if the value has been set.
 SetSide sets Side field to given value.
 
 
-### GetPositionId
+### GetFromGlobalPosition
 
-`func (o *CreateOrderRequest) GetPositionId() string`
+`func (o *CreateOrderRequest) GetFromGlobalPosition() bool`
 
-GetPositionId returns the PositionId field if non-nil, zero value otherwise.
+GetFromGlobalPosition returns the FromGlobalPosition field if non-nil, zero value otherwise.
 
-### GetPositionIdOk
+### GetFromGlobalPositionOk
 
-`func (o *CreateOrderRequest) GetPositionIdOk() (*string, bool)`
+`func (o *CreateOrderRequest) GetFromGlobalPositionOk() (*bool, bool)`
 
-GetPositionIdOk returns a tuple with the PositionId field if it's non-nil, zero value otherwise
+GetFromGlobalPositionOk returns a tuple with the FromGlobalPosition field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetPositionId
+### SetFromGlobalPosition
 
-`func (o *CreateOrderRequest) SetPositionId(v string)`
+`func (o *CreateOrderRequest) SetFromGlobalPosition(v bool)`
 
-SetPositionId sets PositionId field to given value.
+SetFromGlobalPosition sets FromGlobalPosition field to given value.
 
 
 ### GetOrderBookId
@@ -231,20 +232,20 @@ HasGoodTillDate returns a boolean if a field has been set.
 
 ### GetTriggerPrice
 
-`func (o *CreateOrderRequest) GetTriggerPrice() float64`
+`func (o *CreateOrderRequest) GetTriggerPrice() string`
 
 GetTriggerPrice returns the TriggerPrice field if non-nil, zero value otherwise.
 
 ### GetTriggerPriceOk
 
-`func (o *CreateOrderRequest) GetTriggerPriceOk() (*float64, bool)`
+`func (o *CreateOrderRequest) GetTriggerPriceOk() (*string, bool)`
 
 GetTriggerPriceOk returns a tuple with the TriggerPrice field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTriggerPrice
 
-`func (o *CreateOrderRequest) SetTriggerPrice(v float64)`
+`func (o *CreateOrderRequest) SetTriggerPrice(v string)`
 
 SetTriggerPrice sets TriggerPrice field to given value.
 
@@ -253,6 +254,31 @@ SetTriggerPrice sets TriggerPrice field to given value.
 `func (o *CreateOrderRequest) HasTriggerPrice() bool`
 
 HasTriggerPrice returns a boolean if a field has been set.
+
+### GetTriggerType
+
+`func (o *CreateOrderRequest) GetTriggerType() TriggerType`
+
+GetTriggerType returns the TriggerType field if non-nil, zero value otherwise.
+
+### GetTriggerTypeOk
+
+`func (o *CreateOrderRequest) GetTriggerTypeOk() (*TriggerType, bool)`
+
+GetTriggerTypeOk returns a tuple with the TriggerType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTriggerType
+
+`func (o *CreateOrderRequest) SetTriggerType(v TriggerType)`
+
+SetTriggerType sets TriggerType field to given value.
+
+### HasTriggerType
+
+`func (o *CreateOrderRequest) HasTriggerType() bool`
+
+HasTriggerType returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

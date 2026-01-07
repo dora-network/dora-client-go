@@ -19,9 +19,10 @@ var _ MappedNullable = &APIKeyResponseEnvelope{}
 
 // APIKeyResponseEnvelope struct for APIKeyResponseEnvelope
 type APIKeyResponseEnvelope struct {
-	Data []APIKeyResponse `json:"data,omitempty"`
+	Data *APIKeys `json:"data,omitempty"`
 	// The error message. Present for error (non-2xx) responses.
 	Error *string `json:"error,omitempty"`
+	// Metadata about the response, including status code and trace information.
 	Metadata *Metadata `json:"metadata,omitempty"`
 }
 
@@ -43,17 +44,17 @@ func NewAPIKeyResponseEnvelopeWithDefaults() *APIKeyResponseEnvelope {
 }
 
 // GetData returns the Data field value if set, zero value otherwise.
-func (o *APIKeyResponseEnvelope) GetData() []APIKeyResponse {
+func (o *APIKeyResponseEnvelope) GetData() APIKeys {
 	if o == nil || IsNil(o.Data) {
-		var ret []APIKeyResponse
+		var ret APIKeys
 		return ret
 	}
-	return o.Data
+	return *o.Data
 }
 
 // GetDataOk returns a tuple with the Data field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *APIKeyResponseEnvelope) GetDataOk() ([]APIKeyResponse, bool) {
+func (o *APIKeyResponseEnvelope) GetDataOk() (*APIKeys, bool) {
 	if o == nil || IsNil(o.Data) {
 		return nil, false
 	}
@@ -69,9 +70,9 @@ func (o *APIKeyResponseEnvelope) HasData() bool {
 	return false
 }
 
-// SetData gets a reference to the given []APIKeyResponse and assigns it to the Data field.
-func (o *APIKeyResponseEnvelope) SetData(v []APIKeyResponse) {
-	o.Data = v
+// SetData gets a reference to the given APIKeys and assigns it to the Data field.
+func (o *APIKeyResponseEnvelope) SetData(v APIKeys) {
+	o.Data = &v
 }
 
 // GetError returns the Error field value if set, zero value otherwise.

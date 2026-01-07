@@ -19,8 +19,8 @@ var _ MappedNullable = &UserInterest{}
 
 // UserInterest struct for UserInterest
 type UserInterest struct {
-	Available *map[string]int32 `json:"available,omitempty"`
-	Value *map[string]string `json:"value,omitempty"`
+	Available map[string]int32 `json:"available,omitempty"`
+	Value map[string]string `json:"value,omitempty"`
 }
 
 // NewUserInterest instantiates a new UserInterest object
@@ -46,14 +46,14 @@ func (o *UserInterest) GetAvailable() map[string]int32 {
 		var ret map[string]int32
 		return ret
 	}
-	return *o.Available
+	return o.Available
 }
 
 // GetAvailableOk returns a tuple with the Available field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UserInterest) GetAvailableOk() (*map[string]int32, bool) {
+func (o *UserInterest) GetAvailableOk() (map[string]int32, bool) {
 	if o == nil || IsNil(o.Available) {
-		return nil, false
+		return map[string]int32{}, false
 	}
 	return o.Available, true
 }
@@ -69,7 +69,7 @@ func (o *UserInterest) HasAvailable() bool {
 
 // SetAvailable gets a reference to the given map[string]int32 and assigns it to the Available field.
 func (o *UserInterest) SetAvailable(v map[string]int32) {
-	o.Available = &v
+	o.Available = v
 }
 
 // GetValue returns the Value field value if set, zero value otherwise.
@@ -78,14 +78,14 @@ func (o *UserInterest) GetValue() map[string]string {
 		var ret map[string]string
 		return ret
 	}
-	return *o.Value
+	return o.Value
 }
 
 // GetValueOk returns a tuple with the Value field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UserInterest) GetValueOk() (*map[string]string, bool) {
+func (o *UserInterest) GetValueOk() (map[string]string, bool) {
 	if o == nil || IsNil(o.Value) {
-		return nil, false
+		return map[string]string{}, false
 	}
 	return o.Value, true
 }
@@ -101,7 +101,7 @@ func (o *UserInterest) HasValue() bool {
 
 // SetValue gets a reference to the given map[string]string and assigns it to the Value field.
 func (o *UserInterest) SetValue(v map[string]string) {
-	o.Value = &v
+	o.Value = v
 }
 
 func (o UserInterest) MarshalJSON() ([]byte, error) {

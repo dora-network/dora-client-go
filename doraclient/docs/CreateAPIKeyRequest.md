@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Label** | Pointer to **string** |  | [optional] 
-**Expires** | Pointer to **NullableTime** | Date at which the api-key will expire | [optional] 
+**Expires** | Pointer to **time.Time** | Date at which the api-key will expire | [optional] 
 
 ## Methods
 
@@ -76,16 +76,6 @@ SetExpires sets Expires field to given value.
 
 HasExpires returns a boolean if a field has been set.
 
-### SetExpiresNil
-
-`func (o *CreateAPIKeyRequest) SetExpiresNil(b bool)`
-
- SetExpiresNil sets the value for Expires to be an explicit nil
-
-### UnsetExpires
-`func (o *CreateAPIKeyRequest) UnsetExpires()`
-
-UnsetExpires ensures that no value is present for Expires, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

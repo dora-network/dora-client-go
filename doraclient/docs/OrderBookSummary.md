@@ -5,10 +5,10 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **OrderBookId** | Pointer to **string** |  | [optional] 
-**MidPrice** | Pointer to **float64** |  | [optional] 
-**Spread** | Pointer to **float64** |  | [optional] 
-**BestBid** | Pointer to **float64** |  | [optional] 
-**BestAsk** | Pointer to **float64** |  | [optional] 
+**MidPrice** | Pointer to **string** |  | [optional] 
+**Spread** | Pointer to **string** |  | [optional] 
+**BestBid** | Pointer to **string** |  | [optional] 
+**BestAsk** | Pointer to **string** |  | [optional] 
 
 ## Methods
 
@@ -56,20 +56,20 @@ HasOrderBookId returns a boolean if a field has been set.
 
 ### GetMidPrice
 
-`func (o *OrderBookSummary) GetMidPrice() float64`
+`func (o *OrderBookSummary) GetMidPrice() string`
 
 GetMidPrice returns the MidPrice field if non-nil, zero value otherwise.
 
 ### GetMidPriceOk
 
-`func (o *OrderBookSummary) GetMidPriceOk() (*float64, bool)`
+`func (o *OrderBookSummary) GetMidPriceOk() (*string, bool)`
 
 GetMidPriceOk returns a tuple with the MidPrice field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMidPrice
 
-`func (o *OrderBookSummary) SetMidPrice(v float64)`
+`func (o *OrderBookSummary) SetMidPrice(v string)`
 
 SetMidPrice sets MidPrice field to given value.
 
@@ -81,20 +81,20 @@ HasMidPrice returns a boolean if a field has been set.
 
 ### GetSpread
 
-`func (o *OrderBookSummary) GetSpread() float64`
+`func (o *OrderBookSummary) GetSpread() string`
 
 GetSpread returns the Spread field if non-nil, zero value otherwise.
 
 ### GetSpreadOk
 
-`func (o *OrderBookSummary) GetSpreadOk() (*float64, bool)`
+`func (o *OrderBookSummary) GetSpreadOk() (*string, bool)`
 
 GetSpreadOk returns a tuple with the Spread field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSpread
 
-`func (o *OrderBookSummary) SetSpread(v float64)`
+`func (o *OrderBookSummary) SetSpread(v string)`
 
 SetSpread sets Spread field to given value.
 
@@ -106,20 +106,20 @@ HasSpread returns a boolean if a field has been set.
 
 ### GetBestBid
 
-`func (o *OrderBookSummary) GetBestBid() float64`
+`func (o *OrderBookSummary) GetBestBid() string`
 
 GetBestBid returns the BestBid field if non-nil, zero value otherwise.
 
 ### GetBestBidOk
 
-`func (o *OrderBookSummary) GetBestBidOk() (*float64, bool)`
+`func (o *OrderBookSummary) GetBestBidOk() (*string, bool)`
 
 GetBestBidOk returns a tuple with the BestBid field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetBestBid
 
-`func (o *OrderBookSummary) SetBestBid(v float64)`
+`func (o *OrderBookSummary) SetBestBid(v string)`
 
 SetBestBid sets BestBid field to given value.
 
@@ -131,20 +131,20 @@ HasBestBid returns a boolean if a field has been set.
 
 ### GetBestAsk
 
-`func (o *OrderBookSummary) GetBestAsk() float64`
+`func (o *OrderBookSummary) GetBestAsk() string`
 
 GetBestAsk returns the BestAsk field if non-nil, zero value otherwise.
 
 ### GetBestAskOk
 
-`func (o *OrderBookSummary) GetBestAskOk() (*float64, bool)`
+`func (o *OrderBookSummary) GetBestAskOk() (*string, bool)`
 
 GetBestAskOk returns a tuple with the BestAsk field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetBestAsk
 
-`func (o *OrderBookSummary) SetBestAsk(v float64)`
+`func (o *OrderBookSummary) SetBestAsk(v string)`
 
 SetBestAsk sets BestAsk field to given value.
 

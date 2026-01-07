@@ -22,17 +22,27 @@ var _ MappedNullable = &ValidateSubmitOrderRequest{}
 
 // ValidateSubmitOrderRequest struct for ValidateSubmitOrderRequest
 type ValidateSubmitOrderRequest struct {
-	Quantity float64 `json:"quantity"`
+	Quantity string `json:"quantity"`
 	// Minimum tradable increment for the selected order book
-	Tick float64 `json:"tick"`
+	Tick string `json:"tick"`
+	// Must be LIMIT or MARKET
 	Kind OrderKind `json:"kind"`
+	// Must be BUY or SELL
 	Side *Side `json:"side,omitempty"`
 	// If kind is LIMIT, must be > 0; if MARKET it must be 0 or omitted
-	Price float64 `json:"price"`
+	Price string `json:"price"`
 	GoodTillDate *time.Time `json:"good_till_date,omitempty"`
-	InverseLeverage float64 `json:"inverse_leverage"`
+	InverseLeverage string `json:"inverse_leverage"`
 	// User balance used to ensure they can afford the requested quantity
-	UserBalance float64 `json:"user_balance"`
+	UserBalance string `json:"user_balance"`
+	// base asset of orderbook
+	BaseAssetId *string `json:"base_asset_id,omitempty"`
+	// quote asset of orderbook
+	QuoteAssetId *string `json:"quote_asset_id,omitempty"`
+	// Full list of assets in the position with their price and collateral weight, required when inverse_leverage < 1 for leverage health checks
+	PositionAssets []PositionAsset `json:"position_assets,omitempty"`
+	// Configuration for the assets in the order
+	AssetsConfig []AssetConfig `json:"assets_config,omitempty"`
 }
 
 type _ValidateSubmitOrderRequest ValidateSubmitOrderRequest
@@ -41,7 +51,7 @@ type _ValidateSubmitOrderRequest ValidateSubmitOrderRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewValidateSubmitOrderRequest(quantity float64, tick float64, kind OrderKind, price float64, inverseLeverage float64, userBalance float64) *ValidateSubmitOrderRequest {
+func NewValidateSubmitOrderRequest(quantity string, tick string, kind OrderKind, price string, inverseLeverage string, userBalance string) *ValidateSubmitOrderRequest {
 	this := ValidateSubmitOrderRequest{}
 	this.Quantity = quantity
 	this.Tick = tick
@@ -61,9 +71,9 @@ func NewValidateSubmitOrderRequestWithDefaults() *ValidateSubmitOrderRequest {
 }
 
 // GetQuantity returns the Quantity field value
-func (o *ValidateSubmitOrderRequest) GetQuantity() float64 {
+func (o *ValidateSubmitOrderRequest) GetQuantity() string {
 	if o == nil {
-		var ret float64
+		var ret string
 		return ret
 	}
 
@@ -72,7 +82,7 @@ func (o *ValidateSubmitOrderRequest) GetQuantity() float64 {
 
 // GetQuantityOk returns a tuple with the Quantity field value
 // and a boolean to check if the value has been set.
-func (o *ValidateSubmitOrderRequest) GetQuantityOk() (*float64, bool) {
+func (o *ValidateSubmitOrderRequest) GetQuantityOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -80,14 +90,14 @@ func (o *ValidateSubmitOrderRequest) GetQuantityOk() (*float64, bool) {
 }
 
 // SetQuantity sets field value
-func (o *ValidateSubmitOrderRequest) SetQuantity(v float64) {
+func (o *ValidateSubmitOrderRequest) SetQuantity(v string) {
 	o.Quantity = v
 }
 
 // GetTick returns the Tick field value
-func (o *ValidateSubmitOrderRequest) GetTick() float64 {
+func (o *ValidateSubmitOrderRequest) GetTick() string {
 	if o == nil {
-		var ret float64
+		var ret string
 		return ret
 	}
 
@@ -96,7 +106,7 @@ func (o *ValidateSubmitOrderRequest) GetTick() float64 {
 
 // GetTickOk returns a tuple with the Tick field value
 // and a boolean to check if the value has been set.
-func (o *ValidateSubmitOrderRequest) GetTickOk() (*float64, bool) {
+func (o *ValidateSubmitOrderRequest) GetTickOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -104,7 +114,7 @@ func (o *ValidateSubmitOrderRequest) GetTickOk() (*float64, bool) {
 }
 
 // SetTick sets field value
-func (o *ValidateSubmitOrderRequest) SetTick(v float64) {
+func (o *ValidateSubmitOrderRequest) SetTick(v string) {
 	o.Tick = v
 }
 
@@ -165,9 +175,9 @@ func (o *ValidateSubmitOrderRequest) SetSide(v Side) {
 }
 
 // GetPrice returns the Price field value
-func (o *ValidateSubmitOrderRequest) GetPrice() float64 {
+func (o *ValidateSubmitOrderRequest) GetPrice() string {
 	if o == nil {
-		var ret float64
+		var ret string
 		return ret
 	}
 
@@ -176,7 +186,7 @@ func (o *ValidateSubmitOrderRequest) GetPrice() float64 {
 
 // GetPriceOk returns a tuple with the Price field value
 // and a boolean to check if the value has been set.
-func (o *ValidateSubmitOrderRequest) GetPriceOk() (*float64, bool) {
+func (o *ValidateSubmitOrderRequest) GetPriceOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -184,7 +194,7 @@ func (o *ValidateSubmitOrderRequest) GetPriceOk() (*float64, bool) {
 }
 
 // SetPrice sets field value
-func (o *ValidateSubmitOrderRequest) SetPrice(v float64) {
+func (o *ValidateSubmitOrderRequest) SetPrice(v string) {
 	o.Price = v
 }
 
@@ -221,9 +231,9 @@ func (o *ValidateSubmitOrderRequest) SetGoodTillDate(v time.Time) {
 }
 
 // GetInverseLeverage returns the InverseLeverage field value
-func (o *ValidateSubmitOrderRequest) GetInverseLeverage() float64 {
+func (o *ValidateSubmitOrderRequest) GetInverseLeverage() string {
 	if o == nil {
-		var ret float64
+		var ret string
 		return ret
 	}
 
@@ -232,7 +242,7 @@ func (o *ValidateSubmitOrderRequest) GetInverseLeverage() float64 {
 
 // GetInverseLeverageOk returns a tuple with the InverseLeverage field value
 // and a boolean to check if the value has been set.
-func (o *ValidateSubmitOrderRequest) GetInverseLeverageOk() (*float64, bool) {
+func (o *ValidateSubmitOrderRequest) GetInverseLeverageOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -240,14 +250,14 @@ func (o *ValidateSubmitOrderRequest) GetInverseLeverageOk() (*float64, bool) {
 }
 
 // SetInverseLeverage sets field value
-func (o *ValidateSubmitOrderRequest) SetInverseLeverage(v float64) {
+func (o *ValidateSubmitOrderRequest) SetInverseLeverage(v string) {
 	o.InverseLeverage = v
 }
 
 // GetUserBalance returns the UserBalance field value
-func (o *ValidateSubmitOrderRequest) GetUserBalance() float64 {
+func (o *ValidateSubmitOrderRequest) GetUserBalance() string {
 	if o == nil {
-		var ret float64
+		var ret string
 		return ret
 	}
 
@@ -256,7 +266,7 @@ func (o *ValidateSubmitOrderRequest) GetUserBalance() float64 {
 
 // GetUserBalanceOk returns a tuple with the UserBalance field value
 // and a boolean to check if the value has been set.
-func (o *ValidateSubmitOrderRequest) GetUserBalanceOk() (*float64, bool) {
+func (o *ValidateSubmitOrderRequest) GetUserBalanceOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -264,8 +274,136 @@ func (o *ValidateSubmitOrderRequest) GetUserBalanceOk() (*float64, bool) {
 }
 
 // SetUserBalance sets field value
-func (o *ValidateSubmitOrderRequest) SetUserBalance(v float64) {
+func (o *ValidateSubmitOrderRequest) SetUserBalance(v string) {
 	o.UserBalance = v
+}
+
+// GetBaseAssetId returns the BaseAssetId field value if set, zero value otherwise.
+func (o *ValidateSubmitOrderRequest) GetBaseAssetId() string {
+	if o == nil || IsNil(o.BaseAssetId) {
+		var ret string
+		return ret
+	}
+	return *o.BaseAssetId
+}
+
+// GetBaseAssetIdOk returns a tuple with the BaseAssetId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ValidateSubmitOrderRequest) GetBaseAssetIdOk() (*string, bool) {
+	if o == nil || IsNil(o.BaseAssetId) {
+		return nil, false
+	}
+	return o.BaseAssetId, true
+}
+
+// HasBaseAssetId returns a boolean if a field has been set.
+func (o *ValidateSubmitOrderRequest) HasBaseAssetId() bool {
+	if o != nil && !IsNil(o.BaseAssetId) {
+		return true
+	}
+
+	return false
+}
+
+// SetBaseAssetId gets a reference to the given string and assigns it to the BaseAssetId field.
+func (o *ValidateSubmitOrderRequest) SetBaseAssetId(v string) {
+	o.BaseAssetId = &v
+}
+
+// GetQuoteAssetId returns the QuoteAssetId field value if set, zero value otherwise.
+func (o *ValidateSubmitOrderRequest) GetQuoteAssetId() string {
+	if o == nil || IsNil(o.QuoteAssetId) {
+		var ret string
+		return ret
+	}
+	return *o.QuoteAssetId
+}
+
+// GetQuoteAssetIdOk returns a tuple with the QuoteAssetId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ValidateSubmitOrderRequest) GetQuoteAssetIdOk() (*string, bool) {
+	if o == nil || IsNil(o.QuoteAssetId) {
+		return nil, false
+	}
+	return o.QuoteAssetId, true
+}
+
+// HasQuoteAssetId returns a boolean if a field has been set.
+func (o *ValidateSubmitOrderRequest) HasQuoteAssetId() bool {
+	if o != nil && !IsNil(o.QuoteAssetId) {
+		return true
+	}
+
+	return false
+}
+
+// SetQuoteAssetId gets a reference to the given string and assigns it to the QuoteAssetId field.
+func (o *ValidateSubmitOrderRequest) SetQuoteAssetId(v string) {
+	o.QuoteAssetId = &v
+}
+
+// GetPositionAssets returns the PositionAssets field value if set, zero value otherwise.
+func (o *ValidateSubmitOrderRequest) GetPositionAssets() []PositionAsset {
+	if o == nil || IsNil(o.PositionAssets) {
+		var ret []PositionAsset
+		return ret
+	}
+	return o.PositionAssets
+}
+
+// GetPositionAssetsOk returns a tuple with the PositionAssets field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ValidateSubmitOrderRequest) GetPositionAssetsOk() ([]PositionAsset, bool) {
+	if o == nil || IsNil(o.PositionAssets) {
+		return nil, false
+	}
+	return o.PositionAssets, true
+}
+
+// HasPositionAssets returns a boolean if a field has been set.
+func (o *ValidateSubmitOrderRequest) HasPositionAssets() bool {
+	if o != nil && !IsNil(o.PositionAssets) {
+		return true
+	}
+
+	return false
+}
+
+// SetPositionAssets gets a reference to the given []PositionAsset and assigns it to the PositionAssets field.
+func (o *ValidateSubmitOrderRequest) SetPositionAssets(v []PositionAsset) {
+	o.PositionAssets = v
+}
+
+// GetAssetsConfig returns the AssetsConfig field value if set, zero value otherwise.
+func (o *ValidateSubmitOrderRequest) GetAssetsConfig() []AssetConfig {
+	if o == nil || IsNil(o.AssetsConfig) {
+		var ret []AssetConfig
+		return ret
+	}
+	return o.AssetsConfig
+}
+
+// GetAssetsConfigOk returns a tuple with the AssetsConfig field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ValidateSubmitOrderRequest) GetAssetsConfigOk() ([]AssetConfig, bool) {
+	if o == nil || IsNil(o.AssetsConfig) {
+		return nil, false
+	}
+	return o.AssetsConfig, true
+}
+
+// HasAssetsConfig returns a boolean if a field has been set.
+func (o *ValidateSubmitOrderRequest) HasAssetsConfig() bool {
+	if o != nil && !IsNil(o.AssetsConfig) {
+		return true
+	}
+
+	return false
+}
+
+// SetAssetsConfig gets a reference to the given []AssetConfig and assigns it to the AssetsConfig field.
+func (o *ValidateSubmitOrderRequest) SetAssetsConfig(v []AssetConfig) {
+	o.AssetsConfig = v
 }
 
 func (o ValidateSubmitOrderRequest) MarshalJSON() ([]byte, error) {
@@ -290,6 +428,18 @@ func (o ValidateSubmitOrderRequest) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["inverse_leverage"] = o.InverseLeverage
 	toSerialize["user_balance"] = o.UserBalance
+	if !IsNil(o.BaseAssetId) {
+		toSerialize["base_asset_id"] = o.BaseAssetId
+	}
+	if !IsNil(o.QuoteAssetId) {
+		toSerialize["quote_asset_id"] = o.QuoteAssetId
+	}
+	if !IsNil(o.PositionAssets) {
+		toSerialize["position_assets"] = o.PositionAssets
+	}
+	if !IsNil(o.AssetsConfig) {
+		toSerialize["assets_config"] = o.AssetsConfig
+	}
 	return toSerialize, nil
 }
 

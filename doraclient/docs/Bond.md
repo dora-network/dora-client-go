@@ -6,14 +6,14 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | Pointer to **string** |  | [optional] 
 **Kind** | Pointer to [**BondKind**](BondKind.md) |  | [optional] 
-**CouponStartAt** | Pointer to **NullableTime** |  | [optional] 
+**CouponStartAt** | Pointer to **time.Time** |  | [optional] 
 **CreatedAt** | Pointer to **time.Time** |  | [optional] 
-**FinalCouponAt** | Pointer to **NullableTime** |  | [optional] 
+**FinalCouponAt** | Pointer to **time.Time** |  | [optional] 
 **Isin** | Pointer to **string** |  | [optional] 
 **IssuedAt** | Pointer to **time.Time** |  | [optional] 
 **Issuer** | Pointer to **string** |  | [optional] 
 **MaturityAt** | Pointer to **time.Time** |  | [optional] 
-**PrincipalValue** | Pointer to **float64** |  | [optional] 
+**PrincipalValue** | Pointer to **string** |  | [optional] 
 **PaymentsPerYear** | Pointer to **int32** |  | [optional] 
 **PaymentsEvery** | Pointer to **int32** | Coupon payment frequency in nanoseconds (minimum 1000 i.e. 1 microsecond) | [optional] 
 **NextCouponPayment** | Pointer to **time.Time** |  | [optional] 
@@ -112,16 +112,6 @@ SetCouponStartAt sets CouponStartAt field to given value.
 
 HasCouponStartAt returns a boolean if a field has been set.
 
-### SetCouponStartAtNil
-
-`func (o *Bond) SetCouponStartAtNil(b bool)`
-
- SetCouponStartAtNil sets the value for CouponStartAt to be an explicit nil
-
-### UnsetCouponStartAt
-`func (o *Bond) UnsetCouponStartAt()`
-
-UnsetCouponStartAt ensures that no value is present for CouponStartAt, not even an explicit nil
 ### GetCreatedAt
 
 `func (o *Bond) GetCreatedAt() time.Time`
@@ -172,16 +162,6 @@ SetFinalCouponAt sets FinalCouponAt field to given value.
 
 HasFinalCouponAt returns a boolean if a field has been set.
 
-### SetFinalCouponAtNil
-
-`func (o *Bond) SetFinalCouponAtNil(b bool)`
-
- SetFinalCouponAtNil sets the value for FinalCouponAt to be an explicit nil
-
-### UnsetFinalCouponAt
-`func (o *Bond) UnsetFinalCouponAt()`
-
-UnsetFinalCouponAt ensures that no value is present for FinalCouponAt, not even an explicit nil
 ### GetIsin
 
 `func (o *Bond) GetIsin() string`
@@ -284,20 +264,20 @@ HasMaturityAt returns a boolean if a field has been set.
 
 ### GetPrincipalValue
 
-`func (o *Bond) GetPrincipalValue() float64`
+`func (o *Bond) GetPrincipalValue() string`
 
 GetPrincipalValue returns the PrincipalValue field if non-nil, zero value otherwise.
 
 ### GetPrincipalValueOk
 
-`func (o *Bond) GetPrincipalValueOk() (*float64, bool)`
+`func (o *Bond) GetPrincipalValueOk() (*string, bool)`
 
 GetPrincipalValueOk returns a tuple with the PrincipalValue field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPrincipalValue
 
-`func (o *Bond) SetPrincipalValue(v float64)`
+`func (o *Bond) SetPrincipalValue(v string)`
 
 SetPrincipalValue sets PrincipalValue field to given value.
 

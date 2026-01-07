@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**PhotoUrl** | [**UpdateFieldString**](UpdateFieldString.md) |  | 
-**Timezone** | [**UpdateFieldString**](UpdateFieldString.md) |  | 
+**PhotoUrl** | Pointer to [**UpdateFieldString**](UpdateFieldString.md) | Optional: URL of the user&#39;s profile photo, optional. | [optional] 
+**Timezone** | [**UpdateFieldString**](UpdateFieldString.md) | User&#39;s timezone, e.g., &#39;America/New_York&#39;, or an offset. | 
 
 ## Methods
 
 ### NewUpdateUserConfigRequest
 
-`func NewUpdateUserConfigRequest(photoUrl UpdateFieldString, timezone UpdateFieldString, ) *UpdateUserConfigRequest`
+`func NewUpdateUserConfigRequest(timezone UpdateFieldString, ) *UpdateUserConfigRequest`
 
 NewUpdateUserConfigRequest instantiates a new UpdateUserConfigRequest object
 This constructor will assign default values to properties that have it defined,
@@ -45,6 +45,11 @@ and a boolean to check if the value has been set.
 
 SetPhotoUrl sets PhotoUrl field to given value.
 
+### HasPhotoUrl
+
+`func (o *UpdateUserConfigRequest) HasPhotoUrl() bool`
+
+HasPhotoUrl returns a boolean if a field has been set.
 
 ### GetTimezone
 

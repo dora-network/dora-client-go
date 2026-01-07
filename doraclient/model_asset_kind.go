@@ -20,10 +20,10 @@ type AssetKind string
 
 // List of AssetKind
 const (
-	BOND AssetKind = "BOND"
-	CURRENCY AssetKind = "CURRENCY"
-	INTEREST AssetKind = "INTEREST"
-	POOL_SHARE AssetKind = "POOL_SHARE"
+	ASSETKIND_BOND AssetKind = "BOND"
+	ASSETKIND_CURRENCY AssetKind = "CURRENCY"
+	ASSETKIND_INTEREST AssetKind = "INTEREST"
+	ASSETKIND_POOL_SHARE AssetKind = "POOL_SHARE"
 )
 
 // All allowed values of AssetKind enum

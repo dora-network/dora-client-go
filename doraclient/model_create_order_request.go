@@ -22,18 +22,20 @@ var _ MappedNullable = &CreateOrderRequest{}
 
 // CreateOrderRequest struct for CreateOrderRequest
 type CreateOrderRequest struct {
-	Quantity float64 `json:"quantity"`
-	InverseLeverage float64 `json:"inverse_leverage"`
-	Price *float64 `json:"price,omitempty"`
+	Quantity string `json:"quantity"`
+	InverseLeverage string `json:"inverse_leverage"`
+	Price *string `json:"price,omitempty"`
 	Kind OrderKind `json:"kind"`
+	// Required: Must be either 'BUY' or 'SELL'
 	Side Side `json:"side"`
-	// position ID to use for the order. required.
-	PositionId string `json:"position_id"`
+	// use global position for the order or isolated. required.
+	FromGlobalPosition bool `json:"from_global_position"`
 	// Required: the order book to submit the order to
 	OrderBookId string `json:"order_book_id"`
 	OrderModifiers []OrderModifierKind `json:"order_modifiers,omitempty"`
 	GoodTillDate *time.Time `json:"good_till_date,omitempty"`
-	TriggerPrice *float64 `json:"trigger_price,omitempty"`
+	TriggerPrice *string `json:"trigger_price,omitempty"`
+	TriggerType *TriggerType `json:"trigger_type,omitempty"`
 }
 
 type _CreateOrderRequest CreateOrderRequest
@@ -42,13 +44,13 @@ type _CreateOrderRequest CreateOrderRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateOrderRequest(quantity float64, inverseLeverage float64, kind OrderKind, side Side, positionId string, orderBookId string) *CreateOrderRequest {
+func NewCreateOrderRequest(quantity string, inverseLeverage string, kind OrderKind, side Side, fromGlobalPosition bool, orderBookId string) *CreateOrderRequest {
 	this := CreateOrderRequest{}
 	this.Quantity = quantity
 	this.InverseLeverage = inverseLeverage
 	this.Kind = kind
 	this.Side = side
-	this.PositionId = positionId
+	this.FromGlobalPosition = fromGlobalPosition
 	this.OrderBookId = orderBookId
 	return &this
 }
@@ -62,9 +64,9 @@ func NewCreateOrderRequestWithDefaults() *CreateOrderRequest {
 }
 
 // GetQuantity returns the Quantity field value
-func (o *CreateOrderRequest) GetQuantity() float64 {
+func (o *CreateOrderRequest) GetQuantity() string {
 	if o == nil {
-		var ret float64
+		var ret string
 		return ret
 	}
 
@@ -73,7 +75,7 @@ func (o *CreateOrderRequest) GetQuantity() float64 {
 
 // GetQuantityOk returns a tuple with the Quantity field value
 // and a boolean to check if the value has been set.
-func (o *CreateOrderRequest) GetQuantityOk() (*float64, bool) {
+func (o *CreateOrderRequest) GetQuantityOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -81,14 +83,14 @@ func (o *CreateOrderRequest) GetQuantityOk() (*float64, bool) {
 }
 
 // SetQuantity sets field value
-func (o *CreateOrderRequest) SetQuantity(v float64) {
+func (o *CreateOrderRequest) SetQuantity(v string) {
 	o.Quantity = v
 }
 
 // GetInverseLeverage returns the InverseLeverage field value
-func (o *CreateOrderRequest) GetInverseLeverage() float64 {
+func (o *CreateOrderRequest) GetInverseLeverage() string {
 	if o == nil {
-		var ret float64
+		var ret string
 		return ret
 	}
 
@@ -97,7 +99,7 @@ func (o *CreateOrderRequest) GetInverseLeverage() float64 {
 
 // GetInverseLeverageOk returns a tuple with the InverseLeverage field value
 // and a boolean to check if the value has been set.
-func (o *CreateOrderRequest) GetInverseLeverageOk() (*float64, bool) {
+func (o *CreateOrderRequest) GetInverseLeverageOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -105,14 +107,14 @@ func (o *CreateOrderRequest) GetInverseLeverageOk() (*float64, bool) {
 }
 
 // SetInverseLeverage sets field value
-func (o *CreateOrderRequest) SetInverseLeverage(v float64) {
+func (o *CreateOrderRequest) SetInverseLeverage(v string) {
 	o.InverseLeverage = v
 }
 
 // GetPrice returns the Price field value if set, zero value otherwise.
-func (o *CreateOrderRequest) GetPrice() float64 {
+func (o *CreateOrderRequest) GetPrice() string {
 	if o == nil || IsNil(o.Price) {
-		var ret float64
+		var ret string
 		return ret
 	}
 	return *o.Price
@@ -120,7 +122,7 @@ func (o *CreateOrderRequest) GetPrice() float64 {
 
 // GetPriceOk returns a tuple with the Price field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateOrderRequest) GetPriceOk() (*float64, bool) {
+func (o *CreateOrderRequest) GetPriceOk() (*string, bool) {
 	if o == nil || IsNil(o.Price) {
 		return nil, false
 	}
@@ -136,8 +138,8 @@ func (o *CreateOrderRequest) HasPrice() bool {
 	return false
 }
 
-// SetPrice gets a reference to the given float64 and assigns it to the Price field.
-func (o *CreateOrderRequest) SetPrice(v float64) {
+// SetPrice gets a reference to the given string and assigns it to the Price field.
+func (o *CreateOrderRequest) SetPrice(v string) {
 	o.Price = &v
 }
 
@@ -189,28 +191,28 @@ func (o *CreateOrderRequest) SetSide(v Side) {
 	o.Side = v
 }
 
-// GetPositionId returns the PositionId field value
-func (o *CreateOrderRequest) GetPositionId() string {
+// GetFromGlobalPosition returns the FromGlobalPosition field value
+func (o *CreateOrderRequest) GetFromGlobalPosition() bool {
 	if o == nil {
-		var ret string
+		var ret bool
 		return ret
 	}
 
-	return o.PositionId
+	return o.FromGlobalPosition
 }
 
-// GetPositionIdOk returns a tuple with the PositionId field value
+// GetFromGlobalPositionOk returns a tuple with the FromGlobalPosition field value
 // and a boolean to check if the value has been set.
-func (o *CreateOrderRequest) GetPositionIdOk() (*string, bool) {
+func (o *CreateOrderRequest) GetFromGlobalPositionOk() (*bool, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.PositionId, true
+	return &o.FromGlobalPosition, true
 }
 
-// SetPositionId sets field value
-func (o *CreateOrderRequest) SetPositionId(v string) {
-	o.PositionId = v
+// SetFromGlobalPosition sets field value
+func (o *CreateOrderRequest) SetFromGlobalPosition(v bool) {
+	o.FromGlobalPosition = v
 }
 
 // GetOrderBookId returns the OrderBookId field value
@@ -302,9 +304,9 @@ func (o *CreateOrderRequest) SetGoodTillDate(v time.Time) {
 }
 
 // GetTriggerPrice returns the TriggerPrice field value if set, zero value otherwise.
-func (o *CreateOrderRequest) GetTriggerPrice() float64 {
+func (o *CreateOrderRequest) GetTriggerPrice() string {
 	if o == nil || IsNil(o.TriggerPrice) {
-		var ret float64
+		var ret string
 		return ret
 	}
 	return *o.TriggerPrice
@@ -312,7 +314,7 @@ func (o *CreateOrderRequest) GetTriggerPrice() float64 {
 
 // GetTriggerPriceOk returns a tuple with the TriggerPrice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateOrderRequest) GetTriggerPriceOk() (*float64, bool) {
+func (o *CreateOrderRequest) GetTriggerPriceOk() (*string, bool) {
 	if o == nil || IsNil(o.TriggerPrice) {
 		return nil, false
 	}
@@ -328,9 +330,41 @@ func (o *CreateOrderRequest) HasTriggerPrice() bool {
 	return false
 }
 
-// SetTriggerPrice gets a reference to the given float64 and assigns it to the TriggerPrice field.
-func (o *CreateOrderRequest) SetTriggerPrice(v float64) {
+// SetTriggerPrice gets a reference to the given string and assigns it to the TriggerPrice field.
+func (o *CreateOrderRequest) SetTriggerPrice(v string) {
 	o.TriggerPrice = &v
+}
+
+// GetTriggerType returns the TriggerType field value if set, zero value otherwise.
+func (o *CreateOrderRequest) GetTriggerType() TriggerType {
+	if o == nil || IsNil(o.TriggerType) {
+		var ret TriggerType
+		return ret
+	}
+	return *o.TriggerType
+}
+
+// GetTriggerTypeOk returns a tuple with the TriggerType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateOrderRequest) GetTriggerTypeOk() (*TriggerType, bool) {
+	if o == nil || IsNil(o.TriggerType) {
+		return nil, false
+	}
+	return o.TriggerType, true
+}
+
+// HasTriggerType returns a boolean if a field has been set.
+func (o *CreateOrderRequest) HasTriggerType() bool {
+	if o != nil && !IsNil(o.TriggerType) {
+		return true
+	}
+
+	return false
+}
+
+// SetTriggerType gets a reference to the given TriggerType and assigns it to the TriggerType field.
+func (o *CreateOrderRequest) SetTriggerType(v TriggerType) {
+	o.TriggerType = &v
 }
 
 func (o CreateOrderRequest) MarshalJSON() ([]byte, error) {
@@ -350,7 +384,7 @@ func (o CreateOrderRequest) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["kind"] = o.Kind
 	toSerialize["side"] = o.Side
-	toSerialize["position_id"] = o.PositionId
+	toSerialize["from_global_position"] = o.FromGlobalPosition
 	toSerialize["order_book_id"] = o.OrderBookId
 	if !IsNil(o.OrderModifiers) {
 		toSerialize["order_modifiers"] = o.OrderModifiers
@@ -360,6 +394,9 @@ func (o CreateOrderRequest) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.TriggerPrice) {
 		toSerialize["trigger_price"] = o.TriggerPrice
+	}
+	if !IsNil(o.TriggerType) {
+		toSerialize["trigger_type"] = o.TriggerType
 	}
 	return toSerialize, nil
 }
@@ -373,7 +410,7 @@ func (o *CreateOrderRequest) UnmarshalJSON(data []byte) (err error) {
 		"inverse_leverage",
 		"kind",
 		"side",
-		"position_id",
+		"from_global_position",
 		"order_book_id",
 	}
 

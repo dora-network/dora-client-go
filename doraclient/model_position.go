@@ -26,25 +26,21 @@ type Position struct {
 	Seq *int32 `json:"seq,omitempty"`
 	IsGlobal *bool `json:"is_global,omitempty"`
 	// The available balance in the position for this asset that are not locked, supplied, or used as collateral
-	Available *float64 `json:"available,omitempty"`
+	Available *string `json:"available,omitempty"`
 	// The balance that has been reserved for a current order. If spent by the order, they are removed. If the order is cancelled, they are returned to the position's available balance.
-	Locked *float64 `json:"locked,omitempty"`
+	Locked *string `json:"locked,omitempty"`
 	// The balance that user has supplied to the leverage module. The user remains entitled to these assets and can withdraw them into their available balance.
-	Supplied *float64 `json:"supplied,omitempty"`
-	// The balance that has been locked or supplied, but are marked as collateral to support borrow limits and can be consumed in case of liquidation. When unmarked as collateral, the balance returns to the available balance.
-	Collateral *float64 `json:"collateral,omitempty"`
-	// The balance that have been supplied to the leverage module and marked as collateral. The user remains entitled to this balance and can withdraw it into the collateral balance, or unmark them as collateral and move them to the supplied balance.
-	SuppliedCollateral *float64 `json:"supplied_collateral,omitempty"`
-	// The total amount of debt outstanding for this position. The position's collateral + supplied_collateral must support a borrow limit sufficient to cover all borrowed assets. This position cannot be closed until all debt is fully repaid, i.e. borrowed = 0.
-	Borrowed *float64 `json:"borrowed,omitempty"`
+	Supplied *string `json:"supplied,omitempty"`
+	// The total amount of debt outstanding for this position. This position cannot be closed until all debt is fully repaid, i.e. borrowed = 0.
+	Borrowed *string `json:"borrowed,omitempty"`
 	// The equivalent of locked balances, but for leveraged orders. If a user has an active order that would borrow assets as part of its input, then their borrow limit must be reduced until the order is executed or cancelled.
-	ImpendingBorrows *float64 `json:"impending_borrows,omitempty"`
+	ImpendingBorrows *string `json:"impending_borrows,omitempty"`
 	// average cost per unit quantity that was paid (long positions) or received (short positions) for this asset.
-	AvgEntryPrice *float64 `json:"avg_entry_price,omitempty"`
+	AvgEntryPrice *string `json:"avg_entry_price,omitempty"`
 	// The borrow limit
-	BorrowLimit *float64 `json:"borrow_limit,omitempty"`
+	BorrowLimit *string `json:"borrow_limit,omitempty"`
 	// The borrow limit
-	LiquidationThreshold *float64 `json:"liquidation_threshold,omitempty"`
+	LiquidationThreshold *string `json:"liquidation_threshold,omitempty"`
 	CreatedAt *time.Time `json:"created_at,omitempty"`
 	PositionName *string `json:"position_name,omitempty"`
 }
@@ -195,9 +191,9 @@ func (o *Position) SetIsGlobal(v bool) {
 }
 
 // GetAvailable returns the Available field value if set, zero value otherwise.
-func (o *Position) GetAvailable() float64 {
+func (o *Position) GetAvailable() string {
 	if o == nil || IsNil(o.Available) {
-		var ret float64
+		var ret string
 		return ret
 	}
 	return *o.Available
@@ -205,7 +201,7 @@ func (o *Position) GetAvailable() float64 {
 
 // GetAvailableOk returns a tuple with the Available field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Position) GetAvailableOk() (*float64, bool) {
+func (o *Position) GetAvailableOk() (*string, bool) {
 	if o == nil || IsNil(o.Available) {
 		return nil, false
 	}
@@ -221,15 +217,15 @@ func (o *Position) HasAvailable() bool {
 	return false
 }
 
-// SetAvailable gets a reference to the given float64 and assigns it to the Available field.
-func (o *Position) SetAvailable(v float64) {
+// SetAvailable gets a reference to the given string and assigns it to the Available field.
+func (o *Position) SetAvailable(v string) {
 	o.Available = &v
 }
 
 // GetLocked returns the Locked field value if set, zero value otherwise.
-func (o *Position) GetLocked() float64 {
+func (o *Position) GetLocked() string {
 	if o == nil || IsNil(o.Locked) {
-		var ret float64
+		var ret string
 		return ret
 	}
 	return *o.Locked
@@ -237,7 +233,7 @@ func (o *Position) GetLocked() float64 {
 
 // GetLockedOk returns a tuple with the Locked field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Position) GetLockedOk() (*float64, bool) {
+func (o *Position) GetLockedOk() (*string, bool) {
 	if o == nil || IsNil(o.Locked) {
 		return nil, false
 	}
@@ -253,15 +249,15 @@ func (o *Position) HasLocked() bool {
 	return false
 }
 
-// SetLocked gets a reference to the given float64 and assigns it to the Locked field.
-func (o *Position) SetLocked(v float64) {
+// SetLocked gets a reference to the given string and assigns it to the Locked field.
+func (o *Position) SetLocked(v string) {
 	o.Locked = &v
 }
 
 // GetSupplied returns the Supplied field value if set, zero value otherwise.
-func (o *Position) GetSupplied() float64 {
+func (o *Position) GetSupplied() string {
 	if o == nil || IsNil(o.Supplied) {
-		var ret float64
+		var ret string
 		return ret
 	}
 	return *o.Supplied
@@ -269,7 +265,7 @@ func (o *Position) GetSupplied() float64 {
 
 // GetSuppliedOk returns a tuple with the Supplied field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Position) GetSuppliedOk() (*float64, bool) {
+func (o *Position) GetSuppliedOk() (*string, bool) {
 	if o == nil || IsNil(o.Supplied) {
 		return nil, false
 	}
@@ -285,79 +281,15 @@ func (o *Position) HasSupplied() bool {
 	return false
 }
 
-// SetSupplied gets a reference to the given float64 and assigns it to the Supplied field.
-func (o *Position) SetSupplied(v float64) {
+// SetSupplied gets a reference to the given string and assigns it to the Supplied field.
+func (o *Position) SetSupplied(v string) {
 	o.Supplied = &v
 }
 
-// GetCollateral returns the Collateral field value if set, zero value otherwise.
-func (o *Position) GetCollateral() float64 {
-	if o == nil || IsNil(o.Collateral) {
-		var ret float64
-		return ret
-	}
-	return *o.Collateral
-}
-
-// GetCollateralOk returns a tuple with the Collateral field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Position) GetCollateralOk() (*float64, bool) {
-	if o == nil || IsNil(o.Collateral) {
-		return nil, false
-	}
-	return o.Collateral, true
-}
-
-// HasCollateral returns a boolean if a field has been set.
-func (o *Position) HasCollateral() bool {
-	if o != nil && !IsNil(o.Collateral) {
-		return true
-	}
-
-	return false
-}
-
-// SetCollateral gets a reference to the given float64 and assigns it to the Collateral field.
-func (o *Position) SetCollateral(v float64) {
-	o.Collateral = &v
-}
-
-// GetSuppliedCollateral returns the SuppliedCollateral field value if set, zero value otherwise.
-func (o *Position) GetSuppliedCollateral() float64 {
-	if o == nil || IsNil(o.SuppliedCollateral) {
-		var ret float64
-		return ret
-	}
-	return *o.SuppliedCollateral
-}
-
-// GetSuppliedCollateralOk returns a tuple with the SuppliedCollateral field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Position) GetSuppliedCollateralOk() (*float64, bool) {
-	if o == nil || IsNil(o.SuppliedCollateral) {
-		return nil, false
-	}
-	return o.SuppliedCollateral, true
-}
-
-// HasSuppliedCollateral returns a boolean if a field has been set.
-func (o *Position) HasSuppliedCollateral() bool {
-	if o != nil && !IsNil(o.SuppliedCollateral) {
-		return true
-	}
-
-	return false
-}
-
-// SetSuppliedCollateral gets a reference to the given float64 and assigns it to the SuppliedCollateral field.
-func (o *Position) SetSuppliedCollateral(v float64) {
-	o.SuppliedCollateral = &v
-}
-
 // GetBorrowed returns the Borrowed field value if set, zero value otherwise.
-func (o *Position) GetBorrowed() float64 {
+func (o *Position) GetBorrowed() string {
 	if o == nil || IsNil(o.Borrowed) {
-		var ret float64
+		var ret string
 		return ret
 	}
 	return *o.Borrowed
@@ -365,7 +297,7 @@ func (o *Position) GetBorrowed() float64 {
 
 // GetBorrowedOk returns a tuple with the Borrowed field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Position) GetBorrowedOk() (*float64, bool) {
+func (o *Position) GetBorrowedOk() (*string, bool) {
 	if o == nil || IsNil(o.Borrowed) {
 		return nil, false
 	}
@@ -381,15 +313,15 @@ func (o *Position) HasBorrowed() bool {
 	return false
 }
 
-// SetBorrowed gets a reference to the given float64 and assigns it to the Borrowed field.
-func (o *Position) SetBorrowed(v float64) {
+// SetBorrowed gets a reference to the given string and assigns it to the Borrowed field.
+func (o *Position) SetBorrowed(v string) {
 	o.Borrowed = &v
 }
 
 // GetImpendingBorrows returns the ImpendingBorrows field value if set, zero value otherwise.
-func (o *Position) GetImpendingBorrows() float64 {
+func (o *Position) GetImpendingBorrows() string {
 	if o == nil || IsNil(o.ImpendingBorrows) {
-		var ret float64
+		var ret string
 		return ret
 	}
 	return *o.ImpendingBorrows
@@ -397,7 +329,7 @@ func (o *Position) GetImpendingBorrows() float64 {
 
 // GetImpendingBorrowsOk returns a tuple with the ImpendingBorrows field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Position) GetImpendingBorrowsOk() (*float64, bool) {
+func (o *Position) GetImpendingBorrowsOk() (*string, bool) {
 	if o == nil || IsNil(o.ImpendingBorrows) {
 		return nil, false
 	}
@@ -413,15 +345,15 @@ func (o *Position) HasImpendingBorrows() bool {
 	return false
 }
 
-// SetImpendingBorrows gets a reference to the given float64 and assigns it to the ImpendingBorrows field.
-func (o *Position) SetImpendingBorrows(v float64) {
+// SetImpendingBorrows gets a reference to the given string and assigns it to the ImpendingBorrows field.
+func (o *Position) SetImpendingBorrows(v string) {
 	o.ImpendingBorrows = &v
 }
 
 // GetAvgEntryPrice returns the AvgEntryPrice field value if set, zero value otherwise.
-func (o *Position) GetAvgEntryPrice() float64 {
+func (o *Position) GetAvgEntryPrice() string {
 	if o == nil || IsNil(o.AvgEntryPrice) {
-		var ret float64
+		var ret string
 		return ret
 	}
 	return *o.AvgEntryPrice
@@ -429,7 +361,7 @@ func (o *Position) GetAvgEntryPrice() float64 {
 
 // GetAvgEntryPriceOk returns a tuple with the AvgEntryPrice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Position) GetAvgEntryPriceOk() (*float64, bool) {
+func (o *Position) GetAvgEntryPriceOk() (*string, bool) {
 	if o == nil || IsNil(o.AvgEntryPrice) {
 		return nil, false
 	}
@@ -445,15 +377,15 @@ func (o *Position) HasAvgEntryPrice() bool {
 	return false
 }
 
-// SetAvgEntryPrice gets a reference to the given float64 and assigns it to the AvgEntryPrice field.
-func (o *Position) SetAvgEntryPrice(v float64) {
+// SetAvgEntryPrice gets a reference to the given string and assigns it to the AvgEntryPrice field.
+func (o *Position) SetAvgEntryPrice(v string) {
 	o.AvgEntryPrice = &v
 }
 
 // GetBorrowLimit returns the BorrowLimit field value if set, zero value otherwise.
-func (o *Position) GetBorrowLimit() float64 {
+func (o *Position) GetBorrowLimit() string {
 	if o == nil || IsNil(o.BorrowLimit) {
-		var ret float64
+		var ret string
 		return ret
 	}
 	return *o.BorrowLimit
@@ -461,7 +393,7 @@ func (o *Position) GetBorrowLimit() float64 {
 
 // GetBorrowLimitOk returns a tuple with the BorrowLimit field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Position) GetBorrowLimitOk() (*float64, bool) {
+func (o *Position) GetBorrowLimitOk() (*string, bool) {
 	if o == nil || IsNil(o.BorrowLimit) {
 		return nil, false
 	}
@@ -477,15 +409,15 @@ func (o *Position) HasBorrowLimit() bool {
 	return false
 }
 
-// SetBorrowLimit gets a reference to the given float64 and assigns it to the BorrowLimit field.
-func (o *Position) SetBorrowLimit(v float64) {
+// SetBorrowLimit gets a reference to the given string and assigns it to the BorrowLimit field.
+func (o *Position) SetBorrowLimit(v string) {
 	o.BorrowLimit = &v
 }
 
 // GetLiquidationThreshold returns the LiquidationThreshold field value if set, zero value otherwise.
-func (o *Position) GetLiquidationThreshold() float64 {
+func (o *Position) GetLiquidationThreshold() string {
 	if o == nil || IsNil(o.LiquidationThreshold) {
-		var ret float64
+		var ret string
 		return ret
 	}
 	return *o.LiquidationThreshold
@@ -493,7 +425,7 @@ func (o *Position) GetLiquidationThreshold() float64 {
 
 // GetLiquidationThresholdOk returns a tuple with the LiquidationThreshold field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Position) GetLiquidationThresholdOk() (*float64, bool) {
+func (o *Position) GetLiquidationThresholdOk() (*string, bool) {
 	if o == nil || IsNil(o.LiquidationThreshold) {
 		return nil, false
 	}
@@ -509,8 +441,8 @@ func (o *Position) HasLiquidationThreshold() bool {
 	return false
 }
 
-// SetLiquidationThreshold gets a reference to the given float64 and assigns it to the LiquidationThreshold field.
-func (o *Position) SetLiquidationThreshold(v float64) {
+// SetLiquidationThreshold gets a reference to the given string and assigns it to the LiquidationThreshold field.
+func (o *Position) SetLiquidationThreshold(v string) {
 	o.LiquidationThreshold = &v
 }
 
@@ -608,12 +540,6 @@ func (o Position) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Supplied) {
 		toSerialize["supplied"] = o.Supplied
-	}
-	if !IsNil(o.Collateral) {
-		toSerialize["collateral"] = o.Collateral
-	}
-	if !IsNil(o.SuppliedCollateral) {
-		toSerialize["supplied_collateral"] = o.SuppliedCollateral
 	}
 	if !IsNil(o.Borrowed) {
 		toSerialize["borrowed"] = o.Borrowed

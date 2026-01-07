@@ -5,8 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | Pointer to **string** |  | [optional] 
-**ClosedAt** | Pointer to **NullableTime** |  | [optional] 
-**DisabledAt** | Pointer to **NullableTime** |  | [optional] 
+**ClosedAt** | Pointer to **time.Time** |  | [optional] 
+**DisabledAt** | Pointer to **time.Time** |  | [optional] 
 **Email** | Pointer to **string** |  | [optional] 
 **Name** | Pointer to **string** |  | [optional] 
 **NativeAssetId** | Pointer to **string** |  | [optional] 
@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 **Roles** | Pointer to [**[]UserRole**](UserRole.md) |  | [optional] 
 **Timezone** | Pointer to **string** | User&#39;s timezone, e.g., &#39;America/New_York&#39;, or an offset. | [optional] 
 **TimezoneOffset** | Pointer to **int32** | timezone offset in seconds | [optional] 
-**VerifiedAt** | Pointer to **NullableTime** |  | [optional] 
+**VerifiedAt** | Pointer to **time.Time** |  | [optional] 
 
 ## Methods
 
@@ -87,16 +87,6 @@ SetClosedAt sets ClosedAt field to given value.
 
 HasClosedAt returns a boolean if a field has been set.
 
-### SetClosedAtNil
-
-`func (o *User) SetClosedAtNil(b bool)`
-
- SetClosedAtNil sets the value for ClosedAt to be an explicit nil
-
-### UnsetClosedAt
-`func (o *User) UnsetClosedAt()`
-
-UnsetClosedAt ensures that no value is present for ClosedAt, not even an explicit nil
 ### GetDisabledAt
 
 `func (o *User) GetDisabledAt() time.Time`
@@ -122,16 +112,6 @@ SetDisabledAt sets DisabledAt field to given value.
 
 HasDisabledAt returns a boolean if a field has been set.
 
-### SetDisabledAtNil
-
-`func (o *User) SetDisabledAtNil(b bool)`
-
- SetDisabledAtNil sets the value for DisabledAt to be an explicit nil
-
-### UnsetDisabledAt
-`func (o *User) UnsetDisabledAt()`
-
-UnsetDisabledAt ensures that no value is present for DisabledAt, not even an explicit nil
 ### GetEmail
 
 `func (o *User) GetEmail() string`
@@ -382,16 +362,6 @@ SetVerifiedAt sets VerifiedAt field to given value.
 
 HasVerifiedAt returns a boolean if a field has been set.
 
-### SetVerifiedAtNil
-
-`func (o *User) SetVerifiedAtNil(b bool)`
-
- SetVerifiedAtNil sets the value for VerifiedAt to be an explicit nil
-
-### UnsetVerifiedAt
-`func (o *User) UnsetVerifiedAt()`
-
-UnsetVerifiedAt ensures that no value is present for VerifiedAt, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -21,7 +21,9 @@ var _ MappedNullable = &UpdateUserConfigRequest{}
 
 // UpdateUserConfigRequest Request body for PUT /user/{id}/config: update a user changeable details only. Other properties can only be changed by an admin following a manual request by the user.
 type UpdateUserConfigRequest struct {
-	PhotoUrl UpdateFieldString `json:"photo_url"`
+	// Optional: URL of the user's profile photo, optional.
+	PhotoUrl *UpdateFieldString `json:"photo_url,omitempty"`
+	// User's timezone, e.g., 'America/New_York', or an offset.
 	Timezone UpdateFieldString `json:"timezone"`
 }
 
@@ -31,9 +33,8 @@ type _UpdateUserConfigRequest UpdateUserConfigRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUpdateUserConfigRequest(photoUrl UpdateFieldString, timezone UpdateFieldString) *UpdateUserConfigRequest {
+func NewUpdateUserConfigRequest(timezone UpdateFieldString) *UpdateUserConfigRequest {
 	this := UpdateUserConfigRequest{}
-	this.PhotoUrl = photoUrl
 	this.Timezone = timezone
 	return &this
 }
@@ -46,28 +47,36 @@ func NewUpdateUserConfigRequestWithDefaults() *UpdateUserConfigRequest {
 	return &this
 }
 
-// GetPhotoUrl returns the PhotoUrl field value
+// GetPhotoUrl returns the PhotoUrl field value if set, zero value otherwise.
 func (o *UpdateUserConfigRequest) GetPhotoUrl() UpdateFieldString {
-	if o == nil {
+	if o == nil || IsNil(o.PhotoUrl) {
 		var ret UpdateFieldString
 		return ret
 	}
-
-	return o.PhotoUrl
+	return *o.PhotoUrl
 }
 
-// GetPhotoUrlOk returns a tuple with the PhotoUrl field value
+// GetPhotoUrlOk returns a tuple with the PhotoUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UpdateUserConfigRequest) GetPhotoUrlOk() (*UpdateFieldString, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.PhotoUrl) {
 		return nil, false
 	}
-	return &o.PhotoUrl, true
+	return o.PhotoUrl, true
 }
 
-// SetPhotoUrl sets field value
+// HasPhotoUrl returns a boolean if a field has been set.
+func (o *UpdateUserConfigRequest) HasPhotoUrl() bool {
+	if o != nil && !IsNil(o.PhotoUrl) {
+		return true
+	}
+
+	return false
+}
+
+// SetPhotoUrl gets a reference to the given UpdateFieldString and assigns it to the PhotoUrl field.
 func (o *UpdateUserConfigRequest) SetPhotoUrl(v UpdateFieldString) {
-	o.PhotoUrl = v
+	o.PhotoUrl = &v
 }
 
 // GetTimezone returns the Timezone field value
@@ -104,7 +113,9 @@ func (o UpdateUserConfigRequest) MarshalJSON() ([]byte, error) {
 
 func (o UpdateUserConfigRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["photo_url"] = o.PhotoUrl
+	if !IsNil(o.PhotoUrl) {
+		toSerialize["photo_url"] = o.PhotoUrl
+	}
 	toSerialize["timezone"] = o.Timezone
 	return toSerialize, nil
 }
@@ -114,7 +125,6 @@ func (o *UpdateUserConfigRequest) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"photo_url",
 		"timezone",
 	}
 

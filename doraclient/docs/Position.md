@@ -8,16 +8,14 @@ Name | Type | Description | Notes
 **AssetId** | Pointer to **string** |  | [optional] 
 **Seq** | Pointer to **int32** |  | [optional] 
 **IsGlobal** | Pointer to **bool** |  | [optional] 
-**Available** | Pointer to **float64** | The available balance in the position for this asset that are not locked, supplied, or used as collateral | [optional] 
-**Locked** | Pointer to **float64** | The balance that has been reserved for a current order. If spent by the order, they are removed. If the order is cancelled, they are returned to the position&#39;s available balance. | [optional] 
-**Supplied** | Pointer to **float64** | The balance that user has supplied to the leverage module. The user remains entitled to these assets and can withdraw them into their available balance. | [optional] 
-**Collateral** | Pointer to **float64** | The balance that has been locked or supplied, but are marked as collateral to support borrow limits and can be consumed in case of liquidation. When unmarked as collateral, the balance returns to the available balance. | [optional] 
-**SuppliedCollateral** | Pointer to **float64** | The balance that have been supplied to the leverage module and marked as collateral. The user remains entitled to this balance and can withdraw it into the collateral balance, or unmark them as collateral and move them to the supplied balance. | [optional] 
-**Borrowed** | Pointer to **float64** | The total amount of debt outstanding for this position. The position&#39;s collateral + supplied_collateral must support a borrow limit sufficient to cover all borrowed assets. This position cannot be closed until all debt is fully repaid, i.e. borrowed &#x3D; 0. | [optional] 
-**ImpendingBorrows** | Pointer to **float64** | The equivalent of locked balances, but for leveraged orders. If a user has an active order that would borrow assets as part of its input, then their borrow limit must be reduced until the order is executed or cancelled. | [optional] 
-**AvgEntryPrice** | Pointer to **float64** | average cost per unit quantity that was paid (long positions) or received (short positions) for this asset. | [optional] 
-**BorrowLimit** | Pointer to **float64** | The borrow limit | [optional] 
-**LiquidationThreshold** | Pointer to **float64** | The borrow limit | [optional] 
+**Available** | Pointer to **string** | The available balance in the position for this asset that are not locked, supplied, or used as collateral | [optional] 
+**Locked** | Pointer to **string** | The balance that has been reserved for a current order. If spent by the order, they are removed. If the order is cancelled, they are returned to the position&#39;s available balance. | [optional] 
+**Supplied** | Pointer to **string** | The balance that user has supplied to the leverage module. The user remains entitled to these assets and can withdraw them into their available balance. | [optional] 
+**Borrowed** | Pointer to **string** | The total amount of debt outstanding for this position. This position cannot be closed until all debt is fully repaid, i.e. borrowed &#x3D; 0. | [optional] 
+**ImpendingBorrows** | Pointer to **string** | The equivalent of locked balances, but for leveraged orders. If a user has an active order that would borrow assets as part of its input, then their borrow limit must be reduced until the order is executed or cancelled. | [optional] 
+**AvgEntryPrice** | Pointer to **string** | average cost per unit quantity that was paid (long positions) or received (short positions) for this asset. | [optional] 
+**BorrowLimit** | Pointer to **string** | The borrow limit | [optional] 
+**LiquidationThreshold** | Pointer to **string** | The borrow limit | [optional] 
 **CreatedAt** | Pointer to **time.Time** |  | [optional] 
 **PositionName** | Pointer to **string** |  | [optional] 
 
@@ -142,20 +140,20 @@ HasIsGlobal returns a boolean if a field has been set.
 
 ### GetAvailable
 
-`func (o *Position) GetAvailable() float64`
+`func (o *Position) GetAvailable() string`
 
 GetAvailable returns the Available field if non-nil, zero value otherwise.
 
 ### GetAvailableOk
 
-`func (o *Position) GetAvailableOk() (*float64, bool)`
+`func (o *Position) GetAvailableOk() (*string, bool)`
 
 GetAvailableOk returns a tuple with the Available field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAvailable
 
-`func (o *Position) SetAvailable(v float64)`
+`func (o *Position) SetAvailable(v string)`
 
 SetAvailable sets Available field to given value.
 
@@ -167,20 +165,20 @@ HasAvailable returns a boolean if a field has been set.
 
 ### GetLocked
 
-`func (o *Position) GetLocked() float64`
+`func (o *Position) GetLocked() string`
 
 GetLocked returns the Locked field if non-nil, zero value otherwise.
 
 ### GetLockedOk
 
-`func (o *Position) GetLockedOk() (*float64, bool)`
+`func (o *Position) GetLockedOk() (*string, bool)`
 
 GetLockedOk returns a tuple with the Locked field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetLocked
 
-`func (o *Position) SetLocked(v float64)`
+`func (o *Position) SetLocked(v string)`
 
 SetLocked sets Locked field to given value.
 
@@ -192,20 +190,20 @@ HasLocked returns a boolean if a field has been set.
 
 ### GetSupplied
 
-`func (o *Position) GetSupplied() float64`
+`func (o *Position) GetSupplied() string`
 
 GetSupplied returns the Supplied field if non-nil, zero value otherwise.
 
 ### GetSuppliedOk
 
-`func (o *Position) GetSuppliedOk() (*float64, bool)`
+`func (o *Position) GetSuppliedOk() (*string, bool)`
 
 GetSuppliedOk returns a tuple with the Supplied field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSupplied
 
-`func (o *Position) SetSupplied(v float64)`
+`func (o *Position) SetSupplied(v string)`
 
 SetSupplied sets Supplied field to given value.
 
@@ -215,72 +213,22 @@ SetSupplied sets Supplied field to given value.
 
 HasSupplied returns a boolean if a field has been set.
 
-### GetCollateral
-
-`func (o *Position) GetCollateral() float64`
-
-GetCollateral returns the Collateral field if non-nil, zero value otherwise.
-
-### GetCollateralOk
-
-`func (o *Position) GetCollateralOk() (*float64, bool)`
-
-GetCollateralOk returns a tuple with the Collateral field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCollateral
-
-`func (o *Position) SetCollateral(v float64)`
-
-SetCollateral sets Collateral field to given value.
-
-### HasCollateral
-
-`func (o *Position) HasCollateral() bool`
-
-HasCollateral returns a boolean if a field has been set.
-
-### GetSuppliedCollateral
-
-`func (o *Position) GetSuppliedCollateral() float64`
-
-GetSuppliedCollateral returns the SuppliedCollateral field if non-nil, zero value otherwise.
-
-### GetSuppliedCollateralOk
-
-`func (o *Position) GetSuppliedCollateralOk() (*float64, bool)`
-
-GetSuppliedCollateralOk returns a tuple with the SuppliedCollateral field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetSuppliedCollateral
-
-`func (o *Position) SetSuppliedCollateral(v float64)`
-
-SetSuppliedCollateral sets SuppliedCollateral field to given value.
-
-### HasSuppliedCollateral
-
-`func (o *Position) HasSuppliedCollateral() bool`
-
-HasSuppliedCollateral returns a boolean if a field has been set.
-
 ### GetBorrowed
 
-`func (o *Position) GetBorrowed() float64`
+`func (o *Position) GetBorrowed() string`
 
 GetBorrowed returns the Borrowed field if non-nil, zero value otherwise.
 
 ### GetBorrowedOk
 
-`func (o *Position) GetBorrowedOk() (*float64, bool)`
+`func (o *Position) GetBorrowedOk() (*string, bool)`
 
 GetBorrowedOk returns a tuple with the Borrowed field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetBorrowed
 
-`func (o *Position) SetBorrowed(v float64)`
+`func (o *Position) SetBorrowed(v string)`
 
 SetBorrowed sets Borrowed field to given value.
 
@@ -292,20 +240,20 @@ HasBorrowed returns a boolean if a field has been set.
 
 ### GetImpendingBorrows
 
-`func (o *Position) GetImpendingBorrows() float64`
+`func (o *Position) GetImpendingBorrows() string`
 
 GetImpendingBorrows returns the ImpendingBorrows field if non-nil, zero value otherwise.
 
 ### GetImpendingBorrowsOk
 
-`func (o *Position) GetImpendingBorrowsOk() (*float64, bool)`
+`func (o *Position) GetImpendingBorrowsOk() (*string, bool)`
 
 GetImpendingBorrowsOk returns a tuple with the ImpendingBorrows field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetImpendingBorrows
 
-`func (o *Position) SetImpendingBorrows(v float64)`
+`func (o *Position) SetImpendingBorrows(v string)`
 
 SetImpendingBorrows sets ImpendingBorrows field to given value.
 
@@ -317,20 +265,20 @@ HasImpendingBorrows returns a boolean if a field has been set.
 
 ### GetAvgEntryPrice
 
-`func (o *Position) GetAvgEntryPrice() float64`
+`func (o *Position) GetAvgEntryPrice() string`
 
 GetAvgEntryPrice returns the AvgEntryPrice field if non-nil, zero value otherwise.
 
 ### GetAvgEntryPriceOk
 
-`func (o *Position) GetAvgEntryPriceOk() (*float64, bool)`
+`func (o *Position) GetAvgEntryPriceOk() (*string, bool)`
 
 GetAvgEntryPriceOk returns a tuple with the AvgEntryPrice field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAvgEntryPrice
 
-`func (o *Position) SetAvgEntryPrice(v float64)`
+`func (o *Position) SetAvgEntryPrice(v string)`
 
 SetAvgEntryPrice sets AvgEntryPrice field to given value.
 
@@ -342,20 +290,20 @@ HasAvgEntryPrice returns a boolean if a field has been set.
 
 ### GetBorrowLimit
 
-`func (o *Position) GetBorrowLimit() float64`
+`func (o *Position) GetBorrowLimit() string`
 
 GetBorrowLimit returns the BorrowLimit field if non-nil, zero value otherwise.
 
 ### GetBorrowLimitOk
 
-`func (o *Position) GetBorrowLimitOk() (*float64, bool)`
+`func (o *Position) GetBorrowLimitOk() (*string, bool)`
 
 GetBorrowLimitOk returns a tuple with the BorrowLimit field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetBorrowLimit
 
-`func (o *Position) SetBorrowLimit(v float64)`
+`func (o *Position) SetBorrowLimit(v string)`
 
 SetBorrowLimit sets BorrowLimit field to given value.
 
@@ -367,20 +315,20 @@ HasBorrowLimit returns a boolean if a field has been set.
 
 ### GetLiquidationThreshold
 
-`func (o *Position) GetLiquidationThreshold() float64`
+`func (o *Position) GetLiquidationThreshold() string`
 
 GetLiquidationThreshold returns the LiquidationThreshold field if non-nil, zero value otherwise.
 
 ### GetLiquidationThresholdOk
 
-`func (o *Position) GetLiquidationThresholdOk() (*float64, bool)`
+`func (o *Position) GetLiquidationThresholdOk() (*string, bool)`
 
 GetLiquidationThresholdOk returns a tuple with the LiquidationThreshold field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetLiquidationThreshold
 
-`func (o *Position) SetLiquidationThreshold(v float64)`
+`func (o *Position) SetLiquidationThreshold(v string)`
 
 SetLiquidationThreshold sets LiquidationThreshold field to given value.
 

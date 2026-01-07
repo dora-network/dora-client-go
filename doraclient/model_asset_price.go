@@ -21,7 +21,7 @@ var _ MappedNullable = &AssetPrice{}
 // AssetPrice struct for AssetPrice
 type AssetPrice struct {
 	AssetId *string `json:"asset_id,omitempty"`
-	Price *float64 `json:"price,omitempty"`
+	Price *string `json:"price,omitempty"`
 	Time *time.Time `json:"time,omitempty"`
 }
 
@@ -75,9 +75,9 @@ func (o *AssetPrice) SetAssetId(v string) {
 }
 
 // GetPrice returns the Price field value if set, zero value otherwise.
-func (o *AssetPrice) GetPrice() float64 {
+func (o *AssetPrice) GetPrice() string {
 	if o == nil || IsNil(o.Price) {
-		var ret float64
+		var ret string
 		return ret
 	}
 	return *o.Price
@@ -85,7 +85,7 @@ func (o *AssetPrice) GetPrice() float64 {
 
 // GetPriceOk returns a tuple with the Price field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AssetPrice) GetPriceOk() (*float64, bool) {
+func (o *AssetPrice) GetPriceOk() (*string, bool) {
 	if o == nil || IsNil(o.Price) {
 		return nil, false
 	}
@@ -101,8 +101,8 @@ func (o *AssetPrice) HasPrice() bool {
 	return false
 }
 
-// SetPrice gets a reference to the given float64 and assigns it to the Price field.
-func (o *AssetPrice) SetPrice(v float64) {
+// SetPrice gets a reference to the given string and assigns it to the Price field.
+func (o *AssetPrice) SetPrice(v string) {
 	o.Price = &v
 }
 

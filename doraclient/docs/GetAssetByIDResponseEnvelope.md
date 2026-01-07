@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Data** | Pointer to **interface{}** |  | [optional] 
+**Data** | Pointer to [**Asset**](Asset.md) |  | [optional] 
 **Error** | Pointer to **string** | The error message. Present for error (non-2xx) responses. | [optional] 
-**Metadata** | Pointer to [**Metadata**](Metadata.md) |  | [optional] 
+**Metadata** | Pointer to [**Metadata**](Metadata.md) | Metadata about the response, including status code and trace information. | [optional] 
 
 ## Methods
 
@@ -29,20 +29,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetData
 
-`func (o *GetAssetByIDResponseEnvelope) GetData() interface{}`
+`func (o *GetAssetByIDResponseEnvelope) GetData() Asset`
 
 GetData returns the Data field if non-nil, zero value otherwise.
 
 ### GetDataOk
 
-`func (o *GetAssetByIDResponseEnvelope) GetDataOk() (*interface{}, bool)`
+`func (o *GetAssetByIDResponseEnvelope) GetDataOk() (*Asset, bool)`
 
 GetDataOk returns a tuple with the Data field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetData
 
-`func (o *GetAssetByIDResponseEnvelope) SetData(v interface{})`
+`func (o *GetAssetByIDResponseEnvelope) SetData(v Asset)`
 
 SetData sets Data field to given value.
 

@@ -19,9 +19,10 @@ var _ MappedNullable = &LedgerModuleResponseEnvelope{}
 
 // LedgerModuleResponseEnvelope struct for LedgerModuleResponseEnvelope
 type LedgerModuleResponseEnvelope struct {
-	Data []LeverageModuleResponse `json:"data,omitempty"`
+	Data interface{} `json:"data,omitempty"`
 	// The error message. Present for error (non-2xx) responses.
 	Error *string `json:"error,omitempty"`
+	// Metadata about the response, including status code and trace information.
 	Metadata *Metadata `json:"metadata,omitempty"`
 }
 
@@ -42,10 +43,10 @@ func NewLedgerModuleResponseEnvelopeWithDefaults() *LedgerModuleResponseEnvelope
 	return &this
 }
 
-// GetData returns the Data field value if set, zero value otherwise.
-func (o *LedgerModuleResponseEnvelope) GetData() []LeverageModuleResponse {
-	if o == nil || IsNil(o.Data) {
-		var ret []LeverageModuleResponse
+// GetData returns the Data field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *LedgerModuleResponseEnvelope) GetData() interface{} {
+	if o == nil {
+		var ret interface{}
 		return ret
 	}
 	return o.Data
@@ -53,11 +54,12 @@ func (o *LedgerModuleResponseEnvelope) GetData() []LeverageModuleResponse {
 
 // GetDataOk returns a tuple with the Data field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *LedgerModuleResponseEnvelope) GetDataOk() ([]LeverageModuleResponse, bool) {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *LedgerModuleResponseEnvelope) GetDataOk() (*interface{}, bool) {
 	if o == nil || IsNil(o.Data) {
 		return nil, false
 	}
-	return o.Data, true
+	return &o.Data, true
 }
 
 // HasData returns a boolean if a field has been set.
@@ -69,8 +71,8 @@ func (o *LedgerModuleResponseEnvelope) HasData() bool {
 	return false
 }
 
-// SetData gets a reference to the given []LeverageModuleResponse and assigns it to the Data field.
-func (o *LedgerModuleResponseEnvelope) SetData(v []LeverageModuleResponse) {
+// SetData gets a reference to the given interface{} and assigns it to the Data field.
+func (o *LedgerModuleResponseEnvelope) SetData(v interface{}) {
 	o.Data = v
 }
 
@@ -148,7 +150,7 @@ func (o LedgerModuleResponseEnvelope) MarshalJSON() ([]byte, error) {
 
 func (o LedgerModuleResponseEnvelope) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Data) {
+	if o.Data != nil {
 		toSerialize["data"] = o.Data
 	}
 	if !IsNil(o.Error) {

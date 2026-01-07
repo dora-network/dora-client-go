@@ -6,11 +6,11 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **OrderBookId** | Pointer to **string** |  | [optional] 
 **StartTimestamp** | Pointer to **time.Time** |  | [optional] 
-**Open** | Pointer to **float64** |  | [optional] 
-**High** | Pointer to **float64** |  | [optional] 
-**Low** | Pointer to **float64** |  | [optional] 
-**Close** | Pointer to **float64** |  | [optional] 
-**Volume** | Pointer to **float64** |  | [optional] 
+**Open** | Pointer to **string** |  | [optional] 
+**High** | Pointer to **string** |  | [optional] 
+**Low** | Pointer to **string** |  | [optional] 
+**Close** | Pointer to **string** |  | [optional] 
+**Volume** | Pointer to **string** |  | [optional] 
 
 ## Methods
 
@@ -83,20 +83,20 @@ HasStartTimestamp returns a boolean if a field has been set.
 
 ### GetOpen
 
-`func (o *Candle) GetOpen() float64`
+`func (o *Candle) GetOpen() string`
 
 GetOpen returns the Open field if non-nil, zero value otherwise.
 
 ### GetOpenOk
 
-`func (o *Candle) GetOpenOk() (*float64, bool)`
+`func (o *Candle) GetOpenOk() (*string, bool)`
 
 GetOpenOk returns a tuple with the Open field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetOpen
 
-`func (o *Candle) SetOpen(v float64)`
+`func (o *Candle) SetOpen(v string)`
 
 SetOpen sets Open field to given value.
 
@@ -108,20 +108,20 @@ HasOpen returns a boolean if a field has been set.
 
 ### GetHigh
 
-`func (o *Candle) GetHigh() float64`
+`func (o *Candle) GetHigh() string`
 
 GetHigh returns the High field if non-nil, zero value otherwise.
 
 ### GetHighOk
 
-`func (o *Candle) GetHighOk() (*float64, bool)`
+`func (o *Candle) GetHighOk() (*string, bool)`
 
 GetHighOk returns a tuple with the High field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetHigh
 
-`func (o *Candle) SetHigh(v float64)`
+`func (o *Candle) SetHigh(v string)`
 
 SetHigh sets High field to given value.
 
@@ -133,20 +133,20 @@ HasHigh returns a boolean if a field has been set.
 
 ### GetLow
 
-`func (o *Candle) GetLow() float64`
+`func (o *Candle) GetLow() string`
 
 GetLow returns the Low field if non-nil, zero value otherwise.
 
 ### GetLowOk
 
-`func (o *Candle) GetLowOk() (*float64, bool)`
+`func (o *Candle) GetLowOk() (*string, bool)`
 
 GetLowOk returns a tuple with the Low field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetLow
 
-`func (o *Candle) SetLow(v float64)`
+`func (o *Candle) SetLow(v string)`
 
 SetLow sets Low field to given value.
 
@@ -158,20 +158,20 @@ HasLow returns a boolean if a field has been set.
 
 ### GetClose
 
-`func (o *Candle) GetClose() float64`
+`func (o *Candle) GetClose() string`
 
 GetClose returns the Close field if non-nil, zero value otherwise.
 
 ### GetCloseOk
 
-`func (o *Candle) GetCloseOk() (*float64, bool)`
+`func (o *Candle) GetCloseOk() (*string, bool)`
 
 GetCloseOk returns a tuple with the Close field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetClose
 
-`func (o *Candle) SetClose(v float64)`
+`func (o *Candle) SetClose(v string)`
 
 SetClose sets Close field to given value.
 
@@ -183,20 +183,20 @@ HasClose returns a boolean if a field has been set.
 
 ### GetVolume
 
-`func (o *Candle) GetVolume() float64`
+`func (o *Candle) GetVolume() string`
 
 GetVolume returns the Volume field if non-nil, zero value otherwise.
 
 ### GetVolumeOk
 
-`func (o *Candle) GetVolumeOk() (*float64, bool)`
+`func (o *Candle) GetVolumeOk() (*string, bool)`
 
 GetVolumeOk returns a tuple with the Volume field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetVolume
 
-`func (o *Candle) SetVolume(v float64)`
+`func (o *Candle) SetVolume(v string)`
 
 SetVolume sets Volume field to given value.
 

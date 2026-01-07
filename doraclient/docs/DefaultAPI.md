@@ -7,6 +7,8 @@ Method | HTTP request | Description
 [**CancelAllOpenOrders**](DefaultAPI.md#CancelAllOpenOrders) | **Delete** /v1/orders | Cancel all open orders, if user passes orderbook on query param it will cancel all orders on specific orderbook, admin can cancel user&#39;s orders on specific orderbook
 [**CancelOrderById**](DefaultAPI.md#CancelOrderById) | **Delete** /v1/orders/{order_id} | Cancel an order by ID
 [**CheckUserEmailExists**](DefaultAPI.md#CheckUserEmailExists) | **Get** /v1/user/exists | Check whether a user email exists
+[**ClaimLeverageGetAccruedInterest**](DefaultAPI.md#ClaimLeverageGetAccruedInterest) | **Post** /v1/leverage/accrued_interest/claim | Claim current accrued leverage interest for a specific user
+[**CloseIsolatedPosition**](DefaultAPI.md#CloseIsolatedPosition) | **Post** /v1/positions/close | Close isolated positions, repaying the borrowed
 [**CreateAPIKeyForUser**](DefaultAPI.md#CreateAPIKeyForUser) | **Post** /v1/user/apikey | Create apikey for a user
 [**CreateNewIsolatedPosition**](DefaultAPI.md#CreateNewIsolatedPosition) | **Post** /v1/positions/new_isolated | Create a new isolated position for a user transferring available assets into the position
 [**CreateOrder**](DefaultAPI.md#CreateOrder) | **Post** /v1/orders | Create a new order
@@ -30,6 +32,8 @@ Method | HTTP request | Description
 [**GetOrderbookById**](DefaultAPI.md#GetOrderbookById) | **Get** /v1/orderbooks/{order_book_id} | Get orderbook by ID
 [**GetOrderbookDepth**](DefaultAPI.md#GetOrderbookDepth) | **Get** /v1/orderbooks/{order_book_id}/depth | Get the aggregated price levels for a specific orderbook (L2 market depth)
 [**GetOrderbookOrders**](DefaultAPI.md#GetOrderbookOrders) | **Get** /v1/orderbooks/{order_book_id}/orders | Get all open orders for a specific orderbook (L3 market depth)
+[**GetOrderbookStats**](DefaultAPI.md#GetOrderbookStats) | **Get** /v1/orderbooks/{order_book_id}/stats | Get orderbook stats
+[**GetOrderbookStatsStream**](DefaultAPI.md#GetOrderbookStatsStream) | **Get** /v1/orderbooks/{order_book_id}/stats/stream | Orderbook stats stream
 [**GetOrderbookSummary**](DefaultAPI.md#GetOrderbookSummary) | **Get** /v1/orderbooks/{order_book_id}/summary | Get summary of an orderbook
 [**GetOrderbookTop**](DefaultAPI.md#GetOrderbookTop) | **Get** /v1/orderbooks/{order_book_id}/top | Get the top price levels for a specific orderbook (L1 market depth)
 [**GetPoolPrice**](DefaultAPI.md#GetPoolPrice) | **Get** /v1/price/pool/{pool_id} | Get the current price of a pool
@@ -44,6 +48,7 @@ Method | HTTP request | Description
 [**GetUserSelf**](DefaultAPI.md#GetUserSelf) | **Get** /v1/user/self | Get user details for the authenticated user
 [**GetUserTransactionsStream**](DefaultAPI.md#GetUserTransactionsStream) | **Get** /v1/user/{user_id}/transactions/stream | Get a snapshot of user&#39;s executed transactions since a specific time, and opens a stream for further updates
 [**GetUsersAPIKeys**](DefaultAPI.md#GetUsersAPIKeys) | **Get** /v1/user/apikey | Get user&#39;s api keys
+[**LeverageGetAccruedInterestByUser**](DefaultAPI.md#LeverageGetAccruedInterestByUser) | **Get** /v1/leverage/accrued_interest/self | Get current accrued leverage interest for the user
 [**LeverageIsolateCollateral**](DefaultAPI.md#LeverageIsolateCollateral) | **Post** /v1/leverage/isolate_collateral | Create an isolated position by transferring collateral to the position from the user&#39;s global collateral
 [**LeverageSupply**](DefaultAPI.md#LeverageSupply) | **Post** /v1/leverage/supply | Supply leverage for a specific asset
 [**LeverageUnite**](DefaultAPI.md#LeverageUnite) | **Post** /v1/leverage/unite | Combines all isolated positions into a single global position
@@ -54,6 +59,7 @@ Method | HTTP request | Description
 [**ListOrderBooks**](DefaultAPI.md#ListOrderBooks) | **Get** /v1/orderbooks | List order books
 [**ListOrders**](DefaultAPI.md#ListOrders) | **Get** /v1/orders | List all orders
 [**ListPositionAccountsSelf**](DefaultAPI.md#ListPositionAccountsSelf) | **Get** /v1/user/self/position_accounts | List all position accounts for the authenticated user
+[**PayLeverageGetAccruedInterest**](DefaultAPI.md#PayLeverageGetAccruedInterest) | **Post** /v1/leverage/accrued_interest/pay | Pay current accrued leverage interest for a specific user
 [**RevokeAPIKeyForUser**](DefaultAPI.md#RevokeAPIKeyForUser) | **Put** /v1/user/apikey/{key_id}/revoke | Revoke apikey for a user
 [**StreamAssetPrices**](DefaultAPI.md#StreamAssetPrices) | **Get** /v1/prices/stream | Stream real-time asset prices as map objects
 [**StreamCandleData**](DefaultAPI.md#StreamCandleData) | **Get** /v1/charts/{order_book_id}/candle/stream | Get a snapshot of candlestick data from date provided, and open a stream for real-time updates
@@ -124,7 +130,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -192,7 +198,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -256,11 +262,139 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ClaimLeverageGetAccruedInterest
+
+> ClaimLeverageAccruedInterestResponseEnvelope ClaimLeverageGetAccruedInterest(ctx).ClaimLeverageAccruedInterestRequest(claimLeverageAccruedInterestRequest).Execute()
+
+Claim current accrued leverage interest for a specific user
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+	claimLeverageAccruedInterestRequest := *openapiclient.NewClaimLeverageAccruedInterestRequest() // ClaimLeverageAccruedInterestRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.ClaimLeverageGetAccruedInterest(context.Background()).ClaimLeverageAccruedInterestRequest(claimLeverageAccruedInterestRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.ClaimLeverageGetAccruedInterest``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ClaimLeverageGetAccruedInterest`: ClaimLeverageAccruedInterestResponseEnvelope
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.ClaimLeverageGetAccruedInterest`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiClaimLeverageGetAccruedInterestRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **claimLeverageAccruedInterestRequest** | [**ClaimLeverageAccruedInterestRequest**](ClaimLeverageAccruedInterestRequest.md) |  | 
+
+### Return type
+
+[**ClaimLeverageAccruedInterestResponseEnvelope**](ClaimLeverageAccruedInterestResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CloseIsolatedPosition
+
+> ClosePositionResponseEnvelope CloseIsolatedPosition(ctx).ClosePositionRequest(closePositionRequest).Execute()
+
+Close isolated positions, repaying the borrowed
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+	closePositionRequest := *openapiclient.NewClosePositionRequest("PositionId_example", "OrderBookId_example") // ClosePositionRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.CloseIsolatedPosition(context.Background()).ClosePositionRequest(closePositionRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.CloseIsolatedPosition``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CloseIsolatedPosition`: ClosePositionResponseEnvelope
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.CloseIsolatedPosition`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCloseIsolatedPositionRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **closePositionRequest** | [**ClosePositionRequest**](ClosePositionRequest.md) |  | 
+
+### Return type
+
+[**ClosePositionResponseEnvelope**](ClosePositionResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -320,7 +454,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -384,7 +518,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -415,7 +549,7 @@ import (
 )
 
 func main() {
-	createOrderRequest := *openapiclient.NewCreateOrderRequest("Quantity_example", "InverseLeverage_example", openapiclient.OrderKind("LIMIT"), openapiclient.Side("BUY"), "PositionId_example", "OrderBookId_example") // CreateOrderRequest | 
+	createOrderRequest := *openapiclient.NewCreateOrderRequest("Quantity_example", "InverseLeverage_example", openapiclient.OrderKind("LIMIT"), openapiclient.Side("BUY"), false, "OrderBookId_example") // CreateOrderRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -448,7 +582,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -516,7 +650,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -575,7 +709,7 @@ Other parameters are passed through a pointer to a apiGetAllAssetPricesRequest s
 
 ### Authorization
 
-No authorization required
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -711,7 +845,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -725,7 +859,7 @@ No authorization required
 
 ## GetAssetsStream
 
-> []StreamAssetsEntry GetAssetsStream(ctx).Since(since).Until(until).Execute()
+> StreamAssetsResponse GetAssetsStream(ctx).Since(since).Until(until).Execute()
 
 Get all inserts or updates for assets
 
@@ -753,7 +887,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.GetAssetsStream``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetAssetsStream`: []StreamAssetsEntry
+	// response from `GetAssetsStream`: StreamAssetsResponse
 	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.GetAssetsStream`: %v\n", resp)
 }
 ```
@@ -774,7 +908,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]StreamAssetsEntry**](StreamAssetsEntry.md)
+[**StreamAssetsResponse**](StreamAssetsResponse.md)
 
 ### Authorization
 
@@ -1184,7 +1318,7 @@ Other parameters are passed through a pointer to a apiGetLedgerBalancesSelfReque
 
 ### Authorization
 
-No authorization required
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -1243,7 +1377,7 @@ Other parameters are passed through a pointer to a apiGetLedgerInterestSelfReque
 
 ### Authorization
 
-No authorization required
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -1302,7 +1436,7 @@ Other parameters are passed through a pointer to a apiGetLedgerModuleRequest str
 
 ### Authorization
 
-No authorization required
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -1370,7 +1504,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -1429,7 +1563,7 @@ Other parameters are passed through a pointer to a apiGetLedgerPositionsSelfRequ
 
 ### Authorization
 
-No authorization required
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -1488,7 +1622,7 @@ Other parameters are passed through a pointer to a apiGetLedgerValueSelfRequest 
 
 ### Authorization
 
-No authorization required
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -1556,7 +1690,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -1624,7 +1758,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -1772,6 +1906,142 @@ No authorization required
 [[Back to README]](../README.md)
 
 
+## GetOrderbookStats
+
+> OrderbookStatsResponseEnvelope GetOrderbookStats(ctx, orderBookId).Execute()
+
+Get orderbook stats
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+	orderBookId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.GetOrderbookStats(context.Background(), orderBookId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.GetOrderbookStats``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetOrderbookStats`: OrderbookStatsResponseEnvelope
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.GetOrderbookStats`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**orderBookId** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetOrderbookStatsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**OrderbookStatsResponseEnvelope**](OrderbookStatsResponseEnvelope.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetOrderbookStatsStream
+
+> OrderbookStats GetOrderbookStatsStream(ctx, orderBookId).Execute()
+
+Orderbook stats stream
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+	orderBookId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.GetOrderbookStatsStream(context.Background(), orderBookId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.GetOrderbookStatsStream``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetOrderbookStatsStream`: OrderbookStats
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.GetOrderbookStatsStream`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**orderBookId** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetOrderbookStatsStreamRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**OrderbookStats**](OrderbookStats.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetOrderbookSummary
 
 > OrderBookSummaryResponseEnvelope GetOrderbookSummary(ctx, orderBookId).Execute()
@@ -1828,7 +2098,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -1964,7 +2234,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -2107,7 +2377,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -2320,7 +2590,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -2334,7 +2604,7 @@ No authorization required
 
 ## GetUserLedgerStream
 
-> []StreamPositionsEntry GetUserLedgerStream(ctx, userId).Execute()
+> StreamPositionsResponse GetUserLedgerStream(ctx, userId).Execute()
 
 Get a snapshot of user's ledger updates since a specific time, and opens a stream for further updates
 
@@ -2360,7 +2630,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.GetUserLedgerStream``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetUserLedgerStream`: []StreamPositionsEntry
+	// response from `GetUserLedgerStream`: StreamPositionsResponse
 	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.GetUserLedgerStream`: %v\n", resp)
 }
 ```
@@ -2384,11 +2654,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]StreamPositionsEntry**](StreamPositionsEntry.md)
+[**StreamPositionsResponse**](StreamPositionsResponse.md)
 
 ### Authorization
 
-No authorization required
+[apiKeyAuthQuery](../README.md#apiKeyAuthQuery)
 
 ### HTTP request headers
 
@@ -2402,7 +2672,7 @@ No authorization required
 
 ## GetUserOrderUpdatesStream
 
-> []StreamOrderUpdatesEntry GetUserOrderUpdatesStream(ctx, userId, orderBookId).Since(since).Execute()
+> StreamOrderUpdatesResponse GetUserOrderUpdatesStream(ctx, userId, orderBookId).Since(since).Execute()
 
 Get a snapshot of user's order updates for the given order book since a specific time, and opens a stream for further updates
 
@@ -2431,7 +2701,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.GetUserOrderUpdatesStream``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetUserOrderUpdatesStream`: []StreamOrderUpdatesEntry
+	// response from `GetUserOrderUpdatesStream`: StreamOrderUpdatesResponse
 	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.GetUserOrderUpdatesStream`: %v\n", resp)
 }
 ```
@@ -2458,11 +2728,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]StreamOrderUpdatesEntry**](StreamOrderUpdatesEntry.md)
+[**StreamOrderUpdatesResponse**](StreamOrderUpdatesResponse.md)
 
 ### Authorization
 
-No authorization required
+[apiKeyAuthQuery](../README.md#apiKeyAuthQuery)
 
 ### HTTP request headers
 
@@ -2476,7 +2746,7 @@ No authorization required
 
 ## GetUserOrdersUpdatesStreamAll
 
-> []StreamOrderUpdatesEntry GetUserOrdersUpdatesStreamAll(ctx, userId).Since(since).Execute()
+> StreamOrderUpdatesResponse GetUserOrdersUpdatesStreamAll(ctx, userId).Since(since).Execute()
 
 Get a snapshot of user's order updates across all order books since a specific time, and opens a stream for further updates
 
@@ -2504,7 +2774,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.GetUserOrdersUpdatesStreamAll``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetUserOrdersUpdatesStreamAll`: []StreamOrderUpdatesEntry
+	// response from `GetUserOrdersUpdatesStreamAll`: StreamOrderUpdatesResponse
 	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.GetUserOrdersUpdatesStreamAll`: %v\n", resp)
 }
 ```
@@ -2529,11 +2799,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]StreamOrderUpdatesEntry**](StreamOrderUpdatesEntry.md)
+[**StreamOrderUpdatesResponse**](StreamOrderUpdatesResponse.md)
 
 ### Authorization
 
-No authorization required
+[apiKeyAuthQuery](../README.md#apiKeyAuthQuery)
 
 ### HTTP request headers
 
@@ -2592,7 +2862,7 @@ Other parameters are passed through a pointer to a apiGetUserSelfRequest struct 
 
 ### Authorization
 
-No authorization required
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -2606,7 +2876,7 @@ No authorization required
 
 ## GetUserTransactionsStream
 
-> []StreamTransactionsEntry GetUserTransactionsStream(ctx, userId).Since(since).Execute()
+> StreamTransactionsResponse GetUserTransactionsStream(ctx, userId).Since(since).Execute()
 
 Get a snapshot of user's executed transactions since a specific time, and opens a stream for further updates
 
@@ -2634,7 +2904,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.GetUserTransactionsStream``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetUserTransactionsStream`: []StreamTransactionsEntry
+	// response from `GetUserTransactionsStream`: StreamTransactionsResponse
 	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.GetUserTransactionsStream`: %v\n", resp)
 }
 ```
@@ -2659,11 +2929,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]StreamTransactionsEntry**](StreamTransactionsEntry.md)
+[**StreamTransactionsResponse**](StreamTransactionsResponse.md)
 
 ### Authorization
 
-No authorization required
+[apiKeyAuthQuery](../README.md#apiKeyAuthQuery)
 
 ### HTTP request headers
 
@@ -2722,7 +2992,73 @@ Other parameters are passed through a pointer to a apiGetUsersAPIKeysRequest str
 
 ### Authorization
 
-No authorization required
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## LeverageGetAccruedInterestByUser
+
+> CurrentLeverageAccruedInterestResponseEnvelope LeverageGetAccruedInterestByUser(ctx).PositionId(positionId).AssetId(assetId).Execute()
+
+Get current accrued leverage interest for the user
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+	positionId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string |  (optional)
+	assetId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.LeverageGetAccruedInterestByUser(context.Background()).PositionId(positionId).AssetId(assetId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.LeverageGetAccruedInterestByUser``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `LeverageGetAccruedInterestByUser`: CurrentLeverageAccruedInterestResponseEnvelope
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.LeverageGetAccruedInterestByUser`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiLeverageGetAccruedInterestByUserRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **positionId** | **string** |  | 
+ **assetId** | **string** |  | 
+
+### Return type
+
+[**CurrentLeverageAccruedInterestResponseEnvelope**](CurrentLeverageAccruedInterestResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -2786,7 +3122,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -2850,7 +3186,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -2916,7 +3252,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -2980,7 +3316,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -3050,7 +3386,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -3120,7 +3456,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -3275,7 +3611,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -3354,7 +3690,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -3413,11 +3749,75 @@ Other parameters are passed through a pointer to a apiListPositionAccountsSelfRe
 
 ### Authorization
 
-No authorization required
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## PayLeverageGetAccruedInterest
+
+> PayLeverageAccruedInterestResponseEnvelope PayLeverageGetAccruedInterest(ctx).PayLeverageAccruedInterestRequest(payLeverageAccruedInterestRequest).Execute()
+
+Pay current accrued leverage interest for a specific user
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+	payLeverageAccruedInterestRequest := *openapiclient.NewPayLeverageAccruedInterestRequest() // PayLeverageAccruedInterestRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.PayLeverageGetAccruedInterest(context.Background()).PayLeverageAccruedInterestRequest(payLeverageAccruedInterestRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.PayLeverageGetAccruedInterest``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `PayLeverageGetAccruedInterest`: PayLeverageAccruedInterestResponseEnvelope
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.PayLeverageGetAccruedInterest`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPayLeverageGetAccruedInterestRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **payLeverageAccruedInterestRequest** | [**PayLeverageAccruedInterestRequest**](PayLeverageAccruedInterestRequest.md) |  | 
+
+### Return type
+
+[**PayLeverageAccruedInterestResponseEnvelope**](PayLeverageAccruedInterestResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -3481,7 +3881,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -3495,7 +3895,7 @@ No authorization required
 
 ## StreamAssetPrices
 
-> map[string]StreamAssetPricesResponseValue StreamAssetPrices(ctx).Since(since).Execute()
+> StreamAssetPricesResponse StreamAssetPrices(ctx).Since(since).AssetId(assetId).Execute()
 
 Stream real-time asset prices as map objects
 
@@ -3516,15 +3916,16 @@ import (
 
 func main() {
 	since := time.Now() // time.Time |  (optional)
+	assetId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.DefaultAPI.StreamAssetPrices(context.Background()).Since(since).Execute()
+	resp, r, err := apiClient.DefaultAPI.StreamAssetPrices(context.Background()).Since(since).AssetId(assetId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.StreamAssetPrices``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `StreamAssetPrices`: map[string]StreamAssetPricesResponseValue
+	// response from `StreamAssetPrices`: StreamAssetPricesResponse
 	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.StreamAssetPrices`: %v\n", resp)
 }
 ```
@@ -3541,10 +3942,11 @@ Other parameters are passed through a pointer to a apiStreamAssetPricesRequest s
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **since** | **time.Time** |  | 
+ **assetId** | **string** |  | 
 
 ### Return type
 
-[**map[string]StreamAssetPricesResponseValue**](StreamAssetPricesResponseValue.md)
+[**StreamAssetPricesResponse**](StreamAssetPricesResponse.md)
 
 ### Authorization
 
@@ -3562,7 +3964,7 @@ No authorization required
 
 ## StreamCandleData
 
-> []StreamCandlesEntry StreamCandleData(ctx, orderBookId).Since(since).Resolution(resolution).Execute()
+> StreamCandlesResponse StreamCandleData(ctx, orderBookId).Since(since).Resolution(resolution).Execute()
 
 Get a snapshot of candlestick data from date provided, and open a stream for real-time updates
 
@@ -3591,7 +3993,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.StreamCandleData``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `StreamCandleData`: []StreamCandlesEntry
+	// response from `StreamCandleData`: StreamCandlesResponse
 	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.StreamCandleData`: %v\n", resp)
 }
 ```
@@ -3617,7 +4019,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]StreamCandlesEntry**](StreamCandlesEntry.md)
+[**StreamCandlesResponse**](StreamCandlesResponse.md)
 
 ### Authorization
 
@@ -3635,7 +4037,7 @@ No authorization required
 
 ## StreamOrderBookBalances
 
-> []StreamOrderBookBalanceEntry StreamOrderBookBalances(ctx, orderBookId).Since(since).Execute()
+> StreamOrderBookBalancesResponse StreamOrderBookBalances(ctx, orderBookId).Since(since).Execute()
 
 Get a snapshot of base and quote balances for an order book and open a stream for real-time updates
 
@@ -3663,7 +4065,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.StreamOrderBookBalances``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `StreamOrderBookBalances`: []StreamOrderBookBalanceEntry
+	// response from `StreamOrderBookBalances`: StreamOrderBookBalancesResponse
 	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.StreamOrderBookBalances`: %v\n", resp)
 }
 ```
@@ -3688,7 +4090,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]StreamOrderBookBalanceEntry**](StreamOrderBookBalanceEntry.md)
+[**StreamOrderBookBalancesResponse**](StreamOrderBookBalancesResponse.md)
 
 ### Authorization
 
@@ -3777,7 +4179,7 @@ No authorization required
 
 ## StreamTrades
 
-> []StreamTradesEntry StreamTrades(ctx, orderBookId).Since(since).Execute()
+> StreamTradesResponse StreamTrades(ctx, orderBookId).Since(since).Execute()
 
 Get a snapshot of trades executed on the given order book from a specific date and open a stream for real-time updates
 
@@ -3805,7 +4207,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.StreamTrades``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `StreamTrades`: []StreamTradesEntry
+	// response from `StreamTrades`: StreamTradesResponse
 	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.StreamTrades`: %v\n", resp)
 }
 ```
@@ -3830,7 +4232,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]StreamTradesEntry**](StreamTradesEntry.md)
+[**StreamTradesResponse**](StreamTradesResponse.md)
 
 ### Authorization
 
@@ -3898,7 +4300,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -3930,7 +4332,7 @@ import (
 
 func main() {
 	userId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
-	updateUserConfigRequest := *openapiclient.NewUpdateUserConfigRequest(*openapiclient.NewUpdateFieldString(false), *openapiclient.NewUpdateFieldString(false)) // UpdateUserConfigRequest | 
+	updateUserConfigRequest := *openapiclient.NewUpdateUserConfigRequest(*openapiclient.NewUpdateFieldString(false)) // UpdateUserConfigRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -3968,7 +4370,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -3999,7 +4401,7 @@ import (
 )
 
 func main() {
-	updateUserConfigRequest := *openapiclient.NewUpdateUserConfigRequest(*openapiclient.NewUpdateFieldString(false), *openapiclient.NewUpdateFieldString(false)) // UpdateUserConfigRequest | 
+	updateUserConfigRequest := *openapiclient.NewUpdateUserConfigRequest(*openapiclient.NewUpdateFieldString(false)) // UpdateUserConfigRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -4032,7 +4434,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -4096,7 +4498,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -4164,7 +4566,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

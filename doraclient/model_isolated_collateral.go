@@ -23,7 +23,7 @@ type IsolatedCollateral struct {
 	IsolatedPositionId *string `json:"isolated_position_id,omitempty"`
 	TransactionId *string `json:"transaction_id,omitempty"`
 	AssetId *string `json:"asset_id,omitempty"`
-	Quantity *float64 `json:"quantity,omitempty"`
+	Quantity *string `json:"quantity,omitempty"`
 }
 
 // NewIsolatedCollateral instantiates a new IsolatedCollateral object
@@ -172,9 +172,9 @@ func (o *IsolatedCollateral) SetAssetId(v string) {
 }
 
 // GetQuantity returns the Quantity field value if set, zero value otherwise.
-func (o *IsolatedCollateral) GetQuantity() float64 {
+func (o *IsolatedCollateral) GetQuantity() string {
 	if o == nil || IsNil(o.Quantity) {
-		var ret float64
+		var ret string
 		return ret
 	}
 	return *o.Quantity
@@ -182,7 +182,7 @@ func (o *IsolatedCollateral) GetQuantity() float64 {
 
 // GetQuantityOk returns a tuple with the Quantity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *IsolatedCollateral) GetQuantityOk() (*float64, bool) {
+func (o *IsolatedCollateral) GetQuantityOk() (*string, bool) {
 	if o == nil || IsNil(o.Quantity) {
 		return nil, false
 	}
@@ -198,8 +198,8 @@ func (o *IsolatedCollateral) HasQuantity() bool {
 	return false
 }
 
-// SetQuantity gets a reference to the given float64 and assigns it to the Quantity field.
-func (o *IsolatedCollateral) SetQuantity(v float64) {
+// SetQuantity gets a reference to the given string and assigns it to the Quantity field.
+func (o *IsolatedCollateral) SetQuantity(v string) {
 	o.Quantity = &v
 }
 

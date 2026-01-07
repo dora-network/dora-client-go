@@ -8,8 +8,6 @@ Name | Type | Description | Notes
 **Locked** | Pointer to **map[string]string** |  | [optional] 
 **Borrowed** | Pointer to **map[string]string** |  | [optional] 
 **Supplied** | Pointer to **map[string]string** |  | [optional] 
-**Collateral** | Pointer to **map[string]string** |  | [optional] 
-**SuppliedCollateral** | Pointer to **map[string]string** |  | [optional] 
 **ImpendingBorrows** | Pointer to **map[string]string** |  | [optional] 
 **BorrowLimit** | Pointer to **map[string]string** |  | [optional] 
 **LiquidationThreshold** | Pointer to **map[string]string** |  | [optional] 
@@ -138,56 +136,6 @@ SetSupplied sets Supplied field to given value.
 `func (o *UserValue) HasSupplied() bool`
 
 HasSupplied returns a boolean if a field has been set.
-
-### GetCollateral
-
-`func (o *UserValue) GetCollateral() map[string]string`
-
-GetCollateral returns the Collateral field if non-nil, zero value otherwise.
-
-### GetCollateralOk
-
-`func (o *UserValue) GetCollateralOk() (*map[string]string, bool)`
-
-GetCollateralOk returns a tuple with the Collateral field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCollateral
-
-`func (o *UserValue) SetCollateral(v map[string]string)`
-
-SetCollateral sets Collateral field to given value.
-
-### HasCollateral
-
-`func (o *UserValue) HasCollateral() bool`
-
-HasCollateral returns a boolean if a field has been set.
-
-### GetSuppliedCollateral
-
-`func (o *UserValue) GetSuppliedCollateral() map[string]string`
-
-GetSuppliedCollateral returns the SuppliedCollateral field if non-nil, zero value otherwise.
-
-### GetSuppliedCollateralOk
-
-`func (o *UserValue) GetSuppliedCollateralOk() (*map[string]string, bool)`
-
-GetSuppliedCollateralOk returns a tuple with the SuppliedCollateral field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetSuppliedCollateral
-
-`func (o *UserValue) SetSuppliedCollateral(v map[string]string)`
-
-SetSuppliedCollateral sets SuppliedCollateral field to given value.
-
-### HasSuppliedCollateral
-
-`func (o *UserValue) HasSuppliedCollateral() bool`
-
-HasSuppliedCollateral returns a boolean if a field has been set.
 
 ### GetImpendingBorrows
 

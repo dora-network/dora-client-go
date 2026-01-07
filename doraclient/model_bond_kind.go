@@ -20,8 +20,8 @@ type BondKind string
 
 // List of BondKind
 const (
-	COUPON_PAYING BondKind = "COUPON-PAYING"
-	PRINCIPAL_ONLY BondKind = "PRINCIPAL-ONLY"
+	BONDKIND_COUPON_PAYING BondKind = "COUPON-PAYING"
+	BONDKIND_PRINCIPAL_ONLY BondKind = "PRINCIPAL-ONLY"
 )
 
 // All allowed values of BondKind enum

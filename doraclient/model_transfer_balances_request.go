@@ -24,7 +24,7 @@ type TransferBalancesRequest struct {
 	FromPositionId string `json:"from_position_id"`
 	ToPositionId string `json:"to_position_id"`
 	AssetId string `json:"asset_id"`
-	Quantity float64 `json:"quantity"`
+	Quantity string `json:"quantity"`
 }
 
 type _TransferBalancesRequest TransferBalancesRequest
@@ -33,7 +33,7 @@ type _TransferBalancesRequest TransferBalancesRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTransferBalancesRequest(fromPositionId string, toPositionId string, assetId string, quantity float64) *TransferBalancesRequest {
+func NewTransferBalancesRequest(fromPositionId string, toPositionId string, assetId string, quantity string) *TransferBalancesRequest {
 	this := TransferBalancesRequest{}
 	this.FromPositionId = fromPositionId
 	this.ToPositionId = toPositionId
@@ -123,9 +123,9 @@ func (o *TransferBalancesRequest) SetAssetId(v string) {
 }
 
 // GetQuantity returns the Quantity field value
-func (o *TransferBalancesRequest) GetQuantity() float64 {
+func (o *TransferBalancesRequest) GetQuantity() string {
 	if o == nil {
-		var ret float64
+		var ret string
 		return ret
 	}
 
@@ -134,7 +134,7 @@ func (o *TransferBalancesRequest) GetQuantity() float64 {
 
 // GetQuantityOk returns a tuple with the Quantity field value
 // and a boolean to check if the value has been set.
-func (o *TransferBalancesRequest) GetQuantityOk() (*float64, bool) {
+func (o *TransferBalancesRequest) GetQuantityOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -142,7 +142,7 @@ func (o *TransferBalancesRequest) GetQuantityOk() (*float64, bool) {
 }
 
 // SetQuantity sets field value
-func (o *TransferBalancesRequest) SetQuantity(v float64) {
+func (o *TransferBalancesRequest) SetQuantity(v string) {
 	o.Quantity = v
 }
 

@@ -6,13 +6,13 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **GlobalPositionId** | **string** |  | 
 **AssetId** | **string** |  | 
-**Quantity** | **float64** |  | 
+**Quantity** | **string** |  | 
 
 ## Methods
 
 ### NewIsolateCollateralRequest
 
-`func NewIsolateCollateralRequest(globalPositionId string, assetId string, quantity float64, ) *IsolateCollateralRequest`
+`func NewIsolateCollateralRequest(globalPositionId string, assetId string, quantity string, ) *IsolateCollateralRequest`
 
 NewIsolateCollateralRequest instantiates a new IsolateCollateralRequest object
 This constructor will assign default values to properties that have it defined,
@@ -69,20 +69,20 @@ SetAssetId sets AssetId field to given value.
 
 ### GetQuantity
 
-`func (o *IsolateCollateralRequest) GetQuantity() float64`
+`func (o *IsolateCollateralRequest) GetQuantity() string`
 
 GetQuantity returns the Quantity field if non-nil, zero value otherwise.
 
 ### GetQuantityOk
 
-`func (o *IsolateCollateralRequest) GetQuantityOk() (*float64, bool)`
+`func (o *IsolateCollateralRequest) GetQuantityOk() (*string, bool)`
 
 GetQuantityOk returns a tuple with the Quantity field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetQuantity
 
-`func (o *IsolateCollateralRequest) SetQuantity(v float64)`
+`func (o *IsolateCollateralRequest) SetQuantity(v string)`
 
 SetQuantity sets Quantity field to given value.
 

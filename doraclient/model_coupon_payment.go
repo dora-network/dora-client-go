@@ -26,7 +26,7 @@ type CouponPayment struct {
 	StartAt *time.Time `json:"start_at,omitempty"`
 	EndAt *time.Time `json:"end_at,omitempty"`
 	PayAt *time.Time `json:"pay_at,omitempty"`
-	AvailableToPay *float64 `json:"available_to_pay,omitempty"`
+	AvailableToPay *string `json:"available_to_pay,omitempty"`
 	CompletedAt *time.Time `json:"completed_at,omitempty"`
 	CreatedAt *time.Time `json:"created_at,omitempty"`
 	// Number of nanoseconds to wait between coupon payment processing, must be at least 1000 (1 microsecond)
@@ -244,9 +244,9 @@ func (o *CouponPayment) SetPayAt(v time.Time) {
 }
 
 // GetAvailableToPay returns the AvailableToPay field value if set, zero value otherwise.
-func (o *CouponPayment) GetAvailableToPay() float64 {
+func (o *CouponPayment) GetAvailableToPay() string {
 	if o == nil || IsNil(o.AvailableToPay) {
-		var ret float64
+		var ret string
 		return ret
 	}
 	return *o.AvailableToPay
@@ -254,7 +254,7 @@ func (o *CouponPayment) GetAvailableToPay() float64 {
 
 // GetAvailableToPayOk returns a tuple with the AvailableToPay field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CouponPayment) GetAvailableToPayOk() (*float64, bool) {
+func (o *CouponPayment) GetAvailableToPayOk() (*string, bool) {
 	if o == nil || IsNil(o.AvailableToPay) {
 		return nil, false
 	}
@@ -270,8 +270,8 @@ func (o *CouponPayment) HasAvailableToPay() bool {
 	return false
 }
 
-// SetAvailableToPay gets a reference to the given float64 and assigns it to the AvailableToPay field.
-func (o *CouponPayment) SetAvailableToPay(v float64) {
+// SetAvailableToPay gets a reference to the given string and assigns it to the AvailableToPay field.
+func (o *CouponPayment) SetAvailableToPay(v string) {
 	o.AvailableToPay = &v
 }
 

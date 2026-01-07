@@ -6,11 +6,10 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AssetId** | Pointer to **string** |  | [optional] 
 **Seq** | Pointer to **int32** |  | [optional] 
-**Available** | Pointer to **float64** | The available balance in the module for this asset | [optional] 
-**Supplied** | Pointer to **float64** | The total amount supplied to the module for this asset | [optional] 
-**SuppliedCollateral** | Pointer to **float64** | The amount supplied as collateral from user balances in the module for this asset | [optional] 
-**Virtual** | Pointer to **float64** | Assets minted by virtual-borrowing, but not yet repaid | [optional] 
-**Borrowed** | Pointer to **float64** | The total amount borrowed from the supplied but not yet repaid | [optional] 
+**Available** | Pointer to **string** | The available balance in the module for this asset | [optional] 
+**Supplied** | Pointer to **string** | The total amount supplied to the module for this asset | [optional] 
+**Virtual** | Pointer to **string** | Assets minted by virtual-borrowing, but not yet repaid | [optional] 
+**Borrowed** | Pointer to **string** | The total amount borrowed from the supplied but not yet repaid | [optional] 
 
 ## Methods
 
@@ -83,20 +82,20 @@ HasSeq returns a boolean if a field has been set.
 
 ### GetAvailable
 
-`func (o *ModuleBalance) GetAvailable() float64`
+`func (o *ModuleBalance) GetAvailable() string`
 
 GetAvailable returns the Available field if non-nil, zero value otherwise.
 
 ### GetAvailableOk
 
-`func (o *ModuleBalance) GetAvailableOk() (*float64, bool)`
+`func (o *ModuleBalance) GetAvailableOk() (*string, bool)`
 
 GetAvailableOk returns a tuple with the Available field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAvailable
 
-`func (o *ModuleBalance) SetAvailable(v float64)`
+`func (o *ModuleBalance) SetAvailable(v string)`
 
 SetAvailable sets Available field to given value.
 
@@ -108,20 +107,20 @@ HasAvailable returns a boolean if a field has been set.
 
 ### GetSupplied
 
-`func (o *ModuleBalance) GetSupplied() float64`
+`func (o *ModuleBalance) GetSupplied() string`
 
 GetSupplied returns the Supplied field if non-nil, zero value otherwise.
 
 ### GetSuppliedOk
 
-`func (o *ModuleBalance) GetSuppliedOk() (*float64, bool)`
+`func (o *ModuleBalance) GetSuppliedOk() (*string, bool)`
 
 GetSuppliedOk returns a tuple with the Supplied field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSupplied
 
-`func (o *ModuleBalance) SetSupplied(v float64)`
+`func (o *ModuleBalance) SetSupplied(v string)`
 
 SetSupplied sets Supplied field to given value.
 
@@ -131,47 +130,22 @@ SetSupplied sets Supplied field to given value.
 
 HasSupplied returns a boolean if a field has been set.
 
-### GetSuppliedCollateral
-
-`func (o *ModuleBalance) GetSuppliedCollateral() float64`
-
-GetSuppliedCollateral returns the SuppliedCollateral field if non-nil, zero value otherwise.
-
-### GetSuppliedCollateralOk
-
-`func (o *ModuleBalance) GetSuppliedCollateralOk() (*float64, bool)`
-
-GetSuppliedCollateralOk returns a tuple with the SuppliedCollateral field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetSuppliedCollateral
-
-`func (o *ModuleBalance) SetSuppliedCollateral(v float64)`
-
-SetSuppliedCollateral sets SuppliedCollateral field to given value.
-
-### HasSuppliedCollateral
-
-`func (o *ModuleBalance) HasSuppliedCollateral() bool`
-
-HasSuppliedCollateral returns a boolean if a field has been set.
-
 ### GetVirtual
 
-`func (o *ModuleBalance) GetVirtual() float64`
+`func (o *ModuleBalance) GetVirtual() string`
 
 GetVirtual returns the Virtual field if non-nil, zero value otherwise.
 
 ### GetVirtualOk
 
-`func (o *ModuleBalance) GetVirtualOk() (*float64, bool)`
+`func (o *ModuleBalance) GetVirtualOk() (*string, bool)`
 
 GetVirtualOk returns a tuple with the Virtual field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetVirtual
 
-`func (o *ModuleBalance) SetVirtual(v float64)`
+`func (o *ModuleBalance) SetVirtual(v string)`
 
 SetVirtual sets Virtual field to given value.
 
@@ -183,20 +157,20 @@ HasVirtual returns a boolean if a field has been set.
 
 ### GetBorrowed
 
-`func (o *ModuleBalance) GetBorrowed() float64`
+`func (o *ModuleBalance) GetBorrowed() string`
 
 GetBorrowed returns the Borrowed field if non-nil, zero value otherwise.
 
 ### GetBorrowedOk
 
-`func (o *ModuleBalance) GetBorrowedOk() (*float64, bool)`
+`func (o *ModuleBalance) GetBorrowedOk() (*string, bool)`
 
 GetBorrowedOk returns a tuple with the Borrowed field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetBorrowed
 
-`func (o *ModuleBalance) SetBorrowed(v float64)`
+`func (o *ModuleBalance) SetBorrowed(v string)`
 
 SetBorrowed sets Borrowed field to given value.
 

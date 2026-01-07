@@ -1,88 +1,88 @@
-# StreamAssetPricesResponseValue
+# StreamedAssetPrice
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AssetId** | **string** |  | 
-**Price** | **float64** |  | 
+**Price** | **string** |  | 
 **Time** | **time.Time** |  | 
 
 ## Methods
 
-### NewStreamAssetPricesResponseValue
+### NewStreamedAssetPrice
 
-`func NewStreamAssetPricesResponseValue(assetId string, price float64, time time.Time, ) *StreamAssetPricesResponseValue`
+`func NewStreamedAssetPrice(assetId string, price string, time time.Time, ) *StreamedAssetPrice`
 
-NewStreamAssetPricesResponseValue instantiates a new StreamAssetPricesResponseValue object
+NewStreamedAssetPrice instantiates a new StreamedAssetPrice object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewStreamAssetPricesResponseValueWithDefaults
+### NewStreamedAssetPriceWithDefaults
 
-`func NewStreamAssetPricesResponseValueWithDefaults() *StreamAssetPricesResponseValue`
+`func NewStreamedAssetPriceWithDefaults() *StreamedAssetPrice`
 
-NewStreamAssetPricesResponseValueWithDefaults instantiates a new StreamAssetPricesResponseValue object
+NewStreamedAssetPriceWithDefaults instantiates a new StreamedAssetPrice object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetAssetId
 
-`func (o *StreamAssetPricesResponseValue) GetAssetId() string`
+`func (o *StreamedAssetPrice) GetAssetId() string`
 
 GetAssetId returns the AssetId field if non-nil, zero value otherwise.
 
 ### GetAssetIdOk
 
-`func (o *StreamAssetPricesResponseValue) GetAssetIdOk() (*string, bool)`
+`func (o *StreamedAssetPrice) GetAssetIdOk() (*string, bool)`
 
 GetAssetIdOk returns a tuple with the AssetId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAssetId
 
-`func (o *StreamAssetPricesResponseValue) SetAssetId(v string)`
+`func (o *StreamedAssetPrice) SetAssetId(v string)`
 
 SetAssetId sets AssetId field to given value.
 
 
 ### GetPrice
 
-`func (o *StreamAssetPricesResponseValue) GetPrice() float64`
+`func (o *StreamedAssetPrice) GetPrice() string`
 
 GetPrice returns the Price field if non-nil, zero value otherwise.
 
 ### GetPriceOk
 
-`func (o *StreamAssetPricesResponseValue) GetPriceOk() (*float64, bool)`
+`func (o *StreamedAssetPrice) GetPriceOk() (*string, bool)`
 
 GetPriceOk returns a tuple with the Price field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPrice
 
-`func (o *StreamAssetPricesResponseValue) SetPrice(v float64)`
+`func (o *StreamedAssetPrice) SetPrice(v string)`
 
 SetPrice sets Price field to given value.
 
 
 ### GetTime
 
-`func (o *StreamAssetPricesResponseValue) GetTime() time.Time`
+`func (o *StreamedAssetPrice) GetTime() time.Time`
 
 GetTime returns the Time field if non-nil, zero value otherwise.
 
 ### GetTimeOk
 
-`func (o *StreamAssetPricesResponseValue) GetTimeOk() (*time.Time, bool)`
+`func (o *StreamedAssetPrice) GetTimeOk() (*time.Time, bool)`
 
 GetTimeOk returns a tuple with the Time field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTime
 
-`func (o *StreamAssetPricesResponseValue) SetTime(v time.Time)`
+`func (o *StreamedAssetPrice) SetTime(v time.Time)`
 
 SetTime sets Time field to given value.
 

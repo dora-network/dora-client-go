@@ -22,11 +22,11 @@ var _ MappedNullable = &Candle{}
 type Candle struct {
 	OrderBookId *string `json:"order_book_id,omitempty"`
 	StartTimestamp *time.Time `json:"start_timestamp,omitempty"`
-	Open *float64 `json:"open,omitempty"`
-	High *float64 `json:"high,omitempty"`
-	Low *float64 `json:"low,omitempty"`
-	Close *float64 `json:"close,omitempty"`
-	Volume *float64 `json:"volume,omitempty"`
+	Open *string `json:"open,omitempty"`
+	High *string `json:"high,omitempty"`
+	Low *string `json:"low,omitempty"`
+	Close *string `json:"close,omitempty"`
+	Volume *string `json:"volume,omitempty"`
 }
 
 // NewCandle instantiates a new Candle object
@@ -111,9 +111,9 @@ func (o *Candle) SetStartTimestamp(v time.Time) {
 }
 
 // GetOpen returns the Open field value if set, zero value otherwise.
-func (o *Candle) GetOpen() float64 {
+func (o *Candle) GetOpen() string {
 	if o == nil || IsNil(o.Open) {
-		var ret float64
+		var ret string
 		return ret
 	}
 	return *o.Open
@@ -121,7 +121,7 @@ func (o *Candle) GetOpen() float64 {
 
 // GetOpenOk returns a tuple with the Open field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Candle) GetOpenOk() (*float64, bool) {
+func (o *Candle) GetOpenOk() (*string, bool) {
 	if o == nil || IsNil(o.Open) {
 		return nil, false
 	}
@@ -137,15 +137,15 @@ func (o *Candle) HasOpen() bool {
 	return false
 }
 
-// SetOpen gets a reference to the given float64 and assigns it to the Open field.
-func (o *Candle) SetOpen(v float64) {
+// SetOpen gets a reference to the given string and assigns it to the Open field.
+func (o *Candle) SetOpen(v string) {
 	o.Open = &v
 }
 
 // GetHigh returns the High field value if set, zero value otherwise.
-func (o *Candle) GetHigh() float64 {
+func (o *Candle) GetHigh() string {
 	if o == nil || IsNil(o.High) {
-		var ret float64
+		var ret string
 		return ret
 	}
 	return *o.High
@@ -153,7 +153,7 @@ func (o *Candle) GetHigh() float64 {
 
 // GetHighOk returns a tuple with the High field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Candle) GetHighOk() (*float64, bool) {
+func (o *Candle) GetHighOk() (*string, bool) {
 	if o == nil || IsNil(o.High) {
 		return nil, false
 	}
@@ -169,15 +169,15 @@ func (o *Candle) HasHigh() bool {
 	return false
 }
 
-// SetHigh gets a reference to the given float64 and assigns it to the High field.
-func (o *Candle) SetHigh(v float64) {
+// SetHigh gets a reference to the given string and assigns it to the High field.
+func (o *Candle) SetHigh(v string) {
 	o.High = &v
 }
 
 // GetLow returns the Low field value if set, zero value otherwise.
-func (o *Candle) GetLow() float64 {
+func (o *Candle) GetLow() string {
 	if o == nil || IsNil(o.Low) {
-		var ret float64
+		var ret string
 		return ret
 	}
 	return *o.Low
@@ -185,7 +185,7 @@ func (o *Candle) GetLow() float64 {
 
 // GetLowOk returns a tuple with the Low field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Candle) GetLowOk() (*float64, bool) {
+func (o *Candle) GetLowOk() (*string, bool) {
 	if o == nil || IsNil(o.Low) {
 		return nil, false
 	}
@@ -201,15 +201,15 @@ func (o *Candle) HasLow() bool {
 	return false
 }
 
-// SetLow gets a reference to the given float64 and assigns it to the Low field.
-func (o *Candle) SetLow(v float64) {
+// SetLow gets a reference to the given string and assigns it to the Low field.
+func (o *Candle) SetLow(v string) {
 	o.Low = &v
 }
 
 // GetClose returns the Close field value if set, zero value otherwise.
-func (o *Candle) GetClose() float64 {
+func (o *Candle) GetClose() string {
 	if o == nil || IsNil(o.Close) {
-		var ret float64
+		var ret string
 		return ret
 	}
 	return *o.Close
@@ -217,7 +217,7 @@ func (o *Candle) GetClose() float64 {
 
 // GetCloseOk returns a tuple with the Close field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Candle) GetCloseOk() (*float64, bool) {
+func (o *Candle) GetCloseOk() (*string, bool) {
 	if o == nil || IsNil(o.Close) {
 		return nil, false
 	}
@@ -233,15 +233,15 @@ func (o *Candle) HasClose() bool {
 	return false
 }
 
-// SetClose gets a reference to the given float64 and assigns it to the Close field.
-func (o *Candle) SetClose(v float64) {
+// SetClose gets a reference to the given string and assigns it to the Close field.
+func (o *Candle) SetClose(v string) {
 	o.Close = &v
 }
 
 // GetVolume returns the Volume field value if set, zero value otherwise.
-func (o *Candle) GetVolume() float64 {
+func (o *Candle) GetVolume() string {
 	if o == nil || IsNil(o.Volume) {
-		var ret float64
+		var ret string
 		return ret
 	}
 	return *o.Volume
@@ -249,7 +249,7 @@ func (o *Candle) GetVolume() float64 {
 
 // GetVolumeOk returns a tuple with the Volume field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Candle) GetVolumeOk() (*float64, bool) {
+func (o *Candle) GetVolumeOk() (*string, bool) {
 	if o == nil || IsNil(o.Volume) {
 		return nil, false
 	}
@@ -265,8 +265,8 @@ func (o *Candle) HasVolume() bool {
 	return false
 }
 
-// SetVolume gets a reference to the given float64 and assigns it to the Volume field.
-func (o *Candle) SetVolume(v float64) {
+// SetVolume gets a reference to the given string and assigns it to the Volume field.
+func (o *Candle) SetVolume(v string) {
 	o.Volume = &v
 }
 

@@ -20,8 +20,8 @@ type Side string
 
 // List of Side
 const (
-	BUY Side = "BUY"
-	SELL Side = "SELL"
+	SIDE_BUY Side = "BUY"
+	SIDE_SELL Side = "SELL"
 )
 
 // All allowed values of Side enum

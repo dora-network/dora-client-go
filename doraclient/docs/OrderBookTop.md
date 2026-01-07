@@ -5,8 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **OrderBookId** | Pointer to **string** |  | [optional] 
-**BestBid** | Pointer to **float64** |  | [optional] 
-**BestAsk** | Pointer to **float64** |  | [optional] 
+**BestBid** | Pointer to **string** |  | [optional] 
+**BestAsk** | Pointer to **string** |  | [optional] 
 **Timestamp** | Pointer to **time.Time** |  | [optional] 
 
 ## Methods
@@ -55,20 +55,20 @@ HasOrderBookId returns a boolean if a field has been set.
 
 ### GetBestBid
 
-`func (o *OrderBookTop) GetBestBid() float64`
+`func (o *OrderBookTop) GetBestBid() string`
 
 GetBestBid returns the BestBid field if non-nil, zero value otherwise.
 
 ### GetBestBidOk
 
-`func (o *OrderBookTop) GetBestBidOk() (*float64, bool)`
+`func (o *OrderBookTop) GetBestBidOk() (*string, bool)`
 
 GetBestBidOk returns a tuple with the BestBid field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetBestBid
 
-`func (o *OrderBookTop) SetBestBid(v float64)`
+`func (o *OrderBookTop) SetBestBid(v string)`
 
 SetBestBid sets BestBid field to given value.
 
@@ -80,20 +80,20 @@ HasBestBid returns a boolean if a field has been set.
 
 ### GetBestAsk
 
-`func (o *OrderBookTop) GetBestAsk() float64`
+`func (o *OrderBookTop) GetBestAsk() string`
 
 GetBestAsk returns the BestAsk field if non-nil, zero value otherwise.
 
 ### GetBestAskOk
 
-`func (o *OrderBookTop) GetBestAskOk() (*float64, bool)`
+`func (o *OrderBookTop) GetBestAskOk() (*string, bool)`
 
 GetBestAskOk returns a tuple with the BestAsk field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetBestAsk
 
-`func (o *OrderBookTop) SetBestAsk(v float64)`
+`func (o *OrderBookTop) SetBestAsk(v string)`
 
 SetBestAsk sets BestAsk field to given value.
 

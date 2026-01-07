@@ -7,13 +7,13 @@ Name | Type | Description | Notes
 **FromPositionId** | **string** |  | 
 **ToPositionId** | **string** |  | 
 **AssetId** | **string** |  | 
-**Quantity** | **float64** |  | 
+**Quantity** | **string** |  | 
 
 ## Methods
 
 ### NewTransferBalancesRequest
 
-`func NewTransferBalancesRequest(fromPositionId string, toPositionId string, assetId string, quantity float64, ) *TransferBalancesRequest`
+`func NewTransferBalancesRequest(fromPositionId string, toPositionId string, assetId string, quantity string, ) *TransferBalancesRequest`
 
 NewTransferBalancesRequest instantiates a new TransferBalancesRequest object
 This constructor will assign default values to properties that have it defined,
@@ -90,20 +90,20 @@ SetAssetId sets AssetId field to given value.
 
 ### GetQuantity
 
-`func (o *TransferBalancesRequest) GetQuantity() float64`
+`func (o *TransferBalancesRequest) GetQuantity() string`
 
 GetQuantity returns the Quantity field if non-nil, zero value otherwise.
 
 ### GetQuantityOk
 
-`func (o *TransferBalancesRequest) GetQuantityOk() (*float64, bool)`
+`func (o *TransferBalancesRequest) GetQuantityOk() (*string, bool)`
 
 GetQuantityOk returns a tuple with the Quantity field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetQuantity
 
-`func (o *TransferBalancesRequest) SetQuantity(v float64)`
+`func (o *TransferBalancesRequest) SetQuantity(v string)`
 
 SetQuantity sets Quantity field to given value.
 

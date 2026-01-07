@@ -20,8 +20,8 @@ type OrderModifierKind string
 
 // List of OrderModifierKind
 const (
-	LIQUIDATION OrderModifierKind = "LIQUIDATION"
-	MAX_BUY OrderModifierKind = "MAX_BUY"
+	ORDERMODIFIERKIND_LIQUIDATION OrderModifierKind = "LIQUIDATION"
+	ORDERMODIFIERKIND_MAX_BUY OrderModifierKind = "MAX_BUY"
 )
 
 // All allowed values of OrderModifierKind enum
