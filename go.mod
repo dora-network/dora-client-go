@@ -1,8 +1,3 @@
 module github.com/dora-network/dora-client-go
 
 go 1.24.4
-
-require (
-	github.com/antihax/optional v1.0.0
-	golang.org/x/oauth2 v0.31.0
-)
