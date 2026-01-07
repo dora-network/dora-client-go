@@ -22,7 +22,7 @@ go get golang.org/x/net/context
 Put the package under your project folder and add the following in import:
 
 ```go
-import doraclient "github.com/dora-network/dora-go-client/doraclient"
+import doraclient "github.com/dora-network/dora-client-go/doraclient"
 ```
 
 To use a proxy, set the environment variable `HTTP_PROXY`:

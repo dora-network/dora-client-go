@@ -1,4 +1,4 @@
-module github.com/dora-network/dora-go-client/doraclient
+module github.com/dora-network/dora-client-go/doraclient
 
 go 1.23
 

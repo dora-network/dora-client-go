@@ -14,7 +14,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"testing"
-	openapiclient "github.com/dora-network/dora-go-client/doraclient"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
 )
 
 func Test_doraclient_DefaultAPIService(t *testing.T) {
