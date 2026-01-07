@@ -57,7 +57,7 @@ func (o *ResponseEnvelope) GetData() interface{} {
 // and a boolean to check if the value has been set.
 func (o *ResponseEnvelope) GetDataOk() (interface{}, bool) {
 	if o == nil || IsNil(o.Data) {
-		return interface{}{}, false
+		return nil, false
 	}
 	return o.Data, true
 }

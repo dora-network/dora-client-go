@@ -19,6 +19,7 @@ var _ MappedNullable = &PositionAccounts{}
 
 // PositionAccounts struct for PositionAccounts
 type PositionAccounts struct {
+	PositionAccounts []PositionAccount `json:"position_accounts,omitempty"`
 }
 
 // NewPositionAccounts instantiates a new PositionAccounts object
@@ -38,6 +39,38 @@ func NewPositionAccountsWithDefaults() *PositionAccounts {
 	return &this
 }
 
+// GetPositionAccounts returns the PositionAccounts field value if set, zero value otherwise.
+func (o *PositionAccounts) GetPositionAccounts() []PositionAccount {
+	if o == nil || IsNil(o.PositionAccounts) {
+		var ret []PositionAccount
+		return ret
+	}
+	return o.PositionAccounts
+}
+
+// GetPositionAccountsOk returns a tuple with the PositionAccounts field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PositionAccounts) GetPositionAccountsOk() ([]PositionAccount, bool) {
+	if o == nil || IsNil(o.PositionAccounts) {
+		return nil, false
+	}
+	return o.PositionAccounts, true
+}
+
+// HasPositionAccounts returns a boolean if a field has been set.
+func (o *PositionAccounts) HasPositionAccounts() bool {
+	if o != nil && !IsNil(o.PositionAccounts) {
+		return true
+	}
+
+	return false
+}
+
+// SetPositionAccounts gets a reference to the given []PositionAccount and assigns it to the PositionAccounts field.
+func (o *PositionAccounts) SetPositionAccounts(v []PositionAccount) {
+	o.PositionAccounts = v
+}
+
 func (o PositionAccounts) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -47,27 +80,23 @@ func (o PositionAccounts) MarshalJSON() ([]byte, error) {
 }
 
 func (o PositionAccounts) ToMap() (map[string]interface{}, error) {
-	toSerialize := make([]interface{}, len(o.Items))
-	for i, item := range o.Items {
-		toSerialize[i] = item
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.PositionAccounts) {
+		toSerialize["position_accounts"] = o.PositionAccounts
 	}
 	return toSerialize, nil
 }
 
-func (o *PositionAccounts) UnmarshalJSON(data []byte) (err error) {
-	return json.Unmarshal(data, &o.Items)
-}
-
 type NullablePositionAccounts struct {
-	value PositionAccounts
+	value *PositionAccounts
 	isSet bool
 }
 
-func (v NullablePositionAccounts) Get() PositionAccounts {
+func (v NullablePositionAccounts) Get() *PositionAccounts {
 	return v.value
 }
 
-func (v *NullablePositionAccounts) Set(val PositionAccounts) {
+func (v *NullablePositionAccounts) Set(val *PositionAccounts) {
 	v.value = val
 	v.isSet = true
 }
@@ -81,7 +110,7 @@ func (v *NullablePositionAccounts) Unset() {
 	v.isSet = false
 }
 
-func NewNullablePositionAccounts(val PositionAccounts) *NullablePositionAccounts {
+func NewNullablePositionAccounts(val *PositionAccounts) *NullablePositionAccounts {
 	return &NullablePositionAccounts{value: val, isSet: true}
 }
 

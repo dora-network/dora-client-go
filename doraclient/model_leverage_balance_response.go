@@ -52,7 +52,7 @@ func (o *LeverageBalanceResponse) GetLeverageBalance() interface{} {
 // and a boolean to check if the value has been set.
 func (o *LeverageBalanceResponse) GetLeverageBalanceOk() (interface{}, bool) {
 	if o == nil || IsNil(o.LeverageBalance) {
-		return interface{}{}, false
+		return nil, false
 	}
 	return o.LeverageBalance, true
 }

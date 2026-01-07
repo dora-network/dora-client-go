@@ -19,6 +19,7 @@ var _ MappedNullable = &StreamAssetsResponse{}
 
 // StreamAssetsResponse struct for StreamAssetsResponse
 type StreamAssetsResponse struct {
+	StreamAssetsEntries []StreamAssetsEntry `json:"stream_assets_entries,omitempty"`
 }
 
 // NewStreamAssetsResponse instantiates a new StreamAssetsResponse object
@@ -38,6 +39,38 @@ func NewStreamAssetsResponseWithDefaults() *StreamAssetsResponse {
 	return &this
 }
 
+// GetStreamAssetsEntries returns the StreamAssetsEntries field value if set, zero value otherwise.
+func (o *StreamAssetsResponse) GetStreamAssetsEntries() []StreamAssetsEntry {
+	if o == nil || IsNil(o.StreamAssetsEntries) {
+		var ret []StreamAssetsEntry
+		return ret
+	}
+	return o.StreamAssetsEntries
+}
+
+// GetStreamAssetsEntriesOk returns a tuple with the StreamAssetsEntries field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StreamAssetsResponse) GetStreamAssetsEntriesOk() ([]StreamAssetsEntry, bool) {
+	if o == nil || IsNil(o.StreamAssetsEntries) {
+		return nil, false
+	}
+	return o.StreamAssetsEntries, true
+}
+
+// HasStreamAssetsEntries returns a boolean if a field has been set.
+func (o *StreamAssetsResponse) HasStreamAssetsEntries() bool {
+	if o != nil && !IsNil(o.StreamAssetsEntries) {
+		return true
+	}
+
+	return false
+}
+
+// SetStreamAssetsEntries gets a reference to the given []StreamAssetsEntry and assigns it to the StreamAssetsEntries field.
+func (o *StreamAssetsResponse) SetStreamAssetsEntries(v []StreamAssetsEntry) {
+	o.StreamAssetsEntries = v
+}
+
 func (o StreamAssetsResponse) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -47,27 +80,23 @@ func (o StreamAssetsResponse) MarshalJSON() ([]byte, error) {
 }
 
 func (o StreamAssetsResponse) ToMap() (map[string]interface{}, error) {
-	toSerialize := make([]interface{}, len(o.Items))
-	for i, item := range o.Items {
-		toSerialize[i] = item
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.StreamAssetsEntries) {
+		toSerialize["stream_assets_entries"] = o.StreamAssetsEntries
 	}
 	return toSerialize, nil
 }
 
-func (o *StreamAssetsResponse) UnmarshalJSON(data []byte) (err error) {
-	return json.Unmarshal(data, &o.Items)
-}
-
 type NullableStreamAssetsResponse struct {
-	value StreamAssetsResponse
+	value *StreamAssetsResponse
 	isSet bool
 }
 
-func (v NullableStreamAssetsResponse) Get() StreamAssetsResponse {
+func (v NullableStreamAssetsResponse) Get() *StreamAssetsResponse {
 	return v.value
 }
 
-func (v *NullableStreamAssetsResponse) Set(val StreamAssetsResponse) {
+func (v *NullableStreamAssetsResponse) Set(val *StreamAssetsResponse) {
 	v.value = val
 	v.isSet = true
 }
@@ -81,7 +110,7 @@ func (v *NullableStreamAssetsResponse) Unset() {
 	v.isSet = false
 }
 
-func NewNullableStreamAssetsResponse(val StreamAssetsResponse) *NullableStreamAssetsResponse {
+func NewNullableStreamAssetsResponse(val *StreamAssetsResponse) *NullableStreamAssetsResponse {
 	return &NullableStreamAssetsResponse{value: val, isSet: true}
 }
 

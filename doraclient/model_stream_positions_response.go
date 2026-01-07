@@ -19,6 +19,7 @@ var _ MappedNullable = &StreamPositionsResponse{}
 
 // StreamPositionsResponse struct for StreamPositionsResponse
 type StreamPositionsResponse struct {
+	StreamPositionsEntry []StreamPositionsEntry `json:"stream_positions_entry,omitempty"`
 }
 
 // NewStreamPositionsResponse instantiates a new StreamPositionsResponse object
@@ -38,6 +39,38 @@ func NewStreamPositionsResponseWithDefaults() *StreamPositionsResponse {
 	return &this
 }
 
+// GetStreamPositionsEntry returns the StreamPositionsEntry field value if set, zero value otherwise.
+func (o *StreamPositionsResponse) GetStreamPositionsEntry() []StreamPositionsEntry {
+	if o == nil || IsNil(o.StreamPositionsEntry) {
+		var ret []StreamPositionsEntry
+		return ret
+	}
+	return o.StreamPositionsEntry
+}
+
+// GetStreamPositionsEntryOk returns a tuple with the StreamPositionsEntry field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StreamPositionsResponse) GetStreamPositionsEntryOk() ([]StreamPositionsEntry, bool) {
+	if o == nil || IsNil(o.StreamPositionsEntry) {
+		return nil, false
+	}
+	return o.StreamPositionsEntry, true
+}
+
+// HasStreamPositionsEntry returns a boolean if a field has been set.
+func (o *StreamPositionsResponse) HasStreamPositionsEntry() bool {
+	if o != nil && !IsNil(o.StreamPositionsEntry) {
+		return true
+	}
+
+	return false
+}
+
+// SetStreamPositionsEntry gets a reference to the given []StreamPositionsEntry and assigns it to the StreamPositionsEntry field.
+func (o *StreamPositionsResponse) SetStreamPositionsEntry(v []StreamPositionsEntry) {
+	o.StreamPositionsEntry = v
+}
+
 func (o StreamPositionsResponse) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -47,27 +80,23 @@ func (o StreamPositionsResponse) MarshalJSON() ([]byte, error) {
 }
 
 func (o StreamPositionsResponse) ToMap() (map[string]interface{}, error) {
-	toSerialize := make([]interface{}, len(o.Items))
-	for i, item := range o.Items {
-		toSerialize[i] = item
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.StreamPositionsEntry) {
+		toSerialize["stream_positions_entry"] = o.StreamPositionsEntry
 	}
 	return toSerialize, nil
 }
 
-func (o *StreamPositionsResponse) UnmarshalJSON(data []byte) (err error) {
-	return json.Unmarshal(data, &o.Items)
-}
-
 type NullableStreamPositionsResponse struct {
-	value StreamPositionsResponse
+	value *StreamPositionsResponse
 	isSet bool
 }
 
-func (v NullableStreamPositionsResponse) Get() StreamPositionsResponse {
+func (v NullableStreamPositionsResponse) Get() *StreamPositionsResponse {
 	return v.value
 }
 
-func (v *NullableStreamPositionsResponse) Set(val StreamPositionsResponse) {
+func (v *NullableStreamPositionsResponse) Set(val *StreamPositionsResponse) {
 	v.value = val
 	v.isSet = true
 }
@@ -81,7 +110,7 @@ func (v *NullableStreamPositionsResponse) Unset() {
 	v.isSet = false
 }
 
-func NewNullableStreamPositionsResponse(val StreamPositionsResponse) *NullableStreamPositionsResponse {
+func NewNullableStreamPositionsResponse(val *StreamPositionsResponse) *NullableStreamPositionsResponse {
 	return &NullableStreamPositionsResponse{value: val, isSet: true}
 }
 

@@ -19,6 +19,7 @@ var _ MappedNullable = &StreamCandlesResponse{}
 
 // StreamCandlesResponse struct for StreamCandlesResponse
 type StreamCandlesResponse struct {
+	StreamCandlesEntries []StreamCandlesEntry `json:"stream_candles_entries,omitempty"`
 }
 
 // NewStreamCandlesResponse instantiates a new StreamCandlesResponse object
@@ -38,6 +39,38 @@ func NewStreamCandlesResponseWithDefaults() *StreamCandlesResponse {
 	return &this
 }
 
+// GetStreamCandlesEntries returns the StreamCandlesEntries field value if set, zero value otherwise.
+func (o *StreamCandlesResponse) GetStreamCandlesEntries() []StreamCandlesEntry {
+	if o == nil || IsNil(o.StreamCandlesEntries) {
+		var ret []StreamCandlesEntry
+		return ret
+	}
+	return o.StreamCandlesEntries
+}
+
+// GetStreamCandlesEntriesOk returns a tuple with the StreamCandlesEntries field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StreamCandlesResponse) GetStreamCandlesEntriesOk() ([]StreamCandlesEntry, bool) {
+	if o == nil || IsNil(o.StreamCandlesEntries) {
+		return nil, false
+	}
+	return o.StreamCandlesEntries, true
+}
+
+// HasStreamCandlesEntries returns a boolean if a field has been set.
+func (o *StreamCandlesResponse) HasStreamCandlesEntries() bool {
+	if o != nil && !IsNil(o.StreamCandlesEntries) {
+		return true
+	}
+
+	return false
+}
+
+// SetStreamCandlesEntries gets a reference to the given []StreamCandlesEntry and assigns it to the StreamCandlesEntries field.
+func (o *StreamCandlesResponse) SetStreamCandlesEntries(v []StreamCandlesEntry) {
+	o.StreamCandlesEntries = v
+}
+
 func (o StreamCandlesResponse) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -47,27 +80,23 @@ func (o StreamCandlesResponse) MarshalJSON() ([]byte, error) {
 }
 
 func (o StreamCandlesResponse) ToMap() (map[string]interface{}, error) {
-	toSerialize := make([]interface{}, len(o.Items))
-	for i, item := range o.Items {
-		toSerialize[i] = item
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.StreamCandlesEntries) {
+		toSerialize["stream_candles_entries"] = o.StreamCandlesEntries
 	}
 	return toSerialize, nil
 }
 
-func (o *StreamCandlesResponse) UnmarshalJSON(data []byte) (err error) {
-	return json.Unmarshal(data, &o.Items)
-}
-
 type NullableStreamCandlesResponse struct {
-	value StreamCandlesResponse
+	value *StreamCandlesResponse
 	isSet bool
 }
 
-func (v NullableStreamCandlesResponse) Get() StreamCandlesResponse {
+func (v NullableStreamCandlesResponse) Get() *StreamCandlesResponse {
 	return v.value
 }
 
-func (v *NullableStreamCandlesResponse) Set(val StreamCandlesResponse) {
+func (v *NullableStreamCandlesResponse) Set(val *StreamCandlesResponse) {
 	v.value = val
 	v.isSet = true
 }
@@ -81,7 +110,7 @@ func (v *NullableStreamCandlesResponse) Unset() {
 	v.isSet = false
 }
 
-func NewNullableStreamCandlesResponse(val StreamCandlesResponse) *NullableStreamCandlesResponse {
+func NewNullableStreamCandlesResponse(val *StreamCandlesResponse) *NullableStreamCandlesResponse {
 	return &NullableStreamCandlesResponse{value: val, isSet: true}
 }
 

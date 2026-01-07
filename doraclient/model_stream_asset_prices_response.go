@@ -98,7 +98,7 @@ func (v NullableStreamAssetPricesResponse) IsSet() bool {
 }
 
 func (v *NullableStreamAssetPricesResponse) Unset() {
-	v.value = nil
+	v.value = StreamAssetPricesResponse{}
 	v.isSet = false
 }
 

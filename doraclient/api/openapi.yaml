@@ -3890,9 +3890,11 @@ components:
           position_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         Time: 2000-01-23T04:56:07.000+00:00
     StreamOrdersResponse:
-      items:
-        $ref: "#/components/schemas/StreamOrdersEntry"
-      type: array
+      properties:
+        stream_orders_entry:
+          items:
+            $ref: "#/components/schemas/StreamOrdersEntry"
+          type: array
     StreamOrderUpdatesEntry:
       allOf:
       - $ref: "#/components/schemas/StreamEntry"
@@ -3927,9 +3929,65 @@ components:
           position_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         Time: 2000-01-23T04:56:07.000+00:00
     StreamOrderUpdatesResponse:
-      items:
-        $ref: "#/components/schemas/StreamOrderUpdatesEntry"
-      type: array
+      example:
+        stream_order_update_entries:
+        - Val:
+            original_price: original_price
+            side: BUY
+            original_quantity: original_quantity
+            kind: LIMIT
+            trigger_type: STOP_LOSS
+            good_till_date: 2000-01-23T04:56:07.000+00:00
+            avg_fill_price: avg_fill_price
+            order_info: order_info
+            opened_at: 2000-01-23T04:56:07.000+00:00
+            filled_notional: filled_notional
+            trigger_price: trigger_price
+            user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            last_update_at: 2000-01-23T04:56:07.000+00:00
+            inverse_leverage: inverse_leverage
+            cancelled_quantity: cancelled_quantity
+            filled_quantity: filled_quantity
+            order_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            order_book_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            open_quantity: open_quantity
+            status: OPEN
+            order_modifiers:
+            - LIQUIDATION
+            - LIQUIDATION
+            position_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          Time: 2000-01-23T04:56:07.000+00:00
+        - Val:
+            original_price: original_price
+            side: BUY
+            original_quantity: original_quantity
+            kind: LIMIT
+            trigger_type: STOP_LOSS
+            good_till_date: 2000-01-23T04:56:07.000+00:00
+            avg_fill_price: avg_fill_price
+            order_info: order_info
+            opened_at: 2000-01-23T04:56:07.000+00:00
+            filled_notional: filled_notional
+            trigger_price: trigger_price
+            user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            last_update_at: 2000-01-23T04:56:07.000+00:00
+            inverse_leverage: inverse_leverage
+            cancelled_quantity: cancelled_quantity
+            filled_quantity: filled_quantity
+            order_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            order_book_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            open_quantity: open_quantity
+            status: OPEN
+            order_modifiers:
+            - LIQUIDATION
+            - LIQUIDATION
+            position_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          Time: 2000-01-23T04:56:07.000+00:00
+      properties:
+        stream_order_update_entries:
+          items:
+            $ref: "#/components/schemas/StreamOrderUpdatesEntry"
+          type: array
     OrderResponseEnvelope:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
@@ -4382,9 +4440,45 @@ components:
           borrowed: borrowed
         Time: 2000-01-23T04:56:07.000+00:00
     StreamPositionsResponse:
-      items:
-        $ref: "#/components/schemas/StreamPositionsEntry"
-      type: array
+      example:
+        stream_positions_entry:
+        - Val:
+            supplied: supplied
+            impending_borrows: impending_borrows
+            available: available
+            position_name: position_name
+            is_global: true
+            created_at: 2000-01-23T04:56:07.000+00:00
+            asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            avg_entry_price: avg_entry_price
+            borrow_limit: borrow_limit
+            liquidation_threshold: liquidation_threshold
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            locked: locked
+            seq: 0
+            borrowed: borrowed
+          Time: 2000-01-23T04:56:07.000+00:00
+        - Val:
+            supplied: supplied
+            impending_borrows: impending_borrows
+            available: available
+            position_name: position_name
+            is_global: true
+            created_at: 2000-01-23T04:56:07.000+00:00
+            asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            avg_entry_price: avg_entry_price
+            borrow_limit: borrow_limit
+            liquidation_threshold: liquidation_threshold
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            locked: locked
+            seq: 0
+            borrowed: borrowed
+          Time: 2000-01-23T04:56:07.000+00:00
+      properties:
+        stream_positions_entry:
+          items:
+            $ref: "#/components/schemas/StreamPositionsEntry"
+          type: array
     TransformedAssets:
       example:
         gained:
@@ -5149,9 +5243,33 @@ components:
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         Time: 2000-01-23T04:56:07.000+00:00
     StreamTransactionsResponse:
-      items:
-        $ref: "#/components/schemas/StreamTransactionsEntry"
-      type: array
+      example:
+        stream_transactions_entries:
+        - Val:
+            asset0: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            quantity0: quantity0
+            asset1: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            quantity1: quantity1
+            user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            kind: ACCRUE_INTEREST
+            created_at: 2000-01-23T04:56:07.000+00:00
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          Time: 2000-01-23T04:56:07.000+00:00
+        - Val:
+            asset0: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            quantity0: quantity0
+            asset1: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            quantity1: quantity1
+            user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            kind: ACCRUE_INTEREST
+            created_at: 2000-01-23T04:56:07.000+00:00
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          Time: 2000-01-23T04:56:07.000+00:00
+      properties:
+        stream_transactions_entries:
+          items:
+            $ref: "#/components/schemas/StreamTransactionsEntry"
+          type: array
     StreamAssetsEntry:
       allOf:
       - $ref: "#/components/schemas/StreamEntry"
@@ -5196,9 +5314,85 @@ components:
           can_trade: true
         Time: 2000-01-23T04:56:07.000+00:00
     StreamAssetsResponse:
-      items:
-        $ref: "#/components/schemas/StreamAssetsEntry"
-      type: array
+      example:
+        stream_assets_entries:
+        - Val:
+            symbol: symbol
+            can_add_liquidity: true
+            max_leverage: 3.616076749251911
+            fractionalized_units: 5
+            kind: BOND
+            can_onboard: true
+            maturity_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            can_virtual_borrow: true
+            created_at: 2000-01-23T04:56:07.000+00:00
+            description: description
+            bond:
+              kind: COUPON-PAYING
+              payments_per_year: 2
+              created_at: 2000-01-23T04:56:07.000+00:00
+              issued_at: 2000-01-23T04:56:07.000+00:00
+              issuer: issuer
+              maturity_at: 2000-01-23T04:56:07.000+00:00
+              coupon_start_at: 2000-01-23T04:56:07.000+00:00
+              next_coupon_payment: 2000-01-23T04:56:07.000+00:00
+              principal_value: principal_value
+              payments_every: 1000
+              id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              final_coupon_at: 2000-01-23T04:56:07.000+00:00
+              isin: isin
+            max_utilization: 7
+            collateral_weight: 6.027456183070403
+            decimals: 1
+            yield: 9.301444243932576
+            max_supply: 2
+            name: name
+            liquidation_threshold: 5.637376656633329
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            can_direct_borrow: true
+            can_trade: true
+          Time: 2000-01-23T04:56:07.000+00:00
+        - Val:
+            symbol: symbol
+            can_add_liquidity: true
+            max_leverage: 3.616076749251911
+            fractionalized_units: 5
+            kind: BOND
+            can_onboard: true
+            maturity_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            can_virtual_borrow: true
+            created_at: 2000-01-23T04:56:07.000+00:00
+            description: description
+            bond:
+              kind: COUPON-PAYING
+              payments_per_year: 2
+              created_at: 2000-01-23T04:56:07.000+00:00
+              issued_at: 2000-01-23T04:56:07.000+00:00
+              issuer: issuer
+              maturity_at: 2000-01-23T04:56:07.000+00:00
+              coupon_start_at: 2000-01-23T04:56:07.000+00:00
+              next_coupon_payment: 2000-01-23T04:56:07.000+00:00
+              principal_value: principal_value
+              payments_every: 1000
+              id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              final_coupon_at: 2000-01-23T04:56:07.000+00:00
+              isin: isin
+            max_utilization: 7
+            collateral_weight: 6.027456183070403
+            decimals: 1
+            yield: 9.301444243932576
+            max_supply: 2
+            name: name
+            liquidation_threshold: 5.637376656633329
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            can_direct_borrow: true
+            can_trade: true
+          Time: 2000-01-23T04:56:07.000+00:00
+      properties:
+        stream_assets_entries:
+          items:
+            $ref: "#/components/schemas/StreamAssetsEntry"
+          type: array
     TransactionResponseEnvelope:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
@@ -5447,9 +5641,43 @@ components:
           order_book_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         Time: 2000-01-23T04:56:07.000+00:00
     StreamTradesResponse:
-      items:
-        $ref: "#/components/schemas/StreamTradesEntry"
-      type: array
+      example:
+        stream_trades_entry:
+        - Val:
+            transaction_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            order_seq: 0
+            fee_asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            side: BUY
+            created_at: 2000-01-23T04:56:07.000+00:00
+            aggressor_indicator: true
+            fee_quantity: fee_quantity
+            user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            price: price
+            asset_0: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            order_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            quantity_0: quantity_0
+            order_book_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          Time: 2000-01-23T04:56:07.000+00:00
+        - Val:
+            transaction_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            order_seq: 0
+            fee_asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            side: BUY
+            created_at: 2000-01-23T04:56:07.000+00:00
+            aggressor_indicator: true
+            fee_quantity: fee_quantity
+            user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            price: price
+            asset_0: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            order_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            quantity_0: quantity_0
+            order_book_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          Time: 2000-01-23T04:56:07.000+00:00
+      properties:
+        stream_trades_entry:
+          items:
+            $ref: "#/components/schemas/StreamTradesEntry"
+          type: array
     AssetPrice:
       example:
         price: price
@@ -5589,9 +5817,25 @@ components:
           order_book_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         Time: 2000-01-23T04:56:07.000+00:00
     StreamOrderBookBalancesResponse:
-      items:
-        $ref: "#/components/schemas/StreamOrderBookBalanceEntry"
-      type: array
+      example:
+        stream_order_book_balances:
+        - Val:
+            base_quantity: 0.8008281904610115
+            shares_quantity: 1.4658129805029452
+            quote_quantity: 6.027456183070403
+            order_book_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          Time: 2000-01-23T04:56:07.000+00:00
+        - Val:
+            base_quantity: 0.8008281904610115
+            shares_quantity: 1.4658129805029452
+            quote_quantity: 6.027456183070403
+            order_book_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          Time: 2000-01-23T04:56:07.000+00:00
+      properties:
+        stream_order_book_balances:
+          items:
+            $ref: "#/components/schemas/StreamOrderBookBalanceEntry"
+          type: array
     PriceLevel:
       example:
         quantity: quantity
@@ -5893,9 +6137,31 @@ components:
           open: open
         Time: 2000-01-23T04:56:07.000+00:00
     StreamCandlesResponse:
-      items:
-        $ref: "#/components/schemas/StreamCandlesEntry"
-      type: array
+      example:
+        stream_candles_entries:
+        - Val:
+            volume: volume
+            high: high
+            start_timestamp: 2000-01-23T04:56:07.000+00:00
+            low: low
+            close: close
+            order_book_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            open: open
+          Time: 2000-01-23T04:56:07.000+00:00
+        - Val:
+            volume: volume
+            high: high
+            start_timestamp: 2000-01-23T04:56:07.000+00:00
+            low: low
+            close: close
+            order_book_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            open: open
+          Time: 2000-01-23T04:56:07.000+00:00
+      properties:
+        stream_candles_entries:
+          items:
+            $ref: "#/components/schemas/StreamCandlesEntry"
+          type: array
     LedgerModuleResponseEnvelope:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
@@ -6283,9 +6549,19 @@ components:
           description: Whether the position account is the global or an isolated account
           type: boolean
     PositionAccounts:
-      items:
-        $ref: "#/components/schemas/PositionAccount"
-      type: array
+      example:
+        position_accounts:
+        - position_name: position_name
+          is_global: true
+          position_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - position_name: position_name
+          is_global: true
+          position_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        position_accounts:
+          items:
+            $ref: "#/components/schemas/PositionAccount"
+          type: array
     ListPositionAccountsResponseEnvelope:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
@@ -6298,12 +6574,13 @@ components:
           status_code: 0
           request_id: request_id
         data:
-        - position_name: position_name
-          is_global: true
-          position_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        - position_name: position_name
-          is_global: true
-          position_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          position_accounts:
+          - position_name: position_name
+            is_global: true
+            position_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          - position_name: position_name
+            is_global: true
+            position_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         error: error
     ListPositionAccountsResponse:
       $ref: "#/components/schemas/ListPositionAccountsResponseEnvelope"

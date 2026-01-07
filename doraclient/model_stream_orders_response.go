@@ -19,6 +19,7 @@ var _ MappedNullable = &StreamOrdersResponse{}
 
 // StreamOrdersResponse struct for StreamOrdersResponse
 type StreamOrdersResponse struct {
+	StreamOrdersEntry []StreamOrdersEntry `json:"stream_orders_entry,omitempty"`
 }
 
 // NewStreamOrdersResponse instantiates a new StreamOrdersResponse object
@@ -38,6 +39,38 @@ func NewStreamOrdersResponseWithDefaults() *StreamOrdersResponse {
 	return &this
 }
 
+// GetStreamOrdersEntry returns the StreamOrdersEntry field value if set, zero value otherwise.
+func (o *StreamOrdersResponse) GetStreamOrdersEntry() []StreamOrdersEntry {
+	if o == nil || IsNil(o.StreamOrdersEntry) {
+		var ret []StreamOrdersEntry
+		return ret
+	}
+	return o.StreamOrdersEntry
+}
+
+// GetStreamOrdersEntryOk returns a tuple with the StreamOrdersEntry field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StreamOrdersResponse) GetStreamOrdersEntryOk() ([]StreamOrdersEntry, bool) {
+	if o == nil || IsNil(o.StreamOrdersEntry) {
+		return nil, false
+	}
+	return o.StreamOrdersEntry, true
+}
+
+// HasStreamOrdersEntry returns a boolean if a field has been set.
+func (o *StreamOrdersResponse) HasStreamOrdersEntry() bool {
+	if o != nil && !IsNil(o.StreamOrdersEntry) {
+		return true
+	}
+
+	return false
+}
+
+// SetStreamOrdersEntry gets a reference to the given []StreamOrdersEntry and assigns it to the StreamOrdersEntry field.
+func (o *StreamOrdersResponse) SetStreamOrdersEntry(v []StreamOrdersEntry) {
+	o.StreamOrdersEntry = v
+}
+
 func (o StreamOrdersResponse) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -47,27 +80,23 @@ func (o StreamOrdersResponse) MarshalJSON() ([]byte, error) {
 }
 
 func (o StreamOrdersResponse) ToMap() (map[string]interface{}, error) {
-	toSerialize := make([]interface{}, len(o.Items))
-	for i, item := range o.Items {
-		toSerialize[i] = item
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.StreamOrdersEntry) {
+		toSerialize["stream_orders_entry"] = o.StreamOrdersEntry
 	}
 	return toSerialize, nil
 }
 
-func (o *StreamOrdersResponse) UnmarshalJSON(data []byte) (err error) {
-	return json.Unmarshal(data, &o.Items)
-}
-
 type NullableStreamOrdersResponse struct {
-	value StreamOrdersResponse
+	value *StreamOrdersResponse
 	isSet bool
 }
 
-func (v NullableStreamOrdersResponse) Get() StreamOrdersResponse {
+func (v NullableStreamOrdersResponse) Get() *StreamOrdersResponse {
 	return v.value
 }
 
-func (v *NullableStreamOrdersResponse) Set(val StreamOrdersResponse) {
+func (v *NullableStreamOrdersResponse) Set(val *StreamOrdersResponse) {
 	v.value = val
 	v.isSet = true
 }
@@ -81,7 +110,7 @@ func (v *NullableStreamOrdersResponse) Unset() {
 	v.isSet = false
 }
 
-func NewNullableStreamOrdersResponse(val StreamOrdersResponse) *NullableStreamOrdersResponse {
+func NewNullableStreamOrdersResponse(val *StreamOrdersResponse) *NullableStreamOrdersResponse {
 	return &NullableStreamOrdersResponse{value: val, isSet: true}
 }
 

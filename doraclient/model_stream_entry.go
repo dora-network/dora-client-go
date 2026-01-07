@@ -56,7 +56,7 @@ func (o *StreamEntry) GetVal() interface{} {
 // and a boolean to check if the value has been set.
 func (o *StreamEntry) GetValOk() (interface{}, bool) {
 	if o == nil || IsNil(o.Val) {
-		return interface{}{}, false
+		return nil, false
 	}
 	return o.Val, true
 }

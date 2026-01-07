@@ -19,6 +19,7 @@ var _ MappedNullable = &StreamOrderBookBalancesResponse{}
 
 // StreamOrderBookBalancesResponse struct for StreamOrderBookBalancesResponse
 type StreamOrderBookBalancesResponse struct {
+	StreamOrderBookBalances []StreamOrderBookBalanceEntry `json:"stream_order_book_balances,omitempty"`
 }
 
 // NewStreamOrderBookBalancesResponse instantiates a new StreamOrderBookBalancesResponse object
@@ -38,6 +39,38 @@ func NewStreamOrderBookBalancesResponseWithDefaults() *StreamOrderBookBalancesRe
 	return &this
 }
 
+// GetStreamOrderBookBalances returns the StreamOrderBookBalances field value if set, zero value otherwise.
+func (o *StreamOrderBookBalancesResponse) GetStreamOrderBookBalances() []StreamOrderBookBalanceEntry {
+	if o == nil || IsNil(o.StreamOrderBookBalances) {
+		var ret []StreamOrderBookBalanceEntry
+		return ret
+	}
+	return o.StreamOrderBookBalances
+}
+
+// GetStreamOrderBookBalancesOk returns a tuple with the StreamOrderBookBalances field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StreamOrderBookBalancesResponse) GetStreamOrderBookBalancesOk() ([]StreamOrderBookBalanceEntry, bool) {
+	if o == nil || IsNil(o.StreamOrderBookBalances) {
+		return nil, false
+	}
+	return o.StreamOrderBookBalances, true
+}
+
+// HasStreamOrderBookBalances returns a boolean if a field has been set.
+func (o *StreamOrderBookBalancesResponse) HasStreamOrderBookBalances() bool {
+	if o != nil && !IsNil(o.StreamOrderBookBalances) {
+		return true
+	}
+
+	return false
+}
+
+// SetStreamOrderBookBalances gets a reference to the given []StreamOrderBookBalanceEntry and assigns it to the StreamOrderBookBalances field.
+func (o *StreamOrderBookBalancesResponse) SetStreamOrderBookBalances(v []StreamOrderBookBalanceEntry) {
+	o.StreamOrderBookBalances = v
+}
+
 func (o StreamOrderBookBalancesResponse) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -47,27 +80,23 @@ func (o StreamOrderBookBalancesResponse) MarshalJSON() ([]byte, error) {
 }
 
 func (o StreamOrderBookBalancesResponse) ToMap() (map[string]interface{}, error) {
-	toSerialize := make([]interface{}, len(o.Items))
-	for i, item := range o.Items {
-		toSerialize[i] = item
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.StreamOrderBookBalances) {
+		toSerialize["stream_order_book_balances"] = o.StreamOrderBookBalances
 	}
 	return toSerialize, nil
 }
 
-func (o *StreamOrderBookBalancesResponse) UnmarshalJSON(data []byte) (err error) {
-	return json.Unmarshal(data, &o.Items)
-}
-
 type NullableStreamOrderBookBalancesResponse struct {
-	value StreamOrderBookBalancesResponse
+	value *StreamOrderBookBalancesResponse
 	isSet bool
 }
 
-func (v NullableStreamOrderBookBalancesResponse) Get() StreamOrderBookBalancesResponse {
+func (v NullableStreamOrderBookBalancesResponse) Get() *StreamOrderBookBalancesResponse {
 	return v.value
 }
 
-func (v *NullableStreamOrderBookBalancesResponse) Set(val StreamOrderBookBalancesResponse) {
+func (v *NullableStreamOrderBookBalancesResponse) Set(val *StreamOrderBookBalancesResponse) {
 	v.value = val
 	v.isSet = true
 }
@@ -81,7 +110,7 @@ func (v *NullableStreamOrderBookBalancesResponse) Unset() {
 	v.isSet = false
 }
 
-func NewNullableStreamOrderBookBalancesResponse(val StreamOrderBookBalancesResponse) *NullableStreamOrderBookBalancesResponse {
+func NewNullableStreamOrderBookBalancesResponse(val *StreamOrderBookBalancesResponse) *NullableStreamOrderBookBalancesResponse {
 	return &NullableStreamOrderBookBalancesResponse{value: val, isSet: true}
 }
 
