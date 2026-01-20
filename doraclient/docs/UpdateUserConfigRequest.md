@@ -6,6 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **PhotoUrl** | Pointer to [**UpdateFieldString**](UpdateFieldString.md) | Optional: URL of the user&#39;s profile photo, optional. | [optional] 
 **Timezone** | [**UpdateFieldString**](UpdateFieldString.md) | User&#39;s timezone, e.g., &#39;America/New_York&#39;, or an offset. | 
+**ShowTutorialCards** | Pointer to [**UpdateFieldBoolean**](UpdateFieldBoolean.md) | Optional: Whether to show the tutorial. | [optional] 
+**NotificationsEnabled** | Pointer to [**UpdateFieldBoolean**](UpdateFieldBoolean.md) | Optional: Whether to show the notifications. | [optional] 
 
 ## Methods
 
@@ -70,6 +72,56 @@ and a boolean to check if the value has been set.
 
 SetTimezone sets Timezone field to given value.
 
+
+### GetShowTutorialCards
+
+`func (o *UpdateUserConfigRequest) GetShowTutorialCards() UpdateFieldBoolean`
+
+GetShowTutorialCards returns the ShowTutorialCards field if non-nil, zero value otherwise.
+
+### GetShowTutorialCardsOk
+
+`func (o *UpdateUserConfigRequest) GetShowTutorialCardsOk() (*UpdateFieldBoolean, bool)`
+
+GetShowTutorialCardsOk returns a tuple with the ShowTutorialCards field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetShowTutorialCards
+
+`func (o *UpdateUserConfigRequest) SetShowTutorialCards(v UpdateFieldBoolean)`
+
+SetShowTutorialCards sets ShowTutorialCards field to given value.
+
+### HasShowTutorialCards
+
+`func (o *UpdateUserConfigRequest) HasShowTutorialCards() bool`
+
+HasShowTutorialCards returns a boolean if a field has been set.
+
+### GetNotificationsEnabled
+
+`func (o *UpdateUserConfigRequest) GetNotificationsEnabled() UpdateFieldBoolean`
+
+GetNotificationsEnabled returns the NotificationsEnabled field if non-nil, zero value otherwise.
+
+### GetNotificationsEnabledOk
+
+`func (o *UpdateUserConfigRequest) GetNotificationsEnabledOk() (*UpdateFieldBoolean, bool)`
+
+GetNotificationsEnabledOk returns a tuple with the NotificationsEnabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNotificationsEnabled
+
+`func (o *UpdateUserConfigRequest) SetNotificationsEnabled(v UpdateFieldBoolean)`
+
+SetNotificationsEnabled sets NotificationsEnabled field to given value.
+
+### HasNotificationsEnabled
+
+`func (o *UpdateUserConfigRequest) HasNotificationsEnabled() bool`
+
+HasNotificationsEnabled returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

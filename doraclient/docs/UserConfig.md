@@ -9,6 +9,8 @@ Name | Type | Description | Notes
 **Timezone** | Pointer to **string** | User&#39;s timezone, e.g., &#39;America/New_York&#39;, or an offset. | [optional] 
 **CreatedAt** | Pointer to **time.Time** |  | [optional] 
 **UpdatedAt** | Pointer to **time.Time** |  | [optional] 
+**ShowTutorialCards** | Pointer to **bool** |  | [optional] 
+**NotificationsEnabled** | Pointer to **bool** |  | [optional] 
 
 ## Methods
 
@@ -153,6 +155,56 @@ SetUpdatedAt sets UpdatedAt field to given value.
 `func (o *UserConfig) HasUpdatedAt() bool`
 
 HasUpdatedAt returns a boolean if a field has been set.
+
+### GetShowTutorialCards
+
+`func (o *UserConfig) GetShowTutorialCards() bool`
+
+GetShowTutorialCards returns the ShowTutorialCards field if non-nil, zero value otherwise.
+
+### GetShowTutorialCardsOk
+
+`func (o *UserConfig) GetShowTutorialCardsOk() (*bool, bool)`
+
+GetShowTutorialCardsOk returns a tuple with the ShowTutorialCards field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetShowTutorialCards
+
+`func (o *UserConfig) SetShowTutorialCards(v bool)`
+
+SetShowTutorialCards sets ShowTutorialCards field to given value.
+
+### HasShowTutorialCards
+
+`func (o *UserConfig) HasShowTutorialCards() bool`
+
+HasShowTutorialCards returns a boolean if a field has been set.
+
+### GetNotificationsEnabled
+
+`func (o *UserConfig) GetNotificationsEnabled() bool`
+
+GetNotificationsEnabled returns the NotificationsEnabled field if non-nil, zero value otherwise.
+
+### GetNotificationsEnabledOk
+
+`func (o *UserConfig) GetNotificationsEnabledOk() (*bool, bool)`
+
+GetNotificationsEnabledOk returns a tuple with the NotificationsEnabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNotificationsEnabled
+
+`func (o *UserConfig) SetNotificationsEnabled(v bool)`
+
+SetNotificationsEnabled sets NotificationsEnabled field to given value.
+
+### HasNotificationsEnabled
+
+`func (o *UserConfig) HasNotificationsEnabled() bool`
+
+HasNotificationsEnabled returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -10,9 +10,11 @@ Method | HTTP request | Description
 [**ClaimLeverageGetAccruedInterest**](DefaultAPI.md#ClaimLeverageGetAccruedInterest) | **Post** /v1/leverage/accrued_interest/claim | Claim current accrued leverage interest for a specific user
 [**CloseIsolatedPosition**](DefaultAPI.md#CloseIsolatedPosition) | **Post** /v1/positions/close | Close isolated positions, repaying the borrowed
 [**CreateAPIKeyForUser**](DefaultAPI.md#CreateAPIKeyForUser) | **Post** /v1/user/apikey | Create apikey for a user
-[**CreateNewIsolatedPosition**](DefaultAPI.md#CreateNewIsolatedPosition) | **Post** /v1/positions/new_isolated | Create a new isolated position for a user transferring available assets into the position
+[**CreateAPIKeyForUserID**](DefaultAPI.md#CreateAPIKeyForUserID) | **Post** /v1/user/{user_id}/apikey | Create apikey for a user
 [**CreateOrder**](DefaultAPI.md#CreateOrder) | **Post** /v1/orders | Create a new order
+[**CreateUser**](DefaultAPI.md#CreateUser) | **Post** /v1/integrators/user | Create a new user
 [**DeleteUser**](DefaultAPI.md#DeleteUser) | **Delete** /v1/user/{user_id} | Delete user by ID
+[**GetAPIKeysForUserID**](DefaultAPI.md#GetAPIKeysForUserID) | **Get** /v1/user/{user_id}/apikey | Get user&#39;s api keys: admin or integrator only
 [**GetAllAssetPrices**](DefaultAPI.md#GetAllAssetPrices) | **Get** /v1/price | Get the current price of all assets
 [**GetAssetById**](DefaultAPI.md#GetAssetById) | **Get** /v1/assets/{asset_id} | Get asset by ID
 [**GetAssetPrice**](DefaultAPI.md#GetAssetPrice) | **Get** /v1/price/asset/{asset_id} | Get the current price of an asset
@@ -36,18 +38,22 @@ Method | HTTP request | Description
 [**GetOrderbookStatsStream**](DefaultAPI.md#GetOrderbookStatsStream) | **Get** /v1/orderbooks/{order_book_id}/stats/stream | Orderbook stats stream
 [**GetOrderbookSummary**](DefaultAPI.md#GetOrderbookSummary) | **Get** /v1/orderbooks/{order_book_id}/summary | Get summary of an orderbook
 [**GetOrderbookTop**](DefaultAPI.md#GetOrderbookTop) | **Get** /v1/orderbooks/{order_book_id}/top | Get the top price levels for a specific orderbook (L1 market depth)
+[**GetPLForSelfByAccount**](DefaultAPI.md#GetPLForSelfByAccount) | **Get** /v1/pl/self | Get account-by-account PL breakdown for the logged in user
 [**GetPoolPrice**](DefaultAPI.md#GetPoolPrice) | **Get** /v1/price/pool/{pool_id} | Get the current price of a pool
 [**GetTradeById**](DefaultAPI.md#GetTradeById) | **Get** /v1/trades/{trade_id} | Get a trade by ID
 [**GetTrades**](DefaultAPI.md#GetTrades) | **Get** /v1/trades | Get a filtered, paginated list of trades
 [**GetTransactionById**](DefaultAPI.md#GetTransactionById) | **Get** /v1/transactions/{transaction_id} | Get a transaction by ID
 [**GetTransactions**](DefaultAPI.md#GetTransactions) | **Get** /v1/transactions | Get a filtered, paginated list of transactions
 [**GetUserById**](DefaultAPI.md#GetUserById) | **Get** /v1/user/{user_id} | Get user by ID (admin only)
+[**GetUserCouponPaymentsStream**](DefaultAPI.md#GetUserCouponPaymentsStream) | **Get** /v1/user/{user_id}/coupon_payments/stream | Stream user&#39;s coupon payment accruals in real time
 [**GetUserLedgerStream**](DefaultAPI.md#GetUserLedgerStream) | **Get** /v1/user/{user_id}/ledger/stream | Get a snapshot of user&#39;s ledger updates since a specific time, and opens a stream for further updates
 [**GetUserOrderUpdatesStream**](DefaultAPI.md#GetUserOrderUpdatesStream) | **Get** /v1/user/{user_id}/orders/{order_book_id}/updates/stream | Get a snapshot of user&#39;s order updates for the given order book since a specific time, and opens a stream for further updates
 [**GetUserOrdersUpdatesStreamAll**](DefaultAPI.md#GetUserOrdersUpdatesStreamAll) | **Get** /v1/user/{user_id}/orders/all/updates/stream | Get a snapshot of user&#39;s order updates across all order books since a specific time, and opens a stream for further updates
 [**GetUserSelf**](DefaultAPI.md#GetUserSelf) | **Get** /v1/user/self | Get user details for the authenticated user
 [**GetUserTransactionsStream**](DefaultAPI.md#GetUserTransactionsStream) | **Get** /v1/user/{user_id}/transactions/stream | Get a snapshot of user&#39;s executed transactions since a specific time, and opens a stream for further updates
 [**GetUsersAPIKeys**](DefaultAPI.md#GetUsersAPIKeys) | **Get** /v1/user/apikey | Get user&#39;s api keys
+[**LedgerDeposit**](DefaultAPI.md#LedgerDeposit) | **Post** /v1/ledger/deposit/{user_id} | Deposit assets into this user&#39;s account from the outside world
+[**LedgerWithdraw**](DefaultAPI.md#LedgerWithdraw) | **Post** /v1/ledger/withdraw/{user_id} | Withdraw assets from this user to the outside world
 [**LeverageGetAccruedInterestByUser**](DefaultAPI.md#LeverageGetAccruedInterestByUser) | **Get** /v1/leverage/accrued_interest/self | Get current accrued leverage interest for the user
 [**LeverageIsolateCollateral**](DefaultAPI.md#LeverageIsolateCollateral) | **Post** /v1/leverage/isolate_collateral | Create an isolated position by transferring collateral to the position from the user&#39;s global collateral
 [**LeverageSupply**](DefaultAPI.md#LeverageSupply) | **Post** /v1/leverage/supply | Supply leverage for a specific asset
@@ -61,6 +67,8 @@ Method | HTTP request | Description
 [**ListPositionAccountsSelf**](DefaultAPI.md#ListPositionAccountsSelf) | **Get** /v1/user/self/position_accounts | List all position accounts for the authenticated user
 [**PayLeverageGetAccruedInterest**](DefaultAPI.md#PayLeverageGetAccruedInterest) | **Post** /v1/leverage/accrued_interest/pay | Pay current accrued leverage interest for a specific user
 [**RevokeAPIKeyForUser**](DefaultAPI.md#RevokeAPIKeyForUser) | **Put** /v1/user/apikey/{key_id}/revoke | Revoke apikey for a user
+[**RevokeAPIKeyForUserID**](DefaultAPI.md#RevokeAPIKeyForUserID) | **Put** /v1/user/{user_id}/apikey/{key_id}/revoke | Revoke apikey for a user: admin or integrator only
+[**SettleLeverageAccruedInterest**](DefaultAPI.md#SettleLeverageAccruedInterest) | **Post** /v1/leverage/accrued_interest/settle | Settle current accrued leverage interest for a specific user
 [**StreamAssetPrices**](DefaultAPI.md#StreamAssetPrices) | **Get** /v1/prices/stream | Stream real-time asset prices as map objects
 [**StreamCandleData**](DefaultAPI.md#StreamCandleData) | **Get** /v1/charts/{order_book_id}/candle/stream | Get a snapshot of candlestick data from date provided, and open a stream for real-time updates
 [**StreamOrderBookBalances**](DefaultAPI.md#StreamOrderBookBalances) | **Get** /v1/orderbooks/{order_book_id}/balances/stream | Get a snapshot of base and quote balances for an order book and open a stream for real-time updates
@@ -466,11 +474,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## CreateNewIsolatedPosition
+## CreateAPIKeyForUserID
 
-> NewIsolatedPositionResponseEnvelope CreateNewIsolatedPosition(ctx).NewIsolatedPositionRequest(newIsolatedPositionRequest).Execute()
+> CreateAPIKeyResponseEnvelope CreateAPIKeyForUserID(ctx, userId).CreateAPIKeyRequest(createAPIKeyRequest).Execute()
 
-Create a new isolated position for a user transferring available assets into the position
+Create apikey for a user
 
 ### Example
 
@@ -485,36 +493,42 @@ import (
 )
 
 func main() {
-	newIsolatedPositionRequest := *openapiclient.NewNewIsolatedPositionRequest("GlobalPositionId_example", "AssetId_example", "Quantity_example") // NewIsolatedPositionRequest | 
+	userId := "userId_example" // string | 
+	createAPIKeyRequest := *openapiclient.NewCreateAPIKeyRequest() // CreateAPIKeyRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.DefaultAPI.CreateNewIsolatedPosition(context.Background()).NewIsolatedPositionRequest(newIsolatedPositionRequest).Execute()
+	resp, r, err := apiClient.DefaultAPI.CreateAPIKeyForUserID(context.Background(), userId).CreateAPIKeyRequest(createAPIKeyRequest).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.CreateNewIsolatedPosition``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.CreateAPIKeyForUserID``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateNewIsolatedPosition`: NewIsolatedPositionResponseEnvelope
-	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.CreateNewIsolatedPosition`: %v\n", resp)
+	// response from `CreateAPIKeyForUserID`: CreateAPIKeyResponseEnvelope
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.CreateAPIKeyForUserID`: %v\n", resp)
 }
 ```
 
 ### Path Parameters
 
 
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**userId** | **string** |  | 
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiCreateNewIsolatedPositionRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiCreateAPIKeyForUserIDRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **newIsolatedPositionRequest** | [**NewIsolatedPositionRequest**](NewIsolatedPositionRequest.md) |  | 
+
+ **createAPIKeyRequest** | [**CreateAPIKeyRequest**](CreateAPIKeyRequest.md) |  | 
 
 ### Return type
 
-[**NewIsolatedPositionResponseEnvelope**](NewIsolatedPositionResponseEnvelope.md)
+[**CreateAPIKeyResponseEnvelope**](CreateAPIKeyResponseEnvelope.md)
 
 ### Authorization
 
@@ -594,6 +608,70 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## CreateUser
+
+> UserCreatedResponseEnvelope CreateUser(ctx).CreateIntegratorUserRequest(createIntegratorUserRequest).Execute()
+
+Create a new user
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+	createIntegratorUserRequest := *openapiclient.NewCreateIntegratorUserRequest() // CreateIntegratorUserRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.CreateUser(context.Background()).CreateIntegratorUserRequest(createIntegratorUserRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.CreateUser``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CreateUser`: UserCreatedResponseEnvelope
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.CreateUser`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateUserRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **createIntegratorUserRequest** | [**CreateIntegratorUserRequest**](CreateIntegratorUserRequest.md) |  | 
+
+### Return type
+
+[**UserCreatedResponseEnvelope**](UserCreatedResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## DeleteUser
 
 > UserDeletedResponseEnvelope DeleteUser(ctx, userId).Execute()
@@ -647,6 +725,74 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**UserDeletedResponseEnvelope**](UserDeletedResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetAPIKeysForUserID
+
+> APIKeyResponseEnvelope GetAPIKeysForUserID(ctx, userId).Execute()
+
+Get user's api keys: admin or integrator only
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+	userId := "userId_example" // string | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.GetAPIKeysForUserID(context.Background(), userId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.GetAPIKeysForUserID``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetAPIKeysForUserID`: APIKeyResponseEnvelope
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.GetAPIKeysForUserID`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**userId** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetAPIKeysForUserIDRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**APIKeyResponseEnvelope**](APIKeyResponseEnvelope.md)
 
 ### Authorization
 
@@ -2178,6 +2324,65 @@ No authorization required
 [[Back to README]](../README.md)
 
 
+## GetPLForSelfByAccount
+
+> PLResponseEnvelope GetPLForSelfByAccount(ctx).Execute()
+
+Get account-by-account PL breakdown for the logged in user
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.GetPLForSelfByAccount(context.Background()).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.GetPLForSelfByAccount``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetPLForSelfByAccount`: PLResponseEnvelope
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.GetPLForSelfByAccount`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+This endpoint does not need any parameter.
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetPLForSelfByAccountRequest struct via the builder pattern
+
+
+### Return type
+
+[**PLResponseEnvelope**](PLResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetPoolPrice
 
 > PoolPriceResponseEnvelope GetPoolPrice(ctx, poolId).Execute()
@@ -2602,6 +2807,74 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## GetUserCouponPaymentsStream
+
+> []StreamUserCouponPaymentsEntry GetUserCouponPaymentsStream(ctx, userId).Execute()
+
+Stream user's coupon payment accruals in real time
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+	userId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.GetUserCouponPaymentsStream(context.Background(), userId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.GetUserCouponPaymentsStream``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetUserCouponPaymentsStream`: []StreamUserCouponPaymentsEntry
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.GetUserCouponPaymentsStream`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**userId** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetUserCouponPaymentsStreamRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**[]StreamUserCouponPaymentsEntry**](StreamUserCouponPaymentsEntry.md)
+
+### Authorization
+
+[apiKeyAuthQuery](../README.md#apiKeyAuthQuery)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetUserLedgerStream
 
 > []StreamPositionsEntry GetUserLedgerStream(ctx, userId).Execute()
@@ -2997,6 +3270,150 @@ Other parameters are passed through a pointer to a apiGetUsersAPIKeysRequest str
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## LedgerDeposit
+
+> FundUserResponseEnvelope LedgerDeposit(ctx, userId).FundUserRequest(fundUserRequest).Execute()
+
+Deposit assets into this user's account from the outside world
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+	userId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+	fundUserRequest := *openapiclient.NewFundUserRequest("AssetId_example", "Quantity_example") // FundUserRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.LedgerDeposit(context.Background(), userId).FundUserRequest(fundUserRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.LedgerDeposit``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `LedgerDeposit`: FundUserResponseEnvelope
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.LedgerDeposit`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**userId** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiLedgerDepositRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **fundUserRequest** | [**FundUserRequest**](FundUserRequest.md) |  | 
+
+### Return type
+
+[**FundUserResponseEnvelope**](FundUserResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## LedgerWithdraw
+
+> FundUserResponseEnvelope LedgerWithdraw(ctx, userId).DefundUserRequest(defundUserRequest).Execute()
+
+Withdraw assets from this user to the outside world
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+	userId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+	defundUserRequest := *openapiclient.NewDefundUserRequest("AssetId_example", "Quantity_example") // DefundUserRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.LedgerWithdraw(context.Background(), userId).DefundUserRequest(defundUserRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.LedgerWithdraw``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `LedgerWithdraw`: FundUserResponseEnvelope
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.LedgerWithdraw`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**userId** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiLedgerWithdrawRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **defundUserRequest** | [**DefundUserRequest**](DefundUserRequest.md) |  | 
+
+### Return type
+
+[**FundUserResponseEnvelope**](FundUserResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -3886,6 +4303,141 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## RevokeAPIKeyForUserID
+
+> RevokeAPIKeyResponseEnvelope RevokeAPIKeyForUserID(ctx, userId, keyId).Execute()
+
+Revoke apikey for a user: admin or integrator only
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+	userId := "userId_example" // string | 
+	keyId := "keyId_example" // string | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.RevokeAPIKeyForUserID(context.Background(), userId, keyId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.RevokeAPIKeyForUserID``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `RevokeAPIKeyForUserID`: RevokeAPIKeyResponseEnvelope
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.RevokeAPIKeyForUserID`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**userId** | **string** |  | 
+**keyId** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiRevokeAPIKeyForUserIDRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+[**RevokeAPIKeyResponseEnvelope**](RevokeAPIKeyResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## SettleLeverageAccruedInterest
+
+> SettleLeverageAccruedInterestResponseEnvelope SettleLeverageAccruedInterest(ctx).SettleLeverageAccruedInterestRequest(settleLeverageAccruedInterestRequest).Execute()
+
+Settle current accrued leverage interest for a specific user
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+	settleLeverageAccruedInterestRequest := *openapiclient.NewSettleLeverageAccruedInterestRequest() // SettleLeverageAccruedInterestRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.SettleLeverageAccruedInterest(context.Background()).SettleLeverageAccruedInterestRequest(settleLeverageAccruedInterestRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.SettleLeverageAccruedInterest``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `SettleLeverageAccruedInterest`: SettleLeverageAccruedInterestResponseEnvelope
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.SettleLeverageAccruedInterest`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiSettleLeverageAccruedInterestRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **settleLeverageAccruedInterestRequest** | [**SettleLeverageAccruedInterestRequest**](SettleLeverageAccruedInterestRequest.md) |  | 
+
+### Return type
+
+[**SettleLeverageAccruedInterestResponseEnvelope**](SettleLeverageAccruedInterestResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

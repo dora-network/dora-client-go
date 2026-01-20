@@ -1,104 +1,104 @@
-# EmailExistsResponseEnvelope
+# FundUserResponseEnvelope
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Data** | Pointer to [**UserExistsResponse**](UserExistsResponse.md) |  | [optional] 
+**Data** | Pointer to [**FundUser**](FundUser.md) |  | [optional] 
 **Error** | Pointer to **string** | The error message. Present for error (non-2xx) responses. | [optional] 
 **Metadata** | Pointer to [**Metadata**](Metadata.md) | Metadata about the response, including status code and trace information. | [optional] 
 
 ## Methods
 
-### NewEmailExistsResponseEnvelope
+### NewFundUserResponseEnvelope
 
-`func NewEmailExistsResponseEnvelope() *EmailExistsResponseEnvelope`
+`func NewFundUserResponseEnvelope() *FundUserResponseEnvelope`
 
-NewEmailExistsResponseEnvelope instantiates a new EmailExistsResponseEnvelope object
+NewFundUserResponseEnvelope instantiates a new FundUserResponseEnvelope object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewEmailExistsResponseEnvelopeWithDefaults
+### NewFundUserResponseEnvelopeWithDefaults
 
-`func NewEmailExistsResponseEnvelopeWithDefaults() *EmailExistsResponseEnvelope`
+`func NewFundUserResponseEnvelopeWithDefaults() *FundUserResponseEnvelope`
 
-NewEmailExistsResponseEnvelopeWithDefaults instantiates a new EmailExistsResponseEnvelope object
+NewFundUserResponseEnvelopeWithDefaults instantiates a new FundUserResponseEnvelope object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetData
 
-`func (o *EmailExistsResponseEnvelope) GetData() UserExistsResponse`
+`func (o *FundUserResponseEnvelope) GetData() FundUser`
 
 GetData returns the Data field if non-nil, zero value otherwise.
 
 ### GetDataOk
 
-`func (o *EmailExistsResponseEnvelope) GetDataOk() (*UserExistsResponse, bool)`
+`func (o *FundUserResponseEnvelope) GetDataOk() (*FundUser, bool)`
 
 GetDataOk returns a tuple with the Data field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetData
 
-`func (o *EmailExistsResponseEnvelope) SetData(v UserExistsResponse)`
+`func (o *FundUserResponseEnvelope) SetData(v FundUser)`
 
 SetData sets Data field to given value.
 
 ### HasData
 
-`func (o *EmailExistsResponseEnvelope) HasData() bool`
+`func (o *FundUserResponseEnvelope) HasData() bool`
 
 HasData returns a boolean if a field has been set.
 
 ### GetError
 
-`func (o *EmailExistsResponseEnvelope) GetError() string`
+`func (o *FundUserResponseEnvelope) GetError() string`
 
 GetError returns the Error field if non-nil, zero value otherwise.
 
 ### GetErrorOk
 
-`func (o *EmailExistsResponseEnvelope) GetErrorOk() (*string, bool)`
+`func (o *FundUserResponseEnvelope) GetErrorOk() (*string, bool)`
 
 GetErrorOk returns a tuple with the Error field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetError
 
-`func (o *EmailExistsResponseEnvelope) SetError(v string)`
+`func (o *FundUserResponseEnvelope) SetError(v string)`
 
 SetError sets Error field to given value.
 
 ### HasError
 
-`func (o *EmailExistsResponseEnvelope) HasError() bool`
+`func (o *FundUserResponseEnvelope) HasError() bool`
 
 HasError returns a boolean if a field has been set.
 
 ### GetMetadata
 
-`func (o *EmailExistsResponseEnvelope) GetMetadata() Metadata`
+`func (o *FundUserResponseEnvelope) GetMetadata() Metadata`
 
 GetMetadata returns the Metadata field if non-nil, zero value otherwise.
 
 ### GetMetadataOk
 
-`func (o *EmailExistsResponseEnvelope) GetMetadataOk() (*Metadata, bool)`
+`func (o *FundUserResponseEnvelope) GetMetadataOk() (*Metadata, bool)`
 
 GetMetadataOk returns a tuple with the Metadata field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMetadata
 
-`func (o *EmailExistsResponseEnvelope) SetMetadata(v Metadata)`
+`func (o *FundUserResponseEnvelope) SetMetadata(v Metadata)`
 
 SetMetadata sets Metadata field to given value.
 
 ### HasMetadata
 
-`func (o *EmailExistsResponseEnvelope) HasMetadata() bool`
+`func (o *FundUserResponseEnvelope) HasMetadata() bool`
 
 HasMetadata returns a boolean if a field has been set.
 

@@ -25,6 +25,10 @@ type UpdateUserConfigRequest struct {
 	PhotoUrl *UpdateFieldString `json:"photo_url,omitempty"`
 	// User's timezone, e.g., 'America/New_York', or an offset.
 	Timezone UpdateFieldString `json:"timezone"`
+	// Optional: Whether to show the tutorial.
+	ShowTutorialCards *UpdateFieldBoolean `json:"show_tutorial_cards,omitempty"`
+	// Optional: Whether to show the notifications.
+	NotificationsEnabled *UpdateFieldBoolean `json:"notifications_enabled,omitempty"`
 }
 
 type _UpdateUserConfigRequest UpdateUserConfigRequest
@@ -103,6 +107,70 @@ func (o *UpdateUserConfigRequest) SetTimezone(v UpdateFieldString) {
 	o.Timezone = v
 }
 
+// GetShowTutorialCards returns the ShowTutorialCards field value if set, zero value otherwise.
+func (o *UpdateUserConfigRequest) GetShowTutorialCards() UpdateFieldBoolean {
+	if o == nil || IsNil(o.ShowTutorialCards) {
+		var ret UpdateFieldBoolean
+		return ret
+	}
+	return *o.ShowTutorialCards
+}
+
+// GetShowTutorialCardsOk returns a tuple with the ShowTutorialCards field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateUserConfigRequest) GetShowTutorialCardsOk() (*UpdateFieldBoolean, bool) {
+	if o == nil || IsNil(o.ShowTutorialCards) {
+		return nil, false
+	}
+	return o.ShowTutorialCards, true
+}
+
+// HasShowTutorialCards returns a boolean if a field has been set.
+func (o *UpdateUserConfigRequest) HasShowTutorialCards() bool {
+	if o != nil && !IsNil(o.ShowTutorialCards) {
+		return true
+	}
+
+	return false
+}
+
+// SetShowTutorialCards gets a reference to the given UpdateFieldBoolean and assigns it to the ShowTutorialCards field.
+func (o *UpdateUserConfigRequest) SetShowTutorialCards(v UpdateFieldBoolean) {
+	o.ShowTutorialCards = &v
+}
+
+// GetNotificationsEnabled returns the NotificationsEnabled field value if set, zero value otherwise.
+func (o *UpdateUserConfigRequest) GetNotificationsEnabled() UpdateFieldBoolean {
+	if o == nil || IsNil(o.NotificationsEnabled) {
+		var ret UpdateFieldBoolean
+		return ret
+	}
+	return *o.NotificationsEnabled
+}
+
+// GetNotificationsEnabledOk returns a tuple with the NotificationsEnabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateUserConfigRequest) GetNotificationsEnabledOk() (*UpdateFieldBoolean, bool) {
+	if o == nil || IsNil(o.NotificationsEnabled) {
+		return nil, false
+	}
+	return o.NotificationsEnabled, true
+}
+
+// HasNotificationsEnabled returns a boolean if a field has been set.
+func (o *UpdateUserConfigRequest) HasNotificationsEnabled() bool {
+	if o != nil && !IsNil(o.NotificationsEnabled) {
+		return true
+	}
+
+	return false
+}
+
+// SetNotificationsEnabled gets a reference to the given UpdateFieldBoolean and assigns it to the NotificationsEnabled field.
+func (o *UpdateUserConfigRequest) SetNotificationsEnabled(v UpdateFieldBoolean) {
+	o.NotificationsEnabled = &v
+}
+
 func (o UpdateUserConfigRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -117,6 +185,12 @@ func (o UpdateUserConfigRequest) ToMap() (map[string]interface{}, error) {
 		toSerialize["photo_url"] = o.PhotoUrl
 	}
 	toSerialize["timezone"] = o.Timezone
+	if !IsNil(o.ShowTutorialCards) {
+		toSerialize["show_tutorial_cards"] = o.ShowTutorialCards
+	}
+	if !IsNil(o.NotificationsEnabled) {
+		toSerialize["notifications_enabled"] = o.NotificationsEnabled
+	}
 	return toSerialize, nil
 }
 

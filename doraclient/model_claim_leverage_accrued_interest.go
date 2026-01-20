@@ -22,7 +22,7 @@ type ClaimLeverageAccruedInterest struct {
 	TransactionId *string `json:"transaction_id,omitempty"`
 	AssetId *string `json:"asset_id,omitempty"`
 	PositionId *string `json:"position_id,omitempty"`
-	CurrentAccruedInterest *string `json:"current_accrued_interest,omitempty"`
+	CurrentAccruedInterestUsd *string `json:"current_accrued_interest_usd,omitempty"`
 }
 
 // NewClaimLeverageAccruedInterest instantiates a new ClaimLeverageAccruedInterest object
@@ -138,36 +138,36 @@ func (o *ClaimLeverageAccruedInterest) SetPositionId(v string) {
 	o.PositionId = &v
 }
 
-// GetCurrentAccruedInterest returns the CurrentAccruedInterest field value if set, zero value otherwise.
-func (o *ClaimLeverageAccruedInterest) GetCurrentAccruedInterest() string {
-	if o == nil || IsNil(o.CurrentAccruedInterest) {
+// GetCurrentAccruedInterestUsd returns the CurrentAccruedInterestUsd field value if set, zero value otherwise.
+func (o *ClaimLeverageAccruedInterest) GetCurrentAccruedInterestUsd() string {
+	if o == nil || IsNil(o.CurrentAccruedInterestUsd) {
 		var ret string
 		return ret
 	}
-	return *o.CurrentAccruedInterest
+	return *o.CurrentAccruedInterestUsd
 }
 
-// GetCurrentAccruedInterestOk returns a tuple with the CurrentAccruedInterest field value if set, nil otherwise
+// GetCurrentAccruedInterestUsdOk returns a tuple with the CurrentAccruedInterestUsd field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ClaimLeverageAccruedInterest) GetCurrentAccruedInterestOk() (*string, bool) {
-	if o == nil || IsNil(o.CurrentAccruedInterest) {
+func (o *ClaimLeverageAccruedInterest) GetCurrentAccruedInterestUsdOk() (*string, bool) {
+	if o == nil || IsNil(o.CurrentAccruedInterestUsd) {
 		return nil, false
 	}
-	return o.CurrentAccruedInterest, true
+	return o.CurrentAccruedInterestUsd, true
 }
 
-// HasCurrentAccruedInterest returns a boolean if a field has been set.
-func (o *ClaimLeverageAccruedInterest) HasCurrentAccruedInterest() bool {
-	if o != nil && !IsNil(o.CurrentAccruedInterest) {
+// HasCurrentAccruedInterestUsd returns a boolean if a field has been set.
+func (o *ClaimLeverageAccruedInterest) HasCurrentAccruedInterestUsd() bool {
+	if o != nil && !IsNil(o.CurrentAccruedInterestUsd) {
 		return true
 	}
 
 	return false
 }
 
-// SetCurrentAccruedInterest gets a reference to the given string and assigns it to the CurrentAccruedInterest field.
-func (o *ClaimLeverageAccruedInterest) SetCurrentAccruedInterest(v string) {
-	o.CurrentAccruedInterest = &v
+// SetCurrentAccruedInterestUsd gets a reference to the given string and assigns it to the CurrentAccruedInterestUsd field.
+func (o *ClaimLeverageAccruedInterest) SetCurrentAccruedInterestUsd(v string) {
+	o.CurrentAccruedInterestUsd = &v
 }
 
 func (o ClaimLeverageAccruedInterest) MarshalJSON() ([]byte, error) {
@@ -189,8 +189,8 @@ func (o ClaimLeverageAccruedInterest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.PositionId) {
 		toSerialize["position_id"] = o.PositionId
 	}
-	if !IsNil(o.CurrentAccruedInterest) {
-		toSerialize["current_accrued_interest"] = o.CurrentAccruedInterest
+	if !IsNil(o.CurrentAccruedInterestUsd) {
+		toSerialize["current_accrued_interest_usd"] = o.CurrentAccruedInterestUsd
 	}
 	return toSerialize, nil
 }

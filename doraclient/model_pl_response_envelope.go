@@ -14,47 +14,47 @@ import (
 	"encoding/json"
 )
 
-// checks if the NewIsolatedPositionResponseEnvelope type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &NewIsolatedPositionResponseEnvelope{}
+// checks if the PLResponseEnvelope type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &PLResponseEnvelope{}
 
-// NewIsolatedPositionResponseEnvelope struct for NewIsolatedPositionResponseEnvelope
-type NewIsolatedPositionResponseEnvelope struct {
-	Data *Position `json:"data,omitempty"`
+// PLResponseEnvelope struct for PLResponseEnvelope
+type PLResponseEnvelope struct {
+	Data []PLAccount `json:"data,omitempty"`
 	// The error message. Present for error (non-2xx) responses.
 	Error *string `json:"error,omitempty"`
 	// Metadata about the response, including status code and trace information.
 	Metadata *Metadata `json:"metadata,omitempty"`
 }
 
-// NewNewIsolatedPositionResponseEnvelope instantiates a new NewIsolatedPositionResponseEnvelope object
+// NewPLResponseEnvelope instantiates a new PLResponseEnvelope object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewNewIsolatedPositionResponseEnvelope() *NewIsolatedPositionResponseEnvelope {
-	this := NewIsolatedPositionResponseEnvelope{}
+func NewPLResponseEnvelope() *PLResponseEnvelope {
+	this := PLResponseEnvelope{}
 	return &this
 }
 
-// NewNewIsolatedPositionResponseEnvelopeWithDefaults instantiates a new NewIsolatedPositionResponseEnvelope object
+// NewPLResponseEnvelopeWithDefaults instantiates a new PLResponseEnvelope object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewNewIsolatedPositionResponseEnvelopeWithDefaults() *NewIsolatedPositionResponseEnvelope {
-	this := NewIsolatedPositionResponseEnvelope{}
+func NewPLResponseEnvelopeWithDefaults() *PLResponseEnvelope {
+	this := PLResponseEnvelope{}
 	return &this
 }
 
 // GetData returns the Data field value if set, zero value otherwise.
-func (o *NewIsolatedPositionResponseEnvelope) GetData() Position {
+func (o *PLResponseEnvelope) GetData() []PLAccount {
 	if o == nil || IsNil(o.Data) {
-		var ret Position
+		var ret []PLAccount
 		return ret
 	}
-	return *o.Data
+	return o.Data
 }
 
 // GetDataOk returns a tuple with the Data field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *NewIsolatedPositionResponseEnvelope) GetDataOk() (*Position, bool) {
+func (o *PLResponseEnvelope) GetDataOk() ([]PLAccount, bool) {
 	if o == nil || IsNil(o.Data) {
 		return nil, false
 	}
@@ -62,7 +62,7 @@ func (o *NewIsolatedPositionResponseEnvelope) GetDataOk() (*Position, bool) {
 }
 
 // HasData returns a boolean if a field has been set.
-func (o *NewIsolatedPositionResponseEnvelope) HasData() bool {
+func (o *PLResponseEnvelope) HasData() bool {
 	if o != nil && !IsNil(o.Data) {
 		return true
 	}
@@ -70,13 +70,13 @@ func (o *NewIsolatedPositionResponseEnvelope) HasData() bool {
 	return false
 }
 
-// SetData gets a reference to the given Position and assigns it to the Data field.
-func (o *NewIsolatedPositionResponseEnvelope) SetData(v Position) {
-	o.Data = &v
+// SetData gets a reference to the given []PLAccount and assigns it to the Data field.
+func (o *PLResponseEnvelope) SetData(v []PLAccount) {
+	o.Data = v
 }
 
 // GetError returns the Error field value if set, zero value otherwise.
-func (o *NewIsolatedPositionResponseEnvelope) GetError() string {
+func (o *PLResponseEnvelope) GetError() string {
 	if o == nil || IsNil(o.Error) {
 		var ret string
 		return ret
@@ -86,7 +86,7 @@ func (o *NewIsolatedPositionResponseEnvelope) GetError() string {
 
 // GetErrorOk returns a tuple with the Error field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *NewIsolatedPositionResponseEnvelope) GetErrorOk() (*string, bool) {
+func (o *PLResponseEnvelope) GetErrorOk() (*string, bool) {
 	if o == nil || IsNil(o.Error) {
 		return nil, false
 	}
@@ -94,7 +94,7 @@ func (o *NewIsolatedPositionResponseEnvelope) GetErrorOk() (*string, bool) {
 }
 
 // HasError returns a boolean if a field has been set.
-func (o *NewIsolatedPositionResponseEnvelope) HasError() bool {
+func (o *PLResponseEnvelope) HasError() bool {
 	if o != nil && !IsNil(o.Error) {
 		return true
 	}
@@ -103,12 +103,12 @@ func (o *NewIsolatedPositionResponseEnvelope) HasError() bool {
 }
 
 // SetError gets a reference to the given string and assigns it to the Error field.
-func (o *NewIsolatedPositionResponseEnvelope) SetError(v string) {
+func (o *PLResponseEnvelope) SetError(v string) {
 	o.Error = &v
 }
 
 // GetMetadata returns the Metadata field value if set, zero value otherwise.
-func (o *NewIsolatedPositionResponseEnvelope) GetMetadata() Metadata {
+func (o *PLResponseEnvelope) GetMetadata() Metadata {
 	if o == nil || IsNil(o.Metadata) {
 		var ret Metadata
 		return ret
@@ -118,7 +118,7 @@ func (o *NewIsolatedPositionResponseEnvelope) GetMetadata() Metadata {
 
 // GetMetadataOk returns a tuple with the Metadata field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *NewIsolatedPositionResponseEnvelope) GetMetadataOk() (*Metadata, bool) {
+func (o *PLResponseEnvelope) GetMetadataOk() (*Metadata, bool) {
 	if o == nil || IsNil(o.Metadata) {
 		return nil, false
 	}
@@ -126,7 +126,7 @@ func (o *NewIsolatedPositionResponseEnvelope) GetMetadataOk() (*Metadata, bool) 
 }
 
 // HasMetadata returns a boolean if a field has been set.
-func (o *NewIsolatedPositionResponseEnvelope) HasMetadata() bool {
+func (o *PLResponseEnvelope) HasMetadata() bool {
 	if o != nil && !IsNil(o.Metadata) {
 		return true
 	}
@@ -135,11 +135,11 @@ func (o *NewIsolatedPositionResponseEnvelope) HasMetadata() bool {
 }
 
 // SetMetadata gets a reference to the given Metadata and assigns it to the Metadata field.
-func (o *NewIsolatedPositionResponseEnvelope) SetMetadata(v Metadata) {
+func (o *PLResponseEnvelope) SetMetadata(v Metadata) {
 	o.Metadata = &v
 }
 
-func (o NewIsolatedPositionResponseEnvelope) MarshalJSON() ([]byte, error) {
+func (o PLResponseEnvelope) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -147,7 +147,7 @@ func (o NewIsolatedPositionResponseEnvelope) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o NewIsolatedPositionResponseEnvelope) ToMap() (map[string]interface{}, error) {
+func (o PLResponseEnvelope) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
@@ -161,38 +161,38 @@ func (o NewIsolatedPositionResponseEnvelope) ToMap() (map[string]interface{}, er
 	return toSerialize, nil
 }
 
-type NullableNewIsolatedPositionResponseEnvelope struct {
-	value *NewIsolatedPositionResponseEnvelope
+type NullablePLResponseEnvelope struct {
+	value *PLResponseEnvelope
 	isSet bool
 }
 
-func (v NullableNewIsolatedPositionResponseEnvelope) Get() *NewIsolatedPositionResponseEnvelope {
+func (v NullablePLResponseEnvelope) Get() *PLResponseEnvelope {
 	return v.value
 }
 
-func (v *NullableNewIsolatedPositionResponseEnvelope) Set(val *NewIsolatedPositionResponseEnvelope) {
+func (v *NullablePLResponseEnvelope) Set(val *PLResponseEnvelope) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableNewIsolatedPositionResponseEnvelope) IsSet() bool {
+func (v NullablePLResponseEnvelope) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableNewIsolatedPositionResponseEnvelope) Unset() {
+func (v *NullablePLResponseEnvelope) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableNewIsolatedPositionResponseEnvelope(val *NewIsolatedPositionResponseEnvelope) *NullableNewIsolatedPositionResponseEnvelope {
-	return &NullableNewIsolatedPositionResponseEnvelope{value: val, isSet: true}
+func NewNullablePLResponseEnvelope(val *PLResponseEnvelope) *NullablePLResponseEnvelope {
+	return &NullablePLResponseEnvelope{value: val, isSet: true}
 }
 
-func (v NullableNewIsolatedPositionResponseEnvelope) MarshalJSON() ([]byte, error) {
+func (v NullablePLResponseEnvelope) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableNewIsolatedPositionResponseEnvelope) UnmarshalJSON(src []byte) error {
+func (v *NullablePLResponseEnvelope) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

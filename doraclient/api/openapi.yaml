@@ -179,6 +179,35 @@ paths:
           description: Asset not found or no coupon payments available
       security: []
       summary: Get coupon payments for a bond asset
+  /v1/integrators/user:
+    post:
+      operationId: createUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateIntegratorUserRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserCreatedResponse"
+          description: User created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. invalid query parameters"
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Create a new user
   /v1/user/{user_id}:
     delete:
       operationId: deleteUser
@@ -1361,49 +1390,6 @@ paths:
                 $ref: "#/components/schemas/ResponseEnvelope"
           description: Internal server error
       summary: Get your own positions
-  /v1/positions/new_isolated:
-    post:
-      operationId: createNewIsolatedPosition
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/NewIsolatedPositionRequest"
-        required: true
-      responses:
-        "201":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/NewIsolatedPositionResponse"
-          description: Isolated Position Created
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ResponseEnvelope"
-          description: "Bad request, e.g. missing required fields"
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ResponseEnvelope"
-          description: "Unauthorized, user not logged in or does not have access to\
-            \ this orderbook"
-        "409":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ResponseEnvelope"
-          description: "Conflict, e.g. the requested amount is not available to transfer"
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ResponseEnvelope"
-          description: Internal server error
-      summary: Create a new isolated position for a user transferring available assets
-        into the position
   /v1/positions/transfer_balances:
     post:
       operationId: transferAvailableBalances
@@ -1577,6 +1563,90 @@ paths:
                 $ref: "#/components/schemas/ResponseEnvelope"
           description: Internal server error
       summary: Get your own interest
+  /v1/ledger/deposit/{user_id}:
+    post:
+      description: Deposit assets into this user's account from the outside world.
+        Note that this does not interact with any external systems; it simply adds
+        the amount to the user's available balance in the ledger. Actual transfer
+        of assets must be handled separately.
+      operationId: ledgerDeposit
+      parameters:
+      - explode: false
+        in: path
+        name: user_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FundUserRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FundUserResponse"
+          description: Deposit successful
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. invalid parameters or insufficient funds"
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Deposit assets into this user's account from the outside world
+  /v1/ledger/withdraw/{user_id}:
+    post:
+      description: Withdraw assets from this user's account to the outside world.
+        Note that this does not interact with any external systems; it simply deducts
+        the amount from the user's available balance in the ledger. Actual transfer
+        of assets must be handled separately.
+      operationId: ledgerWithdraw
+      parameters:
+      - explode: false
+        in: path
+        name: user_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DefundUserRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FundUserResponse"
+          description: Withdraw successful
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. invalid parameters or insufficient funds"
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Withdraw assets from this user to the outside world
   /v1/leverage/supply:
     post:
       operationId: leverageSupply
@@ -1864,6 +1934,42 @@ paths:
                 $ref: "#/components/schemas/ResponseEnvelope"
           description: Internal server error
       summary: Claim current accrued leverage interest for a specific user
+  /v1/leverage/accrued_interest/settle:
+    post:
+      operationId: settleLeverageAccruedInterest
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SettleLeverageAccruedInterestRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SettleLeverageAccruedInterestResponse"
+          description: Current leverage accrued interest settled successfully
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. invalid parameters"
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Unauthorized, e.g. user not logged in or invalid credentials"
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Settle current accrued leverage interest for a specific user
   /v1/liquidity/pool/{pool_id}/add:
     post:
       operationId: liquidityAdd
@@ -2718,6 +2824,53 @@ paths:
       - apiKeyAuthQuery: []
       summary: "Get a snapshot of user's ledger updates since a specific time, and\
         \ opens a stream for further updates"
+  /v1/user/{user_id}/coupon_payments/stream:
+    get:
+      operationId: getUserCouponPaymentsStream
+      parameters:
+      - explode: false
+        in: path
+        name: user_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StreamUserCouponPaymentsResponse"
+          description: User's coupon payments stream
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. invalid query parameters"
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Unauthorized, user not logged in or does not have access to\
+            \ this data"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: User not found or no coupon payments available
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      security:
+      - apiKeyAuthQuery: []
+      summary: Stream user's coupon payment accruals in real time
   /v1/user/{user_id}/transactions/stream:
     get:
       operationId: getUserTransactionsStream
@@ -2906,6 +3059,75 @@ paths:
                 $ref: "#/components/schemas/ResponseEnvelope"
           description: Internal server error
       summary: Create apikey for a user
+  /v1/user/{user_id}/apikey:
+    get:
+      operationId: getAPIKeysForUserID
+      parameters:
+      - explode: false
+        in: path
+        name: user_id
+        required: true
+        schema:
+          format: text
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetAPIKeyResponse"
+          description: A list of existing api-keys
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. invalid path parameters"
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: "Get user's api keys: admin or integrator only"
+    post:
+      operationId: createAPIKeyForUserID
+      parameters:
+      - explode: false
+        in: path
+        name: user_id
+        required: true
+        schema:
+          format: text
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateAPIKeyRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreateAPIKeyResponse"
+          description: APIKey created
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: User not found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Create apikey for a user
   /v1/user/apikey/{key_id}/revoke:
     put:
       operationId: revokeAPIKeyForUser
@@ -2938,6 +3160,75 @@ paths:
                 $ref: "#/components/schemas/ResponseEnvelope"
           description: Internal server error
       summary: Revoke apikey for a user
+  /v1/user/{user_id}/apikey/{key_id}/revoke:
+    put:
+      operationId: revokeAPIKeyForUserID
+      parameters:
+      - explode: false
+        in: path
+        name: user_id
+        required: true
+        schema:
+          format: text
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: key_id
+        required: true
+        schema:
+          format: text
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RevokeAPIKeyResponse"
+          description: APIKey revoked
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: User not found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: "Revoke apikey for a user: admin or integrator only"
+  /v1/pl/self:
+    get:
+      operationId: getPLForSelfByAccount
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PLResponse"
+          description: List of user accounts with a PL breakdown by asset and summary
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Unauthorized, user is not logged in"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: User not found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Get account-by-account PL breakdown for the logged in user
 components:
   schemas:
     Asset:
@@ -3258,6 +3549,45 @@ components:
         last_processed_at:
           format: date-time
           type: string
+    UserCouponPayment:
+      example:
+        user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        pending: pending
+        coupon_payment_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        started_at: 2000-01-23T04:56:07.000+00:00
+        asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        completed: completed
+        seq: 0
+        ended_at: 2000-01-23T04:56:07.000+00:00
+        position_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        user_id:
+          format: uuid
+          type: string
+        position_id:
+          format: uuid
+          type: string
+        asset_id:
+          format: uuid
+          type: string
+        coupon_payment_id:
+          format: uuid
+          type: string
+        seq:
+          format: int64
+          type: integer
+        pending:
+          format: decimal
+          type: string
+        completed:
+          format: decimal
+          type: string
+        started_at:
+          format: date-time
+          type: string
+        ended_at:
+          format: date-time
+          type: string
     ListCouponPaymentsResponseEnvelope:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
@@ -3319,6 +3649,50 @@ components:
       - TRADER
       - INTEGRATOR
       type: string
+    CreateIntegratorUserRequest:
+      example:
+        native_asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        provider: provider
+        timezone: timezone
+        name: name
+        provider_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        photo_url: photo_url
+        email: email
+      nullable: true
+      oneOf: []
+      properties:
+        email:
+          type: string
+        name:
+          type: string
+        native_asset_id:
+          format: uuid
+          type: string
+        photo_url:
+          type: string
+        provider:
+          type: string
+        provider_id:
+          format: uuid
+          type: string
+        timezone:
+          type: string
+    UserCreatedResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            $ref: "#/components/schemas/CreateOrUpdateUserResponse"
+      example:
+        metadata:
+          trace_id: trace_id
+          status_code: 0
+          request_id: request_id
+        data:
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        error: error
+    UserCreatedResponse:
+      $ref: "#/components/schemas/UserCreatedResponseEnvelope"
     UserEnvelope:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
@@ -3339,6 +3713,8 @@ components:
           - PUBLIC
           - PUBLIC
           timezone_offset: 0
+          show_tutorial_cards: true
+          notifications_enabled: true
           provider: provider
           verified_at: 2000-01-23T04:56:07.000+00:00
           name: name
@@ -3399,6 +3775,8 @@ components:
         - PUBLIC
         - PUBLIC
         timezone_offset: 0
+        show_tutorial_cards: true
+        notifications_enabled: true
         provider: provider
         verified_at: 2000-01-23T04:56:07.000+00:00
         name: name
@@ -3446,6 +3824,10 @@ components:
           format: date-time
           type: string
           nullable: true
+        show_tutorial_cards:
+          type: boolean
+        notifications_enabled:
+          type: boolean
     UserConfig:
       properties:
         id:
@@ -3462,6 +3844,10 @@ components:
         updated_at:
           format: date-time
           type: string
+        show_tutorial_cards:
+          type: boolean
+        notifications_enabled:
+          type: boolean
     UpdateUserConfigRequest:
       description: "Request body for PUT /user/{id}/config: update a user changeable\
         \ details only. Other properties can only be changed by an admin following\
@@ -3473,11 +3859,21 @@ components:
         photo_url:
           update: true
           value: value
+        show_tutorial_cards:
+          update: true
+          value: true
+        notifications_enabled:
+          update: true
+          value: true
       properties:
         photo_url:
           $ref: "#/components/schemas/UpdateFieldString"
         timezone:
           $ref: "#/components/schemas/UpdateFieldString"
+        show_tutorial_cards:
+          $ref: "#/components/schemas/UpdateFieldBoolean"
+        notifications_enabled:
+          $ref: "#/components/schemas/UpdateFieldBoolean"
       required:
       - timezone
     CreateOrUpdateUserResponse:
@@ -3514,6 +3910,21 @@ components:
           type: boolean
         value:
           $ref: "#/components/schemas/UserRole"
+      required:
+      - update
+    UpdateFieldBoolean:
+      description: A generic struct to handle optional updates for boolean fields
+        in user requests.
+      example:
+        update: true
+        value: true
+      properties:
+        update:
+          description: Whether to update the field.
+          type: boolean
+        value:
+          description: The new value to set for the field.
+          type: boolean
       required:
       - update
     OrderBookStatus:
@@ -4104,6 +4515,18 @@ components:
         order_id:
           format: uuid
           type: string
+    UserExistsResponse:
+      example:
+        should_create_user: true
+        firebase_set: true
+        email_exists: true
+      properties:
+        email_exists:
+          type: boolean
+        firebase_set:
+          type: boolean
+        should_create_user:
+          type: boolean
     ValidateSubmitOrderResponse:
       example:
         data: true
@@ -4177,17 +4600,18 @@ components:
     EmailExistsResponseEnvelope:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
-      - example:
-          data: true
-        properties:
+      - properties:
           data:
-            type: boolean
+            $ref: "#/components/schemas/UserExistsResponse"
       example:
         metadata:
           trace_id: trace_id
           status_code: 0
           request_id: request_id
-        data: true
+        data:
+          should_create_user: true
+          firebase_set: true
+          email_exists: true
         error: error
     EmailExistsResponse:
       $ref: "#/components/schemas/EmailExistsResponseEnvelope"
@@ -4384,6 +4808,28 @@ components:
     StreamPositionsResponse:
       items:
         $ref: "#/components/schemas/StreamPositionsEntry"
+      type: array
+    StreamUserCouponPaymentsEntry:
+      allOf:
+      - $ref: "#/components/schemas/StreamEntry"
+      - properties:
+          Val:
+            $ref: "#/components/schemas/UserCouponPayment"
+      example:
+        Val:
+          user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          pending: pending
+          coupon_payment_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          started_at: 2000-01-23T04:56:07.000+00:00
+          asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          completed: completed
+          seq: 0
+          ended_at: 2000-01-23T04:56:07.000+00:00
+          position_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        Time: 2000-01-23T04:56:07.000+00:00
+    StreamUserCouponPaymentsResponse:
+      items:
+        $ref: "#/components/schemas/StreamUserCouponPaymentsEntry"
       type: array
     TransformedAssets:
       example:
@@ -4679,6 +5125,75 @@ components:
         error: error
     UnitePositionResponse:
       $ref: "#/components/schemas/UnitePositionResponseEnvelope"
+    FundUserRequest:
+      example:
+        quantity: quantity
+        asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        asset_id:
+          format: uuid
+          type: string
+        quantity:
+          format: decimal
+          type: string
+      required:
+      - asset_id
+      - quantity
+    DefundUserRequest:
+      example:
+        quantity: quantity
+        asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        asset_id:
+          format: uuid
+          type: string
+        quantity:
+          format: decimal
+          type: string
+      required:
+      - asset_id
+      - quantity
+    FundUser:
+      example:
+        amount: amount
+        user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        final_quantity: final_quantity
+        asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        position_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        user_id:
+          format: uuid
+          type: string
+        position_id:
+          format: uuid
+          type: string
+        asset_id:
+          format: uuid
+          type: string
+        final_quantity:
+          type: string
+        amount:
+          type: string
+    FundUserResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            $ref: "#/components/schemas/FundUser"
+      example:
+        metadata:
+          trace_id: trace_id
+          status_code: 0
+          request_id: request_id
+        data:
+          amount: amount
+          user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          final_quantity: final_quantity
+          asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          position_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        error: error
+    FundUserResponse:
+      $ref: "#/components/schemas/FundUserResponseEnvelope"
     SupplyRequest:
       example:
         quantity: quantity
@@ -4825,7 +5340,7 @@ components:
       example:
         transaction_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        current_accrued_interest: current_accrued_interest
+        current_accrued_interest_usd: current_accrued_interest_usd
         position_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
       properties:
         transaction_id:
@@ -4837,7 +5352,7 @@ components:
         position_id:
           format: uuid
           type: string
-        current_accrued_interest:
+        current_accrued_interest_usd:
           type: string
     PayLeverageAccruedInterestResponseEnvelope:
       allOf:
@@ -4853,7 +5368,7 @@ components:
         data:
           transaction_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          current_accrued_interest: current_accrued_interest
+          current_accrued_interest_usd: current_accrued_interest_usd
           position_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         error: error
     PayLeverageAccruedInterestResponse:
@@ -4876,7 +5391,7 @@ components:
       example:
         transaction_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        current_accrued_interest: current_accrued_interest
+        current_accrued_interest_usd: current_accrued_interest_usd
         position_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
       properties:
         transaction_id:
@@ -4888,7 +5403,7 @@ components:
         position_id:
           format: uuid
           type: string
-        current_accrued_interest:
+        current_accrued_interest_usd:
           type: string
     ClaimLeverageAccruedInterestResponseEnvelope:
       allOf:
@@ -4904,52 +5419,70 @@ components:
         data:
           transaction_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          current_accrued_interest: current_accrued_interest
+          current_accrued_interest_usd: current_accrued_interest_usd
           position_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         error: error
     ClaimLeverageAccruedInterestResponse:
       $ref: "#/components/schemas/ClaimLeverageAccruedInterestResponseEnvelope"
-    PayLeverageAccruedInterestReq:
+    SettleLeverageAccruedInterestResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            items:
+              $ref: "#/components/schemas/SettleLeverageAccruedInterest"
+            type: array
       example:
-        quantity: quantity
+        metadata:
+          trace_id: trace_id
+          status_code: 0
+          request_id: request_id
+        data:
+        - transaction_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          current_accrued_interest_usd: current_accrued_interest_usd
+          position_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - transaction_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          current_accrued_interest_usd: current_accrued_interest_usd
+          position_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        error: error
+    SettleLeverageAccruedInterestResponse:
+      $ref: "#/components/schemas/SettleLeverageAccruedInterestResponseEnvelope"
+    SettleLeverageAccruedInterestRequest:
+      example:
         asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         position_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
       properties:
+        asset_id:
+          format: uuid
+          type: string
         position_id:
+          format: uuid
+          type: string
+    SettleLeverageAccruedInterest:
+      example:
+        transaction_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        current_accrued_interest_usd: current_accrued_interest_usd
+        position_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        transaction_id:
           format: uuid
           type: string
         asset_id:
           format: uuid
           type: string
-        quantity:
-          type: string
-      required:
-      - asset_id
-      - position_id
-      - quantity
-    ClaimLeverageAccruedInterestReq:
-      example:
-        quantity: quantity
-        asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        position_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-      properties:
         position_id:
           format: uuid
           type: string
-        asset_id:
-          format: uuid
+        current_accrued_interest_usd:
           type: string
-        quantity:
-          type: string
-      required:
-      - asset_id
-      - position_id
-      - quantity
     CurrentLeverageAccruedInterest:
       example:
         user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        current_accrued_interest: current_accrued_interest
+        current_accrued_interest_usd: current_accrued_interest_usd
         position_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
       properties:
         user_id:
@@ -4961,7 +5494,7 @@ components:
         position_id:
           format: uuid
           type: string
-        current_accrued_interest:
+        current_accrued_interest_usd:
           type: string
     CurrentLeverageAccruedInterestResponseEnvelope:
       allOf:
@@ -4977,7 +5510,7 @@ components:
         data:
           user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          current_accrued_interest: current_accrued_interest
+          current_accrued_interest_usd: current_accrued_interest_usd
           position_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         error: error
     CurrentLeverageAccruedInterestResponse:
@@ -5763,13 +6296,6 @@ components:
         properties:
           data:
             type: boolean
-      example:
-        metadata:
-          trace_id: trace_id
-          status_code: 0
-          request_id: request_id
-        data: true
-        error: error
     OrderBookHaltResponse:
       $ref: "#/components/schemas/OrderBookHaltResponseEnvelope"
     OrderBookResumeResponseEnvelope:
@@ -5780,13 +6306,6 @@ components:
         properties:
           data:
             type: boolean
-      example:
-        metadata:
-          trace_id: trace_id
-          status_code: 0
-          request_id: request_id
-        data: true
-        error: error
     OrderBookResumeResponse:
       $ref: "#/components/schemas/OrderBookResumeResponseEnvelope"
     OrderBookTerminateResponseEnvelope:
@@ -5797,13 +6316,6 @@ components:
         properties:
           data:
             type: boolean
-      example:
-        metadata:
-          trace_id: trace_id
-          status_code: 0
-          request_id: request_id
-        data: true
-        error: error
     OrderBookTerminateResponse:
       $ref: "#/components/schemas/OrderBookTerminateResponseEnvelope"
     CancelOrderResponseEnvelope:
@@ -6160,56 +6672,6 @@ components:
           request_id: request_id
         data: "{}"
         error: error
-    NewIsolatedPositionRequest:
-      example:
-        global_position_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        quantity: quantity
-        position_name: position_name
-        asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-      properties:
-        global_position_id:
-          format: uuid
-          type: string
-        asset_id:
-          format: uuid
-          type: string
-        quantity:
-          type: string
-        position_name:
-          type: string
-      required:
-      - asset_id
-      - global_position_id
-      - quantity
-    NewIsolatedPositionResponseEnvelope:
-      allOf:
-      - $ref: "#/components/schemas/ResponseEnvelope"
-      - properties:
-          data:
-            $ref: "#/components/schemas/Position"
-      example:
-        metadata:
-          trace_id: trace_id
-          status_code: 0
-          request_id: request_id
-        data:
-          supplied: supplied
-          impending_borrows: impending_borrows
-          available: available
-          position_name: position_name
-          is_global: true
-          created_at: 2000-01-23T04:56:07.000+00:00
-          asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          avg_entry_price: avg_entry_price
-          borrow_limit: borrow_limit
-          liquidation_threshold: liquidation_threshold
-          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          locked: locked
-          seq: 0
-          borrowed: borrowed
-        error: error
-    NewIsolatedPositionResponse:
-      $ref: "#/components/schemas/NewIsolatedPositionResponseEnvelope"
     TransferBalancesRequest:
       example:
         quantity: quantity
@@ -6485,6 +6947,265 @@ components:
         data:
           order_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         error: error
+    Margin:
+      example:
+        available: available
+        used: used
+        remaining: remaining
+      properties:
+        available:
+          description: The total margin available from this position.
+          format: decimal
+          type: string
+        used:
+          description: The amount of margin used from this position.
+          format: decimal
+          type: string
+        remaining:
+          description: The margin remaining available from this position.
+          format: decimal
+          type: string
+    PLAsset:
+      example:
+        liquidation_price: liquidation_price
+        symbol: symbol
+        side: LONG
+        margin:
+          available: available
+          used: used
+          remaining: remaining
+        unrealized_pl: unrealized_pl
+        mark_price: mark_price
+        available: available
+        sl: sl
+        tp: tp
+        avg_entry_price: avg_entry_price
+        borrowed: borrowed
+        leverage_limit: leverage_limit
+      properties:
+        symbol:
+          description: The symbol of the asset
+          type: string
+        side:
+          description: The side of the position (LONG or SHORT)
+          enum:
+          - LONG
+          - SHORT
+          type: string
+        avg_entry_price:
+          description: The average entry price of the position
+          format: decimal
+          type: string
+        mark_price:
+          description: The current mark price for the asset to calculate daily PL.
+            This is usually the close price of the previous day
+          format: decimal
+          type: string
+        liquidation_price:
+          description: The liquidation price of the position
+          format: decimal
+          type: string
+        available:
+          description: The available quantity in units of the asset
+          format: decimal
+          type: string
+        borrowed:
+          description: The borrowed quantity in units of the asset
+          format: decimal
+          type: string
+        margin:
+          $ref: "#/components/schemas/Margin"
+        unrealized_pl:
+          description: The unrealized profit or loss of the position
+          format: decimal
+          type: string
+        leverage_limit:
+          description: The leverage limit for the position
+          format: decimal
+          type: string
+        tp:
+          description: "The take profit price set for the position, if any"
+          format: decimal
+          type: string
+        sl:
+          description: "The stop loss price set for the position, if any"
+          format: decimal
+          type: string
+    PLSummary:
+      example:
+        leverage: leverage
+        available: available
+        health: health
+        account_equity: account_equity
+      properties:
+        leverage:
+          description: The leverage used to obtain the position on the isolated account
+          format: decimal
+          type: string
+        account_equity:
+          format: decimal
+          type: string
+        available:
+          format: decimal
+          type: string
+        health:
+          format: decimal
+          type: string
+    PLAccount:
+      example:
+        summary:
+          leverage: leverage
+          available: available
+          health: health
+          account_equity: account_equity
+        account_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        account_name: account_name
+        is_global: true
+        rows:
+        - liquidation_price: liquidation_price
+          symbol: symbol
+          side: LONG
+          margin:
+            available: available
+            used: used
+            remaining: remaining
+          unrealized_pl: unrealized_pl
+          mark_price: mark_price
+          available: available
+          sl: sl
+          tp: tp
+          avg_entry_price: avg_entry_price
+          borrowed: borrowed
+          leverage_limit: leverage_limit
+        - liquidation_price: liquidation_price
+          symbol: symbol
+          side: LONG
+          margin:
+            available: available
+            used: used
+            remaining: remaining
+          unrealized_pl: unrealized_pl
+          mark_price: mark_price
+          available: available
+          sl: sl
+          tp: tp
+          avg_entry_price: avg_entry_price
+          borrowed: borrowed
+          leverage_limit: leverage_limit
+      properties:
+        account_id:
+          description: The ID of the account holding the position
+          format: uuid
+          type: string
+        account_name:
+          description: The name of the account holding the position
+          type: string
+        is_global:
+          description: Whether the account is the global or an isolated account
+          type: boolean
+        rows:
+          items:
+            $ref: "#/components/schemas/PLAsset"
+          type: array
+        summary:
+          $ref: "#/components/schemas/PLSummary"
+    PLAccounts:
+      items:
+        $ref: "#/components/schemas/PLAccount"
+      type: array
+    PLResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            $ref: "#/components/schemas/PLAccounts"
+      example:
+        metadata:
+          trace_id: trace_id
+          status_code: 0
+          request_id: request_id
+        data:
+        - summary:
+            leverage: leverage
+            available: available
+            health: health
+            account_equity: account_equity
+          account_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          account_name: account_name
+          is_global: true
+          rows:
+          - liquidation_price: liquidation_price
+            symbol: symbol
+            side: LONG
+            margin:
+              available: available
+              used: used
+              remaining: remaining
+            unrealized_pl: unrealized_pl
+            mark_price: mark_price
+            available: available
+            sl: sl
+            tp: tp
+            avg_entry_price: avg_entry_price
+            borrowed: borrowed
+            leverage_limit: leverage_limit
+          - liquidation_price: liquidation_price
+            symbol: symbol
+            side: LONG
+            margin:
+              available: available
+              used: used
+              remaining: remaining
+            unrealized_pl: unrealized_pl
+            mark_price: mark_price
+            available: available
+            sl: sl
+            tp: tp
+            avg_entry_price: avg_entry_price
+            borrowed: borrowed
+            leverage_limit: leverage_limit
+        - summary:
+            leverage: leverage
+            available: available
+            health: health
+            account_equity: account_equity
+          account_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          account_name: account_name
+          is_global: true
+          rows:
+          - liquidation_price: liquidation_price
+            symbol: symbol
+            side: LONG
+            margin:
+              available: available
+              used: used
+              remaining: remaining
+            unrealized_pl: unrealized_pl
+            mark_price: mark_price
+            available: available
+            sl: sl
+            tp: tp
+            avg_entry_price: avg_entry_price
+            borrowed: borrowed
+            leverage_limit: leverage_limit
+          - liquidation_price: liquidation_price
+            symbol: symbol
+            side: LONG
+            margin:
+              available: available
+              used: used
+              remaining: remaining
+            unrealized_pl: unrealized_pl
+            mark_price: mark_price
+            available: available
+            sl: sl
+            tp: tp
+            avg_entry_price: avg_entry_price
+            borrowed: borrowed
+            leverage_limit: leverage_limit
+        error: error
+    PLResponse:
+      $ref: "#/components/schemas/PLResponseEnvelope"
     PositionAsset:
       example:
         kind: BOND

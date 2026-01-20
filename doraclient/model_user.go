@@ -35,6 +35,8 @@ type User struct {
 	// timezone offset in seconds
 	TimezoneOffset *int32 `json:"timezone_offset,omitempty"`
 	VerifiedAt *time.Time `json:"verified_at,omitempty"`
+	ShowTutorialCards *bool `json:"show_tutorial_cards,omitempty"`
+	NotificationsEnabled *bool `json:"notifications_enabled,omitempty"`
 }
 
 // NewUser instantiates a new User object
@@ -470,6 +472,70 @@ func (o *User) SetVerifiedAt(v time.Time) {
 	o.VerifiedAt = &v
 }
 
+// GetShowTutorialCards returns the ShowTutorialCards field value if set, zero value otherwise.
+func (o *User) GetShowTutorialCards() bool {
+	if o == nil || IsNil(o.ShowTutorialCards) {
+		var ret bool
+		return ret
+	}
+	return *o.ShowTutorialCards
+}
+
+// GetShowTutorialCardsOk returns a tuple with the ShowTutorialCards field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *User) GetShowTutorialCardsOk() (*bool, bool) {
+	if o == nil || IsNil(o.ShowTutorialCards) {
+		return nil, false
+	}
+	return o.ShowTutorialCards, true
+}
+
+// HasShowTutorialCards returns a boolean if a field has been set.
+func (o *User) HasShowTutorialCards() bool {
+	if o != nil && !IsNil(o.ShowTutorialCards) {
+		return true
+	}
+
+	return false
+}
+
+// SetShowTutorialCards gets a reference to the given bool and assigns it to the ShowTutorialCards field.
+func (o *User) SetShowTutorialCards(v bool) {
+	o.ShowTutorialCards = &v
+}
+
+// GetNotificationsEnabled returns the NotificationsEnabled field value if set, zero value otherwise.
+func (o *User) GetNotificationsEnabled() bool {
+	if o == nil || IsNil(o.NotificationsEnabled) {
+		var ret bool
+		return ret
+	}
+	return *o.NotificationsEnabled
+}
+
+// GetNotificationsEnabledOk returns a tuple with the NotificationsEnabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *User) GetNotificationsEnabledOk() (*bool, bool) {
+	if o == nil || IsNil(o.NotificationsEnabled) {
+		return nil, false
+	}
+	return o.NotificationsEnabled, true
+}
+
+// HasNotificationsEnabled returns a boolean if a field has been set.
+func (o *User) HasNotificationsEnabled() bool {
+	if o != nil && !IsNil(o.NotificationsEnabled) {
+		return true
+	}
+
+	return false
+}
+
+// SetNotificationsEnabled gets a reference to the given bool and assigns it to the NotificationsEnabled field.
+func (o *User) SetNotificationsEnabled(v bool) {
+	o.NotificationsEnabled = &v
+}
+
 func (o User) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -518,6 +584,12 @@ func (o User) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.VerifiedAt) {
 		toSerialize["verified_at"] = o.VerifiedAt
+	}
+	if !IsNil(o.ShowTutorialCards) {
+		toSerialize["show_tutorial_cards"] = o.ShowTutorialCards
+	}
+	if !IsNil(o.NotificationsEnabled) {
+		toSerialize["notifications_enabled"] = o.NotificationsEnabled
 	}
 	return toSerialize, nil
 }

@@ -14,68 +14,68 @@ import (
 	"encoding/json"
 )
 
-// checks if the CurrentLeverageAccruedInterest type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &CurrentLeverageAccruedInterest{}
+// checks if the SettleLeverageAccruedInterest type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &SettleLeverageAccruedInterest{}
 
-// CurrentLeverageAccruedInterest struct for CurrentLeverageAccruedInterest
-type CurrentLeverageAccruedInterest struct {
-	UserId *string `json:"user_id,omitempty"`
+// SettleLeverageAccruedInterest struct for SettleLeverageAccruedInterest
+type SettleLeverageAccruedInterest struct {
+	TransactionId *string `json:"transaction_id,omitempty"`
 	AssetId *string `json:"asset_id,omitempty"`
 	PositionId *string `json:"position_id,omitempty"`
 	CurrentAccruedInterestUsd *string `json:"current_accrued_interest_usd,omitempty"`
 }
 
-// NewCurrentLeverageAccruedInterest instantiates a new CurrentLeverageAccruedInterest object
+// NewSettleLeverageAccruedInterest instantiates a new SettleLeverageAccruedInterest object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCurrentLeverageAccruedInterest() *CurrentLeverageAccruedInterest {
-	this := CurrentLeverageAccruedInterest{}
+func NewSettleLeverageAccruedInterest() *SettleLeverageAccruedInterest {
+	this := SettleLeverageAccruedInterest{}
 	return &this
 }
 
-// NewCurrentLeverageAccruedInterestWithDefaults instantiates a new CurrentLeverageAccruedInterest object
+// NewSettleLeverageAccruedInterestWithDefaults instantiates a new SettleLeverageAccruedInterest object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewCurrentLeverageAccruedInterestWithDefaults() *CurrentLeverageAccruedInterest {
-	this := CurrentLeverageAccruedInterest{}
+func NewSettleLeverageAccruedInterestWithDefaults() *SettleLeverageAccruedInterest {
+	this := SettleLeverageAccruedInterest{}
 	return &this
 }
 
-// GetUserId returns the UserId field value if set, zero value otherwise.
-func (o *CurrentLeverageAccruedInterest) GetUserId() string {
-	if o == nil || IsNil(o.UserId) {
+// GetTransactionId returns the TransactionId field value if set, zero value otherwise.
+func (o *SettleLeverageAccruedInterest) GetTransactionId() string {
+	if o == nil || IsNil(o.TransactionId) {
 		var ret string
 		return ret
 	}
-	return *o.UserId
+	return *o.TransactionId
 }
 
-// GetUserIdOk returns a tuple with the UserId field value if set, nil otherwise
+// GetTransactionIdOk returns a tuple with the TransactionId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CurrentLeverageAccruedInterest) GetUserIdOk() (*string, bool) {
-	if o == nil || IsNil(o.UserId) {
+func (o *SettleLeverageAccruedInterest) GetTransactionIdOk() (*string, bool) {
+	if o == nil || IsNil(o.TransactionId) {
 		return nil, false
 	}
-	return o.UserId, true
+	return o.TransactionId, true
 }
 
-// HasUserId returns a boolean if a field has been set.
-func (o *CurrentLeverageAccruedInterest) HasUserId() bool {
-	if o != nil && !IsNil(o.UserId) {
+// HasTransactionId returns a boolean if a field has been set.
+func (o *SettleLeverageAccruedInterest) HasTransactionId() bool {
+	if o != nil && !IsNil(o.TransactionId) {
 		return true
 	}
 
 	return false
 }
 
-// SetUserId gets a reference to the given string and assigns it to the UserId field.
-func (o *CurrentLeverageAccruedInterest) SetUserId(v string) {
-	o.UserId = &v
+// SetTransactionId gets a reference to the given string and assigns it to the TransactionId field.
+func (o *SettleLeverageAccruedInterest) SetTransactionId(v string) {
+	o.TransactionId = &v
 }
 
 // GetAssetId returns the AssetId field value if set, zero value otherwise.
-func (o *CurrentLeverageAccruedInterest) GetAssetId() string {
+func (o *SettleLeverageAccruedInterest) GetAssetId() string {
 	if o == nil || IsNil(o.AssetId) {
 		var ret string
 		return ret
@@ -85,7 +85,7 @@ func (o *CurrentLeverageAccruedInterest) GetAssetId() string {
 
 // GetAssetIdOk returns a tuple with the AssetId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CurrentLeverageAccruedInterest) GetAssetIdOk() (*string, bool) {
+func (o *SettleLeverageAccruedInterest) GetAssetIdOk() (*string, bool) {
 	if o == nil || IsNil(o.AssetId) {
 		return nil, false
 	}
@@ -93,7 +93,7 @@ func (o *CurrentLeverageAccruedInterest) GetAssetIdOk() (*string, bool) {
 }
 
 // HasAssetId returns a boolean if a field has been set.
-func (o *CurrentLeverageAccruedInterest) HasAssetId() bool {
+func (o *SettleLeverageAccruedInterest) HasAssetId() bool {
 	if o != nil && !IsNil(o.AssetId) {
 		return true
 	}
@@ -102,12 +102,12 @@ func (o *CurrentLeverageAccruedInterest) HasAssetId() bool {
 }
 
 // SetAssetId gets a reference to the given string and assigns it to the AssetId field.
-func (o *CurrentLeverageAccruedInterest) SetAssetId(v string) {
+func (o *SettleLeverageAccruedInterest) SetAssetId(v string) {
 	o.AssetId = &v
 }
 
 // GetPositionId returns the PositionId field value if set, zero value otherwise.
-func (o *CurrentLeverageAccruedInterest) GetPositionId() string {
+func (o *SettleLeverageAccruedInterest) GetPositionId() string {
 	if o == nil || IsNil(o.PositionId) {
 		var ret string
 		return ret
@@ -117,7 +117,7 @@ func (o *CurrentLeverageAccruedInterest) GetPositionId() string {
 
 // GetPositionIdOk returns a tuple with the PositionId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CurrentLeverageAccruedInterest) GetPositionIdOk() (*string, bool) {
+func (o *SettleLeverageAccruedInterest) GetPositionIdOk() (*string, bool) {
 	if o == nil || IsNil(o.PositionId) {
 		return nil, false
 	}
@@ -125,7 +125,7 @@ func (o *CurrentLeverageAccruedInterest) GetPositionIdOk() (*string, bool) {
 }
 
 // HasPositionId returns a boolean if a field has been set.
-func (o *CurrentLeverageAccruedInterest) HasPositionId() bool {
+func (o *SettleLeverageAccruedInterest) HasPositionId() bool {
 	if o != nil && !IsNil(o.PositionId) {
 		return true
 	}
@@ -134,12 +134,12 @@ func (o *CurrentLeverageAccruedInterest) HasPositionId() bool {
 }
 
 // SetPositionId gets a reference to the given string and assigns it to the PositionId field.
-func (o *CurrentLeverageAccruedInterest) SetPositionId(v string) {
+func (o *SettleLeverageAccruedInterest) SetPositionId(v string) {
 	o.PositionId = &v
 }
 
 // GetCurrentAccruedInterestUsd returns the CurrentAccruedInterestUsd field value if set, zero value otherwise.
-func (o *CurrentLeverageAccruedInterest) GetCurrentAccruedInterestUsd() string {
+func (o *SettleLeverageAccruedInterest) GetCurrentAccruedInterestUsd() string {
 	if o == nil || IsNil(o.CurrentAccruedInterestUsd) {
 		var ret string
 		return ret
@@ -149,7 +149,7 @@ func (o *CurrentLeverageAccruedInterest) GetCurrentAccruedInterestUsd() string {
 
 // GetCurrentAccruedInterestUsdOk returns a tuple with the CurrentAccruedInterestUsd field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CurrentLeverageAccruedInterest) GetCurrentAccruedInterestUsdOk() (*string, bool) {
+func (o *SettleLeverageAccruedInterest) GetCurrentAccruedInterestUsdOk() (*string, bool) {
 	if o == nil || IsNil(o.CurrentAccruedInterestUsd) {
 		return nil, false
 	}
@@ -157,7 +157,7 @@ func (o *CurrentLeverageAccruedInterest) GetCurrentAccruedInterestUsdOk() (*stri
 }
 
 // HasCurrentAccruedInterestUsd returns a boolean if a field has been set.
-func (o *CurrentLeverageAccruedInterest) HasCurrentAccruedInterestUsd() bool {
+func (o *SettleLeverageAccruedInterest) HasCurrentAccruedInterestUsd() bool {
 	if o != nil && !IsNil(o.CurrentAccruedInterestUsd) {
 		return true
 	}
@@ -166,11 +166,11 @@ func (o *CurrentLeverageAccruedInterest) HasCurrentAccruedInterestUsd() bool {
 }
 
 // SetCurrentAccruedInterestUsd gets a reference to the given string and assigns it to the CurrentAccruedInterestUsd field.
-func (o *CurrentLeverageAccruedInterest) SetCurrentAccruedInterestUsd(v string) {
+func (o *SettleLeverageAccruedInterest) SetCurrentAccruedInterestUsd(v string) {
 	o.CurrentAccruedInterestUsd = &v
 }
 
-func (o CurrentLeverageAccruedInterest) MarshalJSON() ([]byte, error) {
+func (o SettleLeverageAccruedInterest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -178,10 +178,10 @@ func (o CurrentLeverageAccruedInterest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CurrentLeverageAccruedInterest) ToMap() (map[string]interface{}, error) {
+func (o SettleLeverageAccruedInterest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.UserId) {
-		toSerialize["user_id"] = o.UserId
+	if !IsNil(o.TransactionId) {
+		toSerialize["transaction_id"] = o.TransactionId
 	}
 	if !IsNil(o.AssetId) {
 		toSerialize["asset_id"] = o.AssetId
@@ -195,38 +195,38 @@ func (o CurrentLeverageAccruedInterest) ToMap() (map[string]interface{}, error) 
 	return toSerialize, nil
 }
 
-type NullableCurrentLeverageAccruedInterest struct {
-	value *CurrentLeverageAccruedInterest
+type NullableSettleLeverageAccruedInterest struct {
+	value *SettleLeverageAccruedInterest
 	isSet bool
 }
 
-func (v NullableCurrentLeverageAccruedInterest) Get() *CurrentLeverageAccruedInterest {
+func (v NullableSettleLeverageAccruedInterest) Get() *SettleLeverageAccruedInterest {
 	return v.value
 }
 
-func (v *NullableCurrentLeverageAccruedInterest) Set(val *CurrentLeverageAccruedInterest) {
+func (v *NullableSettleLeverageAccruedInterest) Set(val *SettleLeverageAccruedInterest) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableCurrentLeverageAccruedInterest) IsSet() bool {
+func (v NullableSettleLeverageAccruedInterest) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableCurrentLeverageAccruedInterest) Unset() {
+func (v *NullableSettleLeverageAccruedInterest) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableCurrentLeverageAccruedInterest(val *CurrentLeverageAccruedInterest) *NullableCurrentLeverageAccruedInterest {
-	return &NullableCurrentLeverageAccruedInterest{value: val, isSet: true}
+func NewNullableSettleLeverageAccruedInterest(val *SettleLeverageAccruedInterest) *NullableSettleLeverageAccruedInterest {
+	return &NullableSettleLeverageAccruedInterest{value: val, isSet: true}
 }
 
-func (v NullableCurrentLeverageAccruedInterest) MarshalJSON() ([]byte, error) {
+func (v NullableSettleLeverageAccruedInterest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableCurrentLeverageAccruedInterest) UnmarshalJSON(src []byte) error {
+func (v *NullableSettleLeverageAccruedInterest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

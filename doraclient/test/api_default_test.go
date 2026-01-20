@@ -96,11 +96,13 @@ func Test_doraclient_DefaultAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test DefaultAPIService CreateNewIsolatedPosition", func(t *testing.T) {
+	t.Run("Test DefaultAPIService CreateAPIKeyForUserID", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		resp, httpRes, err := apiClient.DefaultAPI.CreateNewIsolatedPosition(context.Background()).Execute()
+		var userId string
+
+		resp, httpRes, err := apiClient.DefaultAPI.CreateAPIKeyForUserID(context.Background(), userId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -120,6 +122,18 @@ func Test_doraclient_DefaultAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test DefaultAPIService CreateUser", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.DefaultAPI.CreateUser(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test DefaultAPIService DeleteUser", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -127,6 +141,20 @@ func Test_doraclient_DefaultAPIService(t *testing.T) {
 		var userId string
 
 		resp, httpRes, err := apiClient.DefaultAPI.DeleteUser(context.Background(), userId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DefaultAPIService GetAPIKeysForUserID", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var userId string
+
+		resp, httpRes, err := apiClient.DefaultAPI.GetAPIKeysForUserID(context.Background(), userId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -442,6 +470,18 @@ func Test_doraclient_DefaultAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test DefaultAPIService GetPLForSelfByAccount", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.DefaultAPI.GetPLForSelfByAccount(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test DefaultAPIService GetPoolPrice", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -515,6 +555,20 @@ func Test_doraclient_DefaultAPIService(t *testing.T) {
 		var userId string
 
 		resp, httpRes, err := apiClient.DefaultAPI.GetUserById(context.Background(), userId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DefaultAPIService GetUserCouponPaymentsStream", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var userId string
+
+		resp, httpRes, err := apiClient.DefaultAPI.GetUserCouponPaymentsStream(context.Background(), userId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -596,6 +650,34 @@ func Test_doraclient_DefaultAPIService(t *testing.T) {
 		t.Skip("skip test")  // remove to run test
 
 		resp, httpRes, err := apiClient.DefaultAPI.GetUsersAPIKeys(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DefaultAPIService LedgerDeposit", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var userId string
+
+		resp, httpRes, err := apiClient.DefaultAPI.LedgerDeposit(context.Background(), userId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DefaultAPIService LedgerWithdraw", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var userId string
+
+		resp, httpRes, err := apiClient.DefaultAPI.LedgerWithdraw(context.Background(), userId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -758,6 +840,33 @@ func Test_doraclient_DefaultAPIService(t *testing.T) {
 		var keyId string
 
 		resp, httpRes, err := apiClient.DefaultAPI.RevokeAPIKeyForUser(context.Background(), keyId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DefaultAPIService RevokeAPIKeyForUserID", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var userId string
+		var keyId string
+
+		resp, httpRes, err := apiClient.DefaultAPI.RevokeAPIKeyForUserID(context.Background(), userId, keyId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DefaultAPIService SettleLeverageAccruedInterest", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.DefaultAPI.SettleLeverageAccruedInterest(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

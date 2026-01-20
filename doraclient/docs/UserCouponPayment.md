@@ -1,0 +1,264 @@
+# UserCouponPayment
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**UserId** | Pointer to **string** |  | [optional] 
+**PositionId** | Pointer to **string** |  | [optional] 
+**AssetId** | Pointer to **string** |  | [optional] 
+**CouponPaymentId** | Pointer to **string** |  | [optional] 
+**Seq** | Pointer to **int64** |  | [optional] 
+**Pending** | Pointer to **float64** |  | [optional] 
+**Completed** | Pointer to **float64** |  | [optional] 
+**StartedAt** | Pointer to **time.Time** |  | [optional] 
+**EndedAt** | Pointer to **time.Time** |  | [optional] 
+
+## Methods
+
+### NewUserCouponPayment
+
+`func NewUserCouponPayment() *UserCouponPayment`
+
+NewUserCouponPayment instantiates a new UserCouponPayment object
+This constructor will assign default values to properties that have it defined,
+and makes sure properties required by API are set, but the set of arguments
+will change when the set of required properties is changed
+
+### NewUserCouponPaymentWithDefaults
+
+`func NewUserCouponPaymentWithDefaults() *UserCouponPayment`
+
+NewUserCouponPaymentWithDefaults instantiates a new UserCouponPayment object
+This constructor will only assign default values to properties that have it defined,
+but it doesn't guarantee that properties required by API are set
+
+### GetUserId
+
+`func (o *UserCouponPayment) GetUserId() string`
+
+GetUserId returns the UserId field if non-nil, zero value otherwise.
+
+### GetUserIdOk
+
+`func (o *UserCouponPayment) GetUserIdOk() (*string, bool)`
+
+GetUserIdOk returns a tuple with the UserId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUserId
+
+`func (o *UserCouponPayment) SetUserId(v string)`
+
+SetUserId sets UserId field to given value.
+
+### HasUserId
+
+`func (o *UserCouponPayment) HasUserId() bool`
+
+HasUserId returns a boolean if a field has been set.
+
+### GetPositionId
+
+`func (o *UserCouponPayment) GetPositionId() string`
+
+GetPositionId returns the PositionId field if non-nil, zero value otherwise.
+
+### GetPositionIdOk
+
+`func (o *UserCouponPayment) GetPositionIdOk() (*string, bool)`
+
+GetPositionIdOk returns a tuple with the PositionId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPositionId
+
+`func (o *UserCouponPayment) SetPositionId(v string)`
+
+SetPositionId sets PositionId field to given value.
+
+### HasPositionId
+
+`func (o *UserCouponPayment) HasPositionId() bool`
+
+HasPositionId returns a boolean if a field has been set.
+
+### GetAssetId
+
+`func (o *UserCouponPayment) GetAssetId() string`
+
+GetAssetId returns the AssetId field if non-nil, zero value otherwise.
+
+### GetAssetIdOk
+
+`func (o *UserCouponPayment) GetAssetIdOk() (*string, bool)`
+
+GetAssetIdOk returns a tuple with the AssetId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAssetId
+
+`func (o *UserCouponPayment) SetAssetId(v string)`
+
+SetAssetId sets AssetId field to given value.
+
+### HasAssetId
+
+`func (o *UserCouponPayment) HasAssetId() bool`
+
+HasAssetId returns a boolean if a field has been set.
+
+### GetCouponPaymentId
+
+`func (o *UserCouponPayment) GetCouponPaymentId() string`
+
+GetCouponPaymentId returns the CouponPaymentId field if non-nil, zero value otherwise.
+
+### GetCouponPaymentIdOk
+
+`func (o *UserCouponPayment) GetCouponPaymentIdOk() (*string, bool)`
+
+GetCouponPaymentIdOk returns a tuple with the CouponPaymentId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCouponPaymentId
+
+`func (o *UserCouponPayment) SetCouponPaymentId(v string)`
+
+SetCouponPaymentId sets CouponPaymentId field to given value.
+
+### HasCouponPaymentId
+
+`func (o *UserCouponPayment) HasCouponPaymentId() bool`
+
+HasCouponPaymentId returns a boolean if a field has been set.
+
+### GetSeq
+
+`func (o *UserCouponPayment) GetSeq() int64`
+
+GetSeq returns the Seq field if non-nil, zero value otherwise.
+
+### GetSeqOk
+
+`func (o *UserCouponPayment) GetSeqOk() (*int64, bool)`
+
+GetSeqOk returns a tuple with the Seq field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSeq
+
+`func (o *UserCouponPayment) SetSeq(v int64)`
+
+SetSeq sets Seq field to given value.
+
+### HasSeq
+
+`func (o *UserCouponPayment) HasSeq() bool`
+
+HasSeq returns a boolean if a field has been set.
+
+### GetPending
+
+`func (o *UserCouponPayment) GetPending() float64`
+
+GetPending returns the Pending field if non-nil, zero value otherwise.
+
+### GetPendingOk
+
+`func (o *UserCouponPayment) GetPendingOk() (*float64, bool)`
+
+GetPendingOk returns a tuple with the Pending field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPending
+
+`func (o *UserCouponPayment) SetPending(v float64)`
+
+SetPending sets Pending field to given value.
+
+### HasPending
+
+`func (o *UserCouponPayment) HasPending() bool`
+
+HasPending returns a boolean if a field has been set.
+
+### GetCompleted
+
+`func (o *UserCouponPayment) GetCompleted() float64`
+
+GetCompleted returns the Completed field if non-nil, zero value otherwise.
+
+### GetCompletedOk
+
+`func (o *UserCouponPayment) GetCompletedOk() (*float64, bool)`
+
+GetCompletedOk returns a tuple with the Completed field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCompleted
+
+`func (o *UserCouponPayment) SetCompleted(v float64)`
+
+SetCompleted sets Completed field to given value.
+
+### HasCompleted
+
+`func (o *UserCouponPayment) HasCompleted() bool`
+
+HasCompleted returns a boolean if a field has been set.
+
+### GetStartedAt
+
+`func (o *UserCouponPayment) GetStartedAt() time.Time`
+
+GetStartedAt returns the StartedAt field if non-nil, zero value otherwise.
+
+### GetStartedAtOk
+
+`func (o *UserCouponPayment) GetStartedAtOk() (*time.Time, bool)`
+
+GetStartedAtOk returns a tuple with the StartedAt field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStartedAt
+
+`func (o *UserCouponPayment) SetStartedAt(v time.Time)`
+
+SetStartedAt sets StartedAt field to given value.
+
+### HasStartedAt
+
+`func (o *UserCouponPayment) HasStartedAt() bool`
+
+HasStartedAt returns a boolean if a field has been set.
+
+### GetEndedAt
+
+`func (o *UserCouponPayment) GetEndedAt() time.Time`
+
+GetEndedAt returns the EndedAt field if non-nil, zero value otherwise.
+
+### GetEndedAtOk
+
+`func (o *UserCouponPayment) GetEndedAtOk() (*time.Time, bool)`
+
+GetEndedAtOk returns a tuple with the EndedAt field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEndedAt
+
+`func (o *UserCouponPayment) SetEndedAt(v time.Time)`
+
+SetEndedAt sets EndedAt field to given value.
+
+### HasEndedAt
+
+`func (o *UserCouponPayment) HasEndedAt() bool`
+
+HasEndedAt returns a boolean if a field has been set.
+
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

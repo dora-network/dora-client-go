@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **UserId** | Pointer to **string** |  | [optional] 
 **AssetId** | Pointer to **string** |  | [optional] 
 **PositionId** | Pointer to **string** |  | [optional] 
-**CurrentAccruedInterest** | Pointer to **string** |  | [optional] 
+**CurrentAccruedInterestUsd** | Pointer to **string** |  | [optional] 
 
 ## Methods
 
@@ -103,30 +103,30 @@ SetPositionId sets PositionId field to given value.
 
 HasPositionId returns a boolean if a field has been set.
 
-### GetCurrentAccruedInterest
+### GetCurrentAccruedInterestUsd
 
-`func (o *CurrentLeverageAccruedInterest) GetCurrentAccruedInterest() string`
+`func (o *CurrentLeverageAccruedInterest) GetCurrentAccruedInterestUsd() string`
 
-GetCurrentAccruedInterest returns the CurrentAccruedInterest field if non-nil, zero value otherwise.
+GetCurrentAccruedInterestUsd returns the CurrentAccruedInterestUsd field if non-nil, zero value otherwise.
 
-### GetCurrentAccruedInterestOk
+### GetCurrentAccruedInterestUsdOk
 
-`func (o *CurrentLeverageAccruedInterest) GetCurrentAccruedInterestOk() (*string, bool)`
+`func (o *CurrentLeverageAccruedInterest) GetCurrentAccruedInterestUsdOk() (*string, bool)`
 
-GetCurrentAccruedInterestOk returns a tuple with the CurrentAccruedInterest field if it's non-nil, zero value otherwise
+GetCurrentAccruedInterestUsdOk returns a tuple with the CurrentAccruedInterestUsd field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetCurrentAccruedInterest
+### SetCurrentAccruedInterestUsd
 
-`func (o *CurrentLeverageAccruedInterest) SetCurrentAccruedInterest(v string)`
+`func (o *CurrentLeverageAccruedInterest) SetCurrentAccruedInterestUsd(v string)`
 
-SetCurrentAccruedInterest sets CurrentAccruedInterest field to given value.
+SetCurrentAccruedInterestUsd sets CurrentAccruedInterestUsd field to given value.
 
-### HasCurrentAccruedInterest
+### HasCurrentAccruedInterestUsd
 
-`func (o *CurrentLeverageAccruedInterest) HasCurrentAccruedInterest() bool`
+`func (o *CurrentLeverageAccruedInterest) HasCurrentAccruedInterestUsd() bool`
 
-HasCurrentAccruedInterest returns a boolean if a field has been set.
+HasCurrentAccruedInterestUsd returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

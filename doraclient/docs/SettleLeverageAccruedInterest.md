@@ -1,4 +1,4 @@
-# ClaimLeverageAccruedInterest
+# SettleLeverageAccruedInterest
 
 ## Properties
 
@@ -11,120 +11,120 @@ Name | Type | Description | Notes
 
 ## Methods
 
-### NewClaimLeverageAccruedInterest
+### NewSettleLeverageAccruedInterest
 
-`func NewClaimLeverageAccruedInterest() *ClaimLeverageAccruedInterest`
+`func NewSettleLeverageAccruedInterest() *SettleLeverageAccruedInterest`
 
-NewClaimLeverageAccruedInterest instantiates a new ClaimLeverageAccruedInterest object
+NewSettleLeverageAccruedInterest instantiates a new SettleLeverageAccruedInterest object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewClaimLeverageAccruedInterestWithDefaults
+### NewSettleLeverageAccruedInterestWithDefaults
 
-`func NewClaimLeverageAccruedInterestWithDefaults() *ClaimLeverageAccruedInterest`
+`func NewSettleLeverageAccruedInterestWithDefaults() *SettleLeverageAccruedInterest`
 
-NewClaimLeverageAccruedInterestWithDefaults instantiates a new ClaimLeverageAccruedInterest object
+NewSettleLeverageAccruedInterestWithDefaults instantiates a new SettleLeverageAccruedInterest object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetTransactionId
 
-`func (o *ClaimLeverageAccruedInterest) GetTransactionId() string`
+`func (o *SettleLeverageAccruedInterest) GetTransactionId() string`
 
 GetTransactionId returns the TransactionId field if non-nil, zero value otherwise.
 
 ### GetTransactionIdOk
 
-`func (o *ClaimLeverageAccruedInterest) GetTransactionIdOk() (*string, bool)`
+`func (o *SettleLeverageAccruedInterest) GetTransactionIdOk() (*string, bool)`
 
 GetTransactionIdOk returns a tuple with the TransactionId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTransactionId
 
-`func (o *ClaimLeverageAccruedInterest) SetTransactionId(v string)`
+`func (o *SettleLeverageAccruedInterest) SetTransactionId(v string)`
 
 SetTransactionId sets TransactionId field to given value.
 
 ### HasTransactionId
 
-`func (o *ClaimLeverageAccruedInterest) HasTransactionId() bool`
+`func (o *SettleLeverageAccruedInterest) HasTransactionId() bool`
 
 HasTransactionId returns a boolean if a field has been set.
 
 ### GetAssetId
 
-`func (o *ClaimLeverageAccruedInterest) GetAssetId() string`
+`func (o *SettleLeverageAccruedInterest) GetAssetId() string`
 
 GetAssetId returns the AssetId field if non-nil, zero value otherwise.
 
 ### GetAssetIdOk
 
-`func (o *ClaimLeverageAccruedInterest) GetAssetIdOk() (*string, bool)`
+`func (o *SettleLeverageAccruedInterest) GetAssetIdOk() (*string, bool)`
 
 GetAssetIdOk returns a tuple with the AssetId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAssetId
 
-`func (o *ClaimLeverageAccruedInterest) SetAssetId(v string)`
+`func (o *SettleLeverageAccruedInterest) SetAssetId(v string)`
 
 SetAssetId sets AssetId field to given value.
 
 ### HasAssetId
 
-`func (o *ClaimLeverageAccruedInterest) HasAssetId() bool`
+`func (o *SettleLeverageAccruedInterest) HasAssetId() bool`
 
 HasAssetId returns a boolean if a field has been set.
 
 ### GetPositionId
 
-`func (o *ClaimLeverageAccruedInterest) GetPositionId() string`
+`func (o *SettleLeverageAccruedInterest) GetPositionId() string`
 
 GetPositionId returns the PositionId field if non-nil, zero value otherwise.
 
 ### GetPositionIdOk
 
-`func (o *ClaimLeverageAccruedInterest) GetPositionIdOk() (*string, bool)`
+`func (o *SettleLeverageAccruedInterest) GetPositionIdOk() (*string, bool)`
 
 GetPositionIdOk returns a tuple with the PositionId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPositionId
 
-`func (o *ClaimLeverageAccruedInterest) SetPositionId(v string)`
+`func (o *SettleLeverageAccruedInterest) SetPositionId(v string)`
 
 SetPositionId sets PositionId field to given value.
 
 ### HasPositionId
 
-`func (o *ClaimLeverageAccruedInterest) HasPositionId() bool`
+`func (o *SettleLeverageAccruedInterest) HasPositionId() bool`
 
 HasPositionId returns a boolean if a field has been set.
 
 ### GetCurrentAccruedInterestUsd
 
-`func (o *ClaimLeverageAccruedInterest) GetCurrentAccruedInterestUsd() string`
+`func (o *SettleLeverageAccruedInterest) GetCurrentAccruedInterestUsd() string`
 
 GetCurrentAccruedInterestUsd returns the CurrentAccruedInterestUsd field if non-nil, zero value otherwise.
 
 ### GetCurrentAccruedInterestUsdOk
 
-`func (o *ClaimLeverageAccruedInterest) GetCurrentAccruedInterestUsdOk() (*string, bool)`
+`func (o *SettleLeverageAccruedInterest) GetCurrentAccruedInterestUsdOk() (*string, bool)`
 
 GetCurrentAccruedInterestUsdOk returns a tuple with the CurrentAccruedInterestUsd field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCurrentAccruedInterestUsd
 
-`func (o *ClaimLeverageAccruedInterest) SetCurrentAccruedInterestUsd(v string)`
+`func (o *SettleLeverageAccruedInterest) SetCurrentAccruedInterestUsd(v string)`
 
 SetCurrentAccruedInterestUsd sets CurrentAccruedInterestUsd field to given value.
 
 ### HasCurrentAccruedInterestUsd
 
-`func (o *ClaimLeverageAccruedInterest) HasCurrentAccruedInterestUsd() bool`
+`func (o *SettleLeverageAccruedInterest) HasCurrentAccruedInterestUsd() bool`
 
 HasCurrentAccruedInterestUsd returns a boolean if a field has been set.
 
