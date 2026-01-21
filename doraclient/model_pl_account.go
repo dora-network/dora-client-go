@@ -25,7 +25,7 @@ type PLAccount struct {
 	AccountName *string `json:"account_name,omitempty"`
 	// Whether the account is the global or an isolated account
 	IsGlobal *bool `json:"is_global,omitempty"`
-	Rows []PLAsset `json:"rows,omitempty"`
+	Assets []PLAsset `json:"assets,omitempty"`
 	Summary *PLSummary `json:"summary,omitempty"`
 }
 
@@ -142,36 +142,36 @@ func (o *PLAccount) SetIsGlobal(v bool) {
 	o.IsGlobal = &v
 }
 
-// GetRows returns the Rows field value if set, zero value otherwise.
-func (o *PLAccount) GetRows() []PLAsset {
-	if o == nil || IsNil(o.Rows) {
+// GetAssets returns the Assets field value if set, zero value otherwise.
+func (o *PLAccount) GetAssets() []PLAsset {
+	if o == nil || IsNil(o.Assets) {
 		var ret []PLAsset
 		return ret
 	}
-	return o.Rows
+	return o.Assets
 }
 
-// GetRowsOk returns a tuple with the Rows field value if set, nil otherwise
+// GetAssetsOk returns a tuple with the Assets field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PLAccount) GetRowsOk() ([]PLAsset, bool) {
-	if o == nil || IsNil(o.Rows) {
+func (o *PLAccount) GetAssetsOk() ([]PLAsset, bool) {
+	if o == nil || IsNil(o.Assets) {
 		return nil, false
 	}
-	return o.Rows, true
+	return o.Assets, true
 }
 
-// HasRows returns a boolean if a field has been set.
-func (o *PLAccount) HasRows() bool {
-	if o != nil && !IsNil(o.Rows) {
+// HasAssets returns a boolean if a field has been set.
+func (o *PLAccount) HasAssets() bool {
+	if o != nil && !IsNil(o.Assets) {
 		return true
 	}
 
 	return false
 }
 
-// SetRows gets a reference to the given []PLAsset and assigns it to the Rows field.
-func (o *PLAccount) SetRows(v []PLAsset) {
-	o.Rows = v
+// SetAssets gets a reference to the given []PLAsset and assigns it to the Assets field.
+func (o *PLAccount) SetAssets(v []PLAsset) {
+	o.Assets = v
 }
 
 // GetSummary returns the Summary field value if set, zero value otherwise.
@@ -225,8 +225,8 @@ func (o PLAccount) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.IsGlobal) {
 		toSerialize["is_global"] = o.IsGlobal
 	}
-	if !IsNil(o.Rows) {
-		toSerialize["rows"] = o.Rows
+	if !IsNil(o.Assets) {
+		toSerialize["assets"] = o.Assets
 	}
 	if !IsNil(o.Summary) {
 		toSerialize["summary"] = o.Summary

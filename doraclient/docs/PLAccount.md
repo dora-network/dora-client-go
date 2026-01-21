@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **AccountId** | Pointer to **string** | The ID of the account holding the position | [optional] 
 **AccountName** | Pointer to **string** | The name of the account holding the position | [optional] 
 **IsGlobal** | Pointer to **bool** | Whether the account is the global or an isolated account | [optional] 
-**Rows** | Pointer to [**[]PLAsset**](PLAsset.md) |  | [optional] 
+**Assets** | Pointer to [**[]PLAsset**](PLAsset.md) |  | [optional] 
 **Summary** | Pointer to [**PLSummary**](PLSummary.md) |  | [optional] 
 
 ## Methods
@@ -104,30 +104,30 @@ SetIsGlobal sets IsGlobal field to given value.
 
 HasIsGlobal returns a boolean if a field has been set.
 
-### GetRows
+### GetAssets
 
-`func (o *PLAccount) GetRows() []PLAsset`
+`func (o *PLAccount) GetAssets() []PLAsset`
 
-GetRows returns the Rows field if non-nil, zero value otherwise.
+GetAssets returns the Assets field if non-nil, zero value otherwise.
 
-### GetRowsOk
+### GetAssetsOk
 
-`func (o *PLAccount) GetRowsOk() (*[]PLAsset, bool)`
+`func (o *PLAccount) GetAssetsOk() (*[]PLAsset, bool)`
 
-GetRowsOk returns a tuple with the Rows field if it's non-nil, zero value otherwise
+GetAssetsOk returns a tuple with the Assets field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetRows
+### SetAssets
 
-`func (o *PLAccount) SetRows(v []PLAsset)`
+`func (o *PLAccount) SetAssets(v []PLAsset)`
 
-SetRows sets Rows field to given value.
+SetAssets sets Assets field to given value.
 
-### HasRows
+### HasAssets
 
-`func (o *PLAccount) HasRows() bool`
+`func (o *PLAccount) HasAssets() bool`
 
-HasRows returns a boolean if a field has been set.
+HasAssets returns a boolean if a field has been set.
 
 ### GetSummary
 

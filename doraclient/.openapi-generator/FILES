@@ -15,6 +15,7 @@ docs/AssetKind.md
 docs/AssetPrice.md
 docs/AssetPriceResponseEnvelope.md
 docs/AssetRequestError.md
+docs/AssetYTM.md
 docs/BalanceTransfer.md
 docs/BalancesResponse.md
 docs/Bond.md
@@ -46,6 +47,7 @@ docs/FundUser.md
 docs/FundUserRequest.md
 docs/FundUserResponseEnvelope.md
 docs/GetAssetByIDResponseEnvelope.md
+docs/GetAssetYTMByIDResponseEnvelope.md
 docs/GetTopOfBookResponseEnvelope.md
 docs/IsolateCollateralRequest.md
 docs/IsolateCollateralResponse.md
@@ -184,6 +186,7 @@ model_asset_kind.go
 model_asset_price.go
 model_asset_price_response_envelope.go
 model_asset_request_error.go
+model_asset_ytm.go
 model_balance_transfer.go
 model_balances_response.go
 model_bond.go
@@ -214,6 +217,7 @@ model_fund_user.go
 model_fund_user_request.go
 model_fund_user_response_envelope.go
 model_get_asset_by_id_response_envelope.go
+model_get_asset_ytmby_id_response_envelope.go
 model_get_top_of_book_response_envelope.go
 model_isolate_collateral_request.go
 model_isolate_collateral_response.go

@@ -42,6 +42,14 @@ type PLAsset struct {
 	Tp *float64 `json:"tp,omitempty"`
 	// The stop loss price set for the position, if any
 	Sl *float64 `json:"sl,omitempty"`
+	// The initial capital of the position
+	InitialCapital *float64 `json:"initial_capital,omitempty"`
+	// The impending borrows of the position
+	ImpendingBorrows *float64 `json:"impending_borrows,omitempty"`
+	// The locked amount of the position
+	Locked *float64 `json:"locked,omitempty"`
+	// The unused collateral of the position
+	UnusedCollateral *float64 `json:"unused_collateral,omitempty"`
 }
 
 // NewPLAsset instantiates a new PLAsset object
@@ -445,6 +453,134 @@ func (o *PLAsset) SetSl(v float64) {
 	o.Sl = &v
 }
 
+// GetInitialCapital returns the InitialCapital field value if set, zero value otherwise.
+func (o *PLAsset) GetInitialCapital() float64 {
+	if o == nil || IsNil(o.InitialCapital) {
+		var ret float64
+		return ret
+	}
+	return *o.InitialCapital
+}
+
+// GetInitialCapitalOk returns a tuple with the InitialCapital field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PLAsset) GetInitialCapitalOk() (*float64, bool) {
+	if o == nil || IsNil(o.InitialCapital) {
+		return nil, false
+	}
+	return o.InitialCapital, true
+}
+
+// HasInitialCapital returns a boolean if a field has been set.
+func (o *PLAsset) HasInitialCapital() bool {
+	if o != nil && !IsNil(o.InitialCapital) {
+		return true
+	}
+
+	return false
+}
+
+// SetInitialCapital gets a reference to the given float64 and assigns it to the InitialCapital field.
+func (o *PLAsset) SetInitialCapital(v float64) {
+	o.InitialCapital = &v
+}
+
+// GetImpendingBorrows returns the ImpendingBorrows field value if set, zero value otherwise.
+func (o *PLAsset) GetImpendingBorrows() float64 {
+	if o == nil || IsNil(o.ImpendingBorrows) {
+		var ret float64
+		return ret
+	}
+	return *o.ImpendingBorrows
+}
+
+// GetImpendingBorrowsOk returns a tuple with the ImpendingBorrows field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PLAsset) GetImpendingBorrowsOk() (*float64, bool) {
+	if o == nil || IsNil(o.ImpendingBorrows) {
+		return nil, false
+	}
+	return o.ImpendingBorrows, true
+}
+
+// HasImpendingBorrows returns a boolean if a field has been set.
+func (o *PLAsset) HasImpendingBorrows() bool {
+	if o != nil && !IsNil(o.ImpendingBorrows) {
+		return true
+	}
+
+	return false
+}
+
+// SetImpendingBorrows gets a reference to the given float64 and assigns it to the ImpendingBorrows field.
+func (o *PLAsset) SetImpendingBorrows(v float64) {
+	o.ImpendingBorrows = &v
+}
+
+// GetLocked returns the Locked field value if set, zero value otherwise.
+func (o *PLAsset) GetLocked() float64 {
+	if o == nil || IsNil(o.Locked) {
+		var ret float64
+		return ret
+	}
+	return *o.Locked
+}
+
+// GetLockedOk returns a tuple with the Locked field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PLAsset) GetLockedOk() (*float64, bool) {
+	if o == nil || IsNil(o.Locked) {
+		return nil, false
+	}
+	return o.Locked, true
+}
+
+// HasLocked returns a boolean if a field has been set.
+func (o *PLAsset) HasLocked() bool {
+	if o != nil && !IsNil(o.Locked) {
+		return true
+	}
+
+	return false
+}
+
+// SetLocked gets a reference to the given float64 and assigns it to the Locked field.
+func (o *PLAsset) SetLocked(v float64) {
+	o.Locked = &v
+}
+
+// GetUnusedCollateral returns the UnusedCollateral field value if set, zero value otherwise.
+func (o *PLAsset) GetUnusedCollateral() float64 {
+	if o == nil || IsNil(o.UnusedCollateral) {
+		var ret float64
+		return ret
+	}
+	return *o.UnusedCollateral
+}
+
+// GetUnusedCollateralOk returns a tuple with the UnusedCollateral field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PLAsset) GetUnusedCollateralOk() (*float64, bool) {
+	if o == nil || IsNil(o.UnusedCollateral) {
+		return nil, false
+	}
+	return o.UnusedCollateral, true
+}
+
+// HasUnusedCollateral returns a boolean if a field has been set.
+func (o *PLAsset) HasUnusedCollateral() bool {
+	if o != nil && !IsNil(o.UnusedCollateral) {
+		return true
+	}
+
+	return false
+}
+
+// SetUnusedCollateral gets a reference to the given float64 and assigns it to the UnusedCollateral field.
+func (o *PLAsset) SetUnusedCollateral(v float64) {
+	o.UnusedCollateral = &v
+}
+
 func (o PLAsset) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -490,6 +626,18 @@ func (o PLAsset) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Sl) {
 		toSerialize["sl"] = o.Sl
+	}
+	if !IsNil(o.InitialCapital) {
+		toSerialize["initial_capital"] = o.InitialCapital
+	}
+	if !IsNil(o.ImpendingBorrows) {
+		toSerialize["impending_borrows"] = o.ImpendingBorrows
+	}
+	if !IsNil(o.Locked) {
+		toSerialize["locked"] = o.Locked
+	}
+	if !IsNil(o.UnusedCollateral) {
+		toSerialize["unused_collateral"] = o.UnusedCollateral
 	}
 	return toSerialize, nil
 }

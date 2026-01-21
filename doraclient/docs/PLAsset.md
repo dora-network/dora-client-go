@@ -16,6 +16,10 @@ Name | Type | Description | Notes
 **LeverageLimit** | Pointer to **float64** | The leverage limit for the position | [optional] 
 **Tp** | Pointer to **float64** | The take profit price set for the position, if any | [optional] 
 **Sl** | Pointer to **float64** | The stop loss price set for the position, if any | [optional] 
+**InitialCapital** | Pointer to **float64** | The initial capital of the position | [optional] 
+**ImpendingBorrows** | Pointer to **float64** | The impending borrows of the position | [optional] 
+**Locked** | Pointer to **float64** | The locked amount of the position | [optional] 
+**UnusedCollateral** | Pointer to **float64** | The unused collateral of the position | [optional] 
 
 ## Methods
 
@@ -335,6 +339,106 @@ SetSl sets Sl field to given value.
 `func (o *PLAsset) HasSl() bool`
 
 HasSl returns a boolean if a field has been set.
+
+### GetInitialCapital
+
+`func (o *PLAsset) GetInitialCapital() float64`
+
+GetInitialCapital returns the InitialCapital field if non-nil, zero value otherwise.
+
+### GetInitialCapitalOk
+
+`func (o *PLAsset) GetInitialCapitalOk() (*float64, bool)`
+
+GetInitialCapitalOk returns a tuple with the InitialCapital field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInitialCapital
+
+`func (o *PLAsset) SetInitialCapital(v float64)`
+
+SetInitialCapital sets InitialCapital field to given value.
+
+### HasInitialCapital
+
+`func (o *PLAsset) HasInitialCapital() bool`
+
+HasInitialCapital returns a boolean if a field has been set.
+
+### GetImpendingBorrows
+
+`func (o *PLAsset) GetImpendingBorrows() float64`
+
+GetImpendingBorrows returns the ImpendingBorrows field if non-nil, zero value otherwise.
+
+### GetImpendingBorrowsOk
+
+`func (o *PLAsset) GetImpendingBorrowsOk() (*float64, bool)`
+
+GetImpendingBorrowsOk returns a tuple with the ImpendingBorrows field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetImpendingBorrows
+
+`func (o *PLAsset) SetImpendingBorrows(v float64)`
+
+SetImpendingBorrows sets ImpendingBorrows field to given value.
+
+### HasImpendingBorrows
+
+`func (o *PLAsset) HasImpendingBorrows() bool`
+
+HasImpendingBorrows returns a boolean if a field has been set.
+
+### GetLocked
+
+`func (o *PLAsset) GetLocked() float64`
+
+GetLocked returns the Locked field if non-nil, zero value otherwise.
+
+### GetLockedOk
+
+`func (o *PLAsset) GetLockedOk() (*float64, bool)`
+
+GetLockedOk returns a tuple with the Locked field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLocked
+
+`func (o *PLAsset) SetLocked(v float64)`
+
+SetLocked sets Locked field to given value.
+
+### HasLocked
+
+`func (o *PLAsset) HasLocked() bool`
+
+HasLocked returns a boolean if a field has been set.
+
+### GetUnusedCollateral
+
+`func (o *PLAsset) GetUnusedCollateral() float64`
+
+GetUnusedCollateral returns the UnusedCollateral field if non-nil, zero value otherwise.
+
+### GetUnusedCollateralOk
+
+`func (o *PLAsset) GetUnusedCollateralOk() (*float64, bool)`
+
+GetUnusedCollateralOk returns a tuple with the UnusedCollateral field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUnusedCollateral
+
+`func (o *PLAsset) SetUnusedCollateral(v float64)`
+
+SetUnusedCollateral sets UnusedCollateral field to given value.
+
+### HasUnusedCollateral
+
+`func (o *PLAsset) HasUnusedCollateral() bool`
+
+HasUnusedCollateral returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -92,6 +92,7 @@ Class | Method | HTTP request | Description
 *DefaultAPI* | [**GetAllAssetPrices**](docs/DefaultAPI.md#getallassetprices) | **Get** /v1/price | Get the current price of all assets
 *DefaultAPI* | [**GetAssetById**](docs/DefaultAPI.md#getassetbyid) | **Get** /v1/assets/{asset_id} | Get asset by ID
 *DefaultAPI* | [**GetAssetPrice**](docs/DefaultAPI.md#getassetprice) | **Get** /v1/price/asset/{asset_id} | Get the current price of an asset
+*DefaultAPI* | [**GetAssetYTMById**](docs/DefaultAPI.md#getassetytmbyid) | **Get** /v1/assets/{asset_id}/ytm | Get annualized yield to maturity for a bond asset
 *DefaultAPI* | [**GetAssetsStream**](docs/DefaultAPI.md#getassetsstream) | **Get** /v1/assets/stream | Get all inserts or updates for assets
 *DefaultAPI* | [**GetCandleData**](docs/DefaultAPI.md#getcandledata) | **Get** /v1/charts/{order_book_id}/candle | Get candlestick data for an orderbook
 *DefaultAPI* | [**GetCouponPaymentsByAssetId**](docs/DefaultAPI.md#getcouponpaymentsbyassetid) | **Get** /v1/assets/{asset_id}/coupon_payments | Get coupon payments for a bond asset
@@ -166,6 +167,7 @@ Class | Method | HTTP request | Description
  - [AssetPrice](docs/AssetPrice.md)
  - [AssetPriceResponseEnvelope](docs/AssetPriceResponseEnvelope.md)
  - [AssetRequestError](docs/AssetRequestError.md)
+ - [AssetYTM](docs/AssetYTM.md)
  - [BalanceTransfer](docs/BalanceTransfer.md)
  - [BalancesResponse](docs/BalancesResponse.md)
  - [Bond](docs/Bond.md)
@@ -196,6 +198,7 @@ Class | Method | HTTP request | Description
  - [FundUserRequest](docs/FundUserRequest.md)
  - [FundUserResponseEnvelope](docs/FundUserResponseEnvelope.md)
  - [GetAssetByIDResponseEnvelope](docs/GetAssetByIDResponseEnvelope.md)
+ - [GetAssetYTMByIDResponseEnvelope](docs/GetAssetYTMByIDResponseEnvelope.md)
  - [GetTopOfBookResponseEnvelope](docs/GetTopOfBookResponseEnvelope.md)
  - [IsolateCollateralRequest](docs/IsolateCollateralRequest.md)
  - [IsolateCollateralResponse](docs/IsolateCollateralResponse.md)
