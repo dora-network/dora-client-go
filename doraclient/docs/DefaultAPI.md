@@ -2878,7 +2878,7 @@ Name | Type | Description  | Notes
 
 ## GetUserCouponPaymentsStream
 
-> []StreamUserCouponPaymentsEntry GetUserCouponPaymentsStream(ctx, userId).Execute()
+> StreamUserCouponPaymentsResponse GetUserCouponPaymentsStream(ctx, userId).Execute()
 
 Stream user's coupon payment accruals in real time
 
@@ -2904,7 +2904,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.GetUserCouponPaymentsStream``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetUserCouponPaymentsStream`: []StreamUserCouponPaymentsEntry
+	// response from `GetUserCouponPaymentsStream`: StreamUserCouponPaymentsResponse
 	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.GetUserCouponPaymentsStream`: %v\n", resp)
 }
 ```
@@ -2928,7 +2928,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]StreamUserCouponPaymentsEntry**](StreamUserCouponPaymentsEntry.md)
+[**StreamUserCouponPaymentsResponse**](StreamUserCouponPaymentsResponse.md)
 
 ### Authorization
 

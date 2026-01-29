@@ -20,10 +20,11 @@ var _ MappedNullable = &PLSummary{}
 // PLSummary struct for PLSummary
 type PLSummary struct {
 	// The leverage used to obtain the position on the isolated account
-	Leverage *float64 `json:"leverage,omitempty"`
-	AccountEquity *float64 `json:"account_equity,omitempty"`
-	Available *float64 `json:"available,omitempty"`
-	Health *float64 `json:"health,omitempty"`
+	Leverage *string `json:"leverage,omitempty"`
+	AccountEquity *string `json:"account_equity,omitempty"`
+	Available *string `json:"available,omitempty"`
+	Health *string `json:"health,omitempty"`
+	Ltv *string `json:"ltv,omitempty"`
 }
 
 // NewPLSummary instantiates a new PLSummary object
@@ -44,9 +45,9 @@ func NewPLSummaryWithDefaults() *PLSummary {
 }
 
 // GetLeverage returns the Leverage field value if set, zero value otherwise.
-func (o *PLSummary) GetLeverage() float64 {
+func (o *PLSummary) GetLeverage() string {
 	if o == nil || IsNil(o.Leverage) {
-		var ret float64
+		var ret string
 		return ret
 	}
 	return *o.Leverage
@@ -54,7 +55,7 @@ func (o *PLSummary) GetLeverage() float64 {
 
 // GetLeverageOk returns a tuple with the Leverage field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PLSummary) GetLeverageOk() (*float64, bool) {
+func (o *PLSummary) GetLeverageOk() (*string, bool) {
 	if o == nil || IsNil(o.Leverage) {
 		return nil, false
 	}
@@ -70,15 +71,15 @@ func (o *PLSummary) HasLeverage() bool {
 	return false
 }
 
-// SetLeverage gets a reference to the given float64 and assigns it to the Leverage field.
-func (o *PLSummary) SetLeverage(v float64) {
+// SetLeverage gets a reference to the given string and assigns it to the Leverage field.
+func (o *PLSummary) SetLeverage(v string) {
 	o.Leverage = &v
 }
 
 // GetAccountEquity returns the AccountEquity field value if set, zero value otherwise.
-func (o *PLSummary) GetAccountEquity() float64 {
+func (o *PLSummary) GetAccountEquity() string {
 	if o == nil || IsNil(o.AccountEquity) {
-		var ret float64
+		var ret string
 		return ret
 	}
 	return *o.AccountEquity
@@ -86,7 +87,7 @@ func (o *PLSummary) GetAccountEquity() float64 {
 
 // GetAccountEquityOk returns a tuple with the AccountEquity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PLSummary) GetAccountEquityOk() (*float64, bool) {
+func (o *PLSummary) GetAccountEquityOk() (*string, bool) {
 	if o == nil || IsNil(o.AccountEquity) {
 		return nil, false
 	}
@@ -102,15 +103,15 @@ func (o *PLSummary) HasAccountEquity() bool {
 	return false
 }
 
-// SetAccountEquity gets a reference to the given float64 and assigns it to the AccountEquity field.
-func (o *PLSummary) SetAccountEquity(v float64) {
+// SetAccountEquity gets a reference to the given string and assigns it to the AccountEquity field.
+func (o *PLSummary) SetAccountEquity(v string) {
 	o.AccountEquity = &v
 }
 
 // GetAvailable returns the Available field value if set, zero value otherwise.
-func (o *PLSummary) GetAvailable() float64 {
+func (o *PLSummary) GetAvailable() string {
 	if o == nil || IsNil(o.Available) {
-		var ret float64
+		var ret string
 		return ret
 	}
 	return *o.Available
@@ -118,7 +119,7 @@ func (o *PLSummary) GetAvailable() float64 {
 
 // GetAvailableOk returns a tuple with the Available field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PLSummary) GetAvailableOk() (*float64, bool) {
+func (o *PLSummary) GetAvailableOk() (*string, bool) {
 	if o == nil || IsNil(o.Available) {
 		return nil, false
 	}
@@ -134,15 +135,15 @@ func (o *PLSummary) HasAvailable() bool {
 	return false
 }
 
-// SetAvailable gets a reference to the given float64 and assigns it to the Available field.
-func (o *PLSummary) SetAvailable(v float64) {
+// SetAvailable gets a reference to the given string and assigns it to the Available field.
+func (o *PLSummary) SetAvailable(v string) {
 	o.Available = &v
 }
 
 // GetHealth returns the Health field value if set, zero value otherwise.
-func (o *PLSummary) GetHealth() float64 {
+func (o *PLSummary) GetHealth() string {
 	if o == nil || IsNil(o.Health) {
-		var ret float64
+		var ret string
 		return ret
 	}
 	return *o.Health
@@ -150,7 +151,7 @@ func (o *PLSummary) GetHealth() float64 {
 
 // GetHealthOk returns a tuple with the Health field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PLSummary) GetHealthOk() (*float64, bool) {
+func (o *PLSummary) GetHealthOk() (*string, bool) {
 	if o == nil || IsNil(o.Health) {
 		return nil, false
 	}
@@ -166,9 +167,41 @@ func (o *PLSummary) HasHealth() bool {
 	return false
 }
 
-// SetHealth gets a reference to the given float64 and assigns it to the Health field.
-func (o *PLSummary) SetHealth(v float64) {
+// SetHealth gets a reference to the given string and assigns it to the Health field.
+func (o *PLSummary) SetHealth(v string) {
 	o.Health = &v
+}
+
+// GetLtv returns the Ltv field value if set, zero value otherwise.
+func (o *PLSummary) GetLtv() string {
+	if o == nil || IsNil(o.Ltv) {
+		var ret string
+		return ret
+	}
+	return *o.Ltv
+}
+
+// GetLtvOk returns a tuple with the Ltv field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PLSummary) GetLtvOk() (*string, bool) {
+	if o == nil || IsNil(o.Ltv) {
+		return nil, false
+	}
+	return o.Ltv, true
+}
+
+// HasLtv returns a boolean if a field has been set.
+func (o *PLSummary) HasLtv() bool {
+	if o != nil && !IsNil(o.Ltv) {
+		return true
+	}
+
+	return false
+}
+
+// SetLtv gets a reference to the given string and assigns it to the Ltv field.
+func (o *PLSummary) SetLtv(v string) {
+	o.Ltv = &v
 }
 
 func (o PLSummary) MarshalJSON() ([]byte, error) {
@@ -192,6 +225,9 @@ func (o PLSummary) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Health) {
 		toSerialize["health"] = o.Health
+	}
+	if !IsNil(o.Ltv) {
+		toSerialize["ltv"] = o.Ltv
 	}
 	return toSerialize, nil
 }

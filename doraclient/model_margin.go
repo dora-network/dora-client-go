@@ -20,11 +20,11 @@ var _ MappedNullable = &Margin{}
 // Margin struct for Margin
 type Margin struct {
 	// The total margin available from this position.
-	Available *float64 `json:"available,omitempty"`
+	Available *string `json:"available,omitempty"`
 	// The amount of margin used from this position.
-	Used *float64 `json:"used,omitempty"`
+	Used *string `json:"used,omitempty"`
 	// The margin remaining available from this position.
-	Remaining *float64 `json:"remaining,omitempty"`
+	Remaining *string `json:"remaining,omitempty"`
 }
 
 // NewMargin instantiates a new Margin object
@@ -45,9 +45,9 @@ func NewMarginWithDefaults() *Margin {
 }
 
 // GetAvailable returns the Available field value if set, zero value otherwise.
-func (o *Margin) GetAvailable() float64 {
+func (o *Margin) GetAvailable() string {
 	if o == nil || IsNil(o.Available) {
-		var ret float64
+		var ret string
 		return ret
 	}
 	return *o.Available
@@ -55,7 +55,7 @@ func (o *Margin) GetAvailable() float64 {
 
 // GetAvailableOk returns a tuple with the Available field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Margin) GetAvailableOk() (*float64, bool) {
+func (o *Margin) GetAvailableOk() (*string, bool) {
 	if o == nil || IsNil(o.Available) {
 		return nil, false
 	}
@@ -71,15 +71,15 @@ func (o *Margin) HasAvailable() bool {
 	return false
 }
 
-// SetAvailable gets a reference to the given float64 and assigns it to the Available field.
-func (o *Margin) SetAvailable(v float64) {
+// SetAvailable gets a reference to the given string and assigns it to the Available field.
+func (o *Margin) SetAvailable(v string) {
 	o.Available = &v
 }
 
 // GetUsed returns the Used field value if set, zero value otherwise.
-func (o *Margin) GetUsed() float64 {
+func (o *Margin) GetUsed() string {
 	if o == nil || IsNil(o.Used) {
-		var ret float64
+		var ret string
 		return ret
 	}
 	return *o.Used
@@ -87,7 +87,7 @@ func (o *Margin) GetUsed() float64 {
 
 // GetUsedOk returns a tuple with the Used field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Margin) GetUsedOk() (*float64, bool) {
+func (o *Margin) GetUsedOk() (*string, bool) {
 	if o == nil || IsNil(o.Used) {
 		return nil, false
 	}
@@ -103,15 +103,15 @@ func (o *Margin) HasUsed() bool {
 	return false
 }
 
-// SetUsed gets a reference to the given float64 and assigns it to the Used field.
-func (o *Margin) SetUsed(v float64) {
+// SetUsed gets a reference to the given string and assigns it to the Used field.
+func (o *Margin) SetUsed(v string) {
 	o.Used = &v
 }
 
 // GetRemaining returns the Remaining field value if set, zero value otherwise.
-func (o *Margin) GetRemaining() float64 {
+func (o *Margin) GetRemaining() string {
 	if o == nil || IsNil(o.Remaining) {
-		var ret float64
+		var ret string
 		return ret
 	}
 	return *o.Remaining
@@ -119,7 +119,7 @@ func (o *Margin) GetRemaining() float64 {
 
 // GetRemainingOk returns a tuple with the Remaining field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Margin) GetRemainingOk() (*float64, bool) {
+func (o *Margin) GetRemainingOk() (*string, bool) {
 	if o == nil || IsNil(o.Remaining) {
 		return nil, false
 	}
@@ -135,8 +135,8 @@ func (o *Margin) HasRemaining() bool {
 	return false
 }
 
-// SetRemaining gets a reference to the given float64 and assigns it to the Remaining field.
-func (o *Margin) SetRemaining(v float64) {
+// SetRemaining gets a reference to the given string and assigns it to the Remaining field.
+func (o *Margin) SetRemaining(v string) {
 	o.Remaining = &v
 }
 

@@ -6,20 +6,20 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Symbol** | Pointer to **string** | The symbol of the asset | [optional] 
 **Side** | Pointer to **string** | The side of the position (LONG or SHORT) | [optional] 
-**AvgEntryPrice** | Pointer to **float64** | The average entry price of the position | [optional] 
-**MarkPrice** | Pointer to **float64** | The current mark price for the asset to calculate daily PL. This is usually the close price of the previous day | [optional] 
-**LiquidationPrice** | Pointer to **float64** | The liquidation price of the position | [optional] 
-**Available** | Pointer to **float64** | The available quantity in units of the asset | [optional] 
-**Borrowed** | Pointer to **float64** | The borrowed quantity in units of the asset | [optional] 
+**AvgEntryPrice** | Pointer to **string** | The average entry price of the position | [optional] 
+**MarkPrice** | Pointer to **string** | The current mark price for the asset to calculate daily PL. This is usually the close price of the previous day | [optional] 
+**LiquidationPrice** | Pointer to **string** | The liquidation price of the position | [optional] 
+**Available** | Pointer to **string** | The available quantity in units of the asset | [optional] 
+**Borrowed** | Pointer to **string** | The borrowed quantity in units of the asset | [optional] 
 **Margin** | Pointer to [**Margin**](Margin.md) |  | [optional] 
-**UnrealizedPl** | Pointer to **float64** | The unrealized profit or loss of the position | [optional] 
-**LeverageLimit** | Pointer to **float64** | The leverage limit for the position | [optional] 
-**Tp** | Pointer to **float64** | The take profit price set for the position, if any | [optional] 
-**Sl** | Pointer to **float64** | The stop loss price set for the position, if any | [optional] 
-**InitialCapital** | Pointer to **float64** | The initial capital of the position | [optional] 
-**ImpendingBorrows** | Pointer to **float64** | The impending borrows of the position | [optional] 
-**Locked** | Pointer to **float64** | The locked amount of the position | [optional] 
-**UnusedCollateral** | Pointer to **float64** | The unused collateral of the position | [optional] 
+**UnrealizedPl** | Pointer to **string** | The unrealized profit or loss of the position | [optional] 
+**LeverageLimit** | Pointer to **string** | The leverage limit for the position | [optional] 
+**Tp** | Pointer to **string** | The take profit price set for the position, if any | [optional] 
+**Sl** | Pointer to **string** | The stop loss price set for the position, if any | [optional] 
+**InitialCapital** | Pointer to **string** | The initial capital of the position | [optional] 
+**ImpendingBorrows** | Pointer to **string** | The impending borrows of the position | [optional] 
+**Locked** | Pointer to **string** | The locked amount of the position | [optional] 
+**UnusedCollateral** | Pointer to **string** | The unused collateral of the position | [optional] 
 
 ## Methods
 
@@ -92,20 +92,20 @@ HasSide returns a boolean if a field has been set.
 
 ### GetAvgEntryPrice
 
-`func (o *PLAsset) GetAvgEntryPrice() float64`
+`func (o *PLAsset) GetAvgEntryPrice() string`
 
 GetAvgEntryPrice returns the AvgEntryPrice field if non-nil, zero value otherwise.
 
 ### GetAvgEntryPriceOk
 
-`func (o *PLAsset) GetAvgEntryPriceOk() (*float64, bool)`
+`func (o *PLAsset) GetAvgEntryPriceOk() (*string, bool)`
 
 GetAvgEntryPriceOk returns a tuple with the AvgEntryPrice field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAvgEntryPrice
 
-`func (o *PLAsset) SetAvgEntryPrice(v float64)`
+`func (o *PLAsset) SetAvgEntryPrice(v string)`
 
 SetAvgEntryPrice sets AvgEntryPrice field to given value.
 
@@ -117,20 +117,20 @@ HasAvgEntryPrice returns a boolean if a field has been set.
 
 ### GetMarkPrice
 
-`func (o *PLAsset) GetMarkPrice() float64`
+`func (o *PLAsset) GetMarkPrice() string`
 
 GetMarkPrice returns the MarkPrice field if non-nil, zero value otherwise.
 
 ### GetMarkPriceOk
 
-`func (o *PLAsset) GetMarkPriceOk() (*float64, bool)`
+`func (o *PLAsset) GetMarkPriceOk() (*string, bool)`
 
 GetMarkPriceOk returns a tuple with the MarkPrice field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMarkPrice
 
-`func (o *PLAsset) SetMarkPrice(v float64)`
+`func (o *PLAsset) SetMarkPrice(v string)`
 
 SetMarkPrice sets MarkPrice field to given value.
 
@@ -142,20 +142,20 @@ HasMarkPrice returns a boolean if a field has been set.
 
 ### GetLiquidationPrice
 
-`func (o *PLAsset) GetLiquidationPrice() float64`
+`func (o *PLAsset) GetLiquidationPrice() string`
 
 GetLiquidationPrice returns the LiquidationPrice field if non-nil, zero value otherwise.
 
 ### GetLiquidationPriceOk
 
-`func (o *PLAsset) GetLiquidationPriceOk() (*float64, bool)`
+`func (o *PLAsset) GetLiquidationPriceOk() (*string, bool)`
 
 GetLiquidationPriceOk returns a tuple with the LiquidationPrice field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetLiquidationPrice
 
-`func (o *PLAsset) SetLiquidationPrice(v float64)`
+`func (o *PLAsset) SetLiquidationPrice(v string)`
 
 SetLiquidationPrice sets LiquidationPrice field to given value.
 
@@ -167,20 +167,20 @@ HasLiquidationPrice returns a boolean if a field has been set.
 
 ### GetAvailable
 
-`func (o *PLAsset) GetAvailable() float64`
+`func (o *PLAsset) GetAvailable() string`
 
 GetAvailable returns the Available field if non-nil, zero value otherwise.
 
 ### GetAvailableOk
 
-`func (o *PLAsset) GetAvailableOk() (*float64, bool)`
+`func (o *PLAsset) GetAvailableOk() (*string, bool)`
 
 GetAvailableOk returns a tuple with the Available field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAvailable
 
-`func (o *PLAsset) SetAvailable(v float64)`
+`func (o *PLAsset) SetAvailable(v string)`
 
 SetAvailable sets Available field to given value.
 
@@ -192,20 +192,20 @@ HasAvailable returns a boolean if a field has been set.
 
 ### GetBorrowed
 
-`func (o *PLAsset) GetBorrowed() float64`
+`func (o *PLAsset) GetBorrowed() string`
 
 GetBorrowed returns the Borrowed field if non-nil, zero value otherwise.
 
 ### GetBorrowedOk
 
-`func (o *PLAsset) GetBorrowedOk() (*float64, bool)`
+`func (o *PLAsset) GetBorrowedOk() (*string, bool)`
 
 GetBorrowedOk returns a tuple with the Borrowed field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetBorrowed
 
-`func (o *PLAsset) SetBorrowed(v float64)`
+`func (o *PLAsset) SetBorrowed(v string)`
 
 SetBorrowed sets Borrowed field to given value.
 
@@ -242,20 +242,20 @@ HasMargin returns a boolean if a field has been set.
 
 ### GetUnrealizedPl
 
-`func (o *PLAsset) GetUnrealizedPl() float64`
+`func (o *PLAsset) GetUnrealizedPl() string`
 
 GetUnrealizedPl returns the UnrealizedPl field if non-nil, zero value otherwise.
 
 ### GetUnrealizedPlOk
 
-`func (o *PLAsset) GetUnrealizedPlOk() (*float64, bool)`
+`func (o *PLAsset) GetUnrealizedPlOk() (*string, bool)`
 
 GetUnrealizedPlOk returns a tuple with the UnrealizedPl field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetUnrealizedPl
 
-`func (o *PLAsset) SetUnrealizedPl(v float64)`
+`func (o *PLAsset) SetUnrealizedPl(v string)`
 
 SetUnrealizedPl sets UnrealizedPl field to given value.
 
@@ -267,20 +267,20 @@ HasUnrealizedPl returns a boolean if a field has been set.
 
 ### GetLeverageLimit
 
-`func (o *PLAsset) GetLeverageLimit() float64`
+`func (o *PLAsset) GetLeverageLimit() string`
 
 GetLeverageLimit returns the LeverageLimit field if non-nil, zero value otherwise.
 
 ### GetLeverageLimitOk
 
-`func (o *PLAsset) GetLeverageLimitOk() (*float64, bool)`
+`func (o *PLAsset) GetLeverageLimitOk() (*string, bool)`
 
 GetLeverageLimitOk returns a tuple with the LeverageLimit field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetLeverageLimit
 
-`func (o *PLAsset) SetLeverageLimit(v float64)`
+`func (o *PLAsset) SetLeverageLimit(v string)`
 
 SetLeverageLimit sets LeverageLimit field to given value.
 
@@ -292,20 +292,20 @@ HasLeverageLimit returns a boolean if a field has been set.
 
 ### GetTp
 
-`func (o *PLAsset) GetTp() float64`
+`func (o *PLAsset) GetTp() string`
 
 GetTp returns the Tp field if non-nil, zero value otherwise.
 
 ### GetTpOk
 
-`func (o *PLAsset) GetTpOk() (*float64, bool)`
+`func (o *PLAsset) GetTpOk() (*string, bool)`
 
 GetTpOk returns a tuple with the Tp field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTp
 
-`func (o *PLAsset) SetTp(v float64)`
+`func (o *PLAsset) SetTp(v string)`
 
 SetTp sets Tp field to given value.
 
@@ -317,20 +317,20 @@ HasTp returns a boolean if a field has been set.
 
 ### GetSl
 
-`func (o *PLAsset) GetSl() float64`
+`func (o *PLAsset) GetSl() string`
 
 GetSl returns the Sl field if non-nil, zero value otherwise.
 
 ### GetSlOk
 
-`func (o *PLAsset) GetSlOk() (*float64, bool)`
+`func (o *PLAsset) GetSlOk() (*string, bool)`
 
 GetSlOk returns a tuple with the Sl field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSl
 
-`func (o *PLAsset) SetSl(v float64)`
+`func (o *PLAsset) SetSl(v string)`
 
 SetSl sets Sl field to given value.
 
@@ -342,20 +342,20 @@ HasSl returns a boolean if a field has been set.
 
 ### GetInitialCapital
 
-`func (o *PLAsset) GetInitialCapital() float64`
+`func (o *PLAsset) GetInitialCapital() string`
 
 GetInitialCapital returns the InitialCapital field if non-nil, zero value otherwise.
 
 ### GetInitialCapitalOk
 
-`func (o *PLAsset) GetInitialCapitalOk() (*float64, bool)`
+`func (o *PLAsset) GetInitialCapitalOk() (*string, bool)`
 
 GetInitialCapitalOk returns a tuple with the InitialCapital field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetInitialCapital
 
-`func (o *PLAsset) SetInitialCapital(v float64)`
+`func (o *PLAsset) SetInitialCapital(v string)`
 
 SetInitialCapital sets InitialCapital field to given value.
 
@@ -367,20 +367,20 @@ HasInitialCapital returns a boolean if a field has been set.
 
 ### GetImpendingBorrows
 
-`func (o *PLAsset) GetImpendingBorrows() float64`
+`func (o *PLAsset) GetImpendingBorrows() string`
 
 GetImpendingBorrows returns the ImpendingBorrows field if non-nil, zero value otherwise.
 
 ### GetImpendingBorrowsOk
 
-`func (o *PLAsset) GetImpendingBorrowsOk() (*float64, bool)`
+`func (o *PLAsset) GetImpendingBorrowsOk() (*string, bool)`
 
 GetImpendingBorrowsOk returns a tuple with the ImpendingBorrows field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetImpendingBorrows
 
-`func (o *PLAsset) SetImpendingBorrows(v float64)`
+`func (o *PLAsset) SetImpendingBorrows(v string)`
 
 SetImpendingBorrows sets ImpendingBorrows field to given value.
 
@@ -392,20 +392,20 @@ HasImpendingBorrows returns a boolean if a field has been set.
 
 ### GetLocked
 
-`func (o *PLAsset) GetLocked() float64`
+`func (o *PLAsset) GetLocked() string`
 
 GetLocked returns the Locked field if non-nil, zero value otherwise.
 
 ### GetLockedOk
 
-`func (o *PLAsset) GetLockedOk() (*float64, bool)`
+`func (o *PLAsset) GetLockedOk() (*string, bool)`
 
 GetLockedOk returns a tuple with the Locked field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetLocked
 
-`func (o *PLAsset) SetLocked(v float64)`
+`func (o *PLAsset) SetLocked(v string)`
 
 SetLocked sets Locked field to given value.
 
@@ -417,20 +417,20 @@ HasLocked returns a boolean if a field has been set.
 
 ### GetUnusedCollateral
 
-`func (o *PLAsset) GetUnusedCollateral() float64`
+`func (o *PLAsset) GetUnusedCollateral() string`
 
 GetUnusedCollateral returns the UnusedCollateral field if non-nil, zero value otherwise.
 
 ### GetUnusedCollateralOk
 
-`func (o *PLAsset) GetUnusedCollateralOk() (*float64, bool)`
+`func (o *PLAsset) GetUnusedCollateralOk() (*string, bool)`
 
 GetUnusedCollateralOk returns a tuple with the UnusedCollateral field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetUnusedCollateral
 
-`func (o *PLAsset) SetUnusedCollateral(v float64)`
+`func (o *PLAsset) SetUnusedCollateral(v string)`
 
 SetUnusedCollateral sets UnusedCollateral field to given value.
 

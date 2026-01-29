@@ -22,7 +22,7 @@ var _ MappedNullable = &FundUserRequest{}
 // FundUserRequest struct for FundUserRequest
 type FundUserRequest struct {
 	AssetId string `json:"asset_id"`
-	Quantity float64 `json:"quantity"`
+	Quantity string `json:"quantity"`
 }
 
 type _FundUserRequest FundUserRequest
@@ -31,7 +31,7 @@ type _FundUserRequest FundUserRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFundUserRequest(assetId string, quantity float64) *FundUserRequest {
+func NewFundUserRequest(assetId string, quantity string) *FundUserRequest {
 	this := FundUserRequest{}
 	this.AssetId = assetId
 	this.Quantity = quantity
@@ -71,9 +71,9 @@ func (o *FundUserRequest) SetAssetId(v string) {
 }
 
 // GetQuantity returns the Quantity field value
-func (o *FundUserRequest) GetQuantity() float64 {
+func (o *FundUserRequest) GetQuantity() string {
 	if o == nil {
-		var ret float64
+		var ret string
 		return ret
 	}
 
@@ -82,7 +82,7 @@ func (o *FundUserRequest) GetQuantity() float64 {
 
 // GetQuantityOk returns a tuple with the Quantity field value
 // and a boolean to check if the value has been set.
-func (o *FundUserRequest) GetQuantityOk() (*float64, bool) {
+func (o *FundUserRequest) GetQuantityOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -90,7 +90,7 @@ func (o *FundUserRequest) GetQuantityOk() (*float64, bool) {
 }
 
 // SetQuantity sets field value
-func (o *FundUserRequest) SetQuantity(v float64) {
+func (o *FundUserRequest) SetQuantity(v string) {
 	o.Quantity = v
 }
 

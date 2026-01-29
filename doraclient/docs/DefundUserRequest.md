@@ -5,13 +5,13 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AssetId** | **string** |  | 
-**Quantity** | **float64** |  | 
+**Quantity** | **string** |  | 
 
 ## Methods
 
 ### NewDefundUserRequest
 
-`func NewDefundUserRequest(assetId string, quantity float64, ) *DefundUserRequest`
+`func NewDefundUserRequest(assetId string, quantity string, ) *DefundUserRequest`
 
 NewDefundUserRequest instantiates a new DefundUserRequest object
 This constructor will assign default values to properties that have it defined,
@@ -48,20 +48,20 @@ SetAssetId sets AssetId field to given value.
 
 ### GetQuantity
 
-`func (o *DefundUserRequest) GetQuantity() float64`
+`func (o *DefundUserRequest) GetQuantity() string`
 
 GetQuantity returns the Quantity field if non-nil, zero value otherwise.
 
 ### GetQuantityOk
 
-`func (o *DefundUserRequest) GetQuantityOk() (*float64, bool)`
+`func (o *DefundUserRequest) GetQuantityOk() (*string, bool)`
 
 GetQuantityOk returns a tuple with the Quantity field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetQuantity
 
-`func (o *DefundUserRequest) SetQuantity(v float64)`
+`func (o *DefundUserRequest) SetQuantity(v string)`
 
 SetQuantity sets Quantity field to given value.
 

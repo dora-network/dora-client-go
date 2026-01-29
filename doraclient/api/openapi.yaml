@@ -3294,9 +3294,9 @@ components:
         collateral_weight: 6.027456183070403
         decimals: 1
         yield: 9.301444243932576
+        liquidation_weight: 5.637376656633329
         max_supply: 2
         name: name
-        liquidation_threshold: 5.637376656633329
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         can_direct_borrow: true
         can_trade: true
@@ -3315,7 +3315,7 @@ components:
           type: integer
         description:
           type: string
-        liquidation_threshold:
+        liquidation_weight:
           type: number
         maturity_id:
           format: uuid
@@ -3443,9 +3443,9 @@ components:
           collateral_weight: 6.027456183070403
           decimals: 1
           yield: 9.301444243932576
+          liquidation_weight: 5.637376656633329
           max_supply: 2
           name: name
-          liquidation_threshold: 5.637376656633329
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           can_direct_borrow: true
           can_trade: true
@@ -3477,9 +3477,9 @@ components:
           collateral_weight: 6.027456183070403
           decimals: 1
           yield: 9.301444243932576
+          liquidation_weight: 5.637376656633329
           max_supply: 2
           name: name
-          liquidation_threshold: 5.637376656633329
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           can_direct_borrow: true
           can_trade: true
@@ -3526,9 +3526,9 @@ components:
           collateral_weight: 6.027456183070403
           decimals: 1
           yield: 9.301444243932576
+          liquidation_weight: 5.637376656633329
           max_supply: 2
           name: name
-          liquidation_threshold: 5.637376656633329
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           can_direct_borrow: true
           can_trade: true
@@ -3646,10 +3646,8 @@ components:
           format: int64
           type: integer
         pending:
-          format: decimal
           type: string
         completed:
-          format: decimal
           type: string
         started_at:
           format: date-time
@@ -3657,6 +3655,37 @@ components:
         ended_at:
           format: date-time
           type: string
+    UserCouponPaymentAssetSummary:
+      example:
+        pending: pending
+        asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        completed: completed
+      properties:
+        asset_id:
+          format: uuid
+          type: string
+        pending:
+          type: string
+        completed:
+          type: string
+    UserCouponPaymentsResponseData:
+      properties:
+        coupon_payments:
+          items:
+            $ref: "#/components/schemas/UserCouponPayment"
+          type: array
+        summary_by_asset:
+          items:
+            $ref: "#/components/schemas/UserCouponPaymentAssetSummary"
+          type: array
+    ListUserCouponPaymentsResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            $ref: "#/components/schemas/UserCouponPaymentsResponseData"
+    ListUserCouponPaymentsResponse:
+      $ref: "#/components/schemas/ListUserCouponPaymentsResponseEnvelope"
     ListCouponPaymentsResponseEnvelope:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
@@ -4897,9 +4926,46 @@ components:
           position_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         Time: 2000-01-23T04:56:07.000+00:00
     StreamUserCouponPaymentsResponse:
-      items:
-        $ref: "#/components/schemas/StreamUserCouponPaymentsEntry"
-      type: array
+      example:
+        entries:
+        - Val:
+            user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            pending: pending
+            coupon_payment_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            started_at: 2000-01-23T04:56:07.000+00:00
+            asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            completed: completed
+            seq: 0
+            ended_at: 2000-01-23T04:56:07.000+00:00
+            position_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          Time: 2000-01-23T04:56:07.000+00:00
+        - Val:
+            user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            pending: pending
+            coupon_payment_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            started_at: 2000-01-23T04:56:07.000+00:00
+            asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            completed: completed
+            seq: 0
+            ended_at: 2000-01-23T04:56:07.000+00:00
+            position_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          Time: 2000-01-23T04:56:07.000+00:00
+        summary_by_asset:
+        - pending: pending
+          asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          completed: completed
+        - pending: pending
+          asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          completed: completed
+      properties:
+        entries:
+          items:
+            $ref: "#/components/schemas/StreamUserCouponPaymentsEntry"
+          type: array
+        summary_by_asset:
+          items:
+            $ref: "#/components/schemas/UserCouponPaymentAssetSummary"
+          type: array
     TransformedAssets:
       example:
         gained:
@@ -5203,7 +5269,6 @@ components:
           format: uuid
           type: string
         quantity:
-          format: decimal
           type: string
       required:
       - asset_id
@@ -5217,7 +5282,6 @@ components:
           format: uuid
           type: string
         quantity:
-          format: decimal
           type: string
       required:
       - asset_id
@@ -5790,9 +5854,9 @@ components:
           collateral_weight: 6.027456183070403
           decimals: 1
           yield: 9.301444243932576
+          liquidation_weight: 5.637376656633329
           max_supply: 2
           name: name
-          liquidation_threshold: 5.637376656633329
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           can_direct_borrow: true
           can_trade: true
@@ -7024,15 +7088,12 @@ components:
       properties:
         available:
           description: The total margin available from this position.
-          format: decimal
           type: string
         used:
           description: The amount of margin used from this position.
-          format: decimal
           type: string
         remaining:
           description: The margin remaining available from this position.
-          format: decimal
           type: string
     PLAsset:
       example:
@@ -7067,58 +7128,45 @@ components:
           type: string
         avg_entry_price:
           description: The average entry price of the position
-          format: decimal
           type: string
         mark_price:
           description: The current mark price for the asset to calculate daily PL.
             This is usually the close price of the previous day
-          format: decimal
           type: string
         liquidation_price:
           description: The liquidation price of the position
-          format: decimal
           type: string
         available:
           description: The available quantity in units of the asset
-          format: decimal
           type: string
         borrowed:
           description: The borrowed quantity in units of the asset
-          format: decimal
           type: string
         margin:
           $ref: "#/components/schemas/Margin"
         unrealized_pl:
           description: The unrealized profit or loss of the position
-          format: decimal
           type: string
         leverage_limit:
           description: The leverage limit for the position
-          format: decimal
           type: string
         tp:
           description: "The take profit price set for the position, if any"
-          format: decimal
           type: string
         sl:
           description: "The stop loss price set for the position, if any"
-          format: decimal
           type: string
         initial_capital:
           description: The initial capital of the position
-          format: decimal
           type: string
         impending_borrows:
           description: The impending borrows of the position
-          format: decimal
           type: string
         locked:
           description: The locked amount of the position
-          format: decimal
           type: string
         unused_collateral:
           description: The unused collateral of the position
-          format: decimal
           type: string
     PLSummary:
       example:
@@ -7126,19 +7174,18 @@ components:
         available: available
         health: health
         account_equity: account_equity
+        ltv: ltv
       properties:
         leverage:
           description: The leverage used to obtain the position on the isolated account
-          format: decimal
           type: string
         account_equity:
-          format: decimal
           type: string
         available:
-          format: decimal
           type: string
         health:
-          format: decimal
+          type: string
+        ltv:
           type: string
     PLAccount:
       example:
@@ -7147,6 +7194,7 @@ components:
           available: available
           health: health
           account_equity: account_equity
+          ltv: ltv
         account_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         assets:
         - liquidation_price: liquidation_price
@@ -7227,6 +7275,7 @@ components:
             available: available
             health: health
             account_equity: account_equity
+            ltv: ltv
           account_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           assets:
           - liquidation_price: liquidation_price
@@ -7274,6 +7323,7 @@ components:
             available: available
             health: health
             account_equity: account_equity
+            ltv: ltv
           account_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           assets:
           - liquidation_price: liquidation_price
@@ -7372,6 +7422,8 @@ components:
           format: uuid
           type: string
         price:
+          type: string
+        ytm:
           type: string
         time:
           format: date-time

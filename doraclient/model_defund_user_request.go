@@ -22,7 +22,7 @@ var _ MappedNullable = &DefundUserRequest{}
 // DefundUserRequest struct for DefundUserRequest
 type DefundUserRequest struct {
 	AssetId string `json:"asset_id"`
-	Quantity float64 `json:"quantity"`
+	Quantity string `json:"quantity"`
 }
 
 type _DefundUserRequest DefundUserRequest
@@ -31,7 +31,7 @@ type _DefundUserRequest DefundUserRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDefundUserRequest(assetId string, quantity float64) *DefundUserRequest {
+func NewDefundUserRequest(assetId string, quantity string) *DefundUserRequest {
 	this := DefundUserRequest{}
 	this.AssetId = assetId
 	this.Quantity = quantity
@@ -71,9 +71,9 @@ func (o *DefundUserRequest) SetAssetId(v string) {
 }
 
 // GetQuantity returns the Quantity field value
-func (o *DefundUserRequest) GetQuantity() float64 {
+func (o *DefundUserRequest) GetQuantity() string {
 	if o == nil {
-		var ret float64
+		var ret string
 		return ret
 	}
 
@@ -82,7 +82,7 @@ func (o *DefundUserRequest) GetQuantity() float64 {
 
 // GetQuantityOk returns a tuple with the Quantity field value
 // and a boolean to check if the value has been set.
-func (o *DefundUserRequest) GetQuantityOk() (*float64, bool) {
+func (o *DefundUserRequest) GetQuantityOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -90,7 +90,7 @@ func (o *DefundUserRequest) GetQuantityOk() (*float64, bool) {
 }
 
 // SetQuantity sets field value
-func (o *DefundUserRequest) SetQuantity(v float64) {
+func (o *DefundUserRequest) SetQuantity(v string) {
 	o.Quantity = v
 }
 

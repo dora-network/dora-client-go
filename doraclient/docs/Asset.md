@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **Decimals** | Pointer to **int32** |  | [optional] 
 **FractionalizedUnits** | Pointer to **int32** |  | [optional] 
 **Description** | Pointer to **string** |  | [optional] 
-**LiquidationThreshold** | Pointer to **float32** |  | [optional] 
+**LiquidationWeight** | Pointer to **float32** |  | [optional] 
 **MaturityId** | Pointer to **string** |  | [optional] 
 **MaxSupply** | Pointer to **int32** |  | [optional] 
 **MaxUtilization** | Pointer to **int32** |  | [optional] 
@@ -195,30 +195,30 @@ SetDescription sets Description field to given value.
 
 HasDescription returns a boolean if a field has been set.
 
-### GetLiquidationThreshold
+### GetLiquidationWeight
 
-`func (o *Asset) GetLiquidationThreshold() float32`
+`func (o *Asset) GetLiquidationWeight() float32`
 
-GetLiquidationThreshold returns the LiquidationThreshold field if non-nil, zero value otherwise.
+GetLiquidationWeight returns the LiquidationWeight field if non-nil, zero value otherwise.
 
-### GetLiquidationThresholdOk
+### GetLiquidationWeightOk
 
-`func (o *Asset) GetLiquidationThresholdOk() (*float32, bool)`
+`func (o *Asset) GetLiquidationWeightOk() (*float32, bool)`
 
-GetLiquidationThresholdOk returns a tuple with the LiquidationThreshold field if it's non-nil, zero value otherwise
+GetLiquidationWeightOk returns a tuple with the LiquidationWeight field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetLiquidationThreshold
+### SetLiquidationWeight
 
-`func (o *Asset) SetLiquidationThreshold(v float32)`
+`func (o *Asset) SetLiquidationWeight(v float32)`
 
-SetLiquidationThreshold sets LiquidationThreshold field to given value.
+SetLiquidationWeight sets LiquidationWeight field to given value.
 
-### HasLiquidationThreshold
+### HasLiquidationWeight
 
-`func (o *Asset) HasLiquidationThreshold() bool`
+`func (o *Asset) HasLiquidationWeight() bool`
 
-HasLiquidationThreshold returns a boolean if a field has been set.
+HasLiquidationWeight returns a boolean if a field has been set.
 
 ### GetMaturityId
 

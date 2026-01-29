@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Available** | Pointer to **float64** | The total margin available from this position. | [optional] 
-**Used** | Pointer to **float64** | The amount of margin used from this position. | [optional] 
-**Remaining** | Pointer to **float64** | The margin remaining available from this position. | [optional] 
+**Available** | Pointer to **string** | The total margin available from this position. | [optional] 
+**Used** | Pointer to **string** | The amount of margin used from this position. | [optional] 
+**Remaining** | Pointer to **string** | The margin remaining available from this position. | [optional] 
 
 ## Methods
 
@@ -29,20 +29,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetAvailable
 
-`func (o *Margin) GetAvailable() float64`
+`func (o *Margin) GetAvailable() string`
 
 GetAvailable returns the Available field if non-nil, zero value otherwise.
 
 ### GetAvailableOk
 
-`func (o *Margin) GetAvailableOk() (*float64, bool)`
+`func (o *Margin) GetAvailableOk() (*string, bool)`
 
 GetAvailableOk returns a tuple with the Available field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAvailable
 
-`func (o *Margin) SetAvailable(v float64)`
+`func (o *Margin) SetAvailable(v string)`
 
 SetAvailable sets Available field to given value.
 
@@ -54,20 +54,20 @@ HasAvailable returns a boolean if a field has been set.
 
 ### GetUsed
 
-`func (o *Margin) GetUsed() float64`
+`func (o *Margin) GetUsed() string`
 
 GetUsed returns the Used field if non-nil, zero value otherwise.
 
 ### GetUsedOk
 
-`func (o *Margin) GetUsedOk() (*float64, bool)`
+`func (o *Margin) GetUsedOk() (*string, bool)`
 
 GetUsedOk returns a tuple with the Used field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetUsed
 
-`func (o *Margin) SetUsed(v float64)`
+`func (o *Margin) SetUsed(v string)`
 
 SetUsed sets Used field to given value.
 
@@ -79,20 +79,20 @@ HasUsed returns a boolean if a field has been set.
 
 ### GetRemaining
 
-`func (o *Margin) GetRemaining() float64`
+`func (o *Margin) GetRemaining() string`
 
 GetRemaining returns the Remaining field if non-nil, zero value otherwise.
 
 ### GetRemainingOk
 
-`func (o *Margin) GetRemainingOk() (*float64, bool)`
+`func (o *Margin) GetRemainingOk() (*string, bool)`
 
 GetRemainingOk returns a tuple with the Remaining field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetRemaining
 
-`func (o *Margin) SetRemaining(v float64)`
+`func (o *Margin) SetRemaining(v string)`
 
 SetRemaining sets Remaining field to given value.
 

@@ -9,8 +9,8 @@ Name | Type | Description | Notes
 **AssetId** | Pointer to **string** |  | [optional] 
 **CouponPaymentId** | Pointer to **string** |  | [optional] 
 **Seq** | Pointer to **int64** |  | [optional] 
-**Pending** | Pointer to **float64** |  | [optional] 
-**Completed** | Pointer to **float64** |  | [optional] 
+**Pending** | Pointer to **string** |  | [optional] 
+**Completed** | Pointer to **string** |  | [optional] 
 **StartedAt** | Pointer to **time.Time** |  | [optional] 
 **EndedAt** | Pointer to **time.Time** |  | [optional] 
 
@@ -160,20 +160,20 @@ HasSeq returns a boolean if a field has been set.
 
 ### GetPending
 
-`func (o *UserCouponPayment) GetPending() float64`
+`func (o *UserCouponPayment) GetPending() string`
 
 GetPending returns the Pending field if non-nil, zero value otherwise.
 
 ### GetPendingOk
 
-`func (o *UserCouponPayment) GetPendingOk() (*float64, bool)`
+`func (o *UserCouponPayment) GetPendingOk() (*string, bool)`
 
 GetPendingOk returns a tuple with the Pending field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPending
 
-`func (o *UserCouponPayment) SetPending(v float64)`
+`func (o *UserCouponPayment) SetPending(v string)`
 
 SetPending sets Pending field to given value.
 
@@ -185,20 +185,20 @@ HasPending returns a boolean if a field has been set.
 
 ### GetCompleted
 
-`func (o *UserCouponPayment) GetCompleted() float64`
+`func (o *UserCouponPayment) GetCompleted() string`
 
 GetCompleted returns the Completed field if non-nil, zero value otherwise.
 
 ### GetCompletedOk
 
-`func (o *UserCouponPayment) GetCompletedOk() (*float64, bool)`
+`func (o *UserCouponPayment) GetCompletedOk() (*string, bool)`
 
 GetCompletedOk returns a tuple with the Completed field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCompleted
 
-`func (o *UserCouponPayment) SetCompleted(v float64)`
+`func (o *UserCouponPayment) SetCompleted(v string)`
 
 SetCompleted sets Completed field to given value.
 

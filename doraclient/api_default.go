@@ -6138,7 +6138,7 @@ type ApiGetUserCouponPaymentsStreamRequest struct {
 	userId string
 }
 
-func (r ApiGetUserCouponPaymentsStreamRequest) Execute() ([]StreamUserCouponPaymentsEntry, *http.Response, error) {
+func (r ApiGetUserCouponPaymentsStreamRequest) Execute() (*StreamUserCouponPaymentsResponse, *http.Response, error) {
 	return r.ApiService.GetUserCouponPaymentsStreamExecute(r)
 }
 
@@ -6158,13 +6158,13 @@ func (a *DefaultAPIService) GetUserCouponPaymentsStream(ctx context.Context, use
 }
 
 // Execute executes the request
-//  @return []StreamUserCouponPaymentsEntry
-func (a *DefaultAPIService) GetUserCouponPaymentsStreamExecute(r ApiGetUserCouponPaymentsStreamRequest) ([]StreamUserCouponPaymentsEntry, *http.Response, error) {
+//  @return StreamUserCouponPaymentsResponse
+func (a *DefaultAPIService) GetUserCouponPaymentsStreamExecute(r ApiGetUserCouponPaymentsStreamRequest) (*StreamUserCouponPaymentsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  []StreamUserCouponPaymentsEntry
+		localVarReturnValue  *StreamUserCouponPaymentsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DefaultAPIService.GetUserCouponPaymentsStream")

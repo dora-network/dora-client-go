@@ -26,7 +26,7 @@ type Asset struct {
 	Decimals *int32 `json:"decimals,omitempty"`
 	FractionalizedUnits *int32 `json:"fractionalized_units,omitempty"`
 	Description *string `json:"description,omitempty"`
-	LiquidationThreshold *float32 `json:"liquidation_threshold,omitempty"`
+	LiquidationWeight *float32 `json:"liquidation_weight,omitempty"`
 	MaturityId *string `json:"maturity_id,omitempty"`
 	MaxSupply *int32 `json:"max_supply,omitempty"`
 	MaxUtilization *int32 `json:"max_utilization,omitempty"`
@@ -252,36 +252,36 @@ func (o *Asset) SetDescription(v string) {
 	o.Description = &v
 }
 
-// GetLiquidationThreshold returns the LiquidationThreshold field value if set, zero value otherwise.
-func (o *Asset) GetLiquidationThreshold() float32 {
-	if o == nil || IsNil(o.LiquidationThreshold) {
+// GetLiquidationWeight returns the LiquidationWeight field value if set, zero value otherwise.
+func (o *Asset) GetLiquidationWeight() float32 {
+	if o == nil || IsNil(o.LiquidationWeight) {
 		var ret float32
 		return ret
 	}
-	return *o.LiquidationThreshold
+	return *o.LiquidationWeight
 }
 
-// GetLiquidationThresholdOk returns a tuple with the LiquidationThreshold field value if set, nil otherwise
+// GetLiquidationWeightOk returns a tuple with the LiquidationWeight field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Asset) GetLiquidationThresholdOk() (*float32, bool) {
-	if o == nil || IsNil(o.LiquidationThreshold) {
+func (o *Asset) GetLiquidationWeightOk() (*float32, bool) {
+	if o == nil || IsNil(o.LiquidationWeight) {
 		return nil, false
 	}
-	return o.LiquidationThreshold, true
+	return o.LiquidationWeight, true
 }
 
-// HasLiquidationThreshold returns a boolean if a field has been set.
-func (o *Asset) HasLiquidationThreshold() bool {
-	if o != nil && !IsNil(o.LiquidationThreshold) {
+// HasLiquidationWeight returns a boolean if a field has been set.
+func (o *Asset) HasLiquidationWeight() bool {
+	if o != nil && !IsNil(o.LiquidationWeight) {
 		return true
 	}
 
 	return false
 }
 
-// SetLiquidationThreshold gets a reference to the given float32 and assigns it to the LiquidationThreshold field.
-func (o *Asset) SetLiquidationThreshold(v float32) {
-	o.LiquidationThreshold = &v
+// SetLiquidationWeight gets a reference to the given float32 and assigns it to the LiquidationWeight field.
+func (o *Asset) SetLiquidationWeight(v float32) {
+	o.LiquidationWeight = &v
 }
 
 // GetMaturityId returns the MaturityId field value if set, zero value otherwise.
@@ -760,8 +760,8 @@ func (o Asset) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
-	if !IsNil(o.LiquidationThreshold) {
-		toSerialize["liquidation_threshold"] = o.LiquidationThreshold
+	if !IsNil(o.LiquidationWeight) {
+		toSerialize["liquidation_weight"] = o.LiquidationWeight
 	}
 	if !IsNil(o.MaturityId) {
 		toSerialize["maturity_id"] = o.MaturityId

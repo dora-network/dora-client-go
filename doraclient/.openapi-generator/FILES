@@ -73,6 +73,7 @@ docs/ListPositionAccountsResponseEnvelope.md
 docs/ListPositionsResponse.md
 docs/ListTradeResponseEnvelope.md
 docs/ListTransactionsResponseEnvelope.md
+docs/ListUserCouponPaymentsResponseEnvelope.md
 docs/LiveOrderbook.md
 docs/Margin.md
 docs/Metadata.md
@@ -131,6 +132,7 @@ docs/StreamPositionsEntry.md
 docs/StreamTradesEntry.md
 docs/StreamTransactionsEntry.md
 docs/StreamUserCouponPaymentsEntry.md
+docs/StreamUserCouponPaymentsResponse.md
 docs/StreamedAssetPrice.md
 docs/Supply.md
 docs/SupplyRequest.md
@@ -158,6 +160,8 @@ docs/UserBalanceResponseEnvelope.md
 docs/UserConfig.md
 docs/UserConfigResponseEnvelope.md
 docs/UserCouponPayment.md
+docs/UserCouponPaymentAssetSummary.md
+docs/UserCouponPaymentsResponseData.md
 docs/UserCreatedResponseEnvelope.md
 docs/UserDeletedResponseEnvelope.md
 docs/UserEnvelope.md
@@ -243,6 +247,7 @@ model_list_position_accounts_response_envelope.go
 model_list_positions_response.go
 model_list_trade_response_envelope.go
 model_list_transactions_response_envelope.go
+model_list_user_coupon_payments_response_envelope.go
 model_live_orderbook.go
 model_margin.go
 model_metadata.go
@@ -301,6 +306,7 @@ model_stream_positions_entry.go
 model_stream_trades_entry.go
 model_stream_transactions_entry.go
 model_stream_user_coupon_payments_entry.go
+model_stream_user_coupon_payments_response.go
 model_streamed_asset_price.go
 model_supply.go
 model_supply_request.go
@@ -328,6 +334,8 @@ model_user_balance_response_envelope.go
 model_user_config.go
 model_user_config_response_envelope.go
 model_user_coupon_payment.go
+model_user_coupon_payment_asset_summary.go
+model_user_coupon_payments_response_data.go
 model_user_created_response_envelope.go
 model_user_deleted_response_envelope.go
 model_user_envelope.go

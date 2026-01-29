@@ -24,32 +24,32 @@ type PLAsset struct {
 	// The side of the position (LONG or SHORT)
 	Side *string `json:"side,omitempty"`
 	// The average entry price of the position
-	AvgEntryPrice *float64 `json:"avg_entry_price,omitempty"`
+	AvgEntryPrice *string `json:"avg_entry_price,omitempty"`
 	// The current mark price for the asset to calculate daily PL. This is usually the close price of the previous day
-	MarkPrice *float64 `json:"mark_price,omitempty"`
+	MarkPrice *string `json:"mark_price,omitempty"`
 	// The liquidation price of the position
-	LiquidationPrice *float64 `json:"liquidation_price,omitempty"`
+	LiquidationPrice *string `json:"liquidation_price,omitempty"`
 	// The available quantity in units of the asset
-	Available *float64 `json:"available,omitempty"`
+	Available *string `json:"available,omitempty"`
 	// The borrowed quantity in units of the asset
-	Borrowed *float64 `json:"borrowed,omitempty"`
+	Borrowed *string `json:"borrowed,omitempty"`
 	Margin *Margin `json:"margin,omitempty"`
 	// The unrealized profit or loss of the position
-	UnrealizedPl *float64 `json:"unrealized_pl,omitempty"`
+	UnrealizedPl *string `json:"unrealized_pl,omitempty"`
 	// The leverage limit for the position
-	LeverageLimit *float64 `json:"leverage_limit,omitempty"`
+	LeverageLimit *string `json:"leverage_limit,omitempty"`
 	// The take profit price set for the position, if any
-	Tp *float64 `json:"tp,omitempty"`
+	Tp *string `json:"tp,omitempty"`
 	// The stop loss price set for the position, if any
-	Sl *float64 `json:"sl,omitempty"`
+	Sl *string `json:"sl,omitempty"`
 	// The initial capital of the position
-	InitialCapital *float64 `json:"initial_capital,omitempty"`
+	InitialCapital *string `json:"initial_capital,omitempty"`
 	// The impending borrows of the position
-	ImpendingBorrows *float64 `json:"impending_borrows,omitempty"`
+	ImpendingBorrows *string `json:"impending_borrows,omitempty"`
 	// The locked amount of the position
-	Locked *float64 `json:"locked,omitempty"`
+	Locked *string `json:"locked,omitempty"`
 	// The unused collateral of the position
-	UnusedCollateral *float64 `json:"unused_collateral,omitempty"`
+	UnusedCollateral *string `json:"unused_collateral,omitempty"`
 }
 
 // NewPLAsset instantiates a new PLAsset object
@@ -134,9 +134,9 @@ func (o *PLAsset) SetSide(v string) {
 }
 
 // GetAvgEntryPrice returns the AvgEntryPrice field value if set, zero value otherwise.
-func (o *PLAsset) GetAvgEntryPrice() float64 {
+func (o *PLAsset) GetAvgEntryPrice() string {
 	if o == nil || IsNil(o.AvgEntryPrice) {
-		var ret float64
+		var ret string
 		return ret
 	}
 	return *o.AvgEntryPrice
@@ -144,7 +144,7 @@ func (o *PLAsset) GetAvgEntryPrice() float64 {
 
 // GetAvgEntryPriceOk returns a tuple with the AvgEntryPrice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PLAsset) GetAvgEntryPriceOk() (*float64, bool) {
+func (o *PLAsset) GetAvgEntryPriceOk() (*string, bool) {
 	if o == nil || IsNil(o.AvgEntryPrice) {
 		return nil, false
 	}
@@ -160,15 +160,15 @@ func (o *PLAsset) HasAvgEntryPrice() bool {
 	return false
 }
 
-// SetAvgEntryPrice gets a reference to the given float64 and assigns it to the AvgEntryPrice field.
-func (o *PLAsset) SetAvgEntryPrice(v float64) {
+// SetAvgEntryPrice gets a reference to the given string and assigns it to the AvgEntryPrice field.
+func (o *PLAsset) SetAvgEntryPrice(v string) {
 	o.AvgEntryPrice = &v
 }
 
 // GetMarkPrice returns the MarkPrice field value if set, zero value otherwise.
-func (o *PLAsset) GetMarkPrice() float64 {
+func (o *PLAsset) GetMarkPrice() string {
 	if o == nil || IsNil(o.MarkPrice) {
-		var ret float64
+		var ret string
 		return ret
 	}
 	return *o.MarkPrice
@@ -176,7 +176,7 @@ func (o *PLAsset) GetMarkPrice() float64 {
 
 // GetMarkPriceOk returns a tuple with the MarkPrice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PLAsset) GetMarkPriceOk() (*float64, bool) {
+func (o *PLAsset) GetMarkPriceOk() (*string, bool) {
 	if o == nil || IsNil(o.MarkPrice) {
 		return nil, false
 	}
@@ -192,15 +192,15 @@ func (o *PLAsset) HasMarkPrice() bool {
 	return false
 }
 
-// SetMarkPrice gets a reference to the given float64 and assigns it to the MarkPrice field.
-func (o *PLAsset) SetMarkPrice(v float64) {
+// SetMarkPrice gets a reference to the given string and assigns it to the MarkPrice field.
+func (o *PLAsset) SetMarkPrice(v string) {
 	o.MarkPrice = &v
 }
 
 // GetLiquidationPrice returns the LiquidationPrice field value if set, zero value otherwise.
-func (o *PLAsset) GetLiquidationPrice() float64 {
+func (o *PLAsset) GetLiquidationPrice() string {
 	if o == nil || IsNil(o.LiquidationPrice) {
-		var ret float64
+		var ret string
 		return ret
 	}
 	return *o.LiquidationPrice
@@ -208,7 +208,7 @@ func (o *PLAsset) GetLiquidationPrice() float64 {
 
 // GetLiquidationPriceOk returns a tuple with the LiquidationPrice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PLAsset) GetLiquidationPriceOk() (*float64, bool) {
+func (o *PLAsset) GetLiquidationPriceOk() (*string, bool) {
 	if o == nil || IsNil(o.LiquidationPrice) {
 		return nil, false
 	}
@@ -224,15 +224,15 @@ func (o *PLAsset) HasLiquidationPrice() bool {
 	return false
 }
 
-// SetLiquidationPrice gets a reference to the given float64 and assigns it to the LiquidationPrice field.
-func (o *PLAsset) SetLiquidationPrice(v float64) {
+// SetLiquidationPrice gets a reference to the given string and assigns it to the LiquidationPrice field.
+func (o *PLAsset) SetLiquidationPrice(v string) {
 	o.LiquidationPrice = &v
 }
 
 // GetAvailable returns the Available field value if set, zero value otherwise.
-func (o *PLAsset) GetAvailable() float64 {
+func (o *PLAsset) GetAvailable() string {
 	if o == nil || IsNil(o.Available) {
-		var ret float64
+		var ret string
 		return ret
 	}
 	return *o.Available
@@ -240,7 +240,7 @@ func (o *PLAsset) GetAvailable() float64 {
 
 // GetAvailableOk returns a tuple with the Available field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PLAsset) GetAvailableOk() (*float64, bool) {
+func (o *PLAsset) GetAvailableOk() (*string, bool) {
 	if o == nil || IsNil(o.Available) {
 		return nil, false
 	}
@@ -256,15 +256,15 @@ func (o *PLAsset) HasAvailable() bool {
 	return false
 }
 
-// SetAvailable gets a reference to the given float64 and assigns it to the Available field.
-func (o *PLAsset) SetAvailable(v float64) {
+// SetAvailable gets a reference to the given string and assigns it to the Available field.
+func (o *PLAsset) SetAvailable(v string) {
 	o.Available = &v
 }
 
 // GetBorrowed returns the Borrowed field value if set, zero value otherwise.
-func (o *PLAsset) GetBorrowed() float64 {
+func (o *PLAsset) GetBorrowed() string {
 	if o == nil || IsNil(o.Borrowed) {
-		var ret float64
+		var ret string
 		return ret
 	}
 	return *o.Borrowed
@@ -272,7 +272,7 @@ func (o *PLAsset) GetBorrowed() float64 {
 
 // GetBorrowedOk returns a tuple with the Borrowed field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PLAsset) GetBorrowedOk() (*float64, bool) {
+func (o *PLAsset) GetBorrowedOk() (*string, bool) {
 	if o == nil || IsNil(o.Borrowed) {
 		return nil, false
 	}
@@ -288,8 +288,8 @@ func (o *PLAsset) HasBorrowed() bool {
 	return false
 }
 
-// SetBorrowed gets a reference to the given float64 and assigns it to the Borrowed field.
-func (o *PLAsset) SetBorrowed(v float64) {
+// SetBorrowed gets a reference to the given string and assigns it to the Borrowed field.
+func (o *PLAsset) SetBorrowed(v string) {
 	o.Borrowed = &v
 }
 
@@ -326,9 +326,9 @@ func (o *PLAsset) SetMargin(v Margin) {
 }
 
 // GetUnrealizedPl returns the UnrealizedPl field value if set, zero value otherwise.
-func (o *PLAsset) GetUnrealizedPl() float64 {
+func (o *PLAsset) GetUnrealizedPl() string {
 	if o == nil || IsNil(o.UnrealizedPl) {
-		var ret float64
+		var ret string
 		return ret
 	}
 	return *o.UnrealizedPl
@@ -336,7 +336,7 @@ func (o *PLAsset) GetUnrealizedPl() float64 {
 
 // GetUnrealizedPlOk returns a tuple with the UnrealizedPl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PLAsset) GetUnrealizedPlOk() (*float64, bool) {
+func (o *PLAsset) GetUnrealizedPlOk() (*string, bool) {
 	if o == nil || IsNil(o.UnrealizedPl) {
 		return nil, false
 	}
@@ -352,15 +352,15 @@ func (o *PLAsset) HasUnrealizedPl() bool {
 	return false
 }
 
-// SetUnrealizedPl gets a reference to the given float64 and assigns it to the UnrealizedPl field.
-func (o *PLAsset) SetUnrealizedPl(v float64) {
+// SetUnrealizedPl gets a reference to the given string and assigns it to the UnrealizedPl field.
+func (o *PLAsset) SetUnrealizedPl(v string) {
 	o.UnrealizedPl = &v
 }
 
 // GetLeverageLimit returns the LeverageLimit field value if set, zero value otherwise.
-func (o *PLAsset) GetLeverageLimit() float64 {
+func (o *PLAsset) GetLeverageLimit() string {
 	if o == nil || IsNil(o.LeverageLimit) {
-		var ret float64
+		var ret string
 		return ret
 	}
 	return *o.LeverageLimit
@@ -368,7 +368,7 @@ func (o *PLAsset) GetLeverageLimit() float64 {
 
 // GetLeverageLimitOk returns a tuple with the LeverageLimit field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PLAsset) GetLeverageLimitOk() (*float64, bool) {
+func (o *PLAsset) GetLeverageLimitOk() (*string, bool) {
 	if o == nil || IsNil(o.LeverageLimit) {
 		return nil, false
 	}
@@ -384,15 +384,15 @@ func (o *PLAsset) HasLeverageLimit() bool {
 	return false
 }
 
-// SetLeverageLimit gets a reference to the given float64 and assigns it to the LeverageLimit field.
-func (o *PLAsset) SetLeverageLimit(v float64) {
+// SetLeverageLimit gets a reference to the given string and assigns it to the LeverageLimit field.
+func (o *PLAsset) SetLeverageLimit(v string) {
 	o.LeverageLimit = &v
 }
 
 // GetTp returns the Tp field value if set, zero value otherwise.
-func (o *PLAsset) GetTp() float64 {
+func (o *PLAsset) GetTp() string {
 	if o == nil || IsNil(o.Tp) {
-		var ret float64
+		var ret string
 		return ret
 	}
 	return *o.Tp
@@ -400,7 +400,7 @@ func (o *PLAsset) GetTp() float64 {
 
 // GetTpOk returns a tuple with the Tp field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PLAsset) GetTpOk() (*float64, bool) {
+func (o *PLAsset) GetTpOk() (*string, bool) {
 	if o == nil || IsNil(o.Tp) {
 		return nil, false
 	}
@@ -416,15 +416,15 @@ func (o *PLAsset) HasTp() bool {
 	return false
 }
 
-// SetTp gets a reference to the given float64 and assigns it to the Tp field.
-func (o *PLAsset) SetTp(v float64) {
+// SetTp gets a reference to the given string and assigns it to the Tp field.
+func (o *PLAsset) SetTp(v string) {
 	o.Tp = &v
 }
 
 // GetSl returns the Sl field value if set, zero value otherwise.
-func (o *PLAsset) GetSl() float64 {
+func (o *PLAsset) GetSl() string {
 	if o == nil || IsNil(o.Sl) {
-		var ret float64
+		var ret string
 		return ret
 	}
 	return *o.Sl
@@ -432,7 +432,7 @@ func (o *PLAsset) GetSl() float64 {
 
 // GetSlOk returns a tuple with the Sl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PLAsset) GetSlOk() (*float64, bool) {
+func (o *PLAsset) GetSlOk() (*string, bool) {
 	if o == nil || IsNil(o.Sl) {
 		return nil, false
 	}
@@ -448,15 +448,15 @@ func (o *PLAsset) HasSl() bool {
 	return false
 }
 
-// SetSl gets a reference to the given float64 and assigns it to the Sl field.
-func (o *PLAsset) SetSl(v float64) {
+// SetSl gets a reference to the given string and assigns it to the Sl field.
+func (o *PLAsset) SetSl(v string) {
 	o.Sl = &v
 }
 
 // GetInitialCapital returns the InitialCapital field value if set, zero value otherwise.
-func (o *PLAsset) GetInitialCapital() float64 {
+func (o *PLAsset) GetInitialCapital() string {
 	if o == nil || IsNil(o.InitialCapital) {
-		var ret float64
+		var ret string
 		return ret
 	}
 	return *o.InitialCapital
@@ -464,7 +464,7 @@ func (o *PLAsset) GetInitialCapital() float64 {
 
 // GetInitialCapitalOk returns a tuple with the InitialCapital field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PLAsset) GetInitialCapitalOk() (*float64, bool) {
+func (o *PLAsset) GetInitialCapitalOk() (*string, bool) {
 	if o == nil || IsNil(o.InitialCapital) {
 		return nil, false
 	}
@@ -480,15 +480,15 @@ func (o *PLAsset) HasInitialCapital() bool {
 	return false
 }
 
-// SetInitialCapital gets a reference to the given float64 and assigns it to the InitialCapital field.
-func (o *PLAsset) SetInitialCapital(v float64) {
+// SetInitialCapital gets a reference to the given string and assigns it to the InitialCapital field.
+func (o *PLAsset) SetInitialCapital(v string) {
 	o.InitialCapital = &v
 }
 
 // GetImpendingBorrows returns the ImpendingBorrows field value if set, zero value otherwise.
-func (o *PLAsset) GetImpendingBorrows() float64 {
+func (o *PLAsset) GetImpendingBorrows() string {
 	if o == nil || IsNil(o.ImpendingBorrows) {
-		var ret float64
+		var ret string
 		return ret
 	}
 	return *o.ImpendingBorrows
@@ -496,7 +496,7 @@ func (o *PLAsset) GetImpendingBorrows() float64 {
 
 // GetImpendingBorrowsOk returns a tuple with the ImpendingBorrows field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PLAsset) GetImpendingBorrowsOk() (*float64, bool) {
+func (o *PLAsset) GetImpendingBorrowsOk() (*string, bool) {
 	if o == nil || IsNil(o.ImpendingBorrows) {
 		return nil, false
 	}
@@ -512,15 +512,15 @@ func (o *PLAsset) HasImpendingBorrows() bool {
 	return false
 }
 
-// SetImpendingBorrows gets a reference to the given float64 and assigns it to the ImpendingBorrows field.
-func (o *PLAsset) SetImpendingBorrows(v float64) {
+// SetImpendingBorrows gets a reference to the given string and assigns it to the ImpendingBorrows field.
+func (o *PLAsset) SetImpendingBorrows(v string) {
 	o.ImpendingBorrows = &v
 }
 
 // GetLocked returns the Locked field value if set, zero value otherwise.
-func (o *PLAsset) GetLocked() float64 {
+func (o *PLAsset) GetLocked() string {
 	if o == nil || IsNil(o.Locked) {
-		var ret float64
+		var ret string
 		return ret
 	}
 	return *o.Locked
@@ -528,7 +528,7 @@ func (o *PLAsset) GetLocked() float64 {
 
 // GetLockedOk returns a tuple with the Locked field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PLAsset) GetLockedOk() (*float64, bool) {
+func (o *PLAsset) GetLockedOk() (*string, bool) {
 	if o == nil || IsNil(o.Locked) {
 		return nil, false
 	}
@@ -544,15 +544,15 @@ func (o *PLAsset) HasLocked() bool {
 	return false
 }
 
-// SetLocked gets a reference to the given float64 and assigns it to the Locked field.
-func (o *PLAsset) SetLocked(v float64) {
+// SetLocked gets a reference to the given string and assigns it to the Locked field.
+func (o *PLAsset) SetLocked(v string) {
 	o.Locked = &v
 }
 
 // GetUnusedCollateral returns the UnusedCollateral field value if set, zero value otherwise.
-func (o *PLAsset) GetUnusedCollateral() float64 {
+func (o *PLAsset) GetUnusedCollateral() string {
 	if o == nil || IsNil(o.UnusedCollateral) {
-		var ret float64
+		var ret string
 		return ret
 	}
 	return *o.UnusedCollateral
@@ -560,7 +560,7 @@ func (o *PLAsset) GetUnusedCollateral() float64 {
 
 // GetUnusedCollateralOk returns a tuple with the UnusedCollateral field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PLAsset) GetUnusedCollateralOk() (*float64, bool) {
+func (o *PLAsset) GetUnusedCollateralOk() (*string, bool) {
 	if o == nil || IsNil(o.UnusedCollateral) {
 		return nil, false
 	}
@@ -576,8 +576,8 @@ func (o *PLAsset) HasUnusedCollateral() bool {
 	return false
 }
 
-// SetUnusedCollateral gets a reference to the given float64 and assigns it to the UnusedCollateral field.
-func (o *PLAsset) SetUnusedCollateral(v float64) {
+// SetUnusedCollateral gets a reference to the given string and assigns it to the UnusedCollateral field.
+func (o *PLAsset) SetUnusedCollateral(v string) {
 	o.UnusedCollateral = &v
 }
 

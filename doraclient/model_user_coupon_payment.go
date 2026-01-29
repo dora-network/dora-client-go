@@ -25,8 +25,8 @@ type UserCouponPayment struct {
 	AssetId *string `json:"asset_id,omitempty"`
 	CouponPaymentId *string `json:"coupon_payment_id,omitempty"`
 	Seq *int64 `json:"seq,omitempty"`
-	Pending *float64 `json:"pending,omitempty"`
-	Completed *float64 `json:"completed,omitempty"`
+	Pending *string `json:"pending,omitempty"`
+	Completed *string `json:"completed,omitempty"`
 	StartedAt *time.Time `json:"started_at,omitempty"`
 	EndedAt *time.Time `json:"ended_at,omitempty"`
 }
@@ -209,9 +209,9 @@ func (o *UserCouponPayment) SetSeq(v int64) {
 }
 
 // GetPending returns the Pending field value if set, zero value otherwise.
-func (o *UserCouponPayment) GetPending() float64 {
+func (o *UserCouponPayment) GetPending() string {
 	if o == nil || IsNil(o.Pending) {
-		var ret float64
+		var ret string
 		return ret
 	}
 	return *o.Pending
@@ -219,7 +219,7 @@ func (o *UserCouponPayment) GetPending() float64 {
 
 // GetPendingOk returns a tuple with the Pending field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UserCouponPayment) GetPendingOk() (*float64, bool) {
+func (o *UserCouponPayment) GetPendingOk() (*string, bool) {
 	if o == nil || IsNil(o.Pending) {
 		return nil, false
 	}
@@ -235,15 +235,15 @@ func (o *UserCouponPayment) HasPending() bool {
 	return false
 }
 
-// SetPending gets a reference to the given float64 and assigns it to the Pending field.
-func (o *UserCouponPayment) SetPending(v float64) {
+// SetPending gets a reference to the given string and assigns it to the Pending field.
+func (o *UserCouponPayment) SetPending(v string) {
 	o.Pending = &v
 }
 
 // GetCompleted returns the Completed field value if set, zero value otherwise.
-func (o *UserCouponPayment) GetCompleted() float64 {
+func (o *UserCouponPayment) GetCompleted() string {
 	if o == nil || IsNil(o.Completed) {
-		var ret float64
+		var ret string
 		return ret
 	}
 	return *o.Completed
@@ -251,7 +251,7 @@ func (o *UserCouponPayment) GetCompleted() float64 {
 
 // GetCompletedOk returns a tuple with the Completed field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UserCouponPayment) GetCompletedOk() (*float64, bool) {
+func (o *UserCouponPayment) GetCompletedOk() (*string, bool) {
 	if o == nil || IsNil(o.Completed) {
 		return nil, false
 	}
@@ -267,8 +267,8 @@ func (o *UserCouponPayment) HasCompleted() bool {
 	return false
 }
 
-// SetCompleted gets a reference to the given float64 and assigns it to the Completed field.
-func (o *UserCouponPayment) SetCompleted(v float64) {
+// SetCompleted gets a reference to the given string and assigns it to the Completed field.
+func (o *UserCouponPayment) SetCompleted(v string) {
 	o.Completed = &v
 }
 

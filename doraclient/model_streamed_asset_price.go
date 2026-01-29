@@ -24,6 +24,7 @@ var _ MappedNullable = &StreamedAssetPrice{}
 type StreamedAssetPrice struct {
 	AssetId string `json:"asset_id"`
 	Price string `json:"price"`
+	Ytm *string `json:"ytm,omitempty"`
 	Time time.Time `json:"time"`
 }
 
@@ -97,6 +98,38 @@ func (o *StreamedAssetPrice) SetPrice(v string) {
 	o.Price = v
 }
 
+// GetYtm returns the Ytm field value if set, zero value otherwise.
+func (o *StreamedAssetPrice) GetYtm() string {
+	if o == nil || IsNil(o.Ytm) {
+		var ret string
+		return ret
+	}
+	return *o.Ytm
+}
+
+// GetYtmOk returns a tuple with the Ytm field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StreamedAssetPrice) GetYtmOk() (*string, bool) {
+	if o == nil || IsNil(o.Ytm) {
+		return nil, false
+	}
+	return o.Ytm, true
+}
+
+// HasYtm returns a boolean if a field has been set.
+func (o *StreamedAssetPrice) HasYtm() bool {
+	if o != nil && !IsNil(o.Ytm) {
+		return true
+	}
+
+	return false
+}
+
+// SetYtm gets a reference to the given string and assigns it to the Ytm field.
+func (o *StreamedAssetPrice) SetYtm(v string) {
+	o.Ytm = &v
+}
+
 // GetTime returns the Time field value
 func (o *StreamedAssetPrice) GetTime() time.Time {
 	if o == nil {
@@ -133,6 +166,9 @@ func (o StreamedAssetPrice) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["asset_id"] = o.AssetId
 	toSerialize["price"] = o.Price
+	if !IsNil(o.Ytm) {
+		toSerialize["ytm"] = o.Ytm
+	}
 	toSerialize["time"] = o.Time
 	return toSerialize, nil
 }
