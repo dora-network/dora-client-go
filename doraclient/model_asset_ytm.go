@@ -13,6 +13,8 @@ package doraclient
 import (
 	"encoding/json"
 	"time"
+	"bytes"
+	"fmt"
 )
 
 // checks if the AssetYTM type satisfies the MappedNullable interface at compile time
@@ -20,18 +22,24 @@ var _ MappedNullable = &AssetYTM{}
 
 // AssetYTM struct for AssetYTM
 type AssetYTM struct {
-	AssetId *string `json:"asset_id,omitempty"`
-	CurrentTime *time.Time `json:"current_time,omitempty"`
-	CurrentPrice *string `json:"current_price,omitempty"`
-	YieldToMaturity *string `json:"yield_to_maturity,omitempty"`
+	AssetId string `json:"asset_id"`
+	CurrentTime time.Time `json:"current_time"`
+	CurrentPrice string `json:"current_price"`
+	YieldToMaturity string `json:"yield_to_maturity"`
 }
+
+type _AssetYTM AssetYTM
 
 // NewAssetYTM instantiates a new AssetYTM object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAssetYTM() *AssetYTM {
+func NewAssetYTM(assetId string, currentTime time.Time, currentPrice string, yieldToMaturity string) *AssetYTM {
 	this := AssetYTM{}
+	this.AssetId = assetId
+	this.CurrentTime = currentTime
+	this.CurrentPrice = currentPrice
+	this.YieldToMaturity = yieldToMaturity
 	return &this
 }
 
@@ -43,132 +51,100 @@ func NewAssetYTMWithDefaults() *AssetYTM {
 	return &this
 }
 
-// GetAssetId returns the AssetId field value if set, zero value otherwise.
+// GetAssetId returns the AssetId field value
 func (o *AssetYTM) GetAssetId() string {
-	if o == nil || IsNil(o.AssetId) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.AssetId
+
+	return o.AssetId
 }
 
-// GetAssetIdOk returns a tuple with the AssetId field value if set, nil otherwise
+// GetAssetIdOk returns a tuple with the AssetId field value
 // and a boolean to check if the value has been set.
 func (o *AssetYTM) GetAssetIdOk() (*string, bool) {
-	if o == nil || IsNil(o.AssetId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.AssetId, true
+	return &o.AssetId, true
 }
 
-// HasAssetId returns a boolean if a field has been set.
-func (o *AssetYTM) HasAssetId() bool {
-	if o != nil && !IsNil(o.AssetId) {
-		return true
-	}
-
-	return false
-}
-
-// SetAssetId gets a reference to the given string and assigns it to the AssetId field.
+// SetAssetId sets field value
 func (o *AssetYTM) SetAssetId(v string) {
-	o.AssetId = &v
+	o.AssetId = v
 }
 
-// GetCurrentTime returns the CurrentTime field value if set, zero value otherwise.
+// GetCurrentTime returns the CurrentTime field value
 func (o *AssetYTM) GetCurrentTime() time.Time {
-	if o == nil || IsNil(o.CurrentTime) {
+	if o == nil {
 		var ret time.Time
 		return ret
 	}
-	return *o.CurrentTime
+
+	return o.CurrentTime
 }
 
-// GetCurrentTimeOk returns a tuple with the CurrentTime field value if set, nil otherwise
+// GetCurrentTimeOk returns a tuple with the CurrentTime field value
 // and a boolean to check if the value has been set.
 func (o *AssetYTM) GetCurrentTimeOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.CurrentTime) {
+	if o == nil {
 		return nil, false
 	}
-	return o.CurrentTime, true
+	return &o.CurrentTime, true
 }
 
-// HasCurrentTime returns a boolean if a field has been set.
-func (o *AssetYTM) HasCurrentTime() bool {
-	if o != nil && !IsNil(o.CurrentTime) {
-		return true
-	}
-
-	return false
-}
-
-// SetCurrentTime gets a reference to the given time.Time and assigns it to the CurrentTime field.
+// SetCurrentTime sets field value
 func (o *AssetYTM) SetCurrentTime(v time.Time) {
-	o.CurrentTime = &v
+	o.CurrentTime = v
 }
 
-// GetCurrentPrice returns the CurrentPrice field value if set, zero value otherwise.
+// GetCurrentPrice returns the CurrentPrice field value
 func (o *AssetYTM) GetCurrentPrice() string {
-	if o == nil || IsNil(o.CurrentPrice) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.CurrentPrice
+
+	return o.CurrentPrice
 }
 
-// GetCurrentPriceOk returns a tuple with the CurrentPrice field value if set, nil otherwise
+// GetCurrentPriceOk returns a tuple with the CurrentPrice field value
 // and a boolean to check if the value has been set.
 func (o *AssetYTM) GetCurrentPriceOk() (*string, bool) {
-	if o == nil || IsNil(o.CurrentPrice) {
+	if o == nil {
 		return nil, false
 	}
-	return o.CurrentPrice, true
+	return &o.CurrentPrice, true
 }
 
-// HasCurrentPrice returns a boolean if a field has been set.
-func (o *AssetYTM) HasCurrentPrice() bool {
-	if o != nil && !IsNil(o.CurrentPrice) {
-		return true
-	}
-
-	return false
-}
-
-// SetCurrentPrice gets a reference to the given string and assigns it to the CurrentPrice field.
+// SetCurrentPrice sets field value
 func (o *AssetYTM) SetCurrentPrice(v string) {
-	o.CurrentPrice = &v
+	o.CurrentPrice = v
 }
 
-// GetYieldToMaturity returns the YieldToMaturity field value if set, zero value otherwise.
+// GetYieldToMaturity returns the YieldToMaturity field value
 func (o *AssetYTM) GetYieldToMaturity() string {
-	if o == nil || IsNil(o.YieldToMaturity) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.YieldToMaturity
+
+	return o.YieldToMaturity
 }
 
-// GetYieldToMaturityOk returns a tuple with the YieldToMaturity field value if set, nil otherwise
+// GetYieldToMaturityOk returns a tuple with the YieldToMaturity field value
 // and a boolean to check if the value has been set.
 func (o *AssetYTM) GetYieldToMaturityOk() (*string, bool) {
-	if o == nil || IsNil(o.YieldToMaturity) {
+	if o == nil {
 		return nil, false
 	}
-	return o.YieldToMaturity, true
+	return &o.YieldToMaturity, true
 }
 
-// HasYieldToMaturity returns a boolean if a field has been set.
-func (o *AssetYTM) HasYieldToMaturity() bool {
-	if o != nil && !IsNil(o.YieldToMaturity) {
-		return true
-	}
-
-	return false
-}
-
-// SetYieldToMaturity gets a reference to the given string and assigns it to the YieldToMaturity field.
+// SetYieldToMaturity sets field value
 func (o *AssetYTM) SetYieldToMaturity(v string) {
-	o.YieldToMaturity = &v
+	o.YieldToMaturity = v
 }
 
 func (o AssetYTM) MarshalJSON() ([]byte, error) {
@@ -181,19 +157,51 @@ func (o AssetYTM) MarshalJSON() ([]byte, error) {
 
 func (o AssetYTM) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.AssetId) {
-		toSerialize["asset_id"] = o.AssetId
-	}
-	if !IsNil(o.CurrentTime) {
-		toSerialize["current_time"] = o.CurrentTime
-	}
-	if !IsNil(o.CurrentPrice) {
-		toSerialize["current_price"] = o.CurrentPrice
-	}
-	if !IsNil(o.YieldToMaturity) {
-		toSerialize["yield_to_maturity"] = o.YieldToMaturity
-	}
+	toSerialize["asset_id"] = o.AssetId
+	toSerialize["current_time"] = o.CurrentTime
+	toSerialize["current_price"] = o.CurrentPrice
+	toSerialize["yield_to_maturity"] = o.YieldToMaturity
 	return toSerialize, nil
+}
+
+func (o *AssetYTM) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"asset_id",
+		"current_time",
+		"current_price",
+		"yield_to_maturity",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varAssetYTM := _AssetYTM{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varAssetYTM)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AssetYTM(varAssetYTM)
+
+	return err
 }
 
 type NullableAssetYTM struct {

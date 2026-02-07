@@ -13,6 +13,8 @@ package doraclient
 import (
 	"encoding/json"
 	"time"
+	"bytes"
+	"fmt"
 )
 
 // checks if the PoolPrice type satisfies the MappedNullable interface at compile time
@@ -20,17 +22,22 @@ var _ MappedNullable = &PoolPrice{}
 
 // PoolPrice struct for PoolPrice
 type PoolPrice struct {
-	PoolId *string `json:"pool_id,omitempty"`
-	Price *string `json:"price,omitempty"`
-	Timestamp *time.Time `json:"timestamp,omitempty"`
+	PoolId string `json:"pool_id"`
+	Price string `json:"price"`
+	Timestamp time.Time `json:"timestamp"`
 }
+
+type _PoolPrice PoolPrice
 
 // NewPoolPrice instantiates a new PoolPrice object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPoolPrice() *PoolPrice {
+func NewPoolPrice(poolId string, price string, timestamp time.Time) *PoolPrice {
 	this := PoolPrice{}
+	this.PoolId = poolId
+	this.Price = price
+	this.Timestamp = timestamp
 	return &this
 }
 
@@ -42,100 +49,76 @@ func NewPoolPriceWithDefaults() *PoolPrice {
 	return &this
 }
 
-// GetPoolId returns the PoolId field value if set, zero value otherwise.
+// GetPoolId returns the PoolId field value
 func (o *PoolPrice) GetPoolId() string {
-	if o == nil || IsNil(o.PoolId) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.PoolId
+
+	return o.PoolId
 }
 
-// GetPoolIdOk returns a tuple with the PoolId field value if set, nil otherwise
+// GetPoolIdOk returns a tuple with the PoolId field value
 // and a boolean to check if the value has been set.
 func (o *PoolPrice) GetPoolIdOk() (*string, bool) {
-	if o == nil || IsNil(o.PoolId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.PoolId, true
+	return &o.PoolId, true
 }
 
-// HasPoolId returns a boolean if a field has been set.
-func (o *PoolPrice) HasPoolId() bool {
-	if o != nil && !IsNil(o.PoolId) {
-		return true
-	}
-
-	return false
-}
-
-// SetPoolId gets a reference to the given string and assigns it to the PoolId field.
+// SetPoolId sets field value
 func (o *PoolPrice) SetPoolId(v string) {
-	o.PoolId = &v
+	o.PoolId = v
 }
 
-// GetPrice returns the Price field value if set, zero value otherwise.
+// GetPrice returns the Price field value
 func (o *PoolPrice) GetPrice() string {
-	if o == nil || IsNil(o.Price) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Price
+
+	return o.Price
 }
 
-// GetPriceOk returns a tuple with the Price field value if set, nil otherwise
+// GetPriceOk returns a tuple with the Price field value
 // and a boolean to check if the value has been set.
 func (o *PoolPrice) GetPriceOk() (*string, bool) {
-	if o == nil || IsNil(o.Price) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Price, true
+	return &o.Price, true
 }
 
-// HasPrice returns a boolean if a field has been set.
-func (o *PoolPrice) HasPrice() bool {
-	if o != nil && !IsNil(o.Price) {
-		return true
-	}
-
-	return false
-}
-
-// SetPrice gets a reference to the given string and assigns it to the Price field.
+// SetPrice sets field value
 func (o *PoolPrice) SetPrice(v string) {
-	o.Price = &v
+	o.Price = v
 }
 
-// GetTimestamp returns the Timestamp field value if set, zero value otherwise.
+// GetTimestamp returns the Timestamp field value
 func (o *PoolPrice) GetTimestamp() time.Time {
-	if o == nil || IsNil(o.Timestamp) {
+	if o == nil {
 		var ret time.Time
 		return ret
 	}
-	return *o.Timestamp
+
+	return o.Timestamp
 }
 
-// GetTimestampOk returns a tuple with the Timestamp field value if set, nil otherwise
+// GetTimestampOk returns a tuple with the Timestamp field value
 // and a boolean to check if the value has been set.
 func (o *PoolPrice) GetTimestampOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.Timestamp) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Timestamp, true
+	return &o.Timestamp, true
 }
 
-// HasTimestamp returns a boolean if a field has been set.
-func (o *PoolPrice) HasTimestamp() bool {
-	if o != nil && !IsNil(o.Timestamp) {
-		return true
-	}
-
-	return false
-}
-
-// SetTimestamp gets a reference to the given time.Time and assigns it to the Timestamp field.
+// SetTimestamp sets field value
 func (o *PoolPrice) SetTimestamp(v time.Time) {
-	o.Timestamp = &v
+	o.Timestamp = v
 }
 
 func (o PoolPrice) MarshalJSON() ([]byte, error) {
@@ -148,16 +131,49 @@ func (o PoolPrice) MarshalJSON() ([]byte, error) {
 
 func (o PoolPrice) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.PoolId) {
-		toSerialize["pool_id"] = o.PoolId
-	}
-	if !IsNil(o.Price) {
-		toSerialize["price"] = o.Price
-	}
-	if !IsNil(o.Timestamp) {
-		toSerialize["timestamp"] = o.Timestamp
-	}
+	toSerialize["pool_id"] = o.PoolId
+	toSerialize["price"] = o.Price
+	toSerialize["timestamp"] = o.Timestamp
 	return toSerialize, nil
+}
+
+func (o *PoolPrice) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"pool_id",
+		"price",
+		"timestamp",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varPoolPrice := _PoolPrice{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varPoolPrice)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PoolPrice(varPoolPrice)
+
+	return err
 }
 
 type NullablePoolPrice struct {

@@ -13,6 +13,8 @@ package doraclient
 import (
 	"encoding/json"
 	"time"
+	"bytes"
+	"fmt"
 )
 
 // checks if the Position type satisfies the MappedNullable interface at compile time
@@ -21,36 +23,51 @@ var _ MappedNullable = &Position{}
 // Position struct for Position
 type Position struct {
 	// The unique identifier for the position. Used, for example, when creating an order from a position, or deciding collateral should be transferred from position A to position B.
-	Id *string `json:"id,omitempty"`
-	AssetId *string `json:"asset_id,omitempty"`
-	Seq *int32 `json:"seq,omitempty"`
+	Id string `json:"id"`
+	AssetId string `json:"asset_id"`
+	Seq int32 `json:"seq"`
 	IsGlobal *bool `json:"is_global,omitempty"`
 	// The available balance in the position for this asset that are not locked, supplied, or used as collateral
-	Available *string `json:"available,omitempty"`
+	Available string `json:"available"`
 	// The balance that has been reserved for a current order. If spent by the order, they are removed. If the order is cancelled, they are returned to the position's available balance.
-	Locked *string `json:"locked,omitempty"`
+	Locked string `json:"locked"`
 	// The balance that user has supplied to the leverage module. The user remains entitled to these assets and can withdraw them into their available balance.
-	Supplied *string `json:"supplied,omitempty"`
+	Supplied string `json:"supplied"`
 	// The total amount of debt outstanding for this position. This position cannot be closed until all debt is fully repaid, i.e. borrowed = 0.
-	Borrowed *string `json:"borrowed,omitempty"`
+	Borrowed string `json:"borrowed"`
 	// The equivalent of locked balances, but for leveraged orders. If a user has an active order that would borrow assets as part of its input, then their borrow limit must be reduced until the order is executed or cancelled.
-	ImpendingBorrows *string `json:"impending_borrows,omitempty"`
+	ImpendingBorrows string `json:"impending_borrows"`
 	// average cost per unit quantity that was paid (long positions) or received (short positions) for this asset.
-	AvgEntryPrice *string `json:"avg_entry_price,omitempty"`
+	AvgEntryPrice string `json:"avg_entry_price"`
 	// The borrow limit
-	BorrowLimit *string `json:"borrow_limit,omitempty"`
+	BorrowLimit string `json:"borrow_limit"`
 	// The borrow limit
-	LiquidationThreshold *string `json:"liquidation_threshold,omitempty"`
-	CreatedAt *time.Time `json:"created_at,omitempty"`
-	PositionName *string `json:"position_name,omitempty"`
+	LiquidationThreshold string `json:"liquidation_threshold"`
+	CreatedAt time.Time `json:"created_at"`
+	PositionName string `json:"position_name"`
 }
+
+type _Position Position
 
 // NewPosition instantiates a new Position object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPosition() *Position {
+func NewPosition(id string, assetId string, seq int32, available string, locked string, supplied string, borrowed string, impendingBorrows string, avgEntryPrice string, borrowLimit string, liquidationThreshold string, createdAt time.Time, positionName string) *Position {
 	this := Position{}
+	this.Id = id
+	this.AssetId = assetId
+	this.Seq = seq
+	this.Available = available
+	this.Locked = locked
+	this.Supplied = supplied
+	this.Borrowed = borrowed
+	this.ImpendingBorrows = impendingBorrows
+	this.AvgEntryPrice = avgEntryPrice
+	this.BorrowLimit = borrowLimit
+	this.LiquidationThreshold = liquidationThreshold
+	this.CreatedAt = createdAt
+	this.PositionName = positionName
 	return &this
 }
 
@@ -62,100 +79,76 @@ func NewPositionWithDefaults() *Position {
 	return &this
 }
 
-// GetId returns the Id field value if set, zero value otherwise.
+// GetId returns the Id field value
 func (o *Position) GetId() string {
-	if o == nil || IsNil(o.Id) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Id
+
+	return o.Id
 }
 
-// GetIdOk returns a tuple with the Id field value if set, nil otherwise
+// GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
 func (o *Position) GetIdOk() (*string, bool) {
-	if o == nil || IsNil(o.Id) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Id, true
+	return &o.Id, true
 }
 
-// HasId returns a boolean if a field has been set.
-func (o *Position) HasId() bool {
-	if o != nil && !IsNil(o.Id) {
-		return true
-	}
-
-	return false
-}
-
-// SetId gets a reference to the given string and assigns it to the Id field.
+// SetId sets field value
 func (o *Position) SetId(v string) {
-	o.Id = &v
+	o.Id = v
 }
 
-// GetAssetId returns the AssetId field value if set, zero value otherwise.
+// GetAssetId returns the AssetId field value
 func (o *Position) GetAssetId() string {
-	if o == nil || IsNil(o.AssetId) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.AssetId
+
+	return o.AssetId
 }
 
-// GetAssetIdOk returns a tuple with the AssetId field value if set, nil otherwise
+// GetAssetIdOk returns a tuple with the AssetId field value
 // and a boolean to check if the value has been set.
 func (o *Position) GetAssetIdOk() (*string, bool) {
-	if o == nil || IsNil(o.AssetId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.AssetId, true
+	return &o.AssetId, true
 }
 
-// HasAssetId returns a boolean if a field has been set.
-func (o *Position) HasAssetId() bool {
-	if o != nil && !IsNil(o.AssetId) {
-		return true
-	}
-
-	return false
-}
-
-// SetAssetId gets a reference to the given string and assigns it to the AssetId field.
+// SetAssetId sets field value
 func (o *Position) SetAssetId(v string) {
-	o.AssetId = &v
+	o.AssetId = v
 }
 
-// GetSeq returns the Seq field value if set, zero value otherwise.
+// GetSeq returns the Seq field value
 func (o *Position) GetSeq() int32 {
-	if o == nil || IsNil(o.Seq) {
+	if o == nil {
 		var ret int32
 		return ret
 	}
-	return *o.Seq
+
+	return o.Seq
 }
 
-// GetSeqOk returns a tuple with the Seq field value if set, nil otherwise
+// GetSeqOk returns a tuple with the Seq field value
 // and a boolean to check if the value has been set.
 func (o *Position) GetSeqOk() (*int32, bool) {
-	if o == nil || IsNil(o.Seq) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Seq, true
+	return &o.Seq, true
 }
 
-// HasSeq returns a boolean if a field has been set.
-func (o *Position) HasSeq() bool {
-	if o != nil && !IsNil(o.Seq) {
-		return true
-	}
-
-	return false
-}
-
-// SetSeq gets a reference to the given int32 and assigns it to the Seq field.
+// SetSeq sets field value
 func (o *Position) SetSeq(v int32) {
-	o.Seq = &v
+	o.Seq = v
 }
 
 // GetIsGlobal returns the IsGlobal field value if set, zero value otherwise.
@@ -190,324 +183,244 @@ func (o *Position) SetIsGlobal(v bool) {
 	o.IsGlobal = &v
 }
 
-// GetAvailable returns the Available field value if set, zero value otherwise.
+// GetAvailable returns the Available field value
 func (o *Position) GetAvailable() string {
-	if o == nil || IsNil(o.Available) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Available
+
+	return o.Available
 }
 
-// GetAvailableOk returns a tuple with the Available field value if set, nil otherwise
+// GetAvailableOk returns a tuple with the Available field value
 // and a boolean to check if the value has been set.
 func (o *Position) GetAvailableOk() (*string, bool) {
-	if o == nil || IsNil(o.Available) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Available, true
+	return &o.Available, true
 }
 
-// HasAvailable returns a boolean if a field has been set.
-func (o *Position) HasAvailable() bool {
-	if o != nil && !IsNil(o.Available) {
-		return true
-	}
-
-	return false
-}
-
-// SetAvailable gets a reference to the given string and assigns it to the Available field.
+// SetAvailable sets field value
 func (o *Position) SetAvailable(v string) {
-	o.Available = &v
+	o.Available = v
 }
 
-// GetLocked returns the Locked field value if set, zero value otherwise.
+// GetLocked returns the Locked field value
 func (o *Position) GetLocked() string {
-	if o == nil || IsNil(o.Locked) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Locked
+
+	return o.Locked
 }
 
-// GetLockedOk returns a tuple with the Locked field value if set, nil otherwise
+// GetLockedOk returns a tuple with the Locked field value
 // and a boolean to check if the value has been set.
 func (o *Position) GetLockedOk() (*string, bool) {
-	if o == nil || IsNil(o.Locked) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Locked, true
+	return &o.Locked, true
 }
 
-// HasLocked returns a boolean if a field has been set.
-func (o *Position) HasLocked() bool {
-	if o != nil && !IsNil(o.Locked) {
-		return true
-	}
-
-	return false
-}
-
-// SetLocked gets a reference to the given string and assigns it to the Locked field.
+// SetLocked sets field value
 func (o *Position) SetLocked(v string) {
-	o.Locked = &v
+	o.Locked = v
 }
 
-// GetSupplied returns the Supplied field value if set, zero value otherwise.
+// GetSupplied returns the Supplied field value
 func (o *Position) GetSupplied() string {
-	if o == nil || IsNil(o.Supplied) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Supplied
+
+	return o.Supplied
 }
 
-// GetSuppliedOk returns a tuple with the Supplied field value if set, nil otherwise
+// GetSuppliedOk returns a tuple with the Supplied field value
 // and a boolean to check if the value has been set.
 func (o *Position) GetSuppliedOk() (*string, bool) {
-	if o == nil || IsNil(o.Supplied) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Supplied, true
+	return &o.Supplied, true
 }
 
-// HasSupplied returns a boolean if a field has been set.
-func (o *Position) HasSupplied() bool {
-	if o != nil && !IsNil(o.Supplied) {
-		return true
-	}
-
-	return false
-}
-
-// SetSupplied gets a reference to the given string and assigns it to the Supplied field.
+// SetSupplied sets field value
 func (o *Position) SetSupplied(v string) {
-	o.Supplied = &v
+	o.Supplied = v
 }
 
-// GetBorrowed returns the Borrowed field value if set, zero value otherwise.
+// GetBorrowed returns the Borrowed field value
 func (o *Position) GetBorrowed() string {
-	if o == nil || IsNil(o.Borrowed) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Borrowed
+
+	return o.Borrowed
 }
 
-// GetBorrowedOk returns a tuple with the Borrowed field value if set, nil otherwise
+// GetBorrowedOk returns a tuple with the Borrowed field value
 // and a boolean to check if the value has been set.
 func (o *Position) GetBorrowedOk() (*string, bool) {
-	if o == nil || IsNil(o.Borrowed) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Borrowed, true
+	return &o.Borrowed, true
 }
 
-// HasBorrowed returns a boolean if a field has been set.
-func (o *Position) HasBorrowed() bool {
-	if o != nil && !IsNil(o.Borrowed) {
-		return true
-	}
-
-	return false
-}
-
-// SetBorrowed gets a reference to the given string and assigns it to the Borrowed field.
+// SetBorrowed sets field value
 func (o *Position) SetBorrowed(v string) {
-	o.Borrowed = &v
+	o.Borrowed = v
 }
 
-// GetImpendingBorrows returns the ImpendingBorrows field value if set, zero value otherwise.
+// GetImpendingBorrows returns the ImpendingBorrows field value
 func (o *Position) GetImpendingBorrows() string {
-	if o == nil || IsNil(o.ImpendingBorrows) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.ImpendingBorrows
+
+	return o.ImpendingBorrows
 }
 
-// GetImpendingBorrowsOk returns a tuple with the ImpendingBorrows field value if set, nil otherwise
+// GetImpendingBorrowsOk returns a tuple with the ImpendingBorrows field value
 // and a boolean to check if the value has been set.
 func (o *Position) GetImpendingBorrowsOk() (*string, bool) {
-	if o == nil || IsNil(o.ImpendingBorrows) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ImpendingBorrows, true
+	return &o.ImpendingBorrows, true
 }
 
-// HasImpendingBorrows returns a boolean if a field has been set.
-func (o *Position) HasImpendingBorrows() bool {
-	if o != nil && !IsNil(o.ImpendingBorrows) {
-		return true
-	}
-
-	return false
-}
-
-// SetImpendingBorrows gets a reference to the given string and assigns it to the ImpendingBorrows field.
+// SetImpendingBorrows sets field value
 func (o *Position) SetImpendingBorrows(v string) {
-	o.ImpendingBorrows = &v
+	o.ImpendingBorrows = v
 }
 
-// GetAvgEntryPrice returns the AvgEntryPrice field value if set, zero value otherwise.
+// GetAvgEntryPrice returns the AvgEntryPrice field value
 func (o *Position) GetAvgEntryPrice() string {
-	if o == nil || IsNil(o.AvgEntryPrice) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.AvgEntryPrice
+
+	return o.AvgEntryPrice
 }
 
-// GetAvgEntryPriceOk returns a tuple with the AvgEntryPrice field value if set, nil otherwise
+// GetAvgEntryPriceOk returns a tuple with the AvgEntryPrice field value
 // and a boolean to check if the value has been set.
 func (o *Position) GetAvgEntryPriceOk() (*string, bool) {
-	if o == nil || IsNil(o.AvgEntryPrice) {
+	if o == nil {
 		return nil, false
 	}
-	return o.AvgEntryPrice, true
+	return &o.AvgEntryPrice, true
 }
 
-// HasAvgEntryPrice returns a boolean if a field has been set.
-func (o *Position) HasAvgEntryPrice() bool {
-	if o != nil && !IsNil(o.AvgEntryPrice) {
-		return true
-	}
-
-	return false
-}
-
-// SetAvgEntryPrice gets a reference to the given string and assigns it to the AvgEntryPrice field.
+// SetAvgEntryPrice sets field value
 func (o *Position) SetAvgEntryPrice(v string) {
-	o.AvgEntryPrice = &v
+	o.AvgEntryPrice = v
 }
 
-// GetBorrowLimit returns the BorrowLimit field value if set, zero value otherwise.
+// GetBorrowLimit returns the BorrowLimit field value
 func (o *Position) GetBorrowLimit() string {
-	if o == nil || IsNil(o.BorrowLimit) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.BorrowLimit
+
+	return o.BorrowLimit
 }
 
-// GetBorrowLimitOk returns a tuple with the BorrowLimit field value if set, nil otherwise
+// GetBorrowLimitOk returns a tuple with the BorrowLimit field value
 // and a boolean to check if the value has been set.
 func (o *Position) GetBorrowLimitOk() (*string, bool) {
-	if o == nil || IsNil(o.BorrowLimit) {
+	if o == nil {
 		return nil, false
 	}
-	return o.BorrowLimit, true
+	return &o.BorrowLimit, true
 }
 
-// HasBorrowLimit returns a boolean if a field has been set.
-func (o *Position) HasBorrowLimit() bool {
-	if o != nil && !IsNil(o.BorrowLimit) {
-		return true
-	}
-
-	return false
-}
-
-// SetBorrowLimit gets a reference to the given string and assigns it to the BorrowLimit field.
+// SetBorrowLimit sets field value
 func (o *Position) SetBorrowLimit(v string) {
-	o.BorrowLimit = &v
+	o.BorrowLimit = v
 }
 
-// GetLiquidationThreshold returns the LiquidationThreshold field value if set, zero value otherwise.
+// GetLiquidationThreshold returns the LiquidationThreshold field value
 func (o *Position) GetLiquidationThreshold() string {
-	if o == nil || IsNil(o.LiquidationThreshold) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.LiquidationThreshold
+
+	return o.LiquidationThreshold
 }
 
-// GetLiquidationThresholdOk returns a tuple with the LiquidationThreshold field value if set, nil otherwise
+// GetLiquidationThresholdOk returns a tuple with the LiquidationThreshold field value
 // and a boolean to check if the value has been set.
 func (o *Position) GetLiquidationThresholdOk() (*string, bool) {
-	if o == nil || IsNil(o.LiquidationThreshold) {
+	if o == nil {
 		return nil, false
 	}
-	return o.LiquidationThreshold, true
+	return &o.LiquidationThreshold, true
 }
 
-// HasLiquidationThreshold returns a boolean if a field has been set.
-func (o *Position) HasLiquidationThreshold() bool {
-	if o != nil && !IsNil(o.LiquidationThreshold) {
-		return true
-	}
-
-	return false
-}
-
-// SetLiquidationThreshold gets a reference to the given string and assigns it to the LiquidationThreshold field.
+// SetLiquidationThreshold sets field value
 func (o *Position) SetLiquidationThreshold(v string) {
-	o.LiquidationThreshold = &v
+	o.LiquidationThreshold = v
 }
 
-// GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
+// GetCreatedAt returns the CreatedAt field value
 func (o *Position) GetCreatedAt() time.Time {
-	if o == nil || IsNil(o.CreatedAt) {
+	if o == nil {
 		var ret time.Time
 		return ret
 	}
-	return *o.CreatedAt
+
+	return o.CreatedAt
 }
 
-// GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
+// GetCreatedAtOk returns a tuple with the CreatedAt field value
 // and a boolean to check if the value has been set.
 func (o *Position) GetCreatedAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.CreatedAt) {
+	if o == nil {
 		return nil, false
 	}
-	return o.CreatedAt, true
+	return &o.CreatedAt, true
 }
 
-// HasCreatedAt returns a boolean if a field has been set.
-func (o *Position) HasCreatedAt() bool {
-	if o != nil && !IsNil(o.CreatedAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetCreatedAt gets a reference to the given time.Time and assigns it to the CreatedAt field.
+// SetCreatedAt sets field value
 func (o *Position) SetCreatedAt(v time.Time) {
-	o.CreatedAt = &v
+	o.CreatedAt = v
 }
 
-// GetPositionName returns the PositionName field value if set, zero value otherwise.
+// GetPositionName returns the PositionName field value
 func (o *Position) GetPositionName() string {
-	if o == nil || IsNil(o.PositionName) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.PositionName
+
+	return o.PositionName
 }
 
-// GetPositionNameOk returns a tuple with the PositionName field value if set, nil otherwise
+// GetPositionNameOk returns a tuple with the PositionName field value
 // and a boolean to check if the value has been set.
 func (o *Position) GetPositionNameOk() (*string, bool) {
-	if o == nil || IsNil(o.PositionName) {
+	if o == nil {
 		return nil, false
 	}
-	return o.PositionName, true
+	return &o.PositionName, true
 }
 
-// HasPositionName returns a boolean if a field has been set.
-func (o *Position) HasPositionName() bool {
-	if o != nil && !IsNil(o.PositionName) {
-		return true
-	}
-
-	return false
-}
-
-// SetPositionName gets a reference to the given string and assigns it to the PositionName field.
+// SetPositionName sets field value
 func (o *Position) SetPositionName(v string) {
-	o.PositionName = &v
+	o.PositionName = v
 }
 
 func (o Position) MarshalJSON() ([]byte, error) {
@@ -520,49 +433,72 @@ func (o Position) MarshalJSON() ([]byte, error) {
 
 func (o Position) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Id) {
-		toSerialize["id"] = o.Id
-	}
-	if !IsNil(o.AssetId) {
-		toSerialize["asset_id"] = o.AssetId
-	}
-	if !IsNil(o.Seq) {
-		toSerialize["seq"] = o.Seq
-	}
+	toSerialize["id"] = o.Id
+	toSerialize["asset_id"] = o.AssetId
+	toSerialize["seq"] = o.Seq
 	if !IsNil(o.IsGlobal) {
 		toSerialize["is_global"] = o.IsGlobal
 	}
-	if !IsNil(o.Available) {
-		toSerialize["available"] = o.Available
-	}
-	if !IsNil(o.Locked) {
-		toSerialize["locked"] = o.Locked
-	}
-	if !IsNil(o.Supplied) {
-		toSerialize["supplied"] = o.Supplied
-	}
-	if !IsNil(o.Borrowed) {
-		toSerialize["borrowed"] = o.Borrowed
-	}
-	if !IsNil(o.ImpendingBorrows) {
-		toSerialize["impending_borrows"] = o.ImpendingBorrows
-	}
-	if !IsNil(o.AvgEntryPrice) {
-		toSerialize["avg_entry_price"] = o.AvgEntryPrice
-	}
-	if !IsNil(o.BorrowLimit) {
-		toSerialize["borrow_limit"] = o.BorrowLimit
-	}
-	if !IsNil(o.LiquidationThreshold) {
-		toSerialize["liquidation_threshold"] = o.LiquidationThreshold
-	}
-	if !IsNil(o.CreatedAt) {
-		toSerialize["created_at"] = o.CreatedAt
-	}
-	if !IsNil(o.PositionName) {
-		toSerialize["position_name"] = o.PositionName
-	}
+	toSerialize["available"] = o.Available
+	toSerialize["locked"] = o.Locked
+	toSerialize["supplied"] = o.Supplied
+	toSerialize["borrowed"] = o.Borrowed
+	toSerialize["impending_borrows"] = o.ImpendingBorrows
+	toSerialize["avg_entry_price"] = o.AvgEntryPrice
+	toSerialize["borrow_limit"] = o.BorrowLimit
+	toSerialize["liquidation_threshold"] = o.LiquidationThreshold
+	toSerialize["created_at"] = o.CreatedAt
+	toSerialize["position_name"] = o.PositionName
 	return toSerialize, nil
+}
+
+func (o *Position) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"id",
+		"asset_id",
+		"seq",
+		"available",
+		"locked",
+		"supplied",
+		"borrowed",
+		"impending_borrows",
+		"avg_entry_price",
+		"borrow_limit",
+		"liquidation_threshold",
+		"created_at",
+		"position_name",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varPosition := _Position{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varPosition)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Position(varPosition)
+
+	return err
 }
 
 type NullablePosition struct {

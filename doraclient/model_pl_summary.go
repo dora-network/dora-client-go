@@ -12,6 +12,8 @@ package doraclient
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the PLSummary type satisfies the MappedNullable interface at compile time
@@ -20,19 +22,26 @@ var _ MappedNullable = &PLSummary{}
 // PLSummary struct for PLSummary
 type PLSummary struct {
 	// The leverage used to obtain the position on the isolated account
-	Leverage *string `json:"leverage,omitempty"`
-	AccountEquity *string `json:"account_equity,omitempty"`
-	Available *string `json:"available,omitempty"`
-	Health *string `json:"health,omitempty"`
-	Ltv *string `json:"ltv,omitempty"`
+	Leverage string `json:"leverage"`
+	AccountEquity string `json:"account_equity"`
+	Available string `json:"available"`
+	Health string `json:"health"`
+	Ltv string `json:"ltv"`
 }
+
+type _PLSummary PLSummary
 
 // NewPLSummary instantiates a new PLSummary object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPLSummary() *PLSummary {
+func NewPLSummary(leverage string, accountEquity string, available string, health string, ltv string) *PLSummary {
 	this := PLSummary{}
+	this.Leverage = leverage
+	this.AccountEquity = accountEquity
+	this.Available = available
+	this.Health = health
+	this.Ltv = ltv
 	return &this
 }
 
@@ -44,164 +53,124 @@ func NewPLSummaryWithDefaults() *PLSummary {
 	return &this
 }
 
-// GetLeverage returns the Leverage field value if set, zero value otherwise.
+// GetLeverage returns the Leverage field value
 func (o *PLSummary) GetLeverage() string {
-	if o == nil || IsNil(o.Leverage) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Leverage
+
+	return o.Leverage
 }
 
-// GetLeverageOk returns a tuple with the Leverage field value if set, nil otherwise
+// GetLeverageOk returns a tuple with the Leverage field value
 // and a boolean to check if the value has been set.
 func (o *PLSummary) GetLeverageOk() (*string, bool) {
-	if o == nil || IsNil(o.Leverage) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Leverage, true
+	return &o.Leverage, true
 }
 
-// HasLeverage returns a boolean if a field has been set.
-func (o *PLSummary) HasLeverage() bool {
-	if o != nil && !IsNil(o.Leverage) {
-		return true
-	}
-
-	return false
-}
-
-// SetLeverage gets a reference to the given string and assigns it to the Leverage field.
+// SetLeverage sets field value
 func (o *PLSummary) SetLeverage(v string) {
-	o.Leverage = &v
+	o.Leverage = v
 }
 
-// GetAccountEquity returns the AccountEquity field value if set, zero value otherwise.
+// GetAccountEquity returns the AccountEquity field value
 func (o *PLSummary) GetAccountEquity() string {
-	if o == nil || IsNil(o.AccountEquity) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.AccountEquity
+
+	return o.AccountEquity
 }
 
-// GetAccountEquityOk returns a tuple with the AccountEquity field value if set, nil otherwise
+// GetAccountEquityOk returns a tuple with the AccountEquity field value
 // and a boolean to check if the value has been set.
 func (o *PLSummary) GetAccountEquityOk() (*string, bool) {
-	if o == nil || IsNil(o.AccountEquity) {
+	if o == nil {
 		return nil, false
 	}
-	return o.AccountEquity, true
+	return &o.AccountEquity, true
 }
 
-// HasAccountEquity returns a boolean if a field has been set.
-func (o *PLSummary) HasAccountEquity() bool {
-	if o != nil && !IsNil(o.AccountEquity) {
-		return true
-	}
-
-	return false
-}
-
-// SetAccountEquity gets a reference to the given string and assigns it to the AccountEquity field.
+// SetAccountEquity sets field value
 func (o *PLSummary) SetAccountEquity(v string) {
-	o.AccountEquity = &v
+	o.AccountEquity = v
 }
 
-// GetAvailable returns the Available field value if set, zero value otherwise.
+// GetAvailable returns the Available field value
 func (o *PLSummary) GetAvailable() string {
-	if o == nil || IsNil(o.Available) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Available
+
+	return o.Available
 }
 
-// GetAvailableOk returns a tuple with the Available field value if set, nil otherwise
+// GetAvailableOk returns a tuple with the Available field value
 // and a boolean to check if the value has been set.
 func (o *PLSummary) GetAvailableOk() (*string, bool) {
-	if o == nil || IsNil(o.Available) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Available, true
+	return &o.Available, true
 }
 
-// HasAvailable returns a boolean if a field has been set.
-func (o *PLSummary) HasAvailable() bool {
-	if o != nil && !IsNil(o.Available) {
-		return true
-	}
-
-	return false
-}
-
-// SetAvailable gets a reference to the given string and assigns it to the Available field.
+// SetAvailable sets field value
 func (o *PLSummary) SetAvailable(v string) {
-	o.Available = &v
+	o.Available = v
 }
 
-// GetHealth returns the Health field value if set, zero value otherwise.
+// GetHealth returns the Health field value
 func (o *PLSummary) GetHealth() string {
-	if o == nil || IsNil(o.Health) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Health
+
+	return o.Health
 }
 
-// GetHealthOk returns a tuple with the Health field value if set, nil otherwise
+// GetHealthOk returns a tuple with the Health field value
 // and a boolean to check if the value has been set.
 func (o *PLSummary) GetHealthOk() (*string, bool) {
-	if o == nil || IsNil(o.Health) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Health, true
+	return &o.Health, true
 }
 
-// HasHealth returns a boolean if a field has been set.
-func (o *PLSummary) HasHealth() bool {
-	if o != nil && !IsNil(o.Health) {
-		return true
-	}
-
-	return false
-}
-
-// SetHealth gets a reference to the given string and assigns it to the Health field.
+// SetHealth sets field value
 func (o *PLSummary) SetHealth(v string) {
-	o.Health = &v
+	o.Health = v
 }
 
-// GetLtv returns the Ltv field value if set, zero value otherwise.
+// GetLtv returns the Ltv field value
 func (o *PLSummary) GetLtv() string {
-	if o == nil || IsNil(o.Ltv) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Ltv
+
+	return o.Ltv
 }
 
-// GetLtvOk returns a tuple with the Ltv field value if set, nil otherwise
+// GetLtvOk returns a tuple with the Ltv field value
 // and a boolean to check if the value has been set.
 func (o *PLSummary) GetLtvOk() (*string, bool) {
-	if o == nil || IsNil(o.Ltv) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Ltv, true
+	return &o.Ltv, true
 }
 
-// HasLtv returns a boolean if a field has been set.
-func (o *PLSummary) HasLtv() bool {
-	if o != nil && !IsNil(o.Ltv) {
-		return true
-	}
-
-	return false
-}
-
-// SetLtv gets a reference to the given string and assigns it to the Ltv field.
+// SetLtv sets field value
 func (o *PLSummary) SetLtv(v string) {
-	o.Ltv = &v
+	o.Ltv = v
 }
 
 func (o PLSummary) MarshalJSON() ([]byte, error) {
@@ -214,22 +183,53 @@ func (o PLSummary) MarshalJSON() ([]byte, error) {
 
 func (o PLSummary) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Leverage) {
-		toSerialize["leverage"] = o.Leverage
-	}
-	if !IsNil(o.AccountEquity) {
-		toSerialize["account_equity"] = o.AccountEquity
-	}
-	if !IsNil(o.Available) {
-		toSerialize["available"] = o.Available
-	}
-	if !IsNil(o.Health) {
-		toSerialize["health"] = o.Health
-	}
-	if !IsNil(o.Ltv) {
-		toSerialize["ltv"] = o.Ltv
-	}
+	toSerialize["leverage"] = o.Leverage
+	toSerialize["account_equity"] = o.AccountEquity
+	toSerialize["available"] = o.Available
+	toSerialize["health"] = o.Health
+	toSerialize["ltv"] = o.Ltv
 	return toSerialize, nil
+}
+
+func (o *PLSummary) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"leverage",
+		"account_equity",
+		"available",
+		"health",
+		"ltv",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varPLSummary := _PLSummary{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varPLSummary)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PLSummary(varPLSummary)
+
+	return err
 }
 
 type NullablePLSummary struct {

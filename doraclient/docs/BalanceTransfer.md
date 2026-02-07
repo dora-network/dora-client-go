@@ -4,15 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**FromPositionId** | Pointer to **string** |  | [optional] 
-**ToPositionId** | Pointer to **string** |  | [optional] 
-**TransactionId** | Pointer to **string** |  | [optional] 
+**FromPositionId** | **string** |  | 
+**ToPositionId** | **string** |  | 
+**TransactionId** | **string** |  | 
 
 ## Methods
 
 ### NewBalanceTransfer
 
-`func NewBalanceTransfer() *BalanceTransfer`
+`func NewBalanceTransfer(fromPositionId string, toPositionId string, transactionId string, ) *BalanceTransfer`
 
 NewBalanceTransfer instantiates a new BalanceTransfer object
 This constructor will assign default values to properties that have it defined,
@@ -46,11 +46,6 @@ and a boolean to check if the value has been set.
 
 SetFromPositionId sets FromPositionId field to given value.
 
-### HasFromPositionId
-
-`func (o *BalanceTransfer) HasFromPositionId() bool`
-
-HasFromPositionId returns a boolean if a field has been set.
 
 ### GetToPositionId
 
@@ -71,11 +66,6 @@ and a boolean to check if the value has been set.
 
 SetToPositionId sets ToPositionId field to given value.
 
-### HasToPositionId
-
-`func (o *BalanceTransfer) HasToPositionId() bool`
-
-HasToPositionId returns a boolean if a field has been set.
 
 ### GetTransactionId
 
@@ -96,11 +86,6 @@ and a boolean to check if the value has been set.
 
 SetTransactionId sets TransactionId field to given value.
 
-### HasTransactionId
-
-`func (o *BalanceTransfer) HasTransactionId() bool`
-
-HasTransactionId returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

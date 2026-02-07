@@ -4,19 +4,19 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**OrderBookId** | Pointer to **string** |  | [optional] 
-**StartTimestamp** | Pointer to **time.Time** |  | [optional] 
-**Open** | Pointer to **string** |  | [optional] 
-**High** | Pointer to **string** |  | [optional] 
-**Low** | Pointer to **string** |  | [optional] 
-**Close** | Pointer to **string** |  | [optional] 
-**Volume** | Pointer to **string** |  | [optional] 
+**OrderBookId** | **string** |  | 
+**StartTimestamp** | **time.Time** |  | 
+**Open** | **string** |  | 
+**High** | **string** |  | 
+**Low** | **string** |  | 
+**Close** | **string** |  | 
+**Volume** | **string** |  | 
 
 ## Methods
 
 ### NewCandle
 
-`func NewCandle() *Candle`
+`func NewCandle(orderBookId string, startTimestamp time.Time, open string, high string, low string, close string, volume string, ) *Candle`
 
 NewCandle instantiates a new Candle object
 This constructor will assign default values to properties that have it defined,
@@ -50,11 +50,6 @@ and a boolean to check if the value has been set.
 
 SetOrderBookId sets OrderBookId field to given value.
 
-### HasOrderBookId
-
-`func (o *Candle) HasOrderBookId() bool`
-
-HasOrderBookId returns a boolean if a field has been set.
 
 ### GetStartTimestamp
 
@@ -75,11 +70,6 @@ and a boolean to check if the value has been set.
 
 SetStartTimestamp sets StartTimestamp field to given value.
 
-### HasStartTimestamp
-
-`func (o *Candle) HasStartTimestamp() bool`
-
-HasStartTimestamp returns a boolean if a field has been set.
 
 ### GetOpen
 
@@ -100,11 +90,6 @@ and a boolean to check if the value has been set.
 
 SetOpen sets Open field to given value.
 
-### HasOpen
-
-`func (o *Candle) HasOpen() bool`
-
-HasOpen returns a boolean if a field has been set.
 
 ### GetHigh
 
@@ -125,11 +110,6 @@ and a boolean to check if the value has been set.
 
 SetHigh sets High field to given value.
 
-### HasHigh
-
-`func (o *Candle) HasHigh() bool`
-
-HasHigh returns a boolean if a field has been set.
 
 ### GetLow
 
@@ -150,11 +130,6 @@ and a boolean to check if the value has been set.
 
 SetLow sets Low field to given value.
 
-### HasLow
-
-`func (o *Candle) HasLow() bool`
-
-HasLow returns a boolean if a field has been set.
 
 ### GetClose
 
@@ -175,11 +150,6 @@ and a boolean to check if the value has been set.
 
 SetClose sets Close field to given value.
 
-### HasClose
-
-`func (o *Candle) HasClose() bool`
-
-HasClose returns a boolean if a field has been set.
 
 ### GetVolume
 
@@ -200,11 +170,6 @@ and a boolean to check if the value has been set.
 
 SetVolume sets Volume field to given value.
 
-### HasVolume
-
-`func (o *Candle) HasVolume() bool`
-
-HasVolume returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

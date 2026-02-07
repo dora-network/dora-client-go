@@ -13,6 +13,8 @@ package doraclient
 import (
 	"encoding/json"
 	"time"
+	"bytes"
+	"fmt"
 )
 
 // checks if the CreateAPIKeyRequest type satisfies the MappedNullable interface at compile time
@@ -20,17 +22,20 @@ var _ MappedNullable = &CreateAPIKeyRequest{}
 
 // CreateAPIKeyRequest struct for CreateAPIKeyRequest
 type CreateAPIKeyRequest struct {
-	Label *string `json:"label,omitempty"`
+	Label string `json:"label"`
 	// Date at which the api-key will expire
 	Expires *time.Time `json:"expires,omitempty"`
 }
+
+type _CreateAPIKeyRequest CreateAPIKeyRequest
 
 // NewCreateAPIKeyRequest instantiates a new CreateAPIKeyRequest object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateAPIKeyRequest() *CreateAPIKeyRequest {
+func NewCreateAPIKeyRequest(label string) *CreateAPIKeyRequest {
 	this := CreateAPIKeyRequest{}
+	this.Label = label
 	return &this
 }
 
@@ -42,36 +47,28 @@ func NewCreateAPIKeyRequestWithDefaults() *CreateAPIKeyRequest {
 	return &this
 }
 
-// GetLabel returns the Label field value if set, zero value otherwise.
+// GetLabel returns the Label field value
 func (o *CreateAPIKeyRequest) GetLabel() string {
-	if o == nil || IsNil(o.Label) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Label
+
+	return o.Label
 }
 
-// GetLabelOk returns a tuple with the Label field value if set, nil otherwise
+// GetLabelOk returns a tuple with the Label field value
 // and a boolean to check if the value has been set.
 func (o *CreateAPIKeyRequest) GetLabelOk() (*string, bool) {
-	if o == nil || IsNil(o.Label) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Label, true
+	return &o.Label, true
 }
 
-// HasLabel returns a boolean if a field has been set.
-func (o *CreateAPIKeyRequest) HasLabel() bool {
-	if o != nil && !IsNil(o.Label) {
-		return true
-	}
-
-	return false
-}
-
-// SetLabel gets a reference to the given string and assigns it to the Label field.
+// SetLabel sets field value
 func (o *CreateAPIKeyRequest) SetLabel(v string) {
-	o.Label = &v
+	o.Label = v
 }
 
 // GetExpires returns the Expires field value if set, zero value otherwise.
@@ -116,13 +113,48 @@ func (o CreateAPIKeyRequest) MarshalJSON() ([]byte, error) {
 
 func (o CreateAPIKeyRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Label) {
-		toSerialize["label"] = o.Label
-	}
+	toSerialize["label"] = o.Label
 	if !IsNil(o.Expires) {
 		toSerialize["expires"] = o.Expires
 	}
 	return toSerialize, nil
+}
+
+func (o *CreateAPIKeyRequest) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"label",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varCreateAPIKeyRequest := _CreateAPIKeyRequest{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varCreateAPIKeyRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreateAPIKeyRequest(varCreateAPIKeyRequest)
+
+	return err
 }
 
 type NullableCreateAPIKeyRequest struct {

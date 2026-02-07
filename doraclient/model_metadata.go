@@ -12,6 +12,8 @@ package doraclient
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the Metadata type satisfies the MappedNullable interface at compile time
@@ -20,19 +22,24 @@ var _ MappedNullable = &Metadata{}
 // Metadata Metadata about the response, including status code and tracing information.
 type Metadata struct {
 	// HTTP status code for the response.
-	StatusCode *int32 `json:"status_code,omitempty"`
+	StatusCode int32 `json:"status_code"`
 	// Trace ID for distributed tracing.
-	TraceId *string `json:"trace_id,omitempty"`
+	TraceId string `json:"trace_id"`
 	// Request ID for correlating logs and debugging.
-	RequestId *string `json:"request_id,omitempty"`
+	RequestId string `json:"request_id"`
 }
+
+type _Metadata Metadata
 
 // NewMetadata instantiates a new Metadata object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewMetadata() *Metadata {
+func NewMetadata(statusCode int32, traceId string, requestId string) *Metadata {
 	this := Metadata{}
+	this.StatusCode = statusCode
+	this.TraceId = traceId
+	this.RequestId = requestId
 	return &this
 }
 
@@ -44,100 +51,76 @@ func NewMetadataWithDefaults() *Metadata {
 	return &this
 }
 
-// GetStatusCode returns the StatusCode field value if set, zero value otherwise.
+// GetStatusCode returns the StatusCode field value
 func (o *Metadata) GetStatusCode() int32 {
-	if o == nil || IsNil(o.StatusCode) {
+	if o == nil {
 		var ret int32
 		return ret
 	}
-	return *o.StatusCode
+
+	return o.StatusCode
 }
 
-// GetStatusCodeOk returns a tuple with the StatusCode field value if set, nil otherwise
+// GetStatusCodeOk returns a tuple with the StatusCode field value
 // and a boolean to check if the value has been set.
 func (o *Metadata) GetStatusCodeOk() (*int32, bool) {
-	if o == nil || IsNil(o.StatusCode) {
+	if o == nil {
 		return nil, false
 	}
-	return o.StatusCode, true
+	return &o.StatusCode, true
 }
 
-// HasStatusCode returns a boolean if a field has been set.
-func (o *Metadata) HasStatusCode() bool {
-	if o != nil && !IsNil(o.StatusCode) {
-		return true
-	}
-
-	return false
-}
-
-// SetStatusCode gets a reference to the given int32 and assigns it to the StatusCode field.
+// SetStatusCode sets field value
 func (o *Metadata) SetStatusCode(v int32) {
-	o.StatusCode = &v
+	o.StatusCode = v
 }
 
-// GetTraceId returns the TraceId field value if set, zero value otherwise.
+// GetTraceId returns the TraceId field value
 func (o *Metadata) GetTraceId() string {
-	if o == nil || IsNil(o.TraceId) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.TraceId
+
+	return o.TraceId
 }
 
-// GetTraceIdOk returns a tuple with the TraceId field value if set, nil otherwise
+// GetTraceIdOk returns a tuple with the TraceId field value
 // and a boolean to check if the value has been set.
 func (o *Metadata) GetTraceIdOk() (*string, bool) {
-	if o == nil || IsNil(o.TraceId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.TraceId, true
+	return &o.TraceId, true
 }
 
-// HasTraceId returns a boolean if a field has been set.
-func (o *Metadata) HasTraceId() bool {
-	if o != nil && !IsNil(o.TraceId) {
-		return true
-	}
-
-	return false
-}
-
-// SetTraceId gets a reference to the given string and assigns it to the TraceId field.
+// SetTraceId sets field value
 func (o *Metadata) SetTraceId(v string) {
-	o.TraceId = &v
+	o.TraceId = v
 }
 
-// GetRequestId returns the RequestId field value if set, zero value otherwise.
+// GetRequestId returns the RequestId field value
 func (o *Metadata) GetRequestId() string {
-	if o == nil || IsNil(o.RequestId) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.RequestId
+
+	return o.RequestId
 }
 
-// GetRequestIdOk returns a tuple with the RequestId field value if set, nil otherwise
+// GetRequestIdOk returns a tuple with the RequestId field value
 // and a boolean to check if the value has been set.
 func (o *Metadata) GetRequestIdOk() (*string, bool) {
-	if o == nil || IsNil(o.RequestId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.RequestId, true
+	return &o.RequestId, true
 }
 
-// HasRequestId returns a boolean if a field has been set.
-func (o *Metadata) HasRequestId() bool {
-	if o != nil && !IsNil(o.RequestId) {
-		return true
-	}
-
-	return false
-}
-
-// SetRequestId gets a reference to the given string and assigns it to the RequestId field.
+// SetRequestId sets field value
 func (o *Metadata) SetRequestId(v string) {
-	o.RequestId = &v
+	o.RequestId = v
 }
 
 func (o Metadata) MarshalJSON() ([]byte, error) {
@@ -150,16 +133,49 @@ func (o Metadata) MarshalJSON() ([]byte, error) {
 
 func (o Metadata) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.StatusCode) {
-		toSerialize["status_code"] = o.StatusCode
-	}
-	if !IsNil(o.TraceId) {
-		toSerialize["trace_id"] = o.TraceId
-	}
-	if !IsNil(o.RequestId) {
-		toSerialize["request_id"] = o.RequestId
-	}
+	toSerialize["status_code"] = o.StatusCode
+	toSerialize["trace_id"] = o.TraceId
+	toSerialize["request_id"] = o.RequestId
 	return toSerialize, nil
+}
+
+func (o *Metadata) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"status_code",
+		"trace_id",
+		"request_id",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varMetadata := _Metadata{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varMetadata)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Metadata(varMetadata)
+
+	return err
 }
 
 type NullableMetadata struct {

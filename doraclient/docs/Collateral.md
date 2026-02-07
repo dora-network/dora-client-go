@@ -4,16 +4,16 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**PositionId** | Pointer to **string** |  | [optional] 
-**TransactionId** | Pointer to **string** |  | [optional] 
-**AssetId** | Pointer to **string** |  | [optional] 
-**Quantity** | Pointer to **string** |  | [optional] 
+**PositionId** | **string** |  | 
+**TransactionId** | **string** |  | 
+**AssetId** | **string** |  | 
+**Quantity** | **string** |  | 
 
 ## Methods
 
 ### NewCollateral
 
-`func NewCollateral() *Collateral`
+`func NewCollateral(positionId string, transactionId string, assetId string, quantity string, ) *Collateral`
 
 NewCollateral instantiates a new Collateral object
 This constructor will assign default values to properties that have it defined,
@@ -47,11 +47,6 @@ and a boolean to check if the value has been set.
 
 SetPositionId sets PositionId field to given value.
 
-### HasPositionId
-
-`func (o *Collateral) HasPositionId() bool`
-
-HasPositionId returns a boolean if a field has been set.
 
 ### GetTransactionId
 
@@ -72,11 +67,6 @@ and a boolean to check if the value has been set.
 
 SetTransactionId sets TransactionId field to given value.
 
-### HasTransactionId
-
-`func (o *Collateral) HasTransactionId() bool`
-
-HasTransactionId returns a boolean if a field has been set.
 
 ### GetAssetId
 
@@ -97,11 +87,6 @@ and a boolean to check if the value has been set.
 
 SetAssetId sets AssetId field to given value.
 
-### HasAssetId
-
-`func (o *Collateral) HasAssetId() bool`
-
-HasAssetId returns a boolean if a field has been set.
 
 ### GetQuantity
 
@@ -122,11 +107,6 @@ and a boolean to check if the value has been set.
 
 SetQuantity sets Quantity field to given value.
 
-### HasQuantity
-
-`func (o *Collateral) HasQuantity() bool`
-
-HasQuantity returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

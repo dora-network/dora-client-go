@@ -13,6 +13,8 @@ package doraclient
 import (
 	"encoding/json"
 	"time"
+	"bytes"
+	"fmt"
 )
 
 // checks if the Trade type satisfies the MappedNullable interface at compile time
@@ -20,28 +22,39 @@ var _ MappedNullable = &Trade{}
 
 // Trade struct for Trade
 type Trade struct {
-	TransactionId *string `json:"transaction_id,omitempty"`
-	Asset0 *string `json:"asset_0,omitempty"`
-	CreatedAt *time.Time `json:"created_at,omitempty"`
-	FeeAssetId *string `json:"fee_asset_id,omitempty"`
-	FeeQuantity *string `json:"fee_quantity,omitempty"`
-	OrderBookId *string `json:"order_book_id,omitempty"`
-	OrderId *string `json:"order_id,omitempty"`
-	OrderSeq *int32 `json:"order_seq,omitempty"`
-	Price *string `json:"price,omitempty"`
-	Quantity0 *string `json:"quantity_0,omitempty"`
-	UserId *string `json:"user_id,omitempty"`
-	Side *Side `json:"side,omitempty"`
+	TransactionId string `json:"transaction_id"`
+	Asset0 string `json:"asset_0"`
+	CreatedAt time.Time `json:"created_at"`
+	OrderBookId string `json:"order_book_id"`
+	OrderId string `json:"order_id"`
+	OrderSeq int32 `json:"order_seq"`
+	Price string `json:"price"`
+	Quantity0 string `json:"quantity_0"`
+	UserId string `json:"user_id"`
+	Side Side `json:"side"`
 	// If true, then this order is the aggressor (taker); otherwise it is the maker.
-	AggressorIndicator *bool `json:"aggressor_indicator,omitempty"`
+	AggressorIndicator bool `json:"aggressor_indicator"`
 }
+
+type _Trade Trade
 
 // NewTrade instantiates a new Trade object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTrade() *Trade {
+func NewTrade(transactionId string, asset0 string, createdAt time.Time, orderBookId string, orderId string, orderSeq int32, price string, quantity0 string, userId string, side Side, aggressorIndicator bool) *Trade {
 	this := Trade{}
+	this.TransactionId = transactionId
+	this.Asset0 = asset0
+	this.CreatedAt = createdAt
+	this.OrderBookId = orderBookId
+	this.OrderId = orderId
+	this.OrderSeq = orderSeq
+	this.Price = price
+	this.Quantity0 = quantity0
+	this.UserId = userId
+	this.Side = side
+	this.AggressorIndicator = aggressorIndicator
 	return &this
 }
 
@@ -53,420 +66,268 @@ func NewTradeWithDefaults() *Trade {
 	return &this
 }
 
-// GetTransactionId returns the TransactionId field value if set, zero value otherwise.
+// GetTransactionId returns the TransactionId field value
 func (o *Trade) GetTransactionId() string {
-	if o == nil || IsNil(o.TransactionId) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.TransactionId
+
+	return o.TransactionId
 }
 
-// GetTransactionIdOk returns a tuple with the TransactionId field value if set, nil otherwise
+// GetTransactionIdOk returns a tuple with the TransactionId field value
 // and a boolean to check if the value has been set.
 func (o *Trade) GetTransactionIdOk() (*string, bool) {
-	if o == nil || IsNil(o.TransactionId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.TransactionId, true
+	return &o.TransactionId, true
 }
 
-// HasTransactionId returns a boolean if a field has been set.
-func (o *Trade) HasTransactionId() bool {
-	if o != nil && !IsNil(o.TransactionId) {
-		return true
-	}
-
-	return false
-}
-
-// SetTransactionId gets a reference to the given string and assigns it to the TransactionId field.
+// SetTransactionId sets field value
 func (o *Trade) SetTransactionId(v string) {
-	o.TransactionId = &v
+	o.TransactionId = v
 }
 
-// GetAsset0 returns the Asset0 field value if set, zero value otherwise.
+// GetAsset0 returns the Asset0 field value
 func (o *Trade) GetAsset0() string {
-	if o == nil || IsNil(o.Asset0) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Asset0
+
+	return o.Asset0
 }
 
-// GetAsset0Ok returns a tuple with the Asset0 field value if set, nil otherwise
+// GetAsset0Ok returns a tuple with the Asset0 field value
 // and a boolean to check if the value has been set.
 func (o *Trade) GetAsset0Ok() (*string, bool) {
-	if o == nil || IsNil(o.Asset0) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Asset0, true
+	return &o.Asset0, true
 }
 
-// HasAsset0 returns a boolean if a field has been set.
-func (o *Trade) HasAsset0() bool {
-	if o != nil && !IsNil(o.Asset0) {
-		return true
-	}
-
-	return false
-}
-
-// SetAsset0 gets a reference to the given string and assigns it to the Asset0 field.
+// SetAsset0 sets field value
 func (o *Trade) SetAsset0(v string) {
-	o.Asset0 = &v
+	o.Asset0 = v
 }
 
-// GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
+// GetCreatedAt returns the CreatedAt field value
 func (o *Trade) GetCreatedAt() time.Time {
-	if o == nil || IsNil(o.CreatedAt) {
+	if o == nil {
 		var ret time.Time
 		return ret
 	}
-	return *o.CreatedAt
+
+	return o.CreatedAt
 }
 
-// GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
+// GetCreatedAtOk returns a tuple with the CreatedAt field value
 // and a boolean to check if the value has been set.
 func (o *Trade) GetCreatedAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.CreatedAt) {
+	if o == nil {
 		return nil, false
 	}
-	return o.CreatedAt, true
+	return &o.CreatedAt, true
 }
 
-// HasCreatedAt returns a boolean if a field has been set.
-func (o *Trade) HasCreatedAt() bool {
-	if o != nil && !IsNil(o.CreatedAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetCreatedAt gets a reference to the given time.Time and assigns it to the CreatedAt field.
+// SetCreatedAt sets field value
 func (o *Trade) SetCreatedAt(v time.Time) {
-	o.CreatedAt = &v
+	o.CreatedAt = v
 }
 
-// GetFeeAssetId returns the FeeAssetId field value if set, zero value otherwise.
-func (o *Trade) GetFeeAssetId() string {
-	if o == nil || IsNil(o.FeeAssetId) {
-		var ret string
-		return ret
-	}
-	return *o.FeeAssetId
-}
-
-// GetFeeAssetIdOk returns a tuple with the FeeAssetId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Trade) GetFeeAssetIdOk() (*string, bool) {
-	if o == nil || IsNil(o.FeeAssetId) {
-		return nil, false
-	}
-	return o.FeeAssetId, true
-}
-
-// HasFeeAssetId returns a boolean if a field has been set.
-func (o *Trade) HasFeeAssetId() bool {
-	if o != nil && !IsNil(o.FeeAssetId) {
-		return true
-	}
-
-	return false
-}
-
-// SetFeeAssetId gets a reference to the given string and assigns it to the FeeAssetId field.
-func (o *Trade) SetFeeAssetId(v string) {
-	o.FeeAssetId = &v
-}
-
-// GetFeeQuantity returns the FeeQuantity field value if set, zero value otherwise.
-func (o *Trade) GetFeeQuantity() string {
-	if o == nil || IsNil(o.FeeQuantity) {
-		var ret string
-		return ret
-	}
-	return *o.FeeQuantity
-}
-
-// GetFeeQuantityOk returns a tuple with the FeeQuantity field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Trade) GetFeeQuantityOk() (*string, bool) {
-	if o == nil || IsNil(o.FeeQuantity) {
-		return nil, false
-	}
-	return o.FeeQuantity, true
-}
-
-// HasFeeQuantity returns a boolean if a field has been set.
-func (o *Trade) HasFeeQuantity() bool {
-	if o != nil && !IsNil(o.FeeQuantity) {
-		return true
-	}
-
-	return false
-}
-
-// SetFeeQuantity gets a reference to the given string and assigns it to the FeeQuantity field.
-func (o *Trade) SetFeeQuantity(v string) {
-	o.FeeQuantity = &v
-}
-
-// GetOrderBookId returns the OrderBookId field value if set, zero value otherwise.
+// GetOrderBookId returns the OrderBookId field value
 func (o *Trade) GetOrderBookId() string {
-	if o == nil || IsNil(o.OrderBookId) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.OrderBookId
+
+	return o.OrderBookId
 }
 
-// GetOrderBookIdOk returns a tuple with the OrderBookId field value if set, nil otherwise
+// GetOrderBookIdOk returns a tuple with the OrderBookId field value
 // and a boolean to check if the value has been set.
 func (o *Trade) GetOrderBookIdOk() (*string, bool) {
-	if o == nil || IsNil(o.OrderBookId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.OrderBookId, true
+	return &o.OrderBookId, true
 }
 
-// HasOrderBookId returns a boolean if a field has been set.
-func (o *Trade) HasOrderBookId() bool {
-	if o != nil && !IsNil(o.OrderBookId) {
-		return true
-	}
-
-	return false
-}
-
-// SetOrderBookId gets a reference to the given string and assigns it to the OrderBookId field.
+// SetOrderBookId sets field value
 func (o *Trade) SetOrderBookId(v string) {
-	o.OrderBookId = &v
+	o.OrderBookId = v
 }
 
-// GetOrderId returns the OrderId field value if set, zero value otherwise.
+// GetOrderId returns the OrderId field value
 func (o *Trade) GetOrderId() string {
-	if o == nil || IsNil(o.OrderId) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.OrderId
+
+	return o.OrderId
 }
 
-// GetOrderIdOk returns a tuple with the OrderId field value if set, nil otherwise
+// GetOrderIdOk returns a tuple with the OrderId field value
 // and a boolean to check if the value has been set.
 func (o *Trade) GetOrderIdOk() (*string, bool) {
-	if o == nil || IsNil(o.OrderId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.OrderId, true
+	return &o.OrderId, true
 }
 
-// HasOrderId returns a boolean if a field has been set.
-func (o *Trade) HasOrderId() bool {
-	if o != nil && !IsNil(o.OrderId) {
-		return true
-	}
-
-	return false
-}
-
-// SetOrderId gets a reference to the given string and assigns it to the OrderId field.
+// SetOrderId sets field value
 func (o *Trade) SetOrderId(v string) {
-	o.OrderId = &v
+	o.OrderId = v
 }
 
-// GetOrderSeq returns the OrderSeq field value if set, zero value otherwise.
+// GetOrderSeq returns the OrderSeq field value
 func (o *Trade) GetOrderSeq() int32 {
-	if o == nil || IsNil(o.OrderSeq) {
+	if o == nil {
 		var ret int32
 		return ret
 	}
-	return *o.OrderSeq
+
+	return o.OrderSeq
 }
 
-// GetOrderSeqOk returns a tuple with the OrderSeq field value if set, nil otherwise
+// GetOrderSeqOk returns a tuple with the OrderSeq field value
 // and a boolean to check if the value has been set.
 func (o *Trade) GetOrderSeqOk() (*int32, bool) {
-	if o == nil || IsNil(o.OrderSeq) {
+	if o == nil {
 		return nil, false
 	}
-	return o.OrderSeq, true
+	return &o.OrderSeq, true
 }
 
-// HasOrderSeq returns a boolean if a field has been set.
-func (o *Trade) HasOrderSeq() bool {
-	if o != nil && !IsNil(o.OrderSeq) {
-		return true
-	}
-
-	return false
-}
-
-// SetOrderSeq gets a reference to the given int32 and assigns it to the OrderSeq field.
+// SetOrderSeq sets field value
 func (o *Trade) SetOrderSeq(v int32) {
-	o.OrderSeq = &v
+	o.OrderSeq = v
 }
 
-// GetPrice returns the Price field value if set, zero value otherwise.
+// GetPrice returns the Price field value
 func (o *Trade) GetPrice() string {
-	if o == nil || IsNil(o.Price) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Price
+
+	return o.Price
 }
 
-// GetPriceOk returns a tuple with the Price field value if set, nil otherwise
+// GetPriceOk returns a tuple with the Price field value
 // and a boolean to check if the value has been set.
 func (o *Trade) GetPriceOk() (*string, bool) {
-	if o == nil || IsNil(o.Price) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Price, true
+	return &o.Price, true
 }
 
-// HasPrice returns a boolean if a field has been set.
-func (o *Trade) HasPrice() bool {
-	if o != nil && !IsNil(o.Price) {
-		return true
-	}
-
-	return false
-}
-
-// SetPrice gets a reference to the given string and assigns it to the Price field.
+// SetPrice sets field value
 func (o *Trade) SetPrice(v string) {
-	o.Price = &v
+	o.Price = v
 }
 
-// GetQuantity0 returns the Quantity0 field value if set, zero value otherwise.
+// GetQuantity0 returns the Quantity0 field value
 func (o *Trade) GetQuantity0() string {
-	if o == nil || IsNil(o.Quantity0) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Quantity0
+
+	return o.Quantity0
 }
 
-// GetQuantity0Ok returns a tuple with the Quantity0 field value if set, nil otherwise
+// GetQuantity0Ok returns a tuple with the Quantity0 field value
 // and a boolean to check if the value has been set.
 func (o *Trade) GetQuantity0Ok() (*string, bool) {
-	if o == nil || IsNil(o.Quantity0) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Quantity0, true
+	return &o.Quantity0, true
 }
 
-// HasQuantity0 returns a boolean if a field has been set.
-func (o *Trade) HasQuantity0() bool {
-	if o != nil && !IsNil(o.Quantity0) {
-		return true
-	}
-
-	return false
-}
-
-// SetQuantity0 gets a reference to the given string and assigns it to the Quantity0 field.
+// SetQuantity0 sets field value
 func (o *Trade) SetQuantity0(v string) {
-	o.Quantity0 = &v
+	o.Quantity0 = v
 }
 
-// GetUserId returns the UserId field value if set, zero value otherwise.
+// GetUserId returns the UserId field value
 func (o *Trade) GetUserId() string {
-	if o == nil || IsNil(o.UserId) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.UserId
+
+	return o.UserId
 }
 
-// GetUserIdOk returns a tuple with the UserId field value if set, nil otherwise
+// GetUserIdOk returns a tuple with the UserId field value
 // and a boolean to check if the value has been set.
 func (o *Trade) GetUserIdOk() (*string, bool) {
-	if o == nil || IsNil(o.UserId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.UserId, true
+	return &o.UserId, true
 }
 
-// HasUserId returns a boolean if a field has been set.
-func (o *Trade) HasUserId() bool {
-	if o != nil && !IsNil(o.UserId) {
-		return true
-	}
-
-	return false
-}
-
-// SetUserId gets a reference to the given string and assigns it to the UserId field.
+// SetUserId sets field value
 func (o *Trade) SetUserId(v string) {
-	o.UserId = &v
+	o.UserId = v
 }
 
-// GetSide returns the Side field value if set, zero value otherwise.
+// GetSide returns the Side field value
 func (o *Trade) GetSide() Side {
-	if o == nil || IsNil(o.Side) {
+	if o == nil {
 		var ret Side
 		return ret
 	}
-	return *o.Side
+
+	return o.Side
 }
 
-// GetSideOk returns a tuple with the Side field value if set, nil otherwise
+// GetSideOk returns a tuple with the Side field value
 // and a boolean to check if the value has been set.
 func (o *Trade) GetSideOk() (*Side, bool) {
-	if o == nil || IsNil(o.Side) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Side, true
+	return &o.Side, true
 }
 
-// HasSide returns a boolean if a field has been set.
-func (o *Trade) HasSide() bool {
-	if o != nil && !IsNil(o.Side) {
-		return true
-	}
-
-	return false
-}
-
-// SetSide gets a reference to the given Side and assigns it to the Side field.
+// SetSide sets field value
 func (o *Trade) SetSide(v Side) {
-	o.Side = &v
+	o.Side = v
 }
 
-// GetAggressorIndicator returns the AggressorIndicator field value if set, zero value otherwise.
+// GetAggressorIndicator returns the AggressorIndicator field value
 func (o *Trade) GetAggressorIndicator() bool {
-	if o == nil || IsNil(o.AggressorIndicator) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.AggressorIndicator
+
+	return o.AggressorIndicator
 }
 
-// GetAggressorIndicatorOk returns a tuple with the AggressorIndicator field value if set, nil otherwise
+// GetAggressorIndicatorOk returns a tuple with the AggressorIndicator field value
 // and a boolean to check if the value has been set.
 func (o *Trade) GetAggressorIndicatorOk() (*bool, bool) {
-	if o == nil || IsNil(o.AggressorIndicator) {
+	if o == nil {
 		return nil, false
 	}
-	return o.AggressorIndicator, true
+	return &o.AggressorIndicator, true
 }
 
-// HasAggressorIndicator returns a boolean if a field has been set.
-func (o *Trade) HasAggressorIndicator() bool {
-	if o != nil && !IsNil(o.AggressorIndicator) {
-		return true
-	}
-
-	return false
-}
-
-// SetAggressorIndicator gets a reference to the given bool and assigns it to the AggressorIndicator field.
+// SetAggressorIndicator sets field value
 func (o *Trade) SetAggressorIndicator(v bool) {
-	o.AggressorIndicator = &v
+	o.AggressorIndicator = v
 }
 
 func (o Trade) MarshalJSON() ([]byte, error) {
@@ -479,46 +340,65 @@ func (o Trade) MarshalJSON() ([]byte, error) {
 
 func (o Trade) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.TransactionId) {
-		toSerialize["transaction_id"] = o.TransactionId
-	}
-	if !IsNil(o.Asset0) {
-		toSerialize["asset_0"] = o.Asset0
-	}
-	if !IsNil(o.CreatedAt) {
-		toSerialize["created_at"] = o.CreatedAt
-	}
-	if !IsNil(o.FeeAssetId) {
-		toSerialize["fee_asset_id"] = o.FeeAssetId
-	}
-	if !IsNil(o.FeeQuantity) {
-		toSerialize["fee_quantity"] = o.FeeQuantity
-	}
-	if !IsNil(o.OrderBookId) {
-		toSerialize["order_book_id"] = o.OrderBookId
-	}
-	if !IsNil(o.OrderId) {
-		toSerialize["order_id"] = o.OrderId
-	}
-	if !IsNil(o.OrderSeq) {
-		toSerialize["order_seq"] = o.OrderSeq
-	}
-	if !IsNil(o.Price) {
-		toSerialize["price"] = o.Price
-	}
-	if !IsNil(o.Quantity0) {
-		toSerialize["quantity_0"] = o.Quantity0
-	}
-	if !IsNil(o.UserId) {
-		toSerialize["user_id"] = o.UserId
-	}
-	if !IsNil(o.Side) {
-		toSerialize["side"] = o.Side
-	}
-	if !IsNil(o.AggressorIndicator) {
-		toSerialize["aggressor_indicator"] = o.AggressorIndicator
-	}
+	toSerialize["transaction_id"] = o.TransactionId
+	toSerialize["asset_0"] = o.Asset0
+	toSerialize["created_at"] = o.CreatedAt
+	toSerialize["order_book_id"] = o.OrderBookId
+	toSerialize["order_id"] = o.OrderId
+	toSerialize["order_seq"] = o.OrderSeq
+	toSerialize["price"] = o.Price
+	toSerialize["quantity_0"] = o.Quantity0
+	toSerialize["user_id"] = o.UserId
+	toSerialize["side"] = o.Side
+	toSerialize["aggressor_indicator"] = o.AggressorIndicator
 	return toSerialize, nil
+}
+
+func (o *Trade) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"transaction_id",
+		"asset_0",
+		"created_at",
+		"order_book_id",
+		"order_id",
+		"order_seq",
+		"price",
+		"quantity_0",
+		"user_id",
+		"side",
+		"aggressor_indicator",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varTrade := _Trade{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varTrade)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Trade(varTrade)
+
+	return err
 }
 
 type NullableTrade struct {

@@ -4,15 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**AssetId** | Pointer to **string** |  | [optional] 
-**Pending** | Pointer to **string** |  | [optional] 
-**Completed** | Pointer to **string** |  | [optional] 
+**AssetId** | **string** |  | 
+**Pending** | **string** |  | 
+**Completed** | **string** |  | 
 
 ## Methods
 
 ### NewUserCouponPaymentAssetSummary
 
-`func NewUserCouponPaymentAssetSummary() *UserCouponPaymentAssetSummary`
+`func NewUserCouponPaymentAssetSummary(assetId string, pending string, completed string, ) *UserCouponPaymentAssetSummary`
 
 NewUserCouponPaymentAssetSummary instantiates a new UserCouponPaymentAssetSummary object
 This constructor will assign default values to properties that have it defined,
@@ -46,11 +46,6 @@ and a boolean to check if the value has been set.
 
 SetAssetId sets AssetId field to given value.
 
-### HasAssetId
-
-`func (o *UserCouponPaymentAssetSummary) HasAssetId() bool`
-
-HasAssetId returns a boolean if a field has been set.
 
 ### GetPending
 
@@ -71,11 +66,6 @@ and a boolean to check if the value has been set.
 
 SetPending sets Pending field to given value.
 
-### HasPending
-
-`func (o *UserCouponPaymentAssetSummary) HasPending() bool`
-
-HasPending returns a boolean if a field has been set.
 
 ### GetCompleted
 
@@ -96,11 +86,6 @@ and a boolean to check if the value has been set.
 
 SetCompleted sets Completed field to given value.
 
-### HasCompleted
-
-`func (o *UserCouponPaymentAssetSummary) HasCompleted() bool`
-
-HasCompleted returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

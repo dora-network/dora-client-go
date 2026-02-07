@@ -4,21 +4,21 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**OrderBookId** | Pointer to **string** |  | [optional] 
-**OpenPrice** | Pointer to **string** | Open price of the orderbook | [optional] 
-**LastPrice** | Pointer to **string** | Price of the most recent executed trade. | [optional] 
-**High24h** | Pointer to **string** | Highest price of the orderbook in the last 24 hours. | [optional] 
-**Low24h** | Pointer to **string** | Lowest price of the orderbook in the last 24 hours. | [optional] 
-**Change24h** | Pointer to **string** | Change in price of the orderbook in the last 24 hours. | [optional] 
-**ChangePct24h** | Pointer to **string** | Change percentage in price of the orderbook in the last 24 hours. | [optional] 
-**Volume24hBase** | Pointer to **string** | Total volume of the orderbook in the last 24 hours. | [optional] 
-**Volume24hUsd** | Pointer to **string** | Total volume of the orderbook in the last 24 hours in USD. | [optional] 
+**OrderBookId** | **string** |  | 
+**OpenPrice** | **string** | Open price of the orderbook | 
+**LastPrice** | **string** | Price of the most recent executed trade. | 
+**High24h** | **string** | Highest price of the orderbook in the last 24 hours. | 
+**Low24h** | **string** | Lowest price of the orderbook in the last 24 hours. | 
+**Change24h** | **string** | Change in price of the orderbook in the last 24 hours. | 
+**ChangePct24h** | **string** | Change percentage in price of the orderbook in the last 24 hours. | 
+**Volume24hBase** | **string** | Total volume of the orderbook in the last 24 hours. | 
+**Volume24hUsd** | **string** | Total volume of the orderbook in the last 24 hours in USD. | 
 
 ## Methods
 
 ### NewOrderbookStats
 
-`func NewOrderbookStats() *OrderbookStats`
+`func NewOrderbookStats(orderBookId string, openPrice string, lastPrice string, high24h string, low24h string, change24h string, changePct24h string, volume24hBase string, volume24hUsd string, ) *OrderbookStats`
 
 NewOrderbookStats instantiates a new OrderbookStats object
 This constructor will assign default values to properties that have it defined,
@@ -52,11 +52,6 @@ and a boolean to check if the value has been set.
 
 SetOrderBookId sets OrderBookId field to given value.
 
-### HasOrderBookId
-
-`func (o *OrderbookStats) HasOrderBookId() bool`
-
-HasOrderBookId returns a boolean if a field has been set.
 
 ### GetOpenPrice
 
@@ -77,11 +72,6 @@ and a boolean to check if the value has been set.
 
 SetOpenPrice sets OpenPrice field to given value.
 
-### HasOpenPrice
-
-`func (o *OrderbookStats) HasOpenPrice() bool`
-
-HasOpenPrice returns a boolean if a field has been set.
 
 ### GetLastPrice
 
@@ -102,11 +92,6 @@ and a boolean to check if the value has been set.
 
 SetLastPrice sets LastPrice field to given value.
 
-### HasLastPrice
-
-`func (o *OrderbookStats) HasLastPrice() bool`
-
-HasLastPrice returns a boolean if a field has been set.
 
 ### GetHigh24h
 
@@ -127,11 +112,6 @@ and a boolean to check if the value has been set.
 
 SetHigh24h sets High24h field to given value.
 
-### HasHigh24h
-
-`func (o *OrderbookStats) HasHigh24h() bool`
-
-HasHigh24h returns a boolean if a field has been set.
 
 ### GetLow24h
 
@@ -152,11 +132,6 @@ and a boolean to check if the value has been set.
 
 SetLow24h sets Low24h field to given value.
 
-### HasLow24h
-
-`func (o *OrderbookStats) HasLow24h() bool`
-
-HasLow24h returns a boolean if a field has been set.
 
 ### GetChange24h
 
@@ -177,11 +152,6 @@ and a boolean to check if the value has been set.
 
 SetChange24h sets Change24h field to given value.
 
-### HasChange24h
-
-`func (o *OrderbookStats) HasChange24h() bool`
-
-HasChange24h returns a boolean if a field has been set.
 
 ### GetChangePct24h
 
@@ -202,11 +172,6 @@ and a boolean to check if the value has been set.
 
 SetChangePct24h sets ChangePct24h field to given value.
 
-### HasChangePct24h
-
-`func (o *OrderbookStats) HasChangePct24h() bool`
-
-HasChangePct24h returns a boolean if a field has been set.
 
 ### GetVolume24hBase
 
@@ -227,11 +192,6 @@ and a boolean to check if the value has been set.
 
 SetVolume24hBase sets Volume24hBase field to given value.
 
-### HasVolume24hBase
-
-`func (o *OrderbookStats) HasVolume24hBase() bool`
-
-HasVolume24hBase returns a boolean if a field has been set.
 
 ### GetVolume24hUsd
 
@@ -252,11 +212,6 @@ and a boolean to check if the value has been set.
 
 SetVolume24hUsd sets Volume24hUsd field to given value.
 
-### HasVolume24hUsd
-
-`func (o *OrderbookStats) HasVolume24hUsd() bool`
-
-HasVolume24hUsd returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

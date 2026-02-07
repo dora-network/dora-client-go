@@ -4,15 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**AssetId** | Pointer to **string** |  | [optional] 
-**Price** | Pointer to **string** |  | [optional] 
-**Time** | Pointer to **time.Time** |  | [optional] 
+**AssetId** | **string** |  | 
+**Price** | **string** |  | 
+**Time** | **time.Time** |  | 
 
 ## Methods
 
 ### NewAssetPrice
 
-`func NewAssetPrice() *AssetPrice`
+`func NewAssetPrice(assetId string, price string, time time.Time, ) *AssetPrice`
 
 NewAssetPrice instantiates a new AssetPrice object
 This constructor will assign default values to properties that have it defined,
@@ -46,11 +46,6 @@ and a boolean to check if the value has been set.
 
 SetAssetId sets AssetId field to given value.
 
-### HasAssetId
-
-`func (o *AssetPrice) HasAssetId() bool`
-
-HasAssetId returns a boolean if a field has been set.
 
 ### GetPrice
 
@@ -71,11 +66,6 @@ and a boolean to check if the value has been set.
 
 SetPrice sets Price field to given value.
 
-### HasPrice
-
-`func (o *AssetPrice) HasPrice() bool`
-
-HasPrice returns a boolean if a field has been set.
 
 ### GetTime
 
@@ -96,11 +86,6 @@ and a boolean to check if the value has been set.
 
 SetTime sets Time field to given value.
 
-### HasTime
-
-`func (o *AssetPrice) HasTime() bool`
-
-HasTime returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

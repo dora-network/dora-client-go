@@ -12,6 +12,8 @@ package doraclient
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the UserValue type satisfies the MappedNullable interface at compile time
@@ -19,27 +21,30 @@ var _ MappedNullable = &UserValue{}
 
 // UserValue struct for UserValue
 type UserValue struct {
-	Available map[string]string `json:"available,omitempty"`
-	Locked map[string]string `json:"locked,omitempty"`
-	Borrowed map[string]string `json:"borrowed,omitempty"`
-	Supplied map[string]string `json:"supplied,omitempty"`
-	ImpendingBorrows map[string]string `json:"impending_borrows,omitempty"`
-	BorrowLimit map[string]string `json:"borrow_limit,omitempty"`
-	LiquidationThreshold map[string]string `json:"liquidation_threshold,omitempty"`
-	NotionalLong map[string]string `json:"notional_long,omitempty"`
-	NotionalShort map[string]string `json:"notional_short,omitempty"`
-	PortfolioValue map[string]string `json:"portfolio_value,omitempty"`
-	NetLiquidationValue map[string]string `json:"net_liquidation_value,omitempty"`
-	UnrealizedPnl map[string]string `json:"unrealized_pnl,omitempty"`
-	RealizedPnl map[string]string `json:"realized_pnl,omitempty"`
+	Available map[string]string `json:"available"`
+	Locked map[string]string `json:"locked"`
+	Borrowed map[string]string `json:"borrowed"`
+	Supplied map[string]string `json:"supplied"`
+	ImpendingBorrows map[string]string `json:"impending_borrows"`
+	BorrowLimit map[string]string `json:"borrow_limit"`
+	LiquidationThreshold map[string]string `json:"liquidation_threshold"`
 }
+
+type _UserValue UserValue
 
 // NewUserValue instantiates a new UserValue object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUserValue() *UserValue {
+func NewUserValue(available map[string]string, locked map[string]string, borrowed map[string]string, supplied map[string]string, impendingBorrows map[string]string, borrowLimit map[string]string, liquidationThreshold map[string]string) *UserValue {
 	this := UserValue{}
+	this.Available = available
+	this.Locked = locked
+	this.Borrowed = borrowed
+	this.Supplied = supplied
+	this.ImpendingBorrows = impendingBorrows
+	this.BorrowLimit = borrowLimit
+	this.LiquidationThreshold = liquidationThreshold
 	return &this
 }
 
@@ -51,420 +56,172 @@ func NewUserValueWithDefaults() *UserValue {
 	return &this
 }
 
-// GetAvailable returns the Available field value if set, zero value otherwise.
+// GetAvailable returns the Available field value
 func (o *UserValue) GetAvailable() map[string]string {
-	if o == nil || IsNil(o.Available) {
+	if o == nil {
 		var ret map[string]string
 		return ret
 	}
+
 	return o.Available
 }
 
-// GetAvailableOk returns a tuple with the Available field value if set, nil otherwise
+// GetAvailableOk returns a tuple with the Available field value
 // and a boolean to check if the value has been set.
 func (o *UserValue) GetAvailableOk() (map[string]string, bool) {
-	if o == nil || IsNil(o.Available) {
+	if o == nil {
 		return map[string]string{}, false
 	}
 	return o.Available, true
 }
 
-// HasAvailable returns a boolean if a field has been set.
-func (o *UserValue) HasAvailable() bool {
-	if o != nil && !IsNil(o.Available) {
-		return true
-	}
-
-	return false
-}
-
-// SetAvailable gets a reference to the given map[string]string and assigns it to the Available field.
+// SetAvailable sets field value
 func (o *UserValue) SetAvailable(v map[string]string) {
 	o.Available = v
 }
 
-// GetLocked returns the Locked field value if set, zero value otherwise.
+// GetLocked returns the Locked field value
 func (o *UserValue) GetLocked() map[string]string {
-	if o == nil || IsNil(o.Locked) {
+	if o == nil {
 		var ret map[string]string
 		return ret
 	}
+
 	return o.Locked
 }
 
-// GetLockedOk returns a tuple with the Locked field value if set, nil otherwise
+// GetLockedOk returns a tuple with the Locked field value
 // and a boolean to check if the value has been set.
 func (o *UserValue) GetLockedOk() (map[string]string, bool) {
-	if o == nil || IsNil(o.Locked) {
+	if o == nil {
 		return map[string]string{}, false
 	}
 	return o.Locked, true
 }
 
-// HasLocked returns a boolean if a field has been set.
-func (o *UserValue) HasLocked() bool {
-	if o != nil && !IsNil(o.Locked) {
-		return true
-	}
-
-	return false
-}
-
-// SetLocked gets a reference to the given map[string]string and assigns it to the Locked field.
+// SetLocked sets field value
 func (o *UserValue) SetLocked(v map[string]string) {
 	o.Locked = v
 }
 
-// GetBorrowed returns the Borrowed field value if set, zero value otherwise.
+// GetBorrowed returns the Borrowed field value
 func (o *UserValue) GetBorrowed() map[string]string {
-	if o == nil || IsNil(o.Borrowed) {
+	if o == nil {
 		var ret map[string]string
 		return ret
 	}
+
 	return o.Borrowed
 }
 
-// GetBorrowedOk returns a tuple with the Borrowed field value if set, nil otherwise
+// GetBorrowedOk returns a tuple with the Borrowed field value
 // and a boolean to check if the value has been set.
 func (o *UserValue) GetBorrowedOk() (map[string]string, bool) {
-	if o == nil || IsNil(o.Borrowed) {
+	if o == nil {
 		return map[string]string{}, false
 	}
 	return o.Borrowed, true
 }
 
-// HasBorrowed returns a boolean if a field has been set.
-func (o *UserValue) HasBorrowed() bool {
-	if o != nil && !IsNil(o.Borrowed) {
-		return true
-	}
-
-	return false
-}
-
-// SetBorrowed gets a reference to the given map[string]string and assigns it to the Borrowed field.
+// SetBorrowed sets field value
 func (o *UserValue) SetBorrowed(v map[string]string) {
 	o.Borrowed = v
 }
 
-// GetSupplied returns the Supplied field value if set, zero value otherwise.
+// GetSupplied returns the Supplied field value
 func (o *UserValue) GetSupplied() map[string]string {
-	if o == nil || IsNil(o.Supplied) {
+	if o == nil {
 		var ret map[string]string
 		return ret
 	}
+
 	return o.Supplied
 }
 
-// GetSuppliedOk returns a tuple with the Supplied field value if set, nil otherwise
+// GetSuppliedOk returns a tuple with the Supplied field value
 // and a boolean to check if the value has been set.
 func (o *UserValue) GetSuppliedOk() (map[string]string, bool) {
-	if o == nil || IsNil(o.Supplied) {
+	if o == nil {
 		return map[string]string{}, false
 	}
 	return o.Supplied, true
 }
 
-// HasSupplied returns a boolean if a field has been set.
-func (o *UserValue) HasSupplied() bool {
-	if o != nil && !IsNil(o.Supplied) {
-		return true
-	}
-
-	return false
-}
-
-// SetSupplied gets a reference to the given map[string]string and assigns it to the Supplied field.
+// SetSupplied sets field value
 func (o *UserValue) SetSupplied(v map[string]string) {
 	o.Supplied = v
 }
 
-// GetImpendingBorrows returns the ImpendingBorrows field value if set, zero value otherwise.
+// GetImpendingBorrows returns the ImpendingBorrows field value
 func (o *UserValue) GetImpendingBorrows() map[string]string {
-	if o == nil || IsNil(o.ImpendingBorrows) {
+	if o == nil {
 		var ret map[string]string
 		return ret
 	}
+
 	return o.ImpendingBorrows
 }
 
-// GetImpendingBorrowsOk returns a tuple with the ImpendingBorrows field value if set, nil otherwise
+// GetImpendingBorrowsOk returns a tuple with the ImpendingBorrows field value
 // and a boolean to check if the value has been set.
 func (o *UserValue) GetImpendingBorrowsOk() (map[string]string, bool) {
-	if o == nil || IsNil(o.ImpendingBorrows) {
+	if o == nil {
 		return map[string]string{}, false
 	}
 	return o.ImpendingBorrows, true
 }
 
-// HasImpendingBorrows returns a boolean if a field has been set.
-func (o *UserValue) HasImpendingBorrows() bool {
-	if o != nil && !IsNil(o.ImpendingBorrows) {
-		return true
-	}
-
-	return false
-}
-
-// SetImpendingBorrows gets a reference to the given map[string]string and assigns it to the ImpendingBorrows field.
+// SetImpendingBorrows sets field value
 func (o *UserValue) SetImpendingBorrows(v map[string]string) {
 	o.ImpendingBorrows = v
 }
 
-// GetBorrowLimit returns the BorrowLimit field value if set, zero value otherwise.
+// GetBorrowLimit returns the BorrowLimit field value
 func (o *UserValue) GetBorrowLimit() map[string]string {
-	if o == nil || IsNil(o.BorrowLimit) {
+	if o == nil {
 		var ret map[string]string
 		return ret
 	}
+
 	return o.BorrowLimit
 }
 
-// GetBorrowLimitOk returns a tuple with the BorrowLimit field value if set, nil otherwise
+// GetBorrowLimitOk returns a tuple with the BorrowLimit field value
 // and a boolean to check if the value has been set.
 func (o *UserValue) GetBorrowLimitOk() (map[string]string, bool) {
-	if o == nil || IsNil(o.BorrowLimit) {
+	if o == nil {
 		return map[string]string{}, false
 	}
 	return o.BorrowLimit, true
 }
 
-// HasBorrowLimit returns a boolean if a field has been set.
-func (o *UserValue) HasBorrowLimit() bool {
-	if o != nil && !IsNil(o.BorrowLimit) {
-		return true
-	}
-
-	return false
-}
-
-// SetBorrowLimit gets a reference to the given map[string]string and assigns it to the BorrowLimit field.
+// SetBorrowLimit sets field value
 func (o *UserValue) SetBorrowLimit(v map[string]string) {
 	o.BorrowLimit = v
 }
 
-// GetLiquidationThreshold returns the LiquidationThreshold field value if set, zero value otherwise.
+// GetLiquidationThreshold returns the LiquidationThreshold field value
 func (o *UserValue) GetLiquidationThreshold() map[string]string {
-	if o == nil || IsNil(o.LiquidationThreshold) {
+	if o == nil {
 		var ret map[string]string
 		return ret
 	}
+
 	return o.LiquidationThreshold
 }
 
-// GetLiquidationThresholdOk returns a tuple with the LiquidationThreshold field value if set, nil otherwise
+// GetLiquidationThresholdOk returns a tuple with the LiquidationThreshold field value
 // and a boolean to check if the value has been set.
 func (o *UserValue) GetLiquidationThresholdOk() (map[string]string, bool) {
-	if o == nil || IsNil(o.LiquidationThreshold) {
+	if o == nil {
 		return map[string]string{}, false
 	}
 	return o.LiquidationThreshold, true
 }
 
-// HasLiquidationThreshold returns a boolean if a field has been set.
-func (o *UserValue) HasLiquidationThreshold() bool {
-	if o != nil && !IsNil(o.LiquidationThreshold) {
-		return true
-	}
-
-	return false
-}
-
-// SetLiquidationThreshold gets a reference to the given map[string]string and assigns it to the LiquidationThreshold field.
+// SetLiquidationThreshold sets field value
 func (o *UserValue) SetLiquidationThreshold(v map[string]string) {
 	o.LiquidationThreshold = v
-}
-
-// GetNotionalLong returns the NotionalLong field value if set, zero value otherwise.
-func (o *UserValue) GetNotionalLong() map[string]string {
-	if o == nil || IsNil(o.NotionalLong) {
-		var ret map[string]string
-		return ret
-	}
-	return o.NotionalLong
-}
-
-// GetNotionalLongOk returns a tuple with the NotionalLong field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *UserValue) GetNotionalLongOk() (map[string]string, bool) {
-	if o == nil || IsNil(o.NotionalLong) {
-		return map[string]string{}, false
-	}
-	return o.NotionalLong, true
-}
-
-// HasNotionalLong returns a boolean if a field has been set.
-func (o *UserValue) HasNotionalLong() bool {
-	if o != nil && !IsNil(o.NotionalLong) {
-		return true
-	}
-
-	return false
-}
-
-// SetNotionalLong gets a reference to the given map[string]string and assigns it to the NotionalLong field.
-func (o *UserValue) SetNotionalLong(v map[string]string) {
-	o.NotionalLong = v
-}
-
-// GetNotionalShort returns the NotionalShort field value if set, zero value otherwise.
-func (o *UserValue) GetNotionalShort() map[string]string {
-	if o == nil || IsNil(o.NotionalShort) {
-		var ret map[string]string
-		return ret
-	}
-	return o.NotionalShort
-}
-
-// GetNotionalShortOk returns a tuple with the NotionalShort field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *UserValue) GetNotionalShortOk() (map[string]string, bool) {
-	if o == nil || IsNil(o.NotionalShort) {
-		return map[string]string{}, false
-	}
-	return o.NotionalShort, true
-}
-
-// HasNotionalShort returns a boolean if a field has been set.
-func (o *UserValue) HasNotionalShort() bool {
-	if o != nil && !IsNil(o.NotionalShort) {
-		return true
-	}
-
-	return false
-}
-
-// SetNotionalShort gets a reference to the given map[string]string and assigns it to the NotionalShort field.
-func (o *UserValue) SetNotionalShort(v map[string]string) {
-	o.NotionalShort = v
-}
-
-// GetPortfolioValue returns the PortfolioValue field value if set, zero value otherwise.
-func (o *UserValue) GetPortfolioValue() map[string]string {
-	if o == nil || IsNil(o.PortfolioValue) {
-		var ret map[string]string
-		return ret
-	}
-	return o.PortfolioValue
-}
-
-// GetPortfolioValueOk returns a tuple with the PortfolioValue field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *UserValue) GetPortfolioValueOk() (map[string]string, bool) {
-	if o == nil || IsNil(o.PortfolioValue) {
-		return map[string]string{}, false
-	}
-	return o.PortfolioValue, true
-}
-
-// HasPortfolioValue returns a boolean if a field has been set.
-func (o *UserValue) HasPortfolioValue() bool {
-	if o != nil && !IsNil(o.PortfolioValue) {
-		return true
-	}
-
-	return false
-}
-
-// SetPortfolioValue gets a reference to the given map[string]string and assigns it to the PortfolioValue field.
-func (o *UserValue) SetPortfolioValue(v map[string]string) {
-	o.PortfolioValue = v
-}
-
-// GetNetLiquidationValue returns the NetLiquidationValue field value if set, zero value otherwise.
-func (o *UserValue) GetNetLiquidationValue() map[string]string {
-	if o == nil || IsNil(o.NetLiquidationValue) {
-		var ret map[string]string
-		return ret
-	}
-	return o.NetLiquidationValue
-}
-
-// GetNetLiquidationValueOk returns a tuple with the NetLiquidationValue field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *UserValue) GetNetLiquidationValueOk() (map[string]string, bool) {
-	if o == nil || IsNil(o.NetLiquidationValue) {
-		return map[string]string{}, false
-	}
-	return o.NetLiquidationValue, true
-}
-
-// HasNetLiquidationValue returns a boolean if a field has been set.
-func (o *UserValue) HasNetLiquidationValue() bool {
-	if o != nil && !IsNil(o.NetLiquidationValue) {
-		return true
-	}
-
-	return false
-}
-
-// SetNetLiquidationValue gets a reference to the given map[string]string and assigns it to the NetLiquidationValue field.
-func (o *UserValue) SetNetLiquidationValue(v map[string]string) {
-	o.NetLiquidationValue = v
-}
-
-// GetUnrealizedPnl returns the UnrealizedPnl field value if set, zero value otherwise.
-func (o *UserValue) GetUnrealizedPnl() map[string]string {
-	if o == nil || IsNil(o.UnrealizedPnl) {
-		var ret map[string]string
-		return ret
-	}
-	return o.UnrealizedPnl
-}
-
-// GetUnrealizedPnlOk returns a tuple with the UnrealizedPnl field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *UserValue) GetUnrealizedPnlOk() (map[string]string, bool) {
-	if o == nil || IsNil(o.UnrealizedPnl) {
-		return map[string]string{}, false
-	}
-	return o.UnrealizedPnl, true
-}
-
-// HasUnrealizedPnl returns a boolean if a field has been set.
-func (o *UserValue) HasUnrealizedPnl() bool {
-	if o != nil && !IsNil(o.UnrealizedPnl) {
-		return true
-	}
-
-	return false
-}
-
-// SetUnrealizedPnl gets a reference to the given map[string]string and assigns it to the UnrealizedPnl field.
-func (o *UserValue) SetUnrealizedPnl(v map[string]string) {
-	o.UnrealizedPnl = v
-}
-
-// GetRealizedPnl returns the RealizedPnl field value if set, zero value otherwise.
-func (o *UserValue) GetRealizedPnl() map[string]string {
-	if o == nil || IsNil(o.RealizedPnl) {
-		var ret map[string]string
-		return ret
-	}
-	return o.RealizedPnl
-}
-
-// GetRealizedPnlOk returns a tuple with the RealizedPnl field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *UserValue) GetRealizedPnlOk() (map[string]string, bool) {
-	if o == nil || IsNil(o.RealizedPnl) {
-		return map[string]string{}, false
-	}
-	return o.RealizedPnl, true
-}
-
-// HasRealizedPnl returns a boolean if a field has been set.
-func (o *UserValue) HasRealizedPnl() bool {
-	if o != nil && !IsNil(o.RealizedPnl) {
-		return true
-	}
-
-	return false
-}
-
-// SetRealizedPnl gets a reference to the given map[string]string and assigns it to the RealizedPnl field.
-func (o *UserValue) SetRealizedPnl(v map[string]string) {
-	o.RealizedPnl = v
 }
 
 func (o UserValue) MarshalJSON() ([]byte, error) {
@@ -477,46 +234,57 @@ func (o UserValue) MarshalJSON() ([]byte, error) {
 
 func (o UserValue) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Available) {
-		toSerialize["available"] = o.Available
-	}
-	if !IsNil(o.Locked) {
-		toSerialize["locked"] = o.Locked
-	}
-	if !IsNil(o.Borrowed) {
-		toSerialize["borrowed"] = o.Borrowed
-	}
-	if !IsNil(o.Supplied) {
-		toSerialize["supplied"] = o.Supplied
-	}
-	if !IsNil(o.ImpendingBorrows) {
-		toSerialize["impending_borrows"] = o.ImpendingBorrows
-	}
-	if !IsNil(o.BorrowLimit) {
-		toSerialize["borrow_limit"] = o.BorrowLimit
-	}
-	if !IsNil(o.LiquidationThreshold) {
-		toSerialize["liquidation_threshold"] = o.LiquidationThreshold
-	}
-	if !IsNil(o.NotionalLong) {
-		toSerialize["notional_long"] = o.NotionalLong
-	}
-	if !IsNil(o.NotionalShort) {
-		toSerialize["notional_short"] = o.NotionalShort
-	}
-	if !IsNil(o.PortfolioValue) {
-		toSerialize["portfolio_value"] = o.PortfolioValue
-	}
-	if !IsNil(o.NetLiquidationValue) {
-		toSerialize["net_liquidation_value"] = o.NetLiquidationValue
-	}
-	if !IsNil(o.UnrealizedPnl) {
-		toSerialize["unrealized_pnl"] = o.UnrealizedPnl
-	}
-	if !IsNil(o.RealizedPnl) {
-		toSerialize["realized_pnl"] = o.RealizedPnl
-	}
+	toSerialize["available"] = o.Available
+	toSerialize["locked"] = o.Locked
+	toSerialize["borrowed"] = o.Borrowed
+	toSerialize["supplied"] = o.Supplied
+	toSerialize["impending_borrows"] = o.ImpendingBorrows
+	toSerialize["borrow_limit"] = o.BorrowLimit
+	toSerialize["liquidation_threshold"] = o.LiquidationThreshold
 	return toSerialize, nil
+}
+
+func (o *UserValue) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"available",
+		"locked",
+		"borrowed",
+		"supplied",
+		"impending_borrows",
+		"borrow_limit",
+		"liquidation_threshold",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varUserValue := _UserValue{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varUserValue)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UserValue(varUserValue)
+
+	return err
 }
 
 type NullableUserValue struct {

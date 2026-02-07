@@ -12,6 +12,8 @@ package doraclient
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the OrderBookSummary type satisfies the MappedNullable interface at compile time
@@ -19,19 +21,26 @@ var _ MappedNullable = &OrderBookSummary{}
 
 // OrderBookSummary struct for OrderBookSummary
 type OrderBookSummary struct {
-	OrderBookId *string `json:"order_book_id,omitempty"`
-	MidPrice *string `json:"mid_price,omitempty"`
-	Spread *string `json:"spread,omitempty"`
-	BestBid *string `json:"best_bid,omitempty"`
-	BestAsk *string `json:"best_ask,omitempty"`
+	OrderBookId string `json:"order_book_id"`
+	MidPrice string `json:"mid_price"`
+	Spread string `json:"spread"`
+	BestBid string `json:"best_bid"`
+	BestAsk string `json:"best_ask"`
 }
+
+type _OrderBookSummary OrderBookSummary
 
 // NewOrderBookSummary instantiates a new OrderBookSummary object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewOrderBookSummary() *OrderBookSummary {
+func NewOrderBookSummary(orderBookId string, midPrice string, spread string, bestBid string, bestAsk string) *OrderBookSummary {
 	this := OrderBookSummary{}
+	this.OrderBookId = orderBookId
+	this.MidPrice = midPrice
+	this.Spread = spread
+	this.BestBid = bestBid
+	this.BestAsk = bestAsk
 	return &this
 }
 
@@ -43,164 +52,124 @@ func NewOrderBookSummaryWithDefaults() *OrderBookSummary {
 	return &this
 }
 
-// GetOrderBookId returns the OrderBookId field value if set, zero value otherwise.
+// GetOrderBookId returns the OrderBookId field value
 func (o *OrderBookSummary) GetOrderBookId() string {
-	if o == nil || IsNil(o.OrderBookId) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.OrderBookId
+
+	return o.OrderBookId
 }
 
-// GetOrderBookIdOk returns a tuple with the OrderBookId field value if set, nil otherwise
+// GetOrderBookIdOk returns a tuple with the OrderBookId field value
 // and a boolean to check if the value has been set.
 func (o *OrderBookSummary) GetOrderBookIdOk() (*string, bool) {
-	if o == nil || IsNil(o.OrderBookId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.OrderBookId, true
+	return &o.OrderBookId, true
 }
 
-// HasOrderBookId returns a boolean if a field has been set.
-func (o *OrderBookSummary) HasOrderBookId() bool {
-	if o != nil && !IsNil(o.OrderBookId) {
-		return true
-	}
-
-	return false
-}
-
-// SetOrderBookId gets a reference to the given string and assigns it to the OrderBookId field.
+// SetOrderBookId sets field value
 func (o *OrderBookSummary) SetOrderBookId(v string) {
-	o.OrderBookId = &v
+	o.OrderBookId = v
 }
 
-// GetMidPrice returns the MidPrice field value if set, zero value otherwise.
+// GetMidPrice returns the MidPrice field value
 func (o *OrderBookSummary) GetMidPrice() string {
-	if o == nil || IsNil(o.MidPrice) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.MidPrice
+
+	return o.MidPrice
 }
 
-// GetMidPriceOk returns a tuple with the MidPrice field value if set, nil otherwise
+// GetMidPriceOk returns a tuple with the MidPrice field value
 // and a boolean to check if the value has been set.
 func (o *OrderBookSummary) GetMidPriceOk() (*string, bool) {
-	if o == nil || IsNil(o.MidPrice) {
+	if o == nil {
 		return nil, false
 	}
-	return o.MidPrice, true
+	return &o.MidPrice, true
 }
 
-// HasMidPrice returns a boolean if a field has been set.
-func (o *OrderBookSummary) HasMidPrice() bool {
-	if o != nil && !IsNil(o.MidPrice) {
-		return true
-	}
-
-	return false
-}
-
-// SetMidPrice gets a reference to the given string and assigns it to the MidPrice field.
+// SetMidPrice sets field value
 func (o *OrderBookSummary) SetMidPrice(v string) {
-	o.MidPrice = &v
+	o.MidPrice = v
 }
 
-// GetSpread returns the Spread field value if set, zero value otherwise.
+// GetSpread returns the Spread field value
 func (o *OrderBookSummary) GetSpread() string {
-	if o == nil || IsNil(o.Spread) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Spread
+
+	return o.Spread
 }
 
-// GetSpreadOk returns a tuple with the Spread field value if set, nil otherwise
+// GetSpreadOk returns a tuple with the Spread field value
 // and a boolean to check if the value has been set.
 func (o *OrderBookSummary) GetSpreadOk() (*string, bool) {
-	if o == nil || IsNil(o.Spread) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Spread, true
+	return &o.Spread, true
 }
 
-// HasSpread returns a boolean if a field has been set.
-func (o *OrderBookSummary) HasSpread() bool {
-	if o != nil && !IsNil(o.Spread) {
-		return true
-	}
-
-	return false
-}
-
-// SetSpread gets a reference to the given string and assigns it to the Spread field.
+// SetSpread sets field value
 func (o *OrderBookSummary) SetSpread(v string) {
-	o.Spread = &v
+	o.Spread = v
 }
 
-// GetBestBid returns the BestBid field value if set, zero value otherwise.
+// GetBestBid returns the BestBid field value
 func (o *OrderBookSummary) GetBestBid() string {
-	if o == nil || IsNil(o.BestBid) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.BestBid
+
+	return o.BestBid
 }
 
-// GetBestBidOk returns a tuple with the BestBid field value if set, nil otherwise
+// GetBestBidOk returns a tuple with the BestBid field value
 // and a boolean to check if the value has been set.
 func (o *OrderBookSummary) GetBestBidOk() (*string, bool) {
-	if o == nil || IsNil(o.BestBid) {
+	if o == nil {
 		return nil, false
 	}
-	return o.BestBid, true
+	return &o.BestBid, true
 }
 
-// HasBestBid returns a boolean if a field has been set.
-func (o *OrderBookSummary) HasBestBid() bool {
-	if o != nil && !IsNil(o.BestBid) {
-		return true
-	}
-
-	return false
-}
-
-// SetBestBid gets a reference to the given string and assigns it to the BestBid field.
+// SetBestBid sets field value
 func (o *OrderBookSummary) SetBestBid(v string) {
-	o.BestBid = &v
+	o.BestBid = v
 }
 
-// GetBestAsk returns the BestAsk field value if set, zero value otherwise.
+// GetBestAsk returns the BestAsk field value
 func (o *OrderBookSummary) GetBestAsk() string {
-	if o == nil || IsNil(o.BestAsk) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.BestAsk
+
+	return o.BestAsk
 }
 
-// GetBestAskOk returns a tuple with the BestAsk field value if set, nil otherwise
+// GetBestAskOk returns a tuple with the BestAsk field value
 // and a boolean to check if the value has been set.
 func (o *OrderBookSummary) GetBestAskOk() (*string, bool) {
-	if o == nil || IsNil(o.BestAsk) {
+	if o == nil {
 		return nil, false
 	}
-	return o.BestAsk, true
+	return &o.BestAsk, true
 }
 
-// HasBestAsk returns a boolean if a field has been set.
-func (o *OrderBookSummary) HasBestAsk() bool {
-	if o != nil && !IsNil(o.BestAsk) {
-		return true
-	}
-
-	return false
-}
-
-// SetBestAsk gets a reference to the given string and assigns it to the BestAsk field.
+// SetBestAsk sets field value
 func (o *OrderBookSummary) SetBestAsk(v string) {
-	o.BestAsk = &v
+	o.BestAsk = v
 }
 
 func (o OrderBookSummary) MarshalJSON() ([]byte, error) {
@@ -213,22 +182,53 @@ func (o OrderBookSummary) MarshalJSON() ([]byte, error) {
 
 func (o OrderBookSummary) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.OrderBookId) {
-		toSerialize["order_book_id"] = o.OrderBookId
-	}
-	if !IsNil(o.MidPrice) {
-		toSerialize["mid_price"] = o.MidPrice
-	}
-	if !IsNil(o.Spread) {
-		toSerialize["spread"] = o.Spread
-	}
-	if !IsNil(o.BestBid) {
-		toSerialize["best_bid"] = o.BestBid
-	}
-	if !IsNil(o.BestAsk) {
-		toSerialize["best_ask"] = o.BestAsk
-	}
+	toSerialize["order_book_id"] = o.OrderBookId
+	toSerialize["mid_price"] = o.MidPrice
+	toSerialize["spread"] = o.Spread
+	toSerialize["best_bid"] = o.BestBid
+	toSerialize["best_ask"] = o.BestAsk
 	return toSerialize, nil
+}
+
+func (o *OrderBookSummary) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"order_book_id",
+		"mid_price",
+		"spread",
+		"best_bid",
+		"best_ask",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varOrderBookSummary := _OrderBookSummary{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varOrderBookSummary)
+
+	if err != nil {
+		return err
+	}
+
+	*o = OrderBookSummary(varOrderBookSummary)
+
+	return err
 }
 
 type NullableOrderBookSummary struct {

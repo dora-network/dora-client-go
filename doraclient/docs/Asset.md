@@ -4,33 +4,33 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | Pointer to **string** |  | [optional] 
-**CollateralWeight** | Pointer to **float32** |  | [optional] 
-**CreatedAt** | Pointer to **time.Time** |  | [optional] 
-**Decimals** | Pointer to **int32** |  | [optional] 
-**FractionalizedUnits** | Pointer to **int32** |  | [optional] 
-**Description** | Pointer to **string** |  | [optional] 
-**LiquidationWeight** | Pointer to **float32** |  | [optional] 
-**MaturityId** | Pointer to **string** |  | [optional] 
-**MaxSupply** | Pointer to **int32** |  | [optional] 
-**MaxUtilization** | Pointer to **int32** |  | [optional] 
-**Name** | Pointer to **string** |  | [optional] 
-**Symbol** | Pointer to **string** |  | [optional] 
-**Kind** | Pointer to [**AssetKind**](AssetKind.md) |  | [optional] 
-**Yield** | Pointer to **float32** |  | [optional] 
-**CanAddLiquidity** | Pointer to **bool** |  | [optional] 
-**CanDirectBorrow** | Pointer to **bool** |  | [optional] 
-**CanOnboard** | Pointer to **bool** |  | [optional] 
-**CanTrade** | Pointer to **bool** |  | [optional] 
-**CanVirtualBorrow** | Pointer to **bool** |  | [optional] 
-**MaxLeverage** | Pointer to **float32** |  | [optional] 
+**Id** | **string** |  | 
+**CollateralWeight** | **float32** |  | 
+**CreatedAt** | **time.Time** |  | 
+**Decimals** | **int32** |  | 
+**FractionalizedUnits** | **int32** |  | 
+**Description** | **string** |  | 
+**LiquidationWeight** | **float32** |  | 
+**MaxSupply** | **int32** |  | 
+**MaxUtilization** | **int32** |  | 
+**Name** | **string** |  | 
+**Symbol** | **string** |  | 
+**Kind** | [**AssetKind**](AssetKind.md) |  | 
+**Yield** | **float32** |  | 
+**CanAddLiquidity** | **bool** |  | 
+**CanDirectBorrow** | **bool** |  | 
+**CanOnboard** | **bool** |  | 
+**CanTrade** | **bool** |  | 
+**CanVirtualBorrow** | **bool** |  | 
+**MaxLeverage** | **float32** |  | 
+**LeverageInterestRate** | **float32** |  | [default to 0]
 **Bond** | Pointer to [**Bond**](Bond.md) |  | [optional] 
 
 ## Methods
 
 ### NewAsset
 
-`func NewAsset() *Asset`
+`func NewAsset(id string, collateralWeight float32, createdAt time.Time, decimals int32, fractionalizedUnits int32, description string, liquidationWeight float32, maxSupply int32, maxUtilization int32, name string, symbol string, kind AssetKind, yield float32, canAddLiquidity bool, canDirectBorrow bool, canOnboard bool, canTrade bool, canVirtualBorrow bool, maxLeverage float32, leverageInterestRate float32, ) *Asset`
 
 NewAsset instantiates a new Asset object
 This constructor will assign default values to properties that have it defined,
@@ -64,11 +64,6 @@ and a boolean to check if the value has been set.
 
 SetId sets Id field to given value.
 
-### HasId
-
-`func (o *Asset) HasId() bool`
-
-HasId returns a boolean if a field has been set.
 
 ### GetCollateralWeight
 
@@ -89,11 +84,6 @@ and a boolean to check if the value has been set.
 
 SetCollateralWeight sets CollateralWeight field to given value.
 
-### HasCollateralWeight
-
-`func (o *Asset) HasCollateralWeight() bool`
-
-HasCollateralWeight returns a boolean if a field has been set.
 
 ### GetCreatedAt
 
@@ -114,11 +104,6 @@ and a boolean to check if the value has been set.
 
 SetCreatedAt sets CreatedAt field to given value.
 
-### HasCreatedAt
-
-`func (o *Asset) HasCreatedAt() bool`
-
-HasCreatedAt returns a boolean if a field has been set.
 
 ### GetDecimals
 
@@ -139,11 +124,6 @@ and a boolean to check if the value has been set.
 
 SetDecimals sets Decimals field to given value.
 
-### HasDecimals
-
-`func (o *Asset) HasDecimals() bool`
-
-HasDecimals returns a boolean if a field has been set.
 
 ### GetFractionalizedUnits
 
@@ -164,11 +144,6 @@ and a boolean to check if the value has been set.
 
 SetFractionalizedUnits sets FractionalizedUnits field to given value.
 
-### HasFractionalizedUnits
-
-`func (o *Asset) HasFractionalizedUnits() bool`
-
-HasFractionalizedUnits returns a boolean if a field has been set.
 
 ### GetDescription
 
@@ -189,11 +164,6 @@ and a boolean to check if the value has been set.
 
 SetDescription sets Description field to given value.
 
-### HasDescription
-
-`func (o *Asset) HasDescription() bool`
-
-HasDescription returns a boolean if a field has been set.
 
 ### GetLiquidationWeight
 
@@ -214,36 +184,6 @@ and a boolean to check if the value has been set.
 
 SetLiquidationWeight sets LiquidationWeight field to given value.
 
-### HasLiquidationWeight
-
-`func (o *Asset) HasLiquidationWeight() bool`
-
-HasLiquidationWeight returns a boolean if a field has been set.
-
-### GetMaturityId
-
-`func (o *Asset) GetMaturityId() string`
-
-GetMaturityId returns the MaturityId field if non-nil, zero value otherwise.
-
-### GetMaturityIdOk
-
-`func (o *Asset) GetMaturityIdOk() (*string, bool)`
-
-GetMaturityIdOk returns a tuple with the MaturityId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetMaturityId
-
-`func (o *Asset) SetMaturityId(v string)`
-
-SetMaturityId sets MaturityId field to given value.
-
-### HasMaturityId
-
-`func (o *Asset) HasMaturityId() bool`
-
-HasMaturityId returns a boolean if a field has been set.
 
 ### GetMaxSupply
 
@@ -264,11 +204,6 @@ and a boolean to check if the value has been set.
 
 SetMaxSupply sets MaxSupply field to given value.
 
-### HasMaxSupply
-
-`func (o *Asset) HasMaxSupply() bool`
-
-HasMaxSupply returns a boolean if a field has been set.
 
 ### GetMaxUtilization
 
@@ -289,11 +224,6 @@ and a boolean to check if the value has been set.
 
 SetMaxUtilization sets MaxUtilization field to given value.
 
-### HasMaxUtilization
-
-`func (o *Asset) HasMaxUtilization() bool`
-
-HasMaxUtilization returns a boolean if a field has been set.
 
 ### GetName
 
@@ -314,11 +244,6 @@ and a boolean to check if the value has been set.
 
 SetName sets Name field to given value.
 
-### HasName
-
-`func (o *Asset) HasName() bool`
-
-HasName returns a boolean if a field has been set.
 
 ### GetSymbol
 
@@ -339,11 +264,6 @@ and a boolean to check if the value has been set.
 
 SetSymbol sets Symbol field to given value.
 
-### HasSymbol
-
-`func (o *Asset) HasSymbol() bool`
-
-HasSymbol returns a boolean if a field has been set.
 
 ### GetKind
 
@@ -364,11 +284,6 @@ and a boolean to check if the value has been set.
 
 SetKind sets Kind field to given value.
 
-### HasKind
-
-`func (o *Asset) HasKind() bool`
-
-HasKind returns a boolean if a field has been set.
 
 ### GetYield
 
@@ -389,11 +304,6 @@ and a boolean to check if the value has been set.
 
 SetYield sets Yield field to given value.
 
-### HasYield
-
-`func (o *Asset) HasYield() bool`
-
-HasYield returns a boolean if a field has been set.
 
 ### GetCanAddLiquidity
 
@@ -414,11 +324,6 @@ and a boolean to check if the value has been set.
 
 SetCanAddLiquidity sets CanAddLiquidity field to given value.
 
-### HasCanAddLiquidity
-
-`func (o *Asset) HasCanAddLiquidity() bool`
-
-HasCanAddLiquidity returns a boolean if a field has been set.
 
 ### GetCanDirectBorrow
 
@@ -439,11 +344,6 @@ and a boolean to check if the value has been set.
 
 SetCanDirectBorrow sets CanDirectBorrow field to given value.
 
-### HasCanDirectBorrow
-
-`func (o *Asset) HasCanDirectBorrow() bool`
-
-HasCanDirectBorrow returns a boolean if a field has been set.
 
 ### GetCanOnboard
 
@@ -464,11 +364,6 @@ and a boolean to check if the value has been set.
 
 SetCanOnboard sets CanOnboard field to given value.
 
-### HasCanOnboard
-
-`func (o *Asset) HasCanOnboard() bool`
-
-HasCanOnboard returns a boolean if a field has been set.
 
 ### GetCanTrade
 
@@ -489,11 +384,6 @@ and a boolean to check if the value has been set.
 
 SetCanTrade sets CanTrade field to given value.
 
-### HasCanTrade
-
-`func (o *Asset) HasCanTrade() bool`
-
-HasCanTrade returns a boolean if a field has been set.
 
 ### GetCanVirtualBorrow
 
@@ -514,11 +404,6 @@ and a boolean to check if the value has been set.
 
 SetCanVirtualBorrow sets CanVirtualBorrow field to given value.
 
-### HasCanVirtualBorrow
-
-`func (o *Asset) HasCanVirtualBorrow() bool`
-
-HasCanVirtualBorrow returns a boolean if a field has been set.
 
 ### GetMaxLeverage
 
@@ -539,11 +424,26 @@ and a boolean to check if the value has been set.
 
 SetMaxLeverage sets MaxLeverage field to given value.
 
-### HasMaxLeverage
 
-`func (o *Asset) HasMaxLeverage() bool`
+### GetLeverageInterestRate
 
-HasMaxLeverage returns a boolean if a field has been set.
+`func (o *Asset) GetLeverageInterestRate() float32`
+
+GetLeverageInterestRate returns the LeverageInterestRate field if non-nil, zero value otherwise.
+
+### GetLeverageInterestRateOk
+
+`func (o *Asset) GetLeverageInterestRateOk() (*float32, bool)`
+
+GetLeverageInterestRateOk returns a tuple with the LeverageInterestRate field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLeverageInterestRate
+
+`func (o *Asset) SetLeverageInterestRate(v float32)`
+
+SetLeverageInterestRate sets LeverageInterestRate field to given value.
+
 
 ### GetBond
 

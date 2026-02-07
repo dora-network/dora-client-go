@@ -13,6 +13,8 @@ package doraclient
 import (
 	"encoding/json"
 	"time"
+	"bytes"
+	"fmt"
 )
 
 // checks if the Asset type satisfies the MappedNullable interface at compile time
@@ -20,35 +22,57 @@ var _ MappedNullable = &Asset{}
 
 // Asset struct for Asset
 type Asset struct {
-	Id *string `json:"id,omitempty"`
-	CollateralWeight *float32 `json:"collateral_weight,omitempty"`
-	CreatedAt *time.Time `json:"created_at,omitempty"`
-	Decimals *int32 `json:"decimals,omitempty"`
-	FractionalizedUnits *int32 `json:"fractionalized_units,omitempty"`
-	Description *string `json:"description,omitempty"`
-	LiquidationWeight *float32 `json:"liquidation_weight,omitempty"`
-	MaturityId *string `json:"maturity_id,omitempty"`
-	MaxSupply *int32 `json:"max_supply,omitempty"`
-	MaxUtilization *int32 `json:"max_utilization,omitempty"`
-	Name *string `json:"name,omitempty"`
-	Symbol *string `json:"symbol,omitempty"`
-	Kind *AssetKind `json:"kind,omitempty"`
-	Yield *float32 `json:"yield,omitempty"`
-	CanAddLiquidity *bool `json:"can_add_liquidity,omitempty"`
-	CanDirectBorrow *bool `json:"can_direct_borrow,omitempty"`
-	CanOnboard *bool `json:"can_onboard,omitempty"`
-	CanTrade *bool `json:"can_trade,omitempty"`
-	CanVirtualBorrow *bool `json:"can_virtual_borrow,omitempty"`
-	MaxLeverage *float32 `json:"max_leverage,omitempty"`
+	Id string `json:"id"`
+	CollateralWeight float32 `json:"collateral_weight"`
+	CreatedAt time.Time `json:"created_at"`
+	Decimals int32 `json:"decimals"`
+	FractionalizedUnits int32 `json:"fractionalized_units"`
+	Description string `json:"description"`
+	LiquidationWeight float32 `json:"liquidation_weight"`
+	MaxSupply int32 `json:"max_supply"`
+	MaxUtilization int32 `json:"max_utilization"`
+	Name string `json:"name"`
+	Symbol string `json:"symbol"`
+	Kind AssetKind `json:"kind"`
+	Yield float32 `json:"yield"`
+	CanAddLiquidity bool `json:"can_add_liquidity"`
+	CanDirectBorrow bool `json:"can_direct_borrow"`
+	CanOnboard bool `json:"can_onboard"`
+	CanTrade bool `json:"can_trade"`
+	CanVirtualBorrow bool `json:"can_virtual_borrow"`
+	MaxLeverage float32 `json:"max_leverage"`
+	LeverageInterestRate float32 `json:"leverage_interest_rate"`
 	Bond *Bond `json:"bond,omitempty"`
 }
+
+type _Asset Asset
 
 // NewAsset instantiates a new Asset object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAsset() *Asset {
+func NewAsset(id string, collateralWeight float32, createdAt time.Time, decimals int32, fractionalizedUnits int32, description string, liquidationWeight float32, maxSupply int32, maxUtilization int32, name string, symbol string, kind AssetKind, yield float32, canAddLiquidity bool, canDirectBorrow bool, canOnboard bool, canTrade bool, canVirtualBorrow bool, maxLeverage float32, leverageInterestRate float32) *Asset {
 	this := Asset{}
+	this.Id = id
+	this.CollateralWeight = collateralWeight
+	this.CreatedAt = createdAt
+	this.Decimals = decimals
+	this.FractionalizedUnits = fractionalizedUnits
+	this.Description = description
+	this.LiquidationWeight = liquidationWeight
+	this.MaxSupply = maxSupply
+	this.MaxUtilization = maxUtilization
+	this.Name = name
+	this.Symbol = symbol
+	this.Kind = kind
+	this.Yield = yield
+	this.CanAddLiquidity = canAddLiquidity
+	this.CanDirectBorrow = canDirectBorrow
+	this.CanOnboard = canOnboard
+	this.CanTrade = canTrade
+	this.CanVirtualBorrow = canVirtualBorrow
+	this.MaxLeverage = maxLeverage
+	this.LeverageInterestRate = leverageInterestRate
 	return &this
 }
 
@@ -57,647 +81,489 @@ func NewAsset() *Asset {
 // but it doesn't guarantee that properties required by API are set
 func NewAssetWithDefaults() *Asset {
 	this := Asset{}
+	var leverageInterestRate float32 = 0
+	this.LeverageInterestRate = leverageInterestRate
 	return &this
 }
 
-// GetId returns the Id field value if set, zero value otherwise.
+// GetId returns the Id field value
 func (o *Asset) GetId() string {
-	if o == nil || IsNil(o.Id) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Id
+
+	return o.Id
 }
 
-// GetIdOk returns a tuple with the Id field value if set, nil otherwise
+// GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
 func (o *Asset) GetIdOk() (*string, bool) {
-	if o == nil || IsNil(o.Id) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Id, true
+	return &o.Id, true
 }
 
-// HasId returns a boolean if a field has been set.
-func (o *Asset) HasId() bool {
-	if o != nil && !IsNil(o.Id) {
-		return true
-	}
-
-	return false
-}
-
-// SetId gets a reference to the given string and assigns it to the Id field.
+// SetId sets field value
 func (o *Asset) SetId(v string) {
-	o.Id = &v
+	o.Id = v
 }
 
-// GetCollateralWeight returns the CollateralWeight field value if set, zero value otherwise.
+// GetCollateralWeight returns the CollateralWeight field value
 func (o *Asset) GetCollateralWeight() float32 {
-	if o == nil || IsNil(o.CollateralWeight) {
+	if o == nil {
 		var ret float32
 		return ret
 	}
-	return *o.CollateralWeight
+
+	return o.CollateralWeight
 }
 
-// GetCollateralWeightOk returns a tuple with the CollateralWeight field value if set, nil otherwise
+// GetCollateralWeightOk returns a tuple with the CollateralWeight field value
 // and a boolean to check if the value has been set.
 func (o *Asset) GetCollateralWeightOk() (*float32, bool) {
-	if o == nil || IsNil(o.CollateralWeight) {
+	if o == nil {
 		return nil, false
 	}
-	return o.CollateralWeight, true
+	return &o.CollateralWeight, true
 }
 
-// HasCollateralWeight returns a boolean if a field has been set.
-func (o *Asset) HasCollateralWeight() bool {
-	if o != nil && !IsNil(o.CollateralWeight) {
-		return true
-	}
-
-	return false
-}
-
-// SetCollateralWeight gets a reference to the given float32 and assigns it to the CollateralWeight field.
+// SetCollateralWeight sets field value
 func (o *Asset) SetCollateralWeight(v float32) {
-	o.CollateralWeight = &v
+	o.CollateralWeight = v
 }
 
-// GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
+// GetCreatedAt returns the CreatedAt field value
 func (o *Asset) GetCreatedAt() time.Time {
-	if o == nil || IsNil(o.CreatedAt) {
+	if o == nil {
 		var ret time.Time
 		return ret
 	}
-	return *o.CreatedAt
+
+	return o.CreatedAt
 }
 
-// GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
+// GetCreatedAtOk returns a tuple with the CreatedAt field value
 // and a boolean to check if the value has been set.
 func (o *Asset) GetCreatedAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.CreatedAt) {
+	if o == nil {
 		return nil, false
 	}
-	return o.CreatedAt, true
+	return &o.CreatedAt, true
 }
 
-// HasCreatedAt returns a boolean if a field has been set.
-func (o *Asset) HasCreatedAt() bool {
-	if o != nil && !IsNil(o.CreatedAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetCreatedAt gets a reference to the given time.Time and assigns it to the CreatedAt field.
+// SetCreatedAt sets field value
 func (o *Asset) SetCreatedAt(v time.Time) {
-	o.CreatedAt = &v
+	o.CreatedAt = v
 }
 
-// GetDecimals returns the Decimals field value if set, zero value otherwise.
+// GetDecimals returns the Decimals field value
 func (o *Asset) GetDecimals() int32 {
-	if o == nil || IsNil(o.Decimals) {
+	if o == nil {
 		var ret int32
 		return ret
 	}
-	return *o.Decimals
+
+	return o.Decimals
 }
 
-// GetDecimalsOk returns a tuple with the Decimals field value if set, nil otherwise
+// GetDecimalsOk returns a tuple with the Decimals field value
 // and a boolean to check if the value has been set.
 func (o *Asset) GetDecimalsOk() (*int32, bool) {
-	if o == nil || IsNil(o.Decimals) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Decimals, true
+	return &o.Decimals, true
 }
 
-// HasDecimals returns a boolean if a field has been set.
-func (o *Asset) HasDecimals() bool {
-	if o != nil && !IsNil(o.Decimals) {
-		return true
-	}
-
-	return false
-}
-
-// SetDecimals gets a reference to the given int32 and assigns it to the Decimals field.
+// SetDecimals sets field value
 func (o *Asset) SetDecimals(v int32) {
-	o.Decimals = &v
+	o.Decimals = v
 }
 
-// GetFractionalizedUnits returns the FractionalizedUnits field value if set, zero value otherwise.
+// GetFractionalizedUnits returns the FractionalizedUnits field value
 func (o *Asset) GetFractionalizedUnits() int32 {
-	if o == nil || IsNil(o.FractionalizedUnits) {
+	if o == nil {
 		var ret int32
 		return ret
 	}
-	return *o.FractionalizedUnits
+
+	return o.FractionalizedUnits
 }
 
-// GetFractionalizedUnitsOk returns a tuple with the FractionalizedUnits field value if set, nil otherwise
+// GetFractionalizedUnitsOk returns a tuple with the FractionalizedUnits field value
 // and a boolean to check if the value has been set.
 func (o *Asset) GetFractionalizedUnitsOk() (*int32, bool) {
-	if o == nil || IsNil(o.FractionalizedUnits) {
+	if o == nil {
 		return nil, false
 	}
-	return o.FractionalizedUnits, true
+	return &o.FractionalizedUnits, true
 }
 
-// HasFractionalizedUnits returns a boolean if a field has been set.
-func (o *Asset) HasFractionalizedUnits() bool {
-	if o != nil && !IsNil(o.FractionalizedUnits) {
-		return true
-	}
-
-	return false
-}
-
-// SetFractionalizedUnits gets a reference to the given int32 and assigns it to the FractionalizedUnits field.
+// SetFractionalizedUnits sets field value
 func (o *Asset) SetFractionalizedUnits(v int32) {
-	o.FractionalizedUnits = &v
+	o.FractionalizedUnits = v
 }
 
-// GetDescription returns the Description field value if set, zero value otherwise.
+// GetDescription returns the Description field value
 func (o *Asset) GetDescription() string {
-	if o == nil || IsNil(o.Description) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Description
+
+	return o.Description
 }
 
-// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
+// GetDescriptionOk returns a tuple with the Description field value
 // and a boolean to check if the value has been set.
 func (o *Asset) GetDescriptionOk() (*string, bool) {
-	if o == nil || IsNil(o.Description) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Description, true
+	return &o.Description, true
 }
 
-// HasDescription returns a boolean if a field has been set.
-func (o *Asset) HasDescription() bool {
-	if o != nil && !IsNil(o.Description) {
-		return true
-	}
-
-	return false
-}
-
-// SetDescription gets a reference to the given string and assigns it to the Description field.
+// SetDescription sets field value
 func (o *Asset) SetDescription(v string) {
-	o.Description = &v
+	o.Description = v
 }
 
-// GetLiquidationWeight returns the LiquidationWeight field value if set, zero value otherwise.
+// GetLiquidationWeight returns the LiquidationWeight field value
 func (o *Asset) GetLiquidationWeight() float32 {
-	if o == nil || IsNil(o.LiquidationWeight) {
+	if o == nil {
 		var ret float32
 		return ret
 	}
-	return *o.LiquidationWeight
+
+	return o.LiquidationWeight
 }
 
-// GetLiquidationWeightOk returns a tuple with the LiquidationWeight field value if set, nil otherwise
+// GetLiquidationWeightOk returns a tuple with the LiquidationWeight field value
 // and a boolean to check if the value has been set.
 func (o *Asset) GetLiquidationWeightOk() (*float32, bool) {
-	if o == nil || IsNil(o.LiquidationWeight) {
+	if o == nil {
 		return nil, false
 	}
-	return o.LiquidationWeight, true
+	return &o.LiquidationWeight, true
 }
 
-// HasLiquidationWeight returns a boolean if a field has been set.
-func (o *Asset) HasLiquidationWeight() bool {
-	if o != nil && !IsNil(o.LiquidationWeight) {
-		return true
-	}
-
-	return false
-}
-
-// SetLiquidationWeight gets a reference to the given float32 and assigns it to the LiquidationWeight field.
+// SetLiquidationWeight sets field value
 func (o *Asset) SetLiquidationWeight(v float32) {
-	o.LiquidationWeight = &v
+	o.LiquidationWeight = v
 }
 
-// GetMaturityId returns the MaturityId field value if set, zero value otherwise.
-func (o *Asset) GetMaturityId() string {
-	if o == nil || IsNil(o.MaturityId) {
-		var ret string
-		return ret
-	}
-	return *o.MaturityId
-}
-
-// GetMaturityIdOk returns a tuple with the MaturityId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Asset) GetMaturityIdOk() (*string, bool) {
-	if o == nil || IsNil(o.MaturityId) {
-		return nil, false
-	}
-	return o.MaturityId, true
-}
-
-// HasMaturityId returns a boolean if a field has been set.
-func (o *Asset) HasMaturityId() bool {
-	if o != nil && !IsNil(o.MaturityId) {
-		return true
-	}
-
-	return false
-}
-
-// SetMaturityId gets a reference to the given string and assigns it to the MaturityId field.
-func (o *Asset) SetMaturityId(v string) {
-	o.MaturityId = &v
-}
-
-// GetMaxSupply returns the MaxSupply field value if set, zero value otherwise.
+// GetMaxSupply returns the MaxSupply field value
 func (o *Asset) GetMaxSupply() int32 {
-	if o == nil || IsNil(o.MaxSupply) {
+	if o == nil {
 		var ret int32
 		return ret
 	}
-	return *o.MaxSupply
+
+	return o.MaxSupply
 }
 
-// GetMaxSupplyOk returns a tuple with the MaxSupply field value if set, nil otherwise
+// GetMaxSupplyOk returns a tuple with the MaxSupply field value
 // and a boolean to check if the value has been set.
 func (o *Asset) GetMaxSupplyOk() (*int32, bool) {
-	if o == nil || IsNil(o.MaxSupply) {
+	if o == nil {
 		return nil, false
 	}
-	return o.MaxSupply, true
+	return &o.MaxSupply, true
 }
 
-// HasMaxSupply returns a boolean if a field has been set.
-func (o *Asset) HasMaxSupply() bool {
-	if o != nil && !IsNil(o.MaxSupply) {
-		return true
-	}
-
-	return false
-}
-
-// SetMaxSupply gets a reference to the given int32 and assigns it to the MaxSupply field.
+// SetMaxSupply sets field value
 func (o *Asset) SetMaxSupply(v int32) {
-	o.MaxSupply = &v
+	o.MaxSupply = v
 }
 
-// GetMaxUtilization returns the MaxUtilization field value if set, zero value otherwise.
+// GetMaxUtilization returns the MaxUtilization field value
 func (o *Asset) GetMaxUtilization() int32 {
-	if o == nil || IsNil(o.MaxUtilization) {
+	if o == nil {
 		var ret int32
 		return ret
 	}
-	return *o.MaxUtilization
+
+	return o.MaxUtilization
 }
 
-// GetMaxUtilizationOk returns a tuple with the MaxUtilization field value if set, nil otherwise
+// GetMaxUtilizationOk returns a tuple with the MaxUtilization field value
 // and a boolean to check if the value has been set.
 func (o *Asset) GetMaxUtilizationOk() (*int32, bool) {
-	if o == nil || IsNil(o.MaxUtilization) {
+	if o == nil {
 		return nil, false
 	}
-	return o.MaxUtilization, true
+	return &o.MaxUtilization, true
 }
 
-// HasMaxUtilization returns a boolean if a field has been set.
-func (o *Asset) HasMaxUtilization() bool {
-	if o != nil && !IsNil(o.MaxUtilization) {
-		return true
-	}
-
-	return false
-}
-
-// SetMaxUtilization gets a reference to the given int32 and assigns it to the MaxUtilization field.
+// SetMaxUtilization sets field value
 func (o *Asset) SetMaxUtilization(v int32) {
-	o.MaxUtilization = &v
+	o.MaxUtilization = v
 }
 
-// GetName returns the Name field value if set, zero value otherwise.
+// GetName returns the Name field value
 func (o *Asset) GetName() string {
-	if o == nil || IsNil(o.Name) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Name
+
+	return o.Name
 }
 
-// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
 func (o *Asset) GetNameOk() (*string, bool) {
-	if o == nil || IsNil(o.Name) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Name, true
+	return &o.Name, true
 }
 
-// HasName returns a boolean if a field has been set.
-func (o *Asset) HasName() bool {
-	if o != nil && !IsNil(o.Name) {
-		return true
-	}
-
-	return false
-}
-
-// SetName gets a reference to the given string and assigns it to the Name field.
+// SetName sets field value
 func (o *Asset) SetName(v string) {
-	o.Name = &v
+	o.Name = v
 }
 
-// GetSymbol returns the Symbol field value if set, zero value otherwise.
+// GetSymbol returns the Symbol field value
 func (o *Asset) GetSymbol() string {
-	if o == nil || IsNil(o.Symbol) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Symbol
+
+	return o.Symbol
 }
 
-// GetSymbolOk returns a tuple with the Symbol field value if set, nil otherwise
+// GetSymbolOk returns a tuple with the Symbol field value
 // and a boolean to check if the value has been set.
 func (o *Asset) GetSymbolOk() (*string, bool) {
-	if o == nil || IsNil(o.Symbol) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Symbol, true
+	return &o.Symbol, true
 }
 
-// HasSymbol returns a boolean if a field has been set.
-func (o *Asset) HasSymbol() bool {
-	if o != nil && !IsNil(o.Symbol) {
-		return true
-	}
-
-	return false
-}
-
-// SetSymbol gets a reference to the given string and assigns it to the Symbol field.
+// SetSymbol sets field value
 func (o *Asset) SetSymbol(v string) {
-	o.Symbol = &v
+	o.Symbol = v
 }
 
-// GetKind returns the Kind field value if set, zero value otherwise.
+// GetKind returns the Kind field value
 func (o *Asset) GetKind() AssetKind {
-	if o == nil || IsNil(o.Kind) {
+	if o == nil {
 		var ret AssetKind
 		return ret
 	}
-	return *o.Kind
+
+	return o.Kind
 }
 
-// GetKindOk returns a tuple with the Kind field value if set, nil otherwise
+// GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
 func (o *Asset) GetKindOk() (*AssetKind, bool) {
-	if o == nil || IsNil(o.Kind) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Kind, true
+	return &o.Kind, true
 }
 
-// HasKind returns a boolean if a field has been set.
-func (o *Asset) HasKind() bool {
-	if o != nil && !IsNil(o.Kind) {
-		return true
-	}
-
-	return false
-}
-
-// SetKind gets a reference to the given AssetKind and assigns it to the Kind field.
+// SetKind sets field value
 func (o *Asset) SetKind(v AssetKind) {
-	o.Kind = &v
+	o.Kind = v
 }
 
-// GetYield returns the Yield field value if set, zero value otherwise.
+// GetYield returns the Yield field value
 func (o *Asset) GetYield() float32 {
-	if o == nil || IsNil(o.Yield) {
+	if o == nil {
 		var ret float32
 		return ret
 	}
-	return *o.Yield
+
+	return o.Yield
 }
 
-// GetYieldOk returns a tuple with the Yield field value if set, nil otherwise
+// GetYieldOk returns a tuple with the Yield field value
 // and a boolean to check if the value has been set.
 func (o *Asset) GetYieldOk() (*float32, bool) {
-	if o == nil || IsNil(o.Yield) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Yield, true
+	return &o.Yield, true
 }
 
-// HasYield returns a boolean if a field has been set.
-func (o *Asset) HasYield() bool {
-	if o != nil && !IsNil(o.Yield) {
-		return true
-	}
-
-	return false
-}
-
-// SetYield gets a reference to the given float32 and assigns it to the Yield field.
+// SetYield sets field value
 func (o *Asset) SetYield(v float32) {
-	o.Yield = &v
+	o.Yield = v
 }
 
-// GetCanAddLiquidity returns the CanAddLiquidity field value if set, zero value otherwise.
+// GetCanAddLiquidity returns the CanAddLiquidity field value
 func (o *Asset) GetCanAddLiquidity() bool {
-	if o == nil || IsNil(o.CanAddLiquidity) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.CanAddLiquidity
+
+	return o.CanAddLiquidity
 }
 
-// GetCanAddLiquidityOk returns a tuple with the CanAddLiquidity field value if set, nil otherwise
+// GetCanAddLiquidityOk returns a tuple with the CanAddLiquidity field value
 // and a boolean to check if the value has been set.
 func (o *Asset) GetCanAddLiquidityOk() (*bool, bool) {
-	if o == nil || IsNil(o.CanAddLiquidity) {
+	if o == nil {
 		return nil, false
 	}
-	return o.CanAddLiquidity, true
+	return &o.CanAddLiquidity, true
 }
 
-// HasCanAddLiquidity returns a boolean if a field has been set.
-func (o *Asset) HasCanAddLiquidity() bool {
-	if o != nil && !IsNil(o.CanAddLiquidity) {
-		return true
-	}
-
-	return false
-}
-
-// SetCanAddLiquidity gets a reference to the given bool and assigns it to the CanAddLiquidity field.
+// SetCanAddLiquidity sets field value
 func (o *Asset) SetCanAddLiquidity(v bool) {
-	o.CanAddLiquidity = &v
+	o.CanAddLiquidity = v
 }
 
-// GetCanDirectBorrow returns the CanDirectBorrow field value if set, zero value otherwise.
+// GetCanDirectBorrow returns the CanDirectBorrow field value
 func (o *Asset) GetCanDirectBorrow() bool {
-	if o == nil || IsNil(o.CanDirectBorrow) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.CanDirectBorrow
+
+	return o.CanDirectBorrow
 }
 
-// GetCanDirectBorrowOk returns a tuple with the CanDirectBorrow field value if set, nil otherwise
+// GetCanDirectBorrowOk returns a tuple with the CanDirectBorrow field value
 // and a boolean to check if the value has been set.
 func (o *Asset) GetCanDirectBorrowOk() (*bool, bool) {
-	if o == nil || IsNil(o.CanDirectBorrow) {
+	if o == nil {
 		return nil, false
 	}
-	return o.CanDirectBorrow, true
+	return &o.CanDirectBorrow, true
 }
 
-// HasCanDirectBorrow returns a boolean if a field has been set.
-func (o *Asset) HasCanDirectBorrow() bool {
-	if o != nil && !IsNil(o.CanDirectBorrow) {
-		return true
-	}
-
-	return false
-}
-
-// SetCanDirectBorrow gets a reference to the given bool and assigns it to the CanDirectBorrow field.
+// SetCanDirectBorrow sets field value
 func (o *Asset) SetCanDirectBorrow(v bool) {
-	o.CanDirectBorrow = &v
+	o.CanDirectBorrow = v
 }
 
-// GetCanOnboard returns the CanOnboard field value if set, zero value otherwise.
+// GetCanOnboard returns the CanOnboard field value
 func (o *Asset) GetCanOnboard() bool {
-	if o == nil || IsNil(o.CanOnboard) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.CanOnboard
+
+	return o.CanOnboard
 }
 
-// GetCanOnboardOk returns a tuple with the CanOnboard field value if set, nil otherwise
+// GetCanOnboardOk returns a tuple with the CanOnboard field value
 // and a boolean to check if the value has been set.
 func (o *Asset) GetCanOnboardOk() (*bool, bool) {
-	if o == nil || IsNil(o.CanOnboard) {
+	if o == nil {
 		return nil, false
 	}
-	return o.CanOnboard, true
+	return &o.CanOnboard, true
 }
 
-// HasCanOnboard returns a boolean if a field has been set.
-func (o *Asset) HasCanOnboard() bool {
-	if o != nil && !IsNil(o.CanOnboard) {
-		return true
-	}
-
-	return false
-}
-
-// SetCanOnboard gets a reference to the given bool and assigns it to the CanOnboard field.
+// SetCanOnboard sets field value
 func (o *Asset) SetCanOnboard(v bool) {
-	o.CanOnboard = &v
+	o.CanOnboard = v
 }
 
-// GetCanTrade returns the CanTrade field value if set, zero value otherwise.
+// GetCanTrade returns the CanTrade field value
 func (o *Asset) GetCanTrade() bool {
-	if o == nil || IsNil(o.CanTrade) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.CanTrade
+
+	return o.CanTrade
 }
 
-// GetCanTradeOk returns a tuple with the CanTrade field value if set, nil otherwise
+// GetCanTradeOk returns a tuple with the CanTrade field value
 // and a boolean to check if the value has been set.
 func (o *Asset) GetCanTradeOk() (*bool, bool) {
-	if o == nil || IsNil(o.CanTrade) {
+	if o == nil {
 		return nil, false
 	}
-	return o.CanTrade, true
+	return &o.CanTrade, true
 }
 
-// HasCanTrade returns a boolean if a field has been set.
-func (o *Asset) HasCanTrade() bool {
-	if o != nil && !IsNil(o.CanTrade) {
-		return true
-	}
-
-	return false
-}
-
-// SetCanTrade gets a reference to the given bool and assigns it to the CanTrade field.
+// SetCanTrade sets field value
 func (o *Asset) SetCanTrade(v bool) {
-	o.CanTrade = &v
+	o.CanTrade = v
 }
 
-// GetCanVirtualBorrow returns the CanVirtualBorrow field value if set, zero value otherwise.
+// GetCanVirtualBorrow returns the CanVirtualBorrow field value
 func (o *Asset) GetCanVirtualBorrow() bool {
-	if o == nil || IsNil(o.CanVirtualBorrow) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.CanVirtualBorrow
+
+	return o.CanVirtualBorrow
 }
 
-// GetCanVirtualBorrowOk returns a tuple with the CanVirtualBorrow field value if set, nil otherwise
+// GetCanVirtualBorrowOk returns a tuple with the CanVirtualBorrow field value
 // and a boolean to check if the value has been set.
 func (o *Asset) GetCanVirtualBorrowOk() (*bool, bool) {
-	if o == nil || IsNil(o.CanVirtualBorrow) {
+	if o == nil {
 		return nil, false
 	}
-	return o.CanVirtualBorrow, true
+	return &o.CanVirtualBorrow, true
 }
 
-// HasCanVirtualBorrow returns a boolean if a field has been set.
-func (o *Asset) HasCanVirtualBorrow() bool {
-	if o != nil && !IsNil(o.CanVirtualBorrow) {
-		return true
-	}
-
-	return false
-}
-
-// SetCanVirtualBorrow gets a reference to the given bool and assigns it to the CanVirtualBorrow field.
+// SetCanVirtualBorrow sets field value
 func (o *Asset) SetCanVirtualBorrow(v bool) {
-	o.CanVirtualBorrow = &v
+	o.CanVirtualBorrow = v
 }
 
-// GetMaxLeverage returns the MaxLeverage field value if set, zero value otherwise.
+// GetMaxLeverage returns the MaxLeverage field value
 func (o *Asset) GetMaxLeverage() float32 {
-	if o == nil || IsNil(o.MaxLeverage) {
+	if o == nil {
 		var ret float32
 		return ret
 	}
-	return *o.MaxLeverage
+
+	return o.MaxLeverage
 }
 
-// GetMaxLeverageOk returns a tuple with the MaxLeverage field value if set, nil otherwise
+// GetMaxLeverageOk returns a tuple with the MaxLeverage field value
 // and a boolean to check if the value has been set.
 func (o *Asset) GetMaxLeverageOk() (*float32, bool) {
-	if o == nil || IsNil(o.MaxLeverage) {
+	if o == nil {
 		return nil, false
 	}
-	return o.MaxLeverage, true
+	return &o.MaxLeverage, true
 }
 
-// HasMaxLeverage returns a boolean if a field has been set.
-func (o *Asset) HasMaxLeverage() bool {
-	if o != nil && !IsNil(o.MaxLeverage) {
-		return true
+// SetMaxLeverage sets field value
+func (o *Asset) SetMaxLeverage(v float32) {
+	o.MaxLeverage = v
+}
+
+// GetLeverageInterestRate returns the LeverageInterestRate field value
+func (o *Asset) GetLeverageInterestRate() float32 {
+	if o == nil {
+		var ret float32
+		return ret
 	}
 
-	return false
+	return o.LeverageInterestRate
 }
 
-// SetMaxLeverage gets a reference to the given float32 and assigns it to the MaxLeverage field.
-func (o *Asset) SetMaxLeverage(v float32) {
-	o.MaxLeverage = &v
+// GetLeverageInterestRateOk returns a tuple with the LeverageInterestRate field value
+// and a boolean to check if the value has been set.
+func (o *Asset) GetLeverageInterestRateOk() (*float32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.LeverageInterestRate, true
+}
+
+// SetLeverageInterestRate sets field value
+func (o *Asset) SetLeverageInterestRate(v float32) {
+	o.LeverageInterestRate = v
 }
 
 // GetBond returns the Bond field value if set, zero value otherwise.
@@ -742,70 +608,86 @@ func (o Asset) MarshalJSON() ([]byte, error) {
 
 func (o Asset) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Id) {
-		toSerialize["id"] = o.Id
-	}
-	if !IsNil(o.CollateralWeight) {
-		toSerialize["collateral_weight"] = o.CollateralWeight
-	}
-	if !IsNil(o.CreatedAt) {
-		toSerialize["created_at"] = o.CreatedAt
-	}
-	if !IsNil(o.Decimals) {
-		toSerialize["decimals"] = o.Decimals
-	}
-	if !IsNil(o.FractionalizedUnits) {
-		toSerialize["fractionalized_units"] = o.FractionalizedUnits
-	}
-	if !IsNil(o.Description) {
-		toSerialize["description"] = o.Description
-	}
-	if !IsNil(o.LiquidationWeight) {
-		toSerialize["liquidation_weight"] = o.LiquidationWeight
-	}
-	if !IsNil(o.MaturityId) {
-		toSerialize["maturity_id"] = o.MaturityId
-	}
-	if !IsNil(o.MaxSupply) {
-		toSerialize["max_supply"] = o.MaxSupply
-	}
-	if !IsNil(o.MaxUtilization) {
-		toSerialize["max_utilization"] = o.MaxUtilization
-	}
-	if !IsNil(o.Name) {
-		toSerialize["name"] = o.Name
-	}
-	if !IsNil(o.Symbol) {
-		toSerialize["symbol"] = o.Symbol
-	}
-	if !IsNil(o.Kind) {
-		toSerialize["kind"] = o.Kind
-	}
-	if !IsNil(o.Yield) {
-		toSerialize["yield"] = o.Yield
-	}
-	if !IsNil(o.CanAddLiquidity) {
-		toSerialize["can_add_liquidity"] = o.CanAddLiquidity
-	}
-	if !IsNil(o.CanDirectBorrow) {
-		toSerialize["can_direct_borrow"] = o.CanDirectBorrow
-	}
-	if !IsNil(o.CanOnboard) {
-		toSerialize["can_onboard"] = o.CanOnboard
-	}
-	if !IsNil(o.CanTrade) {
-		toSerialize["can_trade"] = o.CanTrade
-	}
-	if !IsNil(o.CanVirtualBorrow) {
-		toSerialize["can_virtual_borrow"] = o.CanVirtualBorrow
-	}
-	if !IsNil(o.MaxLeverage) {
-		toSerialize["max_leverage"] = o.MaxLeverage
-	}
+	toSerialize["id"] = o.Id
+	toSerialize["collateral_weight"] = o.CollateralWeight
+	toSerialize["created_at"] = o.CreatedAt
+	toSerialize["decimals"] = o.Decimals
+	toSerialize["fractionalized_units"] = o.FractionalizedUnits
+	toSerialize["description"] = o.Description
+	toSerialize["liquidation_weight"] = o.LiquidationWeight
+	toSerialize["max_supply"] = o.MaxSupply
+	toSerialize["max_utilization"] = o.MaxUtilization
+	toSerialize["name"] = o.Name
+	toSerialize["symbol"] = o.Symbol
+	toSerialize["kind"] = o.Kind
+	toSerialize["yield"] = o.Yield
+	toSerialize["can_add_liquidity"] = o.CanAddLiquidity
+	toSerialize["can_direct_borrow"] = o.CanDirectBorrow
+	toSerialize["can_onboard"] = o.CanOnboard
+	toSerialize["can_trade"] = o.CanTrade
+	toSerialize["can_virtual_borrow"] = o.CanVirtualBorrow
+	toSerialize["max_leverage"] = o.MaxLeverage
+	toSerialize["leverage_interest_rate"] = o.LeverageInterestRate
 	if !IsNil(o.Bond) {
 		toSerialize["bond"] = o.Bond
 	}
 	return toSerialize, nil
+}
+
+func (o *Asset) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"id",
+		"collateral_weight",
+		"created_at",
+		"decimals",
+		"fractionalized_units",
+		"description",
+		"liquidation_weight",
+		"max_supply",
+		"max_utilization",
+		"name",
+		"symbol",
+		"kind",
+		"yield",
+		"can_add_liquidity",
+		"can_direct_borrow",
+		"can_onboard",
+		"can_trade",
+		"can_virtual_borrow",
+		"max_leverage",
+		"leverage_interest_rate",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varAsset := _Asset{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varAsset)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Asset(varAsset)
+
+	return err
 }
 
 type NullableAsset struct {

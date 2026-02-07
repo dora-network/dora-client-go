@@ -302,7 +302,7 @@ import (
 )
 
 func main() {
-	claimLeverageAccruedInterestRequest := *openapiclient.NewClaimLeverageAccruedInterestRequest() // ClaimLeverageAccruedInterestRequest | 
+	claimLeverageAccruedInterestRequest := *openapiclient.NewClaimLeverageAccruedInterestRequest("PositionId_example", "AssetId_example", "Quantity_example") // ClaimLeverageAccruedInterestRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -430,7 +430,7 @@ import (
 )
 
 func main() {
-	createAPIKeyRequest := *openapiclient.NewCreateAPIKeyRequest() // CreateAPIKeyRequest | 
+	createAPIKeyRequest := *openapiclient.NewCreateAPIKeyRequest("Label_example") // CreateAPIKeyRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -495,7 +495,7 @@ import (
 
 func main() {
 	userId := "userId_example" // string | 
-	createAPIKeyRequest := *openapiclient.NewCreateAPIKeyRequest() // CreateAPIKeyRequest | 
+	createAPIKeyRequest := *openapiclient.NewCreateAPIKeyRequest("Label_example") // CreateAPIKeyRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -4266,7 +4266,7 @@ import (
 )
 
 func main() {
-	payLeverageAccruedInterestRequest := *openapiclient.NewPayLeverageAccruedInterestRequest() // PayLeverageAccruedInterestRequest | 
+	payLeverageAccruedInterestRequest := *openapiclient.NewPayLeverageAccruedInterestRequest("PositionId_example", "AssetId_example", "Quantity_example") // PayLeverageAccruedInterestRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -4516,7 +4516,7 @@ Name | Type | Description  | Notes
 
 ## StreamAssetPrices
 
-> map[string]StreamedAssetPrice StreamAssetPrices(ctx).Since(since).AssetId(assetId).Execute()
+> map[string]AssetPrice StreamAssetPrices(ctx).Since(since).AssetId(assetId).Execute()
 
 Stream real-time asset prices as map objects
 
@@ -4546,7 +4546,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.StreamAssetPrices``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `StreamAssetPrices`: map[string]StreamedAssetPrice
+	// response from `StreamAssetPrices`: map[string]AssetPrice
 	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.StreamAssetPrices`: %v\n", resp)
 }
 ```
@@ -4567,7 +4567,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**map[string]StreamedAssetPrice**](StreamedAssetPrice.md)
+[**map[string]AssetPrice**](AssetPrice.md)
 
 ### Authorization
 

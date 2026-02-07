@@ -6,13 +6,13 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Data** | Pointer to [**FundUser**](FundUser.md) |  | [optional] 
 **Error** | Pointer to **string** | The error message. Present for error (non-2xx) responses. | [optional] 
-**Metadata** | Pointer to [**Metadata**](Metadata.md) | Metadata about the response, including status code and trace information. | [optional] 
+**Metadata** | [**Metadata**](Metadata.md) | Metadata about the response, including status code and trace information. | 
 
 ## Methods
 
 ### NewFundUserResponseEnvelope
 
-`func NewFundUserResponseEnvelope() *FundUserResponseEnvelope`
+`func NewFundUserResponseEnvelope(metadata Metadata, ) *FundUserResponseEnvelope`
 
 NewFundUserResponseEnvelope instantiates a new FundUserResponseEnvelope object
 This constructor will assign default values to properties that have it defined,
@@ -96,11 +96,6 @@ and a boolean to check if the value has been set.
 
 SetMetadata sets Metadata field to given value.
 
-### HasMetadata
-
-`func (o *FundUserResponseEnvelope) HasMetadata() bool`
-
-HasMetadata returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

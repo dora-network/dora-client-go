@@ -13,6 +13,8 @@ package doraclient
 import (
 	"encoding/json"
 	"time"
+	"bytes"
+	"fmt"
 )
 
 // checks if the StreamAssetsEntry type satisfies the MappedNullable interface at compile time
@@ -20,17 +22,21 @@ var _ MappedNullable = &StreamAssetsEntry{}
 
 // StreamAssetsEntry struct for StreamAssetsEntry
 type StreamAssetsEntry struct {
-	Val *Asset `json:"Val,omitempty"`
+	Val Asset `json:"Val"`
 	// The timestamp when the data was created
-	Time *time.Time `json:"Time,omitempty"`
+	Time time.Time `json:"Time"`
 }
+
+type _StreamAssetsEntry StreamAssetsEntry
 
 // NewStreamAssetsEntry instantiates a new StreamAssetsEntry object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewStreamAssetsEntry() *StreamAssetsEntry {
+func NewStreamAssetsEntry(val Asset, time time.Time) *StreamAssetsEntry {
 	this := StreamAssetsEntry{}
+	this.Val = val
+	this.Time = time
 	return &this
 }
 
@@ -42,68 +48,52 @@ func NewStreamAssetsEntryWithDefaults() *StreamAssetsEntry {
 	return &this
 }
 
-// GetVal returns the Val field value if set, zero value otherwise.
+// GetVal returns the Val field value
 func (o *StreamAssetsEntry) GetVal() Asset {
-	if o == nil || IsNil(o.Val) {
+	if o == nil {
 		var ret Asset
 		return ret
 	}
-	return *o.Val
+
+	return o.Val
 }
 
-// GetValOk returns a tuple with the Val field value if set, nil otherwise
+// GetValOk returns a tuple with the Val field value
 // and a boolean to check if the value has been set.
 func (o *StreamAssetsEntry) GetValOk() (*Asset, bool) {
-	if o == nil || IsNil(o.Val) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Val, true
+	return &o.Val, true
 }
 
-// HasVal returns a boolean if a field has been set.
-func (o *StreamAssetsEntry) HasVal() bool {
-	if o != nil && !IsNil(o.Val) {
-		return true
-	}
-
-	return false
-}
-
-// SetVal gets a reference to the given Asset and assigns it to the Val field.
+// SetVal sets field value
 func (o *StreamAssetsEntry) SetVal(v Asset) {
-	o.Val = &v
+	o.Val = v
 }
 
-// GetTime returns the Time field value if set, zero value otherwise.
+// GetTime returns the Time field value
 func (o *StreamAssetsEntry) GetTime() time.Time {
-	if o == nil || IsNil(o.Time) {
+	if o == nil {
 		var ret time.Time
 		return ret
 	}
-	return *o.Time
+
+	return o.Time
 }
 
-// GetTimeOk returns a tuple with the Time field value if set, nil otherwise
+// GetTimeOk returns a tuple with the Time field value
 // and a boolean to check if the value has been set.
 func (o *StreamAssetsEntry) GetTimeOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.Time) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Time, true
+	return &o.Time, true
 }
 
-// HasTime returns a boolean if a field has been set.
-func (o *StreamAssetsEntry) HasTime() bool {
-	if o != nil && !IsNil(o.Time) {
-		return true
-	}
-
-	return false
-}
-
-// SetTime gets a reference to the given time.Time and assigns it to the Time field.
+// SetTime sets field value
 func (o *StreamAssetsEntry) SetTime(v time.Time) {
-	o.Time = &v
+	o.Time = v
 }
 
 func (o StreamAssetsEntry) MarshalJSON() ([]byte, error) {
@@ -116,13 +106,47 @@ func (o StreamAssetsEntry) MarshalJSON() ([]byte, error) {
 
 func (o StreamAssetsEntry) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Val) {
-		toSerialize["Val"] = o.Val
-	}
-	if !IsNil(o.Time) {
-		toSerialize["Time"] = o.Time
-	}
+	toSerialize["Val"] = o.Val
+	toSerialize["Time"] = o.Time
 	return toSerialize, nil
+}
+
+func (o *StreamAssetsEntry) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"Val",
+		"Time",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varStreamAssetsEntry := _StreamAssetsEntry{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varStreamAssetsEntry)
+
+	if err != nil {
+		return err
+	}
+
+	*o = StreamAssetsEntry(varStreamAssetsEntry)
+
+	return err
 }
 
 type NullableStreamAssetsEntry struct {

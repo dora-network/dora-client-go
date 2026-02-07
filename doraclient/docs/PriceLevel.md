@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Price** | Pointer to **string** |  | [optional] 
-**Quantity** | Pointer to **string** |  | [optional] 
+**Price** | **string** |  | 
+**Quantity** | **string** |  | 
 
 ## Methods
 
 ### NewPriceLevel
 
-`func NewPriceLevel() *PriceLevel`
+`func NewPriceLevel(price string, quantity string, ) *PriceLevel`
 
 NewPriceLevel instantiates a new PriceLevel object
 This constructor will assign default values to properties that have it defined,
@@ -45,11 +45,6 @@ and a boolean to check if the value has been set.
 
 SetPrice sets Price field to given value.
 
-### HasPrice
-
-`func (o *PriceLevel) HasPrice() bool`
-
-HasPrice returns a boolean if a field has been set.
 
 ### GetQuantity
 
@@ -70,11 +65,6 @@ and a boolean to check if the value has been set.
 
 SetQuantity sets Quantity field to given value.
 
-### HasQuantity
-
-`func (o *PriceLevel) HasQuantity() bool`
-
-HasQuantity returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **UserBalance** | **string** | User balance used to ensure they can afford the requested quantity | 
 **BaseAssetId** | Pointer to **string** | base asset of orderbook | [optional] 
 **QuoteAssetId** | Pointer to **string** | quote asset of orderbook | [optional] 
+**ClientOrderId** | Pointer to **string** | An optional client-provided identifier for the order. | [optional] 
 **PositionAssets** | Pointer to [**[]PositionAsset**](PositionAsset.md) | Full list of assets in the position with their price and collateral weight, required when inverse_leverage &lt; 1 for leverage health checks | [optional] 
 **AssetsConfig** | Pointer to [**[]AssetConfig**](AssetConfig.md) | Configuration for the assets in the order | [optional] 
 
@@ -255,6 +256,31 @@ SetQuoteAssetId sets QuoteAssetId field to given value.
 `func (o *ValidateSubmitOrderRequest) HasQuoteAssetId() bool`
 
 HasQuoteAssetId returns a boolean if a field has been set.
+
+### GetClientOrderId
+
+`func (o *ValidateSubmitOrderRequest) GetClientOrderId() string`
+
+GetClientOrderId returns the ClientOrderId field if non-nil, zero value otherwise.
+
+### GetClientOrderIdOk
+
+`func (o *ValidateSubmitOrderRequest) GetClientOrderIdOk() (*string, bool)`
+
+GetClientOrderIdOk returns a tuple with the ClientOrderId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClientOrderId
+
+`func (o *ValidateSubmitOrderRequest) SetClientOrderId(v string)`
+
+SetClientOrderId sets ClientOrderId field to given value.
+
+### HasClientOrderId
+
+`func (o *ValidateSubmitOrderRequest) HasClientOrderId() bool`
+
+HasClientOrderId returns a boolean if a field has been set.
 
 ### GetPositionAssets
 

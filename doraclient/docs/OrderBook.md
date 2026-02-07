@@ -4,30 +4,30 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**OrderBookId** | Pointer to **string** |  | [optional] 
-**BaseQuantity** | Pointer to **float32** |  | [optional] 
-**BaseAssetId** | Pointer to **string** |  | [optional] 
-**CreatedAt** | Pointer to **time.Time** |  | [optional] 
-**DisplayName** | Pointer to **string** |  | [optional] 
-**FeeFactor** | Pointer to **float32** |  | [optional] 
-**InitialAssetsRatio** | Pointer to **float32** |  | [optional] 
-**MaturityAt** | Pointer to **time.Time** |  | [optional] 
-**QuoteQuantity** | Pointer to **float32** |  | [optional] 
-**QuoteAssetId** | Pointer to **string** |  | [optional] 
-**SharesQuantity** | Pointer to **float32** |  | [optional] 
-**Status** | Pointer to [**OrderBookStatus**](OrderBookStatus.md) |  | [optional] 
-**TickSize** | Pointer to **float32** |  | [optional] 
-**UpdatedAt** | Pointer to **time.Time** |  | [optional] 
+**OrderBookId** | **string** |  | 
+**BaseQuantity** | **float32** |  | 
+**BaseAssetId** | **string** |  | 
+**CreatedAt** | **time.Time** |  | 
+**DisplayName** | **string** |  | 
+**FeeFactor** | **float32** |  | 
+**InitialAssetsRatio** | **float32** |  | 
+**MaturityAt** | **time.Time** |  | 
+**QuoteQuantity** | **float32** |  | 
+**QuoteAssetId** | **string** |  | 
+**SharesQuantity** | **float32** |  | 
+**Status** | [**OrderBookStatus**](OrderBookStatus.md) |  | 
+**TickSize** | **float32** |  | 
+**UpdatedAt** | **time.Time** |  | 
 **HaltedAt** | Pointer to **time.Time** |  | [optional] 
 **TerminatedAt** | Pointer to **time.Time** |  | [optional] 
 **PoolUpdatedAt** | Pointer to **time.Time** |  | [optional] 
-**SharesAssetId** | Pointer to **string** |  | [optional] 
+**SharesAssetId** | **string** |  | 
 
 ## Methods
 
 ### NewOrderBook
 
-`func NewOrderBook() *OrderBook`
+`func NewOrderBook(orderBookId string, baseQuantity float32, baseAssetId string, createdAt time.Time, displayName string, feeFactor float32, initialAssetsRatio float32, maturityAt time.Time, quoteQuantity float32, quoteAssetId string, sharesQuantity float32, status OrderBookStatus, tickSize float32, updatedAt time.Time, sharesAssetId string, ) *OrderBook`
 
 NewOrderBook instantiates a new OrderBook object
 This constructor will assign default values to properties that have it defined,
@@ -61,11 +61,6 @@ and a boolean to check if the value has been set.
 
 SetOrderBookId sets OrderBookId field to given value.
 
-### HasOrderBookId
-
-`func (o *OrderBook) HasOrderBookId() bool`
-
-HasOrderBookId returns a boolean if a field has been set.
 
 ### GetBaseQuantity
 
@@ -86,11 +81,6 @@ and a boolean to check if the value has been set.
 
 SetBaseQuantity sets BaseQuantity field to given value.
 
-### HasBaseQuantity
-
-`func (o *OrderBook) HasBaseQuantity() bool`
-
-HasBaseQuantity returns a boolean if a field has been set.
 
 ### GetBaseAssetId
 
@@ -111,11 +101,6 @@ and a boolean to check if the value has been set.
 
 SetBaseAssetId sets BaseAssetId field to given value.
 
-### HasBaseAssetId
-
-`func (o *OrderBook) HasBaseAssetId() bool`
-
-HasBaseAssetId returns a boolean if a field has been set.
 
 ### GetCreatedAt
 
@@ -136,11 +121,6 @@ and a boolean to check if the value has been set.
 
 SetCreatedAt sets CreatedAt field to given value.
 
-### HasCreatedAt
-
-`func (o *OrderBook) HasCreatedAt() bool`
-
-HasCreatedAt returns a boolean if a field has been set.
 
 ### GetDisplayName
 
@@ -161,11 +141,6 @@ and a boolean to check if the value has been set.
 
 SetDisplayName sets DisplayName field to given value.
 
-### HasDisplayName
-
-`func (o *OrderBook) HasDisplayName() bool`
-
-HasDisplayName returns a boolean if a field has been set.
 
 ### GetFeeFactor
 
@@ -186,11 +161,6 @@ and a boolean to check if the value has been set.
 
 SetFeeFactor sets FeeFactor field to given value.
 
-### HasFeeFactor
-
-`func (o *OrderBook) HasFeeFactor() bool`
-
-HasFeeFactor returns a boolean if a field has been set.
 
 ### GetInitialAssetsRatio
 
@@ -211,11 +181,6 @@ and a boolean to check if the value has been set.
 
 SetInitialAssetsRatio sets InitialAssetsRatio field to given value.
 
-### HasInitialAssetsRatio
-
-`func (o *OrderBook) HasInitialAssetsRatio() bool`
-
-HasInitialAssetsRatio returns a boolean if a field has been set.
 
 ### GetMaturityAt
 
@@ -236,11 +201,6 @@ and a boolean to check if the value has been set.
 
 SetMaturityAt sets MaturityAt field to given value.
 
-### HasMaturityAt
-
-`func (o *OrderBook) HasMaturityAt() bool`
-
-HasMaturityAt returns a boolean if a field has been set.
 
 ### GetQuoteQuantity
 
@@ -261,11 +221,6 @@ and a boolean to check if the value has been set.
 
 SetQuoteQuantity sets QuoteQuantity field to given value.
 
-### HasQuoteQuantity
-
-`func (o *OrderBook) HasQuoteQuantity() bool`
-
-HasQuoteQuantity returns a boolean if a field has been set.
 
 ### GetQuoteAssetId
 
@@ -286,11 +241,6 @@ and a boolean to check if the value has been set.
 
 SetQuoteAssetId sets QuoteAssetId field to given value.
 
-### HasQuoteAssetId
-
-`func (o *OrderBook) HasQuoteAssetId() bool`
-
-HasQuoteAssetId returns a boolean if a field has been set.
 
 ### GetSharesQuantity
 
@@ -311,11 +261,6 @@ and a boolean to check if the value has been set.
 
 SetSharesQuantity sets SharesQuantity field to given value.
 
-### HasSharesQuantity
-
-`func (o *OrderBook) HasSharesQuantity() bool`
-
-HasSharesQuantity returns a boolean if a field has been set.
 
 ### GetStatus
 
@@ -336,11 +281,6 @@ and a boolean to check if the value has been set.
 
 SetStatus sets Status field to given value.
 
-### HasStatus
-
-`func (o *OrderBook) HasStatus() bool`
-
-HasStatus returns a boolean if a field has been set.
 
 ### GetTickSize
 
@@ -361,11 +301,6 @@ and a boolean to check if the value has been set.
 
 SetTickSize sets TickSize field to given value.
 
-### HasTickSize
-
-`func (o *OrderBook) HasTickSize() bool`
-
-HasTickSize returns a boolean if a field has been set.
 
 ### GetUpdatedAt
 
@@ -386,11 +321,6 @@ and a boolean to check if the value has been set.
 
 SetUpdatedAt sets UpdatedAt field to given value.
 
-### HasUpdatedAt
-
-`func (o *OrderBook) HasUpdatedAt() bool`
-
-HasUpdatedAt returns a boolean if a field has been set.
 
 ### GetHaltedAt
 
@@ -486,11 +416,6 @@ and a boolean to check if the value has been set.
 
 SetSharesAssetId sets SharesAssetId field to given value.
 
-### HasSharesAssetId
-
-`func (o *OrderBook) HasSharesAssetId() bool`
-
-HasSharesAssetId returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

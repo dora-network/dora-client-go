@@ -4,18 +4,18 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**OrderBookId** | Pointer to **string** |  | [optional] 
-**PositionId** | Pointer to **string** |  | [optional] 
-**TransactionId** | Pointer to **string** |  | [optional] 
-**BaseQuantity** | Pointer to **string** |  | [optional] 
-**QuoteQuantity** | Pointer to **string** |  | [optional] 
-**SharesQuantity** | Pointer to **string** |  | [optional] 
+**OrderBookId** | **string** |  | 
+**PositionId** | **string** |  | 
+**TransactionId** | **string** |  | 
+**BaseQuantity** | **string** |  | 
+**QuoteQuantity** | **string** |  | 
+**SharesQuantity** | **string** |  | 
 
 ## Methods
 
 ### NewLiquidity
 
-`func NewLiquidity() *Liquidity`
+`func NewLiquidity(orderBookId string, positionId string, transactionId string, baseQuantity string, quoteQuantity string, sharesQuantity string, ) *Liquidity`
 
 NewLiquidity instantiates a new Liquidity object
 This constructor will assign default values to properties that have it defined,
@@ -49,11 +49,6 @@ and a boolean to check if the value has been set.
 
 SetOrderBookId sets OrderBookId field to given value.
 
-### HasOrderBookId
-
-`func (o *Liquidity) HasOrderBookId() bool`
-
-HasOrderBookId returns a boolean if a field has been set.
 
 ### GetPositionId
 
@@ -74,11 +69,6 @@ and a boolean to check if the value has been set.
 
 SetPositionId sets PositionId field to given value.
 
-### HasPositionId
-
-`func (o *Liquidity) HasPositionId() bool`
-
-HasPositionId returns a boolean if a field has been set.
 
 ### GetTransactionId
 
@@ -99,11 +89,6 @@ and a boolean to check if the value has been set.
 
 SetTransactionId sets TransactionId field to given value.
 
-### HasTransactionId
-
-`func (o *Liquidity) HasTransactionId() bool`
-
-HasTransactionId returns a boolean if a field has been set.
 
 ### GetBaseQuantity
 
@@ -124,11 +109,6 @@ and a boolean to check if the value has been set.
 
 SetBaseQuantity sets BaseQuantity field to given value.
 
-### HasBaseQuantity
-
-`func (o *Liquidity) HasBaseQuantity() bool`
-
-HasBaseQuantity returns a boolean if a field has been set.
 
 ### GetQuoteQuantity
 
@@ -149,11 +129,6 @@ and a boolean to check if the value has been set.
 
 SetQuoteQuantity sets QuoteQuantity field to given value.
 
-### HasQuoteQuantity
-
-`func (o *Liquidity) HasQuoteQuantity() bool`
-
-HasQuoteQuantity returns a boolean if a field has been set.
 
 ### GetSharesQuantity
 
@@ -174,11 +149,6 @@ and a boolean to check if the value has been set.
 
 SetSharesQuantity sets SharesQuantity field to given value.
 
-### HasSharesQuantity
-
-`func (o *Liquidity) HasSharesQuantity() bool`
-
-HasSharesQuantity returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

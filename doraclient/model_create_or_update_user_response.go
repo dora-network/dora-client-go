@@ -12,6 +12,8 @@ package doraclient
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the CreateOrUpdateUserResponse type satisfies the MappedNullable interface at compile time
@@ -20,15 +22,18 @@ var _ MappedNullable = &CreateOrUpdateUserResponse{}
 // CreateOrUpdateUserResponse Response body for POST /user or PUT /user/{id}: contains the ID of the created or updated user.
 type CreateOrUpdateUserResponse struct {
 	// The ID of the created or updated user.
-	Id *string `json:"id,omitempty"`
+	Id string `json:"id"`
 }
+
+type _CreateOrUpdateUserResponse CreateOrUpdateUserResponse
 
 // NewCreateOrUpdateUserResponse instantiates a new CreateOrUpdateUserResponse object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateOrUpdateUserResponse() *CreateOrUpdateUserResponse {
+func NewCreateOrUpdateUserResponse(id string) *CreateOrUpdateUserResponse {
 	this := CreateOrUpdateUserResponse{}
+	this.Id = id
 	return &this
 }
 
@@ -40,36 +45,28 @@ func NewCreateOrUpdateUserResponseWithDefaults() *CreateOrUpdateUserResponse {
 	return &this
 }
 
-// GetId returns the Id field value if set, zero value otherwise.
+// GetId returns the Id field value
 func (o *CreateOrUpdateUserResponse) GetId() string {
-	if o == nil || IsNil(o.Id) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Id
+
+	return o.Id
 }
 
-// GetIdOk returns a tuple with the Id field value if set, nil otherwise
+// GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
 func (o *CreateOrUpdateUserResponse) GetIdOk() (*string, bool) {
-	if o == nil || IsNil(o.Id) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Id, true
+	return &o.Id, true
 }
 
-// HasId returns a boolean if a field has been set.
-func (o *CreateOrUpdateUserResponse) HasId() bool {
-	if o != nil && !IsNil(o.Id) {
-		return true
-	}
-
-	return false
-}
-
-// SetId gets a reference to the given string and assigns it to the Id field.
+// SetId sets field value
 func (o *CreateOrUpdateUserResponse) SetId(v string) {
-	o.Id = &v
+	o.Id = v
 }
 
 func (o CreateOrUpdateUserResponse) MarshalJSON() ([]byte, error) {
@@ -82,10 +79,45 @@ func (o CreateOrUpdateUserResponse) MarshalJSON() ([]byte, error) {
 
 func (o CreateOrUpdateUserResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Id) {
-		toSerialize["id"] = o.Id
-	}
+	toSerialize["id"] = o.Id
 	return toSerialize, nil
+}
+
+func (o *CreateOrUpdateUserResponse) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"id",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varCreateOrUpdateUserResponse := _CreateOrUpdateUserResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varCreateOrUpdateUserResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreateOrUpdateUserResponse(varCreateOrUpdateUserResponse)
+
+	return err
 }
 
 type NullableCreateOrUpdateUserResponse struct {

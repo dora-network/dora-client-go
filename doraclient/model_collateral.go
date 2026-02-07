@@ -12,6 +12,8 @@ package doraclient
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the Collateral type satisfies the MappedNullable interface at compile time
@@ -19,18 +21,24 @@ var _ MappedNullable = &Collateral{}
 
 // Collateral struct for Collateral
 type Collateral struct {
-	PositionId *string `json:"position_id,omitempty"`
-	TransactionId *string `json:"transaction_id,omitempty"`
-	AssetId *string `json:"asset_id,omitempty"`
-	Quantity *string `json:"quantity,omitempty"`
+	PositionId string `json:"position_id"`
+	TransactionId string `json:"transaction_id"`
+	AssetId string `json:"asset_id"`
+	Quantity string `json:"quantity"`
 }
+
+type _Collateral Collateral
 
 // NewCollateral instantiates a new Collateral object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCollateral() *Collateral {
+func NewCollateral(positionId string, transactionId string, assetId string, quantity string) *Collateral {
 	this := Collateral{}
+	this.PositionId = positionId
+	this.TransactionId = transactionId
+	this.AssetId = assetId
+	this.Quantity = quantity
 	return &this
 }
 
@@ -42,132 +50,100 @@ func NewCollateralWithDefaults() *Collateral {
 	return &this
 }
 
-// GetPositionId returns the PositionId field value if set, zero value otherwise.
+// GetPositionId returns the PositionId field value
 func (o *Collateral) GetPositionId() string {
-	if o == nil || IsNil(o.PositionId) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.PositionId
+
+	return o.PositionId
 }
 
-// GetPositionIdOk returns a tuple with the PositionId field value if set, nil otherwise
+// GetPositionIdOk returns a tuple with the PositionId field value
 // and a boolean to check if the value has been set.
 func (o *Collateral) GetPositionIdOk() (*string, bool) {
-	if o == nil || IsNil(o.PositionId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.PositionId, true
+	return &o.PositionId, true
 }
 
-// HasPositionId returns a boolean if a field has been set.
-func (o *Collateral) HasPositionId() bool {
-	if o != nil && !IsNil(o.PositionId) {
-		return true
-	}
-
-	return false
-}
-
-// SetPositionId gets a reference to the given string and assigns it to the PositionId field.
+// SetPositionId sets field value
 func (o *Collateral) SetPositionId(v string) {
-	o.PositionId = &v
+	o.PositionId = v
 }
 
-// GetTransactionId returns the TransactionId field value if set, zero value otherwise.
+// GetTransactionId returns the TransactionId field value
 func (o *Collateral) GetTransactionId() string {
-	if o == nil || IsNil(o.TransactionId) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.TransactionId
+
+	return o.TransactionId
 }
 
-// GetTransactionIdOk returns a tuple with the TransactionId field value if set, nil otherwise
+// GetTransactionIdOk returns a tuple with the TransactionId field value
 // and a boolean to check if the value has been set.
 func (o *Collateral) GetTransactionIdOk() (*string, bool) {
-	if o == nil || IsNil(o.TransactionId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.TransactionId, true
+	return &o.TransactionId, true
 }
 
-// HasTransactionId returns a boolean if a field has been set.
-func (o *Collateral) HasTransactionId() bool {
-	if o != nil && !IsNil(o.TransactionId) {
-		return true
-	}
-
-	return false
-}
-
-// SetTransactionId gets a reference to the given string and assigns it to the TransactionId field.
+// SetTransactionId sets field value
 func (o *Collateral) SetTransactionId(v string) {
-	o.TransactionId = &v
+	o.TransactionId = v
 }
 
-// GetAssetId returns the AssetId field value if set, zero value otherwise.
+// GetAssetId returns the AssetId field value
 func (o *Collateral) GetAssetId() string {
-	if o == nil || IsNil(o.AssetId) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.AssetId
+
+	return o.AssetId
 }
 
-// GetAssetIdOk returns a tuple with the AssetId field value if set, nil otherwise
+// GetAssetIdOk returns a tuple with the AssetId field value
 // and a boolean to check if the value has been set.
 func (o *Collateral) GetAssetIdOk() (*string, bool) {
-	if o == nil || IsNil(o.AssetId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.AssetId, true
+	return &o.AssetId, true
 }
 
-// HasAssetId returns a boolean if a field has been set.
-func (o *Collateral) HasAssetId() bool {
-	if o != nil && !IsNil(o.AssetId) {
-		return true
-	}
-
-	return false
-}
-
-// SetAssetId gets a reference to the given string and assigns it to the AssetId field.
+// SetAssetId sets field value
 func (o *Collateral) SetAssetId(v string) {
-	o.AssetId = &v
+	o.AssetId = v
 }
 
-// GetQuantity returns the Quantity field value if set, zero value otherwise.
+// GetQuantity returns the Quantity field value
 func (o *Collateral) GetQuantity() string {
-	if o == nil || IsNil(o.Quantity) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Quantity
+
+	return o.Quantity
 }
 
-// GetQuantityOk returns a tuple with the Quantity field value if set, nil otherwise
+// GetQuantityOk returns a tuple with the Quantity field value
 // and a boolean to check if the value has been set.
 func (o *Collateral) GetQuantityOk() (*string, bool) {
-	if o == nil || IsNil(o.Quantity) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Quantity, true
+	return &o.Quantity, true
 }
 
-// HasQuantity returns a boolean if a field has been set.
-func (o *Collateral) HasQuantity() bool {
-	if o != nil && !IsNil(o.Quantity) {
-		return true
-	}
-
-	return false
-}
-
-// SetQuantity gets a reference to the given string and assigns it to the Quantity field.
+// SetQuantity sets field value
 func (o *Collateral) SetQuantity(v string) {
-	o.Quantity = &v
+	o.Quantity = v
 }
 
 func (o Collateral) MarshalJSON() ([]byte, error) {
@@ -180,19 +156,51 @@ func (o Collateral) MarshalJSON() ([]byte, error) {
 
 func (o Collateral) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.PositionId) {
-		toSerialize["position_id"] = o.PositionId
-	}
-	if !IsNil(o.TransactionId) {
-		toSerialize["transaction_id"] = o.TransactionId
-	}
-	if !IsNil(o.AssetId) {
-		toSerialize["asset_id"] = o.AssetId
-	}
-	if !IsNil(o.Quantity) {
-		toSerialize["quantity"] = o.Quantity
-	}
+	toSerialize["position_id"] = o.PositionId
+	toSerialize["transaction_id"] = o.TransactionId
+	toSerialize["asset_id"] = o.AssetId
+	toSerialize["quantity"] = o.Quantity
 	return toSerialize, nil
+}
+
+func (o *Collateral) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"position_id",
+		"transaction_id",
+		"asset_id",
+		"quantity",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varCollateral := _Collateral{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varCollateral)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Collateral(varCollateral)
+
+	return err
 }
 
 type NullableCollateral struct {

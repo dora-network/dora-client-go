@@ -4,15 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Available** | Pointer to **string** | The total margin available from this position. | [optional] 
-**Used** | Pointer to **string** | The amount of margin used from this position. | [optional] 
-**Remaining** | Pointer to **string** | The margin remaining available from this position. | [optional] 
+**Available** | **string** | The total margin available from this position. | 
+**Used** | **string** | The amount of margin used from this position. | 
+**Remaining** | **string** | The margin remaining available from this position. | 
 
 ## Methods
 
 ### NewMargin
 
-`func NewMargin() *Margin`
+`func NewMargin(available string, used string, remaining string, ) *Margin`
 
 NewMargin instantiates a new Margin object
 This constructor will assign default values to properties that have it defined,
@@ -46,11 +46,6 @@ and a boolean to check if the value has been set.
 
 SetAvailable sets Available field to given value.
 
-### HasAvailable
-
-`func (o *Margin) HasAvailable() bool`
-
-HasAvailable returns a boolean if a field has been set.
 
 ### GetUsed
 
@@ -71,11 +66,6 @@ and a boolean to check if the value has been set.
 
 SetUsed sets Used field to given value.
 
-### HasUsed
-
-`func (o *Margin) HasUsed() bool`
-
-HasUsed returns a boolean if a field has been set.
 
 ### GetRemaining
 
@@ -96,11 +86,6 @@ and a boolean to check if the value has been set.
 
 SetRemaining sets Remaining field to given value.
 
-### HasRemaining
-
-`func (o *Margin) HasRemaining() bool`
-
-HasRemaining returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

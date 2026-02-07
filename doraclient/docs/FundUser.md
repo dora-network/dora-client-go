@@ -4,17 +4,17 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**UserId** | Pointer to **string** |  | [optional] 
-**PositionId** | Pointer to **string** |  | [optional] 
-**AssetId** | Pointer to **string** |  | [optional] 
-**FinalQuantity** | Pointer to **string** |  | [optional] 
-**Amount** | Pointer to **string** |  | [optional] 
+**UserId** | **string** |  | 
+**PositionId** | **string** |  | 
+**AssetId** | **string** |  | 
+**FinalQuantity** | **string** |  | 
+**Amount** | **string** |  | 
 
 ## Methods
 
 ### NewFundUser
 
-`func NewFundUser() *FundUser`
+`func NewFundUser(userId string, positionId string, assetId string, finalQuantity string, amount string, ) *FundUser`
 
 NewFundUser instantiates a new FundUser object
 This constructor will assign default values to properties that have it defined,
@@ -48,11 +48,6 @@ and a boolean to check if the value has been set.
 
 SetUserId sets UserId field to given value.
 
-### HasUserId
-
-`func (o *FundUser) HasUserId() bool`
-
-HasUserId returns a boolean if a field has been set.
 
 ### GetPositionId
 
@@ -73,11 +68,6 @@ and a boolean to check if the value has been set.
 
 SetPositionId sets PositionId field to given value.
 
-### HasPositionId
-
-`func (o *FundUser) HasPositionId() bool`
-
-HasPositionId returns a boolean if a field has been set.
 
 ### GetAssetId
 
@@ -98,11 +88,6 @@ and a boolean to check if the value has been set.
 
 SetAssetId sets AssetId field to given value.
 
-### HasAssetId
-
-`func (o *FundUser) HasAssetId() bool`
-
-HasAssetId returns a boolean if a field has been set.
 
 ### GetFinalQuantity
 
@@ -123,11 +108,6 @@ and a boolean to check if the value has been set.
 
 SetFinalQuantity sets FinalQuantity field to given value.
 
-### HasFinalQuantity
-
-`func (o *FundUser) HasFinalQuantity() bool`
-
-HasFinalQuantity returns a boolean if a field has been set.
 
 ### GetAmount
 
@@ -148,11 +128,6 @@ and a boolean to check if the value has been set.
 
 SetAmount sets Amount field to given value.
 
-### HasAmount
-
-`func (o *FundUser) HasAmount() bool`
-
-HasAmount returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

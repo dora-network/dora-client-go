@@ -4,19 +4,19 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | Pointer to **string** |  | [optional] 
+**Id** | **string** |  | 
 **PhotoUrl** | Pointer to **string** |  | [optional] 
 **Timezone** | Pointer to **string** | User&#39;s timezone, e.g., &#39;America/New_York&#39;, or an offset. | [optional] 
-**CreatedAt** | Pointer to **time.Time** |  | [optional] 
-**UpdatedAt** | Pointer to **time.Time** |  | [optional] 
-**ShowTutorialCards** | Pointer to **bool** |  | [optional] 
-**NotificationsEnabled** | Pointer to **bool** |  | [optional] 
+**CreatedAt** | **time.Time** |  | 
+**UpdatedAt** | **time.Time** |  | 
+**ShowTutorialCards** | **bool** |  | 
+**NotificationsEnabled** | **bool** |  | 
 
 ## Methods
 
 ### NewUserConfig
 
-`func NewUserConfig() *UserConfig`
+`func NewUserConfig(id string, createdAt time.Time, updatedAt time.Time, showTutorialCards bool, notificationsEnabled bool, ) *UserConfig`
 
 NewUserConfig instantiates a new UserConfig object
 This constructor will assign default values to properties that have it defined,
@@ -50,11 +50,6 @@ and a boolean to check if the value has been set.
 
 SetId sets Id field to given value.
 
-### HasId
-
-`func (o *UserConfig) HasId() bool`
-
-HasId returns a boolean if a field has been set.
 
 ### GetPhotoUrl
 
@@ -125,11 +120,6 @@ and a boolean to check if the value has been set.
 
 SetCreatedAt sets CreatedAt field to given value.
 
-### HasCreatedAt
-
-`func (o *UserConfig) HasCreatedAt() bool`
-
-HasCreatedAt returns a boolean if a field has been set.
 
 ### GetUpdatedAt
 
@@ -150,11 +140,6 @@ and a boolean to check if the value has been set.
 
 SetUpdatedAt sets UpdatedAt field to given value.
 
-### HasUpdatedAt
-
-`func (o *UserConfig) HasUpdatedAt() bool`
-
-HasUpdatedAt returns a boolean if a field has been set.
 
 ### GetShowTutorialCards
 
@@ -175,11 +160,6 @@ and a boolean to check if the value has been set.
 
 SetShowTutorialCards sets ShowTutorialCards field to given value.
 
-### HasShowTutorialCards
-
-`func (o *UserConfig) HasShowTutorialCards() bool`
-
-HasShowTutorialCards returns a boolean if a field has been set.
 
 ### GetNotificationsEnabled
 
@@ -200,11 +180,6 @@ and a boolean to check if the value has been set.
 
 SetNotificationsEnabled sets NotificationsEnabled field to given value.
 
-### HasNotificationsEnabled
-
-`func (o *UserConfig) HasNotificationsEnabled() bool`
-
-HasNotificationsEnabled returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -13,6 +13,8 @@ package doraclient
 import (
 	"encoding/json"
 	"time"
+	"bytes"
+	"fmt"
 )
 
 // checks if the OrderBookDepth type satisfies the MappedNullable interface at compile time
@@ -20,18 +22,24 @@ var _ MappedNullable = &OrderBookDepth{}
 
 // OrderBookDepth struct for OrderBookDepth
 type OrderBookDepth struct {
-	OrderBookId *string `json:"order_book_id,omitempty"`
-	Bids []PriceLevel `json:"bids,omitempty"`
-	Asks []PriceLevel `json:"asks,omitempty"`
-	Timestamp *time.Time `json:"timestamp,omitempty"`
+	OrderBookId string `json:"order_book_id"`
+	Bids []PriceLevel `json:"bids"`
+	Asks []PriceLevel `json:"asks"`
+	Timestamp time.Time `json:"timestamp"`
 }
+
+type _OrderBookDepth OrderBookDepth
 
 // NewOrderBookDepth instantiates a new OrderBookDepth object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewOrderBookDepth() *OrderBookDepth {
+func NewOrderBookDepth(orderBookId string, bids []PriceLevel, asks []PriceLevel, timestamp time.Time) *OrderBookDepth {
 	this := OrderBookDepth{}
+	this.OrderBookId = orderBookId
+	this.Bids = bids
+	this.Asks = asks
+	this.Timestamp = timestamp
 	return &this
 }
 
@@ -43,132 +51,100 @@ func NewOrderBookDepthWithDefaults() *OrderBookDepth {
 	return &this
 }
 
-// GetOrderBookId returns the OrderBookId field value if set, zero value otherwise.
+// GetOrderBookId returns the OrderBookId field value
 func (o *OrderBookDepth) GetOrderBookId() string {
-	if o == nil || IsNil(o.OrderBookId) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.OrderBookId
+
+	return o.OrderBookId
 }
 
-// GetOrderBookIdOk returns a tuple with the OrderBookId field value if set, nil otherwise
+// GetOrderBookIdOk returns a tuple with the OrderBookId field value
 // and a boolean to check if the value has been set.
 func (o *OrderBookDepth) GetOrderBookIdOk() (*string, bool) {
-	if o == nil || IsNil(o.OrderBookId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.OrderBookId, true
+	return &o.OrderBookId, true
 }
 
-// HasOrderBookId returns a boolean if a field has been set.
-func (o *OrderBookDepth) HasOrderBookId() bool {
-	if o != nil && !IsNil(o.OrderBookId) {
-		return true
-	}
-
-	return false
-}
-
-// SetOrderBookId gets a reference to the given string and assigns it to the OrderBookId field.
+// SetOrderBookId sets field value
 func (o *OrderBookDepth) SetOrderBookId(v string) {
-	o.OrderBookId = &v
+	o.OrderBookId = v
 }
 
-// GetBids returns the Bids field value if set, zero value otherwise.
+// GetBids returns the Bids field value
 func (o *OrderBookDepth) GetBids() []PriceLevel {
-	if o == nil || IsNil(o.Bids) {
+	if o == nil {
 		var ret []PriceLevel
 		return ret
 	}
+
 	return o.Bids
 }
 
-// GetBidsOk returns a tuple with the Bids field value if set, nil otherwise
+// GetBidsOk returns a tuple with the Bids field value
 // and a boolean to check if the value has been set.
 func (o *OrderBookDepth) GetBidsOk() ([]PriceLevel, bool) {
-	if o == nil || IsNil(o.Bids) {
+	if o == nil {
 		return nil, false
 	}
 	return o.Bids, true
 }
 
-// HasBids returns a boolean if a field has been set.
-func (o *OrderBookDepth) HasBids() bool {
-	if o != nil && !IsNil(o.Bids) {
-		return true
-	}
-
-	return false
-}
-
-// SetBids gets a reference to the given []PriceLevel and assigns it to the Bids field.
+// SetBids sets field value
 func (o *OrderBookDepth) SetBids(v []PriceLevel) {
 	o.Bids = v
 }
 
-// GetAsks returns the Asks field value if set, zero value otherwise.
+// GetAsks returns the Asks field value
 func (o *OrderBookDepth) GetAsks() []PriceLevel {
-	if o == nil || IsNil(o.Asks) {
+	if o == nil {
 		var ret []PriceLevel
 		return ret
 	}
+
 	return o.Asks
 }
 
-// GetAsksOk returns a tuple with the Asks field value if set, nil otherwise
+// GetAsksOk returns a tuple with the Asks field value
 // and a boolean to check if the value has been set.
 func (o *OrderBookDepth) GetAsksOk() ([]PriceLevel, bool) {
-	if o == nil || IsNil(o.Asks) {
+	if o == nil {
 		return nil, false
 	}
 	return o.Asks, true
 }
 
-// HasAsks returns a boolean if a field has been set.
-func (o *OrderBookDepth) HasAsks() bool {
-	if o != nil && !IsNil(o.Asks) {
-		return true
-	}
-
-	return false
-}
-
-// SetAsks gets a reference to the given []PriceLevel and assigns it to the Asks field.
+// SetAsks sets field value
 func (o *OrderBookDepth) SetAsks(v []PriceLevel) {
 	o.Asks = v
 }
 
-// GetTimestamp returns the Timestamp field value if set, zero value otherwise.
+// GetTimestamp returns the Timestamp field value
 func (o *OrderBookDepth) GetTimestamp() time.Time {
-	if o == nil || IsNil(o.Timestamp) {
+	if o == nil {
 		var ret time.Time
 		return ret
 	}
-	return *o.Timestamp
+
+	return o.Timestamp
 }
 
-// GetTimestampOk returns a tuple with the Timestamp field value if set, nil otherwise
+// GetTimestampOk returns a tuple with the Timestamp field value
 // and a boolean to check if the value has been set.
 func (o *OrderBookDepth) GetTimestampOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.Timestamp) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Timestamp, true
+	return &o.Timestamp, true
 }
 
-// HasTimestamp returns a boolean if a field has been set.
-func (o *OrderBookDepth) HasTimestamp() bool {
-	if o != nil && !IsNil(o.Timestamp) {
-		return true
-	}
-
-	return false
-}
-
-// SetTimestamp gets a reference to the given time.Time and assigns it to the Timestamp field.
+// SetTimestamp sets field value
 func (o *OrderBookDepth) SetTimestamp(v time.Time) {
-	o.Timestamp = &v
+	o.Timestamp = v
 }
 
 func (o OrderBookDepth) MarshalJSON() ([]byte, error) {
@@ -181,19 +157,51 @@ func (o OrderBookDepth) MarshalJSON() ([]byte, error) {
 
 func (o OrderBookDepth) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.OrderBookId) {
-		toSerialize["order_book_id"] = o.OrderBookId
-	}
-	if !IsNil(o.Bids) {
-		toSerialize["bids"] = o.Bids
-	}
-	if !IsNil(o.Asks) {
-		toSerialize["asks"] = o.Asks
-	}
-	if !IsNil(o.Timestamp) {
-		toSerialize["timestamp"] = o.Timestamp
-	}
+	toSerialize["order_book_id"] = o.OrderBookId
+	toSerialize["bids"] = o.Bids
+	toSerialize["asks"] = o.Asks
+	toSerialize["timestamp"] = o.Timestamp
 	return toSerialize, nil
+}
+
+func (o *OrderBookDepth) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"order_book_id",
+		"bids",
+		"asks",
+		"timestamp",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varOrderBookDepth := _OrderBookDepth{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varOrderBookDepth)
+
+	if err != nil {
+		return err
+	}
+
+	*o = OrderBookDepth(varOrderBookDepth)
+
+	return err
 }
 
 type NullableOrderBookDepth struct {

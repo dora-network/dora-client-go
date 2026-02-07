@@ -13,6 +13,8 @@ package doraclient
 import (
 	"encoding/json"
 	"time"
+	"bytes"
+	"fmt"
 )
 
 // checks if the Transaction type satisfies the MappedNullable interface at compile time
@@ -20,22 +22,36 @@ var _ MappedNullable = &Transaction{}
 
 // Transaction struct for Transaction
 type Transaction struct {
-	Id *string `json:"id,omitempty"`
-	CreatedAt *time.Time `json:"created_at,omitempty"`
-	Kind *TransactionKind `json:"kind,omitempty"`
-	Asset0 *string `json:"asset0,omitempty"`
-	Quantity0 *string `json:"quantity0,omitempty"`
-	Quantity1 *string `json:"quantity1,omitempty"`
-	Asset1 *string `json:"asset1,omitempty"`
-	UserId *string `json:"user_id,omitempty"`
+	Id string `json:"id"`
+	CreatedAt time.Time `json:"created_at"`
+	Kind TransactionKind `json:"kind"`
+	Asset0 string `json:"asset0"`
+	Quantity0 string `json:"quantity0"`
+	Quantity1 string `json:"quantity1"`
+	Asset1 string `json:"asset1"`
+	UserId string `json:"user_id"`
+	AdminUserId string `json:"admin_user_id"`
+	OrderSide Side `json:"order_side"`
 }
+
+type _Transaction Transaction
 
 // NewTransaction instantiates a new Transaction object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTransaction() *Transaction {
+func NewTransaction(id string, createdAt time.Time, kind TransactionKind, asset0 string, quantity0 string, quantity1 string, asset1 string, userId string, adminUserId string, orderSide Side) *Transaction {
 	this := Transaction{}
+	this.Id = id
+	this.CreatedAt = createdAt
+	this.Kind = kind
+	this.Asset0 = asset0
+	this.Quantity0 = quantity0
+	this.Quantity1 = quantity1
+	this.Asset1 = asset1
+	this.UserId = userId
+	this.AdminUserId = adminUserId
+	this.OrderSide = orderSide
 	return &this
 }
 
@@ -47,260 +63,244 @@ func NewTransactionWithDefaults() *Transaction {
 	return &this
 }
 
-// GetId returns the Id field value if set, zero value otherwise.
+// GetId returns the Id field value
 func (o *Transaction) GetId() string {
-	if o == nil || IsNil(o.Id) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Id
+
+	return o.Id
 }
 
-// GetIdOk returns a tuple with the Id field value if set, nil otherwise
+// GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
 func (o *Transaction) GetIdOk() (*string, bool) {
-	if o == nil || IsNil(o.Id) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Id, true
+	return &o.Id, true
 }
 
-// HasId returns a boolean if a field has been set.
-func (o *Transaction) HasId() bool {
-	if o != nil && !IsNil(o.Id) {
-		return true
-	}
-
-	return false
-}
-
-// SetId gets a reference to the given string and assigns it to the Id field.
+// SetId sets field value
 func (o *Transaction) SetId(v string) {
-	o.Id = &v
+	o.Id = v
 }
 
-// GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
+// GetCreatedAt returns the CreatedAt field value
 func (o *Transaction) GetCreatedAt() time.Time {
-	if o == nil || IsNil(o.CreatedAt) {
+	if o == nil {
 		var ret time.Time
 		return ret
 	}
-	return *o.CreatedAt
+
+	return o.CreatedAt
 }
 
-// GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
+// GetCreatedAtOk returns a tuple with the CreatedAt field value
 // and a boolean to check if the value has been set.
 func (o *Transaction) GetCreatedAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.CreatedAt) {
+	if o == nil {
 		return nil, false
 	}
-	return o.CreatedAt, true
+	return &o.CreatedAt, true
 }
 
-// HasCreatedAt returns a boolean if a field has been set.
-func (o *Transaction) HasCreatedAt() bool {
-	if o != nil && !IsNil(o.CreatedAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetCreatedAt gets a reference to the given time.Time and assigns it to the CreatedAt field.
+// SetCreatedAt sets field value
 func (o *Transaction) SetCreatedAt(v time.Time) {
-	o.CreatedAt = &v
+	o.CreatedAt = v
 }
 
-// GetKind returns the Kind field value if set, zero value otherwise.
+// GetKind returns the Kind field value
 func (o *Transaction) GetKind() TransactionKind {
-	if o == nil || IsNil(o.Kind) {
+	if o == nil {
 		var ret TransactionKind
 		return ret
 	}
-	return *o.Kind
+
+	return o.Kind
 }
 
-// GetKindOk returns a tuple with the Kind field value if set, nil otherwise
+// GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
 func (o *Transaction) GetKindOk() (*TransactionKind, bool) {
-	if o == nil || IsNil(o.Kind) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Kind, true
+	return &o.Kind, true
 }
 
-// HasKind returns a boolean if a field has been set.
-func (o *Transaction) HasKind() bool {
-	if o != nil && !IsNil(o.Kind) {
-		return true
-	}
-
-	return false
-}
-
-// SetKind gets a reference to the given TransactionKind and assigns it to the Kind field.
+// SetKind sets field value
 func (o *Transaction) SetKind(v TransactionKind) {
-	o.Kind = &v
+	o.Kind = v
 }
 
-// GetAsset0 returns the Asset0 field value if set, zero value otherwise.
+// GetAsset0 returns the Asset0 field value
 func (o *Transaction) GetAsset0() string {
-	if o == nil || IsNil(o.Asset0) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Asset0
+
+	return o.Asset0
 }
 
-// GetAsset0Ok returns a tuple with the Asset0 field value if set, nil otherwise
+// GetAsset0Ok returns a tuple with the Asset0 field value
 // and a boolean to check if the value has been set.
 func (o *Transaction) GetAsset0Ok() (*string, bool) {
-	if o == nil || IsNil(o.Asset0) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Asset0, true
+	return &o.Asset0, true
 }
 
-// HasAsset0 returns a boolean if a field has been set.
-func (o *Transaction) HasAsset0() bool {
-	if o != nil && !IsNil(o.Asset0) {
-		return true
-	}
-
-	return false
-}
-
-// SetAsset0 gets a reference to the given string and assigns it to the Asset0 field.
+// SetAsset0 sets field value
 func (o *Transaction) SetAsset0(v string) {
-	o.Asset0 = &v
+	o.Asset0 = v
 }
 
-// GetQuantity0 returns the Quantity0 field value if set, zero value otherwise.
+// GetQuantity0 returns the Quantity0 field value
 func (o *Transaction) GetQuantity0() string {
-	if o == nil || IsNil(o.Quantity0) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Quantity0
+
+	return o.Quantity0
 }
 
-// GetQuantity0Ok returns a tuple with the Quantity0 field value if set, nil otherwise
+// GetQuantity0Ok returns a tuple with the Quantity0 field value
 // and a boolean to check if the value has been set.
 func (o *Transaction) GetQuantity0Ok() (*string, bool) {
-	if o == nil || IsNil(o.Quantity0) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Quantity0, true
+	return &o.Quantity0, true
 }
 
-// HasQuantity0 returns a boolean if a field has been set.
-func (o *Transaction) HasQuantity0() bool {
-	if o != nil && !IsNil(o.Quantity0) {
-		return true
-	}
-
-	return false
-}
-
-// SetQuantity0 gets a reference to the given string and assigns it to the Quantity0 field.
+// SetQuantity0 sets field value
 func (o *Transaction) SetQuantity0(v string) {
-	o.Quantity0 = &v
+	o.Quantity0 = v
 }
 
-// GetQuantity1 returns the Quantity1 field value if set, zero value otherwise.
+// GetQuantity1 returns the Quantity1 field value
 func (o *Transaction) GetQuantity1() string {
-	if o == nil || IsNil(o.Quantity1) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Quantity1
+
+	return o.Quantity1
 }
 
-// GetQuantity1Ok returns a tuple with the Quantity1 field value if set, nil otherwise
+// GetQuantity1Ok returns a tuple with the Quantity1 field value
 // and a boolean to check if the value has been set.
 func (o *Transaction) GetQuantity1Ok() (*string, bool) {
-	if o == nil || IsNil(o.Quantity1) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Quantity1, true
+	return &o.Quantity1, true
 }
 
-// HasQuantity1 returns a boolean if a field has been set.
-func (o *Transaction) HasQuantity1() bool {
-	if o != nil && !IsNil(o.Quantity1) {
-		return true
-	}
-
-	return false
-}
-
-// SetQuantity1 gets a reference to the given string and assigns it to the Quantity1 field.
+// SetQuantity1 sets field value
 func (o *Transaction) SetQuantity1(v string) {
-	o.Quantity1 = &v
+	o.Quantity1 = v
 }
 
-// GetAsset1 returns the Asset1 field value if set, zero value otherwise.
+// GetAsset1 returns the Asset1 field value
 func (o *Transaction) GetAsset1() string {
-	if o == nil || IsNil(o.Asset1) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Asset1
+
+	return o.Asset1
 }
 
-// GetAsset1Ok returns a tuple with the Asset1 field value if set, nil otherwise
+// GetAsset1Ok returns a tuple with the Asset1 field value
 // and a boolean to check if the value has been set.
 func (o *Transaction) GetAsset1Ok() (*string, bool) {
-	if o == nil || IsNil(o.Asset1) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Asset1, true
+	return &o.Asset1, true
 }
 
-// HasAsset1 returns a boolean if a field has been set.
-func (o *Transaction) HasAsset1() bool {
-	if o != nil && !IsNil(o.Asset1) {
-		return true
-	}
-
-	return false
-}
-
-// SetAsset1 gets a reference to the given string and assigns it to the Asset1 field.
+// SetAsset1 sets field value
 func (o *Transaction) SetAsset1(v string) {
-	o.Asset1 = &v
+	o.Asset1 = v
 }
 
-// GetUserId returns the UserId field value if set, zero value otherwise.
+// GetUserId returns the UserId field value
 func (o *Transaction) GetUserId() string {
-	if o == nil || IsNil(o.UserId) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.UserId
+
+	return o.UserId
 }
 
-// GetUserIdOk returns a tuple with the UserId field value if set, nil otherwise
+// GetUserIdOk returns a tuple with the UserId field value
 // and a boolean to check if the value has been set.
 func (o *Transaction) GetUserIdOk() (*string, bool) {
-	if o == nil || IsNil(o.UserId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.UserId, true
+	return &o.UserId, true
 }
 
-// HasUserId returns a boolean if a field has been set.
-func (o *Transaction) HasUserId() bool {
-	if o != nil && !IsNil(o.UserId) {
-		return true
+// SetUserId sets field value
+func (o *Transaction) SetUserId(v string) {
+	o.UserId = v
+}
+
+// GetAdminUserId returns the AdminUserId field value
+func (o *Transaction) GetAdminUserId() string {
+	if o == nil {
+		var ret string
+		return ret
 	}
 
-	return false
+	return o.AdminUserId
 }
 
-// SetUserId gets a reference to the given string and assigns it to the UserId field.
-func (o *Transaction) SetUserId(v string) {
-	o.UserId = &v
+// GetAdminUserIdOk returns a tuple with the AdminUserId field value
+// and a boolean to check if the value has been set.
+func (o *Transaction) GetAdminUserIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.AdminUserId, true
+}
+
+// SetAdminUserId sets field value
+func (o *Transaction) SetAdminUserId(v string) {
+	o.AdminUserId = v
+}
+
+// GetOrderSide returns the OrderSide field value
+func (o *Transaction) GetOrderSide() Side {
+	if o == nil {
+		var ret Side
+		return ret
+	}
+
+	return o.OrderSide
+}
+
+// GetOrderSideOk returns a tuple with the OrderSide field value
+// and a boolean to check if the value has been set.
+func (o *Transaction) GetOrderSideOk() (*Side, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.OrderSide, true
+}
+
+// SetOrderSide sets field value
+func (o *Transaction) SetOrderSide(v Side) {
+	o.OrderSide = v
 }
 
 func (o Transaction) MarshalJSON() ([]byte, error) {
@@ -313,31 +313,63 @@ func (o Transaction) MarshalJSON() ([]byte, error) {
 
 func (o Transaction) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Id) {
-		toSerialize["id"] = o.Id
-	}
-	if !IsNil(o.CreatedAt) {
-		toSerialize["created_at"] = o.CreatedAt
-	}
-	if !IsNil(o.Kind) {
-		toSerialize["kind"] = o.Kind
-	}
-	if !IsNil(o.Asset0) {
-		toSerialize["asset0"] = o.Asset0
-	}
-	if !IsNil(o.Quantity0) {
-		toSerialize["quantity0"] = o.Quantity0
-	}
-	if !IsNil(o.Quantity1) {
-		toSerialize["quantity1"] = o.Quantity1
-	}
-	if !IsNil(o.Asset1) {
-		toSerialize["asset1"] = o.Asset1
-	}
-	if !IsNil(o.UserId) {
-		toSerialize["user_id"] = o.UserId
-	}
+	toSerialize["id"] = o.Id
+	toSerialize["created_at"] = o.CreatedAt
+	toSerialize["kind"] = o.Kind
+	toSerialize["asset0"] = o.Asset0
+	toSerialize["quantity0"] = o.Quantity0
+	toSerialize["quantity1"] = o.Quantity1
+	toSerialize["asset1"] = o.Asset1
+	toSerialize["user_id"] = o.UserId
+	toSerialize["admin_user_id"] = o.AdminUserId
+	toSerialize["order_side"] = o.OrderSide
 	return toSerialize, nil
+}
+
+func (o *Transaction) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"id",
+		"created_at",
+		"kind",
+		"asset0",
+		"quantity0",
+		"quantity1",
+		"asset1",
+		"user_id",
+		"admin_user_id",
+		"order_side",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varTransaction := _Transaction{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varTransaction)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Transaction(varTransaction)
+
+	return err
 }
 
 type NullableTransaction struct {

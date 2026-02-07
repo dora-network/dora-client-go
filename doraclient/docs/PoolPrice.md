@@ -4,15 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**PoolId** | Pointer to **string** |  | [optional] 
-**Price** | Pointer to **string** |  | [optional] 
-**Timestamp** | Pointer to **time.Time** |  | [optional] 
+**PoolId** | **string** |  | 
+**Price** | **string** |  | 
+**Timestamp** | **time.Time** |  | 
 
 ## Methods
 
 ### NewPoolPrice
 
-`func NewPoolPrice() *PoolPrice`
+`func NewPoolPrice(poolId string, price string, timestamp time.Time, ) *PoolPrice`
 
 NewPoolPrice instantiates a new PoolPrice object
 This constructor will assign default values to properties that have it defined,
@@ -46,11 +46,6 @@ and a boolean to check if the value has been set.
 
 SetPoolId sets PoolId field to given value.
 
-### HasPoolId
-
-`func (o *PoolPrice) HasPoolId() bool`
-
-HasPoolId returns a boolean if a field has been set.
 
 ### GetPrice
 
@@ -71,11 +66,6 @@ and a boolean to check if the value has been set.
 
 SetPrice sets Price field to given value.
 
-### HasPrice
-
-`func (o *PoolPrice) HasPrice() bool`
-
-HasPrice returns a boolean if a field has been set.
 
 ### GetTimestamp
 
@@ -96,11 +86,6 @@ and a boolean to check if the value has been set.
 
 SetTimestamp sets Timestamp field to given value.
 
-### HasTimestamp
-
-`func (o *PoolPrice) HasTimestamp() bool`
-
-HasTimestamp returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

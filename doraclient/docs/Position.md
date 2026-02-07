@@ -4,26 +4,26 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | Pointer to **string** | The unique identifier for the position. Used, for example, when creating an order from a position, or deciding collateral should be transferred from position A to position B. | [optional] 
-**AssetId** | Pointer to **string** |  | [optional] 
-**Seq** | Pointer to **int32** |  | [optional] 
+**Id** | **string** | The unique identifier for the position. Used, for example, when creating an order from a position, or deciding collateral should be transferred from position A to position B. | 
+**AssetId** | **string** |  | 
+**Seq** | **int32** |  | 
 **IsGlobal** | Pointer to **bool** |  | [optional] 
-**Available** | Pointer to **string** | The available balance in the position for this asset that are not locked, supplied, or used as collateral | [optional] 
-**Locked** | Pointer to **string** | The balance that has been reserved for a current order. If spent by the order, they are removed. If the order is cancelled, they are returned to the position&#39;s available balance. | [optional] 
-**Supplied** | Pointer to **string** | The balance that user has supplied to the leverage module. The user remains entitled to these assets and can withdraw them into their available balance. | [optional] 
-**Borrowed** | Pointer to **string** | The total amount of debt outstanding for this position. This position cannot be closed until all debt is fully repaid, i.e. borrowed &#x3D; 0. | [optional] 
-**ImpendingBorrows** | Pointer to **string** | The equivalent of locked balances, but for leveraged orders. If a user has an active order that would borrow assets as part of its input, then their borrow limit must be reduced until the order is executed or cancelled. | [optional] 
-**AvgEntryPrice** | Pointer to **string** | average cost per unit quantity that was paid (long positions) or received (short positions) for this asset. | [optional] 
-**BorrowLimit** | Pointer to **string** | The borrow limit | [optional] 
-**LiquidationThreshold** | Pointer to **string** | The borrow limit | [optional] 
-**CreatedAt** | Pointer to **time.Time** |  | [optional] 
-**PositionName** | Pointer to **string** |  | [optional] 
+**Available** | **string** | The available balance in the position for this asset that are not locked, supplied, or used as collateral | 
+**Locked** | **string** | The balance that has been reserved for a current order. If spent by the order, they are removed. If the order is cancelled, they are returned to the position&#39;s available balance. | 
+**Supplied** | **string** | The balance that user has supplied to the leverage module. The user remains entitled to these assets and can withdraw them into their available balance. | 
+**Borrowed** | **string** | The total amount of debt outstanding for this position. This position cannot be closed until all debt is fully repaid, i.e. borrowed &#x3D; 0. | 
+**ImpendingBorrows** | **string** | The equivalent of locked balances, but for leveraged orders. If a user has an active order that would borrow assets as part of its input, then their borrow limit must be reduced until the order is executed or cancelled. | 
+**AvgEntryPrice** | **string** | average cost per unit quantity that was paid (long positions) or received (short positions) for this asset. | 
+**BorrowLimit** | **string** | The borrow limit | 
+**LiquidationThreshold** | **string** | The borrow limit | 
+**CreatedAt** | **time.Time** |  | 
+**PositionName** | **string** |  | 
 
 ## Methods
 
 ### NewPosition
 
-`func NewPosition() *Position`
+`func NewPosition(id string, assetId string, seq int32, available string, locked string, supplied string, borrowed string, impendingBorrows string, avgEntryPrice string, borrowLimit string, liquidationThreshold string, createdAt time.Time, positionName string, ) *Position`
 
 NewPosition instantiates a new Position object
 This constructor will assign default values to properties that have it defined,
@@ -57,11 +57,6 @@ and a boolean to check if the value has been set.
 
 SetId sets Id field to given value.
 
-### HasId
-
-`func (o *Position) HasId() bool`
-
-HasId returns a boolean if a field has been set.
 
 ### GetAssetId
 
@@ -82,11 +77,6 @@ and a boolean to check if the value has been set.
 
 SetAssetId sets AssetId field to given value.
 
-### HasAssetId
-
-`func (o *Position) HasAssetId() bool`
-
-HasAssetId returns a boolean if a field has been set.
 
 ### GetSeq
 
@@ -107,11 +97,6 @@ and a boolean to check if the value has been set.
 
 SetSeq sets Seq field to given value.
 
-### HasSeq
-
-`func (o *Position) HasSeq() bool`
-
-HasSeq returns a boolean if a field has been set.
 
 ### GetIsGlobal
 
@@ -157,11 +142,6 @@ and a boolean to check if the value has been set.
 
 SetAvailable sets Available field to given value.
 
-### HasAvailable
-
-`func (o *Position) HasAvailable() bool`
-
-HasAvailable returns a boolean if a field has been set.
 
 ### GetLocked
 
@@ -182,11 +162,6 @@ and a boolean to check if the value has been set.
 
 SetLocked sets Locked field to given value.
 
-### HasLocked
-
-`func (o *Position) HasLocked() bool`
-
-HasLocked returns a boolean if a field has been set.
 
 ### GetSupplied
 
@@ -207,11 +182,6 @@ and a boolean to check if the value has been set.
 
 SetSupplied sets Supplied field to given value.
 
-### HasSupplied
-
-`func (o *Position) HasSupplied() bool`
-
-HasSupplied returns a boolean if a field has been set.
 
 ### GetBorrowed
 
@@ -232,11 +202,6 @@ and a boolean to check if the value has been set.
 
 SetBorrowed sets Borrowed field to given value.
 
-### HasBorrowed
-
-`func (o *Position) HasBorrowed() bool`
-
-HasBorrowed returns a boolean if a field has been set.
 
 ### GetImpendingBorrows
 
@@ -257,11 +222,6 @@ and a boolean to check if the value has been set.
 
 SetImpendingBorrows sets ImpendingBorrows field to given value.
 
-### HasImpendingBorrows
-
-`func (o *Position) HasImpendingBorrows() bool`
-
-HasImpendingBorrows returns a boolean if a field has been set.
 
 ### GetAvgEntryPrice
 
@@ -282,11 +242,6 @@ and a boolean to check if the value has been set.
 
 SetAvgEntryPrice sets AvgEntryPrice field to given value.
 
-### HasAvgEntryPrice
-
-`func (o *Position) HasAvgEntryPrice() bool`
-
-HasAvgEntryPrice returns a boolean if a field has been set.
 
 ### GetBorrowLimit
 
@@ -307,11 +262,6 @@ and a boolean to check if the value has been set.
 
 SetBorrowLimit sets BorrowLimit field to given value.
 
-### HasBorrowLimit
-
-`func (o *Position) HasBorrowLimit() bool`
-
-HasBorrowLimit returns a boolean if a field has been set.
 
 ### GetLiquidationThreshold
 
@@ -332,11 +282,6 @@ and a boolean to check if the value has been set.
 
 SetLiquidationThreshold sets LiquidationThreshold field to given value.
 
-### HasLiquidationThreshold
-
-`func (o *Position) HasLiquidationThreshold() bool`
-
-HasLiquidationThreshold returns a boolean if a field has been set.
 
 ### GetCreatedAt
 
@@ -357,11 +302,6 @@ and a boolean to check if the value has been set.
 
 SetCreatedAt sets CreatedAt field to given value.
 
-### HasCreatedAt
-
-`func (o *Position) HasCreatedAt() bool`
-
-HasCreatedAt returns a boolean if a field has been set.
 
 ### GetPositionName
 
@@ -382,11 +322,6 @@ and a boolean to check if the value has been set.
 
 SetPositionName sets PositionName field to given value.
 
-### HasPositionName
-
-`func (o *Position) HasPositionName() bool`
-
-HasPositionName returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

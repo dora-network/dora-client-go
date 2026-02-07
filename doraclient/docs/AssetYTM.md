@@ -4,16 +4,16 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**AssetId** | Pointer to **string** |  | [optional] 
-**CurrentTime** | Pointer to **time.Time** |  | [optional] 
-**CurrentPrice** | Pointer to **string** |  | [optional] 
-**YieldToMaturity** | Pointer to **string** |  | [optional] 
+**AssetId** | **string** |  | 
+**CurrentTime** | **time.Time** |  | 
+**CurrentPrice** | **string** |  | 
+**YieldToMaturity** | **string** |  | 
 
 ## Methods
 
 ### NewAssetYTM
 
-`func NewAssetYTM() *AssetYTM`
+`func NewAssetYTM(assetId string, currentTime time.Time, currentPrice string, yieldToMaturity string, ) *AssetYTM`
 
 NewAssetYTM instantiates a new AssetYTM object
 This constructor will assign default values to properties that have it defined,
@@ -47,11 +47,6 @@ and a boolean to check if the value has been set.
 
 SetAssetId sets AssetId field to given value.
 
-### HasAssetId
-
-`func (o *AssetYTM) HasAssetId() bool`
-
-HasAssetId returns a boolean if a field has been set.
 
 ### GetCurrentTime
 
@@ -72,11 +67,6 @@ and a boolean to check if the value has been set.
 
 SetCurrentTime sets CurrentTime field to given value.
 
-### HasCurrentTime
-
-`func (o *AssetYTM) HasCurrentTime() bool`
-
-HasCurrentTime returns a boolean if a field has been set.
 
 ### GetCurrentPrice
 
@@ -97,11 +87,6 @@ and a boolean to check if the value has been set.
 
 SetCurrentPrice sets CurrentPrice field to given value.
 
-### HasCurrentPrice
-
-`func (o *AssetYTM) HasCurrentPrice() bool`
-
-HasCurrentPrice returns a boolean if a field has been set.
 
 ### GetYieldToMaturity
 
@@ -122,11 +107,6 @@ and a boolean to check if the value has been set.
 
 SetYieldToMaturity sets YieldToMaturity field to given value.
 
-### HasYieldToMaturity
-
-`func (o *AssetYTM) HasYieldToMaturity() bool`
-
-HasYieldToMaturity returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

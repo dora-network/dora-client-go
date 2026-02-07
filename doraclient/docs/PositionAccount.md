@@ -4,15 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**PositionId** | Pointer to **string** | The ID of the position account | [optional] 
-**PositionName** | Pointer to **string** | The name of the position account | [optional] 
-**IsGlobal** | Pointer to **bool** | Whether the position account is the global or an isolated account | [optional] 
+**PositionId** | **string** | The ID of the position account | 
+**PositionName** | **string** | The name of the position account | 
+**IsGlobal** | **bool** | Whether the position account is the global or an isolated account | 
 
 ## Methods
 
 ### NewPositionAccount
 
-`func NewPositionAccount() *PositionAccount`
+`func NewPositionAccount(positionId string, positionName string, isGlobal bool, ) *PositionAccount`
 
 NewPositionAccount instantiates a new PositionAccount object
 This constructor will assign default values to properties that have it defined,
@@ -46,11 +46,6 @@ and a boolean to check if the value has been set.
 
 SetPositionId sets PositionId field to given value.
 
-### HasPositionId
-
-`func (o *PositionAccount) HasPositionId() bool`
-
-HasPositionId returns a boolean if a field has been set.
 
 ### GetPositionName
 
@@ -71,11 +66,6 @@ and a boolean to check if the value has been set.
 
 SetPositionName sets PositionName field to given value.
 
-### HasPositionName
-
-`func (o *PositionAccount) HasPositionName() bool`
-
-HasPositionName returns a boolean if a field has been set.
 
 ### GetIsGlobal
 
@@ -96,11 +86,6 @@ and a boolean to check if the value has been set.
 
 SetIsGlobal sets IsGlobal field to given value.
 
-### HasIsGlobal
-
-`func (o *PositionAccount) HasIsGlobal() bool`
-
-HasIsGlobal returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

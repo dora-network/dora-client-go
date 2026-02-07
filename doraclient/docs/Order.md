@@ -4,34 +4,35 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**OrderId** | Pointer to **string** |  | [optional] 
-**OrderBookId** | Pointer to **string** |  | [optional] 
-**Kind** | Pointer to [**OrderKind**](OrderKind.md) |  | [optional] 
-**OriginalPrice** | Pointer to **string** | If Kind is LIMIT, this is the original limit price. If Kind is MARKET, this may be 0 or omitted. | [optional] 
-**AvgFillPrice** | Pointer to **string** |  | [optional] 
-**CancelledQuantity** | Pointer to **string** | Quantity that was cancelled, if any. | [optional] 
-**OpenQuantity** | Pointer to **string** | Quantity that is still open, i.e., not filled or cancelled. | [optional] 
-**OriginalQuantity** | Pointer to **string** | The original quantity of the order when it was created. | [optional] 
-**FilledQuantity** | Pointer to **string** | Quantity that has been filled so far. | [optional] 
-**FilledNotional** | Pointer to **string** | Quote quantity that has been filled so far. | [optional] 
+**OrderId** | **string** |  | 
+**OrderBookId** | **string** |  | 
+**Kind** | [**OrderKind**](OrderKind.md) |  | 
+**OriginalPrice** | **string** | If Kind is LIMIT, this is the original limit price. If Kind is MARKET, this may be 0 or omitted. | 
+**AvgFillPrice** | **string** |  | 
+**CancelledQuantity** | **string** | Quantity that was cancelled, if any. | 
+**OpenQuantity** | **string** | Quantity that is still open, i.e., not filled or cancelled. | 
+**OriginalQuantity** | **string** | The original quantity of the order when it was created. | 
+**FilledQuantity** | **string** | Quantity that has been filled so far. | 
+**FilledNotional** | **string** | Quote quantity that has been filled so far. | 
 **LastUpdateAt** | Pointer to **time.Time** |  | [optional] 
-**OpenedAt** | Pointer to **time.Time** |  | [optional] 
-**InverseLeverage** | Pointer to **string** |  | [optional] 
-**Side** | Pointer to [**Side**](Side.md) |  | [optional] 
-**Status** | Pointer to [**OrderStatus**](OrderStatus.md) |  | [optional] 
-**UserId** | Pointer to **string** |  | [optional] 
+**OpenedAt** | **time.Time** |  | 
+**InverseLeverage** | **string** |  | 
+**Side** | [**Side**](Side.md) |  | 
+**Status** | [**OrderStatus**](OrderStatus.md) |  | 
+**UserId** | **string** |  | 
 **OrderModifiers** | Pointer to [**[]OrderModifierKind**](OrderModifierKind.md) |  | [optional] 
-**PositionId** | Pointer to **string** |  | [optional] 
+**PositionId** | **string** |  | 
 **OrderInfo** | Pointer to **string** |  | [optional] 
 **GoodTillDate** | Pointer to **time.Time** |  | [optional] 
 **TriggerPrice** | Pointer to **string** |  | [optional] 
 **TriggerType** | Pointer to [**TriggerType**](TriggerType.md) |  | [optional] 
+**ClientOrderId** | Pointer to **string** | An optional client-provided identifier for the order. | [optional] 
 
 ## Methods
 
 ### NewOrder
 
-`func NewOrder() *Order`
+`func NewOrder(orderId string, orderBookId string, kind OrderKind, originalPrice string, avgFillPrice string, cancelledQuantity string, openQuantity string, originalQuantity string, filledQuantity string, filledNotional string, openedAt time.Time, inverseLeverage string, side Side, status OrderStatus, userId string, positionId string, ) *Order`
 
 NewOrder instantiates a new Order object
 This constructor will assign default values to properties that have it defined,
@@ -65,11 +66,6 @@ and a boolean to check if the value has been set.
 
 SetOrderId sets OrderId field to given value.
 
-### HasOrderId
-
-`func (o *Order) HasOrderId() bool`
-
-HasOrderId returns a boolean if a field has been set.
 
 ### GetOrderBookId
 
@@ -90,11 +86,6 @@ and a boolean to check if the value has been set.
 
 SetOrderBookId sets OrderBookId field to given value.
 
-### HasOrderBookId
-
-`func (o *Order) HasOrderBookId() bool`
-
-HasOrderBookId returns a boolean if a field has been set.
 
 ### GetKind
 
@@ -115,11 +106,6 @@ and a boolean to check if the value has been set.
 
 SetKind sets Kind field to given value.
 
-### HasKind
-
-`func (o *Order) HasKind() bool`
-
-HasKind returns a boolean if a field has been set.
 
 ### GetOriginalPrice
 
@@ -140,11 +126,6 @@ and a boolean to check if the value has been set.
 
 SetOriginalPrice sets OriginalPrice field to given value.
 
-### HasOriginalPrice
-
-`func (o *Order) HasOriginalPrice() bool`
-
-HasOriginalPrice returns a boolean if a field has been set.
 
 ### GetAvgFillPrice
 
@@ -165,11 +146,6 @@ and a boolean to check if the value has been set.
 
 SetAvgFillPrice sets AvgFillPrice field to given value.
 
-### HasAvgFillPrice
-
-`func (o *Order) HasAvgFillPrice() bool`
-
-HasAvgFillPrice returns a boolean if a field has been set.
 
 ### GetCancelledQuantity
 
@@ -190,11 +166,6 @@ and a boolean to check if the value has been set.
 
 SetCancelledQuantity sets CancelledQuantity field to given value.
 
-### HasCancelledQuantity
-
-`func (o *Order) HasCancelledQuantity() bool`
-
-HasCancelledQuantity returns a boolean if a field has been set.
 
 ### GetOpenQuantity
 
@@ -215,11 +186,6 @@ and a boolean to check if the value has been set.
 
 SetOpenQuantity sets OpenQuantity field to given value.
 
-### HasOpenQuantity
-
-`func (o *Order) HasOpenQuantity() bool`
-
-HasOpenQuantity returns a boolean if a field has been set.
 
 ### GetOriginalQuantity
 
@@ -240,11 +206,6 @@ and a boolean to check if the value has been set.
 
 SetOriginalQuantity sets OriginalQuantity field to given value.
 
-### HasOriginalQuantity
-
-`func (o *Order) HasOriginalQuantity() bool`
-
-HasOriginalQuantity returns a boolean if a field has been set.
 
 ### GetFilledQuantity
 
@@ -265,11 +226,6 @@ and a boolean to check if the value has been set.
 
 SetFilledQuantity sets FilledQuantity field to given value.
 
-### HasFilledQuantity
-
-`func (o *Order) HasFilledQuantity() bool`
-
-HasFilledQuantity returns a boolean if a field has been set.
 
 ### GetFilledNotional
 
@@ -290,11 +246,6 @@ and a boolean to check if the value has been set.
 
 SetFilledNotional sets FilledNotional field to given value.
 
-### HasFilledNotional
-
-`func (o *Order) HasFilledNotional() bool`
-
-HasFilledNotional returns a boolean if a field has been set.
 
 ### GetLastUpdateAt
 
@@ -340,11 +291,6 @@ and a boolean to check if the value has been set.
 
 SetOpenedAt sets OpenedAt field to given value.
 
-### HasOpenedAt
-
-`func (o *Order) HasOpenedAt() bool`
-
-HasOpenedAt returns a boolean if a field has been set.
 
 ### GetInverseLeverage
 
@@ -365,11 +311,6 @@ and a boolean to check if the value has been set.
 
 SetInverseLeverage sets InverseLeverage field to given value.
 
-### HasInverseLeverage
-
-`func (o *Order) HasInverseLeverage() bool`
-
-HasInverseLeverage returns a boolean if a field has been set.
 
 ### GetSide
 
@@ -390,11 +331,6 @@ and a boolean to check if the value has been set.
 
 SetSide sets Side field to given value.
 
-### HasSide
-
-`func (o *Order) HasSide() bool`
-
-HasSide returns a boolean if a field has been set.
 
 ### GetStatus
 
@@ -415,11 +351,6 @@ and a boolean to check if the value has been set.
 
 SetStatus sets Status field to given value.
 
-### HasStatus
-
-`func (o *Order) HasStatus() bool`
-
-HasStatus returns a boolean if a field has been set.
 
 ### GetUserId
 
@@ -440,11 +371,6 @@ and a boolean to check if the value has been set.
 
 SetUserId sets UserId field to given value.
 
-### HasUserId
-
-`func (o *Order) HasUserId() bool`
-
-HasUserId returns a boolean if a field has been set.
 
 ### GetOrderModifiers
 
@@ -490,11 +416,6 @@ and a boolean to check if the value has been set.
 
 SetPositionId sets PositionId field to given value.
 
-### HasPositionId
-
-`func (o *Order) HasPositionId() bool`
-
-HasPositionId returns a boolean if a field has been set.
 
 ### GetOrderInfo
 
@@ -595,6 +516,31 @@ SetTriggerType sets TriggerType field to given value.
 `func (o *Order) HasTriggerType() bool`
 
 HasTriggerType returns a boolean if a field has been set.
+
+### GetClientOrderId
+
+`func (o *Order) GetClientOrderId() string`
+
+GetClientOrderId returns the ClientOrderId field if non-nil, zero value otherwise.
+
+### GetClientOrderIdOk
+
+`func (o *Order) GetClientOrderIdOk() (*string, bool)`
+
+GetClientOrderIdOk returns a tuple with the ClientOrderId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClientOrderId
+
+`func (o *Order) SetClientOrderId(v string)`
+
+SetClientOrderId sets ClientOrderId field to given value.
+
+### HasClientOrderId
+
+`func (o *Order) HasClientOrderId() bool`
+
+HasClientOrderId returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -4,20 +4,22 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | Pointer to **string** |  | [optional] 
-**CreatedAt** | Pointer to **time.Time** |  | [optional] 
-**Kind** | Pointer to [**TransactionKind**](TransactionKind.md) |  | [optional] 
-**Asset0** | Pointer to **string** |  | [optional] 
-**Quantity0** | Pointer to **string** |  | [optional] 
-**Quantity1** | Pointer to **string** |  | [optional] 
-**Asset1** | Pointer to **string** |  | [optional] 
-**UserId** | Pointer to **string** |  | [optional] 
+**Id** | **string** |  | 
+**CreatedAt** | **time.Time** |  | 
+**Kind** | [**TransactionKind**](TransactionKind.md) |  | 
+**Asset0** | **string** |  | 
+**Quantity0** | **string** |  | 
+**Quantity1** | **string** |  | 
+**Asset1** | **string** |  | 
+**UserId** | **string** |  | 
+**AdminUserId** | **string** |  | 
+**OrderSide** | [**Side**](Side.md) |  | 
 
 ## Methods
 
 ### NewTransaction
 
-`func NewTransaction() *Transaction`
+`func NewTransaction(id string, createdAt time.Time, kind TransactionKind, asset0 string, quantity0 string, quantity1 string, asset1 string, userId string, adminUserId string, orderSide Side, ) *Transaction`
 
 NewTransaction instantiates a new Transaction object
 This constructor will assign default values to properties that have it defined,
@@ -51,11 +53,6 @@ and a boolean to check if the value has been set.
 
 SetId sets Id field to given value.
 
-### HasId
-
-`func (o *Transaction) HasId() bool`
-
-HasId returns a boolean if a field has been set.
 
 ### GetCreatedAt
 
@@ -76,11 +73,6 @@ and a boolean to check if the value has been set.
 
 SetCreatedAt sets CreatedAt field to given value.
 
-### HasCreatedAt
-
-`func (o *Transaction) HasCreatedAt() bool`
-
-HasCreatedAt returns a boolean if a field has been set.
 
 ### GetKind
 
@@ -101,11 +93,6 @@ and a boolean to check if the value has been set.
 
 SetKind sets Kind field to given value.
 
-### HasKind
-
-`func (o *Transaction) HasKind() bool`
-
-HasKind returns a boolean if a field has been set.
 
 ### GetAsset0
 
@@ -126,11 +113,6 @@ and a boolean to check if the value has been set.
 
 SetAsset0 sets Asset0 field to given value.
 
-### HasAsset0
-
-`func (o *Transaction) HasAsset0() bool`
-
-HasAsset0 returns a boolean if a field has been set.
 
 ### GetQuantity0
 
@@ -151,11 +133,6 @@ and a boolean to check if the value has been set.
 
 SetQuantity0 sets Quantity0 field to given value.
 
-### HasQuantity0
-
-`func (o *Transaction) HasQuantity0() bool`
-
-HasQuantity0 returns a boolean if a field has been set.
 
 ### GetQuantity1
 
@@ -176,11 +153,6 @@ and a boolean to check if the value has been set.
 
 SetQuantity1 sets Quantity1 field to given value.
 
-### HasQuantity1
-
-`func (o *Transaction) HasQuantity1() bool`
-
-HasQuantity1 returns a boolean if a field has been set.
 
 ### GetAsset1
 
@@ -201,11 +173,6 @@ and a boolean to check if the value has been set.
 
 SetAsset1 sets Asset1 field to given value.
 
-### HasAsset1
-
-`func (o *Transaction) HasAsset1() bool`
-
-HasAsset1 returns a boolean if a field has been set.
 
 ### GetUserId
 
@@ -226,11 +193,46 @@ and a boolean to check if the value has been set.
 
 SetUserId sets UserId field to given value.
 
-### HasUserId
 
-`func (o *Transaction) HasUserId() bool`
+### GetAdminUserId
 
-HasUserId returns a boolean if a field has been set.
+`func (o *Transaction) GetAdminUserId() string`
+
+GetAdminUserId returns the AdminUserId field if non-nil, zero value otherwise.
+
+### GetAdminUserIdOk
+
+`func (o *Transaction) GetAdminUserIdOk() (*string, bool)`
+
+GetAdminUserIdOk returns a tuple with the AdminUserId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAdminUserId
+
+`func (o *Transaction) SetAdminUserId(v string)`
+
+SetAdminUserId sets AdminUserId field to given value.
+
+
+### GetOrderSide
+
+`func (o *Transaction) GetOrderSide() Side`
+
+GetOrderSide returns the OrderSide field if non-nil, zero value otherwise.
+
+### GetOrderSideOk
+
+`func (o *Transaction) GetOrderSideOk() (*Side, bool)`
+
+GetOrderSideOk returns a tuple with the OrderSide field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOrderSide
+
+`func (o *Transaction) SetOrderSide(v Side)`
+
+SetOrderSide sets OrderSide field to given value.
+
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -12,6 +12,8 @@ package doraclient
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the UserExistsResponse type satisfies the MappedNullable interface at compile time
@@ -19,17 +21,22 @@ var _ MappedNullable = &UserExistsResponse{}
 
 // UserExistsResponse struct for UserExistsResponse
 type UserExistsResponse struct {
-	EmailExists *bool `json:"email_exists,omitempty"`
-	FirebaseSet *bool `json:"firebase_set,omitempty"`
-	ShouldCreateUser *bool `json:"should_create_user,omitempty"`
+	EmailExists bool `json:"email_exists"`
+	FirebaseSet bool `json:"firebase_set"`
+	ShouldCreateUser bool `json:"should_create_user"`
 }
+
+type _UserExistsResponse UserExistsResponse
 
 // NewUserExistsResponse instantiates a new UserExistsResponse object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUserExistsResponse() *UserExistsResponse {
+func NewUserExistsResponse(emailExists bool, firebaseSet bool, shouldCreateUser bool) *UserExistsResponse {
 	this := UserExistsResponse{}
+	this.EmailExists = emailExists
+	this.FirebaseSet = firebaseSet
+	this.ShouldCreateUser = shouldCreateUser
 	return &this
 }
 
@@ -41,100 +48,76 @@ func NewUserExistsResponseWithDefaults() *UserExistsResponse {
 	return &this
 }
 
-// GetEmailExists returns the EmailExists field value if set, zero value otherwise.
+// GetEmailExists returns the EmailExists field value
 func (o *UserExistsResponse) GetEmailExists() bool {
-	if o == nil || IsNil(o.EmailExists) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.EmailExists
+
+	return o.EmailExists
 }
 
-// GetEmailExistsOk returns a tuple with the EmailExists field value if set, nil otherwise
+// GetEmailExistsOk returns a tuple with the EmailExists field value
 // and a boolean to check if the value has been set.
 func (o *UserExistsResponse) GetEmailExistsOk() (*bool, bool) {
-	if o == nil || IsNil(o.EmailExists) {
+	if o == nil {
 		return nil, false
 	}
-	return o.EmailExists, true
+	return &o.EmailExists, true
 }
 
-// HasEmailExists returns a boolean if a field has been set.
-func (o *UserExistsResponse) HasEmailExists() bool {
-	if o != nil && !IsNil(o.EmailExists) {
-		return true
-	}
-
-	return false
-}
-
-// SetEmailExists gets a reference to the given bool and assigns it to the EmailExists field.
+// SetEmailExists sets field value
 func (o *UserExistsResponse) SetEmailExists(v bool) {
-	o.EmailExists = &v
+	o.EmailExists = v
 }
 
-// GetFirebaseSet returns the FirebaseSet field value if set, zero value otherwise.
+// GetFirebaseSet returns the FirebaseSet field value
 func (o *UserExistsResponse) GetFirebaseSet() bool {
-	if o == nil || IsNil(o.FirebaseSet) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.FirebaseSet
+
+	return o.FirebaseSet
 }
 
-// GetFirebaseSetOk returns a tuple with the FirebaseSet field value if set, nil otherwise
+// GetFirebaseSetOk returns a tuple with the FirebaseSet field value
 // and a boolean to check if the value has been set.
 func (o *UserExistsResponse) GetFirebaseSetOk() (*bool, bool) {
-	if o == nil || IsNil(o.FirebaseSet) {
+	if o == nil {
 		return nil, false
 	}
-	return o.FirebaseSet, true
+	return &o.FirebaseSet, true
 }
 
-// HasFirebaseSet returns a boolean if a field has been set.
-func (o *UserExistsResponse) HasFirebaseSet() bool {
-	if o != nil && !IsNil(o.FirebaseSet) {
-		return true
-	}
-
-	return false
-}
-
-// SetFirebaseSet gets a reference to the given bool and assigns it to the FirebaseSet field.
+// SetFirebaseSet sets field value
 func (o *UserExistsResponse) SetFirebaseSet(v bool) {
-	o.FirebaseSet = &v
+	o.FirebaseSet = v
 }
 
-// GetShouldCreateUser returns the ShouldCreateUser field value if set, zero value otherwise.
+// GetShouldCreateUser returns the ShouldCreateUser field value
 func (o *UserExistsResponse) GetShouldCreateUser() bool {
-	if o == nil || IsNil(o.ShouldCreateUser) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.ShouldCreateUser
+
+	return o.ShouldCreateUser
 }
 
-// GetShouldCreateUserOk returns a tuple with the ShouldCreateUser field value if set, nil otherwise
+// GetShouldCreateUserOk returns a tuple with the ShouldCreateUser field value
 // and a boolean to check if the value has been set.
 func (o *UserExistsResponse) GetShouldCreateUserOk() (*bool, bool) {
-	if o == nil || IsNil(o.ShouldCreateUser) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ShouldCreateUser, true
+	return &o.ShouldCreateUser, true
 }
 
-// HasShouldCreateUser returns a boolean if a field has been set.
-func (o *UserExistsResponse) HasShouldCreateUser() bool {
-	if o != nil && !IsNil(o.ShouldCreateUser) {
-		return true
-	}
-
-	return false
-}
-
-// SetShouldCreateUser gets a reference to the given bool and assigns it to the ShouldCreateUser field.
+// SetShouldCreateUser sets field value
 func (o *UserExistsResponse) SetShouldCreateUser(v bool) {
-	o.ShouldCreateUser = &v
+	o.ShouldCreateUser = v
 }
 
 func (o UserExistsResponse) MarshalJSON() ([]byte, error) {
@@ -147,16 +130,49 @@ func (o UserExistsResponse) MarshalJSON() ([]byte, error) {
 
 func (o UserExistsResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.EmailExists) {
-		toSerialize["email_exists"] = o.EmailExists
-	}
-	if !IsNil(o.FirebaseSet) {
-		toSerialize["firebase_set"] = o.FirebaseSet
-	}
-	if !IsNil(o.ShouldCreateUser) {
-		toSerialize["should_create_user"] = o.ShouldCreateUser
-	}
+	toSerialize["email_exists"] = o.EmailExists
+	toSerialize["firebase_set"] = o.FirebaseSet
+	toSerialize["should_create_user"] = o.ShouldCreateUser
 	return toSerialize, nil
+}
+
+func (o *UserExistsResponse) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"email_exists",
+		"firebase_set",
+		"should_create_user",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varUserExistsResponse := _UserExistsResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varUserExistsResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UserExistsResponse(varUserExistsResponse)
+
+	return err
 }
 
 type NullableUserExistsResponse struct {

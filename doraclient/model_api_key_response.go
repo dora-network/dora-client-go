@@ -13,6 +13,8 @@ package doraclient
 import (
 	"encoding/json"
 	"time"
+	"bytes"
+	"fmt"
 )
 
 // checks if the APIKeyResponse type satisfies the MappedNullable interface at compile time
@@ -20,19 +22,25 @@ var _ MappedNullable = &APIKeyResponse{}
 
 // APIKeyResponse struct for APIKeyResponse
 type APIKeyResponse struct {
-	UserId *string `json:"user_id,omitempty"`
-	KeyId *string `json:"key_id,omitempty"`
-	Label *string `json:"label,omitempty"`
+	UserId string `json:"user_id"`
+	KeyId string `json:"key_id"`
+	Label string `json:"label"`
 	ExpiresAt *time.Time `json:"expires_at,omitempty"`
-	IsActive *bool `json:"is_active,omitempty"`
+	IsActive bool `json:"is_active"`
 }
+
+type _APIKeyResponse APIKeyResponse
 
 // NewAPIKeyResponse instantiates a new APIKeyResponse object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAPIKeyResponse() *APIKeyResponse {
+func NewAPIKeyResponse(userId string, keyId string, label string, isActive bool) *APIKeyResponse {
 	this := APIKeyResponse{}
+	this.UserId = userId
+	this.KeyId = keyId
+	this.Label = label
+	this.IsActive = isActive
 	return &this
 }
 
@@ -44,100 +52,76 @@ func NewAPIKeyResponseWithDefaults() *APIKeyResponse {
 	return &this
 }
 
-// GetUserId returns the UserId field value if set, zero value otherwise.
+// GetUserId returns the UserId field value
 func (o *APIKeyResponse) GetUserId() string {
-	if o == nil || IsNil(o.UserId) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.UserId
+
+	return o.UserId
 }
 
-// GetUserIdOk returns a tuple with the UserId field value if set, nil otherwise
+// GetUserIdOk returns a tuple with the UserId field value
 // and a boolean to check if the value has been set.
 func (o *APIKeyResponse) GetUserIdOk() (*string, bool) {
-	if o == nil || IsNil(o.UserId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.UserId, true
+	return &o.UserId, true
 }
 
-// HasUserId returns a boolean if a field has been set.
-func (o *APIKeyResponse) HasUserId() bool {
-	if o != nil && !IsNil(o.UserId) {
-		return true
-	}
-
-	return false
-}
-
-// SetUserId gets a reference to the given string and assigns it to the UserId field.
+// SetUserId sets field value
 func (o *APIKeyResponse) SetUserId(v string) {
-	o.UserId = &v
+	o.UserId = v
 }
 
-// GetKeyId returns the KeyId field value if set, zero value otherwise.
+// GetKeyId returns the KeyId field value
 func (o *APIKeyResponse) GetKeyId() string {
-	if o == nil || IsNil(o.KeyId) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.KeyId
+
+	return o.KeyId
 }
 
-// GetKeyIdOk returns a tuple with the KeyId field value if set, nil otherwise
+// GetKeyIdOk returns a tuple with the KeyId field value
 // and a boolean to check if the value has been set.
 func (o *APIKeyResponse) GetKeyIdOk() (*string, bool) {
-	if o == nil || IsNil(o.KeyId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.KeyId, true
+	return &o.KeyId, true
 }
 
-// HasKeyId returns a boolean if a field has been set.
-func (o *APIKeyResponse) HasKeyId() bool {
-	if o != nil && !IsNil(o.KeyId) {
-		return true
-	}
-
-	return false
-}
-
-// SetKeyId gets a reference to the given string and assigns it to the KeyId field.
+// SetKeyId sets field value
 func (o *APIKeyResponse) SetKeyId(v string) {
-	o.KeyId = &v
+	o.KeyId = v
 }
 
-// GetLabel returns the Label field value if set, zero value otherwise.
+// GetLabel returns the Label field value
 func (o *APIKeyResponse) GetLabel() string {
-	if o == nil || IsNil(o.Label) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Label
+
+	return o.Label
 }
 
-// GetLabelOk returns a tuple with the Label field value if set, nil otherwise
+// GetLabelOk returns a tuple with the Label field value
 // and a boolean to check if the value has been set.
 func (o *APIKeyResponse) GetLabelOk() (*string, bool) {
-	if o == nil || IsNil(o.Label) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Label, true
+	return &o.Label, true
 }
 
-// HasLabel returns a boolean if a field has been set.
-func (o *APIKeyResponse) HasLabel() bool {
-	if o != nil && !IsNil(o.Label) {
-		return true
-	}
-
-	return false
-}
-
-// SetLabel gets a reference to the given string and assigns it to the Label field.
+// SetLabel sets field value
 func (o *APIKeyResponse) SetLabel(v string) {
-	o.Label = &v
+	o.Label = v
 }
 
 // GetExpiresAt returns the ExpiresAt field value if set, zero value otherwise.
@@ -172,36 +156,28 @@ func (o *APIKeyResponse) SetExpiresAt(v time.Time) {
 	o.ExpiresAt = &v
 }
 
-// GetIsActive returns the IsActive field value if set, zero value otherwise.
+// GetIsActive returns the IsActive field value
 func (o *APIKeyResponse) GetIsActive() bool {
-	if o == nil || IsNil(o.IsActive) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.IsActive
+
+	return o.IsActive
 }
 
-// GetIsActiveOk returns a tuple with the IsActive field value if set, nil otherwise
+// GetIsActiveOk returns a tuple with the IsActive field value
 // and a boolean to check if the value has been set.
 func (o *APIKeyResponse) GetIsActiveOk() (*bool, bool) {
-	if o == nil || IsNil(o.IsActive) {
+	if o == nil {
 		return nil, false
 	}
-	return o.IsActive, true
+	return &o.IsActive, true
 }
 
-// HasIsActive returns a boolean if a field has been set.
-func (o *APIKeyResponse) HasIsActive() bool {
-	if o != nil && !IsNil(o.IsActive) {
-		return true
-	}
-
-	return false
-}
-
-// SetIsActive gets a reference to the given bool and assigns it to the IsActive field.
+// SetIsActive sets field value
 func (o *APIKeyResponse) SetIsActive(v bool) {
-	o.IsActive = &v
+	o.IsActive = v
 }
 
 func (o APIKeyResponse) MarshalJSON() ([]byte, error) {
@@ -214,22 +190,54 @@ func (o APIKeyResponse) MarshalJSON() ([]byte, error) {
 
 func (o APIKeyResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.UserId) {
-		toSerialize["user_id"] = o.UserId
-	}
-	if !IsNil(o.KeyId) {
-		toSerialize["key_id"] = o.KeyId
-	}
-	if !IsNil(o.Label) {
-		toSerialize["label"] = o.Label
-	}
+	toSerialize["user_id"] = o.UserId
+	toSerialize["key_id"] = o.KeyId
+	toSerialize["label"] = o.Label
 	if !IsNil(o.ExpiresAt) {
 		toSerialize["expires_at"] = o.ExpiresAt
 	}
-	if !IsNil(o.IsActive) {
-		toSerialize["is_active"] = o.IsActive
-	}
+	toSerialize["is_active"] = o.IsActive
 	return toSerialize, nil
+}
+
+func (o *APIKeyResponse) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"user_id",
+		"key_id",
+		"label",
+		"is_active",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varAPIKeyResponse := _APIKeyResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varAPIKeyResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = APIKeyResponse(varAPIKeyResponse)
+
+	return err
 }
 
 type NullableAPIKeyResponse struct {

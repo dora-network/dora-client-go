@@ -13,6 +13,8 @@ package doraclient
 import (
 	"encoding/json"
 	"time"
+	"bytes"
+	"fmt"
 )
 
 // checks if the Bond type satisfies the MappedNullable interface at compile time
@@ -20,28 +22,40 @@ var _ MappedNullable = &Bond{}
 
 // Bond struct for Bond
 type Bond struct {
-	Id *string `json:"id,omitempty"`
-	Kind *BondKind `json:"kind,omitempty"`
+	Id string `json:"id"`
+	Kind BondKind `json:"kind"`
 	CouponStartAt *time.Time `json:"coupon_start_at,omitempty"`
-	CreatedAt *time.Time `json:"created_at,omitempty"`
+	CreatedAt time.Time `json:"created_at"`
 	FinalCouponAt *time.Time `json:"final_coupon_at,omitempty"`
-	Isin *string `json:"isin,omitempty"`
-	IssuedAt *time.Time `json:"issued_at,omitempty"`
-	Issuer *string `json:"issuer,omitempty"`
-	MaturityAt *time.Time `json:"maturity_at,omitempty"`
-	PrincipalValue *string `json:"principal_value,omitempty"`
-	PaymentsPerYear *int32 `json:"payments_per_year,omitempty"`
+	Isin string `json:"isin"`
+	IssuedAt time.Time `json:"issued_at"`
+	Issuer string `json:"issuer"`
+	MaturityAt time.Time `json:"maturity_at"`
+	PrincipalValue float64 `json:"principal_value"`
+	PaymentsPerYear int32 `json:"payments_per_year"`
 	// Coupon payment frequency in nanoseconds (minimum 1000 i.e. 1 microsecond)
-	PaymentsEvery *int32 `json:"payments_every,omitempty"`
+	PaymentsEvery int32 `json:"payments_every"`
 	NextCouponPayment *time.Time `json:"next_coupon_payment,omitempty"`
 }
+
+type _Bond Bond
 
 // NewBond instantiates a new Bond object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBond() *Bond {
+func NewBond(id string, kind BondKind, createdAt time.Time, isin string, issuedAt time.Time, issuer string, maturityAt time.Time, principalValue float64, paymentsPerYear int32, paymentsEvery int32) *Bond {
 	this := Bond{}
+	this.Id = id
+	this.Kind = kind
+	this.CreatedAt = createdAt
+	this.Isin = isin
+	this.IssuedAt = issuedAt
+	this.Issuer = issuer
+	this.MaturityAt = maturityAt
+	this.PrincipalValue = principalValue
+	this.PaymentsPerYear = paymentsPerYear
+	this.PaymentsEvery = paymentsEvery
 	return &this
 }
 
@@ -53,68 +67,52 @@ func NewBondWithDefaults() *Bond {
 	return &this
 }
 
-// GetId returns the Id field value if set, zero value otherwise.
+// GetId returns the Id field value
 func (o *Bond) GetId() string {
-	if o == nil || IsNil(o.Id) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Id
+
+	return o.Id
 }
 
-// GetIdOk returns a tuple with the Id field value if set, nil otherwise
+// GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
 func (o *Bond) GetIdOk() (*string, bool) {
-	if o == nil || IsNil(o.Id) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Id, true
+	return &o.Id, true
 }
 
-// HasId returns a boolean if a field has been set.
-func (o *Bond) HasId() bool {
-	if o != nil && !IsNil(o.Id) {
-		return true
-	}
-
-	return false
-}
-
-// SetId gets a reference to the given string and assigns it to the Id field.
+// SetId sets field value
 func (o *Bond) SetId(v string) {
-	o.Id = &v
+	o.Id = v
 }
 
-// GetKind returns the Kind field value if set, zero value otherwise.
+// GetKind returns the Kind field value
 func (o *Bond) GetKind() BondKind {
-	if o == nil || IsNil(o.Kind) {
+	if o == nil {
 		var ret BondKind
 		return ret
 	}
-	return *o.Kind
+
+	return o.Kind
 }
 
-// GetKindOk returns a tuple with the Kind field value if set, nil otherwise
+// GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
 func (o *Bond) GetKindOk() (*BondKind, bool) {
-	if o == nil || IsNil(o.Kind) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Kind, true
+	return &o.Kind, true
 }
 
-// HasKind returns a boolean if a field has been set.
-func (o *Bond) HasKind() bool {
-	if o != nil && !IsNil(o.Kind) {
-		return true
-	}
-
-	return false
-}
-
-// SetKind gets a reference to the given BondKind and assigns it to the Kind field.
+// SetKind sets field value
 func (o *Bond) SetKind(v BondKind) {
-	o.Kind = &v
+	o.Kind = v
 }
 
 // GetCouponStartAt returns the CouponStartAt field value if set, zero value otherwise.
@@ -149,36 +147,28 @@ func (o *Bond) SetCouponStartAt(v time.Time) {
 	o.CouponStartAt = &v
 }
 
-// GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
+// GetCreatedAt returns the CreatedAt field value
 func (o *Bond) GetCreatedAt() time.Time {
-	if o == nil || IsNil(o.CreatedAt) {
+	if o == nil {
 		var ret time.Time
 		return ret
 	}
-	return *o.CreatedAt
+
+	return o.CreatedAt
 }
 
-// GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
+// GetCreatedAtOk returns a tuple with the CreatedAt field value
 // and a boolean to check if the value has been set.
 func (o *Bond) GetCreatedAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.CreatedAt) {
+	if o == nil {
 		return nil, false
 	}
-	return o.CreatedAt, true
+	return &o.CreatedAt, true
 }
 
-// HasCreatedAt returns a boolean if a field has been set.
-func (o *Bond) HasCreatedAt() bool {
-	if o != nil && !IsNil(o.CreatedAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetCreatedAt gets a reference to the given time.Time and assigns it to the CreatedAt field.
+// SetCreatedAt sets field value
 func (o *Bond) SetCreatedAt(v time.Time) {
-	o.CreatedAt = &v
+	o.CreatedAt = v
 }
 
 // GetFinalCouponAt returns the FinalCouponAt field value if set, zero value otherwise.
@@ -213,228 +203,172 @@ func (o *Bond) SetFinalCouponAt(v time.Time) {
 	o.FinalCouponAt = &v
 }
 
-// GetIsin returns the Isin field value if set, zero value otherwise.
+// GetIsin returns the Isin field value
 func (o *Bond) GetIsin() string {
-	if o == nil || IsNil(o.Isin) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Isin
+
+	return o.Isin
 }
 
-// GetIsinOk returns a tuple with the Isin field value if set, nil otherwise
+// GetIsinOk returns a tuple with the Isin field value
 // and a boolean to check if the value has been set.
 func (o *Bond) GetIsinOk() (*string, bool) {
-	if o == nil || IsNil(o.Isin) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Isin, true
+	return &o.Isin, true
 }
 
-// HasIsin returns a boolean if a field has been set.
-func (o *Bond) HasIsin() bool {
-	if o != nil && !IsNil(o.Isin) {
-		return true
-	}
-
-	return false
-}
-
-// SetIsin gets a reference to the given string and assigns it to the Isin field.
+// SetIsin sets field value
 func (o *Bond) SetIsin(v string) {
-	o.Isin = &v
+	o.Isin = v
 }
 
-// GetIssuedAt returns the IssuedAt field value if set, zero value otherwise.
+// GetIssuedAt returns the IssuedAt field value
 func (o *Bond) GetIssuedAt() time.Time {
-	if o == nil || IsNil(o.IssuedAt) {
+	if o == nil {
 		var ret time.Time
 		return ret
 	}
-	return *o.IssuedAt
+
+	return o.IssuedAt
 }
 
-// GetIssuedAtOk returns a tuple with the IssuedAt field value if set, nil otherwise
+// GetIssuedAtOk returns a tuple with the IssuedAt field value
 // and a boolean to check if the value has been set.
 func (o *Bond) GetIssuedAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.IssuedAt) {
+	if o == nil {
 		return nil, false
 	}
-	return o.IssuedAt, true
+	return &o.IssuedAt, true
 }
 
-// HasIssuedAt returns a boolean if a field has been set.
-func (o *Bond) HasIssuedAt() bool {
-	if o != nil && !IsNil(o.IssuedAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetIssuedAt gets a reference to the given time.Time and assigns it to the IssuedAt field.
+// SetIssuedAt sets field value
 func (o *Bond) SetIssuedAt(v time.Time) {
-	o.IssuedAt = &v
+	o.IssuedAt = v
 }
 
-// GetIssuer returns the Issuer field value if set, zero value otherwise.
+// GetIssuer returns the Issuer field value
 func (o *Bond) GetIssuer() string {
-	if o == nil || IsNil(o.Issuer) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Issuer
+
+	return o.Issuer
 }
 
-// GetIssuerOk returns a tuple with the Issuer field value if set, nil otherwise
+// GetIssuerOk returns a tuple with the Issuer field value
 // and a boolean to check if the value has been set.
 func (o *Bond) GetIssuerOk() (*string, bool) {
-	if o == nil || IsNil(o.Issuer) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Issuer, true
+	return &o.Issuer, true
 }
 
-// HasIssuer returns a boolean if a field has been set.
-func (o *Bond) HasIssuer() bool {
-	if o != nil && !IsNil(o.Issuer) {
-		return true
-	}
-
-	return false
-}
-
-// SetIssuer gets a reference to the given string and assigns it to the Issuer field.
+// SetIssuer sets field value
 func (o *Bond) SetIssuer(v string) {
-	o.Issuer = &v
+	o.Issuer = v
 }
 
-// GetMaturityAt returns the MaturityAt field value if set, zero value otherwise.
+// GetMaturityAt returns the MaturityAt field value
 func (o *Bond) GetMaturityAt() time.Time {
-	if o == nil || IsNil(o.MaturityAt) {
+	if o == nil {
 		var ret time.Time
 		return ret
 	}
-	return *o.MaturityAt
+
+	return o.MaturityAt
 }
 
-// GetMaturityAtOk returns a tuple with the MaturityAt field value if set, nil otherwise
+// GetMaturityAtOk returns a tuple with the MaturityAt field value
 // and a boolean to check if the value has been set.
 func (o *Bond) GetMaturityAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.MaturityAt) {
+	if o == nil {
 		return nil, false
 	}
-	return o.MaturityAt, true
+	return &o.MaturityAt, true
 }
 
-// HasMaturityAt returns a boolean if a field has been set.
-func (o *Bond) HasMaturityAt() bool {
-	if o != nil && !IsNil(o.MaturityAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetMaturityAt gets a reference to the given time.Time and assigns it to the MaturityAt field.
+// SetMaturityAt sets field value
 func (o *Bond) SetMaturityAt(v time.Time) {
-	o.MaturityAt = &v
+	o.MaturityAt = v
 }
 
-// GetPrincipalValue returns the PrincipalValue field value if set, zero value otherwise.
-func (o *Bond) GetPrincipalValue() string {
-	if o == nil || IsNil(o.PrincipalValue) {
-		var ret string
+// GetPrincipalValue returns the PrincipalValue field value
+func (o *Bond) GetPrincipalValue() float64 {
+	if o == nil {
+		var ret float64
 		return ret
 	}
-	return *o.PrincipalValue
+
+	return o.PrincipalValue
 }
 
-// GetPrincipalValueOk returns a tuple with the PrincipalValue field value if set, nil otherwise
+// GetPrincipalValueOk returns a tuple with the PrincipalValue field value
 // and a boolean to check if the value has been set.
-func (o *Bond) GetPrincipalValueOk() (*string, bool) {
-	if o == nil || IsNil(o.PrincipalValue) {
+func (o *Bond) GetPrincipalValueOk() (*float64, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.PrincipalValue, true
+	return &o.PrincipalValue, true
 }
 
-// HasPrincipalValue returns a boolean if a field has been set.
-func (o *Bond) HasPrincipalValue() bool {
-	if o != nil && !IsNil(o.PrincipalValue) {
-		return true
-	}
-
-	return false
+// SetPrincipalValue sets field value
+func (o *Bond) SetPrincipalValue(v float64) {
+	o.PrincipalValue = v
 }
 
-// SetPrincipalValue gets a reference to the given string and assigns it to the PrincipalValue field.
-func (o *Bond) SetPrincipalValue(v string) {
-	o.PrincipalValue = &v
-}
-
-// GetPaymentsPerYear returns the PaymentsPerYear field value if set, zero value otherwise.
+// GetPaymentsPerYear returns the PaymentsPerYear field value
 func (o *Bond) GetPaymentsPerYear() int32 {
-	if o == nil || IsNil(o.PaymentsPerYear) {
+	if o == nil {
 		var ret int32
 		return ret
 	}
-	return *o.PaymentsPerYear
+
+	return o.PaymentsPerYear
 }
 
-// GetPaymentsPerYearOk returns a tuple with the PaymentsPerYear field value if set, nil otherwise
+// GetPaymentsPerYearOk returns a tuple with the PaymentsPerYear field value
 // and a boolean to check if the value has been set.
 func (o *Bond) GetPaymentsPerYearOk() (*int32, bool) {
-	if o == nil || IsNil(o.PaymentsPerYear) {
+	if o == nil {
 		return nil, false
 	}
-	return o.PaymentsPerYear, true
+	return &o.PaymentsPerYear, true
 }
 
-// HasPaymentsPerYear returns a boolean if a field has been set.
-func (o *Bond) HasPaymentsPerYear() bool {
-	if o != nil && !IsNil(o.PaymentsPerYear) {
-		return true
-	}
-
-	return false
-}
-
-// SetPaymentsPerYear gets a reference to the given int32 and assigns it to the PaymentsPerYear field.
+// SetPaymentsPerYear sets field value
 func (o *Bond) SetPaymentsPerYear(v int32) {
-	o.PaymentsPerYear = &v
+	o.PaymentsPerYear = v
 }
 
-// GetPaymentsEvery returns the PaymentsEvery field value if set, zero value otherwise.
+// GetPaymentsEvery returns the PaymentsEvery field value
 func (o *Bond) GetPaymentsEvery() int32 {
-	if o == nil || IsNil(o.PaymentsEvery) {
+	if o == nil {
 		var ret int32
 		return ret
 	}
-	return *o.PaymentsEvery
+
+	return o.PaymentsEvery
 }
 
-// GetPaymentsEveryOk returns a tuple with the PaymentsEvery field value if set, nil otherwise
+// GetPaymentsEveryOk returns a tuple with the PaymentsEvery field value
 // and a boolean to check if the value has been set.
 func (o *Bond) GetPaymentsEveryOk() (*int32, bool) {
-	if o == nil || IsNil(o.PaymentsEvery) {
+	if o == nil {
 		return nil, false
 	}
-	return o.PaymentsEvery, true
+	return &o.PaymentsEvery, true
 }
 
-// HasPaymentsEvery returns a boolean if a field has been set.
-func (o *Bond) HasPaymentsEvery() bool {
-	if o != nil && !IsNil(o.PaymentsEvery) {
-		return true
-	}
-
-	return false
-}
-
-// SetPaymentsEvery gets a reference to the given int32 and assigns it to the PaymentsEvery field.
+// SetPaymentsEvery sets field value
 func (o *Bond) SetPaymentsEvery(v int32) {
-	o.PaymentsEvery = &v
+	o.PaymentsEvery = v
 }
 
 // GetNextCouponPayment returns the NextCouponPayment field value if set, zero value otherwise.
@@ -479,46 +413,72 @@ func (o Bond) MarshalJSON() ([]byte, error) {
 
 func (o Bond) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Id) {
-		toSerialize["id"] = o.Id
-	}
-	if !IsNil(o.Kind) {
-		toSerialize["kind"] = o.Kind
-	}
+	toSerialize["id"] = o.Id
+	toSerialize["kind"] = o.Kind
 	if !IsNil(o.CouponStartAt) {
 		toSerialize["coupon_start_at"] = o.CouponStartAt
 	}
-	if !IsNil(o.CreatedAt) {
-		toSerialize["created_at"] = o.CreatedAt
-	}
+	toSerialize["created_at"] = o.CreatedAt
 	if !IsNil(o.FinalCouponAt) {
 		toSerialize["final_coupon_at"] = o.FinalCouponAt
 	}
-	if !IsNil(o.Isin) {
-		toSerialize["isin"] = o.Isin
-	}
-	if !IsNil(o.IssuedAt) {
-		toSerialize["issued_at"] = o.IssuedAt
-	}
-	if !IsNil(o.Issuer) {
-		toSerialize["issuer"] = o.Issuer
-	}
-	if !IsNil(o.MaturityAt) {
-		toSerialize["maturity_at"] = o.MaturityAt
-	}
-	if !IsNil(o.PrincipalValue) {
-		toSerialize["principal_value"] = o.PrincipalValue
-	}
-	if !IsNil(o.PaymentsPerYear) {
-		toSerialize["payments_per_year"] = o.PaymentsPerYear
-	}
-	if !IsNil(o.PaymentsEvery) {
-		toSerialize["payments_every"] = o.PaymentsEvery
-	}
+	toSerialize["isin"] = o.Isin
+	toSerialize["issued_at"] = o.IssuedAt
+	toSerialize["issuer"] = o.Issuer
+	toSerialize["maturity_at"] = o.MaturityAt
+	toSerialize["principal_value"] = o.PrincipalValue
+	toSerialize["payments_per_year"] = o.PaymentsPerYear
+	toSerialize["payments_every"] = o.PaymentsEvery
 	if !IsNil(o.NextCouponPayment) {
 		toSerialize["next_coupon_payment"] = o.NextCouponPayment
 	}
 	return toSerialize, nil
+}
+
+func (o *Bond) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"id",
+		"kind",
+		"created_at",
+		"isin",
+		"issued_at",
+		"issuer",
+		"maturity_at",
+		"principal_value",
+		"payments_per_year",
+		"payments_every",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varBond := _Bond{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varBond)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Bond(varBond)
+
+	return err
 }
 
 type NullableBond struct {

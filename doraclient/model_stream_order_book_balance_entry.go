@@ -13,6 +13,8 @@ package doraclient
 import (
 	"encoding/json"
 	"time"
+	"bytes"
+	"fmt"
 )
 
 // checks if the StreamOrderBookBalanceEntry type satisfies the MappedNullable interface at compile time
@@ -20,17 +22,21 @@ var _ MappedNullable = &StreamOrderBookBalanceEntry{}
 
 // StreamOrderBookBalanceEntry struct for StreamOrderBookBalanceEntry
 type StreamOrderBookBalanceEntry struct {
-	Val *OrderBookBalance `json:"Val,omitempty"`
+	Val OrderBookBalance `json:"Val"`
 	// The timestamp when the data was created
-	Time *time.Time `json:"Time,omitempty"`
+	Time time.Time `json:"Time"`
 }
+
+type _StreamOrderBookBalanceEntry StreamOrderBookBalanceEntry
 
 // NewStreamOrderBookBalanceEntry instantiates a new StreamOrderBookBalanceEntry object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewStreamOrderBookBalanceEntry() *StreamOrderBookBalanceEntry {
+func NewStreamOrderBookBalanceEntry(val OrderBookBalance, time time.Time) *StreamOrderBookBalanceEntry {
 	this := StreamOrderBookBalanceEntry{}
+	this.Val = val
+	this.Time = time
 	return &this
 }
 
@@ -42,68 +48,52 @@ func NewStreamOrderBookBalanceEntryWithDefaults() *StreamOrderBookBalanceEntry {
 	return &this
 }
 
-// GetVal returns the Val field value if set, zero value otherwise.
+// GetVal returns the Val field value
 func (o *StreamOrderBookBalanceEntry) GetVal() OrderBookBalance {
-	if o == nil || IsNil(o.Val) {
+	if o == nil {
 		var ret OrderBookBalance
 		return ret
 	}
-	return *o.Val
+
+	return o.Val
 }
 
-// GetValOk returns a tuple with the Val field value if set, nil otherwise
+// GetValOk returns a tuple with the Val field value
 // and a boolean to check if the value has been set.
 func (o *StreamOrderBookBalanceEntry) GetValOk() (*OrderBookBalance, bool) {
-	if o == nil || IsNil(o.Val) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Val, true
+	return &o.Val, true
 }
 
-// HasVal returns a boolean if a field has been set.
-func (o *StreamOrderBookBalanceEntry) HasVal() bool {
-	if o != nil && !IsNil(o.Val) {
-		return true
-	}
-
-	return false
-}
-
-// SetVal gets a reference to the given OrderBookBalance and assigns it to the Val field.
+// SetVal sets field value
 func (o *StreamOrderBookBalanceEntry) SetVal(v OrderBookBalance) {
-	o.Val = &v
+	o.Val = v
 }
 
-// GetTime returns the Time field value if set, zero value otherwise.
+// GetTime returns the Time field value
 func (o *StreamOrderBookBalanceEntry) GetTime() time.Time {
-	if o == nil || IsNil(o.Time) {
+	if o == nil {
 		var ret time.Time
 		return ret
 	}
-	return *o.Time
+
+	return o.Time
 }
 
-// GetTimeOk returns a tuple with the Time field value if set, nil otherwise
+// GetTimeOk returns a tuple with the Time field value
 // and a boolean to check if the value has been set.
 func (o *StreamOrderBookBalanceEntry) GetTimeOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.Time) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Time, true
+	return &o.Time, true
 }
 
-// HasTime returns a boolean if a field has been set.
-func (o *StreamOrderBookBalanceEntry) HasTime() bool {
-	if o != nil && !IsNil(o.Time) {
-		return true
-	}
-
-	return false
-}
-
-// SetTime gets a reference to the given time.Time and assigns it to the Time field.
+// SetTime sets field value
 func (o *StreamOrderBookBalanceEntry) SetTime(v time.Time) {
-	o.Time = &v
+	o.Time = v
 }
 
 func (o StreamOrderBookBalanceEntry) MarshalJSON() ([]byte, error) {
@@ -116,13 +106,47 @@ func (o StreamOrderBookBalanceEntry) MarshalJSON() ([]byte, error) {
 
 func (o StreamOrderBookBalanceEntry) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Val) {
-		toSerialize["Val"] = o.Val
-	}
-	if !IsNil(o.Time) {
-		toSerialize["Time"] = o.Time
-	}
+	toSerialize["Val"] = o.Val
+	toSerialize["Time"] = o.Time
 	return toSerialize, nil
+}
+
+func (o *StreamOrderBookBalanceEntry) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"Val",
+		"Time",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varStreamOrderBookBalanceEntry := _StreamOrderBookBalanceEntry{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varStreamOrderBookBalanceEntry)
+
+	if err != nil {
+		return err
+	}
+
+	*o = StreamOrderBookBalanceEntry(varStreamOrderBookBalanceEntry)
+
+	return err
 }
 
 type NullableStreamOrderBookBalanceEntry struct {

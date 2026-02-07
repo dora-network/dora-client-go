@@ -12,6 +12,8 @@ package doraclient
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the CreateAPIKeyData type satisfies the MappedNullable interface at compile time
@@ -19,17 +21,22 @@ var _ MappedNullable = &CreateAPIKeyData{}
 
 // CreateAPIKeyData struct for CreateAPIKeyData
 type CreateAPIKeyData struct {
-	KeyId *string `json:"key_id,omitempty"`
-	ApiKey *string `json:"api_key,omitempty"`
-	Label *string `json:"label,omitempty"`
+	KeyId string `json:"key_id"`
+	ApiKey string `json:"api_key"`
+	Label string `json:"label"`
 }
+
+type _CreateAPIKeyData CreateAPIKeyData
 
 // NewCreateAPIKeyData instantiates a new CreateAPIKeyData object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateAPIKeyData() *CreateAPIKeyData {
+func NewCreateAPIKeyData(keyId string, apiKey string, label string) *CreateAPIKeyData {
 	this := CreateAPIKeyData{}
+	this.KeyId = keyId
+	this.ApiKey = apiKey
+	this.Label = label
 	return &this
 }
 
@@ -41,100 +48,76 @@ func NewCreateAPIKeyDataWithDefaults() *CreateAPIKeyData {
 	return &this
 }
 
-// GetKeyId returns the KeyId field value if set, zero value otherwise.
+// GetKeyId returns the KeyId field value
 func (o *CreateAPIKeyData) GetKeyId() string {
-	if o == nil || IsNil(o.KeyId) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.KeyId
+
+	return o.KeyId
 }
 
-// GetKeyIdOk returns a tuple with the KeyId field value if set, nil otherwise
+// GetKeyIdOk returns a tuple with the KeyId field value
 // and a boolean to check if the value has been set.
 func (o *CreateAPIKeyData) GetKeyIdOk() (*string, bool) {
-	if o == nil || IsNil(o.KeyId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.KeyId, true
+	return &o.KeyId, true
 }
 
-// HasKeyId returns a boolean if a field has been set.
-func (o *CreateAPIKeyData) HasKeyId() bool {
-	if o != nil && !IsNil(o.KeyId) {
-		return true
-	}
-
-	return false
-}
-
-// SetKeyId gets a reference to the given string and assigns it to the KeyId field.
+// SetKeyId sets field value
 func (o *CreateAPIKeyData) SetKeyId(v string) {
-	o.KeyId = &v
+	o.KeyId = v
 }
 
-// GetApiKey returns the ApiKey field value if set, zero value otherwise.
+// GetApiKey returns the ApiKey field value
 func (o *CreateAPIKeyData) GetApiKey() string {
-	if o == nil || IsNil(o.ApiKey) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.ApiKey
+
+	return o.ApiKey
 }
 
-// GetApiKeyOk returns a tuple with the ApiKey field value if set, nil otherwise
+// GetApiKeyOk returns a tuple with the ApiKey field value
 // and a boolean to check if the value has been set.
 func (o *CreateAPIKeyData) GetApiKeyOk() (*string, bool) {
-	if o == nil || IsNil(o.ApiKey) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ApiKey, true
+	return &o.ApiKey, true
 }
 
-// HasApiKey returns a boolean if a field has been set.
-func (o *CreateAPIKeyData) HasApiKey() bool {
-	if o != nil && !IsNil(o.ApiKey) {
-		return true
-	}
-
-	return false
-}
-
-// SetApiKey gets a reference to the given string and assigns it to the ApiKey field.
+// SetApiKey sets field value
 func (o *CreateAPIKeyData) SetApiKey(v string) {
-	o.ApiKey = &v
+	o.ApiKey = v
 }
 
-// GetLabel returns the Label field value if set, zero value otherwise.
+// GetLabel returns the Label field value
 func (o *CreateAPIKeyData) GetLabel() string {
-	if o == nil || IsNil(o.Label) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Label
+
+	return o.Label
 }
 
-// GetLabelOk returns a tuple with the Label field value if set, nil otherwise
+// GetLabelOk returns a tuple with the Label field value
 // and a boolean to check if the value has been set.
 func (o *CreateAPIKeyData) GetLabelOk() (*string, bool) {
-	if o == nil || IsNil(o.Label) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Label, true
+	return &o.Label, true
 }
 
-// HasLabel returns a boolean if a field has been set.
-func (o *CreateAPIKeyData) HasLabel() bool {
-	if o != nil && !IsNil(o.Label) {
-		return true
-	}
-
-	return false
-}
-
-// SetLabel gets a reference to the given string and assigns it to the Label field.
+// SetLabel sets field value
 func (o *CreateAPIKeyData) SetLabel(v string) {
-	o.Label = &v
+	o.Label = v
 }
 
 func (o CreateAPIKeyData) MarshalJSON() ([]byte, error) {
@@ -147,16 +130,49 @@ func (o CreateAPIKeyData) MarshalJSON() ([]byte, error) {
 
 func (o CreateAPIKeyData) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.KeyId) {
-		toSerialize["key_id"] = o.KeyId
-	}
-	if !IsNil(o.ApiKey) {
-		toSerialize["api_key"] = o.ApiKey
-	}
-	if !IsNil(o.Label) {
-		toSerialize["label"] = o.Label
-	}
+	toSerialize["key_id"] = o.KeyId
+	toSerialize["api_key"] = o.ApiKey
+	toSerialize["label"] = o.Label
 	return toSerialize, nil
+}
+
+func (o *CreateAPIKeyData) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"key_id",
+		"api_key",
+		"label",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varCreateAPIKeyData := _CreateAPIKeyData{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varCreateAPIKeyData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreateAPIKeyData(varCreateAPIKeyData)
+
+	return err
 }
 
 type NullableCreateAPIKeyData struct {

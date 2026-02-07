@@ -4,15 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**KeyId** | Pointer to **string** |  | [optional] 
-**ApiKey** | Pointer to **string** |  | [optional] 
-**Label** | Pointer to **string** |  | [optional] 
+**KeyId** | **string** |  | 
+**ApiKey** | **string** |  | 
+**Label** | **string** |  | 
 
 ## Methods
 
 ### NewCreateAPIKeyData
 
-`func NewCreateAPIKeyData() *CreateAPIKeyData`
+`func NewCreateAPIKeyData(keyId string, apiKey string, label string, ) *CreateAPIKeyData`
 
 NewCreateAPIKeyData instantiates a new CreateAPIKeyData object
 This constructor will assign default values to properties that have it defined,
@@ -46,11 +46,6 @@ and a boolean to check if the value has been set.
 
 SetKeyId sets KeyId field to given value.
 
-### HasKeyId
-
-`func (o *CreateAPIKeyData) HasKeyId() bool`
-
-HasKeyId returns a boolean if a field has been set.
 
 ### GetApiKey
 
@@ -71,11 +66,6 @@ and a boolean to check if the value has been set.
 
 SetApiKey sets ApiKey field to given value.
 
-### HasApiKey
-
-`func (o *CreateAPIKeyData) HasApiKey() bool`
-
-HasApiKey returns a boolean if a field has been set.
 
 ### GetLabel
 
@@ -96,11 +86,6 @@ and a boolean to check if the value has been set.
 
 SetLabel sets Label field to given value.
 
-### HasLabel
-
-`func (o *CreateAPIKeyData) HasLabel() bool`
-
-HasLabel returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -12,6 +12,8 @@ package doraclient
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the PriceLevel type satisfies the MappedNullable interface at compile time
@@ -19,16 +21,20 @@ var _ MappedNullable = &PriceLevel{}
 
 // PriceLevel struct for PriceLevel
 type PriceLevel struct {
-	Price *string `json:"price,omitempty"`
-	Quantity *string `json:"quantity,omitempty"`
+	Price string `json:"price"`
+	Quantity string `json:"quantity"`
 }
+
+type _PriceLevel PriceLevel
 
 // NewPriceLevel instantiates a new PriceLevel object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPriceLevel() *PriceLevel {
+func NewPriceLevel(price string, quantity string) *PriceLevel {
 	this := PriceLevel{}
+	this.Price = price
+	this.Quantity = quantity
 	return &this
 }
 
@@ -40,68 +46,52 @@ func NewPriceLevelWithDefaults() *PriceLevel {
 	return &this
 }
 
-// GetPrice returns the Price field value if set, zero value otherwise.
+// GetPrice returns the Price field value
 func (o *PriceLevel) GetPrice() string {
-	if o == nil || IsNil(o.Price) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Price
+
+	return o.Price
 }
 
-// GetPriceOk returns a tuple with the Price field value if set, nil otherwise
+// GetPriceOk returns a tuple with the Price field value
 // and a boolean to check if the value has been set.
 func (o *PriceLevel) GetPriceOk() (*string, bool) {
-	if o == nil || IsNil(o.Price) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Price, true
+	return &o.Price, true
 }
 
-// HasPrice returns a boolean if a field has been set.
-func (o *PriceLevel) HasPrice() bool {
-	if o != nil && !IsNil(o.Price) {
-		return true
-	}
-
-	return false
-}
-
-// SetPrice gets a reference to the given string and assigns it to the Price field.
+// SetPrice sets field value
 func (o *PriceLevel) SetPrice(v string) {
-	o.Price = &v
+	o.Price = v
 }
 
-// GetQuantity returns the Quantity field value if set, zero value otherwise.
+// GetQuantity returns the Quantity field value
 func (o *PriceLevel) GetQuantity() string {
-	if o == nil || IsNil(o.Quantity) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Quantity
+
+	return o.Quantity
 }
 
-// GetQuantityOk returns a tuple with the Quantity field value if set, nil otherwise
+// GetQuantityOk returns a tuple with the Quantity field value
 // and a boolean to check if the value has been set.
 func (o *PriceLevel) GetQuantityOk() (*string, bool) {
-	if o == nil || IsNil(o.Quantity) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Quantity, true
+	return &o.Quantity, true
 }
 
-// HasQuantity returns a boolean if a field has been set.
-func (o *PriceLevel) HasQuantity() bool {
-	if o != nil && !IsNil(o.Quantity) {
-		return true
-	}
-
-	return false
-}
-
-// SetQuantity gets a reference to the given string and assigns it to the Quantity field.
+// SetQuantity sets field value
 func (o *PriceLevel) SetQuantity(v string) {
-	o.Quantity = &v
+	o.Quantity = v
 }
 
 func (o PriceLevel) MarshalJSON() ([]byte, error) {
@@ -114,13 +104,47 @@ func (o PriceLevel) MarshalJSON() ([]byte, error) {
 
 func (o PriceLevel) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Price) {
-		toSerialize["price"] = o.Price
-	}
-	if !IsNil(o.Quantity) {
-		toSerialize["quantity"] = o.Quantity
-	}
+	toSerialize["price"] = o.Price
+	toSerialize["quantity"] = o.Quantity
 	return toSerialize, nil
+}
+
+func (o *PriceLevel) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"price",
+		"quantity",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varPriceLevel := _PriceLevel{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varPriceLevel)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PriceLevel(varPriceLevel)
+
+	return err
 }
 
 type NullablePriceLevel struct {

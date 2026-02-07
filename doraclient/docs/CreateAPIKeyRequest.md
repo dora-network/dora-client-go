@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Label** | Pointer to **string** |  | [optional] 
+**Label** | **string** |  | 
 **Expires** | Pointer to **time.Time** | Date at which the api-key will expire | [optional] 
 
 ## Methods
 
 ### NewCreateAPIKeyRequest
 
-`func NewCreateAPIKeyRequest() *CreateAPIKeyRequest`
+`func NewCreateAPIKeyRequest(label string, ) *CreateAPIKeyRequest`
 
 NewCreateAPIKeyRequest instantiates a new CreateAPIKeyRequest object
 This constructor will assign default values to properties that have it defined,
@@ -45,11 +45,6 @@ and a boolean to check if the value has been set.
 
 SetLabel sets Label field to given value.
 
-### HasLabel
-
-`func (o *CreateAPIKeyRequest) HasLabel() bool`
-
-HasLabel returns a boolean if a field has been set.
 
 ### GetExpires
 

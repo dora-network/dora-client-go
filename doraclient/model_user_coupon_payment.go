@@ -13,6 +13,8 @@ package doraclient
 import (
 	"encoding/json"
 	"time"
+	"bytes"
+	"fmt"
 )
 
 // checks if the UserCouponPayment type satisfies the MappedNullable interface at compile time
@@ -20,23 +22,34 @@ var _ MappedNullable = &UserCouponPayment{}
 
 // UserCouponPayment struct for UserCouponPayment
 type UserCouponPayment struct {
-	UserId *string `json:"user_id,omitempty"`
-	PositionId *string `json:"position_id,omitempty"`
-	AssetId *string `json:"asset_id,omitempty"`
-	CouponPaymentId *string `json:"coupon_payment_id,omitempty"`
-	Seq *int64 `json:"seq,omitempty"`
-	Pending *string `json:"pending,omitempty"`
-	Completed *string `json:"completed,omitempty"`
-	StartedAt *time.Time `json:"started_at,omitempty"`
-	EndedAt *time.Time `json:"ended_at,omitempty"`
+	UserId string `json:"user_id"`
+	PositionId string `json:"position_id"`
+	AssetId string `json:"asset_id"`
+	CouponPaymentId string `json:"coupon_payment_id"`
+	Seq int64 `json:"seq"`
+	Pending string `json:"pending"`
+	Completed string `json:"completed"`
+	StartedAt time.Time `json:"started_at"`
+	EndedAt time.Time `json:"ended_at"`
 }
+
+type _UserCouponPayment UserCouponPayment
 
 // NewUserCouponPayment instantiates a new UserCouponPayment object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUserCouponPayment() *UserCouponPayment {
+func NewUserCouponPayment(userId string, positionId string, assetId string, couponPaymentId string, seq int64, pending string, completed string, startedAt time.Time, endedAt time.Time) *UserCouponPayment {
 	this := UserCouponPayment{}
+	this.UserId = userId
+	this.PositionId = positionId
+	this.AssetId = assetId
+	this.CouponPaymentId = couponPaymentId
+	this.Seq = seq
+	this.Pending = pending
+	this.Completed = completed
+	this.StartedAt = startedAt
+	this.EndedAt = endedAt
 	return &this
 }
 
@@ -48,292 +61,220 @@ func NewUserCouponPaymentWithDefaults() *UserCouponPayment {
 	return &this
 }
 
-// GetUserId returns the UserId field value if set, zero value otherwise.
+// GetUserId returns the UserId field value
 func (o *UserCouponPayment) GetUserId() string {
-	if o == nil || IsNil(o.UserId) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.UserId
+
+	return o.UserId
 }
 
-// GetUserIdOk returns a tuple with the UserId field value if set, nil otherwise
+// GetUserIdOk returns a tuple with the UserId field value
 // and a boolean to check if the value has been set.
 func (o *UserCouponPayment) GetUserIdOk() (*string, bool) {
-	if o == nil || IsNil(o.UserId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.UserId, true
+	return &o.UserId, true
 }
 
-// HasUserId returns a boolean if a field has been set.
-func (o *UserCouponPayment) HasUserId() bool {
-	if o != nil && !IsNil(o.UserId) {
-		return true
-	}
-
-	return false
-}
-
-// SetUserId gets a reference to the given string and assigns it to the UserId field.
+// SetUserId sets field value
 func (o *UserCouponPayment) SetUserId(v string) {
-	o.UserId = &v
+	o.UserId = v
 }
 
-// GetPositionId returns the PositionId field value if set, zero value otherwise.
+// GetPositionId returns the PositionId field value
 func (o *UserCouponPayment) GetPositionId() string {
-	if o == nil || IsNil(o.PositionId) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.PositionId
+
+	return o.PositionId
 }
 
-// GetPositionIdOk returns a tuple with the PositionId field value if set, nil otherwise
+// GetPositionIdOk returns a tuple with the PositionId field value
 // and a boolean to check if the value has been set.
 func (o *UserCouponPayment) GetPositionIdOk() (*string, bool) {
-	if o == nil || IsNil(o.PositionId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.PositionId, true
+	return &o.PositionId, true
 }
 
-// HasPositionId returns a boolean if a field has been set.
-func (o *UserCouponPayment) HasPositionId() bool {
-	if o != nil && !IsNil(o.PositionId) {
-		return true
-	}
-
-	return false
-}
-
-// SetPositionId gets a reference to the given string and assigns it to the PositionId field.
+// SetPositionId sets field value
 func (o *UserCouponPayment) SetPositionId(v string) {
-	o.PositionId = &v
+	o.PositionId = v
 }
 
-// GetAssetId returns the AssetId field value if set, zero value otherwise.
+// GetAssetId returns the AssetId field value
 func (o *UserCouponPayment) GetAssetId() string {
-	if o == nil || IsNil(o.AssetId) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.AssetId
+
+	return o.AssetId
 }
 
-// GetAssetIdOk returns a tuple with the AssetId field value if set, nil otherwise
+// GetAssetIdOk returns a tuple with the AssetId field value
 // and a boolean to check if the value has been set.
 func (o *UserCouponPayment) GetAssetIdOk() (*string, bool) {
-	if o == nil || IsNil(o.AssetId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.AssetId, true
+	return &o.AssetId, true
 }
 
-// HasAssetId returns a boolean if a field has been set.
-func (o *UserCouponPayment) HasAssetId() bool {
-	if o != nil && !IsNil(o.AssetId) {
-		return true
-	}
-
-	return false
-}
-
-// SetAssetId gets a reference to the given string and assigns it to the AssetId field.
+// SetAssetId sets field value
 func (o *UserCouponPayment) SetAssetId(v string) {
-	o.AssetId = &v
+	o.AssetId = v
 }
 
-// GetCouponPaymentId returns the CouponPaymentId field value if set, zero value otherwise.
+// GetCouponPaymentId returns the CouponPaymentId field value
 func (o *UserCouponPayment) GetCouponPaymentId() string {
-	if o == nil || IsNil(o.CouponPaymentId) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.CouponPaymentId
+
+	return o.CouponPaymentId
 }
 
-// GetCouponPaymentIdOk returns a tuple with the CouponPaymentId field value if set, nil otherwise
+// GetCouponPaymentIdOk returns a tuple with the CouponPaymentId field value
 // and a boolean to check if the value has been set.
 func (o *UserCouponPayment) GetCouponPaymentIdOk() (*string, bool) {
-	if o == nil || IsNil(o.CouponPaymentId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.CouponPaymentId, true
+	return &o.CouponPaymentId, true
 }
 
-// HasCouponPaymentId returns a boolean if a field has been set.
-func (o *UserCouponPayment) HasCouponPaymentId() bool {
-	if o != nil && !IsNil(o.CouponPaymentId) {
-		return true
-	}
-
-	return false
-}
-
-// SetCouponPaymentId gets a reference to the given string and assigns it to the CouponPaymentId field.
+// SetCouponPaymentId sets field value
 func (o *UserCouponPayment) SetCouponPaymentId(v string) {
-	o.CouponPaymentId = &v
+	o.CouponPaymentId = v
 }
 
-// GetSeq returns the Seq field value if set, zero value otherwise.
+// GetSeq returns the Seq field value
 func (o *UserCouponPayment) GetSeq() int64 {
-	if o == nil || IsNil(o.Seq) {
+	if o == nil {
 		var ret int64
 		return ret
 	}
-	return *o.Seq
+
+	return o.Seq
 }
 
-// GetSeqOk returns a tuple with the Seq field value if set, nil otherwise
+// GetSeqOk returns a tuple with the Seq field value
 // and a boolean to check if the value has been set.
 func (o *UserCouponPayment) GetSeqOk() (*int64, bool) {
-	if o == nil || IsNil(o.Seq) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Seq, true
+	return &o.Seq, true
 }
 
-// HasSeq returns a boolean if a field has been set.
-func (o *UserCouponPayment) HasSeq() bool {
-	if o != nil && !IsNil(o.Seq) {
-		return true
-	}
-
-	return false
-}
-
-// SetSeq gets a reference to the given int64 and assigns it to the Seq field.
+// SetSeq sets field value
 func (o *UserCouponPayment) SetSeq(v int64) {
-	o.Seq = &v
+	o.Seq = v
 }
 
-// GetPending returns the Pending field value if set, zero value otherwise.
+// GetPending returns the Pending field value
 func (o *UserCouponPayment) GetPending() string {
-	if o == nil || IsNil(o.Pending) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Pending
+
+	return o.Pending
 }
 
-// GetPendingOk returns a tuple with the Pending field value if set, nil otherwise
+// GetPendingOk returns a tuple with the Pending field value
 // and a boolean to check if the value has been set.
 func (o *UserCouponPayment) GetPendingOk() (*string, bool) {
-	if o == nil || IsNil(o.Pending) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Pending, true
+	return &o.Pending, true
 }
 
-// HasPending returns a boolean if a field has been set.
-func (o *UserCouponPayment) HasPending() bool {
-	if o != nil && !IsNil(o.Pending) {
-		return true
-	}
-
-	return false
-}
-
-// SetPending gets a reference to the given string and assigns it to the Pending field.
+// SetPending sets field value
 func (o *UserCouponPayment) SetPending(v string) {
-	o.Pending = &v
+	o.Pending = v
 }
 
-// GetCompleted returns the Completed field value if set, zero value otherwise.
+// GetCompleted returns the Completed field value
 func (o *UserCouponPayment) GetCompleted() string {
-	if o == nil || IsNil(o.Completed) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Completed
+
+	return o.Completed
 }
 
-// GetCompletedOk returns a tuple with the Completed field value if set, nil otherwise
+// GetCompletedOk returns a tuple with the Completed field value
 // and a boolean to check if the value has been set.
 func (o *UserCouponPayment) GetCompletedOk() (*string, bool) {
-	if o == nil || IsNil(o.Completed) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Completed, true
+	return &o.Completed, true
 }
 
-// HasCompleted returns a boolean if a field has been set.
-func (o *UserCouponPayment) HasCompleted() bool {
-	if o != nil && !IsNil(o.Completed) {
-		return true
-	}
-
-	return false
-}
-
-// SetCompleted gets a reference to the given string and assigns it to the Completed field.
+// SetCompleted sets field value
 func (o *UserCouponPayment) SetCompleted(v string) {
-	o.Completed = &v
+	o.Completed = v
 }
 
-// GetStartedAt returns the StartedAt field value if set, zero value otherwise.
+// GetStartedAt returns the StartedAt field value
 func (o *UserCouponPayment) GetStartedAt() time.Time {
-	if o == nil || IsNil(o.StartedAt) {
+	if o == nil {
 		var ret time.Time
 		return ret
 	}
-	return *o.StartedAt
+
+	return o.StartedAt
 }
 
-// GetStartedAtOk returns a tuple with the StartedAt field value if set, nil otherwise
+// GetStartedAtOk returns a tuple with the StartedAt field value
 // and a boolean to check if the value has been set.
 func (o *UserCouponPayment) GetStartedAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.StartedAt) {
+	if o == nil {
 		return nil, false
 	}
-	return o.StartedAt, true
+	return &o.StartedAt, true
 }
 
-// HasStartedAt returns a boolean if a field has been set.
-func (o *UserCouponPayment) HasStartedAt() bool {
-	if o != nil && !IsNil(o.StartedAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetStartedAt gets a reference to the given time.Time and assigns it to the StartedAt field.
+// SetStartedAt sets field value
 func (o *UserCouponPayment) SetStartedAt(v time.Time) {
-	o.StartedAt = &v
+	o.StartedAt = v
 }
 
-// GetEndedAt returns the EndedAt field value if set, zero value otherwise.
+// GetEndedAt returns the EndedAt field value
 func (o *UserCouponPayment) GetEndedAt() time.Time {
-	if o == nil || IsNil(o.EndedAt) {
+	if o == nil {
 		var ret time.Time
 		return ret
 	}
-	return *o.EndedAt
+
+	return o.EndedAt
 }
 
-// GetEndedAtOk returns a tuple with the EndedAt field value if set, nil otherwise
+// GetEndedAtOk returns a tuple with the EndedAt field value
 // and a boolean to check if the value has been set.
 func (o *UserCouponPayment) GetEndedAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.EndedAt) {
+	if o == nil {
 		return nil, false
 	}
-	return o.EndedAt, true
+	return &o.EndedAt, true
 }
 
-// HasEndedAt returns a boolean if a field has been set.
-func (o *UserCouponPayment) HasEndedAt() bool {
-	if o != nil && !IsNil(o.EndedAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetEndedAt gets a reference to the given time.Time and assigns it to the EndedAt field.
+// SetEndedAt sets field value
 func (o *UserCouponPayment) SetEndedAt(v time.Time) {
-	o.EndedAt = &v
+	o.EndedAt = v
 }
 
 func (o UserCouponPayment) MarshalJSON() ([]byte, error) {
@@ -346,34 +287,61 @@ func (o UserCouponPayment) MarshalJSON() ([]byte, error) {
 
 func (o UserCouponPayment) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.UserId) {
-		toSerialize["user_id"] = o.UserId
-	}
-	if !IsNil(o.PositionId) {
-		toSerialize["position_id"] = o.PositionId
-	}
-	if !IsNil(o.AssetId) {
-		toSerialize["asset_id"] = o.AssetId
-	}
-	if !IsNil(o.CouponPaymentId) {
-		toSerialize["coupon_payment_id"] = o.CouponPaymentId
-	}
-	if !IsNil(o.Seq) {
-		toSerialize["seq"] = o.Seq
-	}
-	if !IsNil(o.Pending) {
-		toSerialize["pending"] = o.Pending
-	}
-	if !IsNil(o.Completed) {
-		toSerialize["completed"] = o.Completed
-	}
-	if !IsNil(o.StartedAt) {
-		toSerialize["started_at"] = o.StartedAt
-	}
-	if !IsNil(o.EndedAt) {
-		toSerialize["ended_at"] = o.EndedAt
-	}
+	toSerialize["user_id"] = o.UserId
+	toSerialize["position_id"] = o.PositionId
+	toSerialize["asset_id"] = o.AssetId
+	toSerialize["coupon_payment_id"] = o.CouponPaymentId
+	toSerialize["seq"] = o.Seq
+	toSerialize["pending"] = o.Pending
+	toSerialize["completed"] = o.Completed
+	toSerialize["started_at"] = o.StartedAt
+	toSerialize["ended_at"] = o.EndedAt
 	return toSerialize, nil
+}
+
+func (o *UserCouponPayment) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"user_id",
+		"position_id",
+		"asset_id",
+		"coupon_payment_id",
+		"seq",
+		"pending",
+		"completed",
+		"started_at",
+		"ended_at",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varUserCouponPayment := _UserCouponPayment{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varUserCouponPayment)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UserCouponPayment(varUserCouponPayment)
+
+	return err
 }
 
 type NullableUserCouponPayment struct {

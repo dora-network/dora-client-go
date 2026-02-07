@@ -12,6 +12,8 @@ package doraclient
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the UnitedPosition type satisfies the MappedNullable interface at compile time
@@ -19,16 +21,19 @@ var _ MappedNullable = &UnitedPosition{}
 
 // UnitedPosition struct for UnitedPosition
 type UnitedPosition struct {
-	GlobalPositionId *string `json:"global_position_id,omitempty"`
+	GlobalPositionId string `json:"global_position_id"`
 	TransactionIds []string `json:"transaction_ids,omitempty"`
 }
+
+type _UnitedPosition UnitedPosition
 
 // NewUnitedPosition instantiates a new UnitedPosition object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUnitedPosition() *UnitedPosition {
+func NewUnitedPosition(globalPositionId string) *UnitedPosition {
 	this := UnitedPosition{}
+	this.GlobalPositionId = globalPositionId
 	return &this
 }
 
@@ -40,36 +45,28 @@ func NewUnitedPositionWithDefaults() *UnitedPosition {
 	return &this
 }
 
-// GetGlobalPositionId returns the GlobalPositionId field value if set, zero value otherwise.
+// GetGlobalPositionId returns the GlobalPositionId field value
 func (o *UnitedPosition) GetGlobalPositionId() string {
-	if o == nil || IsNil(o.GlobalPositionId) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.GlobalPositionId
+
+	return o.GlobalPositionId
 }
 
-// GetGlobalPositionIdOk returns a tuple with the GlobalPositionId field value if set, nil otherwise
+// GetGlobalPositionIdOk returns a tuple with the GlobalPositionId field value
 // and a boolean to check if the value has been set.
 func (o *UnitedPosition) GetGlobalPositionIdOk() (*string, bool) {
-	if o == nil || IsNil(o.GlobalPositionId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.GlobalPositionId, true
+	return &o.GlobalPositionId, true
 }
 
-// HasGlobalPositionId returns a boolean if a field has been set.
-func (o *UnitedPosition) HasGlobalPositionId() bool {
-	if o != nil && !IsNil(o.GlobalPositionId) {
-		return true
-	}
-
-	return false
-}
-
-// SetGlobalPositionId gets a reference to the given string and assigns it to the GlobalPositionId field.
+// SetGlobalPositionId sets field value
 func (o *UnitedPosition) SetGlobalPositionId(v string) {
-	o.GlobalPositionId = &v
+	o.GlobalPositionId = v
 }
 
 // GetTransactionIds returns the TransactionIds field value if set, zero value otherwise.
@@ -114,13 +111,48 @@ func (o UnitedPosition) MarshalJSON() ([]byte, error) {
 
 func (o UnitedPosition) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.GlobalPositionId) {
-		toSerialize["global_position_id"] = o.GlobalPositionId
-	}
+	toSerialize["global_position_id"] = o.GlobalPositionId
 	if !IsNil(o.TransactionIds) {
 		toSerialize["transaction_ids"] = o.TransactionIds
 	}
 	return toSerialize, nil
+}
+
+func (o *UnitedPosition) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"global_position_id",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varUnitedPosition := _UnitedPosition{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varUnitedPosition)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UnitedPosition(varUnitedPosition)
+
+	return err
 }
 
 type NullableUnitedPosition struct {

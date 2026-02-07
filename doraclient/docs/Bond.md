@@ -4,25 +4,25 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | Pointer to **string** |  | [optional] 
-**Kind** | Pointer to [**BondKind**](BondKind.md) |  | [optional] 
+**Id** | **string** |  | 
+**Kind** | [**BondKind**](BondKind.md) |  | 
 **CouponStartAt** | Pointer to **time.Time** |  | [optional] 
-**CreatedAt** | Pointer to **time.Time** |  | [optional] 
+**CreatedAt** | **time.Time** |  | 
 **FinalCouponAt** | Pointer to **time.Time** |  | [optional] 
-**Isin** | Pointer to **string** |  | [optional] 
-**IssuedAt** | Pointer to **time.Time** |  | [optional] 
-**Issuer** | Pointer to **string** |  | [optional] 
-**MaturityAt** | Pointer to **time.Time** |  | [optional] 
-**PrincipalValue** | Pointer to **string** |  | [optional] 
-**PaymentsPerYear** | Pointer to **int32** |  | [optional] 
-**PaymentsEvery** | Pointer to **int32** | Coupon payment frequency in nanoseconds (minimum 1000 i.e. 1 microsecond) | [optional] 
+**Isin** | **string** |  | 
+**IssuedAt** | **time.Time** |  | 
+**Issuer** | **string** |  | 
+**MaturityAt** | **time.Time** |  | 
+**PrincipalValue** | **float64** |  | 
+**PaymentsPerYear** | **int32** |  | 
+**PaymentsEvery** | **int32** | Coupon payment frequency in nanoseconds (minimum 1000 i.e. 1 microsecond) | 
 **NextCouponPayment** | Pointer to **time.Time** |  | [optional] 
 
 ## Methods
 
 ### NewBond
 
-`func NewBond() *Bond`
+`func NewBond(id string, kind BondKind, createdAt time.Time, isin string, issuedAt time.Time, issuer string, maturityAt time.Time, principalValue float64, paymentsPerYear int32, paymentsEvery int32, ) *Bond`
 
 NewBond instantiates a new Bond object
 This constructor will assign default values to properties that have it defined,
@@ -56,11 +56,6 @@ and a boolean to check if the value has been set.
 
 SetId sets Id field to given value.
 
-### HasId
-
-`func (o *Bond) HasId() bool`
-
-HasId returns a boolean if a field has been set.
 
 ### GetKind
 
@@ -81,11 +76,6 @@ and a boolean to check if the value has been set.
 
 SetKind sets Kind field to given value.
 
-### HasKind
-
-`func (o *Bond) HasKind() bool`
-
-HasKind returns a boolean if a field has been set.
 
 ### GetCouponStartAt
 
@@ -131,11 +121,6 @@ and a boolean to check if the value has been set.
 
 SetCreatedAt sets CreatedAt field to given value.
 
-### HasCreatedAt
-
-`func (o *Bond) HasCreatedAt() bool`
-
-HasCreatedAt returns a boolean if a field has been set.
 
 ### GetFinalCouponAt
 
@@ -181,11 +166,6 @@ and a boolean to check if the value has been set.
 
 SetIsin sets Isin field to given value.
 
-### HasIsin
-
-`func (o *Bond) HasIsin() bool`
-
-HasIsin returns a boolean if a field has been set.
 
 ### GetIssuedAt
 
@@ -206,11 +186,6 @@ and a boolean to check if the value has been set.
 
 SetIssuedAt sets IssuedAt field to given value.
 
-### HasIssuedAt
-
-`func (o *Bond) HasIssuedAt() bool`
-
-HasIssuedAt returns a boolean if a field has been set.
 
 ### GetIssuer
 
@@ -231,11 +206,6 @@ and a boolean to check if the value has been set.
 
 SetIssuer sets Issuer field to given value.
 
-### HasIssuer
-
-`func (o *Bond) HasIssuer() bool`
-
-HasIssuer returns a boolean if a field has been set.
 
 ### GetMaturityAt
 
@@ -256,36 +226,26 @@ and a boolean to check if the value has been set.
 
 SetMaturityAt sets MaturityAt field to given value.
 
-### HasMaturityAt
-
-`func (o *Bond) HasMaturityAt() bool`
-
-HasMaturityAt returns a boolean if a field has been set.
 
 ### GetPrincipalValue
 
-`func (o *Bond) GetPrincipalValue() string`
+`func (o *Bond) GetPrincipalValue() float64`
 
 GetPrincipalValue returns the PrincipalValue field if non-nil, zero value otherwise.
 
 ### GetPrincipalValueOk
 
-`func (o *Bond) GetPrincipalValueOk() (*string, bool)`
+`func (o *Bond) GetPrincipalValueOk() (*float64, bool)`
 
 GetPrincipalValueOk returns a tuple with the PrincipalValue field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPrincipalValue
 
-`func (o *Bond) SetPrincipalValue(v string)`
+`func (o *Bond) SetPrincipalValue(v float64)`
 
 SetPrincipalValue sets PrincipalValue field to given value.
 
-### HasPrincipalValue
-
-`func (o *Bond) HasPrincipalValue() bool`
-
-HasPrincipalValue returns a boolean if a field has been set.
 
 ### GetPaymentsPerYear
 
@@ -306,11 +266,6 @@ and a boolean to check if the value has been set.
 
 SetPaymentsPerYear sets PaymentsPerYear field to given value.
 
-### HasPaymentsPerYear
-
-`func (o *Bond) HasPaymentsPerYear() bool`
-
-HasPaymentsPerYear returns a boolean if a field has been set.
 
 ### GetPaymentsEvery
 
@@ -331,11 +286,6 @@ and a boolean to check if the value has been set.
 
 SetPaymentsEvery sets PaymentsEvery field to given value.
 
-### HasPaymentsEvery
-
-`func (o *Bond) HasPaymentsEvery() bool`
-
-HasPaymentsEvery returns a boolean if a field has been set.
 
 ### GetNextCouponPayment
 

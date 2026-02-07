@@ -12,6 +12,8 @@ package doraclient
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the PositionAccount type satisfies the MappedNullable interface at compile time
@@ -20,19 +22,24 @@ var _ MappedNullable = &PositionAccount{}
 // PositionAccount struct for PositionAccount
 type PositionAccount struct {
 	// The ID of the position account
-	PositionId *string `json:"position_id,omitempty"`
+	PositionId string `json:"position_id"`
 	// The name of the position account
-	PositionName *string `json:"position_name,omitempty"`
+	PositionName string `json:"position_name"`
 	// Whether the position account is the global or an isolated account
-	IsGlobal *bool `json:"is_global,omitempty"`
+	IsGlobal bool `json:"is_global"`
 }
+
+type _PositionAccount PositionAccount
 
 // NewPositionAccount instantiates a new PositionAccount object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPositionAccount() *PositionAccount {
+func NewPositionAccount(positionId string, positionName string, isGlobal bool) *PositionAccount {
 	this := PositionAccount{}
+	this.PositionId = positionId
+	this.PositionName = positionName
+	this.IsGlobal = isGlobal
 	return &this
 }
 
@@ -44,100 +51,76 @@ func NewPositionAccountWithDefaults() *PositionAccount {
 	return &this
 }
 
-// GetPositionId returns the PositionId field value if set, zero value otherwise.
+// GetPositionId returns the PositionId field value
 func (o *PositionAccount) GetPositionId() string {
-	if o == nil || IsNil(o.PositionId) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.PositionId
+
+	return o.PositionId
 }
 
-// GetPositionIdOk returns a tuple with the PositionId field value if set, nil otherwise
+// GetPositionIdOk returns a tuple with the PositionId field value
 // and a boolean to check if the value has been set.
 func (o *PositionAccount) GetPositionIdOk() (*string, bool) {
-	if o == nil || IsNil(o.PositionId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.PositionId, true
+	return &o.PositionId, true
 }
 
-// HasPositionId returns a boolean if a field has been set.
-func (o *PositionAccount) HasPositionId() bool {
-	if o != nil && !IsNil(o.PositionId) {
-		return true
-	}
-
-	return false
-}
-
-// SetPositionId gets a reference to the given string and assigns it to the PositionId field.
+// SetPositionId sets field value
 func (o *PositionAccount) SetPositionId(v string) {
-	o.PositionId = &v
+	o.PositionId = v
 }
 
-// GetPositionName returns the PositionName field value if set, zero value otherwise.
+// GetPositionName returns the PositionName field value
 func (o *PositionAccount) GetPositionName() string {
-	if o == nil || IsNil(o.PositionName) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.PositionName
+
+	return o.PositionName
 }
 
-// GetPositionNameOk returns a tuple with the PositionName field value if set, nil otherwise
+// GetPositionNameOk returns a tuple with the PositionName field value
 // and a boolean to check if the value has been set.
 func (o *PositionAccount) GetPositionNameOk() (*string, bool) {
-	if o == nil || IsNil(o.PositionName) {
+	if o == nil {
 		return nil, false
 	}
-	return o.PositionName, true
+	return &o.PositionName, true
 }
 
-// HasPositionName returns a boolean if a field has been set.
-func (o *PositionAccount) HasPositionName() bool {
-	if o != nil && !IsNil(o.PositionName) {
-		return true
-	}
-
-	return false
-}
-
-// SetPositionName gets a reference to the given string and assigns it to the PositionName field.
+// SetPositionName sets field value
 func (o *PositionAccount) SetPositionName(v string) {
-	o.PositionName = &v
+	o.PositionName = v
 }
 
-// GetIsGlobal returns the IsGlobal field value if set, zero value otherwise.
+// GetIsGlobal returns the IsGlobal field value
 func (o *PositionAccount) GetIsGlobal() bool {
-	if o == nil || IsNil(o.IsGlobal) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.IsGlobal
+
+	return o.IsGlobal
 }
 
-// GetIsGlobalOk returns a tuple with the IsGlobal field value if set, nil otherwise
+// GetIsGlobalOk returns a tuple with the IsGlobal field value
 // and a boolean to check if the value has been set.
 func (o *PositionAccount) GetIsGlobalOk() (*bool, bool) {
-	if o == nil || IsNil(o.IsGlobal) {
+	if o == nil {
 		return nil, false
 	}
-	return o.IsGlobal, true
+	return &o.IsGlobal, true
 }
 
-// HasIsGlobal returns a boolean if a field has been set.
-func (o *PositionAccount) HasIsGlobal() bool {
-	if o != nil && !IsNil(o.IsGlobal) {
-		return true
-	}
-
-	return false
-}
-
-// SetIsGlobal gets a reference to the given bool and assigns it to the IsGlobal field.
+// SetIsGlobal sets field value
 func (o *PositionAccount) SetIsGlobal(v bool) {
-	o.IsGlobal = &v
+	o.IsGlobal = v
 }
 
 func (o PositionAccount) MarshalJSON() ([]byte, error) {
@@ -150,16 +133,49 @@ func (o PositionAccount) MarshalJSON() ([]byte, error) {
 
 func (o PositionAccount) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.PositionId) {
-		toSerialize["position_id"] = o.PositionId
-	}
-	if !IsNil(o.PositionName) {
-		toSerialize["position_name"] = o.PositionName
-	}
-	if !IsNil(o.IsGlobal) {
-		toSerialize["is_global"] = o.IsGlobal
-	}
+	toSerialize["position_id"] = o.PositionId
+	toSerialize["position_name"] = o.PositionName
+	toSerialize["is_global"] = o.IsGlobal
 	return toSerialize, nil
+}
+
+func (o *PositionAccount) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"position_id",
+		"position_name",
+		"is_global",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varPositionAccount := _PositionAccount{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varPositionAccount)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PositionAccount(varPositionAccount)
+
+	return err
 }
 
 type NullablePositionAccount struct {

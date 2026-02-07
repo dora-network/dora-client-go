@@ -13,6 +13,8 @@ package doraclient
 import (
 	"encoding/json"
 	"time"
+	"bytes"
+	"fmt"
 )
 
 // checks if the User type satisfies the MappedNullable interface at compile time
@@ -20,31 +22,40 @@ var _ MappedNullable = &User{}
 
 // User struct for User
 type User struct {
-	Id *string `json:"id,omitempty"`
+	Id string `json:"id"`
 	ClosedAt *time.Time `json:"closed_at,omitempty"`
 	DisabledAt *time.Time `json:"disabled_at,omitempty"`
-	Email *string `json:"email,omitempty"`
-	Name *string `json:"name,omitempty"`
-	NativeAssetId *string `json:"native_asset_id,omitempty"`
+	Email string `json:"email"`
+	Name string `json:"name"`
+	NativeAssetId string `json:"native_asset_id"`
 	PhotoUrl *string `json:"photo_url,omitempty"`
 	Provider *string `json:"provider,omitempty"`
 	ProviderId *string `json:"provider_id,omitempty"`
-	Roles []UserRole `json:"roles,omitempty"`
+	Roles []UserRole `json:"roles"`
 	// User's timezone, e.g., 'America/New_York', or an offset.
 	Timezone *string `json:"timezone,omitempty"`
 	// timezone offset in seconds
 	TimezoneOffset *int32 `json:"timezone_offset,omitempty"`
 	VerifiedAt *time.Time `json:"verified_at,omitempty"`
-	ShowTutorialCards *bool `json:"show_tutorial_cards,omitempty"`
-	NotificationsEnabled *bool `json:"notifications_enabled,omitempty"`
+	ShowTutorialCards bool `json:"show_tutorial_cards"`
+	NotificationsEnabled bool `json:"notifications_enabled"`
 }
+
+type _User User
 
 // NewUser instantiates a new User object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUser() *User {
+func NewUser(id string, email string, name string, nativeAssetId string, roles []UserRole, showTutorialCards bool, notificationsEnabled bool) *User {
 	this := User{}
+	this.Id = id
+	this.Email = email
+	this.Name = name
+	this.NativeAssetId = nativeAssetId
+	this.Roles = roles
+	this.ShowTutorialCards = showTutorialCards
+	this.NotificationsEnabled = notificationsEnabled
 	return &this
 }
 
@@ -56,36 +67,28 @@ func NewUserWithDefaults() *User {
 	return &this
 }
 
-// GetId returns the Id field value if set, zero value otherwise.
+// GetId returns the Id field value
 func (o *User) GetId() string {
-	if o == nil || IsNil(o.Id) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Id
+
+	return o.Id
 }
 
-// GetIdOk returns a tuple with the Id field value if set, nil otherwise
+// GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
 func (o *User) GetIdOk() (*string, bool) {
-	if o == nil || IsNil(o.Id) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Id, true
+	return &o.Id, true
 }
 
-// HasId returns a boolean if a field has been set.
-func (o *User) HasId() bool {
-	if o != nil && !IsNil(o.Id) {
-		return true
-	}
-
-	return false
-}
-
-// SetId gets a reference to the given string and assigns it to the Id field.
+// SetId sets field value
 func (o *User) SetId(v string) {
-	o.Id = &v
+	o.Id = v
 }
 
 // GetClosedAt returns the ClosedAt field value if set, zero value otherwise.
@@ -152,100 +155,76 @@ func (o *User) SetDisabledAt(v time.Time) {
 	o.DisabledAt = &v
 }
 
-// GetEmail returns the Email field value if set, zero value otherwise.
+// GetEmail returns the Email field value
 func (o *User) GetEmail() string {
-	if o == nil || IsNil(o.Email) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Email
+
+	return o.Email
 }
 
-// GetEmailOk returns a tuple with the Email field value if set, nil otherwise
+// GetEmailOk returns a tuple with the Email field value
 // and a boolean to check if the value has been set.
 func (o *User) GetEmailOk() (*string, bool) {
-	if o == nil || IsNil(o.Email) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Email, true
+	return &o.Email, true
 }
 
-// HasEmail returns a boolean if a field has been set.
-func (o *User) HasEmail() bool {
-	if o != nil && !IsNil(o.Email) {
-		return true
-	}
-
-	return false
-}
-
-// SetEmail gets a reference to the given string and assigns it to the Email field.
+// SetEmail sets field value
 func (o *User) SetEmail(v string) {
-	o.Email = &v
+	o.Email = v
 }
 
-// GetName returns the Name field value if set, zero value otherwise.
+// GetName returns the Name field value
 func (o *User) GetName() string {
-	if o == nil || IsNil(o.Name) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Name
+
+	return o.Name
 }
 
-// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
 func (o *User) GetNameOk() (*string, bool) {
-	if o == nil || IsNil(o.Name) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Name, true
+	return &o.Name, true
 }
 
-// HasName returns a boolean if a field has been set.
-func (o *User) HasName() bool {
-	if o != nil && !IsNil(o.Name) {
-		return true
-	}
-
-	return false
-}
-
-// SetName gets a reference to the given string and assigns it to the Name field.
+// SetName sets field value
 func (o *User) SetName(v string) {
-	o.Name = &v
+	o.Name = v
 }
 
-// GetNativeAssetId returns the NativeAssetId field value if set, zero value otherwise.
+// GetNativeAssetId returns the NativeAssetId field value
 func (o *User) GetNativeAssetId() string {
-	if o == nil || IsNil(o.NativeAssetId) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.NativeAssetId
+
+	return o.NativeAssetId
 }
 
-// GetNativeAssetIdOk returns a tuple with the NativeAssetId field value if set, nil otherwise
+// GetNativeAssetIdOk returns a tuple with the NativeAssetId field value
 // and a boolean to check if the value has been set.
 func (o *User) GetNativeAssetIdOk() (*string, bool) {
-	if o == nil || IsNil(o.NativeAssetId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.NativeAssetId, true
+	return &o.NativeAssetId, true
 }
 
-// HasNativeAssetId returns a boolean if a field has been set.
-func (o *User) HasNativeAssetId() bool {
-	if o != nil && !IsNil(o.NativeAssetId) {
-		return true
-	}
-
-	return false
-}
-
-// SetNativeAssetId gets a reference to the given string and assigns it to the NativeAssetId field.
+// SetNativeAssetId sets field value
 func (o *User) SetNativeAssetId(v string) {
-	o.NativeAssetId = &v
+	o.NativeAssetId = v
 }
 
 // GetPhotoUrl returns the PhotoUrl field value if set, zero value otherwise.
@@ -344,34 +323,26 @@ func (o *User) SetProviderId(v string) {
 	o.ProviderId = &v
 }
 
-// GetRoles returns the Roles field value if set, zero value otherwise.
+// GetRoles returns the Roles field value
 func (o *User) GetRoles() []UserRole {
-	if o == nil || IsNil(o.Roles) {
+	if o == nil {
 		var ret []UserRole
 		return ret
 	}
+
 	return o.Roles
 }
 
-// GetRolesOk returns a tuple with the Roles field value if set, nil otherwise
+// GetRolesOk returns a tuple with the Roles field value
 // and a boolean to check if the value has been set.
 func (o *User) GetRolesOk() ([]UserRole, bool) {
-	if o == nil || IsNil(o.Roles) {
+	if o == nil {
 		return nil, false
 	}
 	return o.Roles, true
 }
 
-// HasRoles returns a boolean if a field has been set.
-func (o *User) HasRoles() bool {
-	if o != nil && !IsNil(o.Roles) {
-		return true
-	}
-
-	return false
-}
-
-// SetRoles gets a reference to the given []UserRole and assigns it to the Roles field.
+// SetRoles sets field value
 func (o *User) SetRoles(v []UserRole) {
 	o.Roles = v
 }
@@ -472,68 +443,52 @@ func (o *User) SetVerifiedAt(v time.Time) {
 	o.VerifiedAt = &v
 }
 
-// GetShowTutorialCards returns the ShowTutorialCards field value if set, zero value otherwise.
+// GetShowTutorialCards returns the ShowTutorialCards field value
 func (o *User) GetShowTutorialCards() bool {
-	if o == nil || IsNil(o.ShowTutorialCards) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.ShowTutorialCards
+
+	return o.ShowTutorialCards
 }
 
-// GetShowTutorialCardsOk returns a tuple with the ShowTutorialCards field value if set, nil otherwise
+// GetShowTutorialCardsOk returns a tuple with the ShowTutorialCards field value
 // and a boolean to check if the value has been set.
 func (o *User) GetShowTutorialCardsOk() (*bool, bool) {
-	if o == nil || IsNil(o.ShowTutorialCards) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ShowTutorialCards, true
+	return &o.ShowTutorialCards, true
 }
 
-// HasShowTutorialCards returns a boolean if a field has been set.
-func (o *User) HasShowTutorialCards() bool {
-	if o != nil && !IsNil(o.ShowTutorialCards) {
-		return true
-	}
-
-	return false
-}
-
-// SetShowTutorialCards gets a reference to the given bool and assigns it to the ShowTutorialCards field.
+// SetShowTutorialCards sets field value
 func (o *User) SetShowTutorialCards(v bool) {
-	o.ShowTutorialCards = &v
+	o.ShowTutorialCards = v
 }
 
-// GetNotificationsEnabled returns the NotificationsEnabled field value if set, zero value otherwise.
+// GetNotificationsEnabled returns the NotificationsEnabled field value
 func (o *User) GetNotificationsEnabled() bool {
-	if o == nil || IsNil(o.NotificationsEnabled) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.NotificationsEnabled
+
+	return o.NotificationsEnabled
 }
 
-// GetNotificationsEnabledOk returns a tuple with the NotificationsEnabled field value if set, nil otherwise
+// GetNotificationsEnabledOk returns a tuple with the NotificationsEnabled field value
 // and a boolean to check if the value has been set.
 func (o *User) GetNotificationsEnabledOk() (*bool, bool) {
-	if o == nil || IsNil(o.NotificationsEnabled) {
+	if o == nil {
 		return nil, false
 	}
-	return o.NotificationsEnabled, true
+	return &o.NotificationsEnabled, true
 }
 
-// HasNotificationsEnabled returns a boolean if a field has been set.
-func (o *User) HasNotificationsEnabled() bool {
-	if o != nil && !IsNil(o.NotificationsEnabled) {
-		return true
-	}
-
-	return false
-}
-
-// SetNotificationsEnabled gets a reference to the given bool and assigns it to the NotificationsEnabled field.
+// SetNotificationsEnabled sets field value
 func (o *User) SetNotificationsEnabled(v bool) {
-	o.NotificationsEnabled = &v
+	o.NotificationsEnabled = v
 }
 
 func (o User) MarshalJSON() ([]byte, error) {
@@ -546,24 +501,16 @@ func (o User) MarshalJSON() ([]byte, error) {
 
 func (o User) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Id) {
-		toSerialize["id"] = o.Id
-	}
+	toSerialize["id"] = o.Id
 	if !IsNil(o.ClosedAt) {
 		toSerialize["closed_at"] = o.ClosedAt
 	}
 	if !IsNil(o.DisabledAt) {
 		toSerialize["disabled_at"] = o.DisabledAt
 	}
-	if !IsNil(o.Email) {
-		toSerialize["email"] = o.Email
-	}
-	if !IsNil(o.Name) {
-		toSerialize["name"] = o.Name
-	}
-	if !IsNil(o.NativeAssetId) {
-		toSerialize["native_asset_id"] = o.NativeAssetId
-	}
+	toSerialize["email"] = o.Email
+	toSerialize["name"] = o.Name
+	toSerialize["native_asset_id"] = o.NativeAssetId
 	if !IsNil(o.PhotoUrl) {
 		toSerialize["photo_url"] = o.PhotoUrl
 	}
@@ -573,9 +520,7 @@ func (o User) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ProviderId) {
 		toSerialize["provider_id"] = o.ProviderId
 	}
-	if !IsNil(o.Roles) {
-		toSerialize["roles"] = o.Roles
-	}
+	toSerialize["roles"] = o.Roles
 	if !IsNil(o.Timezone) {
 		toSerialize["timezone"] = o.Timezone
 	}
@@ -585,13 +530,52 @@ func (o User) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.VerifiedAt) {
 		toSerialize["verified_at"] = o.VerifiedAt
 	}
-	if !IsNil(o.ShowTutorialCards) {
-		toSerialize["show_tutorial_cards"] = o.ShowTutorialCards
-	}
-	if !IsNil(o.NotificationsEnabled) {
-		toSerialize["notifications_enabled"] = o.NotificationsEnabled
-	}
+	toSerialize["show_tutorial_cards"] = o.ShowTutorialCards
+	toSerialize["notifications_enabled"] = o.NotificationsEnabled
 	return toSerialize, nil
+}
+
+func (o *User) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"id",
+		"email",
+		"name",
+		"native_asset_id",
+		"roles",
+		"show_tutorial_cards",
+		"notifications_enabled",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varUser := _User{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varUser)
+
+	if err != nil {
+		return err
+	}
+
+	*o = User(varUser)
+
+	return err
 }
 
 type NullableUser struct {

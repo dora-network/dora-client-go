@@ -4,25 +4,19 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Available** | Pointer to **map[string]string** |  | [optional] 
-**Locked** | Pointer to **map[string]string** |  | [optional] 
-**Borrowed** | Pointer to **map[string]string** |  | [optional] 
-**Supplied** | Pointer to **map[string]string** |  | [optional] 
-**ImpendingBorrows** | Pointer to **map[string]string** |  | [optional] 
-**BorrowLimit** | Pointer to **map[string]string** |  | [optional] 
-**LiquidationThreshold** | Pointer to **map[string]string** |  | [optional] 
-**NotionalLong** | Pointer to **map[string]string** |  | [optional] 
-**NotionalShort** | Pointer to **map[string]string** |  | [optional] 
-**PortfolioValue** | Pointer to **map[string]string** |  | [optional] 
-**NetLiquidationValue** | Pointer to **map[string]string** |  | [optional] 
-**UnrealizedPnl** | Pointer to **map[string]string** |  | [optional] 
-**RealizedPnl** | Pointer to **map[string]string** |  | [optional] 
+**Available** | **map[string]string** |  | 
+**Locked** | **map[string]string** |  | 
+**Borrowed** | **map[string]string** |  | 
+**Supplied** | **map[string]string** |  | 
+**ImpendingBorrows** | **map[string]string** |  | 
+**BorrowLimit** | **map[string]string** |  | 
+**LiquidationThreshold** | **map[string]string** |  | 
 
 ## Methods
 
 ### NewUserValue
 
-`func NewUserValue() *UserValue`
+`func NewUserValue(available map[string]string, locked map[string]string, borrowed map[string]string, supplied map[string]string, impendingBorrows map[string]string, borrowLimit map[string]string, liquidationThreshold map[string]string, ) *UserValue`
 
 NewUserValue instantiates a new UserValue object
 This constructor will assign default values to properties that have it defined,
@@ -56,11 +50,6 @@ and a boolean to check if the value has been set.
 
 SetAvailable sets Available field to given value.
 
-### HasAvailable
-
-`func (o *UserValue) HasAvailable() bool`
-
-HasAvailable returns a boolean if a field has been set.
 
 ### GetLocked
 
@@ -81,11 +70,6 @@ and a boolean to check if the value has been set.
 
 SetLocked sets Locked field to given value.
 
-### HasLocked
-
-`func (o *UserValue) HasLocked() bool`
-
-HasLocked returns a boolean if a field has been set.
 
 ### GetBorrowed
 
@@ -106,11 +90,6 @@ and a boolean to check if the value has been set.
 
 SetBorrowed sets Borrowed field to given value.
 
-### HasBorrowed
-
-`func (o *UserValue) HasBorrowed() bool`
-
-HasBorrowed returns a boolean if a field has been set.
 
 ### GetSupplied
 
@@ -131,11 +110,6 @@ and a boolean to check if the value has been set.
 
 SetSupplied sets Supplied field to given value.
 
-### HasSupplied
-
-`func (o *UserValue) HasSupplied() bool`
-
-HasSupplied returns a boolean if a field has been set.
 
 ### GetImpendingBorrows
 
@@ -156,11 +130,6 @@ and a boolean to check if the value has been set.
 
 SetImpendingBorrows sets ImpendingBorrows field to given value.
 
-### HasImpendingBorrows
-
-`func (o *UserValue) HasImpendingBorrows() bool`
-
-HasImpendingBorrows returns a boolean if a field has been set.
 
 ### GetBorrowLimit
 
@@ -181,11 +150,6 @@ and a boolean to check if the value has been set.
 
 SetBorrowLimit sets BorrowLimit field to given value.
 
-### HasBorrowLimit
-
-`func (o *UserValue) HasBorrowLimit() bool`
-
-HasBorrowLimit returns a boolean if a field has been set.
 
 ### GetLiquidationThreshold
 
@@ -206,161 +170,6 @@ and a boolean to check if the value has been set.
 
 SetLiquidationThreshold sets LiquidationThreshold field to given value.
 
-### HasLiquidationThreshold
-
-`func (o *UserValue) HasLiquidationThreshold() bool`
-
-HasLiquidationThreshold returns a boolean if a field has been set.
-
-### GetNotionalLong
-
-`func (o *UserValue) GetNotionalLong() map[string]string`
-
-GetNotionalLong returns the NotionalLong field if non-nil, zero value otherwise.
-
-### GetNotionalLongOk
-
-`func (o *UserValue) GetNotionalLongOk() (*map[string]string, bool)`
-
-GetNotionalLongOk returns a tuple with the NotionalLong field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetNotionalLong
-
-`func (o *UserValue) SetNotionalLong(v map[string]string)`
-
-SetNotionalLong sets NotionalLong field to given value.
-
-### HasNotionalLong
-
-`func (o *UserValue) HasNotionalLong() bool`
-
-HasNotionalLong returns a boolean if a field has been set.
-
-### GetNotionalShort
-
-`func (o *UserValue) GetNotionalShort() map[string]string`
-
-GetNotionalShort returns the NotionalShort field if non-nil, zero value otherwise.
-
-### GetNotionalShortOk
-
-`func (o *UserValue) GetNotionalShortOk() (*map[string]string, bool)`
-
-GetNotionalShortOk returns a tuple with the NotionalShort field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetNotionalShort
-
-`func (o *UserValue) SetNotionalShort(v map[string]string)`
-
-SetNotionalShort sets NotionalShort field to given value.
-
-### HasNotionalShort
-
-`func (o *UserValue) HasNotionalShort() bool`
-
-HasNotionalShort returns a boolean if a field has been set.
-
-### GetPortfolioValue
-
-`func (o *UserValue) GetPortfolioValue() map[string]string`
-
-GetPortfolioValue returns the PortfolioValue field if non-nil, zero value otherwise.
-
-### GetPortfolioValueOk
-
-`func (o *UserValue) GetPortfolioValueOk() (*map[string]string, bool)`
-
-GetPortfolioValueOk returns a tuple with the PortfolioValue field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetPortfolioValue
-
-`func (o *UserValue) SetPortfolioValue(v map[string]string)`
-
-SetPortfolioValue sets PortfolioValue field to given value.
-
-### HasPortfolioValue
-
-`func (o *UserValue) HasPortfolioValue() bool`
-
-HasPortfolioValue returns a boolean if a field has been set.
-
-### GetNetLiquidationValue
-
-`func (o *UserValue) GetNetLiquidationValue() map[string]string`
-
-GetNetLiquidationValue returns the NetLiquidationValue field if non-nil, zero value otherwise.
-
-### GetNetLiquidationValueOk
-
-`func (o *UserValue) GetNetLiquidationValueOk() (*map[string]string, bool)`
-
-GetNetLiquidationValueOk returns a tuple with the NetLiquidationValue field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetNetLiquidationValue
-
-`func (o *UserValue) SetNetLiquidationValue(v map[string]string)`
-
-SetNetLiquidationValue sets NetLiquidationValue field to given value.
-
-### HasNetLiquidationValue
-
-`func (o *UserValue) HasNetLiquidationValue() bool`
-
-HasNetLiquidationValue returns a boolean if a field has been set.
-
-### GetUnrealizedPnl
-
-`func (o *UserValue) GetUnrealizedPnl() map[string]string`
-
-GetUnrealizedPnl returns the UnrealizedPnl field if non-nil, zero value otherwise.
-
-### GetUnrealizedPnlOk
-
-`func (o *UserValue) GetUnrealizedPnlOk() (*map[string]string, bool)`
-
-GetUnrealizedPnlOk returns a tuple with the UnrealizedPnl field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetUnrealizedPnl
-
-`func (o *UserValue) SetUnrealizedPnl(v map[string]string)`
-
-SetUnrealizedPnl sets UnrealizedPnl field to given value.
-
-### HasUnrealizedPnl
-
-`func (o *UserValue) HasUnrealizedPnl() bool`
-
-HasUnrealizedPnl returns a boolean if a field has been set.
-
-### GetRealizedPnl
-
-`func (o *UserValue) GetRealizedPnl() map[string]string`
-
-GetRealizedPnl returns the RealizedPnl field if non-nil, zero value otherwise.
-
-### GetRealizedPnlOk
-
-`func (o *UserValue) GetRealizedPnlOk() (*map[string]string, bool)`
-
-GetRealizedPnlOk returns a tuple with the RealizedPnl field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetRealizedPnl
-
-`func (o *UserValue) SetRealizedPnl(v map[string]string)`
-
-SetRealizedPnl sets RealizedPnl field to given value.
-
-### HasRealizedPnl
-
-`func (o *UserValue) HasRealizedPnl() bool`
-
-HasRealizedPnl returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

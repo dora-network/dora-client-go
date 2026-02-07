@@ -39,6 +39,8 @@ type ValidateSubmitOrderRequest struct {
 	BaseAssetId *string `json:"base_asset_id,omitempty"`
 	// quote asset of orderbook
 	QuoteAssetId *string `json:"quote_asset_id,omitempty"`
+	// An optional client-provided identifier for the order.
+	ClientOrderId *string `json:"client_order_id,omitempty"`
 	// Full list of assets in the position with their price and collateral weight, required when inverse_leverage < 1 for leverage health checks
 	PositionAssets []PositionAsset `json:"position_assets,omitempty"`
 	// Configuration for the assets in the order
@@ -342,6 +344,38 @@ func (o *ValidateSubmitOrderRequest) SetQuoteAssetId(v string) {
 	o.QuoteAssetId = &v
 }
 
+// GetClientOrderId returns the ClientOrderId field value if set, zero value otherwise.
+func (o *ValidateSubmitOrderRequest) GetClientOrderId() string {
+	if o == nil || IsNil(o.ClientOrderId) {
+		var ret string
+		return ret
+	}
+	return *o.ClientOrderId
+}
+
+// GetClientOrderIdOk returns a tuple with the ClientOrderId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ValidateSubmitOrderRequest) GetClientOrderIdOk() (*string, bool) {
+	if o == nil || IsNil(o.ClientOrderId) {
+		return nil, false
+	}
+	return o.ClientOrderId, true
+}
+
+// HasClientOrderId returns a boolean if a field has been set.
+func (o *ValidateSubmitOrderRequest) HasClientOrderId() bool {
+	if o != nil && !IsNil(o.ClientOrderId) {
+		return true
+	}
+
+	return false
+}
+
+// SetClientOrderId gets a reference to the given string and assigns it to the ClientOrderId field.
+func (o *ValidateSubmitOrderRequest) SetClientOrderId(v string) {
+	o.ClientOrderId = &v
+}
+
 // GetPositionAssets returns the PositionAssets field value if set, zero value otherwise.
 func (o *ValidateSubmitOrderRequest) GetPositionAssets() []PositionAsset {
 	if o == nil || IsNil(o.PositionAssets) {
@@ -433,6 +467,9 @@ func (o ValidateSubmitOrderRequest) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.QuoteAssetId) {
 		toSerialize["quote_asset_id"] = o.QuoteAssetId
+	}
+	if !IsNil(o.ClientOrderId) {
+		toSerialize["client_order_id"] = o.ClientOrderId
 	}
 	if !IsNil(o.PositionAssets) {
 		toSerialize["position_assets"] = o.PositionAssets

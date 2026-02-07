@@ -4,17 +4,17 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**UserId** | Pointer to **string** |  | [optional] 
-**KeyId** | Pointer to **string** |  | [optional] 
-**Label** | Pointer to **string** |  | [optional] 
+**UserId** | **string** |  | 
+**KeyId** | **string** |  | 
+**Label** | **string** |  | 
 **ExpiresAt** | Pointer to **time.Time** |  | [optional] 
-**IsActive** | Pointer to **bool** |  | [optional] 
+**IsActive** | **bool** |  | 
 
 ## Methods
 
 ### NewAPIKeyResponse
 
-`func NewAPIKeyResponse() *APIKeyResponse`
+`func NewAPIKeyResponse(userId string, keyId string, label string, isActive bool, ) *APIKeyResponse`
 
 NewAPIKeyResponse instantiates a new APIKeyResponse object
 This constructor will assign default values to properties that have it defined,
@@ -48,11 +48,6 @@ and a boolean to check if the value has been set.
 
 SetUserId sets UserId field to given value.
 
-### HasUserId
-
-`func (o *APIKeyResponse) HasUserId() bool`
-
-HasUserId returns a boolean if a field has been set.
 
 ### GetKeyId
 
@@ -73,11 +68,6 @@ and a boolean to check if the value has been set.
 
 SetKeyId sets KeyId field to given value.
 
-### HasKeyId
-
-`func (o *APIKeyResponse) HasKeyId() bool`
-
-HasKeyId returns a boolean if a field has been set.
 
 ### GetLabel
 
@@ -98,11 +88,6 @@ and a boolean to check if the value has been set.
 
 SetLabel sets Label field to given value.
 
-### HasLabel
-
-`func (o *APIKeyResponse) HasLabel() bool`
-
-HasLabel returns a boolean if a field has been set.
 
 ### GetExpiresAt
 
@@ -148,11 +133,6 @@ and a boolean to check if the value has been set.
 
 SetIsActive sets IsActive field to given value.
 
-### HasIsActive
-
-`func (o *APIKeyResponse) HasIsActive() bool`
-
-HasIsActive returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

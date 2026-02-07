@@ -4,16 +4,16 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**UserId** | Pointer to **string** |  | [optional] 
-**KeyId** | Pointer to **string** |  | [optional] 
-**Label** | Pointer to **string** |  | [optional] 
-**IsActive** | Pointer to **bool** |  | [optional] 
+**UserId** | **string** |  | 
+**KeyId** | **string** |  | 
+**Label** | **string** |  | 
+**IsActive** | **bool** |  | 
 
 ## Methods
 
 ### NewRevokeAPIKeyData
 
-`func NewRevokeAPIKeyData() *RevokeAPIKeyData`
+`func NewRevokeAPIKeyData(userId string, keyId string, label string, isActive bool, ) *RevokeAPIKeyData`
 
 NewRevokeAPIKeyData instantiates a new RevokeAPIKeyData object
 This constructor will assign default values to properties that have it defined,
@@ -47,11 +47,6 @@ and a boolean to check if the value has been set.
 
 SetUserId sets UserId field to given value.
 
-### HasUserId
-
-`func (o *RevokeAPIKeyData) HasUserId() bool`
-
-HasUserId returns a boolean if a field has been set.
 
 ### GetKeyId
 
@@ -72,11 +67,6 @@ and a boolean to check if the value has been set.
 
 SetKeyId sets KeyId field to given value.
 
-### HasKeyId
-
-`func (o *RevokeAPIKeyData) HasKeyId() bool`
-
-HasKeyId returns a boolean if a field has been set.
 
 ### GetLabel
 
@@ -97,11 +87,6 @@ and a boolean to check if the value has been set.
 
 SetLabel sets Label field to given value.
 
-### HasLabel
-
-`func (o *RevokeAPIKeyData) HasLabel() bool`
-
-HasLabel returns a boolean if a field has been set.
 
 ### GetIsActive
 
@@ -122,11 +107,6 @@ and a boolean to check if the value has been set.
 
 SetIsActive sets IsActive field to given value.
 
-### HasIsActive
-
-`func (o *RevokeAPIKeyData) HasIsActive() bool`
-
-HasIsActive returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

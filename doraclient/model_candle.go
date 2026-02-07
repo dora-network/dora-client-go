@@ -13,6 +13,8 @@ package doraclient
 import (
 	"encoding/json"
 	"time"
+	"bytes"
+	"fmt"
 )
 
 // checks if the Candle type satisfies the MappedNullable interface at compile time
@@ -20,21 +22,30 @@ var _ MappedNullable = &Candle{}
 
 // Candle struct for Candle
 type Candle struct {
-	OrderBookId *string `json:"order_book_id,omitempty"`
-	StartTimestamp *time.Time `json:"start_timestamp,omitempty"`
-	Open *string `json:"open,omitempty"`
-	High *string `json:"high,omitempty"`
-	Low *string `json:"low,omitempty"`
-	Close *string `json:"close,omitempty"`
-	Volume *string `json:"volume,omitempty"`
+	OrderBookId string `json:"order_book_id"`
+	StartTimestamp time.Time `json:"start_timestamp"`
+	Open string `json:"open"`
+	High string `json:"high"`
+	Low string `json:"low"`
+	Close string `json:"close"`
+	Volume string `json:"volume"`
 }
+
+type _Candle Candle
 
 // NewCandle instantiates a new Candle object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCandle() *Candle {
+func NewCandle(orderBookId string, startTimestamp time.Time, open string, high string, low string, close string, volume string) *Candle {
 	this := Candle{}
+	this.OrderBookId = orderBookId
+	this.StartTimestamp = startTimestamp
+	this.Open = open
+	this.High = high
+	this.Low = low
+	this.Close = close
+	this.Volume = volume
 	return &this
 }
 
@@ -46,228 +57,172 @@ func NewCandleWithDefaults() *Candle {
 	return &this
 }
 
-// GetOrderBookId returns the OrderBookId field value if set, zero value otherwise.
+// GetOrderBookId returns the OrderBookId field value
 func (o *Candle) GetOrderBookId() string {
-	if o == nil || IsNil(o.OrderBookId) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.OrderBookId
+
+	return o.OrderBookId
 }
 
-// GetOrderBookIdOk returns a tuple with the OrderBookId field value if set, nil otherwise
+// GetOrderBookIdOk returns a tuple with the OrderBookId field value
 // and a boolean to check if the value has been set.
 func (o *Candle) GetOrderBookIdOk() (*string, bool) {
-	if o == nil || IsNil(o.OrderBookId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.OrderBookId, true
+	return &o.OrderBookId, true
 }
 
-// HasOrderBookId returns a boolean if a field has been set.
-func (o *Candle) HasOrderBookId() bool {
-	if o != nil && !IsNil(o.OrderBookId) {
-		return true
-	}
-
-	return false
-}
-
-// SetOrderBookId gets a reference to the given string and assigns it to the OrderBookId field.
+// SetOrderBookId sets field value
 func (o *Candle) SetOrderBookId(v string) {
-	o.OrderBookId = &v
+	o.OrderBookId = v
 }
 
-// GetStartTimestamp returns the StartTimestamp field value if set, zero value otherwise.
+// GetStartTimestamp returns the StartTimestamp field value
 func (o *Candle) GetStartTimestamp() time.Time {
-	if o == nil || IsNil(o.StartTimestamp) {
+	if o == nil {
 		var ret time.Time
 		return ret
 	}
-	return *o.StartTimestamp
+
+	return o.StartTimestamp
 }
 
-// GetStartTimestampOk returns a tuple with the StartTimestamp field value if set, nil otherwise
+// GetStartTimestampOk returns a tuple with the StartTimestamp field value
 // and a boolean to check if the value has been set.
 func (o *Candle) GetStartTimestampOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.StartTimestamp) {
+	if o == nil {
 		return nil, false
 	}
-	return o.StartTimestamp, true
+	return &o.StartTimestamp, true
 }
 
-// HasStartTimestamp returns a boolean if a field has been set.
-func (o *Candle) HasStartTimestamp() bool {
-	if o != nil && !IsNil(o.StartTimestamp) {
-		return true
-	}
-
-	return false
-}
-
-// SetStartTimestamp gets a reference to the given time.Time and assigns it to the StartTimestamp field.
+// SetStartTimestamp sets field value
 func (o *Candle) SetStartTimestamp(v time.Time) {
-	o.StartTimestamp = &v
+	o.StartTimestamp = v
 }
 
-// GetOpen returns the Open field value if set, zero value otherwise.
+// GetOpen returns the Open field value
 func (o *Candle) GetOpen() string {
-	if o == nil || IsNil(o.Open) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Open
+
+	return o.Open
 }
 
-// GetOpenOk returns a tuple with the Open field value if set, nil otherwise
+// GetOpenOk returns a tuple with the Open field value
 // and a boolean to check if the value has been set.
 func (o *Candle) GetOpenOk() (*string, bool) {
-	if o == nil || IsNil(o.Open) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Open, true
+	return &o.Open, true
 }
 
-// HasOpen returns a boolean if a field has been set.
-func (o *Candle) HasOpen() bool {
-	if o != nil && !IsNil(o.Open) {
-		return true
-	}
-
-	return false
-}
-
-// SetOpen gets a reference to the given string and assigns it to the Open field.
+// SetOpen sets field value
 func (o *Candle) SetOpen(v string) {
-	o.Open = &v
+	o.Open = v
 }
 
-// GetHigh returns the High field value if set, zero value otherwise.
+// GetHigh returns the High field value
 func (o *Candle) GetHigh() string {
-	if o == nil || IsNil(o.High) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.High
+
+	return o.High
 }
 
-// GetHighOk returns a tuple with the High field value if set, nil otherwise
+// GetHighOk returns a tuple with the High field value
 // and a boolean to check if the value has been set.
 func (o *Candle) GetHighOk() (*string, bool) {
-	if o == nil || IsNil(o.High) {
+	if o == nil {
 		return nil, false
 	}
-	return o.High, true
+	return &o.High, true
 }
 
-// HasHigh returns a boolean if a field has been set.
-func (o *Candle) HasHigh() bool {
-	if o != nil && !IsNil(o.High) {
-		return true
-	}
-
-	return false
-}
-
-// SetHigh gets a reference to the given string and assigns it to the High field.
+// SetHigh sets field value
 func (o *Candle) SetHigh(v string) {
-	o.High = &v
+	o.High = v
 }
 
-// GetLow returns the Low field value if set, zero value otherwise.
+// GetLow returns the Low field value
 func (o *Candle) GetLow() string {
-	if o == nil || IsNil(o.Low) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Low
+
+	return o.Low
 }
 
-// GetLowOk returns a tuple with the Low field value if set, nil otherwise
+// GetLowOk returns a tuple with the Low field value
 // and a boolean to check if the value has been set.
 func (o *Candle) GetLowOk() (*string, bool) {
-	if o == nil || IsNil(o.Low) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Low, true
+	return &o.Low, true
 }
 
-// HasLow returns a boolean if a field has been set.
-func (o *Candle) HasLow() bool {
-	if o != nil && !IsNil(o.Low) {
-		return true
-	}
-
-	return false
-}
-
-// SetLow gets a reference to the given string and assigns it to the Low field.
+// SetLow sets field value
 func (o *Candle) SetLow(v string) {
-	o.Low = &v
+	o.Low = v
 }
 
-// GetClose returns the Close field value if set, zero value otherwise.
+// GetClose returns the Close field value
 func (o *Candle) GetClose() string {
-	if o == nil || IsNil(o.Close) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Close
+
+	return o.Close
 }
 
-// GetCloseOk returns a tuple with the Close field value if set, nil otherwise
+// GetCloseOk returns a tuple with the Close field value
 // and a boolean to check if the value has been set.
 func (o *Candle) GetCloseOk() (*string, bool) {
-	if o == nil || IsNil(o.Close) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Close, true
+	return &o.Close, true
 }
 
-// HasClose returns a boolean if a field has been set.
-func (o *Candle) HasClose() bool {
-	if o != nil && !IsNil(o.Close) {
-		return true
-	}
-
-	return false
-}
-
-// SetClose gets a reference to the given string and assigns it to the Close field.
+// SetClose sets field value
 func (o *Candle) SetClose(v string) {
-	o.Close = &v
+	o.Close = v
 }
 
-// GetVolume returns the Volume field value if set, zero value otherwise.
+// GetVolume returns the Volume field value
 func (o *Candle) GetVolume() string {
-	if o == nil || IsNil(o.Volume) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Volume
+
+	return o.Volume
 }
 
-// GetVolumeOk returns a tuple with the Volume field value if set, nil otherwise
+// GetVolumeOk returns a tuple with the Volume field value
 // and a boolean to check if the value has been set.
 func (o *Candle) GetVolumeOk() (*string, bool) {
-	if o == nil || IsNil(o.Volume) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Volume, true
+	return &o.Volume, true
 }
 
-// HasVolume returns a boolean if a field has been set.
-func (o *Candle) HasVolume() bool {
-	if o != nil && !IsNil(o.Volume) {
-		return true
-	}
-
-	return false
-}
-
-// SetVolume gets a reference to the given string and assigns it to the Volume field.
+// SetVolume sets field value
 func (o *Candle) SetVolume(v string) {
-	o.Volume = &v
+	o.Volume = v
 }
 
 func (o Candle) MarshalJSON() ([]byte, error) {
@@ -280,28 +235,57 @@ func (o Candle) MarshalJSON() ([]byte, error) {
 
 func (o Candle) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.OrderBookId) {
-		toSerialize["order_book_id"] = o.OrderBookId
-	}
-	if !IsNil(o.StartTimestamp) {
-		toSerialize["start_timestamp"] = o.StartTimestamp
-	}
-	if !IsNil(o.Open) {
-		toSerialize["open"] = o.Open
-	}
-	if !IsNil(o.High) {
-		toSerialize["high"] = o.High
-	}
-	if !IsNil(o.Low) {
-		toSerialize["low"] = o.Low
-	}
-	if !IsNil(o.Close) {
-		toSerialize["close"] = o.Close
-	}
-	if !IsNil(o.Volume) {
-		toSerialize["volume"] = o.Volume
-	}
+	toSerialize["order_book_id"] = o.OrderBookId
+	toSerialize["start_timestamp"] = o.StartTimestamp
+	toSerialize["open"] = o.Open
+	toSerialize["high"] = o.High
+	toSerialize["low"] = o.Low
+	toSerialize["close"] = o.Close
+	toSerialize["volume"] = o.Volume
 	return toSerialize, nil
+}
+
+func (o *Candle) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"order_book_id",
+		"start_timestamp",
+		"open",
+		"high",
+		"low",
+		"close",
+		"volume",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varCandle := _Candle{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varCandle)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Candle(varCandle)
+
+	return err
 }
 
 type NullableCandle struct {

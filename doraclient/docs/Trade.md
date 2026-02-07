@@ -4,25 +4,23 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**TransactionId** | Pointer to **string** |  | [optional] 
-**Asset0** | Pointer to **string** |  | [optional] 
-**CreatedAt** | Pointer to **time.Time** |  | [optional] 
-**FeeAssetId** | Pointer to **string** |  | [optional] 
-**FeeQuantity** | Pointer to **string** |  | [optional] 
-**OrderBookId** | Pointer to **string** |  | [optional] 
-**OrderId** | Pointer to **string** |  | [optional] 
-**OrderSeq** | Pointer to **int32** |  | [optional] 
-**Price** | Pointer to **string** |  | [optional] 
-**Quantity0** | Pointer to **string** |  | [optional] 
-**UserId** | Pointer to **string** |  | [optional] 
-**Side** | Pointer to [**Side**](Side.md) |  | [optional] 
-**AggressorIndicator** | Pointer to **bool** | If true, then this order is the aggressor (taker); otherwise it is the maker. | [optional] 
+**TransactionId** | **string** |  | 
+**Asset0** | **string** |  | 
+**CreatedAt** | **time.Time** |  | 
+**OrderBookId** | **string** |  | 
+**OrderId** | **string** |  | 
+**OrderSeq** | **int32** |  | 
+**Price** | **string** |  | 
+**Quantity0** | **string** |  | 
+**UserId** | **string** |  | 
+**Side** | [**Side**](Side.md) |  | 
+**AggressorIndicator** | **bool** | If true, then this order is the aggressor (taker); otherwise it is the maker. | 
 
 ## Methods
 
 ### NewTrade
 
-`func NewTrade() *Trade`
+`func NewTrade(transactionId string, asset0 string, createdAt time.Time, orderBookId string, orderId string, orderSeq int32, price string, quantity0 string, userId string, side Side, aggressorIndicator bool, ) *Trade`
 
 NewTrade instantiates a new Trade object
 This constructor will assign default values to properties that have it defined,
@@ -56,11 +54,6 @@ and a boolean to check if the value has been set.
 
 SetTransactionId sets TransactionId field to given value.
 
-### HasTransactionId
-
-`func (o *Trade) HasTransactionId() bool`
-
-HasTransactionId returns a boolean if a field has been set.
 
 ### GetAsset0
 
@@ -81,11 +74,6 @@ and a boolean to check if the value has been set.
 
 SetAsset0 sets Asset0 field to given value.
 
-### HasAsset0
-
-`func (o *Trade) HasAsset0() bool`
-
-HasAsset0 returns a boolean if a field has been set.
 
 ### GetCreatedAt
 
@@ -106,61 +94,6 @@ and a boolean to check if the value has been set.
 
 SetCreatedAt sets CreatedAt field to given value.
 
-### HasCreatedAt
-
-`func (o *Trade) HasCreatedAt() bool`
-
-HasCreatedAt returns a boolean if a field has been set.
-
-### GetFeeAssetId
-
-`func (o *Trade) GetFeeAssetId() string`
-
-GetFeeAssetId returns the FeeAssetId field if non-nil, zero value otherwise.
-
-### GetFeeAssetIdOk
-
-`func (o *Trade) GetFeeAssetIdOk() (*string, bool)`
-
-GetFeeAssetIdOk returns a tuple with the FeeAssetId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetFeeAssetId
-
-`func (o *Trade) SetFeeAssetId(v string)`
-
-SetFeeAssetId sets FeeAssetId field to given value.
-
-### HasFeeAssetId
-
-`func (o *Trade) HasFeeAssetId() bool`
-
-HasFeeAssetId returns a boolean if a field has been set.
-
-### GetFeeQuantity
-
-`func (o *Trade) GetFeeQuantity() string`
-
-GetFeeQuantity returns the FeeQuantity field if non-nil, zero value otherwise.
-
-### GetFeeQuantityOk
-
-`func (o *Trade) GetFeeQuantityOk() (*string, bool)`
-
-GetFeeQuantityOk returns a tuple with the FeeQuantity field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetFeeQuantity
-
-`func (o *Trade) SetFeeQuantity(v string)`
-
-SetFeeQuantity sets FeeQuantity field to given value.
-
-### HasFeeQuantity
-
-`func (o *Trade) HasFeeQuantity() bool`
-
-HasFeeQuantity returns a boolean if a field has been set.
 
 ### GetOrderBookId
 
@@ -181,11 +114,6 @@ and a boolean to check if the value has been set.
 
 SetOrderBookId sets OrderBookId field to given value.
 
-### HasOrderBookId
-
-`func (o *Trade) HasOrderBookId() bool`
-
-HasOrderBookId returns a boolean if a field has been set.
 
 ### GetOrderId
 
@@ -206,11 +134,6 @@ and a boolean to check if the value has been set.
 
 SetOrderId sets OrderId field to given value.
 
-### HasOrderId
-
-`func (o *Trade) HasOrderId() bool`
-
-HasOrderId returns a boolean if a field has been set.
 
 ### GetOrderSeq
 
@@ -231,11 +154,6 @@ and a boolean to check if the value has been set.
 
 SetOrderSeq sets OrderSeq field to given value.
 
-### HasOrderSeq
-
-`func (o *Trade) HasOrderSeq() bool`
-
-HasOrderSeq returns a boolean if a field has been set.
 
 ### GetPrice
 
@@ -256,11 +174,6 @@ and a boolean to check if the value has been set.
 
 SetPrice sets Price field to given value.
 
-### HasPrice
-
-`func (o *Trade) HasPrice() bool`
-
-HasPrice returns a boolean if a field has been set.
 
 ### GetQuantity0
 
@@ -281,11 +194,6 @@ and a boolean to check if the value has been set.
 
 SetQuantity0 sets Quantity0 field to given value.
 
-### HasQuantity0
-
-`func (o *Trade) HasQuantity0() bool`
-
-HasQuantity0 returns a boolean if a field has been set.
 
 ### GetUserId
 
@@ -306,11 +214,6 @@ and a boolean to check if the value has been set.
 
 SetUserId sets UserId field to given value.
 
-### HasUserId
-
-`func (o *Trade) HasUserId() bool`
-
-HasUserId returns a boolean if a field has been set.
 
 ### GetSide
 
@@ -331,11 +234,6 @@ and a boolean to check if the value has been set.
 
 SetSide sets Side field to given value.
 
-### HasSide
-
-`func (o *Trade) HasSide() bool`
-
-HasSide returns a boolean if a field has been set.
 
 ### GetAggressorIndicator
 
@@ -356,11 +254,6 @@ and a boolean to check if the value has been set.
 
 SetAggressorIndicator sets AggressorIndicator field to given value.
 
-### HasAggressorIndicator
-
-`func (o *Trade) HasAggressorIndicator() bool`
-
-HasAggressorIndicator returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

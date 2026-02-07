@@ -4,13 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Balances** | Pointer to [**map[string]ModuleBalance**](ModuleBalance.md) | A map of asset IDs to their module balances | [optional] 
+**Balances** | [**map[string]ModuleBalance**](ModuleBalance.md) | A map of asset IDs to their module balances | 
 
 ## Methods
 
 ### NewLeverageModuleResponse
 
-`func NewLeverageModuleResponse() *LeverageModuleResponse`
+`func NewLeverageModuleResponse(balances map[string]ModuleBalance, ) *LeverageModuleResponse`
 
 NewLeverageModuleResponse instantiates a new LeverageModuleResponse object
 This constructor will assign default values to properties that have it defined,
@@ -44,11 +44,6 @@ and a boolean to check if the value has been set.
 
 SetBalances sets Balances field to given value.
 
-### HasBalances
-
-`func (o *LeverageModuleResponse) HasBalances() bool`
-
-HasBalances returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

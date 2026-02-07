@@ -12,6 +12,8 @@ package doraclient
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the RevokeAPIKeyData type satisfies the MappedNullable interface at compile time
@@ -19,18 +21,24 @@ var _ MappedNullable = &RevokeAPIKeyData{}
 
 // RevokeAPIKeyData struct for RevokeAPIKeyData
 type RevokeAPIKeyData struct {
-	UserId *string `json:"user_id,omitempty"`
-	KeyId *string `json:"key_id,omitempty"`
-	Label *string `json:"label,omitempty"`
-	IsActive *bool `json:"is_active,omitempty"`
+	UserId string `json:"user_id"`
+	KeyId string `json:"key_id"`
+	Label string `json:"label"`
+	IsActive bool `json:"is_active"`
 }
+
+type _RevokeAPIKeyData RevokeAPIKeyData
 
 // NewRevokeAPIKeyData instantiates a new RevokeAPIKeyData object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRevokeAPIKeyData() *RevokeAPIKeyData {
+func NewRevokeAPIKeyData(userId string, keyId string, label string, isActive bool) *RevokeAPIKeyData {
 	this := RevokeAPIKeyData{}
+	this.UserId = userId
+	this.KeyId = keyId
+	this.Label = label
+	this.IsActive = isActive
 	return &this
 }
 
@@ -42,132 +50,100 @@ func NewRevokeAPIKeyDataWithDefaults() *RevokeAPIKeyData {
 	return &this
 }
 
-// GetUserId returns the UserId field value if set, zero value otherwise.
+// GetUserId returns the UserId field value
 func (o *RevokeAPIKeyData) GetUserId() string {
-	if o == nil || IsNil(o.UserId) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.UserId
+
+	return o.UserId
 }
 
-// GetUserIdOk returns a tuple with the UserId field value if set, nil otherwise
+// GetUserIdOk returns a tuple with the UserId field value
 // and a boolean to check if the value has been set.
 func (o *RevokeAPIKeyData) GetUserIdOk() (*string, bool) {
-	if o == nil || IsNil(o.UserId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.UserId, true
+	return &o.UserId, true
 }
 
-// HasUserId returns a boolean if a field has been set.
-func (o *RevokeAPIKeyData) HasUserId() bool {
-	if o != nil && !IsNil(o.UserId) {
-		return true
-	}
-
-	return false
-}
-
-// SetUserId gets a reference to the given string and assigns it to the UserId field.
+// SetUserId sets field value
 func (o *RevokeAPIKeyData) SetUserId(v string) {
-	o.UserId = &v
+	o.UserId = v
 }
 
-// GetKeyId returns the KeyId field value if set, zero value otherwise.
+// GetKeyId returns the KeyId field value
 func (o *RevokeAPIKeyData) GetKeyId() string {
-	if o == nil || IsNil(o.KeyId) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.KeyId
+
+	return o.KeyId
 }
 
-// GetKeyIdOk returns a tuple with the KeyId field value if set, nil otherwise
+// GetKeyIdOk returns a tuple with the KeyId field value
 // and a boolean to check if the value has been set.
 func (o *RevokeAPIKeyData) GetKeyIdOk() (*string, bool) {
-	if o == nil || IsNil(o.KeyId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.KeyId, true
+	return &o.KeyId, true
 }
 
-// HasKeyId returns a boolean if a field has been set.
-func (o *RevokeAPIKeyData) HasKeyId() bool {
-	if o != nil && !IsNil(o.KeyId) {
-		return true
-	}
-
-	return false
-}
-
-// SetKeyId gets a reference to the given string and assigns it to the KeyId field.
+// SetKeyId sets field value
 func (o *RevokeAPIKeyData) SetKeyId(v string) {
-	o.KeyId = &v
+	o.KeyId = v
 }
 
-// GetLabel returns the Label field value if set, zero value otherwise.
+// GetLabel returns the Label field value
 func (o *RevokeAPIKeyData) GetLabel() string {
-	if o == nil || IsNil(o.Label) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Label
+
+	return o.Label
 }
 
-// GetLabelOk returns a tuple with the Label field value if set, nil otherwise
+// GetLabelOk returns a tuple with the Label field value
 // and a boolean to check if the value has been set.
 func (o *RevokeAPIKeyData) GetLabelOk() (*string, bool) {
-	if o == nil || IsNil(o.Label) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Label, true
+	return &o.Label, true
 }
 
-// HasLabel returns a boolean if a field has been set.
-func (o *RevokeAPIKeyData) HasLabel() bool {
-	if o != nil && !IsNil(o.Label) {
-		return true
-	}
-
-	return false
-}
-
-// SetLabel gets a reference to the given string and assigns it to the Label field.
+// SetLabel sets field value
 func (o *RevokeAPIKeyData) SetLabel(v string) {
-	o.Label = &v
+	o.Label = v
 }
 
-// GetIsActive returns the IsActive field value if set, zero value otherwise.
+// GetIsActive returns the IsActive field value
 func (o *RevokeAPIKeyData) GetIsActive() bool {
-	if o == nil || IsNil(o.IsActive) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.IsActive
+
+	return o.IsActive
 }
 
-// GetIsActiveOk returns a tuple with the IsActive field value if set, nil otherwise
+// GetIsActiveOk returns a tuple with the IsActive field value
 // and a boolean to check if the value has been set.
 func (o *RevokeAPIKeyData) GetIsActiveOk() (*bool, bool) {
-	if o == nil || IsNil(o.IsActive) {
+	if o == nil {
 		return nil, false
 	}
-	return o.IsActive, true
+	return &o.IsActive, true
 }
 
-// HasIsActive returns a boolean if a field has been set.
-func (o *RevokeAPIKeyData) HasIsActive() bool {
-	if o != nil && !IsNil(o.IsActive) {
-		return true
-	}
-
-	return false
-}
-
-// SetIsActive gets a reference to the given bool and assigns it to the IsActive field.
+// SetIsActive sets field value
 func (o *RevokeAPIKeyData) SetIsActive(v bool) {
-	o.IsActive = &v
+	o.IsActive = v
 }
 
 func (o RevokeAPIKeyData) MarshalJSON() ([]byte, error) {
@@ -180,19 +156,51 @@ func (o RevokeAPIKeyData) MarshalJSON() ([]byte, error) {
 
 func (o RevokeAPIKeyData) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.UserId) {
-		toSerialize["user_id"] = o.UserId
-	}
-	if !IsNil(o.KeyId) {
-		toSerialize["key_id"] = o.KeyId
-	}
-	if !IsNil(o.Label) {
-		toSerialize["label"] = o.Label
-	}
-	if !IsNil(o.IsActive) {
-		toSerialize["is_active"] = o.IsActive
-	}
+	toSerialize["user_id"] = o.UserId
+	toSerialize["key_id"] = o.KeyId
+	toSerialize["label"] = o.Label
+	toSerialize["is_active"] = o.IsActive
 	return toSerialize, nil
+}
+
+func (o *RevokeAPIKeyData) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"user_id",
+		"key_id",
+		"label",
+		"is_active",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varRevokeAPIKeyData := _RevokeAPIKeyData{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varRevokeAPIKeyData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RevokeAPIKeyData(varRevokeAPIKeyData)
+
+	return err
 }
 
 type NullableRevokeAPIKeyData struct {

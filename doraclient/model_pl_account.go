@@ -12,6 +12,8 @@ package doraclient
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the PLAccount type satisfies the MappedNullable interface at compile time
@@ -20,21 +22,28 @@ var _ MappedNullable = &PLAccount{}
 // PLAccount struct for PLAccount
 type PLAccount struct {
 	// The ID of the account holding the position
-	AccountId *string `json:"account_id,omitempty"`
+	AccountId string `json:"account_id"`
 	// The name of the account holding the position
-	AccountName *string `json:"account_name,omitempty"`
+	AccountName string `json:"account_name"`
 	// Whether the account is the global or an isolated account
-	IsGlobal *bool `json:"is_global,omitempty"`
-	Assets []PLAsset `json:"assets,omitempty"`
-	Summary *PLSummary `json:"summary,omitempty"`
+	IsGlobal bool `json:"is_global"`
+	Assets []PLAsset `json:"assets"`
+	Summary PLSummary `json:"summary"`
 }
+
+type _PLAccount PLAccount
 
 // NewPLAccount instantiates a new PLAccount object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPLAccount() *PLAccount {
+func NewPLAccount(accountId string, accountName string, isGlobal bool, assets []PLAsset, summary PLSummary) *PLAccount {
 	this := PLAccount{}
+	this.AccountId = accountId
+	this.AccountName = accountName
+	this.IsGlobal = isGlobal
+	this.Assets = assets
+	this.Summary = summary
 	return &this
 }
 
@@ -46,164 +55,124 @@ func NewPLAccountWithDefaults() *PLAccount {
 	return &this
 }
 
-// GetAccountId returns the AccountId field value if set, zero value otherwise.
+// GetAccountId returns the AccountId field value
 func (o *PLAccount) GetAccountId() string {
-	if o == nil || IsNil(o.AccountId) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.AccountId
+
+	return o.AccountId
 }
 
-// GetAccountIdOk returns a tuple with the AccountId field value if set, nil otherwise
+// GetAccountIdOk returns a tuple with the AccountId field value
 // and a boolean to check if the value has been set.
 func (o *PLAccount) GetAccountIdOk() (*string, bool) {
-	if o == nil || IsNil(o.AccountId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.AccountId, true
+	return &o.AccountId, true
 }
 
-// HasAccountId returns a boolean if a field has been set.
-func (o *PLAccount) HasAccountId() bool {
-	if o != nil && !IsNil(o.AccountId) {
-		return true
-	}
-
-	return false
-}
-
-// SetAccountId gets a reference to the given string and assigns it to the AccountId field.
+// SetAccountId sets field value
 func (o *PLAccount) SetAccountId(v string) {
-	o.AccountId = &v
+	o.AccountId = v
 }
 
-// GetAccountName returns the AccountName field value if set, zero value otherwise.
+// GetAccountName returns the AccountName field value
 func (o *PLAccount) GetAccountName() string {
-	if o == nil || IsNil(o.AccountName) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.AccountName
+
+	return o.AccountName
 }
 
-// GetAccountNameOk returns a tuple with the AccountName field value if set, nil otherwise
+// GetAccountNameOk returns a tuple with the AccountName field value
 // and a boolean to check if the value has been set.
 func (o *PLAccount) GetAccountNameOk() (*string, bool) {
-	if o == nil || IsNil(o.AccountName) {
+	if o == nil {
 		return nil, false
 	}
-	return o.AccountName, true
+	return &o.AccountName, true
 }
 
-// HasAccountName returns a boolean if a field has been set.
-func (o *PLAccount) HasAccountName() bool {
-	if o != nil && !IsNil(o.AccountName) {
-		return true
-	}
-
-	return false
-}
-
-// SetAccountName gets a reference to the given string and assigns it to the AccountName field.
+// SetAccountName sets field value
 func (o *PLAccount) SetAccountName(v string) {
-	o.AccountName = &v
+	o.AccountName = v
 }
 
-// GetIsGlobal returns the IsGlobal field value if set, zero value otherwise.
+// GetIsGlobal returns the IsGlobal field value
 func (o *PLAccount) GetIsGlobal() bool {
-	if o == nil || IsNil(o.IsGlobal) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.IsGlobal
+
+	return o.IsGlobal
 }
 
-// GetIsGlobalOk returns a tuple with the IsGlobal field value if set, nil otherwise
+// GetIsGlobalOk returns a tuple with the IsGlobal field value
 // and a boolean to check if the value has been set.
 func (o *PLAccount) GetIsGlobalOk() (*bool, bool) {
-	if o == nil || IsNil(o.IsGlobal) {
+	if o == nil {
 		return nil, false
 	}
-	return o.IsGlobal, true
+	return &o.IsGlobal, true
 }
 
-// HasIsGlobal returns a boolean if a field has been set.
-func (o *PLAccount) HasIsGlobal() bool {
-	if o != nil && !IsNil(o.IsGlobal) {
-		return true
-	}
-
-	return false
-}
-
-// SetIsGlobal gets a reference to the given bool and assigns it to the IsGlobal field.
+// SetIsGlobal sets field value
 func (o *PLAccount) SetIsGlobal(v bool) {
-	o.IsGlobal = &v
+	o.IsGlobal = v
 }
 
-// GetAssets returns the Assets field value if set, zero value otherwise.
+// GetAssets returns the Assets field value
 func (o *PLAccount) GetAssets() []PLAsset {
-	if o == nil || IsNil(o.Assets) {
+	if o == nil {
 		var ret []PLAsset
 		return ret
 	}
+
 	return o.Assets
 }
 
-// GetAssetsOk returns a tuple with the Assets field value if set, nil otherwise
+// GetAssetsOk returns a tuple with the Assets field value
 // and a boolean to check if the value has been set.
 func (o *PLAccount) GetAssetsOk() ([]PLAsset, bool) {
-	if o == nil || IsNil(o.Assets) {
+	if o == nil {
 		return nil, false
 	}
 	return o.Assets, true
 }
 
-// HasAssets returns a boolean if a field has been set.
-func (o *PLAccount) HasAssets() bool {
-	if o != nil && !IsNil(o.Assets) {
-		return true
-	}
-
-	return false
-}
-
-// SetAssets gets a reference to the given []PLAsset and assigns it to the Assets field.
+// SetAssets sets field value
 func (o *PLAccount) SetAssets(v []PLAsset) {
 	o.Assets = v
 }
 
-// GetSummary returns the Summary field value if set, zero value otherwise.
+// GetSummary returns the Summary field value
 func (o *PLAccount) GetSummary() PLSummary {
-	if o == nil || IsNil(o.Summary) {
+	if o == nil {
 		var ret PLSummary
 		return ret
 	}
-	return *o.Summary
+
+	return o.Summary
 }
 
-// GetSummaryOk returns a tuple with the Summary field value if set, nil otherwise
+// GetSummaryOk returns a tuple with the Summary field value
 // and a boolean to check if the value has been set.
 func (o *PLAccount) GetSummaryOk() (*PLSummary, bool) {
-	if o == nil || IsNil(o.Summary) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Summary, true
+	return &o.Summary, true
 }
 
-// HasSummary returns a boolean if a field has been set.
-func (o *PLAccount) HasSummary() bool {
-	if o != nil && !IsNil(o.Summary) {
-		return true
-	}
-
-	return false
-}
-
-// SetSummary gets a reference to the given PLSummary and assigns it to the Summary field.
+// SetSummary sets field value
 func (o *PLAccount) SetSummary(v PLSummary) {
-	o.Summary = &v
+	o.Summary = v
 }
 
 func (o PLAccount) MarshalJSON() ([]byte, error) {
@@ -216,22 +185,53 @@ func (o PLAccount) MarshalJSON() ([]byte, error) {
 
 func (o PLAccount) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.AccountId) {
-		toSerialize["account_id"] = o.AccountId
-	}
-	if !IsNil(o.AccountName) {
-		toSerialize["account_name"] = o.AccountName
-	}
-	if !IsNil(o.IsGlobal) {
-		toSerialize["is_global"] = o.IsGlobal
-	}
-	if !IsNil(o.Assets) {
-		toSerialize["assets"] = o.Assets
-	}
-	if !IsNil(o.Summary) {
-		toSerialize["summary"] = o.Summary
-	}
+	toSerialize["account_id"] = o.AccountId
+	toSerialize["account_name"] = o.AccountName
+	toSerialize["is_global"] = o.IsGlobal
+	toSerialize["assets"] = o.Assets
+	toSerialize["summary"] = o.Summary
 	return toSerialize, nil
+}
+
+func (o *PLAccount) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"account_id",
+		"account_name",
+		"is_global",
+		"assets",
+		"summary",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varPLAccount := _PLAccount{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varPLAccount)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PLAccount(varPLAccount)
+
+	return err
 }
 
 type NullablePLAccount struct {

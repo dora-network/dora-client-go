@@ -4,15 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**AssetId** | Pointer to **string** |  | [optional] 
-**PositionId** | Pointer to **string** |  | [optional] 
-**Quantity** | Pointer to **string** |  | [optional] 
+**PositionId** | **string** |  | 
+**AssetId** | **string** |  | 
+**Quantity** | **string** |  | 
 
 ## Methods
 
 ### NewClaimLeverageAccruedInterestRequest
 
-`func NewClaimLeverageAccruedInterestRequest() *ClaimLeverageAccruedInterestRequest`
+`func NewClaimLeverageAccruedInterestRequest(positionId string, assetId string, quantity string, ) *ClaimLeverageAccruedInterestRequest`
 
 NewClaimLeverageAccruedInterestRequest instantiates a new ClaimLeverageAccruedInterestRequest object
 This constructor will assign default values to properties that have it defined,
@@ -26,31 +26,6 @@ will change when the set of required properties is changed
 NewClaimLeverageAccruedInterestRequestWithDefaults instantiates a new ClaimLeverageAccruedInterestRequest object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetAssetId
-
-`func (o *ClaimLeverageAccruedInterestRequest) GetAssetId() string`
-
-GetAssetId returns the AssetId field if non-nil, zero value otherwise.
-
-### GetAssetIdOk
-
-`func (o *ClaimLeverageAccruedInterestRequest) GetAssetIdOk() (*string, bool)`
-
-GetAssetIdOk returns a tuple with the AssetId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAssetId
-
-`func (o *ClaimLeverageAccruedInterestRequest) SetAssetId(v string)`
-
-SetAssetId sets AssetId field to given value.
-
-### HasAssetId
-
-`func (o *ClaimLeverageAccruedInterestRequest) HasAssetId() bool`
-
-HasAssetId returns a boolean if a field has been set.
 
 ### GetPositionId
 
@@ -71,11 +46,26 @@ and a boolean to check if the value has been set.
 
 SetPositionId sets PositionId field to given value.
 
-### HasPositionId
 
-`func (o *ClaimLeverageAccruedInterestRequest) HasPositionId() bool`
+### GetAssetId
 
-HasPositionId returns a boolean if a field has been set.
+`func (o *ClaimLeverageAccruedInterestRequest) GetAssetId() string`
+
+GetAssetId returns the AssetId field if non-nil, zero value otherwise.
+
+### GetAssetIdOk
+
+`func (o *ClaimLeverageAccruedInterestRequest) GetAssetIdOk() (*string, bool)`
+
+GetAssetIdOk returns a tuple with the AssetId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAssetId
+
+`func (o *ClaimLeverageAccruedInterestRequest) SetAssetId(v string)`
+
+SetAssetId sets AssetId field to given value.
+
 
 ### GetQuantity
 
@@ -96,11 +86,6 @@ and a boolean to check if the value has been set.
 
 SetQuantity sets Quantity field to given value.
 
-### HasQuantity
-
-`func (o *ClaimLeverageAccruedInterestRequest) HasQuantity() bool`
-
-HasQuantity returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

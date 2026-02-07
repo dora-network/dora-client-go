@@ -12,6 +12,8 @@ package doraclient
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the UserCouponPaymentAssetSummary type satisfies the MappedNullable interface at compile time
@@ -19,17 +21,22 @@ var _ MappedNullable = &UserCouponPaymentAssetSummary{}
 
 // UserCouponPaymentAssetSummary struct for UserCouponPaymentAssetSummary
 type UserCouponPaymentAssetSummary struct {
-	AssetId *string `json:"asset_id,omitempty"`
-	Pending *string `json:"pending,omitempty"`
-	Completed *string `json:"completed,omitempty"`
+	AssetId string `json:"asset_id"`
+	Pending string `json:"pending"`
+	Completed string `json:"completed"`
 }
+
+type _UserCouponPaymentAssetSummary UserCouponPaymentAssetSummary
 
 // NewUserCouponPaymentAssetSummary instantiates a new UserCouponPaymentAssetSummary object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUserCouponPaymentAssetSummary() *UserCouponPaymentAssetSummary {
+func NewUserCouponPaymentAssetSummary(assetId string, pending string, completed string) *UserCouponPaymentAssetSummary {
 	this := UserCouponPaymentAssetSummary{}
+	this.AssetId = assetId
+	this.Pending = pending
+	this.Completed = completed
 	return &this
 }
 
@@ -41,100 +48,76 @@ func NewUserCouponPaymentAssetSummaryWithDefaults() *UserCouponPaymentAssetSumma
 	return &this
 }
 
-// GetAssetId returns the AssetId field value if set, zero value otherwise.
+// GetAssetId returns the AssetId field value
 func (o *UserCouponPaymentAssetSummary) GetAssetId() string {
-	if o == nil || IsNil(o.AssetId) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.AssetId
+
+	return o.AssetId
 }
 
-// GetAssetIdOk returns a tuple with the AssetId field value if set, nil otherwise
+// GetAssetIdOk returns a tuple with the AssetId field value
 // and a boolean to check if the value has been set.
 func (o *UserCouponPaymentAssetSummary) GetAssetIdOk() (*string, bool) {
-	if o == nil || IsNil(o.AssetId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.AssetId, true
+	return &o.AssetId, true
 }
 
-// HasAssetId returns a boolean if a field has been set.
-func (o *UserCouponPaymentAssetSummary) HasAssetId() bool {
-	if o != nil && !IsNil(o.AssetId) {
-		return true
-	}
-
-	return false
-}
-
-// SetAssetId gets a reference to the given string and assigns it to the AssetId field.
+// SetAssetId sets field value
 func (o *UserCouponPaymentAssetSummary) SetAssetId(v string) {
-	o.AssetId = &v
+	o.AssetId = v
 }
 
-// GetPending returns the Pending field value if set, zero value otherwise.
+// GetPending returns the Pending field value
 func (o *UserCouponPaymentAssetSummary) GetPending() string {
-	if o == nil || IsNil(o.Pending) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Pending
+
+	return o.Pending
 }
 
-// GetPendingOk returns a tuple with the Pending field value if set, nil otherwise
+// GetPendingOk returns a tuple with the Pending field value
 // and a boolean to check if the value has been set.
 func (o *UserCouponPaymentAssetSummary) GetPendingOk() (*string, bool) {
-	if o == nil || IsNil(o.Pending) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Pending, true
+	return &o.Pending, true
 }
 
-// HasPending returns a boolean if a field has been set.
-func (o *UserCouponPaymentAssetSummary) HasPending() bool {
-	if o != nil && !IsNil(o.Pending) {
-		return true
-	}
-
-	return false
-}
-
-// SetPending gets a reference to the given string and assigns it to the Pending field.
+// SetPending sets field value
 func (o *UserCouponPaymentAssetSummary) SetPending(v string) {
-	o.Pending = &v
+	o.Pending = v
 }
 
-// GetCompleted returns the Completed field value if set, zero value otherwise.
+// GetCompleted returns the Completed field value
 func (o *UserCouponPaymentAssetSummary) GetCompleted() string {
-	if o == nil || IsNil(o.Completed) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Completed
+
+	return o.Completed
 }
 
-// GetCompletedOk returns a tuple with the Completed field value if set, nil otherwise
+// GetCompletedOk returns a tuple with the Completed field value
 // and a boolean to check if the value has been set.
 func (o *UserCouponPaymentAssetSummary) GetCompletedOk() (*string, bool) {
-	if o == nil || IsNil(o.Completed) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Completed, true
+	return &o.Completed, true
 }
 
-// HasCompleted returns a boolean if a field has been set.
-func (o *UserCouponPaymentAssetSummary) HasCompleted() bool {
-	if o != nil && !IsNil(o.Completed) {
-		return true
-	}
-
-	return false
-}
-
-// SetCompleted gets a reference to the given string and assigns it to the Completed field.
+// SetCompleted sets field value
 func (o *UserCouponPaymentAssetSummary) SetCompleted(v string) {
-	o.Completed = &v
+	o.Completed = v
 }
 
 func (o UserCouponPaymentAssetSummary) MarshalJSON() ([]byte, error) {
@@ -147,16 +130,49 @@ func (o UserCouponPaymentAssetSummary) MarshalJSON() ([]byte, error) {
 
 func (o UserCouponPaymentAssetSummary) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.AssetId) {
-		toSerialize["asset_id"] = o.AssetId
-	}
-	if !IsNil(o.Pending) {
-		toSerialize["pending"] = o.Pending
-	}
-	if !IsNil(o.Completed) {
-		toSerialize["completed"] = o.Completed
-	}
+	toSerialize["asset_id"] = o.AssetId
+	toSerialize["pending"] = o.Pending
+	toSerialize["completed"] = o.Completed
 	return toSerialize, nil
+}
+
+func (o *UserCouponPaymentAssetSummary) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"asset_id",
+		"pending",
+		"completed",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varUserCouponPaymentAssetSummary := _UserCouponPaymentAssetSummary{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varUserCouponPaymentAssetSummary)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UserCouponPaymentAssetSummary(varUserCouponPaymentAssetSummary)
+
+	return err
 }
 
 type NullableUserCouponPaymentAssetSummary struct {

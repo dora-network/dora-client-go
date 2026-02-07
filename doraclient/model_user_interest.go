@@ -12,6 +12,8 @@ package doraclient
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the UserInterest type satisfies the MappedNullable interface at compile time
@@ -19,16 +21,20 @@ var _ MappedNullable = &UserInterest{}
 
 // UserInterest struct for UserInterest
 type UserInterest struct {
-	Available map[string]int32 `json:"available,omitempty"`
-	Value map[string]string `json:"value,omitempty"`
+	Available map[string]int32 `json:"available"`
+	Value map[string]string `json:"value"`
 }
+
+type _UserInterest UserInterest
 
 // NewUserInterest instantiates a new UserInterest object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUserInterest() *UserInterest {
+func NewUserInterest(available map[string]int32, value map[string]string) *UserInterest {
 	this := UserInterest{}
+	this.Available = available
+	this.Value = value
 	return &this
 }
 
@@ -40,66 +46,50 @@ func NewUserInterestWithDefaults() *UserInterest {
 	return &this
 }
 
-// GetAvailable returns the Available field value if set, zero value otherwise.
+// GetAvailable returns the Available field value
 func (o *UserInterest) GetAvailable() map[string]int32 {
-	if o == nil || IsNil(o.Available) {
+	if o == nil {
 		var ret map[string]int32
 		return ret
 	}
+
 	return o.Available
 }
 
-// GetAvailableOk returns a tuple with the Available field value if set, nil otherwise
+// GetAvailableOk returns a tuple with the Available field value
 // and a boolean to check if the value has been set.
 func (o *UserInterest) GetAvailableOk() (map[string]int32, bool) {
-	if o == nil || IsNil(o.Available) {
+	if o == nil {
 		return map[string]int32{}, false
 	}
 	return o.Available, true
 }
 
-// HasAvailable returns a boolean if a field has been set.
-func (o *UserInterest) HasAvailable() bool {
-	if o != nil && !IsNil(o.Available) {
-		return true
-	}
-
-	return false
-}
-
-// SetAvailable gets a reference to the given map[string]int32 and assigns it to the Available field.
+// SetAvailable sets field value
 func (o *UserInterest) SetAvailable(v map[string]int32) {
 	o.Available = v
 }
 
-// GetValue returns the Value field value if set, zero value otherwise.
+// GetValue returns the Value field value
 func (o *UserInterest) GetValue() map[string]string {
-	if o == nil || IsNil(o.Value) {
+	if o == nil {
 		var ret map[string]string
 		return ret
 	}
+
 	return o.Value
 }
 
-// GetValueOk returns a tuple with the Value field value if set, nil otherwise
+// GetValueOk returns a tuple with the Value field value
 // and a boolean to check if the value has been set.
 func (o *UserInterest) GetValueOk() (map[string]string, bool) {
-	if o == nil || IsNil(o.Value) {
+	if o == nil {
 		return map[string]string{}, false
 	}
 	return o.Value, true
 }
 
-// HasValue returns a boolean if a field has been set.
-func (o *UserInterest) HasValue() bool {
-	if o != nil && !IsNil(o.Value) {
-		return true
-	}
-
-	return false
-}
-
-// SetValue gets a reference to the given map[string]string and assigns it to the Value field.
+// SetValue sets field value
 func (o *UserInterest) SetValue(v map[string]string) {
 	o.Value = v
 }
@@ -114,13 +104,47 @@ func (o UserInterest) MarshalJSON() ([]byte, error) {
 
 func (o UserInterest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Available) {
-		toSerialize["available"] = o.Available
-	}
-	if !IsNil(o.Value) {
-		toSerialize["value"] = o.Value
-	}
+	toSerialize["available"] = o.Available
+	toSerialize["value"] = o.Value
 	return toSerialize, nil
+}
+
+func (o *UserInterest) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"available",
+		"value",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varUserInterest := _UserInterest{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varUserInterest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UserInterest(varUserInterest)
+
+	return err
 }
 
 type NullableUserInterest struct {

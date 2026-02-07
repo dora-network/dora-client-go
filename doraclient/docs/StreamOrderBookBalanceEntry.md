@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Val** | Pointer to [**OrderBookBalance**](OrderBookBalance.md) |  | [optional] 
-**Time** | Pointer to **time.Time** | The timestamp when the data was created | [optional] 
+**Val** | [**OrderBookBalance**](OrderBookBalance.md) |  | 
+**Time** | **time.Time** | The timestamp when the data was created | 
 
 ## Methods
 
 ### NewStreamOrderBookBalanceEntry
 
-`func NewStreamOrderBookBalanceEntry() *StreamOrderBookBalanceEntry`
+`func NewStreamOrderBookBalanceEntry(val OrderBookBalance, time time.Time, ) *StreamOrderBookBalanceEntry`
 
 NewStreamOrderBookBalanceEntry instantiates a new StreamOrderBookBalanceEntry object
 This constructor will assign default values to properties that have it defined,
@@ -45,11 +45,6 @@ and a boolean to check if the value has been set.
 
 SetVal sets Val field to given value.
 
-### HasVal
-
-`func (o *StreamOrderBookBalanceEntry) HasVal() bool`
-
-HasVal returns a boolean if a field has been set.
 
 ### GetTime
 
@@ -70,11 +65,6 @@ and a boolean to check if the value has been set.
 
 SetTime sets Time field to given value.
 
-### HasTime
-
-`func (o *StreamOrderBookBalanceEntry) HasTime() bool`
-
-HasTime returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

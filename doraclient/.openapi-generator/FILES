@@ -133,7 +133,6 @@ docs/StreamTradesEntry.md
 docs/StreamTransactionsEntry.md
 docs/StreamUserCouponPaymentsEntry.md
 docs/StreamUserCouponPaymentsResponse.md
-docs/StreamedAssetPrice.md
 docs/Supply.md
 docs/SupplyRequest.md
 docs/SupplyResponseEnvelope.md
@@ -179,8 +178,6 @@ docs/Withdraw.md
 docs/WithdrawRequest.md
 docs/WithdrawResponseEnvelope.md
 git_push.sh
-go.mod
-go.sum
 model_api_key_response.go
 model_api_key_response_envelope.go
 model_api_keys.go
@@ -307,7 +304,6 @@ model_stream_trades_entry.go
 model_stream_transactions_entry.go
 model_stream_user_coupon_payments_entry.go
 model_stream_user_coupon_payments_response.go
-model_streamed_asset_price.go
 model_supply.go
 model_supply_request.go
 model_supply_response_envelope.go

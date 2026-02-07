@@ -6,7 +6,7 @@ servers:
 - description: local DORA server
   url: https://localhost:8084
 - description: DORA staging server
-  url: https://dora-staging.fly.dev
+  url: https://staging.dora.co
 - description: local DORA WebSocket server
   url: ws://localhost:8085
 security:
@@ -82,6 +82,7 @@ paths:
         required: false
         schema:
           default: 1
+          minimum: 1
           type: integer
         style: form
       - explode: true
@@ -90,6 +91,7 @@ paths:
         required: false
         schema:
           default: 100
+          minimum: 1
           type: integer
         style: form
       responses:
@@ -528,6 +530,7 @@ paths:
         required: false
         schema:
           default: 1
+          minimum: 1
           type: integer
         style: form
       - explode: true
@@ -536,6 +539,7 @@ paths:
         required: false
         schema:
           default: 100
+          minimum: 1
           type: integer
         style: form
       responses:
@@ -1068,6 +1072,7 @@ paths:
         required: false
         schema:
           default: 1
+          minimum: 1
           type: integer
         style: form
       - explode: true
@@ -1076,6 +1081,7 @@ paths:
         required: false
         schema:
           default: 100
+          minimum: 1
           type: integer
         style: form
       responses:
@@ -2169,6 +2175,7 @@ paths:
         required: false
         schema:
           default: 1
+          minimum: 1
           type: integer
         style: form
       - explode: true
@@ -2177,6 +2184,7 @@ paths:
         required: false
         schema:
           default: 100
+          minimum: 1
           type: integer
         style: form
       responses:
@@ -2284,6 +2292,7 @@ paths:
         required: false
         schema:
           default: 1
+          minimum: 1
           type: integer
         style: form
       - explode: true
@@ -2292,6 +2301,7 @@ paths:
         required: false
         schema:
           default: 100
+          minimum: 1
           type: integer
         style: form
       responses:
@@ -3268,17 +3278,16 @@ components:
       example:
         symbol: symbol
         can_add_liquidity: true
-        max_leverage: 3.616076749251911
-        fractionalized_units: 5
+        max_leverage: 0.3616076749251911
+        fractionalized_units: 1
         kind: BOND
         can_onboard: true
-        maturity_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         can_virtual_borrow: true
         created_at: 2000-01-23T04:56:07.000+00:00
         description: description
         bond:
           kind: COUPON-PAYING
-          payments_per_year: 2
+          payments_per_year: 0
           created_at: 2000-01-23T04:56:07.000+00:00
           issued_at: 2000-01-23T04:56:07.000+00:00
           issuer: issuer
@@ -3290,12 +3299,13 @@ components:
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           final_coupon_at: 2000-01-23T04:56:07.000+00:00
           isin: isin
-        max_utilization: 7
-        collateral_weight: 6.027456183070403
-        decimals: 1
-        yield: 9.301444243932576
-        liquidation_weight: 5.637376656633329
-        max_supply: 2
+        leverage_interest_rate: 2.027123023002322
+        max_utilization: 0
+        collateral_weight: 0.6027456183070403
+        decimals: 0
+        yield: 0.9301444243932576
+        liquidation_weight: 0.5637376656633328
+        max_supply: 0
         name: name
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         can_direct_borrow: true
@@ -3305,25 +3315,29 @@ components:
           format: uuid
           type: string
         collateral_weight:
+          maximum: 1
+          minimum: 0
           type: number
         created_at:
           format: date-time
           type: string
         decimals:
+          minimum: 0
           type: integer
         fractionalized_units:
+          minimum: 1
           type: integer
         description:
           type: string
         liquidation_weight:
+          maximum: 1
+          minimum: 0
           type: number
-        maturity_id:
-          format: uuid
-          type: string
-          nullable: true
         max_supply:
+          minimum: 0
           type: integer
         max_utilization:
+          minimum: 0
           type: integer
         name:
           type: string
@@ -3332,6 +3346,7 @@ components:
         kind:
           $ref: "#/components/schemas/AssetKind"
         yield:
+          minimum: 0
           type: number
         can_add_liquidity:
           type: boolean
@@ -3344,13 +3359,39 @@ components:
         can_virtual_borrow:
           type: boolean
         max_leverage:
+          maximum: 1
+          minimum: 0
+          type: number
+        leverage_interest_rate:
+          default: 0
           type: number
         bond:
           $ref: "#/components/schemas/Bond"
+      required:
+      - can_add_liquidity
+      - can_direct_borrow
+      - can_onboard
+      - can_trade
+      - can_virtual_borrow
+      - collateral_weight
+      - created_at
+      - decimals
+      - description
+      - fractionalized_units
+      - id
+      - kind
+      - leverage_interest_rate
+      - liquidation_weight
+      - max_leverage
+      - max_supply
+      - max_utilization
+      - name
+      - symbol
+      - yield
     Bond:
       example:
         kind: COUPON-PAYING
-        payments_per_year: 2
+        payments_per_year: 0
         created_at: 2000-01-23T04:56:07.000+00:00
         issued_at: 2000-01-23T04:56:07.000+00:00
         issuer: issuer
@@ -3390,8 +3431,10 @@ components:
           format: date-time
           type: string
         principal_value:
+          format: decimal
           type: string
         payments_per_year:
+          minimum: 0
           type: integer
         payments_every:
           description: Coupon payment frequency in nanoseconds (minimum 1000 i.e.
@@ -3401,6 +3444,17 @@ components:
         next_coupon_payment:
           format: date-time
           type: string
+      required:
+      - created_at
+      - id
+      - isin
+      - issued_at
+      - issuer
+      - kind
+      - maturity_at
+      - payments_every
+      - payments_per_year
+      - principal_value
     ResponseEnvelopeOfListAssets:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
@@ -3417,17 +3471,16 @@ components:
         data:
         - symbol: symbol
           can_add_liquidity: true
-          max_leverage: 3.616076749251911
-          fractionalized_units: 5
+          max_leverage: 0.3616076749251911
+          fractionalized_units: 1
           kind: BOND
           can_onboard: true
-          maturity_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           can_virtual_borrow: true
           created_at: 2000-01-23T04:56:07.000+00:00
           description: description
           bond:
             kind: COUPON-PAYING
-            payments_per_year: 2
+            payments_per_year: 0
             created_at: 2000-01-23T04:56:07.000+00:00
             issued_at: 2000-01-23T04:56:07.000+00:00
             issuer: issuer
@@ -3439,29 +3492,29 @@ components:
             id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             final_coupon_at: 2000-01-23T04:56:07.000+00:00
             isin: isin
-          max_utilization: 7
-          collateral_weight: 6.027456183070403
-          decimals: 1
-          yield: 9.301444243932576
-          liquidation_weight: 5.637376656633329
-          max_supply: 2
+          leverage_interest_rate: 2.027123023002322
+          max_utilization: 0
+          collateral_weight: 0.6027456183070403
+          decimals: 0
+          yield: 0.9301444243932576
+          liquidation_weight: 0.5637376656633328
+          max_supply: 0
           name: name
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           can_direct_borrow: true
           can_trade: true
         - symbol: symbol
           can_add_liquidity: true
-          max_leverage: 3.616076749251911
-          fractionalized_units: 5
+          max_leverage: 0.3616076749251911
+          fractionalized_units: 1
           kind: BOND
           can_onboard: true
-          maturity_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           can_virtual_borrow: true
           created_at: 2000-01-23T04:56:07.000+00:00
           description: description
           bond:
             kind: COUPON-PAYING
-            payments_per_year: 2
+            payments_per_year: 0
             created_at: 2000-01-23T04:56:07.000+00:00
             issued_at: 2000-01-23T04:56:07.000+00:00
             issuer: issuer
@@ -3473,12 +3526,13 @@ components:
             id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             final_coupon_at: 2000-01-23T04:56:07.000+00:00
             isin: isin
-          max_utilization: 7
-          collateral_weight: 6.027456183070403
-          decimals: 1
-          yield: 9.301444243932576
-          liquidation_weight: 5.637376656633329
-          max_supply: 2
+          leverage_interest_rate: 2.027123023002322
+          max_utilization: 0
+          collateral_weight: 0.6027456183070403
+          decimals: 0
+          yield: 0.9301444243932576
+          liquidation_weight: 0.5637376656633328
+          max_supply: 0
           name: name
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           can_direct_borrow: true
@@ -3500,17 +3554,16 @@ components:
         data:
           symbol: symbol
           can_add_liquidity: true
-          max_leverage: 3.616076749251911
-          fractionalized_units: 5
+          max_leverage: 0.3616076749251911
+          fractionalized_units: 1
           kind: BOND
           can_onboard: true
-          maturity_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           can_virtual_borrow: true
           created_at: 2000-01-23T04:56:07.000+00:00
           description: description
           bond:
             kind: COUPON-PAYING
-            payments_per_year: 2
+            payments_per_year: 0
             created_at: 2000-01-23T04:56:07.000+00:00
             issued_at: 2000-01-23T04:56:07.000+00:00
             issuer: issuer
@@ -3522,12 +3575,13 @@ components:
             id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             final_coupon_at: 2000-01-23T04:56:07.000+00:00
             isin: isin
-          max_utilization: 7
-          collateral_weight: 6.027456183070403
-          decimals: 1
-          yield: 9.301444243932576
-          liquidation_weight: 5.637376656633329
-          max_supply: 2
+          leverage_interest_rate: 2.027123023002322
+          max_utilization: 0
+          collateral_weight: 0.6027456183070403
+          decimals: 0
+          yield: 0.9301444243932576
+          liquidation_weight: 0.5637376656633328
+          max_supply: 0
           name: name
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           can_direct_borrow: true
@@ -3552,6 +3606,11 @@ components:
           type: string
         yield_to_maturity:
           type: string
+      required:
+      - asset_id
+      - current_price
+      - current_time
+      - yield_to_maturity
     GetAssetYTMByIDResponseEnvelope:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
@@ -3577,7 +3636,7 @@ components:
         completed_at: 2000-01-23T04:56:07.000+00:00
         pay_at: 2000-01-23T04:56:07.000+00:00
         last_processed_at: 2000-01-23T04:56:07.000+00:00
-        yield: 0.8008281904610115
+        yield: 0.08008281904610115
         created_at: 2000-01-23T04:56:07.000+00:00
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -3592,6 +3651,7 @@ components:
           format: uuid
           type: string
         yield:
+          minimum: 0
           type: number
         start_at:
           format: date-time
@@ -3618,6 +3678,18 @@ components:
         last_processed_at:
           format: date-time
           type: string
+      required:
+      - asset_id
+      - available_to_pay
+      - completed_at
+      - created_at
+      - end_at
+      - id
+      - last_processed_at
+      - pay_at
+      - process_every
+      - start_at
+      - yield
     UserCouponPayment:
       example:
         user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -3644,6 +3716,7 @@ components:
           type: string
         seq:
           format: int64
+          minimum: 0
           type: integer
         pending:
           type: string
@@ -3655,6 +3728,16 @@ components:
         ended_at:
           format: date-time
           type: string
+      required:
+      - asset_id
+      - completed
+      - coupon_payment_id
+      - ended_at
+      - pending
+      - position_id
+      - seq
+      - started_at
+      - user_id
     UserCouponPaymentAssetSummary:
       example:
         pending: pending
@@ -3668,6 +3751,10 @@ components:
           type: string
         completed:
           type: string
+      required:
+      - asset_id
+      - completed
+      - pending
     UserCouponPaymentsResponseData:
       properties:
         coupon_payments:
@@ -3704,7 +3791,7 @@ components:
           completed_at: 2000-01-23T04:56:07.000+00:00
           pay_at: 2000-01-23T04:56:07.000+00:00
           last_processed_at: 2000-01-23T04:56:07.000+00:00
-          yield: 0.8008281904610115
+          yield: 0.08008281904610115
           created_at: 2000-01-23T04:56:07.000+00:00
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -3715,7 +3802,7 @@ components:
           completed_at: 2000-01-23T04:56:07.000+00:00
           pay_at: 2000-01-23T04:56:07.000+00:00
           last_processed_at: 2000-01-23T04:56:07.000+00:00
-          yield: 0.8008281904610115
+          yield: 0.08008281904610115
           created_at: 2000-01-23T04:56:07.000+00:00
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -3926,6 +4013,14 @@ components:
           type: boolean
         notifications_enabled:
           type: boolean
+      required:
+      - email
+      - id
+      - name
+      - native_asset_id
+      - notifications_enabled
+      - roles
+      - show_tutorial_cards
     UserConfig:
       properties:
         id:
@@ -3946,6 +4041,12 @@ components:
           type: boolean
         notifications_enabled:
           type: boolean
+      required:
+      - created_at
+      - id
+      - notifications_enabled
+      - show_tutorial_cards
+      - updated_at
     UpdateUserConfigRequest:
       description: "Request body for PUT /user/{id}/config: update a user changeable\
         \ details only. Other properties can only be changed by an admin following\
@@ -3984,6 +4085,8 @@ components:
           description: The ID of the created or updated user.
           format: uuid
           type: string
+      required:
+      - id
     UpdateFieldString:
       description: A generic struct to handle optional updates for string fields in
         user requests.
@@ -4033,20 +4136,20 @@ components:
       type: string
     OrderBook:
       example:
-        base_quantity: 0.8008281904610115
+        base_quantity: 0.08008281904610115
         quote_asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         halted_at: 2000-01-23T04:56:07.000+00:00
-        shares_quantity: 5.637376656633329
+        shares_quantity: 0.5637376656633328
         created_at: 2000-01-23T04:56:07.000+00:00
         base_asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         display_name: display_name
-        tick_size: 2.3021358869347655
+        tick_size: 0.23021358869347652
         maturity_at: 2000-01-23T04:56:07.000+00:00
         updated_at: 2000-01-23T04:56:07.000+00:00
-        fee_factor: 6.027456183070403
-        initial_assets_ratio: 1.4658129805029452
+        fee_factor: 0.6027456183070403
+        initial_assets_ratio: 0.14658129805029452
         pool_updated_at: 2000-01-23T04:56:07.000+00:00
-        quote_quantity: 5.962133916683182
+        quote_quantity: 0.5962133916683182
         order_book_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         terminated_at: 2000-01-23T04:56:07.000+00:00
         status: CLOSED
@@ -4056,6 +4159,7 @@ components:
           format: uuid
           type: string
         base_quantity:
+          minimum: 0
           type: number
         base_asset_id:
           format: uuid
@@ -4066,22 +4170,29 @@ components:
         display_name:
           type: string
         fee_factor:
+          maximum: 1
+          minimum: 0
           type: number
         initial_assets_ratio:
+          maximum: 1
+          minimum: 0
           type: number
         maturity_at:
           format: date-time
           type: string
         quote_quantity:
+          minimum: 0
           type: number
         quote_asset_id:
           format: uuid
           type: string
         shares_quantity:
+          minimum: 0
           type: number
         status:
           $ref: "#/components/schemas/OrderBookStatus"
         tick_size:
+          minimum: 0
           type: number
         updated_at:
           format: date-time
@@ -4098,6 +4209,22 @@ components:
         shares_asset_id:
           format: uuid
           type: string
+      required:
+      - base_asset_id
+      - base_quantity
+      - created_at
+      - display_name
+      - fee_factor
+      - initial_assets_ratio
+      - maturity_at
+      - order_book_id
+      - quote_asset_id
+      - quote_quantity
+      - shares_asset_id
+      - shares_quantity
+      - status
+      - tick_size
+      - updated_at
     OrderBookResponseEnvelope:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
@@ -4110,20 +4237,20 @@ components:
           status_code: 0
           request_id: request_id
         data:
-          base_quantity: 0.8008281904610115
+          base_quantity: 0.08008281904610115
           quote_asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           halted_at: 2000-01-23T04:56:07.000+00:00
-          shares_quantity: 5.637376656633329
+          shares_quantity: 0.5637376656633328
           created_at: 2000-01-23T04:56:07.000+00:00
           base_asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           display_name: display_name
-          tick_size: 2.3021358869347655
+          tick_size: 0.23021358869347652
           maturity_at: 2000-01-23T04:56:07.000+00:00
           updated_at: 2000-01-23T04:56:07.000+00:00
-          fee_factor: 6.027456183070403
-          initial_assets_ratio: 1.4658129805029452
+          fee_factor: 0.6027456183070403
+          initial_assets_ratio: 0.14658129805029452
           pool_updated_at: 2000-01-23T04:56:07.000+00:00
-          quote_quantity: 5.962133916683182
+          quote_quantity: 0.5962133916683182
           order_book_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           terminated_at: 2000-01-23T04:56:07.000+00:00
           status: CLOSED
@@ -4145,38 +4272,38 @@ components:
           status_code: 0
           request_id: request_id
         data:
-        - base_quantity: 0.8008281904610115
+        - base_quantity: 0.08008281904610115
           quote_asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           halted_at: 2000-01-23T04:56:07.000+00:00
-          shares_quantity: 5.637376656633329
+          shares_quantity: 0.5637376656633328
           created_at: 2000-01-23T04:56:07.000+00:00
           base_asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           display_name: display_name
-          tick_size: 2.3021358869347655
+          tick_size: 0.23021358869347652
           maturity_at: 2000-01-23T04:56:07.000+00:00
           updated_at: 2000-01-23T04:56:07.000+00:00
-          fee_factor: 6.027456183070403
-          initial_assets_ratio: 1.4658129805029452
+          fee_factor: 0.6027456183070403
+          initial_assets_ratio: 0.14658129805029452
           pool_updated_at: 2000-01-23T04:56:07.000+00:00
-          quote_quantity: 5.962133916683182
+          quote_quantity: 0.5962133916683182
           order_book_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           terminated_at: 2000-01-23T04:56:07.000+00:00
           status: CLOSED
           shares_asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        - base_quantity: 0.8008281904610115
+        - base_quantity: 0.08008281904610115
           quote_asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           halted_at: 2000-01-23T04:56:07.000+00:00
-          shares_quantity: 5.637376656633329
+          shares_quantity: 0.5637376656633328
           created_at: 2000-01-23T04:56:07.000+00:00
           base_asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           display_name: display_name
-          tick_size: 2.3021358869347655
+          tick_size: 0.23021358869347652
           maturity_at: 2000-01-23T04:56:07.000+00:00
           updated_at: 2000-01-23T04:56:07.000+00:00
-          fee_factor: 6.027456183070403
-          initial_assets_ratio: 1.4658129805029452
+          fee_factor: 0.6027456183070403
+          initial_assets_ratio: 0.14658129805029452
           pool_updated_at: 2000-01-23T04:56:07.000+00:00
-          quote_quantity: 5.962133916683182
+          quote_quantity: 0.5962133916683182
           order_book_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           terminated_at: 2000-01-23T04:56:07.000+00:00
           status: CLOSED
@@ -4216,6 +4343,7 @@ components:
       example:
         original_price: original_price
         side: BUY
+        client_order_id: client_order_id
         original_quantity: original_quantity
         kind: LIMIT
         trigger_type: STOP_LOSS
@@ -4300,6 +4428,27 @@ components:
           type: string
         trigger_type:
           $ref: "#/components/schemas/TriggerType"
+        client_order_id:
+          description: An optional client-provided identifier for the order.
+          format: text
+          type: string
+      required:
+      - avg_fill_price
+      - cancelled_quantity
+      - filled_notional
+      - filled_quantity
+      - inverse_leverage
+      - kind
+      - open_quantity
+      - opened_at
+      - order_book_id
+      - order_id
+      - original_price
+      - original_quantity
+      - position_id
+      - side
+      - status
+      - user_id
     ListOrdersResponseEnvelope:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
@@ -4316,6 +4465,7 @@ components:
         data:
         - original_price: original_price
           side: BUY
+          client_order_id: client_order_id
           original_quantity: original_quantity
           kind: LIMIT
           trigger_type: STOP_LOSS
@@ -4340,6 +4490,7 @@ components:
           position_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         - original_price: original_price
           side: BUY
+          client_order_id: client_order_id
           original_quantity: original_quantity
           kind: LIMIT
           trigger_type: STOP_LOSS
@@ -4375,6 +4526,7 @@ components:
         Val:
           original_price: original_price
           side: BUY
+          client_order_id: client_order_id
           original_quantity: original_quantity
           kind: LIMIT
           trigger_type: STOP_LOSS
@@ -4412,6 +4564,7 @@ components:
         Val:
           original_price: original_price
           side: BUY
+          client_order_id: client_order_id
           original_quantity: original_quantity
           kind: LIMIT
           trigger_type: STOP_LOSS
@@ -4453,6 +4606,7 @@ components:
         data:
           original_price: original_price
           side: BUY
+          client_order_id: client_order_id
           original_quantity: original_quantity
           kind: LIMIT
           trigger_type: STOP_LOSS
@@ -4481,6 +4635,7 @@ components:
     CreateOrderRequest:
       example:
         side: BUY
+        client_order_id: client_order_id
         quantity: quantity
         trigger_price: trigger_price
         price: price
@@ -4522,6 +4677,10 @@ components:
           type: string
         trigger_type:
           $ref: "#/components/schemas/TriggerType"
+        client_order_id:
+          description: An optional client-provided identifier for the order.
+          format: text
+          type: string
       required:
       - from_global_position
       - inverse_leverage
@@ -4531,11 +4690,15 @@ components:
       - side
     ValidateSubmitOrderRequest:
       example:
-        user_balance: user_balance
         side: BUY
         quote_asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        client_order_id: client_order_id
         quantity: quantity
         kind: LIMIT
+        tick: tick
+        good_till_date: 2000-01-23T04:56:07.000+00:00
+        base_asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        user_balance: user_balance
         price: price
         position_assets:
         - kind: BOND
@@ -4551,9 +4714,6 @@ components:
           locked: locked
           borrowed: borrowed
         inverse_leverage: inverse_leverage
-        tick: tick
-        good_till_date: 2000-01-23T04:56:07.000+00:00
-        base_asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         assets_config:
         - price: price
           asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -4587,6 +4747,10 @@ components:
         quote_asset_id:
           description: quote asset of orderbook
           format: uuid
+          type: string
+        client_order_id:
+          description: An optional client-provided identifier for the order.
+          format: text
           type: string
         position_assets:
           description: "Full list of assets in the position with their price and collateral\
@@ -4625,6 +4789,10 @@ components:
           type: boolean
         should_create_user:
           type: boolean
+      required:
+      - email_exists
+      - firebase_set
+      - should_create_user
     ValidateSubmitOrderResponse:
       example:
         data: true
@@ -4671,6 +4839,16 @@ components:
         volume_24h_usd:
           description: Total volume of the orderbook in the last 24 hours in USD.
           type: string
+      required:
+      - change_24h
+      - change_pct_24h
+      - high_24h
+      - last_price
+      - low_24h
+      - open_price
+      - order_book_id
+      - volume_24h_base
+      - volume_24h_usd
     OrderbookStatsResponseEnvelope:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
@@ -4748,7 +4926,7 @@ components:
                 liquidation_threshold: liquidation_threshold
                 id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
                 locked: locked
-                seq: 0
+                seq: 1
                 borrowed: borrowed
           net_stablecoin_equivalence:
             gained:
@@ -4776,7 +4954,7 @@ components:
               liquidation_threshold: liquidation_threshold
               id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               locked: locked
-              seq: 0
+              seq: 1
               borrowed: borrowed
         net_stablecoin_equivalence:
           gained:
@@ -4816,7 +4994,7 @@ components:
         liquidation_threshold: liquidation_threshold
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         locked: locked
-        seq: 0
+        seq: 1
         borrowed: borrowed
       properties:
         id:
@@ -4829,6 +5007,7 @@ components:
           format: uuid
           type: string
         seq:
+          minimum: 1
           type: integer
         is_global:
           type: boolean
@@ -4872,6 +5051,20 @@ components:
           type: string
         position_name:
           type: string
+      required:
+      - asset_id
+      - available
+      - avg_entry_price
+      - borrow_limit
+      - borrowed
+      - created_at
+      - id
+      - impending_borrows
+      - liquidation_threshold
+      - locked
+      - position_name
+      - seq
+      - supplied
     ListPositionsResponse:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
@@ -4900,7 +5093,7 @@ components:
           liquidation_threshold: liquidation_threshold
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           locked: locked
-          seq: 0
+          seq: 1
           borrowed: borrowed
         Time: 2000-01-23T04:56:07.000+00:00
     StreamPositionsResponse:
@@ -5000,7 +5193,7 @@ components:
           liquidation_threshold: liquidation_threshold
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           locked: locked
-          seq: 0
+          seq: 1
           borrowed: borrowed
         - supplied: supplied
           impending_borrows: impending_borrows
@@ -5014,7 +5207,7 @@ components:
           liquidation_threshold: liquidation_threshold
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           locked: locked
-          seq: 0
+          seq: 1
           borrowed: borrowed
       properties:
         balances:
@@ -5023,28 +5216,16 @@ components:
           type: array
     UserValue:
       example:
-        notional_short:
-          key: notional_short
+        borrow_limit:
+          key: borrow_limit
         supplied:
           key: supplied
         impending_borrows:
           key: impending_borrows
         available:
           key: available
-        notional_long:
-          key: notional_long
-        borrow_limit:
-          key: borrow_limit
-        net_liquidation_value:
-          key: net_liquidation_value
-        portfolio_value:
-          key: portfolio_value
-        realized_pnl:
-          key: realized_pnl
         liquidation_threshold:
           key: liquidation_threshold
-        unrealized_pnl:
-          key: unrealized_pnl
         locked:
           key: locked
         borrowed:
@@ -5071,24 +5252,14 @@ components:
         liquidation_threshold:
           additionalProperties:
             type: string
-        notional_long:
-          additionalProperties:
-            type: string
-        notional_short:
-          additionalProperties:
-            type: string
-        portfolio_value:
-          additionalProperties:
-            type: string
-        net_liquidation_value:
-          additionalProperties:
-            type: string
-        unrealized_pnl:
-          additionalProperties:
-            type: string
-        realized_pnl:
-          additionalProperties:
-            type: string
+      required:
+      - available
+      - borrow_limit
+      - borrowed
+      - impending_borrows
+      - liquidation_threshold
+      - locked
+      - supplied
     UserInterest:
       example:
         available:
@@ -5102,6 +5273,9 @@ components:
         value:
           additionalProperties:
             type: string
+      required:
+      - available
+      - value
     LeverageType:
       enum:
       - Balances
@@ -5118,19 +5292,22 @@ components:
           additionalProperties:
             $ref: "#/components/schemas/ModuleBalance"
           description: A map of asset IDs to their module balances
+      required:
+      - balances
     ModuleBalance:
       example:
         virtual: virtual
         supplied: supplied
         available: available
         asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        seq: 0
+        seq: 1
         borrowed: borrowed
       properties:
         asset_id:
           format: uuid
           type: string
         seq:
+          minimum: 1
           type: integer
         available:
           description: The available balance in the module for this asset
@@ -5144,6 +5321,13 @@ components:
         borrowed:
           description: The total amount borrowed from the supplied but not yet repaid
           type: string
+      required:
+      - asset_id
+      - available
+      - borrowed
+      - seq
+      - supplied
+      - virtual
     LeverageBalanceResponse:
       properties:
         leverage_balance:
@@ -5188,6 +5372,12 @@ components:
           type: string
         quantity:
           type: string
+      required:
+      - asset_id
+      - global_position_id
+      - isolated_position_id
+      - quantity
+      - transaction_id
     IsolateCollateralResponse:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
@@ -5217,6 +5407,10 @@ components:
         transaction_id:
           format: uuid
           type: string
+      required:
+      - global_position_id
+      - isolated_position_id
+      - transaction_id
     UnitePositionRequest:
       example:
         global_position_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -5241,6 +5435,8 @@ components:
             format: uuid
             type: string
           type: array
+      required:
+      - global_position_id
     UnitePositionResponseEnvelope:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
@@ -5307,6 +5503,12 @@ components:
           type: string
         amount:
           type: string
+      required:
+      - amount
+      - asset_id
+      - final_quantity
+      - position_id
+      - user_id
     FundUserResponseEnvelope:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
@@ -5363,6 +5565,11 @@ components:
           type: string
         quantity:
           type: string
+      required:
+      - asset_id
+      - position_id
+      - quantity
+      - transaction_id
     SupplyResponseEnvelope:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
@@ -5418,6 +5625,11 @@ components:
           type: string
         quantity:
           type: string
+      required:
+      - asset_id
+      - position_id
+      - quantity
+      - transaction_id
     WithdrawResponseEnvelope:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
@@ -5455,20 +5667,29 @@ components:
           type: string
         quantity:
           type: string
+      required:
+      - asset_id
+      - position_id
+      - quantity
+      - transaction_id
     PayLeverageAccruedInterestRequest:
       example:
         quantity: quantity
         asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         position_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
       properties:
-        asset_id:
+        position_id:
           format: uuid
           type: string
-        position_id:
+        asset_id:
           format: uuid
           type: string
         quantity:
           type: string
+      required:
+      - asset_id
+      - position_id
+      - quantity
     PayLeverageAccruedInterest:
       example:
         transaction_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -5487,6 +5708,11 @@ components:
           type: string
         current_accrued_interest_usd:
           type: string
+      required:
+      - asset_id
+      - current_accrued_interest_usd
+      - position_id
+      - transaction_id
     PayLeverageAccruedInterestResponseEnvelope:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
@@ -5512,14 +5738,18 @@ components:
         asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         position_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
       properties:
-        asset_id:
+        position_id:
           format: uuid
           type: string
-        position_id:
+        asset_id:
           format: uuid
           type: string
         quantity:
           type: string
+      required:
+      - asset_id
+      - position_id
+      - quantity
     ClaimLeverageAccruedInterest:
       example:
         transaction_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -5538,6 +5768,11 @@ components:
           type: string
         current_accrued_interest_usd:
           type: string
+      required:
+      - asset_id
+      - current_accrued_interest_usd
+      - position_id
+      - transaction_id
     ClaimLeverageAccruedInterestResponseEnvelope:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
@@ -5611,6 +5846,11 @@ components:
           type: string
         current_accrued_interest_usd:
           type: string
+      required:
+      - asset_id
+      - current_accrued_interest_usd
+      - position_id
+      - transaction_id
     CurrentLeverageAccruedInterest:
       example:
         user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -5629,6 +5869,11 @@ components:
           type: string
         current_accrued_interest_usd:
           type: string
+      required:
+      - asset_id
+      - current_accrued_interest_usd
+      - position_id
+      - user_id
     CurrentLeverageAccruedInterestResponseEnvelope:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
@@ -5685,6 +5930,13 @@ components:
           type: string
         shares_quantity:
           type: string
+      required:
+      - base_quantity
+      - order_book_id
+      - position_id
+      - quote_quantity
+      - shares_quantity
+      - transaction_id
     LiquidityResponseEnvelope:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
@@ -5738,10 +5990,12 @@ components:
         quantity0: quantity0
         asset1: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         quantity1: quantity1
+        admin_user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         kind: ACCRUE_INTEREST
         created_at: 2000-01-23T04:56:07.000+00:00
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        order_side: BUY
       properties:
         id:
           format: uuid
@@ -5764,6 +6018,22 @@ components:
         user_id:
           format: uuid
           type: string
+        admin_user_id:
+          format: uuid
+          type: string
+        order_side:
+          $ref: "#/components/schemas/Side"
+      required:
+      - admin_user_id
+      - asset0
+      - asset1
+      - created_at
+      - id
+      - kind
+      - order_side
+      - quantity0
+      - quantity1
+      - user_id
     ListTransactionsResponseEnvelope:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
@@ -5782,18 +6052,22 @@ components:
           quantity0: quantity0
           asset1: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           quantity1: quantity1
+          admin_user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           kind: ACCRUE_INTEREST
           created_at: 2000-01-23T04:56:07.000+00:00
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          order_side: BUY
         - asset0: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           quantity0: quantity0
           asset1: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           quantity1: quantity1
+          admin_user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           kind: ACCRUE_INTEREST
           created_at: 2000-01-23T04:56:07.000+00:00
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          order_side: BUY
         error: error
     ListTransactionsResponse:
       $ref: "#/components/schemas/ListTransactionsResponseEnvelope"
@@ -5809,10 +6083,12 @@ components:
           quantity0: quantity0
           asset1: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           quantity1: quantity1
+          admin_user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           kind: ACCRUE_INTEREST
           created_at: 2000-01-23T04:56:07.000+00:00
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          order_side: BUY
         Time: 2000-01-23T04:56:07.000+00:00
     StreamTransactionsResponse:
       items:
@@ -5828,17 +6104,16 @@ components:
         Val:
           symbol: symbol
           can_add_liquidity: true
-          max_leverage: 3.616076749251911
-          fractionalized_units: 5
+          max_leverage: 0.3616076749251911
+          fractionalized_units: 1
           kind: BOND
           can_onboard: true
-          maturity_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           can_virtual_borrow: true
           created_at: 2000-01-23T04:56:07.000+00:00
           description: description
           bond:
             kind: COUPON-PAYING
-            payments_per_year: 2
+            payments_per_year: 0
             created_at: 2000-01-23T04:56:07.000+00:00
             issued_at: 2000-01-23T04:56:07.000+00:00
             issuer: issuer
@@ -5850,12 +6125,13 @@ components:
             id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             final_coupon_at: 2000-01-23T04:56:07.000+00:00
             isin: isin
-          max_utilization: 7
-          collateral_weight: 6.027456183070403
-          decimals: 1
-          yield: 9.301444243932576
-          liquidation_weight: 5.637376656633329
-          max_supply: 2
+          leverage_interest_rate: 2.027123023002322
+          max_utilization: 0
+          collateral_weight: 0.6027456183070403
+          decimals: 0
+          yield: 0.9301444243932576
+          liquidation_weight: 0.5637376656633328
+          max_supply: 0
           name: name
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           can_direct_borrow: true
@@ -5881,10 +6157,12 @@ components:
           quantity0: quantity0
           asset1: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           quantity1: quantity1
+          admin_user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           kind: ACCRUE_INTEREST
           created_at: 2000-01-23T04:56:07.000+00:00
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          order_side: BUY
         error: error
     GetTransactionResponse:
       $ref: "#/components/schemas/TransactionResponseEnvelope"
@@ -5902,11 +6180,15 @@ components:
         data:
           description: The response data. Present for successful (2xx) responses.
           type: object
+          nullable: true
         error:
           description: The error message. Present for error (non-2xx) responses.
           type: string
+          nullable: true
         metadata:
           $ref: "#/components/schemas/Metadata"
+      required:
+      - metadata
     StreamEntry:
       properties:
         Val:
@@ -5916,6 +6198,9 @@ components:
           description: The timestamp when the data was created
           format: date-time
           type: string
+      required:
+      - Time
+      - Val
     Metadata:
       description: "Metadata about the response, including status code and tracing\
         \ information."
@@ -5933,6 +6218,10 @@ components:
         request_id:
           description: Request ID for correlating logs and debugging.
           type: string
+      required:
+      - request_id
+      - status_code
+      - trace_id
     CandleResolution:
       enum:
       - 1m
@@ -5968,6 +6257,14 @@ components:
           type: string
         volume:
           type: string
+      required:
+      - close
+      - high
+      - low
+      - open
+      - order_book_id
+      - start_timestamp
+      - volume
     TradeResponseEnvelope:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
@@ -5981,15 +6278,13 @@ components:
           request_id: request_id
         data:
           transaction_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          order_seq: 0
-          fee_asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          order_seq: 1
           side: BUY
-          created_at: 2000-01-23T04:56:07.000+00:00
-          aggressor_indicator: true
-          fee_quantity: fee_quantity
           user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           price: price
+          created_at: 2000-01-23T04:56:07.000+00:00
           asset_0: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          aggressor_indicator: true
           order_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           quantity_0: quantity_0
           order_book_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -5999,15 +6294,13 @@ components:
     Trade:
       example:
         transaction_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        order_seq: 0
-        fee_asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        order_seq: 1
         side: BUY
-        created_at: 2000-01-23T04:56:07.000+00:00
-        aggressor_indicator: true
-        fee_quantity: fee_quantity
         user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         price: price
+        created_at: 2000-01-23T04:56:07.000+00:00
         asset_0: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        aggressor_indicator: true
         order_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         quantity_0: quantity_0
         order_book_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -6021,11 +6314,6 @@ components:
         created_at:
           format: date-time
           type: string
-        fee_asset_id:
-          format: uuid
-          type: string
-        fee_quantity:
-          type: string
         order_book_id:
           format: uuid
           type: string
@@ -6033,6 +6321,7 @@ components:
           format: uuid
           type: string
         order_seq:
+          minimum: 1
           type: integer
         price:
           type: string
@@ -6047,6 +6336,18 @@ components:
           description: "If true, then this order is the aggressor (taker); otherwise\
             \ it is the maker."
           type: boolean
+      required:
+      - aggressor_indicator
+      - asset_0
+      - created_at
+      - order_book_id
+      - order_id
+      - order_seq
+      - price
+      - quantity_0
+      - side
+      - transaction_id
+      - user_id
     ListTradeResponseEnvelope:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
@@ -6062,28 +6363,24 @@ components:
           request_id: request_id
         data:
         - transaction_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          order_seq: 0
-          fee_asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          order_seq: 1
           side: BUY
-          created_at: 2000-01-23T04:56:07.000+00:00
-          aggressor_indicator: true
-          fee_quantity: fee_quantity
           user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           price: price
+          created_at: 2000-01-23T04:56:07.000+00:00
           asset_0: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          aggressor_indicator: true
           order_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           quantity_0: quantity_0
           order_book_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         - transaction_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          order_seq: 0
-          fee_asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          order_seq: 1
           side: BUY
-          created_at: 2000-01-23T04:56:07.000+00:00
-          aggressor_indicator: true
-          fee_quantity: fee_quantity
           user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           price: price
+          created_at: 2000-01-23T04:56:07.000+00:00
           asset_0: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          aggressor_indicator: true
           order_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           quantity_0: quantity_0
           order_book_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -6099,15 +6396,13 @@ components:
       example:
         Val:
           transaction_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          order_seq: 0
-          fee_asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          order_seq: 1
           side: BUY
-          created_at: 2000-01-23T04:56:07.000+00:00
-          aggressor_indicator: true
-          fee_quantity: fee_quantity
           user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           price: price
+          created_at: 2000-01-23T04:56:07.000+00:00
           asset_0: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          aggressor_indicator: true
           order_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           quantity_0: quantity_0
           order_book_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -6130,6 +6425,10 @@ components:
         time:
           format: date-time
           type: string
+      required:
+      - asset_id
+      - price
+      - time
     ListAssetPriceResponseEnvelope:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
@@ -6155,7 +6454,9 @@ components:
       $ref: "#/components/schemas/ListAssetPriceResponseEnvelope"
     StreamAssetPricesResponse:
       additionalProperties:
-        $ref: "#/components/schemas/StreamedAssetPrice"
+        allOf:
+        - $ref: "#/components/schemas/AssetPrice"
+        title: StreamedAssetPrice
       description: "Map of asset prices keyed by asset ID. Format: {\"asset_id\":\
         \ {\"asset_id\": \"uuid\", \"price\": \"decimal\", \"time\": \"date-time\"\
         }}"
@@ -6200,6 +6501,10 @@ components:
         timestamp:
           format: date-time
           type: string
+      required:
+      - pool_id
+      - price
+      - timestamp
     PoolPriceResponseEnvelope:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
@@ -6220,9 +6525,9 @@ components:
       $ref: "#/components/schemas/PoolPriceResponseEnvelope"
     OrderBookBalance:
       example:
-        base_quantity: 0.8008281904610115
-        shares_quantity: 1.4658129805029452
-        quote_quantity: 6.027456183070403
+        base_quantity: 0.08008281904610115
+        shares_quantity: 0.14658129805029452
+        quote_quantity: 0.6027456183070403
         order_book_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
       properties:
         order_book_id:
@@ -6232,15 +6537,23 @@ components:
         base_quantity:
           description: The quantity of the base asset.
           format: double
+          minimum: 0
           type: number
         quote_quantity:
           description: The quantity of the quote asset.
           format: double
+          minimum: 0
           type: number
         shares_quantity:
           description: The quantity of pool shares.
           format: double
+          minimum: 0
           type: number
+      required:
+      - base_quantity
+      - order_book_id
+      - quote_quantity
+      - shares_quantity
     StreamOrderBookBalanceEntry:
       allOf:
       - $ref: "#/components/schemas/StreamEntry"
@@ -6249,9 +6562,9 @@ components:
             $ref: "#/components/schemas/OrderBookBalance"
       example:
         Val:
-          base_quantity: 0.8008281904610115
-          shares_quantity: 1.4658129805029452
-          quote_quantity: 6.027456183070403
+          base_quantity: 0.08008281904610115
+          shares_quantity: 0.14658129805029452
+          quote_quantity: 0.6027456183070403
           order_book_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         Time: 2000-01-23T04:56:07.000+00:00
     StreamOrderBookBalancesResponse:
@@ -6267,6 +6580,9 @@ components:
           type: string
         quantity:
           type: string
+      required:
+      - price
+      - quantity
     LiveOrderbook:
       example:
         asks:
@@ -6290,6 +6606,9 @@ components:
           items:
             $ref: "#/components/schemas/PriceLevel"
           type: array
+      required:
+      - asks
+      - bids
     OrderBookDepth:
       example:
         asks:
@@ -6319,6 +6638,11 @@ components:
         timestamp:
           format: date-time
           type: string
+      required:
+      - asks
+      - bids
+      - order_book_id
+      - timestamp
     ListOrderBookDepthResponseEnvelope:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
@@ -6363,6 +6687,11 @@ components:
         timestamp:
           format: date-time
           type: string
+      required:
+      - best_ask
+      - best_bid
+      - order_book_id
+      - timestamp
     GetTopOfBookResponseEnvelope:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
@@ -6401,6 +6730,12 @@ components:
           type: string
         best_ask:
           type: string
+      required:
+      - best_ask
+      - best_bid
+      - mid_price
+      - order_book_id
+      - spread
     OrderBookSummaryResponseEnvelope:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
@@ -6465,6 +6800,7 @@ components:
         data:
           original_price: original_price
           side: BUY
+          client_order_id: client_order_id
           original_quantity: original_quantity
           kind: LIMIT
           trigger_type: STOP_LOSS
@@ -6573,7 +6909,7 @@ components:
           supplied: supplied
           available: available
           asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          seq: 0
+          seq: 1
           borrowed: borrowed
         error: error
     LedgerModuleByAssetResponse:
@@ -6607,7 +6943,7 @@ components:
                   liquidation_threshold: liquidation_threshold
                   id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
                   locked: locked
-                  seq: 0
+                  seq: 1
                   borrowed: borrowed
             net_stablecoin_equivalence:
               gained:
@@ -6642,7 +6978,7 @@ components:
             liquidation_threshold: liquidation_threshold
             id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             locked: locked
-            seq: 0
+            seq: 1
             borrowed: borrowed
           - supplied: supplied
             impending_borrows: impending_borrows
@@ -6656,7 +6992,7 @@ components:
             liquidation_threshold: liquidation_threshold
             id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             locked: locked
-            seq: 0
+            seq: 1
             borrowed: borrowed
         error: error
     UserBalanceResponse:
@@ -6673,28 +7009,16 @@ components:
           status_code: 0
           request_id: request_id
         data:
-          notional_short:
-            key: notional_short
+          borrow_limit:
+            key: borrow_limit
           supplied:
             key: supplied
           impending_borrows:
             key: impending_borrows
           available:
             key: available
-          notional_long:
-            key: notional_long
-          borrow_limit:
-            key: borrow_limit
-          net_liquidation_value:
-            key: net_liquidation_value
-          portfolio_value:
-            key: portfolio_value
-          realized_pnl:
-            key: realized_pnl
           liquidation_threshold:
             key: liquidation_threshold
-          unrealized_pnl:
-            key: unrealized_pnl
           locked:
             key: locked
           borrowed:
@@ -6732,14 +7056,6 @@ components:
             type: array
     LiquidationTargetsResponse:
       $ref: "#/components/schemas/LiquidationTargetsResponseEnvelope"
-    BorrowRequest:
-      type: object
-    BorrowResponse:
-      type: object
-    RepayRequest:
-      type: object
-    RepayResponse:
-      type: object
     LeverageRequestError:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
@@ -6843,6 +7159,10 @@ components:
         transaction_id:
           format: uuid
           type: string
+      required:
+      - from_position_id
+      - to_position_id
+      - transaction_id
     TransferBalancesResponseEnvelope:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
@@ -6877,6 +7197,10 @@ components:
         is_global:
           description: Whether the position account is the global or an isolated account
           type: boolean
+      required:
+      - is_global
+      - position_id
+      - position_name
     PositionAccounts:
       items:
         $ref: "#/components/schemas/PositionAccount"
@@ -6966,6 +7290,11 @@ components:
           type: string
         is_active:
           type: boolean
+      required:
+      - is_active
+      - key_id
+      - label
+      - user_id
     CreateAPIKeyRequest:
       example:
         expires: 2000-01-23T04:56:07.000+00:00
@@ -6978,6 +7307,8 @@ components:
           format: date-time
           type: string
           nullable: true
+      required:
+      - label
     CreateAPIKeyResponse:
       $ref: "#/components/schemas/CreateAPIKeyResponseEnvelope"
     CreateAPIKeyResponseEnvelope:
@@ -7008,6 +7339,10 @@ components:
           type: string
         label:
           type: string
+      required:
+      - api_key
+      - key_id
+      - label
     RevokeAPIKeyResponse:
       $ref: "#/components/schemas/RevokeAPIKeyResponseEnvelope"
     RevokeAPIKeyResponseEnvelope:
@@ -7043,6 +7378,11 @@ components:
           type: string
         is_active:
           type: boolean
+      required:
+      - is_active
+      - key_id
+      - label
+      - user_id
     ClosePositionResponse:
       $ref: "#/components/schemas/ClosePositionResponseEnvelope"
     ClosePositionRequest:
@@ -7095,6 +7435,10 @@ components:
         remaining:
           description: The margin remaining available from this position.
           type: string
+      required:
+      - available
+      - remaining
+      - used
     PLAsset:
       example:
         liquidation_price: liquidation_price
@@ -7168,6 +7512,20 @@ components:
         unused_collateral:
           description: The unused collateral of the position
           type: string
+      required:
+      - available
+      - avg_entry_price
+      - borrowed
+      - initial_capital
+      - leverage_limit
+      - liquidation_price
+      - locked
+      - margin
+      - mark_price
+      - side
+      - symbol
+      - unrealized_pl
+      - unused_collateral
     PLSummary:
       example:
         leverage: leverage
@@ -7187,6 +7545,12 @@ components:
           type: string
         ltv:
           type: string
+      required:
+      - account_equity
+      - available
+      - health
+      - leverage
+      - ltv
     PLAccount:
       example:
         summary:
@@ -7254,6 +7618,12 @@ components:
           type: array
         summary:
           $ref: "#/components/schemas/PLSummary"
+      required:
+      - account_id
+      - account_name
+      - assets
+      - is_global
+      - summary
     PLAccounts:
       items:
         $ref: "#/components/schemas/PLAccount"
@@ -7416,23 +7786,6 @@ components:
       - asset_id
       - price
       title: AssetConfig
-    StreamedAssetPrice:
-      properties:
-        asset_id:
-          format: uuid
-          type: string
-        price:
-          type: string
-        ytm:
-          type: string
-        time:
-          format: date-time
-          type: string
-      required:
-      - asset_id
-      - price
-      - time
-      title: StreamedAssetPrice
   securitySchemes:
     bearerAuth:
       bearerFormat: JWT

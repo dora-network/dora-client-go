@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Val** | Pointer to [**Transaction**](Transaction.md) |  | [optional] 
-**Time** | Pointer to **time.Time** | The timestamp when the data was created | [optional] 
+**Val** | [**Transaction**](Transaction.md) |  | 
+**Time** | **time.Time** | The timestamp when the data was created | 
 
 ## Methods
 
 ### NewStreamTransactionsEntry
 
-`func NewStreamTransactionsEntry() *StreamTransactionsEntry`
+`func NewStreamTransactionsEntry(val Transaction, time time.Time, ) *StreamTransactionsEntry`
 
 NewStreamTransactionsEntry instantiates a new StreamTransactionsEntry object
 This constructor will assign default values to properties that have it defined,
@@ -45,11 +45,6 @@ and a boolean to check if the value has been set.
 
 SetVal sets Val field to given value.
 
-### HasVal
-
-`func (o *StreamTransactionsEntry) HasVal() bool`
-
-HasVal returns a boolean if a field has been set.
 
 ### GetTime
 
@@ -70,11 +65,6 @@ and a boolean to check if the value has been set.
 
 SetTime sets Time field to given value.
 
-### HasTime
-
-`func (o *StreamTransactionsEntry) HasTime() bool`
-
-HasTime returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

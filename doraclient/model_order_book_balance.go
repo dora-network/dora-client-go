@@ -12,6 +12,8 @@ package doraclient
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the OrderBookBalance type satisfies the MappedNullable interface at compile time
@@ -20,21 +22,27 @@ var _ MappedNullable = &OrderBookBalance{}
 // OrderBookBalance struct for OrderBookBalance
 type OrderBookBalance struct {
 	// The ID of the order book.
-	OrderBookId *string `json:"order_book_id,omitempty"`
+	OrderBookId string `json:"order_book_id"`
 	// The quantity of the base asset.
-	BaseQuantity *float64 `json:"base_quantity,omitempty"`
+	BaseQuantity float64 `json:"base_quantity"`
 	// The quantity of the quote asset.
-	QuoteQuantity *float64 `json:"quote_quantity,omitempty"`
+	QuoteQuantity float64 `json:"quote_quantity"`
 	// The quantity of pool shares.
-	SharesQuantity *float64 `json:"shares_quantity,omitempty"`
+	SharesQuantity float64 `json:"shares_quantity"`
 }
+
+type _OrderBookBalance OrderBookBalance
 
 // NewOrderBookBalance instantiates a new OrderBookBalance object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewOrderBookBalance() *OrderBookBalance {
+func NewOrderBookBalance(orderBookId string, baseQuantity float64, quoteQuantity float64, sharesQuantity float64) *OrderBookBalance {
 	this := OrderBookBalance{}
+	this.OrderBookId = orderBookId
+	this.BaseQuantity = baseQuantity
+	this.QuoteQuantity = quoteQuantity
+	this.SharesQuantity = sharesQuantity
 	return &this
 }
 
@@ -46,132 +54,100 @@ func NewOrderBookBalanceWithDefaults() *OrderBookBalance {
 	return &this
 }
 
-// GetOrderBookId returns the OrderBookId field value if set, zero value otherwise.
+// GetOrderBookId returns the OrderBookId field value
 func (o *OrderBookBalance) GetOrderBookId() string {
-	if o == nil || IsNil(o.OrderBookId) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.OrderBookId
+
+	return o.OrderBookId
 }
 
-// GetOrderBookIdOk returns a tuple with the OrderBookId field value if set, nil otherwise
+// GetOrderBookIdOk returns a tuple with the OrderBookId field value
 // and a boolean to check if the value has been set.
 func (o *OrderBookBalance) GetOrderBookIdOk() (*string, bool) {
-	if o == nil || IsNil(o.OrderBookId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.OrderBookId, true
+	return &o.OrderBookId, true
 }
 
-// HasOrderBookId returns a boolean if a field has been set.
-func (o *OrderBookBalance) HasOrderBookId() bool {
-	if o != nil && !IsNil(o.OrderBookId) {
-		return true
-	}
-
-	return false
-}
-
-// SetOrderBookId gets a reference to the given string and assigns it to the OrderBookId field.
+// SetOrderBookId sets field value
 func (o *OrderBookBalance) SetOrderBookId(v string) {
-	o.OrderBookId = &v
+	o.OrderBookId = v
 }
 
-// GetBaseQuantity returns the BaseQuantity field value if set, zero value otherwise.
+// GetBaseQuantity returns the BaseQuantity field value
 func (o *OrderBookBalance) GetBaseQuantity() float64 {
-	if o == nil || IsNil(o.BaseQuantity) {
+	if o == nil {
 		var ret float64
 		return ret
 	}
-	return *o.BaseQuantity
+
+	return o.BaseQuantity
 }
 
-// GetBaseQuantityOk returns a tuple with the BaseQuantity field value if set, nil otherwise
+// GetBaseQuantityOk returns a tuple with the BaseQuantity field value
 // and a boolean to check if the value has been set.
 func (o *OrderBookBalance) GetBaseQuantityOk() (*float64, bool) {
-	if o == nil || IsNil(o.BaseQuantity) {
+	if o == nil {
 		return nil, false
 	}
-	return o.BaseQuantity, true
+	return &o.BaseQuantity, true
 }
 
-// HasBaseQuantity returns a boolean if a field has been set.
-func (o *OrderBookBalance) HasBaseQuantity() bool {
-	if o != nil && !IsNil(o.BaseQuantity) {
-		return true
-	}
-
-	return false
-}
-
-// SetBaseQuantity gets a reference to the given float64 and assigns it to the BaseQuantity field.
+// SetBaseQuantity sets field value
 func (o *OrderBookBalance) SetBaseQuantity(v float64) {
-	o.BaseQuantity = &v
+	o.BaseQuantity = v
 }
 
-// GetQuoteQuantity returns the QuoteQuantity field value if set, zero value otherwise.
+// GetQuoteQuantity returns the QuoteQuantity field value
 func (o *OrderBookBalance) GetQuoteQuantity() float64 {
-	if o == nil || IsNil(o.QuoteQuantity) {
+	if o == nil {
 		var ret float64
 		return ret
 	}
-	return *o.QuoteQuantity
+
+	return o.QuoteQuantity
 }
 
-// GetQuoteQuantityOk returns a tuple with the QuoteQuantity field value if set, nil otherwise
+// GetQuoteQuantityOk returns a tuple with the QuoteQuantity field value
 // and a boolean to check if the value has been set.
 func (o *OrderBookBalance) GetQuoteQuantityOk() (*float64, bool) {
-	if o == nil || IsNil(o.QuoteQuantity) {
+	if o == nil {
 		return nil, false
 	}
-	return o.QuoteQuantity, true
+	return &o.QuoteQuantity, true
 }
 
-// HasQuoteQuantity returns a boolean if a field has been set.
-func (o *OrderBookBalance) HasQuoteQuantity() bool {
-	if o != nil && !IsNil(o.QuoteQuantity) {
-		return true
-	}
-
-	return false
-}
-
-// SetQuoteQuantity gets a reference to the given float64 and assigns it to the QuoteQuantity field.
+// SetQuoteQuantity sets field value
 func (o *OrderBookBalance) SetQuoteQuantity(v float64) {
-	o.QuoteQuantity = &v
+	o.QuoteQuantity = v
 }
 
-// GetSharesQuantity returns the SharesQuantity field value if set, zero value otherwise.
+// GetSharesQuantity returns the SharesQuantity field value
 func (o *OrderBookBalance) GetSharesQuantity() float64 {
-	if o == nil || IsNil(o.SharesQuantity) {
+	if o == nil {
 		var ret float64
 		return ret
 	}
-	return *o.SharesQuantity
+
+	return o.SharesQuantity
 }
 
-// GetSharesQuantityOk returns a tuple with the SharesQuantity field value if set, nil otherwise
+// GetSharesQuantityOk returns a tuple with the SharesQuantity field value
 // and a boolean to check if the value has been set.
 func (o *OrderBookBalance) GetSharesQuantityOk() (*float64, bool) {
-	if o == nil || IsNil(o.SharesQuantity) {
+	if o == nil {
 		return nil, false
 	}
-	return o.SharesQuantity, true
+	return &o.SharesQuantity, true
 }
 
-// HasSharesQuantity returns a boolean if a field has been set.
-func (o *OrderBookBalance) HasSharesQuantity() bool {
-	if o != nil && !IsNil(o.SharesQuantity) {
-		return true
-	}
-
-	return false
-}
-
-// SetSharesQuantity gets a reference to the given float64 and assigns it to the SharesQuantity field.
+// SetSharesQuantity sets field value
 func (o *OrderBookBalance) SetSharesQuantity(v float64) {
-	o.SharesQuantity = &v
+	o.SharesQuantity = v
 }
 
 func (o OrderBookBalance) MarshalJSON() ([]byte, error) {
@@ -184,19 +160,51 @@ func (o OrderBookBalance) MarshalJSON() ([]byte, error) {
 
 func (o OrderBookBalance) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.OrderBookId) {
-		toSerialize["order_book_id"] = o.OrderBookId
-	}
-	if !IsNil(o.BaseQuantity) {
-		toSerialize["base_quantity"] = o.BaseQuantity
-	}
-	if !IsNil(o.QuoteQuantity) {
-		toSerialize["quote_quantity"] = o.QuoteQuantity
-	}
-	if !IsNil(o.SharesQuantity) {
-		toSerialize["shares_quantity"] = o.SharesQuantity
-	}
+	toSerialize["order_book_id"] = o.OrderBookId
+	toSerialize["base_quantity"] = o.BaseQuantity
+	toSerialize["quote_quantity"] = o.QuoteQuantity
+	toSerialize["shares_quantity"] = o.SharesQuantity
 	return toSerialize, nil
+}
+
+func (o *OrderBookBalance) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"order_book_id",
+		"base_quantity",
+		"quote_quantity",
+		"shares_quantity",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varOrderBookBalance := _OrderBookBalance{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varOrderBookBalance)
+
+	if err != nil {
+		return err
+	}
+
+	*o = OrderBookBalance(varOrderBookBalance)
+
+	return err
 }
 
 type NullableOrderBookBalance struct {

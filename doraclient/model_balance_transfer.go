@@ -12,6 +12,8 @@ package doraclient
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the BalanceTransfer type satisfies the MappedNullable interface at compile time
@@ -19,17 +21,22 @@ var _ MappedNullable = &BalanceTransfer{}
 
 // BalanceTransfer struct for BalanceTransfer
 type BalanceTransfer struct {
-	FromPositionId *string `json:"from_position_id,omitempty"`
-	ToPositionId *string `json:"to_position_id,omitempty"`
-	TransactionId *string `json:"transaction_id,omitempty"`
+	FromPositionId string `json:"from_position_id"`
+	ToPositionId string `json:"to_position_id"`
+	TransactionId string `json:"transaction_id"`
 }
+
+type _BalanceTransfer BalanceTransfer
 
 // NewBalanceTransfer instantiates a new BalanceTransfer object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBalanceTransfer() *BalanceTransfer {
+func NewBalanceTransfer(fromPositionId string, toPositionId string, transactionId string) *BalanceTransfer {
 	this := BalanceTransfer{}
+	this.FromPositionId = fromPositionId
+	this.ToPositionId = toPositionId
+	this.TransactionId = transactionId
 	return &this
 }
 
@@ -41,100 +48,76 @@ func NewBalanceTransferWithDefaults() *BalanceTransfer {
 	return &this
 }
 
-// GetFromPositionId returns the FromPositionId field value if set, zero value otherwise.
+// GetFromPositionId returns the FromPositionId field value
 func (o *BalanceTransfer) GetFromPositionId() string {
-	if o == nil || IsNil(o.FromPositionId) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.FromPositionId
+
+	return o.FromPositionId
 }
 
-// GetFromPositionIdOk returns a tuple with the FromPositionId field value if set, nil otherwise
+// GetFromPositionIdOk returns a tuple with the FromPositionId field value
 // and a boolean to check if the value has been set.
 func (o *BalanceTransfer) GetFromPositionIdOk() (*string, bool) {
-	if o == nil || IsNil(o.FromPositionId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.FromPositionId, true
+	return &o.FromPositionId, true
 }
 
-// HasFromPositionId returns a boolean if a field has been set.
-func (o *BalanceTransfer) HasFromPositionId() bool {
-	if o != nil && !IsNil(o.FromPositionId) {
-		return true
-	}
-
-	return false
-}
-
-// SetFromPositionId gets a reference to the given string and assigns it to the FromPositionId field.
+// SetFromPositionId sets field value
 func (o *BalanceTransfer) SetFromPositionId(v string) {
-	o.FromPositionId = &v
+	o.FromPositionId = v
 }
 
-// GetToPositionId returns the ToPositionId field value if set, zero value otherwise.
+// GetToPositionId returns the ToPositionId field value
 func (o *BalanceTransfer) GetToPositionId() string {
-	if o == nil || IsNil(o.ToPositionId) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.ToPositionId
+
+	return o.ToPositionId
 }
 
-// GetToPositionIdOk returns a tuple with the ToPositionId field value if set, nil otherwise
+// GetToPositionIdOk returns a tuple with the ToPositionId field value
 // and a boolean to check if the value has been set.
 func (o *BalanceTransfer) GetToPositionIdOk() (*string, bool) {
-	if o == nil || IsNil(o.ToPositionId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ToPositionId, true
+	return &o.ToPositionId, true
 }
 
-// HasToPositionId returns a boolean if a field has been set.
-func (o *BalanceTransfer) HasToPositionId() bool {
-	if o != nil && !IsNil(o.ToPositionId) {
-		return true
-	}
-
-	return false
-}
-
-// SetToPositionId gets a reference to the given string and assigns it to the ToPositionId field.
+// SetToPositionId sets field value
 func (o *BalanceTransfer) SetToPositionId(v string) {
-	o.ToPositionId = &v
+	o.ToPositionId = v
 }
 
-// GetTransactionId returns the TransactionId field value if set, zero value otherwise.
+// GetTransactionId returns the TransactionId field value
 func (o *BalanceTransfer) GetTransactionId() string {
-	if o == nil || IsNil(o.TransactionId) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.TransactionId
+
+	return o.TransactionId
 }
 
-// GetTransactionIdOk returns a tuple with the TransactionId field value if set, nil otherwise
+// GetTransactionIdOk returns a tuple with the TransactionId field value
 // and a boolean to check if the value has been set.
 func (o *BalanceTransfer) GetTransactionIdOk() (*string, bool) {
-	if o == nil || IsNil(o.TransactionId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.TransactionId, true
+	return &o.TransactionId, true
 }
 
-// HasTransactionId returns a boolean if a field has been set.
-func (o *BalanceTransfer) HasTransactionId() bool {
-	if o != nil && !IsNil(o.TransactionId) {
-		return true
-	}
-
-	return false
-}
-
-// SetTransactionId gets a reference to the given string and assigns it to the TransactionId field.
+// SetTransactionId sets field value
 func (o *BalanceTransfer) SetTransactionId(v string) {
-	o.TransactionId = &v
+	o.TransactionId = v
 }
 
 func (o BalanceTransfer) MarshalJSON() ([]byte, error) {
@@ -147,16 +130,49 @@ func (o BalanceTransfer) MarshalJSON() ([]byte, error) {
 
 func (o BalanceTransfer) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.FromPositionId) {
-		toSerialize["from_position_id"] = o.FromPositionId
-	}
-	if !IsNil(o.ToPositionId) {
-		toSerialize["to_position_id"] = o.ToPositionId
-	}
-	if !IsNil(o.TransactionId) {
-		toSerialize["transaction_id"] = o.TransactionId
-	}
+	toSerialize["from_position_id"] = o.FromPositionId
+	toSerialize["to_position_id"] = o.ToPositionId
+	toSerialize["transaction_id"] = o.TransactionId
 	return toSerialize, nil
+}
+
+func (o *BalanceTransfer) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"from_position_id",
+		"to_position_id",
+		"transaction_id",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varBalanceTransfer := _BalanceTransfer{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varBalanceTransfer)
+
+	if err != nil {
+		return err
+	}
+
+	*o = BalanceTransfer(varBalanceTransfer)
+
+	return err
 }
 
 type NullableBalanceTransfer struct {

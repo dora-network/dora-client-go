@@ -12,6 +12,8 @@ package doraclient
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the OrderbookStats type satisfies the MappedNullable interface at compile time
@@ -19,31 +21,42 @@ var _ MappedNullable = &OrderbookStats{}
 
 // OrderbookStats struct for OrderbookStats
 type OrderbookStats struct {
-	OrderBookId *string `json:"order_book_id,omitempty"`
+	OrderBookId string `json:"order_book_id"`
 	// Open price of the orderbook
-	OpenPrice *string `json:"open_price,omitempty"`
+	OpenPrice string `json:"open_price"`
 	// Price of the most recent executed trade.
-	LastPrice *string `json:"last_price,omitempty"`
+	LastPrice string `json:"last_price"`
 	// Highest price of the orderbook in the last 24 hours.
-	High24h *string `json:"high_24h,omitempty"`
+	High24h string `json:"high_24h"`
 	// Lowest price of the orderbook in the last 24 hours.
-	Low24h *string `json:"low_24h,omitempty"`
+	Low24h string `json:"low_24h"`
 	// Change in price of the orderbook in the last 24 hours.
-	Change24h *string `json:"change_24h,omitempty"`
+	Change24h string `json:"change_24h"`
 	// Change percentage in price of the orderbook in the last 24 hours.
-	ChangePct24h *string `json:"change_pct_24h,omitempty"`
+	ChangePct24h string `json:"change_pct_24h"`
 	// Total volume of the orderbook in the last 24 hours.
-	Volume24hBase *string `json:"volume_24h_base,omitempty"`
+	Volume24hBase string `json:"volume_24h_base"`
 	// Total volume of the orderbook in the last 24 hours in USD.
-	Volume24hUsd *string `json:"volume_24h_usd,omitempty"`
+	Volume24hUsd string `json:"volume_24h_usd"`
 }
+
+type _OrderbookStats OrderbookStats
 
 // NewOrderbookStats instantiates a new OrderbookStats object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewOrderbookStats() *OrderbookStats {
+func NewOrderbookStats(orderBookId string, openPrice string, lastPrice string, high24h string, low24h string, change24h string, changePct24h string, volume24hBase string, volume24hUsd string) *OrderbookStats {
 	this := OrderbookStats{}
+	this.OrderBookId = orderBookId
+	this.OpenPrice = openPrice
+	this.LastPrice = lastPrice
+	this.High24h = high24h
+	this.Low24h = low24h
+	this.Change24h = change24h
+	this.ChangePct24h = changePct24h
+	this.Volume24hBase = volume24hBase
+	this.Volume24hUsd = volume24hUsd
 	return &this
 }
 
@@ -55,292 +68,220 @@ func NewOrderbookStatsWithDefaults() *OrderbookStats {
 	return &this
 }
 
-// GetOrderBookId returns the OrderBookId field value if set, zero value otherwise.
+// GetOrderBookId returns the OrderBookId field value
 func (o *OrderbookStats) GetOrderBookId() string {
-	if o == nil || IsNil(o.OrderBookId) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.OrderBookId
+
+	return o.OrderBookId
 }
 
-// GetOrderBookIdOk returns a tuple with the OrderBookId field value if set, nil otherwise
+// GetOrderBookIdOk returns a tuple with the OrderBookId field value
 // and a boolean to check if the value has been set.
 func (o *OrderbookStats) GetOrderBookIdOk() (*string, bool) {
-	if o == nil || IsNil(o.OrderBookId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.OrderBookId, true
+	return &o.OrderBookId, true
 }
 
-// HasOrderBookId returns a boolean if a field has been set.
-func (o *OrderbookStats) HasOrderBookId() bool {
-	if o != nil && !IsNil(o.OrderBookId) {
-		return true
-	}
-
-	return false
-}
-
-// SetOrderBookId gets a reference to the given string and assigns it to the OrderBookId field.
+// SetOrderBookId sets field value
 func (o *OrderbookStats) SetOrderBookId(v string) {
-	o.OrderBookId = &v
+	o.OrderBookId = v
 }
 
-// GetOpenPrice returns the OpenPrice field value if set, zero value otherwise.
+// GetOpenPrice returns the OpenPrice field value
 func (o *OrderbookStats) GetOpenPrice() string {
-	if o == nil || IsNil(o.OpenPrice) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.OpenPrice
+
+	return o.OpenPrice
 }
 
-// GetOpenPriceOk returns a tuple with the OpenPrice field value if set, nil otherwise
+// GetOpenPriceOk returns a tuple with the OpenPrice field value
 // and a boolean to check if the value has been set.
 func (o *OrderbookStats) GetOpenPriceOk() (*string, bool) {
-	if o == nil || IsNil(o.OpenPrice) {
+	if o == nil {
 		return nil, false
 	}
-	return o.OpenPrice, true
+	return &o.OpenPrice, true
 }
 
-// HasOpenPrice returns a boolean if a field has been set.
-func (o *OrderbookStats) HasOpenPrice() bool {
-	if o != nil && !IsNil(o.OpenPrice) {
-		return true
-	}
-
-	return false
-}
-
-// SetOpenPrice gets a reference to the given string and assigns it to the OpenPrice field.
+// SetOpenPrice sets field value
 func (o *OrderbookStats) SetOpenPrice(v string) {
-	o.OpenPrice = &v
+	o.OpenPrice = v
 }
 
-// GetLastPrice returns the LastPrice field value if set, zero value otherwise.
+// GetLastPrice returns the LastPrice field value
 func (o *OrderbookStats) GetLastPrice() string {
-	if o == nil || IsNil(o.LastPrice) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.LastPrice
+
+	return o.LastPrice
 }
 
-// GetLastPriceOk returns a tuple with the LastPrice field value if set, nil otherwise
+// GetLastPriceOk returns a tuple with the LastPrice field value
 // and a boolean to check if the value has been set.
 func (o *OrderbookStats) GetLastPriceOk() (*string, bool) {
-	if o == nil || IsNil(o.LastPrice) {
+	if o == nil {
 		return nil, false
 	}
-	return o.LastPrice, true
+	return &o.LastPrice, true
 }
 
-// HasLastPrice returns a boolean if a field has been set.
-func (o *OrderbookStats) HasLastPrice() bool {
-	if o != nil && !IsNil(o.LastPrice) {
-		return true
-	}
-
-	return false
-}
-
-// SetLastPrice gets a reference to the given string and assigns it to the LastPrice field.
+// SetLastPrice sets field value
 func (o *OrderbookStats) SetLastPrice(v string) {
-	o.LastPrice = &v
+	o.LastPrice = v
 }
 
-// GetHigh24h returns the High24h field value if set, zero value otherwise.
+// GetHigh24h returns the High24h field value
 func (o *OrderbookStats) GetHigh24h() string {
-	if o == nil || IsNil(o.High24h) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.High24h
+
+	return o.High24h
 }
 
-// GetHigh24hOk returns a tuple with the High24h field value if set, nil otherwise
+// GetHigh24hOk returns a tuple with the High24h field value
 // and a boolean to check if the value has been set.
 func (o *OrderbookStats) GetHigh24hOk() (*string, bool) {
-	if o == nil || IsNil(o.High24h) {
+	if o == nil {
 		return nil, false
 	}
-	return o.High24h, true
+	return &o.High24h, true
 }
 
-// HasHigh24h returns a boolean if a field has been set.
-func (o *OrderbookStats) HasHigh24h() bool {
-	if o != nil && !IsNil(o.High24h) {
-		return true
-	}
-
-	return false
-}
-
-// SetHigh24h gets a reference to the given string and assigns it to the High24h field.
+// SetHigh24h sets field value
 func (o *OrderbookStats) SetHigh24h(v string) {
-	o.High24h = &v
+	o.High24h = v
 }
 
-// GetLow24h returns the Low24h field value if set, zero value otherwise.
+// GetLow24h returns the Low24h field value
 func (o *OrderbookStats) GetLow24h() string {
-	if o == nil || IsNil(o.Low24h) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Low24h
+
+	return o.Low24h
 }
 
-// GetLow24hOk returns a tuple with the Low24h field value if set, nil otherwise
+// GetLow24hOk returns a tuple with the Low24h field value
 // and a boolean to check if the value has been set.
 func (o *OrderbookStats) GetLow24hOk() (*string, bool) {
-	if o == nil || IsNil(o.Low24h) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Low24h, true
+	return &o.Low24h, true
 }
 
-// HasLow24h returns a boolean if a field has been set.
-func (o *OrderbookStats) HasLow24h() bool {
-	if o != nil && !IsNil(o.Low24h) {
-		return true
-	}
-
-	return false
-}
-
-// SetLow24h gets a reference to the given string and assigns it to the Low24h field.
+// SetLow24h sets field value
 func (o *OrderbookStats) SetLow24h(v string) {
-	o.Low24h = &v
+	o.Low24h = v
 }
 
-// GetChange24h returns the Change24h field value if set, zero value otherwise.
+// GetChange24h returns the Change24h field value
 func (o *OrderbookStats) GetChange24h() string {
-	if o == nil || IsNil(o.Change24h) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Change24h
+
+	return o.Change24h
 }
 
-// GetChange24hOk returns a tuple with the Change24h field value if set, nil otherwise
+// GetChange24hOk returns a tuple with the Change24h field value
 // and a boolean to check if the value has been set.
 func (o *OrderbookStats) GetChange24hOk() (*string, bool) {
-	if o == nil || IsNil(o.Change24h) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Change24h, true
+	return &o.Change24h, true
 }
 
-// HasChange24h returns a boolean if a field has been set.
-func (o *OrderbookStats) HasChange24h() bool {
-	if o != nil && !IsNil(o.Change24h) {
-		return true
-	}
-
-	return false
-}
-
-// SetChange24h gets a reference to the given string and assigns it to the Change24h field.
+// SetChange24h sets field value
 func (o *OrderbookStats) SetChange24h(v string) {
-	o.Change24h = &v
+	o.Change24h = v
 }
 
-// GetChangePct24h returns the ChangePct24h field value if set, zero value otherwise.
+// GetChangePct24h returns the ChangePct24h field value
 func (o *OrderbookStats) GetChangePct24h() string {
-	if o == nil || IsNil(o.ChangePct24h) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.ChangePct24h
+
+	return o.ChangePct24h
 }
 
-// GetChangePct24hOk returns a tuple with the ChangePct24h field value if set, nil otherwise
+// GetChangePct24hOk returns a tuple with the ChangePct24h field value
 // and a boolean to check if the value has been set.
 func (o *OrderbookStats) GetChangePct24hOk() (*string, bool) {
-	if o == nil || IsNil(o.ChangePct24h) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ChangePct24h, true
+	return &o.ChangePct24h, true
 }
 
-// HasChangePct24h returns a boolean if a field has been set.
-func (o *OrderbookStats) HasChangePct24h() bool {
-	if o != nil && !IsNil(o.ChangePct24h) {
-		return true
-	}
-
-	return false
-}
-
-// SetChangePct24h gets a reference to the given string and assigns it to the ChangePct24h field.
+// SetChangePct24h sets field value
 func (o *OrderbookStats) SetChangePct24h(v string) {
-	o.ChangePct24h = &v
+	o.ChangePct24h = v
 }
 
-// GetVolume24hBase returns the Volume24hBase field value if set, zero value otherwise.
+// GetVolume24hBase returns the Volume24hBase field value
 func (o *OrderbookStats) GetVolume24hBase() string {
-	if o == nil || IsNil(o.Volume24hBase) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Volume24hBase
+
+	return o.Volume24hBase
 }
 
-// GetVolume24hBaseOk returns a tuple with the Volume24hBase field value if set, nil otherwise
+// GetVolume24hBaseOk returns a tuple with the Volume24hBase field value
 // and a boolean to check if the value has been set.
 func (o *OrderbookStats) GetVolume24hBaseOk() (*string, bool) {
-	if o == nil || IsNil(o.Volume24hBase) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Volume24hBase, true
+	return &o.Volume24hBase, true
 }
 
-// HasVolume24hBase returns a boolean if a field has been set.
-func (o *OrderbookStats) HasVolume24hBase() bool {
-	if o != nil && !IsNil(o.Volume24hBase) {
-		return true
-	}
-
-	return false
-}
-
-// SetVolume24hBase gets a reference to the given string and assigns it to the Volume24hBase field.
+// SetVolume24hBase sets field value
 func (o *OrderbookStats) SetVolume24hBase(v string) {
-	o.Volume24hBase = &v
+	o.Volume24hBase = v
 }
 
-// GetVolume24hUsd returns the Volume24hUsd field value if set, zero value otherwise.
+// GetVolume24hUsd returns the Volume24hUsd field value
 func (o *OrderbookStats) GetVolume24hUsd() string {
-	if o == nil || IsNil(o.Volume24hUsd) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Volume24hUsd
+
+	return o.Volume24hUsd
 }
 
-// GetVolume24hUsdOk returns a tuple with the Volume24hUsd field value if set, nil otherwise
+// GetVolume24hUsdOk returns a tuple with the Volume24hUsd field value
 // and a boolean to check if the value has been set.
 func (o *OrderbookStats) GetVolume24hUsdOk() (*string, bool) {
-	if o == nil || IsNil(o.Volume24hUsd) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Volume24hUsd, true
+	return &o.Volume24hUsd, true
 }
 
-// HasVolume24hUsd returns a boolean if a field has been set.
-func (o *OrderbookStats) HasVolume24hUsd() bool {
-	if o != nil && !IsNil(o.Volume24hUsd) {
-		return true
-	}
-
-	return false
-}
-
-// SetVolume24hUsd gets a reference to the given string and assigns it to the Volume24hUsd field.
+// SetVolume24hUsd sets field value
 func (o *OrderbookStats) SetVolume24hUsd(v string) {
-	o.Volume24hUsd = &v
+	o.Volume24hUsd = v
 }
 
 func (o OrderbookStats) MarshalJSON() ([]byte, error) {
@@ -353,34 +294,61 @@ func (o OrderbookStats) MarshalJSON() ([]byte, error) {
 
 func (o OrderbookStats) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.OrderBookId) {
-		toSerialize["order_book_id"] = o.OrderBookId
-	}
-	if !IsNil(o.OpenPrice) {
-		toSerialize["open_price"] = o.OpenPrice
-	}
-	if !IsNil(o.LastPrice) {
-		toSerialize["last_price"] = o.LastPrice
-	}
-	if !IsNil(o.High24h) {
-		toSerialize["high_24h"] = o.High24h
-	}
-	if !IsNil(o.Low24h) {
-		toSerialize["low_24h"] = o.Low24h
-	}
-	if !IsNil(o.Change24h) {
-		toSerialize["change_24h"] = o.Change24h
-	}
-	if !IsNil(o.ChangePct24h) {
-		toSerialize["change_pct_24h"] = o.ChangePct24h
-	}
-	if !IsNil(o.Volume24hBase) {
-		toSerialize["volume_24h_base"] = o.Volume24hBase
-	}
-	if !IsNil(o.Volume24hUsd) {
-		toSerialize["volume_24h_usd"] = o.Volume24hUsd
-	}
+	toSerialize["order_book_id"] = o.OrderBookId
+	toSerialize["open_price"] = o.OpenPrice
+	toSerialize["last_price"] = o.LastPrice
+	toSerialize["high_24h"] = o.High24h
+	toSerialize["low_24h"] = o.Low24h
+	toSerialize["change_24h"] = o.Change24h
+	toSerialize["change_pct_24h"] = o.ChangePct24h
+	toSerialize["volume_24h_base"] = o.Volume24hBase
+	toSerialize["volume_24h_usd"] = o.Volume24hUsd
 	return toSerialize, nil
+}
+
+func (o *OrderbookStats) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"order_book_id",
+		"open_price",
+		"last_price",
+		"high_24h",
+		"low_24h",
+		"change_24h",
+		"change_pct_24h",
+		"volume_24h_base",
+		"volume_24h_usd",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varOrderbookStats := _OrderbookStats{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varOrderbookStats)
+
+	if err != nil {
+		return err
+	}
+
+	*o = OrderbookStats(varOrderbookStats)
+
+	return err
 }
 
 type NullableOrderbookStats struct {

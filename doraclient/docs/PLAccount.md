@@ -4,17 +4,17 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**AccountId** | Pointer to **string** | The ID of the account holding the position | [optional] 
-**AccountName** | Pointer to **string** | The name of the account holding the position | [optional] 
-**IsGlobal** | Pointer to **bool** | Whether the account is the global or an isolated account | [optional] 
-**Assets** | Pointer to [**[]PLAsset**](PLAsset.md) |  | [optional] 
-**Summary** | Pointer to [**PLSummary**](PLSummary.md) |  | [optional] 
+**AccountId** | **string** | The ID of the account holding the position | 
+**AccountName** | **string** | The name of the account holding the position | 
+**IsGlobal** | **bool** | Whether the account is the global or an isolated account | 
+**Assets** | [**[]PLAsset**](PLAsset.md) |  | 
+**Summary** | [**PLSummary**](PLSummary.md) |  | 
 
 ## Methods
 
 ### NewPLAccount
 
-`func NewPLAccount() *PLAccount`
+`func NewPLAccount(accountId string, accountName string, isGlobal bool, assets []PLAsset, summary PLSummary, ) *PLAccount`
 
 NewPLAccount instantiates a new PLAccount object
 This constructor will assign default values to properties that have it defined,
@@ -48,11 +48,6 @@ and a boolean to check if the value has been set.
 
 SetAccountId sets AccountId field to given value.
 
-### HasAccountId
-
-`func (o *PLAccount) HasAccountId() bool`
-
-HasAccountId returns a boolean if a field has been set.
 
 ### GetAccountName
 
@@ -73,11 +68,6 @@ and a boolean to check if the value has been set.
 
 SetAccountName sets AccountName field to given value.
 
-### HasAccountName
-
-`func (o *PLAccount) HasAccountName() bool`
-
-HasAccountName returns a boolean if a field has been set.
 
 ### GetIsGlobal
 
@@ -98,11 +88,6 @@ and a boolean to check if the value has been set.
 
 SetIsGlobal sets IsGlobal field to given value.
 
-### HasIsGlobal
-
-`func (o *PLAccount) HasIsGlobal() bool`
-
-HasIsGlobal returns a boolean if a field has been set.
 
 ### GetAssets
 
@@ -123,11 +108,6 @@ and a boolean to check if the value has been set.
 
 SetAssets sets Assets field to given value.
 
-### HasAssets
-
-`func (o *PLAccount) HasAssets() bool`
-
-HasAssets returns a boolean if a field has been set.
 
 ### GetSummary
 
@@ -148,11 +128,6 @@ and a boolean to check if the value has been set.
 
 SetSummary sets Summary field to given value.
 
-### HasSummary
-
-`func (o *PLAccount) HasSummary() bool`
-
-HasSummary returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

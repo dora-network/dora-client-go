@@ -13,6 +13,8 @@ package doraclient
 import (
 	"encoding/json"
 	"time"
+	"bytes"
+	"fmt"
 )
 
 // checks if the UserConfig type satisfies the MappedNullable interface at compile time
@@ -20,22 +22,29 @@ var _ MappedNullable = &UserConfig{}
 
 // UserConfig struct for UserConfig
 type UserConfig struct {
-	Id *string `json:"id,omitempty"`
+	Id string `json:"id"`
 	PhotoUrl *string `json:"photo_url,omitempty"`
 	// User's timezone, e.g., 'America/New_York', or an offset.
 	Timezone *string `json:"timezone,omitempty"`
-	CreatedAt *time.Time `json:"created_at,omitempty"`
-	UpdatedAt *time.Time `json:"updated_at,omitempty"`
-	ShowTutorialCards *bool `json:"show_tutorial_cards,omitempty"`
-	NotificationsEnabled *bool `json:"notifications_enabled,omitempty"`
+	CreatedAt time.Time `json:"created_at"`
+	UpdatedAt time.Time `json:"updated_at"`
+	ShowTutorialCards bool `json:"show_tutorial_cards"`
+	NotificationsEnabled bool `json:"notifications_enabled"`
 }
+
+type _UserConfig UserConfig
 
 // NewUserConfig instantiates a new UserConfig object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUserConfig() *UserConfig {
+func NewUserConfig(id string, createdAt time.Time, updatedAt time.Time, showTutorialCards bool, notificationsEnabled bool) *UserConfig {
 	this := UserConfig{}
+	this.Id = id
+	this.CreatedAt = createdAt
+	this.UpdatedAt = updatedAt
+	this.ShowTutorialCards = showTutorialCards
+	this.NotificationsEnabled = notificationsEnabled
 	return &this
 }
 
@@ -47,36 +56,28 @@ func NewUserConfigWithDefaults() *UserConfig {
 	return &this
 }
 
-// GetId returns the Id field value if set, zero value otherwise.
+// GetId returns the Id field value
 func (o *UserConfig) GetId() string {
-	if o == nil || IsNil(o.Id) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Id
+
+	return o.Id
 }
 
-// GetIdOk returns a tuple with the Id field value if set, nil otherwise
+// GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
 func (o *UserConfig) GetIdOk() (*string, bool) {
-	if o == nil || IsNil(o.Id) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Id, true
+	return &o.Id, true
 }
 
-// HasId returns a boolean if a field has been set.
-func (o *UserConfig) HasId() bool {
-	if o != nil && !IsNil(o.Id) {
-		return true
-	}
-
-	return false
-}
-
-// SetId gets a reference to the given string and assigns it to the Id field.
+// SetId sets field value
 func (o *UserConfig) SetId(v string) {
-	o.Id = &v
+	o.Id = v
 }
 
 // GetPhotoUrl returns the PhotoUrl field value if set, zero value otherwise.
@@ -143,132 +144,100 @@ func (o *UserConfig) SetTimezone(v string) {
 	o.Timezone = &v
 }
 
-// GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
+// GetCreatedAt returns the CreatedAt field value
 func (o *UserConfig) GetCreatedAt() time.Time {
-	if o == nil || IsNil(o.CreatedAt) {
+	if o == nil {
 		var ret time.Time
 		return ret
 	}
-	return *o.CreatedAt
+
+	return o.CreatedAt
 }
 
-// GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
+// GetCreatedAtOk returns a tuple with the CreatedAt field value
 // and a boolean to check if the value has been set.
 func (o *UserConfig) GetCreatedAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.CreatedAt) {
+	if o == nil {
 		return nil, false
 	}
-	return o.CreatedAt, true
+	return &o.CreatedAt, true
 }
 
-// HasCreatedAt returns a boolean if a field has been set.
-func (o *UserConfig) HasCreatedAt() bool {
-	if o != nil && !IsNil(o.CreatedAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetCreatedAt gets a reference to the given time.Time and assigns it to the CreatedAt field.
+// SetCreatedAt sets field value
 func (o *UserConfig) SetCreatedAt(v time.Time) {
-	o.CreatedAt = &v
+	o.CreatedAt = v
 }
 
-// GetUpdatedAt returns the UpdatedAt field value if set, zero value otherwise.
+// GetUpdatedAt returns the UpdatedAt field value
 func (o *UserConfig) GetUpdatedAt() time.Time {
-	if o == nil || IsNil(o.UpdatedAt) {
+	if o == nil {
 		var ret time.Time
 		return ret
 	}
-	return *o.UpdatedAt
+
+	return o.UpdatedAt
 }
 
-// GetUpdatedAtOk returns a tuple with the UpdatedAt field value if set, nil otherwise
+// GetUpdatedAtOk returns a tuple with the UpdatedAt field value
 // and a boolean to check if the value has been set.
 func (o *UserConfig) GetUpdatedAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.UpdatedAt) {
+	if o == nil {
 		return nil, false
 	}
-	return o.UpdatedAt, true
+	return &o.UpdatedAt, true
 }
 
-// HasUpdatedAt returns a boolean if a field has been set.
-func (o *UserConfig) HasUpdatedAt() bool {
-	if o != nil && !IsNil(o.UpdatedAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetUpdatedAt gets a reference to the given time.Time and assigns it to the UpdatedAt field.
+// SetUpdatedAt sets field value
 func (o *UserConfig) SetUpdatedAt(v time.Time) {
-	o.UpdatedAt = &v
+	o.UpdatedAt = v
 }
 
-// GetShowTutorialCards returns the ShowTutorialCards field value if set, zero value otherwise.
+// GetShowTutorialCards returns the ShowTutorialCards field value
 func (o *UserConfig) GetShowTutorialCards() bool {
-	if o == nil || IsNil(o.ShowTutorialCards) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.ShowTutorialCards
+
+	return o.ShowTutorialCards
 }
 
-// GetShowTutorialCardsOk returns a tuple with the ShowTutorialCards field value if set, nil otherwise
+// GetShowTutorialCardsOk returns a tuple with the ShowTutorialCards field value
 // and a boolean to check if the value has been set.
 func (o *UserConfig) GetShowTutorialCardsOk() (*bool, bool) {
-	if o == nil || IsNil(o.ShowTutorialCards) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ShowTutorialCards, true
+	return &o.ShowTutorialCards, true
 }
 
-// HasShowTutorialCards returns a boolean if a field has been set.
-func (o *UserConfig) HasShowTutorialCards() bool {
-	if o != nil && !IsNil(o.ShowTutorialCards) {
-		return true
-	}
-
-	return false
-}
-
-// SetShowTutorialCards gets a reference to the given bool and assigns it to the ShowTutorialCards field.
+// SetShowTutorialCards sets field value
 func (o *UserConfig) SetShowTutorialCards(v bool) {
-	o.ShowTutorialCards = &v
+	o.ShowTutorialCards = v
 }
 
-// GetNotificationsEnabled returns the NotificationsEnabled field value if set, zero value otherwise.
+// GetNotificationsEnabled returns the NotificationsEnabled field value
 func (o *UserConfig) GetNotificationsEnabled() bool {
-	if o == nil || IsNil(o.NotificationsEnabled) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.NotificationsEnabled
+
+	return o.NotificationsEnabled
 }
 
-// GetNotificationsEnabledOk returns a tuple with the NotificationsEnabled field value if set, nil otherwise
+// GetNotificationsEnabledOk returns a tuple with the NotificationsEnabled field value
 // and a boolean to check if the value has been set.
 func (o *UserConfig) GetNotificationsEnabledOk() (*bool, bool) {
-	if o == nil || IsNil(o.NotificationsEnabled) {
+	if o == nil {
 		return nil, false
 	}
-	return o.NotificationsEnabled, true
+	return &o.NotificationsEnabled, true
 }
 
-// HasNotificationsEnabled returns a boolean if a field has been set.
-func (o *UserConfig) HasNotificationsEnabled() bool {
-	if o != nil && !IsNil(o.NotificationsEnabled) {
-		return true
-	}
-
-	return false
-}
-
-// SetNotificationsEnabled gets a reference to the given bool and assigns it to the NotificationsEnabled field.
+// SetNotificationsEnabled sets field value
 func (o *UserConfig) SetNotificationsEnabled(v bool) {
-	o.NotificationsEnabled = &v
+	o.NotificationsEnabled = v
 }
 
 func (o UserConfig) MarshalJSON() ([]byte, error) {
@@ -281,28 +250,59 @@ func (o UserConfig) MarshalJSON() ([]byte, error) {
 
 func (o UserConfig) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Id) {
-		toSerialize["id"] = o.Id
-	}
+	toSerialize["id"] = o.Id
 	if !IsNil(o.PhotoUrl) {
 		toSerialize["photo_url"] = o.PhotoUrl
 	}
 	if !IsNil(o.Timezone) {
 		toSerialize["timezone"] = o.Timezone
 	}
-	if !IsNil(o.CreatedAt) {
-		toSerialize["created_at"] = o.CreatedAt
-	}
-	if !IsNil(o.UpdatedAt) {
-		toSerialize["updated_at"] = o.UpdatedAt
-	}
-	if !IsNil(o.ShowTutorialCards) {
-		toSerialize["show_tutorial_cards"] = o.ShowTutorialCards
-	}
-	if !IsNil(o.NotificationsEnabled) {
-		toSerialize["notifications_enabled"] = o.NotificationsEnabled
-	}
+	toSerialize["created_at"] = o.CreatedAt
+	toSerialize["updated_at"] = o.UpdatedAt
+	toSerialize["show_tutorial_cards"] = o.ShowTutorialCards
+	toSerialize["notifications_enabled"] = o.NotificationsEnabled
 	return toSerialize, nil
+}
+
+func (o *UserConfig) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"id",
+		"created_at",
+		"updated_at",
+		"show_tutorial_cards",
+		"notifications_enabled",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varUserConfig := _UserConfig{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varUserConfig)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UserConfig(varUserConfig)
+
+	return err
 }
 
 type NullableUserConfig struct {

@@ -4,16 +4,16 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**OrderBookId** | Pointer to **string** | The ID of the order book. | [optional] 
-**BaseQuantity** | Pointer to **float64** | The quantity of the base asset. | [optional] 
-**QuoteQuantity** | Pointer to **float64** | The quantity of the quote asset. | [optional] 
-**SharesQuantity** | Pointer to **float64** | The quantity of pool shares. | [optional] 
+**OrderBookId** | **string** | The ID of the order book. | 
+**BaseQuantity** | **float64** | The quantity of the base asset. | 
+**QuoteQuantity** | **float64** | The quantity of the quote asset. | 
+**SharesQuantity** | **float64** | The quantity of pool shares. | 
 
 ## Methods
 
 ### NewOrderBookBalance
 
-`func NewOrderBookBalance() *OrderBookBalance`
+`func NewOrderBookBalance(orderBookId string, baseQuantity float64, quoteQuantity float64, sharesQuantity float64, ) *OrderBookBalance`
 
 NewOrderBookBalance instantiates a new OrderBookBalance object
 This constructor will assign default values to properties that have it defined,
@@ -47,11 +47,6 @@ and a boolean to check if the value has been set.
 
 SetOrderBookId sets OrderBookId field to given value.
 
-### HasOrderBookId
-
-`func (o *OrderBookBalance) HasOrderBookId() bool`
-
-HasOrderBookId returns a boolean if a field has been set.
 
 ### GetBaseQuantity
 
@@ -72,11 +67,6 @@ and a boolean to check if the value has been set.
 
 SetBaseQuantity sets BaseQuantity field to given value.
 
-### HasBaseQuantity
-
-`func (o *OrderBookBalance) HasBaseQuantity() bool`
-
-HasBaseQuantity returns a boolean if a field has been set.
 
 ### GetQuoteQuantity
 
@@ -97,11 +87,6 @@ and a boolean to check if the value has been set.
 
 SetQuoteQuantity sets QuoteQuantity field to given value.
 
-### HasQuoteQuantity
-
-`func (o *OrderBookBalance) HasQuoteQuantity() bool`
-
-HasQuoteQuantity returns a boolean if a field has been set.
 
 ### GetSharesQuantity
 
@@ -122,11 +107,6 @@ and a boolean to check if the value has been set.
 
 SetSharesQuantity sets SharesQuantity field to given value.
 
-### HasSharesQuantity
-
-`func (o *OrderBookBalance) HasSharesQuantity() bool`
-
-HasSharesQuantity returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

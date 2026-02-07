@@ -4,15 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**StatusCode** | Pointer to **int32** | HTTP status code for the response. | [optional] 
-**TraceId** | Pointer to **string** | Trace ID for distributed tracing. | [optional] 
-**RequestId** | Pointer to **string** | Request ID for correlating logs and debugging. | [optional] 
+**StatusCode** | **int32** | HTTP status code for the response. | 
+**TraceId** | **string** | Trace ID for distributed tracing. | 
+**RequestId** | **string** | Request ID for correlating logs and debugging. | 
 
 ## Methods
 
 ### NewMetadata
 
-`func NewMetadata() *Metadata`
+`func NewMetadata(statusCode int32, traceId string, requestId string, ) *Metadata`
 
 NewMetadata instantiates a new Metadata object
 This constructor will assign default values to properties that have it defined,
@@ -46,11 +46,6 @@ and a boolean to check if the value has been set.
 
 SetStatusCode sets StatusCode field to given value.
 
-### HasStatusCode
-
-`func (o *Metadata) HasStatusCode() bool`
-
-HasStatusCode returns a boolean if a field has been set.
 
 ### GetTraceId
 
@@ -71,11 +66,6 @@ and a boolean to check if the value has been set.
 
 SetTraceId sets TraceId field to given value.
 
-### HasTraceId
-
-`func (o *Metadata) HasTraceId() bool`
-
-HasTraceId returns a boolean if a field has been set.
 
 ### GetRequestId
 
@@ -96,11 +86,6 @@ and a boolean to check if the value has been set.
 
 SetRequestId sets RequestId field to given value.
 
-### HasRequestId
-
-`func (o *Metadata) HasRequestId() bool`
-
-HasRequestId returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

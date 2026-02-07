@@ -13,6 +13,8 @@ package doraclient
 import (
 	"encoding/json"
 	"time"
+	"bytes"
+	"fmt"
 )
 
 // checks if the CouponPayment type satisfies the MappedNullable interface at compile time
@@ -20,26 +22,39 @@ var _ MappedNullable = &CouponPayment{}
 
 // CouponPayment struct for CouponPayment
 type CouponPayment struct {
-	Id *string `json:"id,omitempty"`
-	AssetId *string `json:"asset_id,omitempty"`
-	Yield *float32 `json:"yield,omitempty"`
-	StartAt *time.Time `json:"start_at,omitempty"`
-	EndAt *time.Time `json:"end_at,omitempty"`
-	PayAt *time.Time `json:"pay_at,omitempty"`
-	AvailableToPay *string `json:"available_to_pay,omitempty"`
-	CompletedAt *time.Time `json:"completed_at,omitempty"`
-	CreatedAt *time.Time `json:"created_at,omitempty"`
+	Id string `json:"id"`
+	AssetId string `json:"asset_id"`
+	Yield float32 `json:"yield"`
+	StartAt time.Time `json:"start_at"`
+	EndAt time.Time `json:"end_at"`
+	PayAt time.Time `json:"pay_at"`
+	AvailableToPay string `json:"available_to_pay"`
+	CompletedAt time.Time `json:"completed_at"`
+	CreatedAt time.Time `json:"created_at"`
 	// Number of nanoseconds to wait between coupon payment processing, must be at least 1000 (1 microsecond)
-	ProcessEvery *int32 `json:"process_every,omitempty"`
-	LastProcessedAt *time.Time `json:"last_processed_at,omitempty"`
+	ProcessEvery int32 `json:"process_every"`
+	LastProcessedAt time.Time `json:"last_processed_at"`
 }
+
+type _CouponPayment CouponPayment
 
 // NewCouponPayment instantiates a new CouponPayment object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCouponPayment() *CouponPayment {
+func NewCouponPayment(id string, assetId string, yield float32, startAt time.Time, endAt time.Time, payAt time.Time, availableToPay string, completedAt time.Time, createdAt time.Time, processEvery int32, lastProcessedAt time.Time) *CouponPayment {
 	this := CouponPayment{}
+	this.Id = id
+	this.AssetId = assetId
+	this.Yield = yield
+	this.StartAt = startAt
+	this.EndAt = endAt
+	this.PayAt = payAt
+	this.AvailableToPay = availableToPay
+	this.CompletedAt = completedAt
+	this.CreatedAt = createdAt
+	this.ProcessEvery = processEvery
+	this.LastProcessedAt = lastProcessedAt
 	return &this
 }
 
@@ -51,356 +66,268 @@ func NewCouponPaymentWithDefaults() *CouponPayment {
 	return &this
 }
 
-// GetId returns the Id field value if set, zero value otherwise.
+// GetId returns the Id field value
 func (o *CouponPayment) GetId() string {
-	if o == nil || IsNil(o.Id) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Id
+
+	return o.Id
 }
 
-// GetIdOk returns a tuple with the Id field value if set, nil otherwise
+// GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
 func (o *CouponPayment) GetIdOk() (*string, bool) {
-	if o == nil || IsNil(o.Id) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Id, true
+	return &o.Id, true
 }
 
-// HasId returns a boolean if a field has been set.
-func (o *CouponPayment) HasId() bool {
-	if o != nil && !IsNil(o.Id) {
-		return true
-	}
-
-	return false
-}
-
-// SetId gets a reference to the given string and assigns it to the Id field.
+// SetId sets field value
 func (o *CouponPayment) SetId(v string) {
-	o.Id = &v
+	o.Id = v
 }
 
-// GetAssetId returns the AssetId field value if set, zero value otherwise.
+// GetAssetId returns the AssetId field value
 func (o *CouponPayment) GetAssetId() string {
-	if o == nil || IsNil(o.AssetId) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.AssetId
+
+	return o.AssetId
 }
 
-// GetAssetIdOk returns a tuple with the AssetId field value if set, nil otherwise
+// GetAssetIdOk returns a tuple with the AssetId field value
 // and a boolean to check if the value has been set.
 func (o *CouponPayment) GetAssetIdOk() (*string, bool) {
-	if o == nil || IsNil(o.AssetId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.AssetId, true
+	return &o.AssetId, true
 }
 
-// HasAssetId returns a boolean if a field has been set.
-func (o *CouponPayment) HasAssetId() bool {
-	if o != nil && !IsNil(o.AssetId) {
-		return true
-	}
-
-	return false
-}
-
-// SetAssetId gets a reference to the given string and assigns it to the AssetId field.
+// SetAssetId sets field value
 func (o *CouponPayment) SetAssetId(v string) {
-	o.AssetId = &v
+	o.AssetId = v
 }
 
-// GetYield returns the Yield field value if set, zero value otherwise.
+// GetYield returns the Yield field value
 func (o *CouponPayment) GetYield() float32 {
-	if o == nil || IsNil(o.Yield) {
+	if o == nil {
 		var ret float32
 		return ret
 	}
-	return *o.Yield
+
+	return o.Yield
 }
 
-// GetYieldOk returns a tuple with the Yield field value if set, nil otherwise
+// GetYieldOk returns a tuple with the Yield field value
 // and a boolean to check if the value has been set.
 func (o *CouponPayment) GetYieldOk() (*float32, bool) {
-	if o == nil || IsNil(o.Yield) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Yield, true
+	return &o.Yield, true
 }
 
-// HasYield returns a boolean if a field has been set.
-func (o *CouponPayment) HasYield() bool {
-	if o != nil && !IsNil(o.Yield) {
-		return true
-	}
-
-	return false
-}
-
-// SetYield gets a reference to the given float32 and assigns it to the Yield field.
+// SetYield sets field value
 func (o *CouponPayment) SetYield(v float32) {
-	o.Yield = &v
+	o.Yield = v
 }
 
-// GetStartAt returns the StartAt field value if set, zero value otherwise.
+// GetStartAt returns the StartAt field value
 func (o *CouponPayment) GetStartAt() time.Time {
-	if o == nil || IsNil(o.StartAt) {
+	if o == nil {
 		var ret time.Time
 		return ret
 	}
-	return *o.StartAt
+
+	return o.StartAt
 }
 
-// GetStartAtOk returns a tuple with the StartAt field value if set, nil otherwise
+// GetStartAtOk returns a tuple with the StartAt field value
 // and a boolean to check if the value has been set.
 func (o *CouponPayment) GetStartAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.StartAt) {
+	if o == nil {
 		return nil, false
 	}
-	return o.StartAt, true
+	return &o.StartAt, true
 }
 
-// HasStartAt returns a boolean if a field has been set.
-func (o *CouponPayment) HasStartAt() bool {
-	if o != nil && !IsNil(o.StartAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetStartAt gets a reference to the given time.Time and assigns it to the StartAt field.
+// SetStartAt sets field value
 func (o *CouponPayment) SetStartAt(v time.Time) {
-	o.StartAt = &v
+	o.StartAt = v
 }
 
-// GetEndAt returns the EndAt field value if set, zero value otherwise.
+// GetEndAt returns the EndAt field value
 func (o *CouponPayment) GetEndAt() time.Time {
-	if o == nil || IsNil(o.EndAt) {
+	if o == nil {
 		var ret time.Time
 		return ret
 	}
-	return *o.EndAt
+
+	return o.EndAt
 }
 
-// GetEndAtOk returns a tuple with the EndAt field value if set, nil otherwise
+// GetEndAtOk returns a tuple with the EndAt field value
 // and a boolean to check if the value has been set.
 func (o *CouponPayment) GetEndAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.EndAt) {
+	if o == nil {
 		return nil, false
 	}
-	return o.EndAt, true
+	return &o.EndAt, true
 }
 
-// HasEndAt returns a boolean if a field has been set.
-func (o *CouponPayment) HasEndAt() bool {
-	if o != nil && !IsNil(o.EndAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetEndAt gets a reference to the given time.Time and assigns it to the EndAt field.
+// SetEndAt sets field value
 func (o *CouponPayment) SetEndAt(v time.Time) {
-	o.EndAt = &v
+	o.EndAt = v
 }
 
-// GetPayAt returns the PayAt field value if set, zero value otherwise.
+// GetPayAt returns the PayAt field value
 func (o *CouponPayment) GetPayAt() time.Time {
-	if o == nil || IsNil(o.PayAt) {
+	if o == nil {
 		var ret time.Time
 		return ret
 	}
-	return *o.PayAt
+
+	return o.PayAt
 }
 
-// GetPayAtOk returns a tuple with the PayAt field value if set, nil otherwise
+// GetPayAtOk returns a tuple with the PayAt field value
 // and a boolean to check if the value has been set.
 func (o *CouponPayment) GetPayAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.PayAt) {
+	if o == nil {
 		return nil, false
 	}
-	return o.PayAt, true
+	return &o.PayAt, true
 }
 
-// HasPayAt returns a boolean if a field has been set.
-func (o *CouponPayment) HasPayAt() bool {
-	if o != nil && !IsNil(o.PayAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetPayAt gets a reference to the given time.Time and assigns it to the PayAt field.
+// SetPayAt sets field value
 func (o *CouponPayment) SetPayAt(v time.Time) {
-	o.PayAt = &v
+	o.PayAt = v
 }
 
-// GetAvailableToPay returns the AvailableToPay field value if set, zero value otherwise.
+// GetAvailableToPay returns the AvailableToPay field value
 func (o *CouponPayment) GetAvailableToPay() string {
-	if o == nil || IsNil(o.AvailableToPay) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.AvailableToPay
+
+	return o.AvailableToPay
 }
 
-// GetAvailableToPayOk returns a tuple with the AvailableToPay field value if set, nil otherwise
+// GetAvailableToPayOk returns a tuple with the AvailableToPay field value
 // and a boolean to check if the value has been set.
 func (o *CouponPayment) GetAvailableToPayOk() (*string, bool) {
-	if o == nil || IsNil(o.AvailableToPay) {
+	if o == nil {
 		return nil, false
 	}
-	return o.AvailableToPay, true
+	return &o.AvailableToPay, true
 }
 
-// HasAvailableToPay returns a boolean if a field has been set.
-func (o *CouponPayment) HasAvailableToPay() bool {
-	if o != nil && !IsNil(o.AvailableToPay) {
-		return true
-	}
-
-	return false
-}
-
-// SetAvailableToPay gets a reference to the given string and assigns it to the AvailableToPay field.
+// SetAvailableToPay sets field value
 func (o *CouponPayment) SetAvailableToPay(v string) {
-	o.AvailableToPay = &v
+	o.AvailableToPay = v
 }
 
-// GetCompletedAt returns the CompletedAt field value if set, zero value otherwise.
+// GetCompletedAt returns the CompletedAt field value
 func (o *CouponPayment) GetCompletedAt() time.Time {
-	if o == nil || IsNil(o.CompletedAt) {
+	if o == nil {
 		var ret time.Time
 		return ret
 	}
-	return *o.CompletedAt
+
+	return o.CompletedAt
 }
 
-// GetCompletedAtOk returns a tuple with the CompletedAt field value if set, nil otherwise
+// GetCompletedAtOk returns a tuple with the CompletedAt field value
 // and a boolean to check if the value has been set.
 func (o *CouponPayment) GetCompletedAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.CompletedAt) {
+	if o == nil {
 		return nil, false
 	}
-	return o.CompletedAt, true
+	return &o.CompletedAt, true
 }
 
-// HasCompletedAt returns a boolean if a field has been set.
-func (o *CouponPayment) HasCompletedAt() bool {
-	if o != nil && !IsNil(o.CompletedAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetCompletedAt gets a reference to the given time.Time and assigns it to the CompletedAt field.
+// SetCompletedAt sets field value
 func (o *CouponPayment) SetCompletedAt(v time.Time) {
-	o.CompletedAt = &v
+	o.CompletedAt = v
 }
 
-// GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
+// GetCreatedAt returns the CreatedAt field value
 func (o *CouponPayment) GetCreatedAt() time.Time {
-	if o == nil || IsNil(o.CreatedAt) {
+	if o == nil {
 		var ret time.Time
 		return ret
 	}
-	return *o.CreatedAt
+
+	return o.CreatedAt
 }
 
-// GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
+// GetCreatedAtOk returns a tuple with the CreatedAt field value
 // and a boolean to check if the value has been set.
 func (o *CouponPayment) GetCreatedAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.CreatedAt) {
+	if o == nil {
 		return nil, false
 	}
-	return o.CreatedAt, true
+	return &o.CreatedAt, true
 }
 
-// HasCreatedAt returns a boolean if a field has been set.
-func (o *CouponPayment) HasCreatedAt() bool {
-	if o != nil && !IsNil(o.CreatedAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetCreatedAt gets a reference to the given time.Time and assigns it to the CreatedAt field.
+// SetCreatedAt sets field value
 func (o *CouponPayment) SetCreatedAt(v time.Time) {
-	o.CreatedAt = &v
+	o.CreatedAt = v
 }
 
-// GetProcessEvery returns the ProcessEvery field value if set, zero value otherwise.
+// GetProcessEvery returns the ProcessEvery field value
 func (o *CouponPayment) GetProcessEvery() int32 {
-	if o == nil || IsNil(o.ProcessEvery) {
+	if o == nil {
 		var ret int32
 		return ret
 	}
-	return *o.ProcessEvery
+
+	return o.ProcessEvery
 }
 
-// GetProcessEveryOk returns a tuple with the ProcessEvery field value if set, nil otherwise
+// GetProcessEveryOk returns a tuple with the ProcessEvery field value
 // and a boolean to check if the value has been set.
 func (o *CouponPayment) GetProcessEveryOk() (*int32, bool) {
-	if o == nil || IsNil(o.ProcessEvery) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ProcessEvery, true
+	return &o.ProcessEvery, true
 }
 
-// HasProcessEvery returns a boolean if a field has been set.
-func (o *CouponPayment) HasProcessEvery() bool {
-	if o != nil && !IsNil(o.ProcessEvery) {
-		return true
-	}
-
-	return false
-}
-
-// SetProcessEvery gets a reference to the given int32 and assigns it to the ProcessEvery field.
+// SetProcessEvery sets field value
 func (o *CouponPayment) SetProcessEvery(v int32) {
-	o.ProcessEvery = &v
+	o.ProcessEvery = v
 }
 
-// GetLastProcessedAt returns the LastProcessedAt field value if set, zero value otherwise.
+// GetLastProcessedAt returns the LastProcessedAt field value
 func (o *CouponPayment) GetLastProcessedAt() time.Time {
-	if o == nil || IsNil(o.LastProcessedAt) {
+	if o == nil {
 		var ret time.Time
 		return ret
 	}
-	return *o.LastProcessedAt
+
+	return o.LastProcessedAt
 }
 
-// GetLastProcessedAtOk returns a tuple with the LastProcessedAt field value if set, nil otherwise
+// GetLastProcessedAtOk returns a tuple with the LastProcessedAt field value
 // and a boolean to check if the value has been set.
 func (o *CouponPayment) GetLastProcessedAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.LastProcessedAt) {
+	if o == nil {
 		return nil, false
 	}
-	return o.LastProcessedAt, true
+	return &o.LastProcessedAt, true
 }
 
-// HasLastProcessedAt returns a boolean if a field has been set.
-func (o *CouponPayment) HasLastProcessedAt() bool {
-	if o != nil && !IsNil(o.LastProcessedAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetLastProcessedAt gets a reference to the given time.Time and assigns it to the LastProcessedAt field.
+// SetLastProcessedAt sets field value
 func (o *CouponPayment) SetLastProcessedAt(v time.Time) {
-	o.LastProcessedAt = &v
+	o.LastProcessedAt = v
 }
 
 func (o CouponPayment) MarshalJSON() ([]byte, error) {
@@ -413,40 +340,65 @@ func (o CouponPayment) MarshalJSON() ([]byte, error) {
 
 func (o CouponPayment) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Id) {
-		toSerialize["id"] = o.Id
-	}
-	if !IsNil(o.AssetId) {
-		toSerialize["asset_id"] = o.AssetId
-	}
-	if !IsNil(o.Yield) {
-		toSerialize["yield"] = o.Yield
-	}
-	if !IsNil(o.StartAt) {
-		toSerialize["start_at"] = o.StartAt
-	}
-	if !IsNil(o.EndAt) {
-		toSerialize["end_at"] = o.EndAt
-	}
-	if !IsNil(o.PayAt) {
-		toSerialize["pay_at"] = o.PayAt
-	}
-	if !IsNil(o.AvailableToPay) {
-		toSerialize["available_to_pay"] = o.AvailableToPay
-	}
-	if !IsNil(o.CompletedAt) {
-		toSerialize["completed_at"] = o.CompletedAt
-	}
-	if !IsNil(o.CreatedAt) {
-		toSerialize["created_at"] = o.CreatedAt
-	}
-	if !IsNil(o.ProcessEvery) {
-		toSerialize["process_every"] = o.ProcessEvery
-	}
-	if !IsNil(o.LastProcessedAt) {
-		toSerialize["last_processed_at"] = o.LastProcessedAt
-	}
+	toSerialize["id"] = o.Id
+	toSerialize["asset_id"] = o.AssetId
+	toSerialize["yield"] = o.Yield
+	toSerialize["start_at"] = o.StartAt
+	toSerialize["end_at"] = o.EndAt
+	toSerialize["pay_at"] = o.PayAt
+	toSerialize["available_to_pay"] = o.AvailableToPay
+	toSerialize["completed_at"] = o.CompletedAt
+	toSerialize["created_at"] = o.CreatedAt
+	toSerialize["process_every"] = o.ProcessEvery
+	toSerialize["last_processed_at"] = o.LastProcessedAt
 	return toSerialize, nil
+}
+
+func (o *CouponPayment) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"id",
+		"asset_id",
+		"yield",
+		"start_at",
+		"end_at",
+		"pay_at",
+		"available_to_pay",
+		"completed_at",
+		"created_at",
+		"process_every",
+		"last_processed_at",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varCouponPayment := _CouponPayment{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varCouponPayment)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CouponPayment(varCouponPayment)
+
+	return err
 }
 
 type NullableCouponPayment struct {

@@ -4,16 +4,16 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**UserId** | Pointer to **string** |  | [optional] 
-**AssetId** | Pointer to **string** |  | [optional] 
-**PositionId** | Pointer to **string** |  | [optional] 
-**CurrentAccruedInterestUsd** | Pointer to **string** |  | [optional] 
+**UserId** | **string** |  | 
+**AssetId** | **string** |  | 
+**PositionId** | **string** |  | 
+**CurrentAccruedInterestUsd** | **string** |  | 
 
 ## Methods
 
 ### NewCurrentLeverageAccruedInterest
 
-`func NewCurrentLeverageAccruedInterest() *CurrentLeverageAccruedInterest`
+`func NewCurrentLeverageAccruedInterest(userId string, assetId string, positionId string, currentAccruedInterestUsd string, ) *CurrentLeverageAccruedInterest`
 
 NewCurrentLeverageAccruedInterest instantiates a new CurrentLeverageAccruedInterest object
 This constructor will assign default values to properties that have it defined,
@@ -47,11 +47,6 @@ and a boolean to check if the value has been set.
 
 SetUserId sets UserId field to given value.
 
-### HasUserId
-
-`func (o *CurrentLeverageAccruedInterest) HasUserId() bool`
-
-HasUserId returns a boolean if a field has been set.
 
 ### GetAssetId
 
@@ -72,11 +67,6 @@ and a boolean to check if the value has been set.
 
 SetAssetId sets AssetId field to given value.
 
-### HasAssetId
-
-`func (o *CurrentLeverageAccruedInterest) HasAssetId() bool`
-
-HasAssetId returns a boolean if a field has been set.
 
 ### GetPositionId
 
@@ -97,11 +87,6 @@ and a boolean to check if the value has been set.
 
 SetPositionId sets PositionId field to given value.
 
-### HasPositionId
-
-`func (o *CurrentLeverageAccruedInterest) HasPositionId() bool`
-
-HasPositionId returns a boolean if a field has been set.
 
 ### GetCurrentAccruedInterestUsd
 
@@ -122,11 +107,6 @@ and a boolean to check if the value has been set.
 
 SetCurrentAccruedInterestUsd sets CurrentAccruedInterestUsd field to given value.
 
-### HasCurrentAccruedInterestUsd
-
-`func (o *CurrentLeverageAccruedInterest) HasCurrentAccruedInterestUsd() bool`
-
-HasCurrentAccruedInterestUsd returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

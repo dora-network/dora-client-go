@@ -4,18 +4,18 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**AssetId** | Pointer to **string** |  | [optional] 
-**Seq** | Pointer to **int32** |  | [optional] 
-**Available** | Pointer to **string** | The available balance in the module for this asset | [optional] 
-**Supplied** | Pointer to **string** | The total amount supplied to the module for this asset | [optional] 
-**Virtual** | Pointer to **string** | Assets minted by virtual-borrowing, but not yet repaid | [optional] 
-**Borrowed** | Pointer to **string** | The total amount borrowed from the supplied but not yet repaid | [optional] 
+**AssetId** | **string** |  | 
+**Seq** | **int32** |  | 
+**Available** | **string** | The available balance in the module for this asset | 
+**Supplied** | **string** | The total amount supplied to the module for this asset | 
+**Virtual** | **string** | Assets minted by virtual-borrowing, but not yet repaid | 
+**Borrowed** | **string** | The total amount borrowed from the supplied but not yet repaid | 
 
 ## Methods
 
 ### NewModuleBalance
 
-`func NewModuleBalance() *ModuleBalance`
+`func NewModuleBalance(assetId string, seq int32, available string, supplied string, virtual string, borrowed string, ) *ModuleBalance`
 
 NewModuleBalance instantiates a new ModuleBalance object
 This constructor will assign default values to properties that have it defined,
@@ -49,11 +49,6 @@ and a boolean to check if the value has been set.
 
 SetAssetId sets AssetId field to given value.
 
-### HasAssetId
-
-`func (o *ModuleBalance) HasAssetId() bool`
-
-HasAssetId returns a boolean if a field has been set.
 
 ### GetSeq
 
@@ -74,11 +69,6 @@ and a boolean to check if the value has been set.
 
 SetSeq sets Seq field to given value.
 
-### HasSeq
-
-`func (o *ModuleBalance) HasSeq() bool`
-
-HasSeq returns a boolean if a field has been set.
 
 ### GetAvailable
 
@@ -99,11 +89,6 @@ and a boolean to check if the value has been set.
 
 SetAvailable sets Available field to given value.
 
-### HasAvailable
-
-`func (o *ModuleBalance) HasAvailable() bool`
-
-HasAvailable returns a boolean if a field has been set.
 
 ### GetSupplied
 
@@ -124,11 +109,6 @@ and a boolean to check if the value has been set.
 
 SetSupplied sets Supplied field to given value.
 
-### HasSupplied
-
-`func (o *ModuleBalance) HasSupplied() bool`
-
-HasSupplied returns a boolean if a field has been set.
 
 ### GetVirtual
 
@@ -149,11 +129,6 @@ and a boolean to check if the value has been set.
 
 SetVirtual sets Virtual field to given value.
 
-### HasVirtual
-
-`func (o *ModuleBalance) HasVirtual() bool`
-
-HasVirtual returns a boolean if a field has been set.
 
 ### GetBorrowed
 
@@ -174,11 +149,6 @@ and a boolean to check if the value has been set.
 
 SetBorrowed sets Borrowed field to given value.
 
-### HasBorrowed
-
-`func (o *ModuleBalance) HasBorrowed() bool`
-
-HasBorrowed returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

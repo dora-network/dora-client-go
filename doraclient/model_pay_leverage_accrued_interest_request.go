@@ -12,6 +12,8 @@ package doraclient
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the PayLeverageAccruedInterestRequest type satisfies the MappedNullable interface at compile time
@@ -19,17 +21,22 @@ var _ MappedNullable = &PayLeverageAccruedInterestRequest{}
 
 // PayLeverageAccruedInterestRequest struct for PayLeverageAccruedInterestRequest
 type PayLeverageAccruedInterestRequest struct {
-	AssetId *string `json:"asset_id,omitempty"`
-	PositionId *string `json:"position_id,omitempty"`
-	Quantity *string `json:"quantity,omitempty"`
+	PositionId string `json:"position_id"`
+	AssetId string `json:"asset_id"`
+	Quantity string `json:"quantity"`
 }
+
+type _PayLeverageAccruedInterestRequest PayLeverageAccruedInterestRequest
 
 // NewPayLeverageAccruedInterestRequest instantiates a new PayLeverageAccruedInterestRequest object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPayLeverageAccruedInterestRequest() *PayLeverageAccruedInterestRequest {
+func NewPayLeverageAccruedInterestRequest(positionId string, assetId string, quantity string) *PayLeverageAccruedInterestRequest {
 	this := PayLeverageAccruedInterestRequest{}
+	this.PositionId = positionId
+	this.AssetId = assetId
+	this.Quantity = quantity
 	return &this
 }
 
@@ -41,100 +48,76 @@ func NewPayLeverageAccruedInterestRequestWithDefaults() *PayLeverageAccruedInter
 	return &this
 }
 
-// GetAssetId returns the AssetId field value if set, zero value otherwise.
-func (o *PayLeverageAccruedInterestRequest) GetAssetId() string {
-	if o == nil || IsNil(o.AssetId) {
-		var ret string
-		return ret
-	}
-	return *o.AssetId
-}
-
-// GetAssetIdOk returns a tuple with the AssetId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PayLeverageAccruedInterestRequest) GetAssetIdOk() (*string, bool) {
-	if o == nil || IsNil(o.AssetId) {
-		return nil, false
-	}
-	return o.AssetId, true
-}
-
-// HasAssetId returns a boolean if a field has been set.
-func (o *PayLeverageAccruedInterestRequest) HasAssetId() bool {
-	if o != nil && !IsNil(o.AssetId) {
-		return true
-	}
-
-	return false
-}
-
-// SetAssetId gets a reference to the given string and assigns it to the AssetId field.
-func (o *PayLeverageAccruedInterestRequest) SetAssetId(v string) {
-	o.AssetId = &v
-}
-
-// GetPositionId returns the PositionId field value if set, zero value otherwise.
+// GetPositionId returns the PositionId field value
 func (o *PayLeverageAccruedInterestRequest) GetPositionId() string {
-	if o == nil || IsNil(o.PositionId) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.PositionId
+
+	return o.PositionId
 }
 
-// GetPositionIdOk returns a tuple with the PositionId field value if set, nil otherwise
+// GetPositionIdOk returns a tuple with the PositionId field value
 // and a boolean to check if the value has been set.
 func (o *PayLeverageAccruedInterestRequest) GetPositionIdOk() (*string, bool) {
-	if o == nil || IsNil(o.PositionId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.PositionId, true
+	return &o.PositionId, true
 }
 
-// HasPositionId returns a boolean if a field has been set.
-func (o *PayLeverageAccruedInterestRequest) HasPositionId() bool {
-	if o != nil && !IsNil(o.PositionId) {
-		return true
-	}
-
-	return false
-}
-
-// SetPositionId gets a reference to the given string and assigns it to the PositionId field.
+// SetPositionId sets field value
 func (o *PayLeverageAccruedInterestRequest) SetPositionId(v string) {
-	o.PositionId = &v
+	o.PositionId = v
 }
 
-// GetQuantity returns the Quantity field value if set, zero value otherwise.
-func (o *PayLeverageAccruedInterestRequest) GetQuantity() string {
-	if o == nil || IsNil(o.Quantity) {
+// GetAssetId returns the AssetId field value
+func (o *PayLeverageAccruedInterestRequest) GetAssetId() string {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Quantity
+
+	return o.AssetId
 }
 
-// GetQuantityOk returns a tuple with the Quantity field value if set, nil otherwise
+// GetAssetIdOk returns a tuple with the AssetId field value
 // and a boolean to check if the value has been set.
-func (o *PayLeverageAccruedInterestRequest) GetQuantityOk() (*string, bool) {
-	if o == nil || IsNil(o.Quantity) {
+func (o *PayLeverageAccruedInterestRequest) GetAssetIdOk() (*string, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Quantity, true
+	return &o.AssetId, true
 }
 
-// HasQuantity returns a boolean if a field has been set.
-func (o *PayLeverageAccruedInterestRequest) HasQuantity() bool {
-	if o != nil && !IsNil(o.Quantity) {
-		return true
+// SetAssetId sets field value
+func (o *PayLeverageAccruedInterestRequest) SetAssetId(v string) {
+	o.AssetId = v
+}
+
+// GetQuantity returns the Quantity field value
+func (o *PayLeverageAccruedInterestRequest) GetQuantity() string {
+	if o == nil {
+		var ret string
+		return ret
 	}
 
-	return false
+	return o.Quantity
 }
 
-// SetQuantity gets a reference to the given string and assigns it to the Quantity field.
+// GetQuantityOk returns a tuple with the Quantity field value
+// and a boolean to check if the value has been set.
+func (o *PayLeverageAccruedInterestRequest) GetQuantityOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Quantity, true
+}
+
+// SetQuantity sets field value
 func (o *PayLeverageAccruedInterestRequest) SetQuantity(v string) {
-	o.Quantity = &v
+	o.Quantity = v
 }
 
 func (o PayLeverageAccruedInterestRequest) MarshalJSON() ([]byte, error) {
@@ -147,16 +130,49 @@ func (o PayLeverageAccruedInterestRequest) MarshalJSON() ([]byte, error) {
 
 func (o PayLeverageAccruedInterestRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.AssetId) {
-		toSerialize["asset_id"] = o.AssetId
-	}
-	if !IsNil(o.PositionId) {
-		toSerialize["position_id"] = o.PositionId
-	}
-	if !IsNil(o.Quantity) {
-		toSerialize["quantity"] = o.Quantity
-	}
+	toSerialize["position_id"] = o.PositionId
+	toSerialize["asset_id"] = o.AssetId
+	toSerialize["quantity"] = o.Quantity
 	return toSerialize, nil
+}
+
+func (o *PayLeverageAccruedInterestRequest) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"position_id",
+		"asset_id",
+		"quantity",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varPayLeverageAccruedInterestRequest := _PayLeverageAccruedInterestRequest{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varPayLeverageAccruedInterestRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PayLeverageAccruedInterestRequest(varPayLeverageAccruedInterestRequest)
+
+	return err
 }
 
 type NullablePayLeverageAccruedInterestRequest struct {

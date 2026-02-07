@@ -4,28 +4,28 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Symbol** | Pointer to **string** | The symbol of the asset | [optional] 
-**Side** | Pointer to **string** | The side of the position (LONG or SHORT) | [optional] 
-**AvgEntryPrice** | Pointer to **string** | The average entry price of the position | [optional] 
-**MarkPrice** | Pointer to **string** | The current mark price for the asset to calculate daily PL. This is usually the close price of the previous day | [optional] 
-**LiquidationPrice** | Pointer to **string** | The liquidation price of the position | [optional] 
-**Available** | Pointer to **string** | The available quantity in units of the asset | [optional] 
-**Borrowed** | Pointer to **string** | The borrowed quantity in units of the asset | [optional] 
-**Margin** | Pointer to [**Margin**](Margin.md) |  | [optional] 
-**UnrealizedPl** | Pointer to **string** | The unrealized profit or loss of the position | [optional] 
-**LeverageLimit** | Pointer to **string** | The leverage limit for the position | [optional] 
+**Symbol** | **string** | The symbol of the asset | 
+**Side** | **string** | The side of the position (LONG or SHORT) | 
+**AvgEntryPrice** | **string** | The average entry price of the position | 
+**MarkPrice** | **string** | The current mark price for the asset to calculate daily PL. This is usually the close price of the previous day | 
+**LiquidationPrice** | **string** | The liquidation price of the position | 
+**Available** | **string** | The available quantity in units of the asset | 
+**Borrowed** | **string** | The borrowed quantity in units of the asset | 
+**Margin** | [**Margin**](Margin.md) |  | 
+**UnrealizedPl** | **string** | The unrealized profit or loss of the position | 
+**LeverageLimit** | **string** | The leverage limit for the position | 
 **Tp** | Pointer to **string** | The take profit price set for the position, if any | [optional] 
 **Sl** | Pointer to **string** | The stop loss price set for the position, if any | [optional] 
-**InitialCapital** | Pointer to **string** | The initial capital of the position | [optional] 
+**InitialCapital** | **string** | The initial capital of the position | 
 **ImpendingBorrows** | Pointer to **string** | The impending borrows of the position | [optional] 
-**Locked** | Pointer to **string** | The locked amount of the position | [optional] 
-**UnusedCollateral** | Pointer to **string** | The unused collateral of the position | [optional] 
+**Locked** | **string** | The locked amount of the position | 
+**UnusedCollateral** | **string** | The unused collateral of the position | 
 
 ## Methods
 
 ### NewPLAsset
 
-`func NewPLAsset() *PLAsset`
+`func NewPLAsset(symbol string, side string, avgEntryPrice string, markPrice string, liquidationPrice string, available string, borrowed string, margin Margin, unrealizedPl string, leverageLimit string, initialCapital string, locked string, unusedCollateral string, ) *PLAsset`
 
 NewPLAsset instantiates a new PLAsset object
 This constructor will assign default values to properties that have it defined,
@@ -59,11 +59,6 @@ and a boolean to check if the value has been set.
 
 SetSymbol sets Symbol field to given value.
 
-### HasSymbol
-
-`func (o *PLAsset) HasSymbol() bool`
-
-HasSymbol returns a boolean if a field has been set.
 
 ### GetSide
 
@@ -84,11 +79,6 @@ and a boolean to check if the value has been set.
 
 SetSide sets Side field to given value.
 
-### HasSide
-
-`func (o *PLAsset) HasSide() bool`
-
-HasSide returns a boolean if a field has been set.
 
 ### GetAvgEntryPrice
 
@@ -109,11 +99,6 @@ and a boolean to check if the value has been set.
 
 SetAvgEntryPrice sets AvgEntryPrice field to given value.
 
-### HasAvgEntryPrice
-
-`func (o *PLAsset) HasAvgEntryPrice() bool`
-
-HasAvgEntryPrice returns a boolean if a field has been set.
 
 ### GetMarkPrice
 
@@ -134,11 +119,6 @@ and a boolean to check if the value has been set.
 
 SetMarkPrice sets MarkPrice field to given value.
 
-### HasMarkPrice
-
-`func (o *PLAsset) HasMarkPrice() bool`
-
-HasMarkPrice returns a boolean if a field has been set.
 
 ### GetLiquidationPrice
 
@@ -159,11 +139,6 @@ and a boolean to check if the value has been set.
 
 SetLiquidationPrice sets LiquidationPrice field to given value.
 
-### HasLiquidationPrice
-
-`func (o *PLAsset) HasLiquidationPrice() bool`
-
-HasLiquidationPrice returns a boolean if a field has been set.
 
 ### GetAvailable
 
@@ -184,11 +159,6 @@ and a boolean to check if the value has been set.
 
 SetAvailable sets Available field to given value.
 
-### HasAvailable
-
-`func (o *PLAsset) HasAvailable() bool`
-
-HasAvailable returns a boolean if a field has been set.
 
 ### GetBorrowed
 
@@ -209,11 +179,6 @@ and a boolean to check if the value has been set.
 
 SetBorrowed sets Borrowed field to given value.
 
-### HasBorrowed
-
-`func (o *PLAsset) HasBorrowed() bool`
-
-HasBorrowed returns a boolean if a field has been set.
 
 ### GetMargin
 
@@ -234,11 +199,6 @@ and a boolean to check if the value has been set.
 
 SetMargin sets Margin field to given value.
 
-### HasMargin
-
-`func (o *PLAsset) HasMargin() bool`
-
-HasMargin returns a boolean if a field has been set.
 
 ### GetUnrealizedPl
 
@@ -259,11 +219,6 @@ and a boolean to check if the value has been set.
 
 SetUnrealizedPl sets UnrealizedPl field to given value.
 
-### HasUnrealizedPl
-
-`func (o *PLAsset) HasUnrealizedPl() bool`
-
-HasUnrealizedPl returns a boolean if a field has been set.
 
 ### GetLeverageLimit
 
@@ -284,11 +239,6 @@ and a boolean to check if the value has been set.
 
 SetLeverageLimit sets LeverageLimit field to given value.
 
-### HasLeverageLimit
-
-`func (o *PLAsset) HasLeverageLimit() bool`
-
-HasLeverageLimit returns a boolean if a field has been set.
 
 ### GetTp
 
@@ -359,11 +309,6 @@ and a boolean to check if the value has been set.
 
 SetInitialCapital sets InitialCapital field to given value.
 
-### HasInitialCapital
-
-`func (o *PLAsset) HasInitialCapital() bool`
-
-HasInitialCapital returns a boolean if a field has been set.
 
 ### GetImpendingBorrows
 
@@ -409,11 +354,6 @@ and a boolean to check if the value has been set.
 
 SetLocked sets Locked field to given value.
 
-### HasLocked
-
-`func (o *PLAsset) HasLocked() bool`
-
-HasLocked returns a boolean if a field has been set.
 
 ### GetUnusedCollateral
 
@@ -434,11 +374,6 @@ and a boolean to check if the value has been set.
 
 SetUnusedCollateral sets UnusedCollateral field to given value.
 
-### HasUnusedCollateral
-
-`func (o *PLAsset) HasUnusedCollateral() bool`
-
-HasUnusedCollateral returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

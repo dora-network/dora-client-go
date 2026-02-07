@@ -12,6 +12,8 @@ package doraclient
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the Margin type satisfies the MappedNullable interface at compile time
@@ -20,19 +22,24 @@ var _ MappedNullable = &Margin{}
 // Margin struct for Margin
 type Margin struct {
 	// The total margin available from this position.
-	Available *string `json:"available,omitempty"`
+	Available string `json:"available"`
 	// The amount of margin used from this position.
-	Used *string `json:"used,omitempty"`
+	Used string `json:"used"`
 	// The margin remaining available from this position.
-	Remaining *string `json:"remaining,omitempty"`
+	Remaining string `json:"remaining"`
 }
+
+type _Margin Margin
 
 // NewMargin instantiates a new Margin object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewMargin() *Margin {
+func NewMargin(available string, used string, remaining string) *Margin {
 	this := Margin{}
+	this.Available = available
+	this.Used = used
+	this.Remaining = remaining
 	return &this
 }
 
@@ -44,100 +51,76 @@ func NewMarginWithDefaults() *Margin {
 	return &this
 }
 
-// GetAvailable returns the Available field value if set, zero value otherwise.
+// GetAvailable returns the Available field value
 func (o *Margin) GetAvailable() string {
-	if o == nil || IsNil(o.Available) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Available
+
+	return o.Available
 }
 
-// GetAvailableOk returns a tuple with the Available field value if set, nil otherwise
+// GetAvailableOk returns a tuple with the Available field value
 // and a boolean to check if the value has been set.
 func (o *Margin) GetAvailableOk() (*string, bool) {
-	if o == nil || IsNil(o.Available) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Available, true
+	return &o.Available, true
 }
 
-// HasAvailable returns a boolean if a field has been set.
-func (o *Margin) HasAvailable() bool {
-	if o != nil && !IsNil(o.Available) {
-		return true
-	}
-
-	return false
-}
-
-// SetAvailable gets a reference to the given string and assigns it to the Available field.
+// SetAvailable sets field value
 func (o *Margin) SetAvailable(v string) {
-	o.Available = &v
+	o.Available = v
 }
 
-// GetUsed returns the Used field value if set, zero value otherwise.
+// GetUsed returns the Used field value
 func (o *Margin) GetUsed() string {
-	if o == nil || IsNil(o.Used) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Used
+
+	return o.Used
 }
 
-// GetUsedOk returns a tuple with the Used field value if set, nil otherwise
+// GetUsedOk returns a tuple with the Used field value
 // and a boolean to check if the value has been set.
 func (o *Margin) GetUsedOk() (*string, bool) {
-	if o == nil || IsNil(o.Used) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Used, true
+	return &o.Used, true
 }
 
-// HasUsed returns a boolean if a field has been set.
-func (o *Margin) HasUsed() bool {
-	if o != nil && !IsNil(o.Used) {
-		return true
-	}
-
-	return false
-}
-
-// SetUsed gets a reference to the given string and assigns it to the Used field.
+// SetUsed sets field value
 func (o *Margin) SetUsed(v string) {
-	o.Used = &v
+	o.Used = v
 }
 
-// GetRemaining returns the Remaining field value if set, zero value otherwise.
+// GetRemaining returns the Remaining field value
 func (o *Margin) GetRemaining() string {
-	if o == nil || IsNil(o.Remaining) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Remaining
+
+	return o.Remaining
 }
 
-// GetRemainingOk returns a tuple with the Remaining field value if set, nil otherwise
+// GetRemainingOk returns a tuple with the Remaining field value
 // and a boolean to check if the value has been set.
 func (o *Margin) GetRemainingOk() (*string, bool) {
-	if o == nil || IsNil(o.Remaining) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Remaining, true
+	return &o.Remaining, true
 }
 
-// HasRemaining returns a boolean if a field has been set.
-func (o *Margin) HasRemaining() bool {
-	if o != nil && !IsNil(o.Remaining) {
-		return true
-	}
-
-	return false
-}
-
-// SetRemaining gets a reference to the given string and assigns it to the Remaining field.
+// SetRemaining sets field value
 func (o *Margin) SetRemaining(v string) {
-	o.Remaining = &v
+	o.Remaining = v
 }
 
 func (o Margin) MarshalJSON() ([]byte, error) {
@@ -150,16 +133,49 @@ func (o Margin) MarshalJSON() ([]byte, error) {
 
 func (o Margin) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Available) {
-		toSerialize["available"] = o.Available
-	}
-	if !IsNil(o.Used) {
-		toSerialize["used"] = o.Used
-	}
-	if !IsNil(o.Remaining) {
-		toSerialize["remaining"] = o.Remaining
-	}
+	toSerialize["available"] = o.Available
+	toSerialize["used"] = o.Used
+	toSerialize["remaining"] = o.Remaining
 	return toSerialize, nil
+}
+
+func (o *Margin) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"available",
+		"used",
+		"remaining",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varMargin := _Margin{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varMargin)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Margin(varMargin)
+
+	return err
 }
 
 type NullableMargin struct {

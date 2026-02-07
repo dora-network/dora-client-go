@@ -4,17 +4,17 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Leverage** | Pointer to **string** | The leverage used to obtain the position on the isolated account | [optional] 
-**AccountEquity** | Pointer to **string** |  | [optional] 
-**Available** | Pointer to **string** |  | [optional] 
-**Health** | Pointer to **string** |  | [optional] 
-**Ltv** | Pointer to **string** |  | [optional] 
+**Leverage** | **string** | The leverage used to obtain the position on the isolated account | 
+**AccountEquity** | **string** |  | 
+**Available** | **string** |  | 
+**Health** | **string** |  | 
+**Ltv** | **string** |  | 
 
 ## Methods
 
 ### NewPLSummary
 
-`func NewPLSummary() *PLSummary`
+`func NewPLSummary(leverage string, accountEquity string, available string, health string, ltv string, ) *PLSummary`
 
 NewPLSummary instantiates a new PLSummary object
 This constructor will assign default values to properties that have it defined,
@@ -48,11 +48,6 @@ and a boolean to check if the value has been set.
 
 SetLeverage sets Leverage field to given value.
 
-### HasLeverage
-
-`func (o *PLSummary) HasLeverage() bool`
-
-HasLeverage returns a boolean if a field has been set.
 
 ### GetAccountEquity
 
@@ -73,11 +68,6 @@ and a boolean to check if the value has been set.
 
 SetAccountEquity sets AccountEquity field to given value.
 
-### HasAccountEquity
-
-`func (o *PLSummary) HasAccountEquity() bool`
-
-HasAccountEquity returns a boolean if a field has been set.
 
 ### GetAvailable
 
@@ -98,11 +88,6 @@ and a boolean to check if the value has been set.
 
 SetAvailable sets Available field to given value.
 
-### HasAvailable
-
-`func (o *PLSummary) HasAvailable() bool`
-
-HasAvailable returns a boolean if a field has been set.
 
 ### GetHealth
 
@@ -123,11 +108,6 @@ and a boolean to check if the value has been set.
 
 SetHealth sets Health field to given value.
 
-### HasHealth
-
-`func (o *PLSummary) HasHealth() bool`
-
-HasHealth returns a boolean if a field has been set.
 
 ### GetLtv
 
@@ -148,11 +128,6 @@ and a boolean to check if the value has been set.
 
 SetLtv sets Ltv field to given value.
 
-### HasLtv
-
-`func (o *PLSummary) HasLtv() bool`
-
-HasLtv returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

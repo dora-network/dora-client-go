@@ -36,6 +36,8 @@ type CreateOrderRequest struct {
 	GoodTillDate *time.Time `json:"good_till_date,omitempty"`
 	TriggerPrice *string `json:"trigger_price,omitempty"`
 	TriggerType *TriggerType `json:"trigger_type,omitempty"`
+	// An optional client-provided identifier for the order.
+	ClientOrderId *string `json:"client_order_id,omitempty"`
 }
 
 type _CreateOrderRequest CreateOrderRequest
@@ -367,6 +369,38 @@ func (o *CreateOrderRequest) SetTriggerType(v TriggerType) {
 	o.TriggerType = &v
 }
 
+// GetClientOrderId returns the ClientOrderId field value if set, zero value otherwise.
+func (o *CreateOrderRequest) GetClientOrderId() string {
+	if o == nil || IsNil(o.ClientOrderId) {
+		var ret string
+		return ret
+	}
+	return *o.ClientOrderId
+}
+
+// GetClientOrderIdOk returns a tuple with the ClientOrderId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateOrderRequest) GetClientOrderIdOk() (*string, bool) {
+	if o == nil || IsNil(o.ClientOrderId) {
+		return nil, false
+	}
+	return o.ClientOrderId, true
+}
+
+// HasClientOrderId returns a boolean if a field has been set.
+func (o *CreateOrderRequest) HasClientOrderId() bool {
+	if o != nil && !IsNil(o.ClientOrderId) {
+		return true
+	}
+
+	return false
+}
+
+// SetClientOrderId gets a reference to the given string and assigns it to the ClientOrderId field.
+func (o *CreateOrderRequest) SetClientOrderId(v string) {
+	o.ClientOrderId = &v
+}
+
 func (o CreateOrderRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -397,6 +431,9 @@ func (o CreateOrderRequest) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.TriggerType) {
 		toSerialize["trigger_type"] = o.TriggerType
+	}
+	if !IsNil(o.ClientOrderId) {
+		toSerialize["client_order_id"] = o.ClientOrderId
 	}
 	return toSerialize, nil
 }

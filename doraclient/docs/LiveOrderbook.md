@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Bids** | Pointer to [**[]PriceLevel**](PriceLevel.md) | sorted in desc order by price | [optional] 
-**Asks** | Pointer to [**[]PriceLevel**](PriceLevel.md) | sorted in asc order by price | [optional] 
+**Bids** | [**[]PriceLevel**](PriceLevel.md) | sorted in desc order by price | 
+**Asks** | [**[]PriceLevel**](PriceLevel.md) | sorted in asc order by price | 
 
 ## Methods
 
 ### NewLiveOrderbook
 
-`func NewLiveOrderbook() *LiveOrderbook`
+`func NewLiveOrderbook(bids []PriceLevel, asks []PriceLevel, ) *LiveOrderbook`
 
 NewLiveOrderbook instantiates a new LiveOrderbook object
 This constructor will assign default values to properties that have it defined,
@@ -45,11 +45,6 @@ and a boolean to check if the value has been set.
 
 SetBids sets Bids field to given value.
 
-### HasBids
-
-`func (o *LiveOrderbook) HasBids() bool`
-
-HasBids returns a boolean if a field has been set.
 
 ### GetAsks
 
@@ -70,11 +65,6 @@ and a boolean to check if the value has been set.
 
 SetAsks sets Asks field to given value.
 
-### HasAsks
-
-`func (o *LiveOrderbook) HasAsks() bool`
-
-HasAsks returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

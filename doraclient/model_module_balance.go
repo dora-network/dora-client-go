@@ -12,6 +12,8 @@ package doraclient
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the ModuleBalance type satisfies the MappedNullable interface at compile time
@@ -19,24 +21,32 @@ var _ MappedNullable = &ModuleBalance{}
 
 // ModuleBalance struct for ModuleBalance
 type ModuleBalance struct {
-	AssetId *string `json:"asset_id,omitempty"`
-	Seq *int32 `json:"seq,omitempty"`
+	AssetId string `json:"asset_id"`
+	Seq int32 `json:"seq"`
 	// The available balance in the module for this asset
-	Available *string `json:"available,omitempty"`
+	Available string `json:"available"`
 	// The total amount supplied to the module for this asset
-	Supplied *string `json:"supplied,omitempty"`
+	Supplied string `json:"supplied"`
 	// Assets minted by virtual-borrowing, but not yet repaid
-	Virtual *string `json:"virtual,omitempty"`
+	Virtual string `json:"virtual"`
 	// The total amount borrowed from the supplied but not yet repaid
-	Borrowed *string `json:"borrowed,omitempty"`
+	Borrowed string `json:"borrowed"`
 }
+
+type _ModuleBalance ModuleBalance
 
 // NewModuleBalance instantiates a new ModuleBalance object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewModuleBalance() *ModuleBalance {
+func NewModuleBalance(assetId string, seq int32, available string, supplied string, virtual string, borrowed string) *ModuleBalance {
 	this := ModuleBalance{}
+	this.AssetId = assetId
+	this.Seq = seq
+	this.Available = available
+	this.Supplied = supplied
+	this.Virtual = virtual
+	this.Borrowed = borrowed
 	return &this
 }
 
@@ -48,196 +58,148 @@ func NewModuleBalanceWithDefaults() *ModuleBalance {
 	return &this
 }
 
-// GetAssetId returns the AssetId field value if set, zero value otherwise.
+// GetAssetId returns the AssetId field value
 func (o *ModuleBalance) GetAssetId() string {
-	if o == nil || IsNil(o.AssetId) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.AssetId
+
+	return o.AssetId
 }
 
-// GetAssetIdOk returns a tuple with the AssetId field value if set, nil otherwise
+// GetAssetIdOk returns a tuple with the AssetId field value
 // and a boolean to check if the value has been set.
 func (o *ModuleBalance) GetAssetIdOk() (*string, bool) {
-	if o == nil || IsNil(o.AssetId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.AssetId, true
+	return &o.AssetId, true
 }
 
-// HasAssetId returns a boolean if a field has been set.
-func (o *ModuleBalance) HasAssetId() bool {
-	if o != nil && !IsNil(o.AssetId) {
-		return true
-	}
-
-	return false
-}
-
-// SetAssetId gets a reference to the given string and assigns it to the AssetId field.
+// SetAssetId sets field value
 func (o *ModuleBalance) SetAssetId(v string) {
-	o.AssetId = &v
+	o.AssetId = v
 }
 
-// GetSeq returns the Seq field value if set, zero value otherwise.
+// GetSeq returns the Seq field value
 func (o *ModuleBalance) GetSeq() int32 {
-	if o == nil || IsNil(o.Seq) {
+	if o == nil {
 		var ret int32
 		return ret
 	}
-	return *o.Seq
+
+	return o.Seq
 }
 
-// GetSeqOk returns a tuple with the Seq field value if set, nil otherwise
+// GetSeqOk returns a tuple with the Seq field value
 // and a boolean to check if the value has been set.
 func (o *ModuleBalance) GetSeqOk() (*int32, bool) {
-	if o == nil || IsNil(o.Seq) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Seq, true
+	return &o.Seq, true
 }
 
-// HasSeq returns a boolean if a field has been set.
-func (o *ModuleBalance) HasSeq() bool {
-	if o != nil && !IsNil(o.Seq) {
-		return true
-	}
-
-	return false
-}
-
-// SetSeq gets a reference to the given int32 and assigns it to the Seq field.
+// SetSeq sets field value
 func (o *ModuleBalance) SetSeq(v int32) {
-	o.Seq = &v
+	o.Seq = v
 }
 
-// GetAvailable returns the Available field value if set, zero value otherwise.
+// GetAvailable returns the Available field value
 func (o *ModuleBalance) GetAvailable() string {
-	if o == nil || IsNil(o.Available) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Available
+
+	return o.Available
 }
 
-// GetAvailableOk returns a tuple with the Available field value if set, nil otherwise
+// GetAvailableOk returns a tuple with the Available field value
 // and a boolean to check if the value has been set.
 func (o *ModuleBalance) GetAvailableOk() (*string, bool) {
-	if o == nil || IsNil(o.Available) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Available, true
+	return &o.Available, true
 }
 
-// HasAvailable returns a boolean if a field has been set.
-func (o *ModuleBalance) HasAvailable() bool {
-	if o != nil && !IsNil(o.Available) {
-		return true
-	}
-
-	return false
-}
-
-// SetAvailable gets a reference to the given string and assigns it to the Available field.
+// SetAvailable sets field value
 func (o *ModuleBalance) SetAvailable(v string) {
-	o.Available = &v
+	o.Available = v
 }
 
-// GetSupplied returns the Supplied field value if set, zero value otherwise.
+// GetSupplied returns the Supplied field value
 func (o *ModuleBalance) GetSupplied() string {
-	if o == nil || IsNil(o.Supplied) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Supplied
+
+	return o.Supplied
 }
 
-// GetSuppliedOk returns a tuple with the Supplied field value if set, nil otherwise
+// GetSuppliedOk returns a tuple with the Supplied field value
 // and a boolean to check if the value has been set.
 func (o *ModuleBalance) GetSuppliedOk() (*string, bool) {
-	if o == nil || IsNil(o.Supplied) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Supplied, true
+	return &o.Supplied, true
 }
 
-// HasSupplied returns a boolean if a field has been set.
-func (o *ModuleBalance) HasSupplied() bool {
-	if o != nil && !IsNil(o.Supplied) {
-		return true
-	}
-
-	return false
-}
-
-// SetSupplied gets a reference to the given string and assigns it to the Supplied field.
+// SetSupplied sets field value
 func (o *ModuleBalance) SetSupplied(v string) {
-	o.Supplied = &v
+	o.Supplied = v
 }
 
-// GetVirtual returns the Virtual field value if set, zero value otherwise.
+// GetVirtual returns the Virtual field value
 func (o *ModuleBalance) GetVirtual() string {
-	if o == nil || IsNil(o.Virtual) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Virtual
+
+	return o.Virtual
 }
 
-// GetVirtualOk returns a tuple with the Virtual field value if set, nil otherwise
+// GetVirtualOk returns a tuple with the Virtual field value
 // and a boolean to check if the value has been set.
 func (o *ModuleBalance) GetVirtualOk() (*string, bool) {
-	if o == nil || IsNil(o.Virtual) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Virtual, true
+	return &o.Virtual, true
 }
 
-// HasVirtual returns a boolean if a field has been set.
-func (o *ModuleBalance) HasVirtual() bool {
-	if o != nil && !IsNil(o.Virtual) {
-		return true
-	}
-
-	return false
-}
-
-// SetVirtual gets a reference to the given string and assigns it to the Virtual field.
+// SetVirtual sets field value
 func (o *ModuleBalance) SetVirtual(v string) {
-	o.Virtual = &v
+	o.Virtual = v
 }
 
-// GetBorrowed returns the Borrowed field value if set, zero value otherwise.
+// GetBorrowed returns the Borrowed field value
 func (o *ModuleBalance) GetBorrowed() string {
-	if o == nil || IsNil(o.Borrowed) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Borrowed
+
+	return o.Borrowed
 }
 
-// GetBorrowedOk returns a tuple with the Borrowed field value if set, nil otherwise
+// GetBorrowedOk returns a tuple with the Borrowed field value
 // and a boolean to check if the value has been set.
 func (o *ModuleBalance) GetBorrowedOk() (*string, bool) {
-	if o == nil || IsNil(o.Borrowed) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Borrowed, true
+	return &o.Borrowed, true
 }
 
-// HasBorrowed returns a boolean if a field has been set.
-func (o *ModuleBalance) HasBorrowed() bool {
-	if o != nil && !IsNil(o.Borrowed) {
-		return true
-	}
-
-	return false
-}
-
-// SetBorrowed gets a reference to the given string and assigns it to the Borrowed field.
+// SetBorrowed sets field value
 func (o *ModuleBalance) SetBorrowed(v string) {
-	o.Borrowed = &v
+	o.Borrowed = v
 }
 
 func (o ModuleBalance) MarshalJSON() ([]byte, error) {
@@ -250,25 +212,55 @@ func (o ModuleBalance) MarshalJSON() ([]byte, error) {
 
 func (o ModuleBalance) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.AssetId) {
-		toSerialize["asset_id"] = o.AssetId
-	}
-	if !IsNil(o.Seq) {
-		toSerialize["seq"] = o.Seq
-	}
-	if !IsNil(o.Available) {
-		toSerialize["available"] = o.Available
-	}
-	if !IsNil(o.Supplied) {
-		toSerialize["supplied"] = o.Supplied
-	}
-	if !IsNil(o.Virtual) {
-		toSerialize["virtual"] = o.Virtual
-	}
-	if !IsNil(o.Borrowed) {
-		toSerialize["borrowed"] = o.Borrowed
-	}
+	toSerialize["asset_id"] = o.AssetId
+	toSerialize["seq"] = o.Seq
+	toSerialize["available"] = o.Available
+	toSerialize["supplied"] = o.Supplied
+	toSerialize["virtual"] = o.Virtual
+	toSerialize["borrowed"] = o.Borrowed
 	return toSerialize, nil
+}
+
+func (o *ModuleBalance) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"asset_id",
+		"seq",
+		"available",
+		"supplied",
+		"virtual",
+		"borrowed",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varModuleBalance := _ModuleBalance{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varModuleBalance)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ModuleBalance(varModuleBalance)
+
+	return err
 }
 
 type NullableModuleBalance struct {

@@ -4,27 +4,27 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | Pointer to **string** |  | [optional] 
+**Id** | **string** |  | 
 **ClosedAt** | Pointer to **time.Time** |  | [optional] 
 **DisabledAt** | Pointer to **time.Time** |  | [optional] 
-**Email** | Pointer to **string** |  | [optional] 
-**Name** | Pointer to **string** |  | [optional] 
-**NativeAssetId** | Pointer to **string** |  | [optional] 
+**Email** | **string** |  | 
+**Name** | **string** |  | 
+**NativeAssetId** | **string** |  | 
 **PhotoUrl** | Pointer to **string** |  | [optional] 
 **Provider** | Pointer to **string** |  | [optional] 
 **ProviderId** | Pointer to **string** |  | [optional] 
-**Roles** | Pointer to [**[]UserRole**](UserRole.md) |  | [optional] 
+**Roles** | [**[]UserRole**](UserRole.md) |  | 
 **Timezone** | Pointer to **string** | User&#39;s timezone, e.g., &#39;America/New_York&#39;, or an offset. | [optional] 
 **TimezoneOffset** | Pointer to **int32** | timezone offset in seconds | [optional] 
 **VerifiedAt** | Pointer to **time.Time** |  | [optional] 
-**ShowTutorialCards** | Pointer to **bool** |  | [optional] 
-**NotificationsEnabled** | Pointer to **bool** |  | [optional] 
+**ShowTutorialCards** | **bool** |  | 
+**NotificationsEnabled** | **bool** |  | 
 
 ## Methods
 
 ### NewUser
 
-`func NewUser() *User`
+`func NewUser(id string, email string, name string, nativeAssetId string, roles []UserRole, showTutorialCards bool, notificationsEnabled bool, ) *User`
 
 NewUser instantiates a new User object
 This constructor will assign default values to properties that have it defined,
@@ -58,11 +58,6 @@ and a boolean to check if the value has been set.
 
 SetId sets Id field to given value.
 
-### HasId
-
-`func (o *User) HasId() bool`
-
-HasId returns a boolean if a field has been set.
 
 ### GetClosedAt
 
@@ -133,11 +128,6 @@ and a boolean to check if the value has been set.
 
 SetEmail sets Email field to given value.
 
-### HasEmail
-
-`func (o *User) HasEmail() bool`
-
-HasEmail returns a boolean if a field has been set.
 
 ### GetName
 
@@ -158,11 +148,6 @@ and a boolean to check if the value has been set.
 
 SetName sets Name field to given value.
 
-### HasName
-
-`func (o *User) HasName() bool`
-
-HasName returns a boolean if a field has been set.
 
 ### GetNativeAssetId
 
@@ -183,11 +168,6 @@ and a boolean to check if the value has been set.
 
 SetNativeAssetId sets NativeAssetId field to given value.
 
-### HasNativeAssetId
-
-`func (o *User) HasNativeAssetId() bool`
-
-HasNativeAssetId returns a boolean if a field has been set.
 
 ### GetPhotoUrl
 
@@ -283,11 +263,6 @@ and a boolean to check if the value has been set.
 
 SetRoles sets Roles field to given value.
 
-### HasRoles
-
-`func (o *User) HasRoles() bool`
-
-HasRoles returns a boolean if a field has been set.
 
 ### GetTimezone
 
@@ -383,11 +358,6 @@ and a boolean to check if the value has been set.
 
 SetShowTutorialCards sets ShowTutorialCards field to given value.
 
-### HasShowTutorialCards
-
-`func (o *User) HasShowTutorialCards() bool`
-
-HasShowTutorialCards returns a boolean if a field has been set.
 
 ### GetNotificationsEnabled
 
@@ -408,11 +378,6 @@ and a boolean to check if the value has been set.
 
 SetNotificationsEnabled sets NotificationsEnabled field to given value.
 
-### HasNotificationsEnabled
-
-`func (o *User) HasNotificationsEnabled() bool`
-
-HasNotificationsEnabled returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

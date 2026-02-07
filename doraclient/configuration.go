@@ -100,7 +100,7 @@ func NewConfiguration() *Configuration {
 				Description: "local DORA server",
 			},
 			{
-				URL: "https://dora-staging.fly.dev",
+				URL: "https://staging.dora.co",
 				Description: "DORA staging server",
 			},
 			{

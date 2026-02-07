@@ -13,6 +13,8 @@ package doraclient
 import (
 	"encoding/json"
 	"time"
+	"bytes"
+	"fmt"
 )
 
 // checks if the StreamTransactionsEntry type satisfies the MappedNullable interface at compile time
@@ -20,17 +22,21 @@ var _ MappedNullable = &StreamTransactionsEntry{}
 
 // StreamTransactionsEntry struct for StreamTransactionsEntry
 type StreamTransactionsEntry struct {
-	Val *Transaction `json:"Val,omitempty"`
+	Val Transaction `json:"Val"`
 	// The timestamp when the data was created
-	Time *time.Time `json:"Time,omitempty"`
+	Time time.Time `json:"Time"`
 }
+
+type _StreamTransactionsEntry StreamTransactionsEntry
 
 // NewStreamTransactionsEntry instantiates a new StreamTransactionsEntry object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewStreamTransactionsEntry() *StreamTransactionsEntry {
+func NewStreamTransactionsEntry(val Transaction, time time.Time) *StreamTransactionsEntry {
 	this := StreamTransactionsEntry{}
+	this.Val = val
+	this.Time = time
 	return &this
 }
 
@@ -42,68 +48,52 @@ func NewStreamTransactionsEntryWithDefaults() *StreamTransactionsEntry {
 	return &this
 }
 
-// GetVal returns the Val field value if set, zero value otherwise.
+// GetVal returns the Val field value
 func (o *StreamTransactionsEntry) GetVal() Transaction {
-	if o == nil || IsNil(o.Val) {
+	if o == nil {
 		var ret Transaction
 		return ret
 	}
-	return *o.Val
+
+	return o.Val
 }
 
-// GetValOk returns a tuple with the Val field value if set, nil otherwise
+// GetValOk returns a tuple with the Val field value
 // and a boolean to check if the value has been set.
 func (o *StreamTransactionsEntry) GetValOk() (*Transaction, bool) {
-	if o == nil || IsNil(o.Val) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Val, true
+	return &o.Val, true
 }
 
-// HasVal returns a boolean if a field has been set.
-func (o *StreamTransactionsEntry) HasVal() bool {
-	if o != nil && !IsNil(o.Val) {
-		return true
-	}
-
-	return false
-}
-
-// SetVal gets a reference to the given Transaction and assigns it to the Val field.
+// SetVal sets field value
 func (o *StreamTransactionsEntry) SetVal(v Transaction) {
-	o.Val = &v
+	o.Val = v
 }
 
-// GetTime returns the Time field value if set, zero value otherwise.
+// GetTime returns the Time field value
 func (o *StreamTransactionsEntry) GetTime() time.Time {
-	if o == nil || IsNil(o.Time) {
+	if o == nil {
 		var ret time.Time
 		return ret
 	}
-	return *o.Time
+
+	return o.Time
 }
 
-// GetTimeOk returns a tuple with the Time field value if set, nil otherwise
+// GetTimeOk returns a tuple with the Time field value
 // and a boolean to check if the value has been set.
 func (o *StreamTransactionsEntry) GetTimeOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.Time) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Time, true
+	return &o.Time, true
 }
 
-// HasTime returns a boolean if a field has been set.
-func (o *StreamTransactionsEntry) HasTime() bool {
-	if o != nil && !IsNil(o.Time) {
-		return true
-	}
-
-	return false
-}
-
-// SetTime gets a reference to the given time.Time and assigns it to the Time field.
+// SetTime sets field value
 func (o *StreamTransactionsEntry) SetTime(v time.Time) {
-	o.Time = &v
+	o.Time = v
 }
 
 func (o StreamTransactionsEntry) MarshalJSON() ([]byte, error) {
@@ -116,13 +106,47 @@ func (o StreamTransactionsEntry) MarshalJSON() ([]byte, error) {
 
 func (o StreamTransactionsEntry) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Val) {
-		toSerialize["Val"] = o.Val
-	}
-	if !IsNil(o.Time) {
-		toSerialize["Time"] = o.Time
-	}
+	toSerialize["Val"] = o.Val
+	toSerialize["Time"] = o.Time
 	return toSerialize, nil
+}
+
+func (o *StreamTransactionsEntry) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"Val",
+		"Time",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varStreamTransactionsEntry := _StreamTransactionsEntry{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varStreamTransactionsEntry)
+
+	if err != nil {
+		return err
+	}
+
+	*o = StreamTransactionsEntry(varStreamTransactionsEntry)
+
+	return err
 }
 
 type NullableStreamTransactionsEntry struct {

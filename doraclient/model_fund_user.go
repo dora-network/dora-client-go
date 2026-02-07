@@ -12,6 +12,8 @@ package doraclient
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the FundUser type satisfies the MappedNullable interface at compile time
@@ -19,19 +21,26 @@ var _ MappedNullable = &FundUser{}
 
 // FundUser struct for FundUser
 type FundUser struct {
-	UserId *string `json:"user_id,omitempty"`
-	PositionId *string `json:"position_id,omitempty"`
-	AssetId *string `json:"asset_id,omitempty"`
-	FinalQuantity *string `json:"final_quantity,omitempty"`
-	Amount *string `json:"amount,omitempty"`
+	UserId string `json:"user_id"`
+	PositionId string `json:"position_id"`
+	AssetId string `json:"asset_id"`
+	FinalQuantity string `json:"final_quantity"`
+	Amount string `json:"amount"`
 }
+
+type _FundUser FundUser
 
 // NewFundUser instantiates a new FundUser object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFundUser() *FundUser {
+func NewFundUser(userId string, positionId string, assetId string, finalQuantity string, amount string) *FundUser {
 	this := FundUser{}
+	this.UserId = userId
+	this.PositionId = positionId
+	this.AssetId = assetId
+	this.FinalQuantity = finalQuantity
+	this.Amount = amount
 	return &this
 }
 
@@ -43,164 +52,124 @@ func NewFundUserWithDefaults() *FundUser {
 	return &this
 }
 
-// GetUserId returns the UserId field value if set, zero value otherwise.
+// GetUserId returns the UserId field value
 func (o *FundUser) GetUserId() string {
-	if o == nil || IsNil(o.UserId) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.UserId
+
+	return o.UserId
 }
 
-// GetUserIdOk returns a tuple with the UserId field value if set, nil otherwise
+// GetUserIdOk returns a tuple with the UserId field value
 // and a boolean to check if the value has been set.
 func (o *FundUser) GetUserIdOk() (*string, bool) {
-	if o == nil || IsNil(o.UserId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.UserId, true
+	return &o.UserId, true
 }
 
-// HasUserId returns a boolean if a field has been set.
-func (o *FundUser) HasUserId() bool {
-	if o != nil && !IsNil(o.UserId) {
-		return true
-	}
-
-	return false
-}
-
-// SetUserId gets a reference to the given string and assigns it to the UserId field.
+// SetUserId sets field value
 func (o *FundUser) SetUserId(v string) {
-	o.UserId = &v
+	o.UserId = v
 }
 
-// GetPositionId returns the PositionId field value if set, zero value otherwise.
+// GetPositionId returns the PositionId field value
 func (o *FundUser) GetPositionId() string {
-	if o == nil || IsNil(o.PositionId) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.PositionId
+
+	return o.PositionId
 }
 
-// GetPositionIdOk returns a tuple with the PositionId field value if set, nil otherwise
+// GetPositionIdOk returns a tuple with the PositionId field value
 // and a boolean to check if the value has been set.
 func (o *FundUser) GetPositionIdOk() (*string, bool) {
-	if o == nil || IsNil(o.PositionId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.PositionId, true
+	return &o.PositionId, true
 }
 
-// HasPositionId returns a boolean if a field has been set.
-func (o *FundUser) HasPositionId() bool {
-	if o != nil && !IsNil(o.PositionId) {
-		return true
-	}
-
-	return false
-}
-
-// SetPositionId gets a reference to the given string and assigns it to the PositionId field.
+// SetPositionId sets field value
 func (o *FundUser) SetPositionId(v string) {
-	o.PositionId = &v
+	o.PositionId = v
 }
 
-// GetAssetId returns the AssetId field value if set, zero value otherwise.
+// GetAssetId returns the AssetId field value
 func (o *FundUser) GetAssetId() string {
-	if o == nil || IsNil(o.AssetId) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.AssetId
+
+	return o.AssetId
 }
 
-// GetAssetIdOk returns a tuple with the AssetId field value if set, nil otherwise
+// GetAssetIdOk returns a tuple with the AssetId field value
 // and a boolean to check if the value has been set.
 func (o *FundUser) GetAssetIdOk() (*string, bool) {
-	if o == nil || IsNil(o.AssetId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.AssetId, true
+	return &o.AssetId, true
 }
 
-// HasAssetId returns a boolean if a field has been set.
-func (o *FundUser) HasAssetId() bool {
-	if o != nil && !IsNil(o.AssetId) {
-		return true
-	}
-
-	return false
-}
-
-// SetAssetId gets a reference to the given string and assigns it to the AssetId field.
+// SetAssetId sets field value
 func (o *FundUser) SetAssetId(v string) {
-	o.AssetId = &v
+	o.AssetId = v
 }
 
-// GetFinalQuantity returns the FinalQuantity field value if set, zero value otherwise.
+// GetFinalQuantity returns the FinalQuantity field value
 func (o *FundUser) GetFinalQuantity() string {
-	if o == nil || IsNil(o.FinalQuantity) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.FinalQuantity
+
+	return o.FinalQuantity
 }
 
-// GetFinalQuantityOk returns a tuple with the FinalQuantity field value if set, nil otherwise
+// GetFinalQuantityOk returns a tuple with the FinalQuantity field value
 // and a boolean to check if the value has been set.
 func (o *FundUser) GetFinalQuantityOk() (*string, bool) {
-	if o == nil || IsNil(o.FinalQuantity) {
+	if o == nil {
 		return nil, false
 	}
-	return o.FinalQuantity, true
+	return &o.FinalQuantity, true
 }
 
-// HasFinalQuantity returns a boolean if a field has been set.
-func (o *FundUser) HasFinalQuantity() bool {
-	if o != nil && !IsNil(o.FinalQuantity) {
-		return true
-	}
-
-	return false
-}
-
-// SetFinalQuantity gets a reference to the given string and assigns it to the FinalQuantity field.
+// SetFinalQuantity sets field value
 func (o *FundUser) SetFinalQuantity(v string) {
-	o.FinalQuantity = &v
+	o.FinalQuantity = v
 }
 
-// GetAmount returns the Amount field value if set, zero value otherwise.
+// GetAmount returns the Amount field value
 func (o *FundUser) GetAmount() string {
-	if o == nil || IsNil(o.Amount) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Amount
+
+	return o.Amount
 }
 
-// GetAmountOk returns a tuple with the Amount field value if set, nil otherwise
+// GetAmountOk returns a tuple with the Amount field value
 // and a boolean to check if the value has been set.
 func (o *FundUser) GetAmountOk() (*string, bool) {
-	if o == nil || IsNil(o.Amount) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Amount, true
+	return &o.Amount, true
 }
 
-// HasAmount returns a boolean if a field has been set.
-func (o *FundUser) HasAmount() bool {
-	if o != nil && !IsNil(o.Amount) {
-		return true
-	}
-
-	return false
-}
-
-// SetAmount gets a reference to the given string and assigns it to the Amount field.
+// SetAmount sets field value
 func (o *FundUser) SetAmount(v string) {
-	o.Amount = &v
+	o.Amount = v
 }
 
 func (o FundUser) MarshalJSON() ([]byte, error) {
@@ -213,22 +182,53 @@ func (o FundUser) MarshalJSON() ([]byte, error) {
 
 func (o FundUser) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.UserId) {
-		toSerialize["user_id"] = o.UserId
-	}
-	if !IsNil(o.PositionId) {
-		toSerialize["position_id"] = o.PositionId
-	}
-	if !IsNil(o.AssetId) {
-		toSerialize["asset_id"] = o.AssetId
-	}
-	if !IsNil(o.FinalQuantity) {
-		toSerialize["final_quantity"] = o.FinalQuantity
-	}
-	if !IsNil(o.Amount) {
-		toSerialize["amount"] = o.Amount
-	}
+	toSerialize["user_id"] = o.UserId
+	toSerialize["position_id"] = o.PositionId
+	toSerialize["asset_id"] = o.AssetId
+	toSerialize["final_quantity"] = o.FinalQuantity
+	toSerialize["amount"] = o.Amount
 	return toSerialize, nil
+}
+
+func (o *FundUser) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"user_id",
+		"position_id",
+		"asset_id",
+		"final_quantity",
+		"amount",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varFundUser := _FundUser{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varFundUser)
+
+	if err != nil {
+		return err
+	}
+
+	*o = FundUser(varFundUser)
+
+	return err
 }
 
 type NullableFundUser struct {

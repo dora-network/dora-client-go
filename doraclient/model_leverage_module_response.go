@@ -12,6 +12,8 @@ package doraclient
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the LeverageModuleResponse type satisfies the MappedNullable interface at compile time
@@ -20,15 +22,18 @@ var _ MappedNullable = &LeverageModuleResponse{}
 // LeverageModuleResponse struct for LeverageModuleResponse
 type LeverageModuleResponse struct {
 	// A map of asset IDs to their module balances
-	Balances map[string]ModuleBalance `json:"balances,omitempty"`
+	Balances map[string]ModuleBalance `json:"balances"`
 }
+
+type _LeverageModuleResponse LeverageModuleResponse
 
 // NewLeverageModuleResponse instantiates a new LeverageModuleResponse object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewLeverageModuleResponse() *LeverageModuleResponse {
+func NewLeverageModuleResponse(balances map[string]ModuleBalance) *LeverageModuleResponse {
 	this := LeverageModuleResponse{}
+	this.Balances = balances
 	return &this
 }
 
@@ -40,34 +45,26 @@ func NewLeverageModuleResponseWithDefaults() *LeverageModuleResponse {
 	return &this
 }
 
-// GetBalances returns the Balances field value if set, zero value otherwise.
+// GetBalances returns the Balances field value
 func (o *LeverageModuleResponse) GetBalances() map[string]ModuleBalance {
-	if o == nil || IsNil(o.Balances) {
+	if o == nil {
 		var ret map[string]ModuleBalance
 		return ret
 	}
+
 	return o.Balances
 }
 
-// GetBalancesOk returns a tuple with the Balances field value if set, nil otherwise
+// GetBalancesOk returns a tuple with the Balances field value
 // and a boolean to check if the value has been set.
 func (o *LeverageModuleResponse) GetBalancesOk() (map[string]ModuleBalance, bool) {
-	if o == nil || IsNil(o.Balances) {
+	if o == nil {
 		return map[string]ModuleBalance{}, false
 	}
 	return o.Balances, true
 }
 
-// HasBalances returns a boolean if a field has been set.
-func (o *LeverageModuleResponse) HasBalances() bool {
-	if o != nil && !IsNil(o.Balances) {
-		return true
-	}
-
-	return false
-}
-
-// SetBalances gets a reference to the given map[string]ModuleBalance and assigns it to the Balances field.
+// SetBalances sets field value
 func (o *LeverageModuleResponse) SetBalances(v map[string]ModuleBalance) {
 	o.Balances = v
 }
@@ -82,10 +79,45 @@ func (o LeverageModuleResponse) MarshalJSON() ([]byte, error) {
 
 func (o LeverageModuleResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Balances) {
-		toSerialize["balances"] = o.Balances
-	}
+	toSerialize["balances"] = o.Balances
 	return toSerialize, nil
+}
+
+func (o *LeverageModuleResponse) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"balances",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varLeverageModuleResponse := _LeverageModuleResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varLeverageModuleResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = LeverageModuleResponse(varLeverageModuleResponse)
+
+	return err
 }
 
 type NullableLeverageModuleResponse struct {

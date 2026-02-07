@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **GoodTillDate** | Pointer to **time.Time** |  | [optional] 
 **TriggerPrice** | Pointer to **string** |  | [optional] 
 **TriggerType** | Pointer to [**TriggerType**](TriggerType.md) |  | [optional] 
+**ClientOrderId** | Pointer to **string** | An optional client-provided identifier for the order. | [optional] 
 
 ## Methods
 
@@ -279,6 +280,31 @@ SetTriggerType sets TriggerType field to given value.
 `func (o *CreateOrderRequest) HasTriggerType() bool`
 
 HasTriggerType returns a boolean if a field has been set.
+
+### GetClientOrderId
+
+`func (o *CreateOrderRequest) GetClientOrderId() string`
+
+GetClientOrderId returns the ClientOrderId field if non-nil, zero value otherwise.
+
+### GetClientOrderIdOk
+
+`func (o *CreateOrderRequest) GetClientOrderIdOk() (*string, bool)`
+
+GetClientOrderIdOk returns a tuple with the ClientOrderId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClientOrderId
+
+`func (o *CreateOrderRequest) SetClientOrderId(v string)`
+
+SetClientOrderId sets ClientOrderId field to given value.
+
+### HasClientOrderId
+
+`func (o *CreateOrderRequest) HasClientOrderId() bool`
+
+HasClientOrderId returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

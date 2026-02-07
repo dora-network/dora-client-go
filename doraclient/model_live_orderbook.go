@@ -12,6 +12,8 @@ package doraclient
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the LiveOrderbook type satisfies the MappedNullable interface at compile time
@@ -20,17 +22,21 @@ var _ MappedNullable = &LiveOrderbook{}
 // LiveOrderbook struct for LiveOrderbook
 type LiveOrderbook struct {
 	// sorted in desc order by price
-	Bids []PriceLevel `json:"bids,omitempty"`
+	Bids []PriceLevel `json:"bids"`
 	// sorted in asc order by price
-	Asks []PriceLevel `json:"asks,omitempty"`
+	Asks []PriceLevel `json:"asks"`
 }
+
+type _LiveOrderbook LiveOrderbook
 
 // NewLiveOrderbook instantiates a new LiveOrderbook object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewLiveOrderbook() *LiveOrderbook {
+func NewLiveOrderbook(bids []PriceLevel, asks []PriceLevel) *LiveOrderbook {
 	this := LiveOrderbook{}
+	this.Bids = bids
+	this.Asks = asks
 	return &this
 }
 
@@ -42,66 +48,50 @@ func NewLiveOrderbookWithDefaults() *LiveOrderbook {
 	return &this
 }
 
-// GetBids returns the Bids field value if set, zero value otherwise.
+// GetBids returns the Bids field value
 func (o *LiveOrderbook) GetBids() []PriceLevel {
-	if o == nil || IsNil(o.Bids) {
+	if o == nil {
 		var ret []PriceLevel
 		return ret
 	}
+
 	return o.Bids
 }
 
-// GetBidsOk returns a tuple with the Bids field value if set, nil otherwise
+// GetBidsOk returns a tuple with the Bids field value
 // and a boolean to check if the value has been set.
 func (o *LiveOrderbook) GetBidsOk() ([]PriceLevel, bool) {
-	if o == nil || IsNil(o.Bids) {
+	if o == nil {
 		return nil, false
 	}
 	return o.Bids, true
 }
 
-// HasBids returns a boolean if a field has been set.
-func (o *LiveOrderbook) HasBids() bool {
-	if o != nil && !IsNil(o.Bids) {
-		return true
-	}
-
-	return false
-}
-
-// SetBids gets a reference to the given []PriceLevel and assigns it to the Bids field.
+// SetBids sets field value
 func (o *LiveOrderbook) SetBids(v []PriceLevel) {
 	o.Bids = v
 }
 
-// GetAsks returns the Asks field value if set, zero value otherwise.
+// GetAsks returns the Asks field value
 func (o *LiveOrderbook) GetAsks() []PriceLevel {
-	if o == nil || IsNil(o.Asks) {
+	if o == nil {
 		var ret []PriceLevel
 		return ret
 	}
+
 	return o.Asks
 }
 
-// GetAsksOk returns a tuple with the Asks field value if set, nil otherwise
+// GetAsksOk returns a tuple with the Asks field value
 // and a boolean to check if the value has been set.
 func (o *LiveOrderbook) GetAsksOk() ([]PriceLevel, bool) {
-	if o == nil || IsNil(o.Asks) {
+	if o == nil {
 		return nil, false
 	}
 	return o.Asks, true
 }
 
-// HasAsks returns a boolean if a field has been set.
-func (o *LiveOrderbook) HasAsks() bool {
-	if o != nil && !IsNil(o.Asks) {
-		return true
-	}
-
-	return false
-}
-
-// SetAsks gets a reference to the given []PriceLevel and assigns it to the Asks field.
+// SetAsks sets field value
 func (o *LiveOrderbook) SetAsks(v []PriceLevel) {
 	o.Asks = v
 }
@@ -116,13 +106,47 @@ func (o LiveOrderbook) MarshalJSON() ([]byte, error) {
 
 func (o LiveOrderbook) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Bids) {
-		toSerialize["bids"] = o.Bids
-	}
-	if !IsNil(o.Asks) {
-		toSerialize["asks"] = o.Asks
-	}
+	toSerialize["bids"] = o.Bids
+	toSerialize["asks"] = o.Asks
 	return toSerialize, nil
+}
+
+func (o *LiveOrderbook) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"bids",
+		"asks",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varLiveOrderbook := _LiveOrderbook{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varLiveOrderbook)
+
+	if err != nil {
+		return err
+	}
+
+	*o = LiveOrderbook(varLiveOrderbook)
+
+	return err
 }
 
 type NullableLiveOrderbook struct {

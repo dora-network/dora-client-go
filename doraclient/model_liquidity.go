@@ -12,6 +12,8 @@ package doraclient
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the Liquidity type satisfies the MappedNullable interface at compile time
@@ -19,20 +21,28 @@ var _ MappedNullable = &Liquidity{}
 
 // Liquidity struct for Liquidity
 type Liquidity struct {
-	OrderBookId *string `json:"order_book_id,omitempty"`
-	PositionId *string `json:"position_id,omitempty"`
-	TransactionId *string `json:"transaction_id,omitempty"`
-	BaseQuantity *string `json:"base_quantity,omitempty"`
-	QuoteQuantity *string `json:"quote_quantity,omitempty"`
-	SharesQuantity *string `json:"shares_quantity,omitempty"`
+	OrderBookId string `json:"order_book_id"`
+	PositionId string `json:"position_id"`
+	TransactionId string `json:"transaction_id"`
+	BaseQuantity string `json:"base_quantity"`
+	QuoteQuantity string `json:"quote_quantity"`
+	SharesQuantity string `json:"shares_quantity"`
 }
+
+type _Liquidity Liquidity
 
 // NewLiquidity instantiates a new Liquidity object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewLiquidity() *Liquidity {
+func NewLiquidity(orderBookId string, positionId string, transactionId string, baseQuantity string, quoteQuantity string, sharesQuantity string) *Liquidity {
 	this := Liquidity{}
+	this.OrderBookId = orderBookId
+	this.PositionId = positionId
+	this.TransactionId = transactionId
+	this.BaseQuantity = baseQuantity
+	this.QuoteQuantity = quoteQuantity
+	this.SharesQuantity = sharesQuantity
 	return &this
 }
 
@@ -44,196 +54,148 @@ func NewLiquidityWithDefaults() *Liquidity {
 	return &this
 }
 
-// GetOrderBookId returns the OrderBookId field value if set, zero value otherwise.
+// GetOrderBookId returns the OrderBookId field value
 func (o *Liquidity) GetOrderBookId() string {
-	if o == nil || IsNil(o.OrderBookId) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.OrderBookId
+
+	return o.OrderBookId
 }
 
-// GetOrderBookIdOk returns a tuple with the OrderBookId field value if set, nil otherwise
+// GetOrderBookIdOk returns a tuple with the OrderBookId field value
 // and a boolean to check if the value has been set.
 func (o *Liquidity) GetOrderBookIdOk() (*string, bool) {
-	if o == nil || IsNil(o.OrderBookId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.OrderBookId, true
+	return &o.OrderBookId, true
 }
 
-// HasOrderBookId returns a boolean if a field has been set.
-func (o *Liquidity) HasOrderBookId() bool {
-	if o != nil && !IsNil(o.OrderBookId) {
-		return true
-	}
-
-	return false
-}
-
-// SetOrderBookId gets a reference to the given string and assigns it to the OrderBookId field.
+// SetOrderBookId sets field value
 func (o *Liquidity) SetOrderBookId(v string) {
-	o.OrderBookId = &v
+	o.OrderBookId = v
 }
 
-// GetPositionId returns the PositionId field value if set, zero value otherwise.
+// GetPositionId returns the PositionId field value
 func (o *Liquidity) GetPositionId() string {
-	if o == nil || IsNil(o.PositionId) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.PositionId
+
+	return o.PositionId
 }
 
-// GetPositionIdOk returns a tuple with the PositionId field value if set, nil otherwise
+// GetPositionIdOk returns a tuple with the PositionId field value
 // and a boolean to check if the value has been set.
 func (o *Liquidity) GetPositionIdOk() (*string, bool) {
-	if o == nil || IsNil(o.PositionId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.PositionId, true
+	return &o.PositionId, true
 }
 
-// HasPositionId returns a boolean if a field has been set.
-func (o *Liquidity) HasPositionId() bool {
-	if o != nil && !IsNil(o.PositionId) {
-		return true
-	}
-
-	return false
-}
-
-// SetPositionId gets a reference to the given string and assigns it to the PositionId field.
+// SetPositionId sets field value
 func (o *Liquidity) SetPositionId(v string) {
-	o.PositionId = &v
+	o.PositionId = v
 }
 
-// GetTransactionId returns the TransactionId field value if set, zero value otherwise.
+// GetTransactionId returns the TransactionId field value
 func (o *Liquidity) GetTransactionId() string {
-	if o == nil || IsNil(o.TransactionId) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.TransactionId
+
+	return o.TransactionId
 }
 
-// GetTransactionIdOk returns a tuple with the TransactionId field value if set, nil otherwise
+// GetTransactionIdOk returns a tuple with the TransactionId field value
 // and a boolean to check if the value has been set.
 func (o *Liquidity) GetTransactionIdOk() (*string, bool) {
-	if o == nil || IsNil(o.TransactionId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.TransactionId, true
+	return &o.TransactionId, true
 }
 
-// HasTransactionId returns a boolean if a field has been set.
-func (o *Liquidity) HasTransactionId() bool {
-	if o != nil && !IsNil(o.TransactionId) {
-		return true
-	}
-
-	return false
-}
-
-// SetTransactionId gets a reference to the given string and assigns it to the TransactionId field.
+// SetTransactionId sets field value
 func (o *Liquidity) SetTransactionId(v string) {
-	o.TransactionId = &v
+	o.TransactionId = v
 }
 
-// GetBaseQuantity returns the BaseQuantity field value if set, zero value otherwise.
+// GetBaseQuantity returns the BaseQuantity field value
 func (o *Liquidity) GetBaseQuantity() string {
-	if o == nil || IsNil(o.BaseQuantity) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.BaseQuantity
+
+	return o.BaseQuantity
 }
 
-// GetBaseQuantityOk returns a tuple with the BaseQuantity field value if set, nil otherwise
+// GetBaseQuantityOk returns a tuple with the BaseQuantity field value
 // and a boolean to check if the value has been set.
 func (o *Liquidity) GetBaseQuantityOk() (*string, bool) {
-	if o == nil || IsNil(o.BaseQuantity) {
+	if o == nil {
 		return nil, false
 	}
-	return o.BaseQuantity, true
+	return &o.BaseQuantity, true
 }
 
-// HasBaseQuantity returns a boolean if a field has been set.
-func (o *Liquidity) HasBaseQuantity() bool {
-	if o != nil && !IsNil(o.BaseQuantity) {
-		return true
-	}
-
-	return false
-}
-
-// SetBaseQuantity gets a reference to the given string and assigns it to the BaseQuantity field.
+// SetBaseQuantity sets field value
 func (o *Liquidity) SetBaseQuantity(v string) {
-	o.BaseQuantity = &v
+	o.BaseQuantity = v
 }
 
-// GetQuoteQuantity returns the QuoteQuantity field value if set, zero value otherwise.
+// GetQuoteQuantity returns the QuoteQuantity field value
 func (o *Liquidity) GetQuoteQuantity() string {
-	if o == nil || IsNil(o.QuoteQuantity) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.QuoteQuantity
+
+	return o.QuoteQuantity
 }
 
-// GetQuoteQuantityOk returns a tuple with the QuoteQuantity field value if set, nil otherwise
+// GetQuoteQuantityOk returns a tuple with the QuoteQuantity field value
 // and a boolean to check if the value has been set.
 func (o *Liquidity) GetQuoteQuantityOk() (*string, bool) {
-	if o == nil || IsNil(o.QuoteQuantity) {
+	if o == nil {
 		return nil, false
 	}
-	return o.QuoteQuantity, true
+	return &o.QuoteQuantity, true
 }
 
-// HasQuoteQuantity returns a boolean if a field has been set.
-func (o *Liquidity) HasQuoteQuantity() bool {
-	if o != nil && !IsNil(o.QuoteQuantity) {
-		return true
-	}
-
-	return false
-}
-
-// SetQuoteQuantity gets a reference to the given string and assigns it to the QuoteQuantity field.
+// SetQuoteQuantity sets field value
 func (o *Liquidity) SetQuoteQuantity(v string) {
-	o.QuoteQuantity = &v
+	o.QuoteQuantity = v
 }
 
-// GetSharesQuantity returns the SharesQuantity field value if set, zero value otherwise.
+// GetSharesQuantity returns the SharesQuantity field value
 func (o *Liquidity) GetSharesQuantity() string {
-	if o == nil || IsNil(o.SharesQuantity) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.SharesQuantity
+
+	return o.SharesQuantity
 }
 
-// GetSharesQuantityOk returns a tuple with the SharesQuantity field value if set, nil otherwise
+// GetSharesQuantityOk returns a tuple with the SharesQuantity field value
 // and a boolean to check if the value has been set.
 func (o *Liquidity) GetSharesQuantityOk() (*string, bool) {
-	if o == nil || IsNil(o.SharesQuantity) {
+	if o == nil {
 		return nil, false
 	}
-	return o.SharesQuantity, true
+	return &o.SharesQuantity, true
 }
 
-// HasSharesQuantity returns a boolean if a field has been set.
-func (o *Liquidity) HasSharesQuantity() bool {
-	if o != nil && !IsNil(o.SharesQuantity) {
-		return true
-	}
-
-	return false
-}
-
-// SetSharesQuantity gets a reference to the given string and assigns it to the SharesQuantity field.
+// SetSharesQuantity sets field value
 func (o *Liquidity) SetSharesQuantity(v string) {
-	o.SharesQuantity = &v
+	o.SharesQuantity = v
 }
 
 func (o Liquidity) MarshalJSON() ([]byte, error) {
@@ -246,25 +208,55 @@ func (o Liquidity) MarshalJSON() ([]byte, error) {
 
 func (o Liquidity) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.OrderBookId) {
-		toSerialize["order_book_id"] = o.OrderBookId
-	}
-	if !IsNil(o.PositionId) {
-		toSerialize["position_id"] = o.PositionId
-	}
-	if !IsNil(o.TransactionId) {
-		toSerialize["transaction_id"] = o.TransactionId
-	}
-	if !IsNil(o.BaseQuantity) {
-		toSerialize["base_quantity"] = o.BaseQuantity
-	}
-	if !IsNil(o.QuoteQuantity) {
-		toSerialize["quote_quantity"] = o.QuoteQuantity
-	}
-	if !IsNil(o.SharesQuantity) {
-		toSerialize["shares_quantity"] = o.SharesQuantity
-	}
+	toSerialize["order_book_id"] = o.OrderBookId
+	toSerialize["position_id"] = o.PositionId
+	toSerialize["transaction_id"] = o.TransactionId
+	toSerialize["base_quantity"] = o.BaseQuantity
+	toSerialize["quote_quantity"] = o.QuoteQuantity
+	toSerialize["shares_quantity"] = o.SharesQuantity
 	return toSerialize, nil
+}
+
+func (o *Liquidity) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"order_book_id",
+		"position_id",
+		"transaction_id",
+		"base_quantity",
+		"quote_quantity",
+		"shares_quantity",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varLiquidity := _Liquidity{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varLiquidity)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Liquidity(varLiquidity)
+
+	return err
 }
 
 type NullableLiquidity struct {

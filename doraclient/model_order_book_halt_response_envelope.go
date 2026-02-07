@@ -12,6 +12,8 @@ package doraclient
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the OrderBookHaltResponseEnvelope type satisfies the MappedNullable interface at compile time
@@ -23,15 +25,18 @@ type OrderBookHaltResponseEnvelope struct {
 	// The error message. Present for error (non-2xx) responses.
 	Error *string `json:"error,omitempty"`
 	// Metadata about the response, including status code and trace information.
-	Metadata *Metadata `json:"metadata,omitempty"`
+	Metadata Metadata `json:"metadata"`
 }
+
+type _OrderBookHaltResponseEnvelope OrderBookHaltResponseEnvelope
 
 // NewOrderBookHaltResponseEnvelope instantiates a new OrderBookHaltResponseEnvelope object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewOrderBookHaltResponseEnvelope() *OrderBookHaltResponseEnvelope {
+func NewOrderBookHaltResponseEnvelope(metadata Metadata) *OrderBookHaltResponseEnvelope {
 	this := OrderBookHaltResponseEnvelope{}
+	this.Metadata = metadata
 	return &this
 }
 
@@ -107,36 +112,28 @@ func (o *OrderBookHaltResponseEnvelope) SetError(v string) {
 	o.Error = &v
 }
 
-// GetMetadata returns the Metadata field value if set, zero value otherwise.
+// GetMetadata returns the Metadata field value
 func (o *OrderBookHaltResponseEnvelope) GetMetadata() Metadata {
-	if o == nil || IsNil(o.Metadata) {
+	if o == nil {
 		var ret Metadata
 		return ret
 	}
-	return *o.Metadata
+
+	return o.Metadata
 }
 
-// GetMetadataOk returns a tuple with the Metadata field value if set, nil otherwise
+// GetMetadataOk returns a tuple with the Metadata field value
 // and a boolean to check if the value has been set.
 func (o *OrderBookHaltResponseEnvelope) GetMetadataOk() (*Metadata, bool) {
-	if o == nil || IsNil(o.Metadata) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Metadata, true
+	return &o.Metadata, true
 }
 
-// HasMetadata returns a boolean if a field has been set.
-func (o *OrderBookHaltResponseEnvelope) HasMetadata() bool {
-	if o != nil && !IsNil(o.Metadata) {
-		return true
-	}
-
-	return false
-}
-
-// SetMetadata gets a reference to the given Metadata and assigns it to the Metadata field.
+// SetMetadata sets field value
 func (o *OrderBookHaltResponseEnvelope) SetMetadata(v Metadata) {
-	o.Metadata = &v
+	o.Metadata = v
 }
 
 func (o OrderBookHaltResponseEnvelope) MarshalJSON() ([]byte, error) {
@@ -155,10 +152,45 @@ func (o OrderBookHaltResponseEnvelope) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Error) {
 		toSerialize["error"] = o.Error
 	}
-	if !IsNil(o.Metadata) {
-		toSerialize["metadata"] = o.Metadata
-	}
+	toSerialize["metadata"] = o.Metadata
 	return toSerialize, nil
+}
+
+func (o *OrderBookHaltResponseEnvelope) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"metadata",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varOrderBookHaltResponseEnvelope := _OrderBookHaltResponseEnvelope{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varOrderBookHaltResponseEnvelope)
+
+	if err != nil {
+		return err
+	}
+
+	*o = OrderBookHaltResponseEnvelope(varOrderBookHaltResponseEnvelope)
+
+	return err
 }
 
 type NullableOrderBookHaltResponseEnvelope struct {

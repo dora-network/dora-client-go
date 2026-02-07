@@ -12,6 +12,8 @@ package doraclient
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the IsolatedPosition type satisfies the MappedNullable interface at compile time
@@ -19,17 +21,22 @@ var _ MappedNullable = &IsolatedPosition{}
 
 // IsolatedPosition struct for IsolatedPosition
 type IsolatedPosition struct {
-	GlobalPositionId *string `json:"global_position_id,omitempty"`
-	IsolatedPositionId *string `json:"isolated_position_id,omitempty"`
-	TransactionId *string `json:"transaction_id,omitempty"`
+	GlobalPositionId string `json:"global_position_id"`
+	IsolatedPositionId string `json:"isolated_position_id"`
+	TransactionId string `json:"transaction_id"`
 }
+
+type _IsolatedPosition IsolatedPosition
 
 // NewIsolatedPosition instantiates a new IsolatedPosition object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewIsolatedPosition() *IsolatedPosition {
+func NewIsolatedPosition(globalPositionId string, isolatedPositionId string, transactionId string) *IsolatedPosition {
 	this := IsolatedPosition{}
+	this.GlobalPositionId = globalPositionId
+	this.IsolatedPositionId = isolatedPositionId
+	this.TransactionId = transactionId
 	return &this
 }
 
@@ -41,100 +48,76 @@ func NewIsolatedPositionWithDefaults() *IsolatedPosition {
 	return &this
 }
 
-// GetGlobalPositionId returns the GlobalPositionId field value if set, zero value otherwise.
+// GetGlobalPositionId returns the GlobalPositionId field value
 func (o *IsolatedPosition) GetGlobalPositionId() string {
-	if o == nil || IsNil(o.GlobalPositionId) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.GlobalPositionId
+
+	return o.GlobalPositionId
 }
 
-// GetGlobalPositionIdOk returns a tuple with the GlobalPositionId field value if set, nil otherwise
+// GetGlobalPositionIdOk returns a tuple with the GlobalPositionId field value
 // and a boolean to check if the value has been set.
 func (o *IsolatedPosition) GetGlobalPositionIdOk() (*string, bool) {
-	if o == nil || IsNil(o.GlobalPositionId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.GlobalPositionId, true
+	return &o.GlobalPositionId, true
 }
 
-// HasGlobalPositionId returns a boolean if a field has been set.
-func (o *IsolatedPosition) HasGlobalPositionId() bool {
-	if o != nil && !IsNil(o.GlobalPositionId) {
-		return true
-	}
-
-	return false
-}
-
-// SetGlobalPositionId gets a reference to the given string and assigns it to the GlobalPositionId field.
+// SetGlobalPositionId sets field value
 func (o *IsolatedPosition) SetGlobalPositionId(v string) {
-	o.GlobalPositionId = &v
+	o.GlobalPositionId = v
 }
 
-// GetIsolatedPositionId returns the IsolatedPositionId field value if set, zero value otherwise.
+// GetIsolatedPositionId returns the IsolatedPositionId field value
 func (o *IsolatedPosition) GetIsolatedPositionId() string {
-	if o == nil || IsNil(o.IsolatedPositionId) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.IsolatedPositionId
+
+	return o.IsolatedPositionId
 }
 
-// GetIsolatedPositionIdOk returns a tuple with the IsolatedPositionId field value if set, nil otherwise
+// GetIsolatedPositionIdOk returns a tuple with the IsolatedPositionId field value
 // and a boolean to check if the value has been set.
 func (o *IsolatedPosition) GetIsolatedPositionIdOk() (*string, bool) {
-	if o == nil || IsNil(o.IsolatedPositionId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.IsolatedPositionId, true
+	return &o.IsolatedPositionId, true
 }
 
-// HasIsolatedPositionId returns a boolean if a field has been set.
-func (o *IsolatedPosition) HasIsolatedPositionId() bool {
-	if o != nil && !IsNil(o.IsolatedPositionId) {
-		return true
-	}
-
-	return false
-}
-
-// SetIsolatedPositionId gets a reference to the given string and assigns it to the IsolatedPositionId field.
+// SetIsolatedPositionId sets field value
 func (o *IsolatedPosition) SetIsolatedPositionId(v string) {
-	o.IsolatedPositionId = &v
+	o.IsolatedPositionId = v
 }
 
-// GetTransactionId returns the TransactionId field value if set, zero value otherwise.
+// GetTransactionId returns the TransactionId field value
 func (o *IsolatedPosition) GetTransactionId() string {
-	if o == nil || IsNil(o.TransactionId) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.TransactionId
+
+	return o.TransactionId
 }
 
-// GetTransactionIdOk returns a tuple with the TransactionId field value if set, nil otherwise
+// GetTransactionIdOk returns a tuple with the TransactionId field value
 // and a boolean to check if the value has been set.
 func (o *IsolatedPosition) GetTransactionIdOk() (*string, bool) {
-	if o == nil || IsNil(o.TransactionId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.TransactionId, true
+	return &o.TransactionId, true
 }
 
-// HasTransactionId returns a boolean if a field has been set.
-func (o *IsolatedPosition) HasTransactionId() bool {
-	if o != nil && !IsNil(o.TransactionId) {
-		return true
-	}
-
-	return false
-}
-
-// SetTransactionId gets a reference to the given string and assigns it to the TransactionId field.
+// SetTransactionId sets field value
 func (o *IsolatedPosition) SetTransactionId(v string) {
-	o.TransactionId = &v
+	o.TransactionId = v
 }
 
 func (o IsolatedPosition) MarshalJSON() ([]byte, error) {
@@ -147,16 +130,49 @@ func (o IsolatedPosition) MarshalJSON() ([]byte, error) {
 
 func (o IsolatedPosition) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.GlobalPositionId) {
-		toSerialize["global_position_id"] = o.GlobalPositionId
-	}
-	if !IsNil(o.IsolatedPositionId) {
-		toSerialize["isolated_position_id"] = o.IsolatedPositionId
-	}
-	if !IsNil(o.TransactionId) {
-		toSerialize["transaction_id"] = o.TransactionId
-	}
+	toSerialize["global_position_id"] = o.GlobalPositionId
+	toSerialize["isolated_position_id"] = o.IsolatedPositionId
+	toSerialize["transaction_id"] = o.TransactionId
 	return toSerialize, nil
+}
+
+func (o *IsolatedPosition) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"global_position_id",
+		"isolated_position_id",
+		"transaction_id",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varIsolatedPosition := _IsolatedPosition{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varIsolatedPosition)
+
+	if err != nil {
+		return err
+	}
+
+	*o = IsolatedPosition(varIsolatedPosition)
+
+	return err
 }
 
 type NullableIsolatedPosition struct {

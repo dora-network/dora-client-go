@@ -13,6 +13,8 @@ package doraclient
 import (
 	"encoding/json"
 	"time"
+	"bytes"
+	"fmt"
 )
 
 // checks if the OrderBook type satisfies the MappedNullable interface at compile time
@@ -20,32 +22,49 @@ var _ MappedNullable = &OrderBook{}
 
 // OrderBook struct for OrderBook
 type OrderBook struct {
-	OrderBookId *string `json:"order_book_id,omitempty"`
-	BaseQuantity *float32 `json:"base_quantity,omitempty"`
-	BaseAssetId *string `json:"base_asset_id,omitempty"`
-	CreatedAt *time.Time `json:"created_at,omitempty"`
-	DisplayName *string `json:"display_name,omitempty"`
-	FeeFactor *float32 `json:"fee_factor,omitempty"`
-	InitialAssetsRatio *float32 `json:"initial_assets_ratio,omitempty"`
-	MaturityAt *time.Time `json:"maturity_at,omitempty"`
-	QuoteQuantity *float32 `json:"quote_quantity,omitempty"`
-	QuoteAssetId *string `json:"quote_asset_id,omitempty"`
-	SharesQuantity *float32 `json:"shares_quantity,omitempty"`
-	Status *OrderBookStatus `json:"status,omitempty"`
-	TickSize *float32 `json:"tick_size,omitempty"`
-	UpdatedAt *time.Time `json:"updated_at,omitempty"`
+	OrderBookId string `json:"order_book_id"`
+	BaseQuantity float32 `json:"base_quantity"`
+	BaseAssetId string `json:"base_asset_id"`
+	CreatedAt time.Time `json:"created_at"`
+	DisplayName string `json:"display_name"`
+	FeeFactor float32 `json:"fee_factor"`
+	InitialAssetsRatio float32 `json:"initial_assets_ratio"`
+	MaturityAt time.Time `json:"maturity_at"`
+	QuoteQuantity float32 `json:"quote_quantity"`
+	QuoteAssetId string `json:"quote_asset_id"`
+	SharesQuantity float32 `json:"shares_quantity"`
+	Status OrderBookStatus `json:"status"`
+	TickSize float32 `json:"tick_size"`
+	UpdatedAt time.Time `json:"updated_at"`
 	HaltedAt *time.Time `json:"halted_at,omitempty"`
 	TerminatedAt *time.Time `json:"terminated_at,omitempty"`
 	PoolUpdatedAt *time.Time `json:"pool_updated_at,omitempty"`
-	SharesAssetId *string `json:"shares_asset_id,omitempty"`
+	SharesAssetId string `json:"shares_asset_id"`
 }
+
+type _OrderBook OrderBook
 
 // NewOrderBook instantiates a new OrderBook object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewOrderBook() *OrderBook {
+func NewOrderBook(orderBookId string, baseQuantity float32, baseAssetId string, createdAt time.Time, displayName string, feeFactor float32, initialAssetsRatio float32, maturityAt time.Time, quoteQuantity float32, quoteAssetId string, sharesQuantity float32, status OrderBookStatus, tickSize float32, updatedAt time.Time, sharesAssetId string) *OrderBook {
 	this := OrderBook{}
+	this.OrderBookId = orderBookId
+	this.BaseQuantity = baseQuantity
+	this.BaseAssetId = baseAssetId
+	this.CreatedAt = createdAt
+	this.DisplayName = displayName
+	this.FeeFactor = feeFactor
+	this.InitialAssetsRatio = initialAssetsRatio
+	this.MaturityAt = maturityAt
+	this.QuoteQuantity = quoteQuantity
+	this.QuoteAssetId = quoteAssetId
+	this.SharesQuantity = sharesQuantity
+	this.Status = status
+	this.TickSize = tickSize
+	this.UpdatedAt = updatedAt
+	this.SharesAssetId = sharesAssetId
 	return &this
 }
 
@@ -57,452 +76,340 @@ func NewOrderBookWithDefaults() *OrderBook {
 	return &this
 }
 
-// GetOrderBookId returns the OrderBookId field value if set, zero value otherwise.
+// GetOrderBookId returns the OrderBookId field value
 func (o *OrderBook) GetOrderBookId() string {
-	if o == nil || IsNil(o.OrderBookId) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.OrderBookId
+
+	return o.OrderBookId
 }
 
-// GetOrderBookIdOk returns a tuple with the OrderBookId field value if set, nil otherwise
+// GetOrderBookIdOk returns a tuple with the OrderBookId field value
 // and a boolean to check if the value has been set.
 func (o *OrderBook) GetOrderBookIdOk() (*string, bool) {
-	if o == nil || IsNil(o.OrderBookId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.OrderBookId, true
+	return &o.OrderBookId, true
 }
 
-// HasOrderBookId returns a boolean if a field has been set.
-func (o *OrderBook) HasOrderBookId() bool {
-	if o != nil && !IsNil(o.OrderBookId) {
-		return true
-	}
-
-	return false
-}
-
-// SetOrderBookId gets a reference to the given string and assigns it to the OrderBookId field.
+// SetOrderBookId sets field value
 func (o *OrderBook) SetOrderBookId(v string) {
-	o.OrderBookId = &v
+	o.OrderBookId = v
 }
 
-// GetBaseQuantity returns the BaseQuantity field value if set, zero value otherwise.
+// GetBaseQuantity returns the BaseQuantity field value
 func (o *OrderBook) GetBaseQuantity() float32 {
-	if o == nil || IsNil(o.BaseQuantity) {
+	if o == nil {
 		var ret float32
 		return ret
 	}
-	return *o.BaseQuantity
+
+	return o.BaseQuantity
 }
 
-// GetBaseQuantityOk returns a tuple with the BaseQuantity field value if set, nil otherwise
+// GetBaseQuantityOk returns a tuple with the BaseQuantity field value
 // and a boolean to check if the value has been set.
 func (o *OrderBook) GetBaseQuantityOk() (*float32, bool) {
-	if o == nil || IsNil(o.BaseQuantity) {
+	if o == nil {
 		return nil, false
 	}
-	return o.BaseQuantity, true
+	return &o.BaseQuantity, true
 }
 
-// HasBaseQuantity returns a boolean if a field has been set.
-func (o *OrderBook) HasBaseQuantity() bool {
-	if o != nil && !IsNil(o.BaseQuantity) {
-		return true
-	}
-
-	return false
-}
-
-// SetBaseQuantity gets a reference to the given float32 and assigns it to the BaseQuantity field.
+// SetBaseQuantity sets field value
 func (o *OrderBook) SetBaseQuantity(v float32) {
-	o.BaseQuantity = &v
+	o.BaseQuantity = v
 }
 
-// GetBaseAssetId returns the BaseAssetId field value if set, zero value otherwise.
+// GetBaseAssetId returns the BaseAssetId field value
 func (o *OrderBook) GetBaseAssetId() string {
-	if o == nil || IsNil(o.BaseAssetId) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.BaseAssetId
+
+	return o.BaseAssetId
 }
 
-// GetBaseAssetIdOk returns a tuple with the BaseAssetId field value if set, nil otherwise
+// GetBaseAssetIdOk returns a tuple with the BaseAssetId field value
 // and a boolean to check if the value has been set.
 func (o *OrderBook) GetBaseAssetIdOk() (*string, bool) {
-	if o == nil || IsNil(o.BaseAssetId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.BaseAssetId, true
+	return &o.BaseAssetId, true
 }
 
-// HasBaseAssetId returns a boolean if a field has been set.
-func (o *OrderBook) HasBaseAssetId() bool {
-	if o != nil && !IsNil(o.BaseAssetId) {
-		return true
-	}
-
-	return false
-}
-
-// SetBaseAssetId gets a reference to the given string and assigns it to the BaseAssetId field.
+// SetBaseAssetId sets field value
 func (o *OrderBook) SetBaseAssetId(v string) {
-	o.BaseAssetId = &v
+	o.BaseAssetId = v
 }
 
-// GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
+// GetCreatedAt returns the CreatedAt field value
 func (o *OrderBook) GetCreatedAt() time.Time {
-	if o == nil || IsNil(o.CreatedAt) {
+	if o == nil {
 		var ret time.Time
 		return ret
 	}
-	return *o.CreatedAt
+
+	return o.CreatedAt
 }
 
-// GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
+// GetCreatedAtOk returns a tuple with the CreatedAt field value
 // and a boolean to check if the value has been set.
 func (o *OrderBook) GetCreatedAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.CreatedAt) {
+	if o == nil {
 		return nil, false
 	}
-	return o.CreatedAt, true
+	return &o.CreatedAt, true
 }
 
-// HasCreatedAt returns a boolean if a field has been set.
-func (o *OrderBook) HasCreatedAt() bool {
-	if o != nil && !IsNil(o.CreatedAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetCreatedAt gets a reference to the given time.Time and assigns it to the CreatedAt field.
+// SetCreatedAt sets field value
 func (o *OrderBook) SetCreatedAt(v time.Time) {
-	o.CreatedAt = &v
+	o.CreatedAt = v
 }
 
-// GetDisplayName returns the DisplayName field value if set, zero value otherwise.
+// GetDisplayName returns the DisplayName field value
 func (o *OrderBook) GetDisplayName() string {
-	if o == nil || IsNil(o.DisplayName) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.DisplayName
+
+	return o.DisplayName
 }
 
-// GetDisplayNameOk returns a tuple with the DisplayName field value if set, nil otherwise
+// GetDisplayNameOk returns a tuple with the DisplayName field value
 // and a boolean to check if the value has been set.
 func (o *OrderBook) GetDisplayNameOk() (*string, bool) {
-	if o == nil || IsNil(o.DisplayName) {
+	if o == nil {
 		return nil, false
 	}
-	return o.DisplayName, true
+	return &o.DisplayName, true
 }
 
-// HasDisplayName returns a boolean if a field has been set.
-func (o *OrderBook) HasDisplayName() bool {
-	if o != nil && !IsNil(o.DisplayName) {
-		return true
-	}
-
-	return false
-}
-
-// SetDisplayName gets a reference to the given string and assigns it to the DisplayName field.
+// SetDisplayName sets field value
 func (o *OrderBook) SetDisplayName(v string) {
-	o.DisplayName = &v
+	o.DisplayName = v
 }
 
-// GetFeeFactor returns the FeeFactor field value if set, zero value otherwise.
+// GetFeeFactor returns the FeeFactor field value
 func (o *OrderBook) GetFeeFactor() float32 {
-	if o == nil || IsNil(o.FeeFactor) {
+	if o == nil {
 		var ret float32
 		return ret
 	}
-	return *o.FeeFactor
+
+	return o.FeeFactor
 }
 
-// GetFeeFactorOk returns a tuple with the FeeFactor field value if set, nil otherwise
+// GetFeeFactorOk returns a tuple with the FeeFactor field value
 // and a boolean to check if the value has been set.
 func (o *OrderBook) GetFeeFactorOk() (*float32, bool) {
-	if o == nil || IsNil(o.FeeFactor) {
+	if o == nil {
 		return nil, false
 	}
-	return o.FeeFactor, true
+	return &o.FeeFactor, true
 }
 
-// HasFeeFactor returns a boolean if a field has been set.
-func (o *OrderBook) HasFeeFactor() bool {
-	if o != nil && !IsNil(o.FeeFactor) {
-		return true
-	}
-
-	return false
-}
-
-// SetFeeFactor gets a reference to the given float32 and assigns it to the FeeFactor field.
+// SetFeeFactor sets field value
 func (o *OrderBook) SetFeeFactor(v float32) {
-	o.FeeFactor = &v
+	o.FeeFactor = v
 }
 
-// GetInitialAssetsRatio returns the InitialAssetsRatio field value if set, zero value otherwise.
+// GetInitialAssetsRatio returns the InitialAssetsRatio field value
 func (o *OrderBook) GetInitialAssetsRatio() float32 {
-	if o == nil || IsNil(o.InitialAssetsRatio) {
+	if o == nil {
 		var ret float32
 		return ret
 	}
-	return *o.InitialAssetsRatio
+
+	return o.InitialAssetsRatio
 }
 
-// GetInitialAssetsRatioOk returns a tuple with the InitialAssetsRatio field value if set, nil otherwise
+// GetInitialAssetsRatioOk returns a tuple with the InitialAssetsRatio field value
 // and a boolean to check if the value has been set.
 func (o *OrderBook) GetInitialAssetsRatioOk() (*float32, bool) {
-	if o == nil || IsNil(o.InitialAssetsRatio) {
+	if o == nil {
 		return nil, false
 	}
-	return o.InitialAssetsRatio, true
+	return &o.InitialAssetsRatio, true
 }
 
-// HasInitialAssetsRatio returns a boolean if a field has been set.
-func (o *OrderBook) HasInitialAssetsRatio() bool {
-	if o != nil && !IsNil(o.InitialAssetsRatio) {
-		return true
-	}
-
-	return false
-}
-
-// SetInitialAssetsRatio gets a reference to the given float32 and assigns it to the InitialAssetsRatio field.
+// SetInitialAssetsRatio sets field value
 func (o *OrderBook) SetInitialAssetsRatio(v float32) {
-	o.InitialAssetsRatio = &v
+	o.InitialAssetsRatio = v
 }
 
-// GetMaturityAt returns the MaturityAt field value if set, zero value otherwise.
+// GetMaturityAt returns the MaturityAt field value
 func (o *OrderBook) GetMaturityAt() time.Time {
-	if o == nil || IsNil(o.MaturityAt) {
+	if o == nil {
 		var ret time.Time
 		return ret
 	}
-	return *o.MaturityAt
+
+	return o.MaturityAt
 }
 
-// GetMaturityAtOk returns a tuple with the MaturityAt field value if set, nil otherwise
+// GetMaturityAtOk returns a tuple with the MaturityAt field value
 // and a boolean to check if the value has been set.
 func (o *OrderBook) GetMaturityAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.MaturityAt) {
+	if o == nil {
 		return nil, false
 	}
-	return o.MaturityAt, true
+	return &o.MaturityAt, true
 }
 
-// HasMaturityAt returns a boolean if a field has been set.
-func (o *OrderBook) HasMaturityAt() bool {
-	if o != nil && !IsNil(o.MaturityAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetMaturityAt gets a reference to the given time.Time and assigns it to the MaturityAt field.
+// SetMaturityAt sets field value
 func (o *OrderBook) SetMaturityAt(v time.Time) {
-	o.MaturityAt = &v
+	o.MaturityAt = v
 }
 
-// GetQuoteQuantity returns the QuoteQuantity field value if set, zero value otherwise.
+// GetQuoteQuantity returns the QuoteQuantity field value
 func (o *OrderBook) GetQuoteQuantity() float32 {
-	if o == nil || IsNil(o.QuoteQuantity) {
+	if o == nil {
 		var ret float32
 		return ret
 	}
-	return *o.QuoteQuantity
+
+	return o.QuoteQuantity
 }
 
-// GetQuoteQuantityOk returns a tuple with the QuoteQuantity field value if set, nil otherwise
+// GetQuoteQuantityOk returns a tuple with the QuoteQuantity field value
 // and a boolean to check if the value has been set.
 func (o *OrderBook) GetQuoteQuantityOk() (*float32, bool) {
-	if o == nil || IsNil(o.QuoteQuantity) {
+	if o == nil {
 		return nil, false
 	}
-	return o.QuoteQuantity, true
+	return &o.QuoteQuantity, true
 }
 
-// HasQuoteQuantity returns a boolean if a field has been set.
-func (o *OrderBook) HasQuoteQuantity() bool {
-	if o != nil && !IsNil(o.QuoteQuantity) {
-		return true
-	}
-
-	return false
-}
-
-// SetQuoteQuantity gets a reference to the given float32 and assigns it to the QuoteQuantity field.
+// SetQuoteQuantity sets field value
 func (o *OrderBook) SetQuoteQuantity(v float32) {
-	o.QuoteQuantity = &v
+	o.QuoteQuantity = v
 }
 
-// GetQuoteAssetId returns the QuoteAssetId field value if set, zero value otherwise.
+// GetQuoteAssetId returns the QuoteAssetId field value
 func (o *OrderBook) GetQuoteAssetId() string {
-	if o == nil || IsNil(o.QuoteAssetId) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.QuoteAssetId
+
+	return o.QuoteAssetId
 }
 
-// GetQuoteAssetIdOk returns a tuple with the QuoteAssetId field value if set, nil otherwise
+// GetQuoteAssetIdOk returns a tuple with the QuoteAssetId field value
 // and a boolean to check if the value has been set.
 func (o *OrderBook) GetQuoteAssetIdOk() (*string, bool) {
-	if o == nil || IsNil(o.QuoteAssetId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.QuoteAssetId, true
+	return &o.QuoteAssetId, true
 }
 
-// HasQuoteAssetId returns a boolean if a field has been set.
-func (o *OrderBook) HasQuoteAssetId() bool {
-	if o != nil && !IsNil(o.QuoteAssetId) {
-		return true
-	}
-
-	return false
-}
-
-// SetQuoteAssetId gets a reference to the given string and assigns it to the QuoteAssetId field.
+// SetQuoteAssetId sets field value
 func (o *OrderBook) SetQuoteAssetId(v string) {
-	o.QuoteAssetId = &v
+	o.QuoteAssetId = v
 }
 
-// GetSharesQuantity returns the SharesQuantity field value if set, zero value otherwise.
+// GetSharesQuantity returns the SharesQuantity field value
 func (o *OrderBook) GetSharesQuantity() float32 {
-	if o == nil || IsNil(o.SharesQuantity) {
+	if o == nil {
 		var ret float32
 		return ret
 	}
-	return *o.SharesQuantity
+
+	return o.SharesQuantity
 }
 
-// GetSharesQuantityOk returns a tuple with the SharesQuantity field value if set, nil otherwise
+// GetSharesQuantityOk returns a tuple with the SharesQuantity field value
 // and a boolean to check if the value has been set.
 func (o *OrderBook) GetSharesQuantityOk() (*float32, bool) {
-	if o == nil || IsNil(o.SharesQuantity) {
+	if o == nil {
 		return nil, false
 	}
-	return o.SharesQuantity, true
+	return &o.SharesQuantity, true
 }
 
-// HasSharesQuantity returns a boolean if a field has been set.
-func (o *OrderBook) HasSharesQuantity() bool {
-	if o != nil && !IsNil(o.SharesQuantity) {
-		return true
-	}
-
-	return false
-}
-
-// SetSharesQuantity gets a reference to the given float32 and assigns it to the SharesQuantity field.
+// SetSharesQuantity sets field value
 func (o *OrderBook) SetSharesQuantity(v float32) {
-	o.SharesQuantity = &v
+	o.SharesQuantity = v
 }
 
-// GetStatus returns the Status field value if set, zero value otherwise.
+// GetStatus returns the Status field value
 func (o *OrderBook) GetStatus() OrderBookStatus {
-	if o == nil || IsNil(o.Status) {
+	if o == nil {
 		var ret OrderBookStatus
 		return ret
 	}
-	return *o.Status
+
+	return o.Status
 }
 
-// GetStatusOk returns a tuple with the Status field value if set, nil otherwise
+// GetStatusOk returns a tuple with the Status field value
 // and a boolean to check if the value has been set.
 func (o *OrderBook) GetStatusOk() (*OrderBookStatus, bool) {
-	if o == nil || IsNil(o.Status) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Status, true
+	return &o.Status, true
 }
 
-// HasStatus returns a boolean if a field has been set.
-func (o *OrderBook) HasStatus() bool {
-	if o != nil && !IsNil(o.Status) {
-		return true
-	}
-
-	return false
-}
-
-// SetStatus gets a reference to the given OrderBookStatus and assigns it to the Status field.
+// SetStatus sets field value
 func (o *OrderBook) SetStatus(v OrderBookStatus) {
-	o.Status = &v
+	o.Status = v
 }
 
-// GetTickSize returns the TickSize field value if set, zero value otherwise.
+// GetTickSize returns the TickSize field value
 func (o *OrderBook) GetTickSize() float32 {
-	if o == nil || IsNil(o.TickSize) {
+	if o == nil {
 		var ret float32
 		return ret
 	}
-	return *o.TickSize
+
+	return o.TickSize
 }
 
-// GetTickSizeOk returns a tuple with the TickSize field value if set, nil otherwise
+// GetTickSizeOk returns a tuple with the TickSize field value
 // and a boolean to check if the value has been set.
 func (o *OrderBook) GetTickSizeOk() (*float32, bool) {
-	if o == nil || IsNil(o.TickSize) {
+	if o == nil {
 		return nil, false
 	}
-	return o.TickSize, true
+	return &o.TickSize, true
 }
 
-// HasTickSize returns a boolean if a field has been set.
-func (o *OrderBook) HasTickSize() bool {
-	if o != nil && !IsNil(o.TickSize) {
-		return true
-	}
-
-	return false
-}
-
-// SetTickSize gets a reference to the given float32 and assigns it to the TickSize field.
+// SetTickSize sets field value
 func (o *OrderBook) SetTickSize(v float32) {
-	o.TickSize = &v
+	o.TickSize = v
 }
 
-// GetUpdatedAt returns the UpdatedAt field value if set, zero value otherwise.
+// GetUpdatedAt returns the UpdatedAt field value
 func (o *OrderBook) GetUpdatedAt() time.Time {
-	if o == nil || IsNil(o.UpdatedAt) {
+	if o == nil {
 		var ret time.Time
 		return ret
 	}
-	return *o.UpdatedAt
+
+	return o.UpdatedAt
 }
 
-// GetUpdatedAtOk returns a tuple with the UpdatedAt field value if set, nil otherwise
+// GetUpdatedAtOk returns a tuple with the UpdatedAt field value
 // and a boolean to check if the value has been set.
 func (o *OrderBook) GetUpdatedAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.UpdatedAt) {
+	if o == nil {
 		return nil, false
 	}
-	return o.UpdatedAt, true
+	return &o.UpdatedAt, true
 }
 
-// HasUpdatedAt returns a boolean if a field has been set.
-func (o *OrderBook) HasUpdatedAt() bool {
-	if o != nil && !IsNil(o.UpdatedAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetUpdatedAt gets a reference to the given time.Time and assigns it to the UpdatedAt field.
+// SetUpdatedAt sets field value
 func (o *OrderBook) SetUpdatedAt(v time.Time) {
-	o.UpdatedAt = &v
+	o.UpdatedAt = v
 }
 
 // GetHaltedAt returns the HaltedAt field value if set, zero value otherwise.
@@ -601,36 +508,28 @@ func (o *OrderBook) SetPoolUpdatedAt(v time.Time) {
 	o.PoolUpdatedAt = &v
 }
 
-// GetSharesAssetId returns the SharesAssetId field value if set, zero value otherwise.
+// GetSharesAssetId returns the SharesAssetId field value
 func (o *OrderBook) GetSharesAssetId() string {
-	if o == nil || IsNil(o.SharesAssetId) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.SharesAssetId
+
+	return o.SharesAssetId
 }
 
-// GetSharesAssetIdOk returns a tuple with the SharesAssetId field value if set, nil otherwise
+// GetSharesAssetIdOk returns a tuple with the SharesAssetId field value
 // and a boolean to check if the value has been set.
 func (o *OrderBook) GetSharesAssetIdOk() (*string, bool) {
-	if o == nil || IsNil(o.SharesAssetId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.SharesAssetId, true
+	return &o.SharesAssetId, true
 }
 
-// HasSharesAssetId returns a boolean if a field has been set.
-func (o *OrderBook) HasSharesAssetId() bool {
-	if o != nil && !IsNil(o.SharesAssetId) {
-		return true
-	}
-
-	return false
-}
-
-// SetSharesAssetId gets a reference to the given string and assigns it to the SharesAssetId field.
+// SetSharesAssetId sets field value
 func (o *OrderBook) SetSharesAssetId(v string) {
-	o.SharesAssetId = &v
+	o.SharesAssetId = v
 }
 
 func (o OrderBook) MarshalJSON() ([]byte, error) {
@@ -643,48 +542,20 @@ func (o OrderBook) MarshalJSON() ([]byte, error) {
 
 func (o OrderBook) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.OrderBookId) {
-		toSerialize["order_book_id"] = o.OrderBookId
-	}
-	if !IsNil(o.BaseQuantity) {
-		toSerialize["base_quantity"] = o.BaseQuantity
-	}
-	if !IsNil(o.BaseAssetId) {
-		toSerialize["base_asset_id"] = o.BaseAssetId
-	}
-	if !IsNil(o.CreatedAt) {
-		toSerialize["created_at"] = o.CreatedAt
-	}
-	if !IsNil(o.DisplayName) {
-		toSerialize["display_name"] = o.DisplayName
-	}
-	if !IsNil(o.FeeFactor) {
-		toSerialize["fee_factor"] = o.FeeFactor
-	}
-	if !IsNil(o.InitialAssetsRatio) {
-		toSerialize["initial_assets_ratio"] = o.InitialAssetsRatio
-	}
-	if !IsNil(o.MaturityAt) {
-		toSerialize["maturity_at"] = o.MaturityAt
-	}
-	if !IsNil(o.QuoteQuantity) {
-		toSerialize["quote_quantity"] = o.QuoteQuantity
-	}
-	if !IsNil(o.QuoteAssetId) {
-		toSerialize["quote_asset_id"] = o.QuoteAssetId
-	}
-	if !IsNil(o.SharesQuantity) {
-		toSerialize["shares_quantity"] = o.SharesQuantity
-	}
-	if !IsNil(o.Status) {
-		toSerialize["status"] = o.Status
-	}
-	if !IsNil(o.TickSize) {
-		toSerialize["tick_size"] = o.TickSize
-	}
-	if !IsNil(o.UpdatedAt) {
-		toSerialize["updated_at"] = o.UpdatedAt
-	}
+	toSerialize["order_book_id"] = o.OrderBookId
+	toSerialize["base_quantity"] = o.BaseQuantity
+	toSerialize["base_asset_id"] = o.BaseAssetId
+	toSerialize["created_at"] = o.CreatedAt
+	toSerialize["display_name"] = o.DisplayName
+	toSerialize["fee_factor"] = o.FeeFactor
+	toSerialize["initial_assets_ratio"] = o.InitialAssetsRatio
+	toSerialize["maturity_at"] = o.MaturityAt
+	toSerialize["quote_quantity"] = o.QuoteQuantity
+	toSerialize["quote_asset_id"] = o.QuoteAssetId
+	toSerialize["shares_quantity"] = o.SharesQuantity
+	toSerialize["status"] = o.Status
+	toSerialize["tick_size"] = o.TickSize
+	toSerialize["updated_at"] = o.UpdatedAt
 	if !IsNil(o.HaltedAt) {
 		toSerialize["halted_at"] = o.HaltedAt
 	}
@@ -694,10 +565,59 @@ func (o OrderBook) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.PoolUpdatedAt) {
 		toSerialize["pool_updated_at"] = o.PoolUpdatedAt
 	}
-	if !IsNil(o.SharesAssetId) {
-		toSerialize["shares_asset_id"] = o.SharesAssetId
-	}
+	toSerialize["shares_asset_id"] = o.SharesAssetId
 	return toSerialize, nil
+}
+
+func (o *OrderBook) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"order_book_id",
+		"base_quantity",
+		"base_asset_id",
+		"created_at",
+		"display_name",
+		"fee_factor",
+		"initial_assets_ratio",
+		"maturity_at",
+		"quote_quantity",
+		"quote_asset_id",
+		"shares_quantity",
+		"status",
+		"tick_size",
+		"updated_at",
+		"shares_asset_id",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varOrderBook := _OrderBook{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varOrderBook)
+
+	if err != nil {
+		return err
+	}
+
+	*o = OrderBook(varOrderBook)
+
+	return err
 }
 
 type NullableOrderBook struct {

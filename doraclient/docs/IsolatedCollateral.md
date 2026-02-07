@@ -4,17 +4,17 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**GlobalPositionId** | Pointer to **string** |  | [optional] 
-**IsolatedPositionId** | Pointer to **string** |  | [optional] 
-**TransactionId** | Pointer to **string** |  | [optional] 
-**AssetId** | Pointer to **string** |  | [optional] 
-**Quantity** | Pointer to **string** |  | [optional] 
+**GlobalPositionId** | **string** |  | 
+**IsolatedPositionId** | **string** |  | 
+**TransactionId** | **string** |  | 
+**AssetId** | **string** |  | 
+**Quantity** | **string** |  | 
 
 ## Methods
 
 ### NewIsolatedCollateral
 
-`func NewIsolatedCollateral() *IsolatedCollateral`
+`func NewIsolatedCollateral(globalPositionId string, isolatedPositionId string, transactionId string, assetId string, quantity string, ) *IsolatedCollateral`
 
 NewIsolatedCollateral instantiates a new IsolatedCollateral object
 This constructor will assign default values to properties that have it defined,
@@ -48,11 +48,6 @@ and a boolean to check if the value has been set.
 
 SetGlobalPositionId sets GlobalPositionId field to given value.
 
-### HasGlobalPositionId
-
-`func (o *IsolatedCollateral) HasGlobalPositionId() bool`
-
-HasGlobalPositionId returns a boolean if a field has been set.
 
 ### GetIsolatedPositionId
 
@@ -73,11 +68,6 @@ and a boolean to check if the value has been set.
 
 SetIsolatedPositionId sets IsolatedPositionId field to given value.
 
-### HasIsolatedPositionId
-
-`func (o *IsolatedCollateral) HasIsolatedPositionId() bool`
-
-HasIsolatedPositionId returns a boolean if a field has been set.
 
 ### GetTransactionId
 
@@ -98,11 +88,6 @@ and a boolean to check if the value has been set.
 
 SetTransactionId sets TransactionId field to given value.
 
-### HasTransactionId
-
-`func (o *IsolatedCollateral) HasTransactionId() bool`
-
-HasTransactionId returns a boolean if a field has been set.
 
 ### GetAssetId
 
@@ -123,11 +108,6 @@ and a boolean to check if the value has been set.
 
 SetAssetId sets AssetId field to given value.
 
-### HasAssetId
-
-`func (o *IsolatedCollateral) HasAssetId() bool`
-
-HasAssetId returns a boolean if a field has been set.
 
 ### GetQuantity
 
@@ -148,11 +128,6 @@ and a boolean to check if the value has been set.
 
 SetQuantity sets Quantity field to given value.
 
-### HasQuantity
-
-`func (o *IsolatedCollateral) HasQuantity() bool`
-
-HasQuantity returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

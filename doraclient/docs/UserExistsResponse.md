@@ -4,15 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**EmailExists** | Pointer to **bool** |  | [optional] 
-**FirebaseSet** | Pointer to **bool** |  | [optional] 
-**ShouldCreateUser** | Pointer to **bool** |  | [optional] 
+**EmailExists** | **bool** |  | 
+**FirebaseSet** | **bool** |  | 
+**ShouldCreateUser** | **bool** |  | 
 
 ## Methods
 
 ### NewUserExistsResponse
 
-`func NewUserExistsResponse() *UserExistsResponse`
+`func NewUserExistsResponse(emailExists bool, firebaseSet bool, shouldCreateUser bool, ) *UserExistsResponse`
 
 NewUserExistsResponse instantiates a new UserExistsResponse object
 This constructor will assign default values to properties that have it defined,
@@ -46,11 +46,6 @@ and a boolean to check if the value has been set.
 
 SetEmailExists sets EmailExists field to given value.
 
-### HasEmailExists
-
-`func (o *UserExistsResponse) HasEmailExists() bool`
-
-HasEmailExists returns a boolean if a field has been set.
 
 ### GetFirebaseSet
 
@@ -71,11 +66,6 @@ and a boolean to check if the value has been set.
 
 SetFirebaseSet sets FirebaseSet field to given value.
 
-### HasFirebaseSet
-
-`func (o *UserExistsResponse) HasFirebaseSet() bool`
-
-HasFirebaseSet returns a boolean if a field has been set.
 
 ### GetShouldCreateUser
 
@@ -96,11 +86,6 @@ and a boolean to check if the value has been set.
 
 SetShouldCreateUser sets ShouldCreateUser field to given value.
 
-### HasShouldCreateUser
-
-`func (o *UserExistsResponse) HasShouldCreateUser() bool`
-
-HasShouldCreateUser returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

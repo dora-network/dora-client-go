@@ -4,16 +4,16 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**OrderBookId** | Pointer to **string** |  | [optional] 
-**BestBid** | Pointer to **string** |  | [optional] 
-**BestAsk** | Pointer to **string** |  | [optional] 
-**Timestamp** | Pointer to **time.Time** |  | [optional] 
+**OrderBookId** | **string** |  | 
+**BestBid** | **string** |  | 
+**BestAsk** | **string** |  | 
+**Timestamp** | **time.Time** |  | 
 
 ## Methods
 
 ### NewOrderBookTop
 
-`func NewOrderBookTop() *OrderBookTop`
+`func NewOrderBookTop(orderBookId string, bestBid string, bestAsk string, timestamp time.Time, ) *OrderBookTop`
 
 NewOrderBookTop instantiates a new OrderBookTop object
 This constructor will assign default values to properties that have it defined,
@@ -47,11 +47,6 @@ and a boolean to check if the value has been set.
 
 SetOrderBookId sets OrderBookId field to given value.
 
-### HasOrderBookId
-
-`func (o *OrderBookTop) HasOrderBookId() bool`
-
-HasOrderBookId returns a boolean if a field has been set.
 
 ### GetBestBid
 
@@ -72,11 +67,6 @@ and a boolean to check if the value has been set.
 
 SetBestBid sets BestBid field to given value.
 
-### HasBestBid
-
-`func (o *OrderBookTop) HasBestBid() bool`
-
-HasBestBid returns a boolean if a field has been set.
 
 ### GetBestAsk
 
@@ -97,11 +87,6 @@ and a boolean to check if the value has been set.
 
 SetBestAsk sets BestAsk field to given value.
 
-### HasBestAsk
-
-`func (o *OrderBookTop) HasBestAsk() bool`
-
-HasBestAsk returns a boolean if a field has been set.
 
 ### GetTimestamp
 
@@ -122,11 +107,6 @@ and a boolean to check if the value has been set.
 
 SetTimestamp sets Timestamp field to given value.
 
-### HasTimestamp
-
-`func (o *OrderBookTop) HasTimestamp() bool`
-
-HasTimestamp returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

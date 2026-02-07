@@ -4,15 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**GlobalPositionId** | Pointer to **string** |  | [optional] 
-**IsolatedPositionId** | Pointer to **string** |  | [optional] 
-**TransactionId** | Pointer to **string** |  | [optional] 
+**GlobalPositionId** | **string** |  | 
+**IsolatedPositionId** | **string** |  | 
+**TransactionId** | **string** |  | 
 
 ## Methods
 
 ### NewIsolatedPosition
 
-`func NewIsolatedPosition() *IsolatedPosition`
+`func NewIsolatedPosition(globalPositionId string, isolatedPositionId string, transactionId string, ) *IsolatedPosition`
 
 NewIsolatedPosition instantiates a new IsolatedPosition object
 This constructor will assign default values to properties that have it defined,
@@ -46,11 +46,6 @@ and a boolean to check if the value has been set.
 
 SetGlobalPositionId sets GlobalPositionId field to given value.
 
-### HasGlobalPositionId
-
-`func (o *IsolatedPosition) HasGlobalPositionId() bool`
-
-HasGlobalPositionId returns a boolean if a field has been set.
 
 ### GetIsolatedPositionId
 
@@ -71,11 +66,6 @@ and a boolean to check if the value has been set.
 
 SetIsolatedPositionId sets IsolatedPositionId field to given value.
 
-### HasIsolatedPositionId
-
-`func (o *IsolatedPosition) HasIsolatedPositionId() bool`
-
-HasIsolatedPositionId returns a boolean if a field has been set.
 
 ### GetTransactionId
 
@@ -96,11 +86,6 @@ and a boolean to check if the value has been set.
 
 SetTransactionId sets TransactionId field to given value.
 
-### HasTransactionId
-
-`func (o *IsolatedPosition) HasTransactionId() bool`
-
-HasTransactionId returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

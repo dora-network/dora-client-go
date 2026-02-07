@@ -12,6 +12,8 @@ package doraclient
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the PLAsset type satisfies the MappedNullable interface at compile time
@@ -20,44 +22,59 @@ var _ MappedNullable = &PLAsset{}
 // PLAsset struct for PLAsset
 type PLAsset struct {
 	// The symbol of the asset
-	Symbol *string `json:"symbol,omitempty"`
+	Symbol string `json:"symbol"`
 	// The side of the position (LONG or SHORT)
-	Side *string `json:"side,omitempty"`
+	Side string `json:"side"`
 	// The average entry price of the position
-	AvgEntryPrice *string `json:"avg_entry_price,omitempty"`
+	AvgEntryPrice string `json:"avg_entry_price"`
 	// The current mark price for the asset to calculate daily PL. This is usually the close price of the previous day
-	MarkPrice *string `json:"mark_price,omitempty"`
+	MarkPrice string `json:"mark_price"`
 	// The liquidation price of the position
-	LiquidationPrice *string `json:"liquidation_price,omitempty"`
+	LiquidationPrice string `json:"liquidation_price"`
 	// The available quantity in units of the asset
-	Available *string `json:"available,omitempty"`
+	Available string `json:"available"`
 	// The borrowed quantity in units of the asset
-	Borrowed *string `json:"borrowed,omitempty"`
-	Margin *Margin `json:"margin,omitempty"`
+	Borrowed string `json:"borrowed"`
+	Margin Margin `json:"margin"`
 	// The unrealized profit or loss of the position
-	UnrealizedPl *string `json:"unrealized_pl,omitempty"`
+	UnrealizedPl string `json:"unrealized_pl"`
 	// The leverage limit for the position
-	LeverageLimit *string `json:"leverage_limit,omitempty"`
+	LeverageLimit string `json:"leverage_limit"`
 	// The take profit price set for the position, if any
 	Tp *string `json:"tp,omitempty"`
 	// The stop loss price set for the position, if any
 	Sl *string `json:"sl,omitempty"`
 	// The initial capital of the position
-	InitialCapital *string `json:"initial_capital,omitempty"`
+	InitialCapital string `json:"initial_capital"`
 	// The impending borrows of the position
 	ImpendingBorrows *string `json:"impending_borrows,omitempty"`
 	// The locked amount of the position
-	Locked *string `json:"locked,omitempty"`
+	Locked string `json:"locked"`
 	// The unused collateral of the position
-	UnusedCollateral *string `json:"unused_collateral,omitempty"`
+	UnusedCollateral string `json:"unused_collateral"`
 }
+
+type _PLAsset PLAsset
 
 // NewPLAsset instantiates a new PLAsset object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPLAsset() *PLAsset {
+func NewPLAsset(symbol string, side string, avgEntryPrice string, markPrice string, liquidationPrice string, available string, borrowed string, margin Margin, unrealizedPl string, leverageLimit string, initialCapital string, locked string, unusedCollateral string) *PLAsset {
 	this := PLAsset{}
+	this.Symbol = symbol
+	this.Side = side
+	this.AvgEntryPrice = avgEntryPrice
+	this.MarkPrice = markPrice
+	this.LiquidationPrice = liquidationPrice
+	this.Available = available
+	this.Borrowed = borrowed
+	this.Margin = margin
+	this.UnrealizedPl = unrealizedPl
+	this.LeverageLimit = leverageLimit
+	this.InitialCapital = initialCapital
+	this.Locked = locked
+	this.UnusedCollateral = unusedCollateral
 	return &this
 }
 
@@ -69,324 +86,244 @@ func NewPLAssetWithDefaults() *PLAsset {
 	return &this
 }
 
-// GetSymbol returns the Symbol field value if set, zero value otherwise.
+// GetSymbol returns the Symbol field value
 func (o *PLAsset) GetSymbol() string {
-	if o == nil || IsNil(o.Symbol) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Symbol
+
+	return o.Symbol
 }
 
-// GetSymbolOk returns a tuple with the Symbol field value if set, nil otherwise
+// GetSymbolOk returns a tuple with the Symbol field value
 // and a boolean to check if the value has been set.
 func (o *PLAsset) GetSymbolOk() (*string, bool) {
-	if o == nil || IsNil(o.Symbol) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Symbol, true
+	return &o.Symbol, true
 }
 
-// HasSymbol returns a boolean if a field has been set.
-func (o *PLAsset) HasSymbol() bool {
-	if o != nil && !IsNil(o.Symbol) {
-		return true
-	}
-
-	return false
-}
-
-// SetSymbol gets a reference to the given string and assigns it to the Symbol field.
+// SetSymbol sets field value
 func (o *PLAsset) SetSymbol(v string) {
-	o.Symbol = &v
+	o.Symbol = v
 }
 
-// GetSide returns the Side field value if set, zero value otherwise.
+// GetSide returns the Side field value
 func (o *PLAsset) GetSide() string {
-	if o == nil || IsNil(o.Side) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Side
+
+	return o.Side
 }
 
-// GetSideOk returns a tuple with the Side field value if set, nil otherwise
+// GetSideOk returns a tuple with the Side field value
 // and a boolean to check if the value has been set.
 func (o *PLAsset) GetSideOk() (*string, bool) {
-	if o == nil || IsNil(o.Side) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Side, true
+	return &o.Side, true
 }
 
-// HasSide returns a boolean if a field has been set.
-func (o *PLAsset) HasSide() bool {
-	if o != nil && !IsNil(o.Side) {
-		return true
-	}
-
-	return false
-}
-
-// SetSide gets a reference to the given string and assigns it to the Side field.
+// SetSide sets field value
 func (o *PLAsset) SetSide(v string) {
-	o.Side = &v
+	o.Side = v
 }
 
-// GetAvgEntryPrice returns the AvgEntryPrice field value if set, zero value otherwise.
+// GetAvgEntryPrice returns the AvgEntryPrice field value
 func (o *PLAsset) GetAvgEntryPrice() string {
-	if o == nil || IsNil(o.AvgEntryPrice) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.AvgEntryPrice
+
+	return o.AvgEntryPrice
 }
 
-// GetAvgEntryPriceOk returns a tuple with the AvgEntryPrice field value if set, nil otherwise
+// GetAvgEntryPriceOk returns a tuple with the AvgEntryPrice field value
 // and a boolean to check if the value has been set.
 func (o *PLAsset) GetAvgEntryPriceOk() (*string, bool) {
-	if o == nil || IsNil(o.AvgEntryPrice) {
+	if o == nil {
 		return nil, false
 	}
-	return o.AvgEntryPrice, true
+	return &o.AvgEntryPrice, true
 }
 
-// HasAvgEntryPrice returns a boolean if a field has been set.
-func (o *PLAsset) HasAvgEntryPrice() bool {
-	if o != nil && !IsNil(o.AvgEntryPrice) {
-		return true
-	}
-
-	return false
-}
-
-// SetAvgEntryPrice gets a reference to the given string and assigns it to the AvgEntryPrice field.
+// SetAvgEntryPrice sets field value
 func (o *PLAsset) SetAvgEntryPrice(v string) {
-	o.AvgEntryPrice = &v
+	o.AvgEntryPrice = v
 }
 
-// GetMarkPrice returns the MarkPrice field value if set, zero value otherwise.
+// GetMarkPrice returns the MarkPrice field value
 func (o *PLAsset) GetMarkPrice() string {
-	if o == nil || IsNil(o.MarkPrice) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.MarkPrice
+
+	return o.MarkPrice
 }
 
-// GetMarkPriceOk returns a tuple with the MarkPrice field value if set, nil otherwise
+// GetMarkPriceOk returns a tuple with the MarkPrice field value
 // and a boolean to check if the value has been set.
 func (o *PLAsset) GetMarkPriceOk() (*string, bool) {
-	if o == nil || IsNil(o.MarkPrice) {
+	if o == nil {
 		return nil, false
 	}
-	return o.MarkPrice, true
+	return &o.MarkPrice, true
 }
 
-// HasMarkPrice returns a boolean if a field has been set.
-func (o *PLAsset) HasMarkPrice() bool {
-	if o != nil && !IsNil(o.MarkPrice) {
-		return true
-	}
-
-	return false
-}
-
-// SetMarkPrice gets a reference to the given string and assigns it to the MarkPrice field.
+// SetMarkPrice sets field value
 func (o *PLAsset) SetMarkPrice(v string) {
-	o.MarkPrice = &v
+	o.MarkPrice = v
 }
 
-// GetLiquidationPrice returns the LiquidationPrice field value if set, zero value otherwise.
+// GetLiquidationPrice returns the LiquidationPrice field value
 func (o *PLAsset) GetLiquidationPrice() string {
-	if o == nil || IsNil(o.LiquidationPrice) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.LiquidationPrice
+
+	return o.LiquidationPrice
 }
 
-// GetLiquidationPriceOk returns a tuple with the LiquidationPrice field value if set, nil otherwise
+// GetLiquidationPriceOk returns a tuple with the LiquidationPrice field value
 // and a boolean to check if the value has been set.
 func (o *PLAsset) GetLiquidationPriceOk() (*string, bool) {
-	if o == nil || IsNil(o.LiquidationPrice) {
+	if o == nil {
 		return nil, false
 	}
-	return o.LiquidationPrice, true
+	return &o.LiquidationPrice, true
 }
 
-// HasLiquidationPrice returns a boolean if a field has been set.
-func (o *PLAsset) HasLiquidationPrice() bool {
-	if o != nil && !IsNil(o.LiquidationPrice) {
-		return true
-	}
-
-	return false
-}
-
-// SetLiquidationPrice gets a reference to the given string and assigns it to the LiquidationPrice field.
+// SetLiquidationPrice sets field value
 func (o *PLAsset) SetLiquidationPrice(v string) {
-	o.LiquidationPrice = &v
+	o.LiquidationPrice = v
 }
 
-// GetAvailable returns the Available field value if set, zero value otherwise.
+// GetAvailable returns the Available field value
 func (o *PLAsset) GetAvailable() string {
-	if o == nil || IsNil(o.Available) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Available
+
+	return o.Available
 }
 
-// GetAvailableOk returns a tuple with the Available field value if set, nil otherwise
+// GetAvailableOk returns a tuple with the Available field value
 // and a boolean to check if the value has been set.
 func (o *PLAsset) GetAvailableOk() (*string, bool) {
-	if o == nil || IsNil(o.Available) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Available, true
+	return &o.Available, true
 }
 
-// HasAvailable returns a boolean if a field has been set.
-func (o *PLAsset) HasAvailable() bool {
-	if o != nil && !IsNil(o.Available) {
-		return true
-	}
-
-	return false
-}
-
-// SetAvailable gets a reference to the given string and assigns it to the Available field.
+// SetAvailable sets field value
 func (o *PLAsset) SetAvailable(v string) {
-	o.Available = &v
+	o.Available = v
 }
 
-// GetBorrowed returns the Borrowed field value if set, zero value otherwise.
+// GetBorrowed returns the Borrowed field value
 func (o *PLAsset) GetBorrowed() string {
-	if o == nil || IsNil(o.Borrowed) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Borrowed
+
+	return o.Borrowed
 }
 
-// GetBorrowedOk returns a tuple with the Borrowed field value if set, nil otherwise
+// GetBorrowedOk returns a tuple with the Borrowed field value
 // and a boolean to check if the value has been set.
 func (o *PLAsset) GetBorrowedOk() (*string, bool) {
-	if o == nil || IsNil(o.Borrowed) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Borrowed, true
+	return &o.Borrowed, true
 }
 
-// HasBorrowed returns a boolean if a field has been set.
-func (o *PLAsset) HasBorrowed() bool {
-	if o != nil && !IsNil(o.Borrowed) {
-		return true
-	}
-
-	return false
-}
-
-// SetBorrowed gets a reference to the given string and assigns it to the Borrowed field.
+// SetBorrowed sets field value
 func (o *PLAsset) SetBorrowed(v string) {
-	o.Borrowed = &v
+	o.Borrowed = v
 }
 
-// GetMargin returns the Margin field value if set, zero value otherwise.
+// GetMargin returns the Margin field value
 func (o *PLAsset) GetMargin() Margin {
-	if o == nil || IsNil(o.Margin) {
+	if o == nil {
 		var ret Margin
 		return ret
 	}
-	return *o.Margin
+
+	return o.Margin
 }
 
-// GetMarginOk returns a tuple with the Margin field value if set, nil otherwise
+// GetMarginOk returns a tuple with the Margin field value
 // and a boolean to check if the value has been set.
 func (o *PLAsset) GetMarginOk() (*Margin, bool) {
-	if o == nil || IsNil(o.Margin) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Margin, true
+	return &o.Margin, true
 }
 
-// HasMargin returns a boolean if a field has been set.
-func (o *PLAsset) HasMargin() bool {
-	if o != nil && !IsNil(o.Margin) {
-		return true
-	}
-
-	return false
-}
-
-// SetMargin gets a reference to the given Margin and assigns it to the Margin field.
+// SetMargin sets field value
 func (o *PLAsset) SetMargin(v Margin) {
-	o.Margin = &v
+	o.Margin = v
 }
 
-// GetUnrealizedPl returns the UnrealizedPl field value if set, zero value otherwise.
+// GetUnrealizedPl returns the UnrealizedPl field value
 func (o *PLAsset) GetUnrealizedPl() string {
-	if o == nil || IsNil(o.UnrealizedPl) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.UnrealizedPl
+
+	return o.UnrealizedPl
 }
 
-// GetUnrealizedPlOk returns a tuple with the UnrealizedPl field value if set, nil otherwise
+// GetUnrealizedPlOk returns a tuple with the UnrealizedPl field value
 // and a boolean to check if the value has been set.
 func (o *PLAsset) GetUnrealizedPlOk() (*string, bool) {
-	if o == nil || IsNil(o.UnrealizedPl) {
+	if o == nil {
 		return nil, false
 	}
-	return o.UnrealizedPl, true
+	return &o.UnrealizedPl, true
 }
 
-// HasUnrealizedPl returns a boolean if a field has been set.
-func (o *PLAsset) HasUnrealizedPl() bool {
-	if o != nil && !IsNil(o.UnrealizedPl) {
-		return true
-	}
-
-	return false
-}
-
-// SetUnrealizedPl gets a reference to the given string and assigns it to the UnrealizedPl field.
+// SetUnrealizedPl sets field value
 func (o *PLAsset) SetUnrealizedPl(v string) {
-	o.UnrealizedPl = &v
+	o.UnrealizedPl = v
 }
 
-// GetLeverageLimit returns the LeverageLimit field value if set, zero value otherwise.
+// GetLeverageLimit returns the LeverageLimit field value
 func (o *PLAsset) GetLeverageLimit() string {
-	if o == nil || IsNil(o.LeverageLimit) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.LeverageLimit
+
+	return o.LeverageLimit
 }
 
-// GetLeverageLimitOk returns a tuple with the LeverageLimit field value if set, nil otherwise
+// GetLeverageLimitOk returns a tuple with the LeverageLimit field value
 // and a boolean to check if the value has been set.
 func (o *PLAsset) GetLeverageLimitOk() (*string, bool) {
-	if o == nil || IsNil(o.LeverageLimit) {
+	if o == nil {
 		return nil, false
 	}
-	return o.LeverageLimit, true
+	return &o.LeverageLimit, true
 }
 
-// HasLeverageLimit returns a boolean if a field has been set.
-func (o *PLAsset) HasLeverageLimit() bool {
-	if o != nil && !IsNil(o.LeverageLimit) {
-		return true
-	}
-
-	return false
-}
-
-// SetLeverageLimit gets a reference to the given string and assigns it to the LeverageLimit field.
+// SetLeverageLimit sets field value
 func (o *PLAsset) SetLeverageLimit(v string) {
-	o.LeverageLimit = &v
+	o.LeverageLimit = v
 }
 
 // GetTp returns the Tp field value if set, zero value otherwise.
@@ -453,36 +390,28 @@ func (o *PLAsset) SetSl(v string) {
 	o.Sl = &v
 }
 
-// GetInitialCapital returns the InitialCapital field value if set, zero value otherwise.
+// GetInitialCapital returns the InitialCapital field value
 func (o *PLAsset) GetInitialCapital() string {
-	if o == nil || IsNil(o.InitialCapital) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.InitialCapital
+
+	return o.InitialCapital
 }
 
-// GetInitialCapitalOk returns a tuple with the InitialCapital field value if set, nil otherwise
+// GetInitialCapitalOk returns a tuple with the InitialCapital field value
 // and a boolean to check if the value has been set.
 func (o *PLAsset) GetInitialCapitalOk() (*string, bool) {
-	if o == nil || IsNil(o.InitialCapital) {
+	if o == nil {
 		return nil, false
 	}
-	return o.InitialCapital, true
+	return &o.InitialCapital, true
 }
 
-// HasInitialCapital returns a boolean if a field has been set.
-func (o *PLAsset) HasInitialCapital() bool {
-	if o != nil && !IsNil(o.InitialCapital) {
-		return true
-	}
-
-	return false
-}
-
-// SetInitialCapital gets a reference to the given string and assigns it to the InitialCapital field.
+// SetInitialCapital sets field value
 func (o *PLAsset) SetInitialCapital(v string) {
-	o.InitialCapital = &v
+	o.InitialCapital = v
 }
 
 // GetImpendingBorrows returns the ImpendingBorrows field value if set, zero value otherwise.
@@ -517,68 +446,52 @@ func (o *PLAsset) SetImpendingBorrows(v string) {
 	o.ImpendingBorrows = &v
 }
 
-// GetLocked returns the Locked field value if set, zero value otherwise.
+// GetLocked returns the Locked field value
 func (o *PLAsset) GetLocked() string {
-	if o == nil || IsNil(o.Locked) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Locked
+
+	return o.Locked
 }
 
-// GetLockedOk returns a tuple with the Locked field value if set, nil otherwise
+// GetLockedOk returns a tuple with the Locked field value
 // and a boolean to check if the value has been set.
 func (o *PLAsset) GetLockedOk() (*string, bool) {
-	if o == nil || IsNil(o.Locked) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Locked, true
+	return &o.Locked, true
 }
 
-// HasLocked returns a boolean if a field has been set.
-func (o *PLAsset) HasLocked() bool {
-	if o != nil && !IsNil(o.Locked) {
-		return true
-	}
-
-	return false
-}
-
-// SetLocked gets a reference to the given string and assigns it to the Locked field.
+// SetLocked sets field value
 func (o *PLAsset) SetLocked(v string) {
-	o.Locked = &v
+	o.Locked = v
 }
 
-// GetUnusedCollateral returns the UnusedCollateral field value if set, zero value otherwise.
+// GetUnusedCollateral returns the UnusedCollateral field value
 func (o *PLAsset) GetUnusedCollateral() string {
-	if o == nil || IsNil(o.UnusedCollateral) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.UnusedCollateral
+
+	return o.UnusedCollateral
 }
 
-// GetUnusedCollateralOk returns a tuple with the UnusedCollateral field value if set, nil otherwise
+// GetUnusedCollateralOk returns a tuple with the UnusedCollateral field value
 // and a boolean to check if the value has been set.
 func (o *PLAsset) GetUnusedCollateralOk() (*string, bool) {
-	if o == nil || IsNil(o.UnusedCollateral) {
+	if o == nil {
 		return nil, false
 	}
-	return o.UnusedCollateral, true
+	return &o.UnusedCollateral, true
 }
 
-// HasUnusedCollateral returns a boolean if a field has been set.
-func (o *PLAsset) HasUnusedCollateral() bool {
-	if o != nil && !IsNil(o.UnusedCollateral) {
-		return true
-	}
-
-	return false
-}
-
-// SetUnusedCollateral gets a reference to the given string and assigns it to the UnusedCollateral field.
+// SetUnusedCollateral sets field value
 func (o *PLAsset) SetUnusedCollateral(v string) {
-	o.UnusedCollateral = &v
+	o.UnusedCollateral = v
 }
 
 func (o PLAsset) MarshalJSON() ([]byte, error) {
@@ -591,55 +504,78 @@ func (o PLAsset) MarshalJSON() ([]byte, error) {
 
 func (o PLAsset) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Symbol) {
-		toSerialize["symbol"] = o.Symbol
-	}
-	if !IsNil(o.Side) {
-		toSerialize["side"] = o.Side
-	}
-	if !IsNil(o.AvgEntryPrice) {
-		toSerialize["avg_entry_price"] = o.AvgEntryPrice
-	}
-	if !IsNil(o.MarkPrice) {
-		toSerialize["mark_price"] = o.MarkPrice
-	}
-	if !IsNil(o.LiquidationPrice) {
-		toSerialize["liquidation_price"] = o.LiquidationPrice
-	}
-	if !IsNil(o.Available) {
-		toSerialize["available"] = o.Available
-	}
-	if !IsNil(o.Borrowed) {
-		toSerialize["borrowed"] = o.Borrowed
-	}
-	if !IsNil(o.Margin) {
-		toSerialize["margin"] = o.Margin
-	}
-	if !IsNil(o.UnrealizedPl) {
-		toSerialize["unrealized_pl"] = o.UnrealizedPl
-	}
-	if !IsNil(o.LeverageLimit) {
-		toSerialize["leverage_limit"] = o.LeverageLimit
-	}
+	toSerialize["symbol"] = o.Symbol
+	toSerialize["side"] = o.Side
+	toSerialize["avg_entry_price"] = o.AvgEntryPrice
+	toSerialize["mark_price"] = o.MarkPrice
+	toSerialize["liquidation_price"] = o.LiquidationPrice
+	toSerialize["available"] = o.Available
+	toSerialize["borrowed"] = o.Borrowed
+	toSerialize["margin"] = o.Margin
+	toSerialize["unrealized_pl"] = o.UnrealizedPl
+	toSerialize["leverage_limit"] = o.LeverageLimit
 	if !IsNil(o.Tp) {
 		toSerialize["tp"] = o.Tp
 	}
 	if !IsNil(o.Sl) {
 		toSerialize["sl"] = o.Sl
 	}
-	if !IsNil(o.InitialCapital) {
-		toSerialize["initial_capital"] = o.InitialCapital
-	}
+	toSerialize["initial_capital"] = o.InitialCapital
 	if !IsNil(o.ImpendingBorrows) {
 		toSerialize["impending_borrows"] = o.ImpendingBorrows
 	}
-	if !IsNil(o.Locked) {
-		toSerialize["locked"] = o.Locked
-	}
-	if !IsNil(o.UnusedCollateral) {
-		toSerialize["unused_collateral"] = o.UnusedCollateral
-	}
+	toSerialize["locked"] = o.Locked
+	toSerialize["unused_collateral"] = o.UnusedCollateral
 	return toSerialize, nil
+}
+
+func (o *PLAsset) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"symbol",
+		"side",
+		"avg_entry_price",
+		"mark_price",
+		"liquidation_price",
+		"available",
+		"borrowed",
+		"margin",
+		"unrealized_pl",
+		"leverage_limit",
+		"initial_capital",
+		"locked",
+		"unused_collateral",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varPLAsset := _PLAsset{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varPLAsset)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PLAsset(varPLAsset)
+
+	return err
 }
 
 type NullablePLAsset struct {

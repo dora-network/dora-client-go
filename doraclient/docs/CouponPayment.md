@@ -4,23 +4,23 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | Pointer to **string** |  | [optional] 
-**AssetId** | Pointer to **string** |  | [optional] 
-**Yield** | Pointer to **float32** |  | [optional] 
-**StartAt** | Pointer to **time.Time** |  | [optional] 
-**EndAt** | Pointer to **time.Time** |  | [optional] 
-**PayAt** | Pointer to **time.Time** |  | [optional] 
-**AvailableToPay** | Pointer to **string** |  | [optional] 
-**CompletedAt** | Pointer to **time.Time** |  | [optional] 
-**CreatedAt** | Pointer to **time.Time** |  | [optional] 
-**ProcessEvery** | Pointer to **int32** | Number of nanoseconds to wait between coupon payment processing, must be at least 1000 (1 microsecond) | [optional] 
-**LastProcessedAt** | Pointer to **time.Time** |  | [optional] 
+**Id** | **string** |  | 
+**AssetId** | **string** |  | 
+**Yield** | **float32** |  | 
+**StartAt** | **time.Time** |  | 
+**EndAt** | **time.Time** |  | 
+**PayAt** | **time.Time** |  | 
+**AvailableToPay** | **string** |  | 
+**CompletedAt** | **time.Time** |  | 
+**CreatedAt** | **time.Time** |  | 
+**ProcessEvery** | **int32** | Number of nanoseconds to wait between coupon payment processing, must be at least 1000 (1 microsecond) | 
+**LastProcessedAt** | **time.Time** |  | 
 
 ## Methods
 
 ### NewCouponPayment
 
-`func NewCouponPayment() *CouponPayment`
+`func NewCouponPayment(id string, assetId string, yield float32, startAt time.Time, endAt time.Time, payAt time.Time, availableToPay string, completedAt time.Time, createdAt time.Time, processEvery int32, lastProcessedAt time.Time, ) *CouponPayment`
 
 NewCouponPayment instantiates a new CouponPayment object
 This constructor will assign default values to properties that have it defined,
@@ -54,11 +54,6 @@ and a boolean to check if the value has been set.
 
 SetId sets Id field to given value.
 
-### HasId
-
-`func (o *CouponPayment) HasId() bool`
-
-HasId returns a boolean if a field has been set.
 
 ### GetAssetId
 
@@ -79,11 +74,6 @@ and a boolean to check if the value has been set.
 
 SetAssetId sets AssetId field to given value.
 
-### HasAssetId
-
-`func (o *CouponPayment) HasAssetId() bool`
-
-HasAssetId returns a boolean if a field has been set.
 
 ### GetYield
 
@@ -104,11 +94,6 @@ and a boolean to check if the value has been set.
 
 SetYield sets Yield field to given value.
 
-### HasYield
-
-`func (o *CouponPayment) HasYield() bool`
-
-HasYield returns a boolean if a field has been set.
 
 ### GetStartAt
 
@@ -129,11 +114,6 @@ and a boolean to check if the value has been set.
 
 SetStartAt sets StartAt field to given value.
 
-### HasStartAt
-
-`func (o *CouponPayment) HasStartAt() bool`
-
-HasStartAt returns a boolean if a field has been set.
 
 ### GetEndAt
 
@@ -154,11 +134,6 @@ and a boolean to check if the value has been set.
 
 SetEndAt sets EndAt field to given value.
 
-### HasEndAt
-
-`func (o *CouponPayment) HasEndAt() bool`
-
-HasEndAt returns a boolean if a field has been set.
 
 ### GetPayAt
 
@@ -179,11 +154,6 @@ and a boolean to check if the value has been set.
 
 SetPayAt sets PayAt field to given value.
 
-### HasPayAt
-
-`func (o *CouponPayment) HasPayAt() bool`
-
-HasPayAt returns a boolean if a field has been set.
 
 ### GetAvailableToPay
 
@@ -204,11 +174,6 @@ and a boolean to check if the value has been set.
 
 SetAvailableToPay sets AvailableToPay field to given value.
 
-### HasAvailableToPay
-
-`func (o *CouponPayment) HasAvailableToPay() bool`
-
-HasAvailableToPay returns a boolean if a field has been set.
 
 ### GetCompletedAt
 
@@ -229,11 +194,6 @@ and a boolean to check if the value has been set.
 
 SetCompletedAt sets CompletedAt field to given value.
 
-### HasCompletedAt
-
-`func (o *CouponPayment) HasCompletedAt() bool`
-
-HasCompletedAt returns a boolean if a field has been set.
 
 ### GetCreatedAt
 
@@ -254,11 +214,6 @@ and a boolean to check if the value has been set.
 
 SetCreatedAt sets CreatedAt field to given value.
 
-### HasCreatedAt
-
-`func (o *CouponPayment) HasCreatedAt() bool`
-
-HasCreatedAt returns a boolean if a field has been set.
 
 ### GetProcessEvery
 
@@ -279,11 +234,6 @@ and a boolean to check if the value has been set.
 
 SetProcessEvery sets ProcessEvery field to given value.
 
-### HasProcessEvery
-
-`func (o *CouponPayment) HasProcessEvery() bool`
-
-HasProcessEvery returns a boolean if a field has been set.
 
 ### GetLastProcessedAt
 
@@ -304,11 +254,6 @@ and a boolean to check if the value has been set.
 
 SetLastProcessedAt sets LastProcessedAt field to given value.
 
-### HasLastProcessedAt
-
-`func (o *CouponPayment) HasLastProcessedAt() bool`
-
-HasLastProcessedAt returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

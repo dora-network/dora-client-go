@@ -4,17 +4,17 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**OrderBookId** | Pointer to **string** |  | [optional] 
-**MidPrice** | Pointer to **string** |  | [optional] 
-**Spread** | Pointer to **string** |  | [optional] 
-**BestBid** | Pointer to **string** |  | [optional] 
-**BestAsk** | Pointer to **string** |  | [optional] 
+**OrderBookId** | **string** |  | 
+**MidPrice** | **string** |  | 
+**Spread** | **string** |  | 
+**BestBid** | **string** |  | 
+**BestAsk** | **string** |  | 
 
 ## Methods
 
 ### NewOrderBookSummary
 
-`func NewOrderBookSummary() *OrderBookSummary`
+`func NewOrderBookSummary(orderBookId string, midPrice string, spread string, bestBid string, bestAsk string, ) *OrderBookSummary`
 
 NewOrderBookSummary instantiates a new OrderBookSummary object
 This constructor will assign default values to properties that have it defined,
@@ -48,11 +48,6 @@ and a boolean to check if the value has been set.
 
 SetOrderBookId sets OrderBookId field to given value.
 
-### HasOrderBookId
-
-`func (o *OrderBookSummary) HasOrderBookId() bool`
-
-HasOrderBookId returns a boolean if a field has been set.
 
 ### GetMidPrice
 
@@ -73,11 +68,6 @@ and a boolean to check if the value has been set.
 
 SetMidPrice sets MidPrice field to given value.
 
-### HasMidPrice
-
-`func (o *OrderBookSummary) HasMidPrice() bool`
-
-HasMidPrice returns a boolean if a field has been set.
 
 ### GetSpread
 
@@ -98,11 +88,6 @@ and a boolean to check if the value has been set.
 
 SetSpread sets Spread field to given value.
 
-### HasSpread
-
-`func (o *OrderBookSummary) HasSpread() bool`
-
-HasSpread returns a boolean if a field has been set.
 
 ### GetBestBid
 
@@ -123,11 +108,6 @@ and a boolean to check if the value has been set.
 
 SetBestBid sets BestBid field to given value.
 
-### HasBestBid
-
-`func (o *OrderBookSummary) HasBestBid() bool`
-
-HasBestBid returns a boolean if a field has been set.
 
 ### GetBestAsk
 
@@ -148,11 +128,6 @@ and a boolean to check if the value has been set.
 
 SetBestAsk sets BestAsk field to given value.
 
-### HasBestAsk
-
-`func (o *OrderBookSummary) HasBestAsk() bool`
-
-HasBestAsk returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

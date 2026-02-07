@@ -4,21 +4,21 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**UserId** | Pointer to **string** |  | [optional] 
-**PositionId** | Pointer to **string** |  | [optional] 
-**AssetId** | Pointer to **string** |  | [optional] 
-**CouponPaymentId** | Pointer to **string** |  | [optional] 
-**Seq** | Pointer to **int64** |  | [optional] 
-**Pending** | Pointer to **string** |  | [optional] 
-**Completed** | Pointer to **string** |  | [optional] 
-**StartedAt** | Pointer to **time.Time** |  | [optional] 
-**EndedAt** | Pointer to **time.Time** |  | [optional] 
+**UserId** | **string** |  | 
+**PositionId** | **string** |  | 
+**AssetId** | **string** |  | 
+**CouponPaymentId** | **string** |  | 
+**Seq** | **int64** |  | 
+**Pending** | **string** |  | 
+**Completed** | **string** |  | 
+**StartedAt** | **time.Time** |  | 
+**EndedAt** | **time.Time** |  | 
 
 ## Methods
 
 ### NewUserCouponPayment
 
-`func NewUserCouponPayment() *UserCouponPayment`
+`func NewUserCouponPayment(userId string, positionId string, assetId string, couponPaymentId string, seq int64, pending string, completed string, startedAt time.Time, endedAt time.Time, ) *UserCouponPayment`
 
 NewUserCouponPayment instantiates a new UserCouponPayment object
 This constructor will assign default values to properties that have it defined,
@@ -52,11 +52,6 @@ and a boolean to check if the value has been set.
 
 SetUserId sets UserId field to given value.
 
-### HasUserId
-
-`func (o *UserCouponPayment) HasUserId() bool`
-
-HasUserId returns a boolean if a field has been set.
 
 ### GetPositionId
 
@@ -77,11 +72,6 @@ and a boolean to check if the value has been set.
 
 SetPositionId sets PositionId field to given value.
 
-### HasPositionId
-
-`func (o *UserCouponPayment) HasPositionId() bool`
-
-HasPositionId returns a boolean if a field has been set.
 
 ### GetAssetId
 
@@ -102,11 +92,6 @@ and a boolean to check if the value has been set.
 
 SetAssetId sets AssetId field to given value.
 
-### HasAssetId
-
-`func (o *UserCouponPayment) HasAssetId() bool`
-
-HasAssetId returns a boolean if a field has been set.
 
 ### GetCouponPaymentId
 
@@ -127,11 +112,6 @@ and a boolean to check if the value has been set.
 
 SetCouponPaymentId sets CouponPaymentId field to given value.
 
-### HasCouponPaymentId
-
-`func (o *UserCouponPayment) HasCouponPaymentId() bool`
-
-HasCouponPaymentId returns a boolean if a field has been set.
 
 ### GetSeq
 
@@ -152,11 +132,6 @@ and a boolean to check if the value has been set.
 
 SetSeq sets Seq field to given value.
 
-### HasSeq
-
-`func (o *UserCouponPayment) HasSeq() bool`
-
-HasSeq returns a boolean if a field has been set.
 
 ### GetPending
 
@@ -177,11 +152,6 @@ and a boolean to check if the value has been set.
 
 SetPending sets Pending field to given value.
 
-### HasPending
-
-`func (o *UserCouponPayment) HasPending() bool`
-
-HasPending returns a boolean if a field has been set.
 
 ### GetCompleted
 
@@ -202,11 +172,6 @@ and a boolean to check if the value has been set.
 
 SetCompleted sets Completed field to given value.
 
-### HasCompleted
-
-`func (o *UserCouponPayment) HasCompleted() bool`
-
-HasCompleted returns a boolean if a field has been set.
 
 ### GetStartedAt
 
@@ -227,11 +192,6 @@ and a boolean to check if the value has been set.
 
 SetStartedAt sets StartedAt field to given value.
 
-### HasStartedAt
-
-`func (o *UserCouponPayment) HasStartedAt() bool`
-
-HasStartedAt returns a boolean if a field has been set.
 
 ### GetEndedAt
 
@@ -252,11 +212,6 @@ and a boolean to check if the value has been set.
 
 SetEndedAt sets EndedAt field to given value.
 
-### HasEndedAt
-
-`func (o *UserCouponPayment) HasEndedAt() bool`
-
-HasEndedAt returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -13,6 +13,8 @@ package doraclient
 import (
 	"encoding/json"
 	"time"
+	"bytes"
+	"fmt"
 )
 
 // checks if the Order type satisfies the MappedNullable interface at compile time
@@ -20,42 +22,62 @@ var _ MappedNullable = &Order{}
 
 // Order struct for Order
 type Order struct {
-	OrderId *string `json:"order_id,omitempty"`
-	OrderBookId *string `json:"order_book_id,omitempty"`
-	Kind *OrderKind `json:"kind,omitempty"`
+	OrderId string `json:"order_id"`
+	OrderBookId string `json:"order_book_id"`
+	Kind OrderKind `json:"kind"`
 	// If Kind is LIMIT, this is the original limit price. If Kind is MARKET, this may be 0 or omitted.
-	OriginalPrice *string `json:"original_price,omitempty"`
-	AvgFillPrice *string `json:"avg_fill_price,omitempty"`
+	OriginalPrice string `json:"original_price"`
+	AvgFillPrice string `json:"avg_fill_price"`
 	// Quantity that was cancelled, if any.
-	CancelledQuantity *string `json:"cancelled_quantity,omitempty"`
+	CancelledQuantity string `json:"cancelled_quantity"`
 	// Quantity that is still open, i.e., not filled or cancelled.
-	OpenQuantity *string `json:"open_quantity,omitempty"`
+	OpenQuantity string `json:"open_quantity"`
 	// The original quantity of the order when it was created.
-	OriginalQuantity *string `json:"original_quantity,omitempty"`
+	OriginalQuantity string `json:"original_quantity"`
 	// Quantity that has been filled so far.
-	FilledQuantity *string `json:"filled_quantity,omitempty"`
+	FilledQuantity string `json:"filled_quantity"`
 	// Quote quantity that has been filled so far.
-	FilledNotional *string `json:"filled_notional,omitempty"`
+	FilledNotional string `json:"filled_notional"`
 	LastUpdateAt *time.Time `json:"last_update_at,omitempty"`
-	OpenedAt *time.Time `json:"opened_at,omitempty"`
-	InverseLeverage *string `json:"inverse_leverage,omitempty"`
-	Side *Side `json:"side,omitempty"`
-	Status *OrderStatus `json:"status,omitempty"`
-	UserId *string `json:"user_id,omitempty"`
+	OpenedAt time.Time `json:"opened_at"`
+	InverseLeverage string `json:"inverse_leverage"`
+	Side Side `json:"side"`
+	Status OrderStatus `json:"status"`
+	UserId string `json:"user_id"`
 	OrderModifiers []OrderModifierKind `json:"order_modifiers,omitempty"`
-	PositionId *string `json:"position_id,omitempty"`
+	PositionId string `json:"position_id"`
 	OrderInfo *string `json:"order_info,omitempty"`
 	GoodTillDate *time.Time `json:"good_till_date,omitempty"`
 	TriggerPrice *string `json:"trigger_price,omitempty"`
 	TriggerType *TriggerType `json:"trigger_type,omitempty"`
+	// An optional client-provided identifier for the order.
+	ClientOrderId *string `json:"client_order_id,omitempty"`
 }
+
+type _Order Order
 
 // NewOrder instantiates a new Order object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewOrder() *Order {
+func NewOrder(orderId string, orderBookId string, kind OrderKind, originalPrice string, avgFillPrice string, cancelledQuantity string, openQuantity string, originalQuantity string, filledQuantity string, filledNotional string, openedAt time.Time, inverseLeverage string, side Side, status OrderStatus, userId string, positionId string) *Order {
 	this := Order{}
+	this.OrderId = orderId
+	this.OrderBookId = orderBookId
+	this.Kind = kind
+	this.OriginalPrice = originalPrice
+	this.AvgFillPrice = avgFillPrice
+	this.CancelledQuantity = cancelledQuantity
+	this.OpenQuantity = openQuantity
+	this.OriginalQuantity = originalQuantity
+	this.FilledQuantity = filledQuantity
+	this.FilledNotional = filledNotional
+	this.OpenedAt = openedAt
+	this.InverseLeverage = inverseLeverage
+	this.Side = side
+	this.Status = status
+	this.UserId = userId
+	this.PositionId = positionId
 	return &this
 }
 
@@ -67,324 +89,244 @@ func NewOrderWithDefaults() *Order {
 	return &this
 }
 
-// GetOrderId returns the OrderId field value if set, zero value otherwise.
+// GetOrderId returns the OrderId field value
 func (o *Order) GetOrderId() string {
-	if o == nil || IsNil(o.OrderId) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.OrderId
+
+	return o.OrderId
 }
 
-// GetOrderIdOk returns a tuple with the OrderId field value if set, nil otherwise
+// GetOrderIdOk returns a tuple with the OrderId field value
 // and a boolean to check if the value has been set.
 func (o *Order) GetOrderIdOk() (*string, bool) {
-	if o == nil || IsNil(o.OrderId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.OrderId, true
+	return &o.OrderId, true
 }
 
-// HasOrderId returns a boolean if a field has been set.
-func (o *Order) HasOrderId() bool {
-	if o != nil && !IsNil(o.OrderId) {
-		return true
-	}
-
-	return false
-}
-
-// SetOrderId gets a reference to the given string and assigns it to the OrderId field.
+// SetOrderId sets field value
 func (o *Order) SetOrderId(v string) {
-	o.OrderId = &v
+	o.OrderId = v
 }
 
-// GetOrderBookId returns the OrderBookId field value if set, zero value otherwise.
+// GetOrderBookId returns the OrderBookId field value
 func (o *Order) GetOrderBookId() string {
-	if o == nil || IsNil(o.OrderBookId) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.OrderBookId
+
+	return o.OrderBookId
 }
 
-// GetOrderBookIdOk returns a tuple with the OrderBookId field value if set, nil otherwise
+// GetOrderBookIdOk returns a tuple with the OrderBookId field value
 // and a boolean to check if the value has been set.
 func (o *Order) GetOrderBookIdOk() (*string, bool) {
-	if o == nil || IsNil(o.OrderBookId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.OrderBookId, true
+	return &o.OrderBookId, true
 }
 
-// HasOrderBookId returns a boolean if a field has been set.
-func (o *Order) HasOrderBookId() bool {
-	if o != nil && !IsNil(o.OrderBookId) {
-		return true
-	}
-
-	return false
-}
-
-// SetOrderBookId gets a reference to the given string and assigns it to the OrderBookId field.
+// SetOrderBookId sets field value
 func (o *Order) SetOrderBookId(v string) {
-	o.OrderBookId = &v
+	o.OrderBookId = v
 }
 
-// GetKind returns the Kind field value if set, zero value otherwise.
+// GetKind returns the Kind field value
 func (o *Order) GetKind() OrderKind {
-	if o == nil || IsNil(o.Kind) {
+	if o == nil {
 		var ret OrderKind
 		return ret
 	}
-	return *o.Kind
+
+	return o.Kind
 }
 
-// GetKindOk returns a tuple with the Kind field value if set, nil otherwise
+// GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
 func (o *Order) GetKindOk() (*OrderKind, bool) {
-	if o == nil || IsNil(o.Kind) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Kind, true
+	return &o.Kind, true
 }
 
-// HasKind returns a boolean if a field has been set.
-func (o *Order) HasKind() bool {
-	if o != nil && !IsNil(o.Kind) {
-		return true
-	}
-
-	return false
-}
-
-// SetKind gets a reference to the given OrderKind and assigns it to the Kind field.
+// SetKind sets field value
 func (o *Order) SetKind(v OrderKind) {
-	o.Kind = &v
+	o.Kind = v
 }
 
-// GetOriginalPrice returns the OriginalPrice field value if set, zero value otherwise.
+// GetOriginalPrice returns the OriginalPrice field value
 func (o *Order) GetOriginalPrice() string {
-	if o == nil || IsNil(o.OriginalPrice) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.OriginalPrice
+
+	return o.OriginalPrice
 }
 
-// GetOriginalPriceOk returns a tuple with the OriginalPrice field value if set, nil otherwise
+// GetOriginalPriceOk returns a tuple with the OriginalPrice field value
 // and a boolean to check if the value has been set.
 func (o *Order) GetOriginalPriceOk() (*string, bool) {
-	if o == nil || IsNil(o.OriginalPrice) {
+	if o == nil {
 		return nil, false
 	}
-	return o.OriginalPrice, true
+	return &o.OriginalPrice, true
 }
 
-// HasOriginalPrice returns a boolean if a field has been set.
-func (o *Order) HasOriginalPrice() bool {
-	if o != nil && !IsNil(o.OriginalPrice) {
-		return true
-	}
-
-	return false
-}
-
-// SetOriginalPrice gets a reference to the given string and assigns it to the OriginalPrice field.
+// SetOriginalPrice sets field value
 func (o *Order) SetOriginalPrice(v string) {
-	o.OriginalPrice = &v
+	o.OriginalPrice = v
 }
 
-// GetAvgFillPrice returns the AvgFillPrice field value if set, zero value otherwise.
+// GetAvgFillPrice returns the AvgFillPrice field value
 func (o *Order) GetAvgFillPrice() string {
-	if o == nil || IsNil(o.AvgFillPrice) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.AvgFillPrice
+
+	return o.AvgFillPrice
 }
 
-// GetAvgFillPriceOk returns a tuple with the AvgFillPrice field value if set, nil otherwise
+// GetAvgFillPriceOk returns a tuple with the AvgFillPrice field value
 // and a boolean to check if the value has been set.
 func (o *Order) GetAvgFillPriceOk() (*string, bool) {
-	if o == nil || IsNil(o.AvgFillPrice) {
+	if o == nil {
 		return nil, false
 	}
-	return o.AvgFillPrice, true
+	return &o.AvgFillPrice, true
 }
 
-// HasAvgFillPrice returns a boolean if a field has been set.
-func (o *Order) HasAvgFillPrice() bool {
-	if o != nil && !IsNil(o.AvgFillPrice) {
-		return true
-	}
-
-	return false
-}
-
-// SetAvgFillPrice gets a reference to the given string and assigns it to the AvgFillPrice field.
+// SetAvgFillPrice sets field value
 func (o *Order) SetAvgFillPrice(v string) {
-	o.AvgFillPrice = &v
+	o.AvgFillPrice = v
 }
 
-// GetCancelledQuantity returns the CancelledQuantity field value if set, zero value otherwise.
+// GetCancelledQuantity returns the CancelledQuantity field value
 func (o *Order) GetCancelledQuantity() string {
-	if o == nil || IsNil(o.CancelledQuantity) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.CancelledQuantity
+
+	return o.CancelledQuantity
 }
 
-// GetCancelledQuantityOk returns a tuple with the CancelledQuantity field value if set, nil otherwise
+// GetCancelledQuantityOk returns a tuple with the CancelledQuantity field value
 // and a boolean to check if the value has been set.
 func (o *Order) GetCancelledQuantityOk() (*string, bool) {
-	if o == nil || IsNil(o.CancelledQuantity) {
+	if o == nil {
 		return nil, false
 	}
-	return o.CancelledQuantity, true
+	return &o.CancelledQuantity, true
 }
 
-// HasCancelledQuantity returns a boolean if a field has been set.
-func (o *Order) HasCancelledQuantity() bool {
-	if o != nil && !IsNil(o.CancelledQuantity) {
-		return true
-	}
-
-	return false
-}
-
-// SetCancelledQuantity gets a reference to the given string and assigns it to the CancelledQuantity field.
+// SetCancelledQuantity sets field value
 func (o *Order) SetCancelledQuantity(v string) {
-	o.CancelledQuantity = &v
+	o.CancelledQuantity = v
 }
 
-// GetOpenQuantity returns the OpenQuantity field value if set, zero value otherwise.
+// GetOpenQuantity returns the OpenQuantity field value
 func (o *Order) GetOpenQuantity() string {
-	if o == nil || IsNil(o.OpenQuantity) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.OpenQuantity
+
+	return o.OpenQuantity
 }
 
-// GetOpenQuantityOk returns a tuple with the OpenQuantity field value if set, nil otherwise
+// GetOpenQuantityOk returns a tuple with the OpenQuantity field value
 // and a boolean to check if the value has been set.
 func (o *Order) GetOpenQuantityOk() (*string, bool) {
-	if o == nil || IsNil(o.OpenQuantity) {
+	if o == nil {
 		return nil, false
 	}
-	return o.OpenQuantity, true
+	return &o.OpenQuantity, true
 }
 
-// HasOpenQuantity returns a boolean if a field has been set.
-func (o *Order) HasOpenQuantity() bool {
-	if o != nil && !IsNil(o.OpenQuantity) {
-		return true
-	}
-
-	return false
-}
-
-// SetOpenQuantity gets a reference to the given string and assigns it to the OpenQuantity field.
+// SetOpenQuantity sets field value
 func (o *Order) SetOpenQuantity(v string) {
-	o.OpenQuantity = &v
+	o.OpenQuantity = v
 }
 
-// GetOriginalQuantity returns the OriginalQuantity field value if set, zero value otherwise.
+// GetOriginalQuantity returns the OriginalQuantity field value
 func (o *Order) GetOriginalQuantity() string {
-	if o == nil || IsNil(o.OriginalQuantity) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.OriginalQuantity
+
+	return o.OriginalQuantity
 }
 
-// GetOriginalQuantityOk returns a tuple with the OriginalQuantity field value if set, nil otherwise
+// GetOriginalQuantityOk returns a tuple with the OriginalQuantity field value
 // and a boolean to check if the value has been set.
 func (o *Order) GetOriginalQuantityOk() (*string, bool) {
-	if o == nil || IsNil(o.OriginalQuantity) {
+	if o == nil {
 		return nil, false
 	}
-	return o.OriginalQuantity, true
+	return &o.OriginalQuantity, true
 }
 
-// HasOriginalQuantity returns a boolean if a field has been set.
-func (o *Order) HasOriginalQuantity() bool {
-	if o != nil && !IsNil(o.OriginalQuantity) {
-		return true
-	}
-
-	return false
-}
-
-// SetOriginalQuantity gets a reference to the given string and assigns it to the OriginalQuantity field.
+// SetOriginalQuantity sets field value
 func (o *Order) SetOriginalQuantity(v string) {
-	o.OriginalQuantity = &v
+	o.OriginalQuantity = v
 }
 
-// GetFilledQuantity returns the FilledQuantity field value if set, zero value otherwise.
+// GetFilledQuantity returns the FilledQuantity field value
 func (o *Order) GetFilledQuantity() string {
-	if o == nil || IsNil(o.FilledQuantity) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.FilledQuantity
+
+	return o.FilledQuantity
 }
 
-// GetFilledQuantityOk returns a tuple with the FilledQuantity field value if set, nil otherwise
+// GetFilledQuantityOk returns a tuple with the FilledQuantity field value
 // and a boolean to check if the value has been set.
 func (o *Order) GetFilledQuantityOk() (*string, bool) {
-	if o == nil || IsNil(o.FilledQuantity) {
+	if o == nil {
 		return nil, false
 	}
-	return o.FilledQuantity, true
+	return &o.FilledQuantity, true
 }
 
-// HasFilledQuantity returns a boolean if a field has been set.
-func (o *Order) HasFilledQuantity() bool {
-	if o != nil && !IsNil(o.FilledQuantity) {
-		return true
-	}
-
-	return false
-}
-
-// SetFilledQuantity gets a reference to the given string and assigns it to the FilledQuantity field.
+// SetFilledQuantity sets field value
 func (o *Order) SetFilledQuantity(v string) {
-	o.FilledQuantity = &v
+	o.FilledQuantity = v
 }
 
-// GetFilledNotional returns the FilledNotional field value if set, zero value otherwise.
+// GetFilledNotional returns the FilledNotional field value
 func (o *Order) GetFilledNotional() string {
-	if o == nil || IsNil(o.FilledNotional) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.FilledNotional
+
+	return o.FilledNotional
 }
 
-// GetFilledNotionalOk returns a tuple with the FilledNotional field value if set, nil otherwise
+// GetFilledNotionalOk returns a tuple with the FilledNotional field value
 // and a boolean to check if the value has been set.
 func (o *Order) GetFilledNotionalOk() (*string, bool) {
-	if o == nil || IsNil(o.FilledNotional) {
+	if o == nil {
 		return nil, false
 	}
-	return o.FilledNotional, true
+	return &o.FilledNotional, true
 }
 
-// HasFilledNotional returns a boolean if a field has been set.
-func (o *Order) HasFilledNotional() bool {
-	if o != nil && !IsNil(o.FilledNotional) {
-		return true
-	}
-
-	return false
-}
-
-// SetFilledNotional gets a reference to the given string and assigns it to the FilledNotional field.
+// SetFilledNotional sets field value
 func (o *Order) SetFilledNotional(v string) {
-	o.FilledNotional = &v
+	o.FilledNotional = v
 }
 
 // GetLastUpdateAt returns the LastUpdateAt field value if set, zero value otherwise.
@@ -419,164 +361,124 @@ func (o *Order) SetLastUpdateAt(v time.Time) {
 	o.LastUpdateAt = &v
 }
 
-// GetOpenedAt returns the OpenedAt field value if set, zero value otherwise.
+// GetOpenedAt returns the OpenedAt field value
 func (o *Order) GetOpenedAt() time.Time {
-	if o == nil || IsNil(o.OpenedAt) {
+	if o == nil {
 		var ret time.Time
 		return ret
 	}
-	return *o.OpenedAt
+
+	return o.OpenedAt
 }
 
-// GetOpenedAtOk returns a tuple with the OpenedAt field value if set, nil otherwise
+// GetOpenedAtOk returns a tuple with the OpenedAt field value
 // and a boolean to check if the value has been set.
 func (o *Order) GetOpenedAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.OpenedAt) {
+	if o == nil {
 		return nil, false
 	}
-	return o.OpenedAt, true
+	return &o.OpenedAt, true
 }
 
-// HasOpenedAt returns a boolean if a field has been set.
-func (o *Order) HasOpenedAt() bool {
-	if o != nil && !IsNil(o.OpenedAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetOpenedAt gets a reference to the given time.Time and assigns it to the OpenedAt field.
+// SetOpenedAt sets field value
 func (o *Order) SetOpenedAt(v time.Time) {
-	o.OpenedAt = &v
+	o.OpenedAt = v
 }
 
-// GetInverseLeverage returns the InverseLeverage field value if set, zero value otherwise.
+// GetInverseLeverage returns the InverseLeverage field value
 func (o *Order) GetInverseLeverage() string {
-	if o == nil || IsNil(o.InverseLeverage) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.InverseLeverage
+
+	return o.InverseLeverage
 }
 
-// GetInverseLeverageOk returns a tuple with the InverseLeverage field value if set, nil otherwise
+// GetInverseLeverageOk returns a tuple with the InverseLeverage field value
 // and a boolean to check if the value has been set.
 func (o *Order) GetInverseLeverageOk() (*string, bool) {
-	if o == nil || IsNil(o.InverseLeverage) {
+	if o == nil {
 		return nil, false
 	}
-	return o.InverseLeverage, true
+	return &o.InverseLeverage, true
 }
 
-// HasInverseLeverage returns a boolean if a field has been set.
-func (o *Order) HasInverseLeverage() bool {
-	if o != nil && !IsNil(o.InverseLeverage) {
-		return true
-	}
-
-	return false
-}
-
-// SetInverseLeverage gets a reference to the given string and assigns it to the InverseLeverage field.
+// SetInverseLeverage sets field value
 func (o *Order) SetInverseLeverage(v string) {
-	o.InverseLeverage = &v
+	o.InverseLeverage = v
 }
 
-// GetSide returns the Side field value if set, zero value otherwise.
+// GetSide returns the Side field value
 func (o *Order) GetSide() Side {
-	if o == nil || IsNil(o.Side) {
+	if o == nil {
 		var ret Side
 		return ret
 	}
-	return *o.Side
+
+	return o.Side
 }
 
-// GetSideOk returns a tuple with the Side field value if set, nil otherwise
+// GetSideOk returns a tuple with the Side field value
 // and a boolean to check if the value has been set.
 func (o *Order) GetSideOk() (*Side, bool) {
-	if o == nil || IsNil(o.Side) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Side, true
+	return &o.Side, true
 }
 
-// HasSide returns a boolean if a field has been set.
-func (o *Order) HasSide() bool {
-	if o != nil && !IsNil(o.Side) {
-		return true
-	}
-
-	return false
-}
-
-// SetSide gets a reference to the given Side and assigns it to the Side field.
+// SetSide sets field value
 func (o *Order) SetSide(v Side) {
-	o.Side = &v
+	o.Side = v
 }
 
-// GetStatus returns the Status field value if set, zero value otherwise.
+// GetStatus returns the Status field value
 func (o *Order) GetStatus() OrderStatus {
-	if o == nil || IsNil(o.Status) {
+	if o == nil {
 		var ret OrderStatus
 		return ret
 	}
-	return *o.Status
+
+	return o.Status
 }
 
-// GetStatusOk returns a tuple with the Status field value if set, nil otherwise
+// GetStatusOk returns a tuple with the Status field value
 // and a boolean to check if the value has been set.
 func (o *Order) GetStatusOk() (*OrderStatus, bool) {
-	if o == nil || IsNil(o.Status) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Status, true
+	return &o.Status, true
 }
 
-// HasStatus returns a boolean if a field has been set.
-func (o *Order) HasStatus() bool {
-	if o != nil && !IsNil(o.Status) {
-		return true
-	}
-
-	return false
-}
-
-// SetStatus gets a reference to the given OrderStatus and assigns it to the Status field.
+// SetStatus sets field value
 func (o *Order) SetStatus(v OrderStatus) {
-	o.Status = &v
+	o.Status = v
 }
 
-// GetUserId returns the UserId field value if set, zero value otherwise.
+// GetUserId returns the UserId field value
 func (o *Order) GetUserId() string {
-	if o == nil || IsNil(o.UserId) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.UserId
+
+	return o.UserId
 }
 
-// GetUserIdOk returns a tuple with the UserId field value if set, nil otherwise
+// GetUserIdOk returns a tuple with the UserId field value
 // and a boolean to check if the value has been set.
 func (o *Order) GetUserIdOk() (*string, bool) {
-	if o == nil || IsNil(o.UserId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.UserId, true
+	return &o.UserId, true
 }
 
-// HasUserId returns a boolean if a field has been set.
-func (o *Order) HasUserId() bool {
-	if o != nil && !IsNil(o.UserId) {
-		return true
-	}
-
-	return false
-}
-
-// SetUserId gets a reference to the given string and assigns it to the UserId field.
+// SetUserId sets field value
 func (o *Order) SetUserId(v string) {
-	o.UserId = &v
+	o.UserId = v
 }
 
 // GetOrderModifiers returns the OrderModifiers field value if set, zero value otherwise.
@@ -611,36 +513,28 @@ func (o *Order) SetOrderModifiers(v []OrderModifierKind) {
 	o.OrderModifiers = v
 }
 
-// GetPositionId returns the PositionId field value if set, zero value otherwise.
+// GetPositionId returns the PositionId field value
 func (o *Order) GetPositionId() string {
-	if o == nil || IsNil(o.PositionId) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.PositionId
+
+	return o.PositionId
 }
 
-// GetPositionIdOk returns a tuple with the PositionId field value if set, nil otherwise
+// GetPositionIdOk returns a tuple with the PositionId field value
 // and a boolean to check if the value has been set.
 func (o *Order) GetPositionIdOk() (*string, bool) {
-	if o == nil || IsNil(o.PositionId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.PositionId, true
+	return &o.PositionId, true
 }
 
-// HasPositionId returns a boolean if a field has been set.
-func (o *Order) HasPositionId() bool {
-	if o != nil && !IsNil(o.PositionId) {
-		return true
-	}
-
-	return false
-}
-
-// SetPositionId gets a reference to the given string and assigns it to the PositionId field.
+// SetPositionId sets field value
 func (o *Order) SetPositionId(v string) {
-	o.PositionId = &v
+	o.PositionId = v
 }
 
 // GetOrderInfo returns the OrderInfo field value if set, zero value otherwise.
@@ -771,6 +665,38 @@ func (o *Order) SetTriggerType(v TriggerType) {
 	o.TriggerType = &v
 }
 
+// GetClientOrderId returns the ClientOrderId field value if set, zero value otherwise.
+func (o *Order) GetClientOrderId() string {
+	if o == nil || IsNil(o.ClientOrderId) {
+		var ret string
+		return ret
+	}
+	return *o.ClientOrderId
+}
+
+// GetClientOrderIdOk returns a tuple with the ClientOrderId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Order) GetClientOrderIdOk() (*string, bool) {
+	if o == nil || IsNil(o.ClientOrderId) {
+		return nil, false
+	}
+	return o.ClientOrderId, true
+}
+
+// HasClientOrderId returns a boolean if a field has been set.
+func (o *Order) HasClientOrderId() bool {
+	if o != nil && !IsNil(o.ClientOrderId) {
+		return true
+	}
+
+	return false
+}
+
+// SetClientOrderId gets a reference to the given string and assigns it to the ClientOrderId field.
+func (o *Order) SetClientOrderId(v string) {
+	o.ClientOrderId = &v
+}
+
 func (o Order) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -781,60 +707,28 @@ func (o Order) MarshalJSON() ([]byte, error) {
 
 func (o Order) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.OrderId) {
-		toSerialize["order_id"] = o.OrderId
-	}
-	if !IsNil(o.OrderBookId) {
-		toSerialize["order_book_id"] = o.OrderBookId
-	}
-	if !IsNil(o.Kind) {
-		toSerialize["kind"] = o.Kind
-	}
-	if !IsNil(o.OriginalPrice) {
-		toSerialize["original_price"] = o.OriginalPrice
-	}
-	if !IsNil(o.AvgFillPrice) {
-		toSerialize["avg_fill_price"] = o.AvgFillPrice
-	}
-	if !IsNil(o.CancelledQuantity) {
-		toSerialize["cancelled_quantity"] = o.CancelledQuantity
-	}
-	if !IsNil(o.OpenQuantity) {
-		toSerialize["open_quantity"] = o.OpenQuantity
-	}
-	if !IsNil(o.OriginalQuantity) {
-		toSerialize["original_quantity"] = o.OriginalQuantity
-	}
-	if !IsNil(o.FilledQuantity) {
-		toSerialize["filled_quantity"] = o.FilledQuantity
-	}
-	if !IsNil(o.FilledNotional) {
-		toSerialize["filled_notional"] = o.FilledNotional
-	}
+	toSerialize["order_id"] = o.OrderId
+	toSerialize["order_book_id"] = o.OrderBookId
+	toSerialize["kind"] = o.Kind
+	toSerialize["original_price"] = o.OriginalPrice
+	toSerialize["avg_fill_price"] = o.AvgFillPrice
+	toSerialize["cancelled_quantity"] = o.CancelledQuantity
+	toSerialize["open_quantity"] = o.OpenQuantity
+	toSerialize["original_quantity"] = o.OriginalQuantity
+	toSerialize["filled_quantity"] = o.FilledQuantity
+	toSerialize["filled_notional"] = o.FilledNotional
 	if !IsNil(o.LastUpdateAt) {
 		toSerialize["last_update_at"] = o.LastUpdateAt
 	}
-	if !IsNil(o.OpenedAt) {
-		toSerialize["opened_at"] = o.OpenedAt
-	}
-	if !IsNil(o.InverseLeverage) {
-		toSerialize["inverse_leverage"] = o.InverseLeverage
-	}
-	if !IsNil(o.Side) {
-		toSerialize["side"] = o.Side
-	}
-	if !IsNil(o.Status) {
-		toSerialize["status"] = o.Status
-	}
-	if !IsNil(o.UserId) {
-		toSerialize["user_id"] = o.UserId
-	}
+	toSerialize["opened_at"] = o.OpenedAt
+	toSerialize["inverse_leverage"] = o.InverseLeverage
+	toSerialize["side"] = o.Side
+	toSerialize["status"] = o.Status
+	toSerialize["user_id"] = o.UserId
 	if !IsNil(o.OrderModifiers) {
 		toSerialize["order_modifiers"] = o.OrderModifiers
 	}
-	if !IsNil(o.PositionId) {
-		toSerialize["position_id"] = o.PositionId
-	}
+	toSerialize["position_id"] = o.PositionId
 	if !IsNil(o.OrderInfo) {
 		toSerialize["order_info"] = o.OrderInfo
 	}
@@ -847,7 +741,62 @@ func (o Order) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TriggerType) {
 		toSerialize["trigger_type"] = o.TriggerType
 	}
+	if !IsNil(o.ClientOrderId) {
+		toSerialize["client_order_id"] = o.ClientOrderId
+	}
 	return toSerialize, nil
+}
+
+func (o *Order) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"order_id",
+		"order_book_id",
+		"kind",
+		"original_price",
+		"avg_fill_price",
+		"cancelled_quantity",
+		"open_quantity",
+		"original_quantity",
+		"filled_quantity",
+		"filled_notional",
+		"opened_at",
+		"inverse_leverage",
+		"side",
+		"status",
+		"user_id",
+		"position_id",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varOrder := _Order{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varOrder)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Order(varOrder)
+
+	return err
 }
 
 type NullableOrder struct {

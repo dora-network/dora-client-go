@@ -10127,7 +10127,7 @@ func (r ApiStreamAssetPricesRequest) AssetId(assetId string) ApiStreamAssetPrice
 	return r
 }
 
-func (r ApiStreamAssetPricesRequest) Execute() (*map[string]StreamedAssetPrice, *http.Response, error) {
+func (r ApiStreamAssetPricesRequest) Execute() (*map[string]AssetPrice, *http.Response, error) {
 	return r.ApiService.StreamAssetPricesExecute(r)
 }
 
@@ -10147,13 +10147,13 @@ func (a *DefaultAPIService) StreamAssetPrices(ctx context.Context) ApiStreamAsse
 }
 
 // Execute executes the request
-//  @return map[string]StreamedAssetPrice
-func (a *DefaultAPIService) StreamAssetPricesExecute(r ApiStreamAssetPricesRequest) (*map[string]StreamedAssetPrice, *http.Response, error) {
+//  @return map[string]AssetPrice
+func (a *DefaultAPIService) StreamAssetPricesExecute(r ApiStreamAssetPricesRequest) (*map[string]AssetPrice, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *map[string]StreamedAssetPrice
+		localVarReturnValue  *map[string]AssetPrice
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DefaultAPIService.StreamAssetPrices")

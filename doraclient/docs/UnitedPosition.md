@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**GlobalPositionId** | Pointer to **string** |  | [optional] 
+**GlobalPositionId** | **string** |  | 
 **TransactionIds** | Pointer to **[]string** |  | [optional] 
 
 ## Methods
 
 ### NewUnitedPosition
 
-`func NewUnitedPosition() *UnitedPosition`
+`func NewUnitedPosition(globalPositionId string, ) *UnitedPosition`
 
 NewUnitedPosition instantiates a new UnitedPosition object
 This constructor will assign default values to properties that have it defined,
@@ -45,11 +45,6 @@ and a boolean to check if the value has been set.
 
 SetGlobalPositionId sets GlobalPositionId field to given value.
 
-### HasGlobalPositionId
-
-`func (o *UnitedPosition) HasGlobalPositionId() bool`
-
-HasGlobalPositionId returns a boolean if a field has been set.
 
 ### GetTransactionIds
 
