@@ -27,6 +27,8 @@ type OrderBook struct {
 	BaseAssetId string `json:"base_asset_id"`
 	CreatedAt time.Time `json:"created_at"`
 	DisplayName string `json:"display_name"`
+	BaseAssetFractionalizedUnits int64 `json:"base_asset_fractionalized_units"`
+	QuoteAssetFractionalizedUnits int64 `json:"quote_asset_fractionalized_units"`
 	FeeFactor float32 `json:"fee_factor"`
 	InitialAssetsRatio float32 `json:"initial_assets_ratio"`
 	MaturityAt time.Time `json:"maturity_at"`
@@ -48,13 +50,15 @@ type _OrderBook OrderBook
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewOrderBook(orderBookId string, baseQuantity float32, baseAssetId string, createdAt time.Time, displayName string, feeFactor float32, initialAssetsRatio float32, maturityAt time.Time, quoteQuantity float32, quoteAssetId string, sharesQuantity float32, status OrderBookStatus, tickSize float32, updatedAt time.Time, sharesAssetId string) *OrderBook {
+func NewOrderBook(orderBookId string, baseQuantity float32, baseAssetId string, createdAt time.Time, displayName string, baseAssetFractionalizedUnits int64, quoteAssetFractionalizedUnits int64, feeFactor float32, initialAssetsRatio float32, maturityAt time.Time, quoteQuantity float32, quoteAssetId string, sharesQuantity float32, status OrderBookStatus, tickSize float32, updatedAt time.Time, sharesAssetId string) *OrderBook {
 	this := OrderBook{}
 	this.OrderBookId = orderBookId
 	this.BaseQuantity = baseQuantity
 	this.BaseAssetId = baseAssetId
 	this.CreatedAt = createdAt
 	this.DisplayName = displayName
+	this.BaseAssetFractionalizedUnits = baseAssetFractionalizedUnits
+	this.QuoteAssetFractionalizedUnits = quoteAssetFractionalizedUnits
 	this.FeeFactor = feeFactor
 	this.InitialAssetsRatio = initialAssetsRatio
 	this.MaturityAt = maturityAt
@@ -194,6 +198,54 @@ func (o *OrderBook) GetDisplayNameOk() (*string, bool) {
 // SetDisplayName sets field value
 func (o *OrderBook) SetDisplayName(v string) {
 	o.DisplayName = v
+}
+
+// GetBaseAssetFractionalizedUnits returns the BaseAssetFractionalizedUnits field value
+func (o *OrderBook) GetBaseAssetFractionalizedUnits() int64 {
+	if o == nil {
+		var ret int64
+		return ret
+	}
+
+	return o.BaseAssetFractionalizedUnits
+}
+
+// GetBaseAssetFractionalizedUnitsOk returns a tuple with the BaseAssetFractionalizedUnits field value
+// and a boolean to check if the value has been set.
+func (o *OrderBook) GetBaseAssetFractionalizedUnitsOk() (*int64, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.BaseAssetFractionalizedUnits, true
+}
+
+// SetBaseAssetFractionalizedUnits sets field value
+func (o *OrderBook) SetBaseAssetFractionalizedUnits(v int64) {
+	o.BaseAssetFractionalizedUnits = v
+}
+
+// GetQuoteAssetFractionalizedUnits returns the QuoteAssetFractionalizedUnits field value
+func (o *OrderBook) GetQuoteAssetFractionalizedUnits() int64 {
+	if o == nil {
+		var ret int64
+		return ret
+	}
+
+	return o.QuoteAssetFractionalizedUnits
+}
+
+// GetQuoteAssetFractionalizedUnitsOk returns a tuple with the QuoteAssetFractionalizedUnits field value
+// and a boolean to check if the value has been set.
+func (o *OrderBook) GetQuoteAssetFractionalizedUnitsOk() (*int64, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.QuoteAssetFractionalizedUnits, true
+}
+
+// SetQuoteAssetFractionalizedUnits sets field value
+func (o *OrderBook) SetQuoteAssetFractionalizedUnits(v int64) {
+	o.QuoteAssetFractionalizedUnits = v
 }
 
 // GetFeeFactor returns the FeeFactor field value
@@ -547,6 +599,8 @@ func (o OrderBook) ToMap() (map[string]interface{}, error) {
 	toSerialize["base_asset_id"] = o.BaseAssetId
 	toSerialize["created_at"] = o.CreatedAt
 	toSerialize["display_name"] = o.DisplayName
+	toSerialize["base_asset_fractionalized_units"] = o.BaseAssetFractionalizedUnits
+	toSerialize["quote_asset_fractionalized_units"] = o.QuoteAssetFractionalizedUnits
 	toSerialize["fee_factor"] = o.FeeFactor
 	toSerialize["initial_assets_ratio"] = o.InitialAssetsRatio
 	toSerialize["maturity_at"] = o.MaturityAt
@@ -579,6 +633,8 @@ func (o *OrderBook) UnmarshalJSON(data []byte) (err error) {
 		"base_asset_id",
 		"created_at",
 		"display_name",
+		"base_asset_fractionalized_units",
+		"quote_asset_fractionalized_units",
 		"fee_factor",
 		"initial_assets_ratio",
 		"maturity_at",

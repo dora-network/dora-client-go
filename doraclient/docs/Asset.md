@@ -16,21 +16,21 @@ Name | Type | Description | Notes
 **Name** | **string** |  | 
 **Symbol** | **string** |  | 
 **Kind** | [**AssetKind**](AssetKind.md) |  | 
-**Yield** | **float32** |  | 
+**Yield** | Pointer to **float32** |  | [optional] 
 **CanAddLiquidity** | **bool** |  | 
 **CanDirectBorrow** | **bool** |  | 
 **CanOnboard** | **bool** |  | 
 **CanTrade** | **bool** |  | 
 **CanVirtualBorrow** | **bool** |  | 
 **MaxLeverage** | **float32** |  | 
-**LeverageInterestRate** | **float32** |  | [default to 0]
+**LeverageInterestRate** | Pointer to **float32** |  | [optional] [default to 0]
 **Bond** | Pointer to [**Bond**](Bond.md) |  | [optional] 
 
 ## Methods
 
 ### NewAsset
 
-`func NewAsset(id string, collateralWeight float32, createdAt time.Time, decimals int32, fractionalizedUnits int32, description string, liquidationWeight float32, maxSupply int32, maxUtilization int32, name string, symbol string, kind AssetKind, yield float32, canAddLiquidity bool, canDirectBorrow bool, canOnboard bool, canTrade bool, canVirtualBorrow bool, maxLeverage float32, leverageInterestRate float32, ) *Asset`
+`func NewAsset(id string, collateralWeight float32, createdAt time.Time, decimals int32, fractionalizedUnits int32, description string, liquidationWeight float32, maxSupply int32, maxUtilization int32, name string, symbol string, kind AssetKind, canAddLiquidity bool, canDirectBorrow bool, canOnboard bool, canTrade bool, canVirtualBorrow bool, maxLeverage float32, ) *Asset`
 
 NewAsset instantiates a new Asset object
 This constructor will assign default values to properties that have it defined,
@@ -304,6 +304,11 @@ and a boolean to check if the value has been set.
 
 SetYield sets Yield field to given value.
 
+### HasYield
+
+`func (o *Asset) HasYield() bool`
+
+HasYield returns a boolean if a field has been set.
 
 ### GetCanAddLiquidity
 
@@ -444,6 +449,11 @@ and a boolean to check if the value has been set.
 
 SetLeverageInterestRate sets LeverageInterestRate field to given value.
 
+### HasLeverageInterestRate
+
+`func (o *Asset) HasLeverageInterestRate() bool`
+
+HasLeverageInterestRate returns a boolean if a field has been set.
 
 ### GetBond
 

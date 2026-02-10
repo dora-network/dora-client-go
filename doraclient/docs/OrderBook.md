@@ -9,6 +9,8 @@ Name | Type | Description | Notes
 **BaseAssetId** | **string** |  | 
 **CreatedAt** | **time.Time** |  | 
 **DisplayName** | **string** |  | 
+**BaseAssetFractionalizedUnits** | **int64** |  | 
+**QuoteAssetFractionalizedUnits** | **int64** |  | 
 **FeeFactor** | **float32** |  | 
 **InitialAssetsRatio** | **float32** |  | 
 **MaturityAt** | **time.Time** |  | 
@@ -27,7 +29,7 @@ Name | Type | Description | Notes
 
 ### NewOrderBook
 
-`func NewOrderBook(orderBookId string, baseQuantity float32, baseAssetId string, createdAt time.Time, displayName string, feeFactor float32, initialAssetsRatio float32, maturityAt time.Time, quoteQuantity float32, quoteAssetId string, sharesQuantity float32, status OrderBookStatus, tickSize float32, updatedAt time.Time, sharesAssetId string, ) *OrderBook`
+`func NewOrderBook(orderBookId string, baseQuantity float32, baseAssetId string, createdAt time.Time, displayName string, baseAssetFractionalizedUnits int64, quoteAssetFractionalizedUnits int64, feeFactor float32, initialAssetsRatio float32, maturityAt time.Time, quoteQuantity float32, quoteAssetId string, sharesQuantity float32, status OrderBookStatus, tickSize float32, updatedAt time.Time, sharesAssetId string, ) *OrderBook`
 
 NewOrderBook instantiates a new OrderBook object
 This constructor will assign default values to properties that have it defined,
@@ -140,6 +142,46 @@ and a boolean to check if the value has been set.
 `func (o *OrderBook) SetDisplayName(v string)`
 
 SetDisplayName sets DisplayName field to given value.
+
+
+### GetBaseAssetFractionalizedUnits
+
+`func (o *OrderBook) GetBaseAssetFractionalizedUnits() int64`
+
+GetBaseAssetFractionalizedUnits returns the BaseAssetFractionalizedUnits field if non-nil, zero value otherwise.
+
+### GetBaseAssetFractionalizedUnitsOk
+
+`func (o *OrderBook) GetBaseAssetFractionalizedUnitsOk() (*int64, bool)`
+
+GetBaseAssetFractionalizedUnitsOk returns a tuple with the BaseAssetFractionalizedUnits field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBaseAssetFractionalizedUnits
+
+`func (o *OrderBook) SetBaseAssetFractionalizedUnits(v int64)`
+
+SetBaseAssetFractionalizedUnits sets BaseAssetFractionalizedUnits field to given value.
+
+
+### GetQuoteAssetFractionalizedUnits
+
+`func (o *OrderBook) GetQuoteAssetFractionalizedUnits() int64`
+
+GetQuoteAssetFractionalizedUnits returns the QuoteAssetFractionalizedUnits field if non-nil, zero value otherwise.
+
+### GetQuoteAssetFractionalizedUnitsOk
+
+`func (o *OrderBook) GetQuoteAssetFractionalizedUnitsOk() (*int64, bool)`
+
+GetQuoteAssetFractionalizedUnitsOk returns a tuple with the QuoteAssetFractionalizedUnits field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetQuoteAssetFractionalizedUnits
+
+`func (o *OrderBook) SetQuoteAssetFractionalizedUnits(v int64)`
+
+SetQuoteAssetFractionalizedUnits sets QuoteAssetFractionalizedUnits field to given value.
 
 
 ### GetFeeFactor

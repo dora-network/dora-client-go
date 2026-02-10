@@ -34,14 +34,14 @@ type Asset struct {
 	Name string `json:"name"`
 	Symbol string `json:"symbol"`
 	Kind AssetKind `json:"kind"`
-	Yield float32 `json:"yield"`
+	Yield *float32 `json:"yield,omitempty"`
 	CanAddLiquidity bool `json:"can_add_liquidity"`
 	CanDirectBorrow bool `json:"can_direct_borrow"`
 	CanOnboard bool `json:"can_onboard"`
 	CanTrade bool `json:"can_trade"`
 	CanVirtualBorrow bool `json:"can_virtual_borrow"`
 	MaxLeverage float32 `json:"max_leverage"`
-	LeverageInterestRate float32 `json:"leverage_interest_rate"`
+	LeverageInterestRate *float32 `json:"leverage_interest_rate,omitempty"`
 	Bond *Bond `json:"bond,omitempty"`
 }
 
@@ -51,7 +51,7 @@ type _Asset Asset
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAsset(id string, collateralWeight float32, createdAt time.Time, decimals int32, fractionalizedUnits int32, description string, liquidationWeight float32, maxSupply int32, maxUtilization int32, name string, symbol string, kind AssetKind, yield float32, canAddLiquidity bool, canDirectBorrow bool, canOnboard bool, canTrade bool, canVirtualBorrow bool, maxLeverage float32, leverageInterestRate float32) *Asset {
+func NewAsset(id string, collateralWeight float32, createdAt time.Time, decimals int32, fractionalizedUnits int32, description string, liquidationWeight float32, maxSupply int32, maxUtilization int32, name string, symbol string, kind AssetKind, canAddLiquidity bool, canDirectBorrow bool, canOnboard bool, canTrade bool, canVirtualBorrow bool, maxLeverage float32) *Asset {
 	this := Asset{}
 	this.Id = id
 	this.CollateralWeight = collateralWeight
@@ -65,14 +65,14 @@ func NewAsset(id string, collateralWeight float32, createdAt time.Time, decimals
 	this.Name = name
 	this.Symbol = symbol
 	this.Kind = kind
-	this.Yield = yield
 	this.CanAddLiquidity = canAddLiquidity
 	this.CanDirectBorrow = canDirectBorrow
 	this.CanOnboard = canOnboard
 	this.CanTrade = canTrade
 	this.CanVirtualBorrow = canVirtualBorrow
 	this.MaxLeverage = maxLeverage
-	this.LeverageInterestRate = leverageInterestRate
+	var leverageInterestRate float32 = 0
+	this.LeverageInterestRate = &leverageInterestRate
 	return &this
 }
 
@@ -82,7 +82,7 @@ func NewAsset(id string, collateralWeight float32, createdAt time.Time, decimals
 func NewAssetWithDefaults() *Asset {
 	this := Asset{}
 	var leverageInterestRate float32 = 0
-	this.LeverageInterestRate = leverageInterestRate
+	this.LeverageInterestRate = &leverageInterestRate
 	return &this
 }
 
@@ -374,28 +374,36 @@ func (o *Asset) SetKind(v AssetKind) {
 	o.Kind = v
 }
 
-// GetYield returns the Yield field value
+// GetYield returns the Yield field value if set, zero value otherwise.
 func (o *Asset) GetYield() float32 {
-	if o == nil {
+	if o == nil || IsNil(o.Yield) {
 		var ret float32
 		return ret
 	}
-
-	return o.Yield
+	return *o.Yield
 }
 
-// GetYieldOk returns a tuple with the Yield field value
+// GetYieldOk returns a tuple with the Yield field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Asset) GetYieldOk() (*float32, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Yield) {
 		return nil, false
 	}
-	return &o.Yield, true
+	return o.Yield, true
 }
 
-// SetYield sets field value
+// HasYield returns a boolean if a field has been set.
+func (o *Asset) HasYield() bool {
+	if o != nil && !IsNil(o.Yield) {
+		return true
+	}
+
+	return false
+}
+
+// SetYield gets a reference to the given float32 and assigns it to the Yield field.
 func (o *Asset) SetYield(v float32) {
-	o.Yield = v
+	o.Yield = &v
 }
 
 // GetCanAddLiquidity returns the CanAddLiquidity field value
@@ -542,28 +550,36 @@ func (o *Asset) SetMaxLeverage(v float32) {
 	o.MaxLeverage = v
 }
 
-// GetLeverageInterestRate returns the LeverageInterestRate field value
+// GetLeverageInterestRate returns the LeverageInterestRate field value if set, zero value otherwise.
 func (o *Asset) GetLeverageInterestRate() float32 {
-	if o == nil {
+	if o == nil || IsNil(o.LeverageInterestRate) {
 		var ret float32
 		return ret
 	}
-
-	return o.LeverageInterestRate
+	return *o.LeverageInterestRate
 }
 
-// GetLeverageInterestRateOk returns a tuple with the LeverageInterestRate field value
+// GetLeverageInterestRateOk returns a tuple with the LeverageInterestRate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Asset) GetLeverageInterestRateOk() (*float32, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.LeverageInterestRate) {
 		return nil, false
 	}
-	return &o.LeverageInterestRate, true
+	return o.LeverageInterestRate, true
 }
 
-// SetLeverageInterestRate sets field value
+// HasLeverageInterestRate returns a boolean if a field has been set.
+func (o *Asset) HasLeverageInterestRate() bool {
+	if o != nil && !IsNil(o.LeverageInterestRate) {
+		return true
+	}
+
+	return false
+}
+
+// SetLeverageInterestRate gets a reference to the given float32 and assigns it to the LeverageInterestRate field.
 func (o *Asset) SetLeverageInterestRate(v float32) {
-	o.LeverageInterestRate = v
+	o.LeverageInterestRate = &v
 }
 
 // GetBond returns the Bond field value if set, zero value otherwise.
@@ -620,14 +636,18 @@ func (o Asset) ToMap() (map[string]interface{}, error) {
 	toSerialize["name"] = o.Name
 	toSerialize["symbol"] = o.Symbol
 	toSerialize["kind"] = o.Kind
-	toSerialize["yield"] = o.Yield
+	if !IsNil(o.Yield) {
+		toSerialize["yield"] = o.Yield
+	}
 	toSerialize["can_add_liquidity"] = o.CanAddLiquidity
 	toSerialize["can_direct_borrow"] = o.CanDirectBorrow
 	toSerialize["can_onboard"] = o.CanOnboard
 	toSerialize["can_trade"] = o.CanTrade
 	toSerialize["can_virtual_borrow"] = o.CanVirtualBorrow
 	toSerialize["max_leverage"] = o.MaxLeverage
-	toSerialize["leverage_interest_rate"] = o.LeverageInterestRate
+	if !IsNil(o.LeverageInterestRate) {
+		toSerialize["leverage_interest_rate"] = o.LeverageInterestRate
+	}
 	if !IsNil(o.Bond) {
 		toSerialize["bond"] = o.Bond
 	}
@@ -651,14 +671,12 @@ func (o *Asset) UnmarshalJSON(data []byte) (err error) {
 		"name",
 		"symbol",
 		"kind",
-		"yield",
 		"can_add_liquidity",
 		"can_direct_borrow",
 		"can_onboard",
 		"can_trade",
 		"can_virtual_borrow",
 		"max_leverage",
-		"leverage_interest_rate",
 	}
 
 	allProperties := make(map[string]interface{})

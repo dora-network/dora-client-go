@@ -31,10 +31,10 @@ type Bond struct {
 	IssuedAt time.Time `json:"issued_at"`
 	Issuer string `json:"issuer"`
 	MaturityAt time.Time `json:"maturity_at"`
-	PrincipalValue float64 `json:"principal_value"`
+	PrincipalValue string `json:"principal_value"`
 	PaymentsPerYear int32 `json:"payments_per_year"`
 	// Coupon payment frequency in nanoseconds (minimum 1000 i.e. 1 microsecond)
-	PaymentsEvery int32 `json:"payments_every"`
+	PaymentsEvery *int64 `json:"payments_every,omitempty"`
 	NextCouponPayment *time.Time `json:"next_coupon_payment,omitempty"`
 }
 
@@ -44,7 +44,7 @@ type _Bond Bond
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBond(id string, kind BondKind, createdAt time.Time, isin string, issuedAt time.Time, issuer string, maturityAt time.Time, principalValue float64, paymentsPerYear int32, paymentsEvery int32) *Bond {
+func NewBond(id string, kind BondKind, createdAt time.Time, isin string, issuedAt time.Time, issuer string, maturityAt time.Time, principalValue string, paymentsPerYear int32) *Bond {
 	this := Bond{}
 	this.Id = id
 	this.Kind = kind
@@ -55,7 +55,6 @@ func NewBond(id string, kind BondKind, createdAt time.Time, isin string, issuedA
 	this.MaturityAt = maturityAt
 	this.PrincipalValue = principalValue
 	this.PaymentsPerYear = paymentsPerYear
-	this.PaymentsEvery = paymentsEvery
 	return &this
 }
 
@@ -300,9 +299,9 @@ func (o *Bond) SetMaturityAt(v time.Time) {
 }
 
 // GetPrincipalValue returns the PrincipalValue field value
-func (o *Bond) GetPrincipalValue() float64 {
+func (o *Bond) GetPrincipalValue() string {
 	if o == nil {
-		var ret float64
+		var ret string
 		return ret
 	}
 
@@ -311,7 +310,7 @@ func (o *Bond) GetPrincipalValue() float64 {
 
 // GetPrincipalValueOk returns a tuple with the PrincipalValue field value
 // and a boolean to check if the value has been set.
-func (o *Bond) GetPrincipalValueOk() (*float64, bool) {
+func (o *Bond) GetPrincipalValueOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -319,7 +318,7 @@ func (o *Bond) GetPrincipalValueOk() (*float64, bool) {
 }
 
 // SetPrincipalValue sets field value
-func (o *Bond) SetPrincipalValue(v float64) {
+func (o *Bond) SetPrincipalValue(v string) {
 	o.PrincipalValue = v
 }
 
@@ -347,28 +346,36 @@ func (o *Bond) SetPaymentsPerYear(v int32) {
 	o.PaymentsPerYear = v
 }
 
-// GetPaymentsEvery returns the PaymentsEvery field value
-func (o *Bond) GetPaymentsEvery() int32 {
-	if o == nil {
-		var ret int32
+// GetPaymentsEvery returns the PaymentsEvery field value if set, zero value otherwise.
+func (o *Bond) GetPaymentsEvery() int64 {
+	if o == nil || IsNil(o.PaymentsEvery) {
+		var ret int64
 		return ret
 	}
-
-	return o.PaymentsEvery
+	return *o.PaymentsEvery
 }
 
-// GetPaymentsEveryOk returns a tuple with the PaymentsEvery field value
+// GetPaymentsEveryOk returns a tuple with the PaymentsEvery field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Bond) GetPaymentsEveryOk() (*int32, bool) {
-	if o == nil {
+func (o *Bond) GetPaymentsEveryOk() (*int64, bool) {
+	if o == nil || IsNil(o.PaymentsEvery) {
 		return nil, false
 	}
-	return &o.PaymentsEvery, true
+	return o.PaymentsEvery, true
 }
 
-// SetPaymentsEvery sets field value
-func (o *Bond) SetPaymentsEvery(v int32) {
-	o.PaymentsEvery = v
+// HasPaymentsEvery returns a boolean if a field has been set.
+func (o *Bond) HasPaymentsEvery() bool {
+	if o != nil && !IsNil(o.PaymentsEvery) {
+		return true
+	}
+
+	return false
+}
+
+// SetPaymentsEvery gets a reference to the given int64 and assigns it to the PaymentsEvery field.
+func (o *Bond) SetPaymentsEvery(v int64) {
+	o.PaymentsEvery = &v
 }
 
 // GetNextCouponPayment returns the NextCouponPayment field value if set, zero value otherwise.
@@ -428,7 +435,9 @@ func (o Bond) ToMap() (map[string]interface{}, error) {
 	toSerialize["maturity_at"] = o.MaturityAt
 	toSerialize["principal_value"] = o.PrincipalValue
 	toSerialize["payments_per_year"] = o.PaymentsPerYear
-	toSerialize["payments_every"] = o.PaymentsEvery
+	if !IsNil(o.PaymentsEvery) {
+		toSerialize["payments_every"] = o.PaymentsEvery
+	}
 	if !IsNil(o.NextCouponPayment) {
 		toSerialize["next_coupon_payment"] = o.NextCouponPayment
 	}
@@ -449,7 +458,6 @@ func (o *Bond) UnmarshalJSON(data []byte) (err error) {
 		"maturity_at",
 		"principal_value",
 		"payments_per_year",
-		"payments_every",
 	}
 
 	allProperties := make(map[string]interface{})

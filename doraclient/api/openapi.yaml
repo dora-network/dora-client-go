@@ -3380,14 +3380,12 @@ components:
       - fractionalized_units
       - id
       - kind
-      - leverage_interest_rate
       - liquidation_weight
       - max_leverage
       - max_supply
       - max_utilization
       - name
       - symbol
-      - yield
     Bond:
       example:
         kind: COUPON-PAYING
@@ -3431,7 +3429,6 @@ components:
           format: date-time
           type: string
         principal_value:
-          format: decimal
           type: string
         payments_per_year:
           minimum: 0
@@ -3439,6 +3436,7 @@ components:
         payments_every:
           description: Coupon payment frequency in nanoseconds (minimum 1000 i.e.
             1 microsecond)
+          format: int64
           minimum: 1000
           type: integer
         next_coupon_payment:
@@ -3452,7 +3450,6 @@ components:
       - issuer
       - kind
       - maturity_at
-      - payments_every
       - payments_per_year
       - principal_value
     ResponseEnvelopeOfListAssets:
@@ -4139,18 +4136,20 @@ components:
         base_quantity: 0.08008281904610115
         quote_asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         halted_at: 2000-01-23T04:56:07.000+00:00
-        shares_quantity: 0.5637376656633328
+        shares_quantity: 0.7061401241503109
         created_at: 2000-01-23T04:56:07.000+00:00
         base_asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         display_name: display_name
-        tick_size: 0.23021358869347652
+        tick_size: 0.9301444243932576
         maturity_at: 2000-01-23T04:56:07.000+00:00
         updated_at: 2000-01-23T04:56:07.000+00:00
-        fee_factor: 0.6027456183070403
-        initial_assets_ratio: 0.14658129805029452
+        fee_factor: 0.5962133916683182
+        initial_assets_ratio: 0.5637376656633328
         pool_updated_at: 2000-01-23T04:56:07.000+00:00
-        quote_quantity: 0.5962133916683182
+        quote_asset_fractionalized_units: 0
+        quote_quantity: 0.23021358869347652
         order_book_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        base_asset_fractionalized_units: 0
         terminated_at: 2000-01-23T04:56:07.000+00:00
         status: CLOSED
         shares_asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -4169,6 +4168,14 @@ components:
           type: string
         display_name:
           type: string
+        base_asset_fractionalized_units:
+          format: int64
+          minimum: 0
+          type: integer
+        quote_asset_fractionalized_units:
+          format: int64
+          minimum: 0
+          type: integer
         fee_factor:
           maximum: 1
           minimum: 0
@@ -4210,6 +4217,7 @@ components:
           format: uuid
           type: string
       required:
+      - base_asset_fractionalized_units
       - base_asset_id
       - base_quantity
       - created_at
@@ -4218,6 +4226,7 @@ components:
       - initial_assets_ratio
       - maturity_at
       - order_book_id
+      - quote_asset_fractionalized_units
       - quote_asset_id
       - quote_quantity
       - shares_asset_id
@@ -4240,18 +4249,20 @@ components:
           base_quantity: 0.08008281904610115
           quote_asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           halted_at: 2000-01-23T04:56:07.000+00:00
-          shares_quantity: 0.5637376656633328
+          shares_quantity: 0.7061401241503109
           created_at: 2000-01-23T04:56:07.000+00:00
           base_asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           display_name: display_name
-          tick_size: 0.23021358869347652
+          tick_size: 0.9301444243932576
           maturity_at: 2000-01-23T04:56:07.000+00:00
           updated_at: 2000-01-23T04:56:07.000+00:00
-          fee_factor: 0.6027456183070403
-          initial_assets_ratio: 0.14658129805029452
+          fee_factor: 0.5962133916683182
+          initial_assets_ratio: 0.5637376656633328
           pool_updated_at: 2000-01-23T04:56:07.000+00:00
-          quote_quantity: 0.5962133916683182
+          quote_asset_fractionalized_units: 0
+          quote_quantity: 0.23021358869347652
           order_book_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          base_asset_fractionalized_units: 0
           terminated_at: 2000-01-23T04:56:07.000+00:00
           status: CLOSED
           shares_asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -4275,36 +4286,40 @@ components:
         - base_quantity: 0.08008281904610115
           quote_asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           halted_at: 2000-01-23T04:56:07.000+00:00
-          shares_quantity: 0.5637376656633328
+          shares_quantity: 0.7061401241503109
           created_at: 2000-01-23T04:56:07.000+00:00
           base_asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           display_name: display_name
-          tick_size: 0.23021358869347652
+          tick_size: 0.9301444243932576
           maturity_at: 2000-01-23T04:56:07.000+00:00
           updated_at: 2000-01-23T04:56:07.000+00:00
-          fee_factor: 0.6027456183070403
-          initial_assets_ratio: 0.14658129805029452
+          fee_factor: 0.5962133916683182
+          initial_assets_ratio: 0.5637376656633328
           pool_updated_at: 2000-01-23T04:56:07.000+00:00
-          quote_quantity: 0.5962133916683182
+          quote_asset_fractionalized_units: 0
+          quote_quantity: 0.23021358869347652
           order_book_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          base_asset_fractionalized_units: 0
           terminated_at: 2000-01-23T04:56:07.000+00:00
           status: CLOSED
           shares_asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         - base_quantity: 0.08008281904610115
           quote_asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           halted_at: 2000-01-23T04:56:07.000+00:00
-          shares_quantity: 0.5637376656633328
+          shares_quantity: 0.7061401241503109
           created_at: 2000-01-23T04:56:07.000+00:00
           base_asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           display_name: display_name
-          tick_size: 0.23021358869347652
+          tick_size: 0.9301444243932576
           maturity_at: 2000-01-23T04:56:07.000+00:00
           updated_at: 2000-01-23T04:56:07.000+00:00
-          fee_factor: 0.6027456183070403
-          initial_assets_ratio: 0.14658129805029452
+          fee_factor: 0.5962133916683182
+          initial_assets_ratio: 0.5637376656633328
           pool_updated_at: 2000-01-23T04:56:07.000+00:00
-          quote_quantity: 0.5962133916683182
+          quote_asset_fractionalized_units: 0
+          quote_quantity: 0.23021358869347652
           order_book_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          base_asset_fractionalized_units: 0
           terminated_at: 2000-01-23T04:56:07.000+00:00
           status: CLOSED
           shares_asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -6413,6 +6428,7 @@ components:
       type: array
     AssetPrice:
       example:
+        ytm: ytm
         price: price
         asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         time: 2000-01-23T04:56:07.000+00:00
@@ -6421,6 +6437,8 @@ components:
           format: uuid
           type: string
         price:
+          type: string
+        ytm:
           type: string
         time:
           format: date-time
@@ -6443,10 +6461,12 @@ components:
           status_code: 0
           request_id: request_id
         data:
-        - price: price
+        - ytm: ytm
+          price: price
           asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           time: 2000-01-23T04:56:07.000+00:00
-        - price: price
+        - ytm: ytm
+          price: price
           asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           time: 2000-01-23T04:56:07.000+00:00
         error: error
@@ -6481,6 +6501,7 @@ components:
           status_code: 0
           request_id: request_id
         data:
+          ytm: ytm
           price: price
           asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           time: 2000-01-23T04:56:07.000+00:00

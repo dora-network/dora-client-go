@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AssetId** | **string** |  | 
 **Price** | **string** |  | 
+**Ytm** | Pointer to **string** |  | [optional] 
 **Time** | **time.Time** |  | 
 
 ## Methods
@@ -66,6 +67,31 @@ and a boolean to check if the value has been set.
 
 SetPrice sets Price field to given value.
 
+
+### GetYtm
+
+`func (o *AssetPrice) GetYtm() string`
+
+GetYtm returns the Ytm field if non-nil, zero value otherwise.
+
+### GetYtmOk
+
+`func (o *AssetPrice) GetYtmOk() (*string, bool)`
+
+GetYtmOk returns a tuple with the Ytm field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetYtm
+
+`func (o *AssetPrice) SetYtm(v string)`
+
+SetYtm sets Ytm field to given value.
+
+### HasYtm
+
+`func (o *AssetPrice) HasYtm() bool`
+
+HasYtm returns a boolean if a field has been set.
 
 ### GetTime
 

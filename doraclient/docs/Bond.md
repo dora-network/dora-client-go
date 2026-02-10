@@ -13,16 +13,16 @@ Name | Type | Description | Notes
 **IssuedAt** | **time.Time** |  | 
 **Issuer** | **string** |  | 
 **MaturityAt** | **time.Time** |  | 
-**PrincipalValue** | **float64** |  | 
+**PrincipalValue** | **string** |  | 
 **PaymentsPerYear** | **int32** |  | 
-**PaymentsEvery** | **int32** | Coupon payment frequency in nanoseconds (minimum 1000 i.e. 1 microsecond) | 
+**PaymentsEvery** | Pointer to **int64** | Coupon payment frequency in nanoseconds (minimum 1000 i.e. 1 microsecond) | [optional] 
 **NextCouponPayment** | Pointer to **time.Time** |  | [optional] 
 
 ## Methods
 
 ### NewBond
 
-`func NewBond(id string, kind BondKind, createdAt time.Time, isin string, issuedAt time.Time, issuer string, maturityAt time.Time, principalValue float64, paymentsPerYear int32, paymentsEvery int32, ) *Bond`
+`func NewBond(id string, kind BondKind, createdAt time.Time, isin string, issuedAt time.Time, issuer string, maturityAt time.Time, principalValue string, paymentsPerYear int32, ) *Bond`
 
 NewBond instantiates a new Bond object
 This constructor will assign default values to properties that have it defined,
@@ -229,20 +229,20 @@ SetMaturityAt sets MaturityAt field to given value.
 
 ### GetPrincipalValue
 
-`func (o *Bond) GetPrincipalValue() float64`
+`func (o *Bond) GetPrincipalValue() string`
 
 GetPrincipalValue returns the PrincipalValue field if non-nil, zero value otherwise.
 
 ### GetPrincipalValueOk
 
-`func (o *Bond) GetPrincipalValueOk() (*float64, bool)`
+`func (o *Bond) GetPrincipalValueOk() (*string, bool)`
 
 GetPrincipalValueOk returns a tuple with the PrincipalValue field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPrincipalValue
 
-`func (o *Bond) SetPrincipalValue(v float64)`
+`func (o *Bond) SetPrincipalValue(v string)`
 
 SetPrincipalValue sets PrincipalValue field to given value.
 
@@ -269,23 +269,28 @@ SetPaymentsPerYear sets PaymentsPerYear field to given value.
 
 ### GetPaymentsEvery
 
-`func (o *Bond) GetPaymentsEvery() int32`
+`func (o *Bond) GetPaymentsEvery() int64`
 
 GetPaymentsEvery returns the PaymentsEvery field if non-nil, zero value otherwise.
 
 ### GetPaymentsEveryOk
 
-`func (o *Bond) GetPaymentsEveryOk() (*int32, bool)`
+`func (o *Bond) GetPaymentsEveryOk() (*int64, bool)`
 
 GetPaymentsEveryOk returns a tuple with the PaymentsEvery field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPaymentsEvery
 
-`func (o *Bond) SetPaymentsEvery(v int32)`
+`func (o *Bond) SetPaymentsEvery(v int64)`
 
 SetPaymentsEvery sets PaymentsEvery field to given value.
 
+### HasPaymentsEvery
+
+`func (o *Bond) HasPaymentsEvery() bool`
+
+HasPaymentsEvery returns a boolean if a field has been set.
 
 ### GetNextCouponPayment
 
