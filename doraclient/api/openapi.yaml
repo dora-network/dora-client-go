@@ -3887,6 +3887,7 @@ components:
           status_code: 0
           request_id: request_id
         data:
+          tenant_id: tenant_id
           closed_at: 2000-01-23T04:56:07.000+00:00
           native_asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           timezone: timezone
@@ -3949,6 +3950,7 @@ components:
       $ref: "#/components/schemas/UserConfigResponseEnvelope"
     User:
       example:
+        tenant_id: tenant_id
         closed_at: 2000-01-23T04:56:07.000+00:00
         native_asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         timezone: timezone
@@ -4010,6 +4012,8 @@ components:
           type: boolean
         notifications_enabled:
           type: boolean
+        tenant_id:
+          type: string
       required:
       - email
       - id
@@ -4018,6 +4022,7 @@ components:
       - notifications_enabled
       - roles
       - show_tutorial_cards
+      - tenant_id
     UserConfig:
       properties:
         id:

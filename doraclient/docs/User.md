@@ -19,12 +19,13 @@ Name | Type | Description | Notes
 **VerifiedAt** | Pointer to **time.Time** |  | [optional] 
 **ShowTutorialCards** | **bool** |  | 
 **NotificationsEnabled** | **bool** |  | 
+**TenantId** | **string** |  | 
 
 ## Methods
 
 ### NewUser
 
-`func NewUser(id string, email string, name string, nativeAssetId string, roles []UserRole, showTutorialCards bool, notificationsEnabled bool, ) *User`
+`func NewUser(id string, email string, name string, nativeAssetId string, roles []UserRole, showTutorialCards bool, notificationsEnabled bool, tenantId string, ) *User`
 
 NewUser instantiates a new User object
 This constructor will assign default values to properties that have it defined,
@@ -377,6 +378,26 @@ and a boolean to check if the value has been set.
 `func (o *User) SetNotificationsEnabled(v bool)`
 
 SetNotificationsEnabled sets NotificationsEnabled field to given value.
+
+
+### GetTenantId
+
+`func (o *User) GetTenantId() string`
+
+GetTenantId returns the TenantId field if non-nil, zero value otherwise.
+
+### GetTenantIdOk
+
+`func (o *User) GetTenantIdOk() (*string, bool)`
+
+GetTenantIdOk returns a tuple with the TenantId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTenantId
+
+`func (o *User) SetTenantId(v string)`
+
+SetTenantId sets TenantId field to given value.
 
 
 
