@@ -4938,6 +4938,7 @@ components:
                 impending_borrows: impending_borrows
                 available: available
                 position_name: position_name
+                pending_withdrawal: pending_withdrawal
                 is_global: true
                 created_at: 2000-01-23T04:56:07.000+00:00
                 asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -4966,6 +4967,7 @@ components:
               impending_borrows: impending_borrows
               available: available
               position_name: position_name
+              pending_withdrawal: pending_withdrawal
               is_global: true
               created_at: 2000-01-23T04:56:07.000+00:00
               asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -5006,6 +5008,7 @@ components:
         impending_borrows: impending_borrows
         available: available
         position_name: position_name
+        pending_withdrawal: pending_withdrawal
         is_global: true
         created_at: 2000-01-23T04:56:07.000+00:00
         asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -5071,6 +5074,9 @@ components:
           type: string
         position_name:
           type: string
+        pending_withdrawal:
+          description: The amount of asset that is pending withdrawal from the position.
+          type: string
       required:
       - asset_id
       - available
@@ -5082,6 +5088,7 @@ components:
       - impending_borrows
       - liquidation_threshold
       - locked
+      - pending_withdrawal
       - position_name
       - seq
       - supplied
@@ -5105,6 +5112,7 @@ components:
           impending_borrows: impending_borrows
           available: available
           position_name: position_name
+          pending_withdrawal: pending_withdrawal
           is_global: true
           created_at: 2000-01-23T04:56:07.000+00:00
           asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -5205,6 +5213,7 @@ components:
           impending_borrows: impending_borrows
           available: available
           position_name: position_name
+          pending_withdrawal: pending_withdrawal
           is_global: true
           created_at: 2000-01-23T04:56:07.000+00:00
           asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -5219,6 +5228,7 @@ components:
           impending_borrows: impending_borrows
           available: available
           position_name: position_name
+          pending_withdrawal: pending_withdrawal
           is_global: true
           created_at: 2000-01-23T04:56:07.000+00:00
           asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -6961,6 +6971,7 @@ components:
                   impending_borrows: impending_borrows
                   available: available
                   position_name: position_name
+                  pending_withdrawal: pending_withdrawal
                   is_global: true
                   created_at: 2000-01-23T04:56:07.000+00:00
                   asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -6996,6 +7007,7 @@ components:
             impending_borrows: impending_borrows
             available: available
             position_name: position_name
+            pending_withdrawal: pending_withdrawal
             is_global: true
             created_at: 2000-01-23T04:56:07.000+00:00
             asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -7010,6 +7022,7 @@ components:
             impending_borrows: impending_borrows
             available: available
             position_name: position_name
+            pending_withdrawal: pending_withdrawal
             is_global: true
             created_at: 2000-01-23T04:56:07.000+00:00
             asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91

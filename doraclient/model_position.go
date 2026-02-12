@@ -45,6 +45,8 @@ type Position struct {
 	LiquidationThreshold string `json:"liquidation_threshold"`
 	CreatedAt time.Time `json:"created_at"`
 	PositionName string `json:"position_name"`
+	// The amount of asset that is pending withdrawal from the position.
+	PendingWithdrawal string `json:"pending_withdrawal"`
 }
 
 type _Position Position
@@ -53,7 +55,7 @@ type _Position Position
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPosition(id string, assetId string, seq int32, available string, locked string, supplied string, borrowed string, impendingBorrows string, avgEntryPrice string, borrowLimit string, liquidationThreshold string, createdAt time.Time, positionName string) *Position {
+func NewPosition(id string, assetId string, seq int32, available string, locked string, supplied string, borrowed string, impendingBorrows string, avgEntryPrice string, borrowLimit string, liquidationThreshold string, createdAt time.Time, positionName string, pendingWithdrawal string) *Position {
 	this := Position{}
 	this.Id = id
 	this.AssetId = assetId
@@ -68,6 +70,7 @@ func NewPosition(id string, assetId string, seq int32, available string, locked 
 	this.LiquidationThreshold = liquidationThreshold
 	this.CreatedAt = createdAt
 	this.PositionName = positionName
+	this.PendingWithdrawal = pendingWithdrawal
 	return &this
 }
 
@@ -423,6 +426,30 @@ func (o *Position) SetPositionName(v string) {
 	o.PositionName = v
 }
 
+// GetPendingWithdrawal returns the PendingWithdrawal field value
+func (o *Position) GetPendingWithdrawal() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.PendingWithdrawal
+}
+
+// GetPendingWithdrawalOk returns a tuple with the PendingWithdrawal field value
+// and a boolean to check if the value has been set.
+func (o *Position) GetPendingWithdrawalOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.PendingWithdrawal, true
+}
+
+// SetPendingWithdrawal sets field value
+func (o *Position) SetPendingWithdrawal(v string) {
+	o.PendingWithdrawal = v
+}
+
 func (o Position) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -449,6 +476,7 @@ func (o Position) ToMap() (map[string]interface{}, error) {
 	toSerialize["liquidation_threshold"] = o.LiquidationThreshold
 	toSerialize["created_at"] = o.CreatedAt
 	toSerialize["position_name"] = o.PositionName
+	toSerialize["pending_withdrawal"] = o.PendingWithdrawal
 	return toSerialize, nil
 }
 
@@ -470,6 +498,7 @@ func (o *Position) UnmarshalJSON(data []byte) (err error) {
 		"liquidation_threshold",
 		"created_at",
 		"position_name",
+		"pending_withdrawal",
 	}
 
 	allProperties := make(map[string]interface{})

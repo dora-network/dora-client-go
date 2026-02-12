@@ -18,12 +18,13 @@ Name | Type | Description | Notes
 **LiquidationThreshold** | **string** | The borrow limit | 
 **CreatedAt** | **time.Time** |  | 
 **PositionName** | **string** |  | 
+**PendingWithdrawal** | **string** | The amount of asset that is pending withdrawal from the position. | 
 
 ## Methods
 
 ### NewPosition
 
-`func NewPosition(id string, assetId string, seq int32, available string, locked string, supplied string, borrowed string, impendingBorrows string, avgEntryPrice string, borrowLimit string, liquidationThreshold string, createdAt time.Time, positionName string, ) *Position`
+`func NewPosition(id string, assetId string, seq int32, available string, locked string, supplied string, borrowed string, impendingBorrows string, avgEntryPrice string, borrowLimit string, liquidationThreshold string, createdAt time.Time, positionName string, pendingWithdrawal string, ) *Position`
 
 NewPosition instantiates a new Position object
 This constructor will assign default values to properties that have it defined,
@@ -321,6 +322,26 @@ and a boolean to check if the value has been set.
 `func (o *Position) SetPositionName(v string)`
 
 SetPositionName sets PositionName field to given value.
+
+
+### GetPendingWithdrawal
+
+`func (o *Position) GetPendingWithdrawal() string`
+
+GetPendingWithdrawal returns the PendingWithdrawal field if non-nil, zero value otherwise.
+
+### GetPendingWithdrawalOk
+
+`func (o *Position) GetPendingWithdrawalOk() (*string, bool)`
+
+GetPendingWithdrawalOk returns a tuple with the PendingWithdrawal field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPendingWithdrawal
+
+`func (o *Position) SetPendingWithdrawal(v string)`
+
+SetPendingWithdrawal sets PendingWithdrawal field to given value.
 
 
 
