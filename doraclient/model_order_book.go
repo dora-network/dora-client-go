@@ -23,6 +23,7 @@ var _ MappedNullable = &OrderBook{}
 // OrderBook struct for OrderBook
 type OrderBook struct {
 	OrderBookId string `json:"order_book_id"`
+	OrderBookSeq *int64 `json:"order_book_seq,omitempty"`
 	BaseQuantity float32 `json:"base_quantity"`
 	BaseAssetId string `json:"base_asset_id"`
 	CreatedAt time.Time `json:"created_at"`
@@ -102,6 +103,38 @@ func (o *OrderBook) GetOrderBookIdOk() (*string, bool) {
 // SetOrderBookId sets field value
 func (o *OrderBook) SetOrderBookId(v string) {
 	o.OrderBookId = v
+}
+
+// GetOrderBookSeq returns the OrderBookSeq field value if set, zero value otherwise.
+func (o *OrderBook) GetOrderBookSeq() int64 {
+	if o == nil || IsNil(o.OrderBookSeq) {
+		var ret int64
+		return ret
+	}
+	return *o.OrderBookSeq
+}
+
+// GetOrderBookSeqOk returns a tuple with the OrderBookSeq field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *OrderBook) GetOrderBookSeqOk() (*int64, bool) {
+	if o == nil || IsNil(o.OrderBookSeq) {
+		return nil, false
+	}
+	return o.OrderBookSeq, true
+}
+
+// HasOrderBookSeq returns a boolean if a field has been set.
+func (o *OrderBook) HasOrderBookSeq() bool {
+	if o != nil && !IsNil(o.OrderBookSeq) {
+		return true
+	}
+
+	return false
+}
+
+// SetOrderBookSeq gets a reference to the given int64 and assigns it to the OrderBookSeq field.
+func (o *OrderBook) SetOrderBookSeq(v int64) {
+	o.OrderBookSeq = &v
 }
 
 // GetBaseQuantity returns the BaseQuantity field value
@@ -595,6 +628,9 @@ func (o OrderBook) MarshalJSON() ([]byte, error) {
 func (o OrderBook) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["order_book_id"] = o.OrderBookId
+	if !IsNil(o.OrderBookSeq) {
+		toSerialize["order_book_seq"] = o.OrderBookSeq
+	}
 	toSerialize["base_quantity"] = o.BaseQuantity
 	toSerialize["base_asset_id"] = o.BaseAssetId
 	toSerialize["created_at"] = o.CreatedAt

@@ -9,6 +9,7 @@ configuration.go
 docs/APIKeyResponse.md
 docs/APIKeyResponseEnvelope.md
 docs/APIKeys.md
+docs/AllWithdrawalInitiationsResponseEnvelope.md
 docs/Asset.md
 docs/AssetConfig.md
 docs/AssetKind.md
@@ -177,7 +178,10 @@ docs/ValidateSubmitOrderResponse.md
 docs/Withdraw.md
 docs/WithdrawRequest.md
 docs/WithdrawResponseEnvelope.md
+docs/WithdrawalInitiation.md
+docs/WithdrawalInitiationResponseEnvelope.md
 git_push.sh
+model_all_withdrawal_initiations_response_envelope.go
 model_api_key_response.go
 model_api_key_response_envelope.go
 model_api_keys.go
@@ -348,6 +352,8 @@ model_validate_submit_order_response.go
 model_withdraw.go
 model_withdraw_request.go
 model_withdraw_response_envelope.go
+model_withdrawal_initiation.go
+model_withdrawal_initiation_response_envelope.go
 response.go
 test/api_default_test.go
 utils.go

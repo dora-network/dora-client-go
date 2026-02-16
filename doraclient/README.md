@@ -105,6 +105,7 @@ Class | Method | HTTP request | Description
 *DefaultAPI* | [**GetLedgerModuleByAsset**](docs/DefaultAPI.md#getledgermodulebyasset) | **Get** /v1/ledger/module/{asset_id} | Get the module object for a single asset ID
 *DefaultAPI* | [**GetLedgerPositionsSelf**](docs/DefaultAPI.md#getledgerpositionsself) | **Get** /v1/ledger/positions/self | Get your own positions
 *DefaultAPI* | [**GetLedgerValueSelf**](docs/DefaultAPI.md#getledgervalueself) | **Get** /v1/ledger/value/self | Get your own available, locked, and borrowed USD value; and realized and unrealized PnL
+*DefaultAPI* | [**GetLedgerWithdrawRequestsBySelf**](docs/DefaultAPI.md#getledgerwithdrawrequestsbyself) | **Get** /v1/ledger/withdraw/requests/self | Get all pending withdrawal requests for the logged in user
 *DefaultAPI* | [**GetOrderById**](docs/DefaultAPI.md#getorderbyid) | **Get** /v1/orders/{order_id} | Get order by ID
 *DefaultAPI* | [**GetOrderbookById**](docs/DefaultAPI.md#getorderbookbyid) | **Get** /v1/orderbooks/{order_book_id} | Get orderbook by ID
 *DefaultAPI* | [**GetOrderbookDepth**](docs/DefaultAPI.md#getorderbookdepth) | **Get** /v1/orderbooks/{order_book_id}/depth | Get the aggregated price levels for a specific orderbook (L2 market depth)
@@ -129,6 +130,7 @@ Class | Method | HTTP request | Description
 *DefaultAPI* | [**GetUsersAPIKeys**](docs/DefaultAPI.md#getusersapikeys) | **Get** /v1/user/apikey | Get user&#39;s api keys
 *DefaultAPI* | [**LedgerDeposit**](docs/DefaultAPI.md#ledgerdeposit) | **Post** /v1/ledger/deposit/{user_id} | Deposit assets into this user&#39;s account from the outside world
 *DefaultAPI* | [**LedgerWithdraw**](docs/DefaultAPI.md#ledgerwithdraw) | **Post** /v1/ledger/withdraw/{user_id} | Withdraw assets from this user to the outside world
+*DefaultAPI* | [**LedgerWithdrawRequest**](docs/DefaultAPI.md#ledgerwithdrawrequest) | **Post** /v1/ledger/withdraw/requests/self | Initiate a withdrawal request for the logged in user to the outside world
 *DefaultAPI* | [**LeverageGetAccruedInterestByUser**](docs/DefaultAPI.md#leveragegetaccruedinterestbyuser) | **Get** /v1/leverage/accrued_interest/self | Get current accrued leverage interest for the user
 *DefaultAPI* | [**LeverageIsolateCollateral**](docs/DefaultAPI.md#leverageisolatecollateral) | **Post** /v1/leverage/isolate_collateral | Create an isolated position by transferring collateral to the position from the user&#39;s global collateral
 *DefaultAPI* | [**LeverageSupply**](docs/DefaultAPI.md#leveragesupply) | **Post** /v1/leverage/supply | Supply leverage for a specific asset
@@ -161,6 +163,7 @@ Class | Method | HTTP request | Description
  - [APIKeyResponse](docs/APIKeyResponse.md)
  - [APIKeyResponseEnvelope](docs/APIKeyResponseEnvelope.md)
  - [APIKeys](docs/APIKeys.md)
+ - [AllWithdrawalInitiationsResponseEnvelope](docs/AllWithdrawalInitiationsResponseEnvelope.md)
  - [Asset](docs/Asset.md)
  - [AssetConfig](docs/AssetConfig.md)
  - [AssetKind](docs/AssetKind.md)
@@ -328,6 +331,8 @@ Class | Method | HTTP request | Description
  - [Withdraw](docs/Withdraw.md)
  - [WithdrawRequest](docs/WithdrawRequest.md)
  - [WithdrawResponseEnvelope](docs/WithdrawResponseEnvelope.md)
+ - [WithdrawalInitiation](docs/WithdrawalInitiation.md)
+ - [WithdrawalInitiationResponseEnvelope](docs/WithdrawalInitiationResponseEnvelope.md)
 
 
 ## Documentation For Authorization

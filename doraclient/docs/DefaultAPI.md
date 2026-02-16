@@ -31,6 +31,7 @@ Method | HTTP request | Description
 [**GetLedgerModuleByAsset**](DefaultAPI.md#GetLedgerModuleByAsset) | **Get** /v1/ledger/module/{asset_id} | Get the module object for a single asset ID
 [**GetLedgerPositionsSelf**](DefaultAPI.md#GetLedgerPositionsSelf) | **Get** /v1/ledger/positions/self | Get your own positions
 [**GetLedgerValueSelf**](DefaultAPI.md#GetLedgerValueSelf) | **Get** /v1/ledger/value/self | Get your own available, locked, and borrowed USD value; and realized and unrealized PnL
+[**GetLedgerWithdrawRequestsBySelf**](DefaultAPI.md#GetLedgerWithdrawRequestsBySelf) | **Get** /v1/ledger/withdraw/requests/self | Get all pending withdrawal requests for the logged in user
 [**GetOrderById**](DefaultAPI.md#GetOrderById) | **Get** /v1/orders/{order_id} | Get order by ID
 [**GetOrderbookById**](DefaultAPI.md#GetOrderbookById) | **Get** /v1/orderbooks/{order_book_id} | Get orderbook by ID
 [**GetOrderbookDepth**](DefaultAPI.md#GetOrderbookDepth) | **Get** /v1/orderbooks/{order_book_id}/depth | Get the aggregated price levels for a specific orderbook (L2 market depth)
@@ -55,6 +56,7 @@ Method | HTTP request | Description
 [**GetUsersAPIKeys**](DefaultAPI.md#GetUsersAPIKeys) | **Get** /v1/user/apikey | Get user&#39;s api keys
 [**LedgerDeposit**](DefaultAPI.md#LedgerDeposit) | **Post** /v1/ledger/deposit/{user_id} | Deposit assets into this user&#39;s account from the outside world
 [**LedgerWithdraw**](DefaultAPI.md#LedgerWithdraw) | **Post** /v1/ledger/withdraw/{user_id} | Withdraw assets from this user to the outside world
+[**LedgerWithdrawRequest**](DefaultAPI.md#LedgerWithdrawRequest) | **Post** /v1/ledger/withdraw/requests/self | Initiate a withdrawal request for the logged in user to the outside world
 [**LeverageGetAccruedInterestByUser**](DefaultAPI.md#LeverageGetAccruedInterestByUser) | **Get** /v1/leverage/accrued_interest/self | Get current accrued leverage interest for the user
 [**LeverageIsolateCollateral**](DefaultAPI.md#LeverageIsolateCollateral) | **Post** /v1/leverage/isolate_collateral | Create an isolated position by transferring collateral to the position from the user&#39;s global collateral
 [**LeverageSupply**](DefaultAPI.md#LeverageSupply) | **Post** /v1/leverage/supply | Supply leverage for a specific asset
@@ -1849,6 +1851,65 @@ Other parameters are passed through a pointer to a apiGetLedgerValueSelfRequest 
 [[Back to README]](../README.md)
 
 
+## GetLedgerWithdrawRequestsBySelf
+
+> AllWithdrawalInitiationsResponseEnvelope GetLedgerWithdrawRequestsBySelf(ctx).Execute()
+
+Get all pending withdrawal requests for the logged in user
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.GetLedgerWithdrawRequestsBySelf(context.Background()).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.GetLedgerWithdrawRequestsBySelf``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetLedgerWithdrawRequestsBySelf`: AllWithdrawalInitiationsResponseEnvelope
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.GetLedgerWithdrawRequestsBySelf`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+This endpoint does not need any parameter.
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetLedgerWithdrawRequestsBySelfRequest struct via the builder pattern
+
+
+### Return type
+
+[**AllWithdrawalInitiationsResponseEnvelope**](AllWithdrawalInitiationsResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetOrderById
 
 > OrderResponseEnvelope GetOrderById(ctx, orderId).Execute()
@@ -3475,6 +3536,78 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**FundUserResponseEnvelope**](FundUserResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## LedgerWithdrawRequest
+
+> WithdrawalInitiationResponseEnvelope LedgerWithdrawRequest(ctx, userId).DefundUserRequest(defundUserRequest).Execute()
+
+Initiate a withdrawal request for the logged in user to the outside world
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+	userId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+	defundUserRequest := *openapiclient.NewDefundUserRequest("AssetId_example", "Quantity_example") // DefundUserRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.LedgerWithdrawRequest(context.Background(), userId).DefundUserRequest(defundUserRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.LedgerWithdrawRequest``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `LedgerWithdrawRequest`: WithdrawalInitiationResponseEnvelope
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.LedgerWithdrawRequest`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**userId** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiLedgerWithdrawRequestRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **defundUserRequest** | [**DefundUserRequest**](DefundUserRequest.md) |  | 
+
+### Return type
+
+[**WithdrawalInitiationResponseEnvelope**](WithdrawalInitiationResponseEnvelope.md)
 
 ### Authorization
 

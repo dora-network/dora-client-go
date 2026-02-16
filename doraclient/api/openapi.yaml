@@ -1686,6 +1686,78 @@ paths:
                 $ref: "#/components/schemas/ResponseEnvelope"
           description: Internal server error
       summary: Withdraw assets from this user to the outside world
+  /v1/ledger/withdraw/requests/self:
+    get:
+      operationId: getLedgerWithdrawRequestsBySelf
+      parameters: []
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AllWithdrawalInitiationsResponse"
+          description: List of pending withdrawal requests for the logged in user
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. invalid user ID format"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: User not found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Get all pending withdrawal requests for the logged in user
+    post:
+      description: Withdraw assets from the logged in user's account to the outside
+        world. Note that this does not interact with any external systems; it simply
+        deducts the amount from the user's available balance in the ledger. Actual
+        transfer of assets must be handled separately.
+      operationId: ledgerWithdrawRequest
+      parameters:
+      - explode: false
+        in: path
+        name: user_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DefundUserRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WithdrawalInitiationResponse"
+          description: Withdraw request initiation successful
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. invalid parameters or insufficient funds"
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Initiate a withdrawal request for the logged in user to the outside
+        world
   /v1/leverage/supply:
     post:
       operationId: leverageSupply
@@ -4138,21 +4210,22 @@ components:
       type: string
     OrderBook:
       example:
-        base_quantity: 0.08008281904610115
+        base_quantity: 0.6027456183070403
         quote_asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         halted_at: 2000-01-23T04:56:07.000+00:00
-        shares_quantity: 0.7061401241503109
+        order_book_seq: 0
+        shares_quantity: 0.9301444243932576
         created_at: 2000-01-23T04:56:07.000+00:00
         base_asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         display_name: display_name
-        tick_size: 0.9301444243932576
+        tick_size: 0.3616076749251911
         maturity_at: 2000-01-23T04:56:07.000+00:00
         updated_at: 2000-01-23T04:56:07.000+00:00
-        fee_factor: 0.5962133916683182
-        initial_assets_ratio: 0.5637376656633328
+        fee_factor: 0.5637376656633328
+        initial_assets_ratio: 0.23021358869347652
         pool_updated_at: 2000-01-23T04:56:07.000+00:00
         quote_asset_fractionalized_units: 0
-        quote_quantity: 0.23021358869347652
+        quote_quantity: 0.7061401241503109
         order_book_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         base_asset_fractionalized_units: 0
         terminated_at: 2000-01-23T04:56:07.000+00:00
@@ -4162,6 +4235,9 @@ components:
         order_book_id:
           format: uuid
           type: string
+        order_book_seq:
+          format: int64
+          type: integer
         base_quantity:
           minimum: 0
           type: number
@@ -4251,21 +4327,22 @@ components:
           status_code: 0
           request_id: request_id
         data:
-          base_quantity: 0.08008281904610115
+          base_quantity: 0.6027456183070403
           quote_asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           halted_at: 2000-01-23T04:56:07.000+00:00
-          shares_quantity: 0.7061401241503109
+          order_book_seq: 0
+          shares_quantity: 0.9301444243932576
           created_at: 2000-01-23T04:56:07.000+00:00
           base_asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           display_name: display_name
-          tick_size: 0.9301444243932576
+          tick_size: 0.3616076749251911
           maturity_at: 2000-01-23T04:56:07.000+00:00
           updated_at: 2000-01-23T04:56:07.000+00:00
-          fee_factor: 0.5962133916683182
-          initial_assets_ratio: 0.5637376656633328
+          fee_factor: 0.5637376656633328
+          initial_assets_ratio: 0.23021358869347652
           pool_updated_at: 2000-01-23T04:56:07.000+00:00
           quote_asset_fractionalized_units: 0
-          quote_quantity: 0.23021358869347652
+          quote_quantity: 0.7061401241503109
           order_book_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           base_asset_fractionalized_units: 0
           terminated_at: 2000-01-23T04:56:07.000+00:00
@@ -4288,41 +4365,43 @@ components:
           status_code: 0
           request_id: request_id
         data:
-        - base_quantity: 0.08008281904610115
+        - base_quantity: 0.6027456183070403
           quote_asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           halted_at: 2000-01-23T04:56:07.000+00:00
-          shares_quantity: 0.7061401241503109
+          order_book_seq: 0
+          shares_quantity: 0.9301444243932576
           created_at: 2000-01-23T04:56:07.000+00:00
           base_asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           display_name: display_name
-          tick_size: 0.9301444243932576
+          tick_size: 0.3616076749251911
           maturity_at: 2000-01-23T04:56:07.000+00:00
           updated_at: 2000-01-23T04:56:07.000+00:00
-          fee_factor: 0.5962133916683182
-          initial_assets_ratio: 0.5637376656633328
+          fee_factor: 0.5637376656633328
+          initial_assets_ratio: 0.23021358869347652
           pool_updated_at: 2000-01-23T04:56:07.000+00:00
           quote_asset_fractionalized_units: 0
-          quote_quantity: 0.23021358869347652
+          quote_quantity: 0.7061401241503109
           order_book_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           base_asset_fractionalized_units: 0
           terminated_at: 2000-01-23T04:56:07.000+00:00
           status: CLOSED
           shares_asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        - base_quantity: 0.08008281904610115
+        - base_quantity: 0.6027456183070403
           quote_asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           halted_at: 2000-01-23T04:56:07.000+00:00
-          shares_quantity: 0.7061401241503109
+          order_book_seq: 0
+          shares_quantity: 0.9301444243932576
           created_at: 2000-01-23T04:56:07.000+00:00
           base_asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           display_name: display_name
-          tick_size: 0.9301444243932576
+          tick_size: 0.3616076749251911
           maturity_at: 2000-01-23T04:56:07.000+00:00
           updated_at: 2000-01-23T04:56:07.000+00:00
-          fee_factor: 0.5962133916683182
-          initial_assets_ratio: 0.5637376656633328
+          fee_factor: 0.5637376656633328
+          initial_assets_ratio: 0.23021358869347652
           pool_updated_at: 2000-01-23T04:56:07.000+00:00
           quote_asset_fractionalized_units: 0
-          quote_quantity: 0.23021358869347652
+          quote_quantity: 0.7061401241503109
           order_book_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           base_asset_fractionalized_units: 0
           terminated_at: 2000-01-23T04:56:07.000+00:00
@@ -5619,6 +5698,104 @@ components:
         error: error
     SupplyResponse:
       $ref: "#/components/schemas/SupplyResponseEnvelope"
+    WithdrawalInitiation:
+      example:
+        quantity: quantity
+        updated_at: 2000-01-23T04:56:07.000+00:00
+        user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        withdrawal_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        created_at: 2000-01-23T04:56:07.000+00:00
+        asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        position_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        status: status
+      properties:
+        withdrawal_id:
+          format: uuid
+          type: string
+        user_id:
+          format: uuid
+          type: string
+        position_id:
+          format: uuid
+          type: string
+        asset_id:
+          format: uuid
+          type: string
+        quantity:
+          type: string
+        status:
+          type: string
+        created_at:
+          format: date-time
+          type: string
+        updated_at:
+          format: date-time
+          type: string
+      required:
+      - asset_id
+      - created_at
+      - position_id
+      - quantity
+      - status
+      - updated_at
+      - user_id
+      - withdrawal_id
+    WithdrawalInitiationResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            $ref: "#/components/schemas/WithdrawalInitiation"
+      example:
+        metadata:
+          trace_id: trace_id
+          status_code: 0
+          request_id: request_id
+        data:
+          quantity: quantity
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          withdrawal_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          created_at: 2000-01-23T04:56:07.000+00:00
+          asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          position_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          status: status
+        error: error
+    WithdrawalInitiationResponse:
+      $ref: "#/components/schemas/WithdrawalInitiationResponseEnvelope"
+    AllWithdrawalInitiationsResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            items:
+              $ref: "#/components/schemas/WithdrawalInitiation"
+            type: array
+      example:
+        metadata:
+          trace_id: trace_id
+          status_code: 0
+          request_id: request_id
+        data:
+        - quantity: quantity
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          withdrawal_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          created_at: 2000-01-23T04:56:07.000+00:00
+          asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          position_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          status: status
+        - quantity: quantity
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          withdrawal_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          created_at: 2000-01-23T04:56:07.000+00:00
+          asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          position_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          status: status
+        error: error
+    AllWithdrawalInitiationsResponse:
+      $ref: "#/components/schemas/AllWithdrawalInitiationsResponseEnvelope"
     WithdrawRequest:
       example:
         quantity: quantity

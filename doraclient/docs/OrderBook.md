@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **OrderBookId** | **string** |  | 
+**OrderBookSeq** | Pointer to **int64** |  | [optional] 
 **BaseQuantity** | **float32** |  | 
 **BaseAssetId** | **string** |  | 
 **CreatedAt** | **time.Time** |  | 
@@ -63,6 +64,31 @@ and a boolean to check if the value has been set.
 
 SetOrderBookId sets OrderBookId field to given value.
 
+
+### GetOrderBookSeq
+
+`func (o *OrderBook) GetOrderBookSeq() int64`
+
+GetOrderBookSeq returns the OrderBookSeq field if non-nil, zero value otherwise.
+
+### GetOrderBookSeqOk
+
+`func (o *OrderBook) GetOrderBookSeqOk() (*int64, bool)`
+
+GetOrderBookSeqOk returns a tuple with the OrderBookSeq field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOrderBookSeq
+
+`func (o *OrderBook) SetOrderBookSeq(v int64)`
+
+SetOrderBookSeq sets OrderBookSeq field to given value.
+
+### HasOrderBookSeq
+
+`func (o *OrderBook) HasOrderBookSeq() bool`
+
+HasOrderBookSeq returns a boolean if a field has been set.
 
 ### GetBaseQuantity
 
