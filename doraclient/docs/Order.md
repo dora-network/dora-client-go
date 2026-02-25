@@ -27,6 +27,7 @@ Name | Type | Description | Notes
 **TriggerPrice** | Pointer to **string** |  | [optional] 
 **TriggerType** | Pointer to [**TriggerType**](TriggerType.md) |  | [optional] 
 **ClientOrderId** | Pointer to **string** | An optional client-provided identifier for the order. | [optional] 
+**ParentOrderId** | Pointer to **string** |  | [optional] 
 
 ## Methods
 
@@ -541,6 +542,31 @@ SetClientOrderId sets ClientOrderId field to given value.
 `func (o *Order) HasClientOrderId() bool`
 
 HasClientOrderId returns a boolean if a field has been set.
+
+### GetParentOrderId
+
+`func (o *Order) GetParentOrderId() string`
+
+GetParentOrderId returns the ParentOrderId field if non-nil, zero value otherwise.
+
+### GetParentOrderIdOk
+
+`func (o *Order) GetParentOrderIdOk() (*string, bool)`
+
+GetParentOrderIdOk returns a tuple with the ParentOrderId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetParentOrderId
+
+`func (o *Order) SetParentOrderId(v string)`
+
+SetParentOrderId sets ParentOrderId field to given value.
+
+### HasParentOrderId
+
+`func (o *Order) HasParentOrderId() bool`
+
+HasParentOrderId returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -1,10 +1,12 @@
 # \DefaultAPI
 
-All URIs are relative to *https://localhost:8084*
+All URIs are relative to *https://staging.dora.co*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**ApproveLedgerWithdrawRequest**](DefaultAPI.md#ApproveLedgerWithdrawRequest) | **Post** /v1/ledger/withdraw/requests/{withdrawal_id}/approve | Approve a pending withdrawal request
 [**CancelAllOpenOrders**](DefaultAPI.md#CancelAllOpenOrders) | **Delete** /v1/orders | Cancel all open orders, if user passes orderbook on query param it will cancel all orders on specific orderbook, admin can cancel user&#39;s orders on specific orderbook
+[**CancelLedgerWithdrawRequest**](DefaultAPI.md#CancelLedgerWithdrawRequest) | **Post** /v1/ledger/withdraw/requests/{withdrawal_id}/cancel | Cancel a pending withdrawal request
 [**CancelOrderById**](DefaultAPI.md#CancelOrderById) | **Delete** /v1/orders/{order_id} | Cancel an order by ID
 [**CheckUserEmailExists**](DefaultAPI.md#CheckUserEmailExists) | **Get** /v1/user/exists | Check whether a user email exists
 [**ClaimLeverageGetAccruedInterest**](DefaultAPI.md#ClaimLeverageGetAccruedInterest) | **Post** /v1/leverage/accrued_interest/claim | Claim current accrued leverage interest for a specific user
@@ -16,6 +18,7 @@ Method | HTTP request | Description
 [**DeleteUser**](DefaultAPI.md#DeleteUser) | **Delete** /v1/user/{user_id} | Delete user by ID
 [**GetAPIKeysForUserID**](DefaultAPI.md#GetAPIKeysForUserID) | **Get** /v1/user/{user_id}/apikey | Get user&#39;s api keys: admin or integrator only
 [**GetAllAssetPrices**](DefaultAPI.md#GetAllAssetPrices) | **Get** /v1/price | Get the current price of all assets
+[**GetAllWithdrawalRequests**](DefaultAPI.md#GetAllWithdrawalRequests) | **Get** /v1/ledger/withdraw/requests | Get all withdrawal requests
 [**GetAssetById**](DefaultAPI.md#GetAssetById) | **Get** /v1/assets/{asset_id} | Get asset by ID
 [**GetAssetPrice**](DefaultAPI.md#GetAssetPrice) | **Get** /v1/price/asset/{asset_id} | Get the current price of an asset
 [**GetAssetYTMById**](DefaultAPI.md#GetAssetYTMById) | **Get** /v1/assets/{asset_id}/ytm | Get annualized yield to maturity for a bond asset
@@ -32,6 +35,7 @@ Method | HTTP request | Description
 [**GetLedgerPositionsSelf**](DefaultAPI.md#GetLedgerPositionsSelf) | **Get** /v1/ledger/positions/self | Get your own positions
 [**GetLedgerValueSelf**](DefaultAPI.md#GetLedgerValueSelf) | **Get** /v1/ledger/value/self | Get your own available, locked, and borrowed USD value; and realized and unrealized PnL
 [**GetLedgerWithdrawRequestsBySelf**](DefaultAPI.md#GetLedgerWithdrawRequestsBySelf) | **Get** /v1/ledger/withdraw/requests/self | Get all pending withdrawal requests for the logged in user
+[**GetLedgerWithdrawRequestsByUserID**](DefaultAPI.md#GetLedgerWithdrawRequestsByUserID) | **Get** /v1/ledger/withdraw/requests/{user_id} | Get all pending withdrawal requests for this user
 [**GetOrderById**](DefaultAPI.md#GetOrderById) | **Get** /v1/orders/{order_id} | Get order by ID
 [**GetOrderbookById**](DefaultAPI.md#GetOrderbookById) | **Get** /v1/orderbooks/{order_book_id} | Get orderbook by ID
 [**GetOrderbookDepth**](DefaultAPI.md#GetOrderbookDepth) | **Get** /v1/orderbooks/{order_book_id}/depth | Get the aggregated price levels for a specific orderbook (L2 market depth)
@@ -56,7 +60,8 @@ Method | HTTP request | Description
 [**GetUsersAPIKeys**](DefaultAPI.md#GetUsersAPIKeys) | **Get** /v1/user/apikey | Get user&#39;s api keys
 [**LedgerDeposit**](DefaultAPI.md#LedgerDeposit) | **Post** /v1/ledger/deposit/{user_id} | Deposit assets into this user&#39;s account from the outside world
 [**LedgerWithdraw**](DefaultAPI.md#LedgerWithdraw) | **Post** /v1/ledger/withdraw/{user_id} | Withdraw assets from this user to the outside world
-[**LedgerWithdrawRequest**](DefaultAPI.md#LedgerWithdrawRequest) | **Post** /v1/ledger/withdraw/requests/self | Initiate a withdrawal request for the logged in user to the outside world
+[**LedgerWithdrawRequest**](DefaultAPI.md#LedgerWithdrawRequest) | **Post** /v1/ledger/withdraw/requests/{user_id} | Initiate a withdrawal request for this user to the outside world
+[**LedgerWithdrawRequestSelf**](DefaultAPI.md#LedgerWithdrawRequestSelf) | **Post** /v1/ledger/withdraw/requests/self | Initiate a withdrawal request for the logged in user to the outside world
 [**LeverageGetAccruedInterestByUser**](DefaultAPI.md#LeverageGetAccruedInterestByUser) | **Get** /v1/leverage/accrued_interest/self | Get current accrued leverage interest for the user
 [**LeverageIsolateCollateral**](DefaultAPI.md#LeverageIsolateCollateral) | **Post** /v1/leverage/isolate_collateral | Create an isolated position by transferring collateral to the position from the user&#39;s global collateral
 [**LeverageSupply**](DefaultAPI.md#LeverageSupply) | **Post** /v1/leverage/supply | Supply leverage for a specific asset
@@ -69,6 +74,7 @@ Method | HTTP request | Description
 [**ListOrders**](DefaultAPI.md#ListOrders) | **Get** /v1/orders | List all orders
 [**ListPositionAccountsSelf**](DefaultAPI.md#ListPositionAccountsSelf) | **Get** /v1/user/self/position_accounts | List all position accounts for the authenticated user
 [**PayLeverageGetAccruedInterest**](DefaultAPI.md#PayLeverageGetAccruedInterest) | **Post** /v1/leverage/accrued_interest/pay | Pay current accrued leverage interest for a specific user
+[**RejectLedgerWithdrawRequest**](DefaultAPI.md#RejectLedgerWithdrawRequest) | **Post** /v1/ledger/withdraw/requests/{withdrawal_id}/reject | Reject a pending withdrawal request
 [**RevokeAPIKeyForUser**](DefaultAPI.md#RevokeAPIKeyForUser) | **Put** /v1/user/apikey/{key_id}/revoke | Revoke apikey for a user
 [**RevokeAPIKeyForUserID**](DefaultAPI.md#RevokeAPIKeyForUserID) | **Put** /v1/user/{user_id}/apikey/{key_id}/revoke | Revoke apikey for a user: admin or integrator only
 [**SettleLeverageAccruedInterest**](DefaultAPI.md#SettleLeverageAccruedInterest) | **Post** /v1/leverage/accrued_interest/settle | Settle current accrued leverage interest for a specific user
@@ -83,6 +89,78 @@ Method | HTTP request | Description
 [**ValidateSubmitOrder**](DefaultAPI.md#ValidateSubmitOrder) | **Post** /v1/orders/validate | Validate submit order request data
 [**VerifyUser**](DefaultAPI.md#VerifyUser) | **Put** /v1/user/{user_id}/verify | Verify a user by ID
 
+
+
+## ApproveLedgerWithdrawRequest
+
+> WithdrawalInitiationResponseEnvelope ApproveLedgerWithdrawRequest(ctx, withdrawalId).WithdrawalRequestReason(withdrawalRequestReason).Execute()
+
+Approve a pending withdrawal request
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+	withdrawalId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+	withdrawalRequestReason := *openapiclient.NewWithdrawalRequestReason("Reason_example") // WithdrawalRequestReason |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.ApproveLedgerWithdrawRequest(context.Background(), withdrawalId).WithdrawalRequestReason(withdrawalRequestReason).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.ApproveLedgerWithdrawRequest``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ApproveLedgerWithdrawRequest`: WithdrawalInitiationResponseEnvelope
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.ApproveLedgerWithdrawRequest`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**withdrawalId** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiApproveLedgerWithdrawRequestRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **withdrawalRequestReason** | [**WithdrawalRequestReason**](WithdrawalRequestReason.md) |  | 
+
+### Return type
+
+[**WithdrawalInitiationResponseEnvelope**](WithdrawalInitiationResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 
 
 ## CancelAllOpenOrders
@@ -146,6 +224,78 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CancelLedgerWithdrawRequest
+
+> WithdrawalInitiationResponseEnvelope CancelLedgerWithdrawRequest(ctx, withdrawalId).WithdrawalRequestReason(withdrawalRequestReason).Execute()
+
+Cancel a pending withdrawal request
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+	withdrawalId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+	withdrawalRequestReason := *openapiclient.NewWithdrawalRequestReason("Reason_example") // WithdrawalRequestReason |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.CancelLedgerWithdrawRequest(context.Background(), withdrawalId).WithdrawalRequestReason(withdrawalRequestReason).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.CancelLedgerWithdrawRequest``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CancelLedgerWithdrawRequest`: WithdrawalInitiationResponseEnvelope
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.CancelLedgerWithdrawRequest`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**withdrawalId** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCancelLedgerWithdrawRequestRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **withdrawalRequestReason** | [**WithdrawalRequestReason**](WithdrawalRequestReason.md) |  | 
+
+### Return type
+
+[**WithdrawalInitiationResponseEnvelope**](WithdrawalInitiationResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -855,6 +1005,70 @@ Other parameters are passed through a pointer to a apiGetAllAssetPricesRequest s
 ### Return type
 
 [**ListAssetPriceResponseEnvelope**](ListAssetPriceResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetAllWithdrawalRequests
+
+> AllWithdrawalInitiationsResponseEnvelope GetAllWithdrawalRequests(ctx).Status(status).Execute()
+
+Get all withdrawal requests
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+	status := "status_example" // string |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.GetAllWithdrawalRequests(context.Background()).Status(status).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.GetAllWithdrawalRequests``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetAllWithdrawalRequests`: AllWithdrawalInitiationsResponseEnvelope
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.GetAllWithdrawalRequests`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetAllWithdrawalRequestsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **status** | **string** |  | 
+
+### Return type
+
+[**AllWithdrawalInitiationsResponseEnvelope**](AllWithdrawalInitiationsResponseEnvelope.md)
 
 ### Authorization
 
@@ -1853,7 +2067,7 @@ Other parameters are passed through a pointer to a apiGetLedgerValueSelfRequest 
 
 ## GetLedgerWithdrawRequestsBySelf
 
-> AllWithdrawalInitiationsResponseEnvelope GetLedgerWithdrawRequestsBySelf(ctx).Execute()
+> AllWithdrawalInitiationsResponseEnvelope GetLedgerWithdrawRequestsBySelf(ctx).Status(status).Execute()
 
 Get all pending withdrawal requests for the logged in user
 
@@ -1870,10 +2084,11 @@ import (
 )
 
 func main() {
+	status := "status_example" // string |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.DefaultAPI.GetLedgerWithdrawRequestsBySelf(context.Background()).Execute()
+	resp, r, err := apiClient.DefaultAPI.GetLedgerWithdrawRequestsBySelf(context.Background()).Status(status).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.GetLedgerWithdrawRequestsBySelf``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1885,12 +2100,86 @@ func main() {
 
 ### Path Parameters
 
-This endpoint does not need any parameter.
+
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiGetLedgerWithdrawRequestsBySelfRequest struct via the builder pattern
 
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **status** | **string** |  | 
+
+### Return type
+
+[**AllWithdrawalInitiationsResponseEnvelope**](AllWithdrawalInitiationsResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetLedgerWithdrawRequestsByUserID
+
+> AllWithdrawalInitiationsResponseEnvelope GetLedgerWithdrawRequestsByUserID(ctx, userId).Status(status).Execute()
+
+Get all pending withdrawal requests for this user
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+	userId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+	status := "status_example" // string |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.GetLedgerWithdrawRequestsByUserID(context.Background(), userId).Status(status).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.GetLedgerWithdrawRequestsByUserID``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetLedgerWithdrawRequestsByUserID`: AllWithdrawalInitiationsResponseEnvelope
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.GetLedgerWithdrawRequestsByUserID`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**userId** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetLedgerWithdrawRequestsByUserIDRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **status** | **string** |  | 
 
 ### Return type
 
@@ -3481,7 +3770,7 @@ Name | Type | Description  | Notes
 
 ## LedgerWithdraw
 
-> FundUserResponseEnvelope LedgerWithdraw(ctx, userId).DefundUserRequest(defundUserRequest).Execute()
+> FundUserResponseEnvelope LedgerWithdraw(ctx, userId).DefundUserRequest(defundUserRequest).Status(status).Execute()
 
 Withdraw assets from this user to the outside world
 
@@ -3502,10 +3791,11 @@ import (
 func main() {
 	userId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
 	defundUserRequest := *openapiclient.NewDefundUserRequest("AssetId_example", "Quantity_example") // DefundUserRequest | 
+	status := "status_example" // string |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.DefaultAPI.LedgerWithdraw(context.Background(), userId).DefundUserRequest(defundUserRequest).Execute()
+	resp, r, err := apiClient.DefaultAPI.LedgerWithdraw(context.Background(), userId).DefundUserRequest(defundUserRequest).Status(status).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.LedgerWithdraw``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -3532,6 +3822,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **defundUserRequest** | [**DefundUserRequest**](DefundUserRequest.md) |  | 
+ **status** | **string** |  | 
 
 ### Return type
 
@@ -3555,7 +3846,7 @@ Name | Type | Description  | Notes
 
 > WithdrawalInitiationResponseEnvelope LedgerWithdrawRequest(ctx, userId).DefundUserRequest(defundUserRequest).Execute()
 
-Initiate a withdrawal request for the logged in user to the outside world
+Initiate a withdrawal request for this user to the outside world
 
 
 
@@ -3598,6 +3889,78 @@ Name | Type | Description  | Notes
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiLedgerWithdrawRequestRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **defundUserRequest** | [**DefundUserRequest**](DefundUserRequest.md) |  | 
+
+### Return type
+
+[**WithdrawalInitiationResponseEnvelope**](WithdrawalInitiationResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## LedgerWithdrawRequestSelf
+
+> WithdrawalInitiationResponseEnvelope LedgerWithdrawRequestSelf(ctx, userId).DefundUserRequest(defundUserRequest).Execute()
+
+Initiate a withdrawal request for the logged in user to the outside world
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+	userId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+	defundUserRequest := *openapiclient.NewDefundUserRequest("AssetId_example", "Quantity_example") // DefundUserRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.LedgerWithdrawRequestSelf(context.Background(), userId).DefundUserRequest(defundUserRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.LedgerWithdrawRequestSelf``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `LedgerWithdrawRequestSelf`: WithdrawalInitiationResponseEnvelope
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.LedgerWithdrawRequestSelf`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**userId** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiLedgerWithdrawRequestSelfRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -4429,6 +4792,78 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**PayLeverageAccruedInterestResponseEnvelope**](PayLeverageAccruedInterestResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## RejectLedgerWithdrawRequest
+
+> WithdrawalInitiationResponseEnvelope RejectLedgerWithdrawRequest(ctx, withdrawalId).WithdrawalRequestReason(withdrawalRequestReason).Execute()
+
+Reject a pending withdrawal request
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+	withdrawalId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+	withdrawalRequestReason := *openapiclient.NewWithdrawalRequestReason("Reason_example") // WithdrawalRequestReason | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.RejectLedgerWithdrawRequest(context.Background(), withdrawalId).WithdrawalRequestReason(withdrawalRequestReason).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.RejectLedgerWithdrawRequest``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `RejectLedgerWithdrawRequest`: WithdrawalInitiationResponseEnvelope
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.RejectLedgerWithdrawRequest`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**withdrawalId** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiRejectLedgerWithdrawRequestRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **withdrawalRequestReason** | [**WithdrawalRequestReason**](WithdrawalRequestReason.md) |  | 
+
+### Return type
+
+[**WithdrawalInitiationResponseEnvelope**](WithdrawalInitiationResponseEnvelope.md)
 
 ### Authorization
 

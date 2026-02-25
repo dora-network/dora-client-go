@@ -34,10 +34,12 @@ type CreateOrderRequest struct {
 	OrderBookId string `json:"order_book_id"`
 	OrderModifiers []OrderModifierKind `json:"order_modifiers,omitempty"`
 	GoodTillDate *time.Time `json:"good_till_date,omitempty"`
-	TriggerPrice *string `json:"trigger_price,omitempty"`
-	TriggerType *TriggerType `json:"trigger_type,omitempty"`
 	// An optional client-provided identifier for the order.
 	ClientOrderId *string `json:"client_order_id,omitempty"`
+	// Stop loss price
+	StopLossPrice *string `json:"stop_loss_price,omitempty"`
+	// Take profit price
+	TakeProfitPrice *string `json:"take_profit_price,omitempty"`
 }
 
 type _CreateOrderRequest CreateOrderRequest
@@ -305,70 +307,6 @@ func (o *CreateOrderRequest) SetGoodTillDate(v time.Time) {
 	o.GoodTillDate = &v
 }
 
-// GetTriggerPrice returns the TriggerPrice field value if set, zero value otherwise.
-func (o *CreateOrderRequest) GetTriggerPrice() string {
-	if o == nil || IsNil(o.TriggerPrice) {
-		var ret string
-		return ret
-	}
-	return *o.TriggerPrice
-}
-
-// GetTriggerPriceOk returns a tuple with the TriggerPrice field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CreateOrderRequest) GetTriggerPriceOk() (*string, bool) {
-	if o == nil || IsNil(o.TriggerPrice) {
-		return nil, false
-	}
-	return o.TriggerPrice, true
-}
-
-// HasTriggerPrice returns a boolean if a field has been set.
-func (o *CreateOrderRequest) HasTriggerPrice() bool {
-	if o != nil && !IsNil(o.TriggerPrice) {
-		return true
-	}
-
-	return false
-}
-
-// SetTriggerPrice gets a reference to the given string and assigns it to the TriggerPrice field.
-func (o *CreateOrderRequest) SetTriggerPrice(v string) {
-	o.TriggerPrice = &v
-}
-
-// GetTriggerType returns the TriggerType field value if set, zero value otherwise.
-func (o *CreateOrderRequest) GetTriggerType() TriggerType {
-	if o == nil || IsNil(o.TriggerType) {
-		var ret TriggerType
-		return ret
-	}
-	return *o.TriggerType
-}
-
-// GetTriggerTypeOk returns a tuple with the TriggerType field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CreateOrderRequest) GetTriggerTypeOk() (*TriggerType, bool) {
-	if o == nil || IsNil(o.TriggerType) {
-		return nil, false
-	}
-	return o.TriggerType, true
-}
-
-// HasTriggerType returns a boolean if a field has been set.
-func (o *CreateOrderRequest) HasTriggerType() bool {
-	if o != nil && !IsNil(o.TriggerType) {
-		return true
-	}
-
-	return false
-}
-
-// SetTriggerType gets a reference to the given TriggerType and assigns it to the TriggerType field.
-func (o *CreateOrderRequest) SetTriggerType(v TriggerType) {
-	o.TriggerType = &v
-}
-
 // GetClientOrderId returns the ClientOrderId field value if set, zero value otherwise.
 func (o *CreateOrderRequest) GetClientOrderId() string {
 	if o == nil || IsNil(o.ClientOrderId) {
@@ -401,6 +339,70 @@ func (o *CreateOrderRequest) SetClientOrderId(v string) {
 	o.ClientOrderId = &v
 }
 
+// GetStopLossPrice returns the StopLossPrice field value if set, zero value otherwise.
+func (o *CreateOrderRequest) GetStopLossPrice() string {
+	if o == nil || IsNil(o.StopLossPrice) {
+		var ret string
+		return ret
+	}
+	return *o.StopLossPrice
+}
+
+// GetStopLossPriceOk returns a tuple with the StopLossPrice field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateOrderRequest) GetStopLossPriceOk() (*string, bool) {
+	if o == nil || IsNil(o.StopLossPrice) {
+		return nil, false
+	}
+	return o.StopLossPrice, true
+}
+
+// HasStopLossPrice returns a boolean if a field has been set.
+func (o *CreateOrderRequest) HasStopLossPrice() bool {
+	if o != nil && !IsNil(o.StopLossPrice) {
+		return true
+	}
+
+	return false
+}
+
+// SetStopLossPrice gets a reference to the given string and assigns it to the StopLossPrice field.
+func (o *CreateOrderRequest) SetStopLossPrice(v string) {
+	o.StopLossPrice = &v
+}
+
+// GetTakeProfitPrice returns the TakeProfitPrice field value if set, zero value otherwise.
+func (o *CreateOrderRequest) GetTakeProfitPrice() string {
+	if o == nil || IsNil(o.TakeProfitPrice) {
+		var ret string
+		return ret
+	}
+	return *o.TakeProfitPrice
+}
+
+// GetTakeProfitPriceOk returns a tuple with the TakeProfitPrice field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateOrderRequest) GetTakeProfitPriceOk() (*string, bool) {
+	if o == nil || IsNil(o.TakeProfitPrice) {
+		return nil, false
+	}
+	return o.TakeProfitPrice, true
+}
+
+// HasTakeProfitPrice returns a boolean if a field has been set.
+func (o *CreateOrderRequest) HasTakeProfitPrice() bool {
+	if o != nil && !IsNil(o.TakeProfitPrice) {
+		return true
+	}
+
+	return false
+}
+
+// SetTakeProfitPrice gets a reference to the given string and assigns it to the TakeProfitPrice field.
+func (o *CreateOrderRequest) SetTakeProfitPrice(v string) {
+	o.TakeProfitPrice = &v
+}
+
 func (o CreateOrderRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -426,14 +428,14 @@ func (o CreateOrderRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.GoodTillDate) {
 		toSerialize["good_till_date"] = o.GoodTillDate
 	}
-	if !IsNil(o.TriggerPrice) {
-		toSerialize["trigger_price"] = o.TriggerPrice
-	}
-	if !IsNil(o.TriggerType) {
-		toSerialize["trigger_type"] = o.TriggerType
-	}
 	if !IsNil(o.ClientOrderId) {
 		toSerialize["client_order_id"] = o.ClientOrderId
+	}
+	if !IsNil(o.StopLossPrice) {
+		toSerialize["stop_loss_price"] = o.StopLossPrice
+	}
+	if !IsNil(o.TakeProfitPrice) {
+		toSerialize["take_profit_price"] = o.TakeProfitPrice
 	}
 	return toSerialize, nil
 }

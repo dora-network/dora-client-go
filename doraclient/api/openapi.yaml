@@ -3,12 +3,14 @@ info:
   title: DORA
   version: 1.0.0
 servers:
-- description: local DORA server
-  url: https://localhost:8084
-- description: DORA staging server
-  url: https://staging.dora.co
-- description: local DORA WebSocket server
-  url: ws://localhost:8085
+- description: DORA staging API server
+  url: https://staging.dora.co/
+- description: DORA staging Websocket API server
+  url: wss://staging.dora.co/
+- description: DORA production API server
+  url: https://prod.dora.co/
+- description: DORA production Websocket API server
+  url: wss://prod.dora.co/
 security:
 - bearerAuth: []
 - apiKeyAuthHeader: []
@@ -1660,6 +1662,13 @@ paths:
           format: uuid
           type: string
         style: simple
+      - explode: true
+        in: query
+        name: status
+        required: false
+        schema:
+          type: string
+        style: form
       requestBody:
         content:
           application/json:
@@ -1686,10 +1695,128 @@ paths:
                 $ref: "#/components/schemas/ResponseEnvelope"
           description: Internal server error
       summary: Withdraw assets from this user to the outside world
+  /v1/ledger/withdraw/requests:
+    get:
+      operationId: getAllWithdrawalRequests
+      parameters:
+      - explode: true
+        in: query
+        name: status
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AllWithdrawalInitiationsResponse"
+          description: List of withdrawal requests
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Get all withdrawal requests
+  /v1/ledger/withdraw/requests/{user_id}:
+    get:
+      operationId: getLedgerWithdrawRequestsByUserID
+      parameters:
+      - explode: false
+        in: path
+        name: user_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: status
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AllWithdrawalInitiationsResponse"
+          description: List of pending withdrawal requests for this user
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. invalid user ID format"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: User not found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Get all pending withdrawal requests for this user
+    post:
+      description: Withdraw assets from this user's account to the outside world.
+        Note that this does not interact with any external systems; it simply deducts
+        the amount from the user's available balance in the ledger. Actual transfer
+        of assets must be handled separately.
+      operationId: ledgerWithdrawRequest
+      parameters:
+      - explode: false
+        in: path
+        name: user_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DefundUserRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WithdrawalInitiationResponse"
+          description: Withdraw request initiation successful
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. invalid parameters or insufficient funds"
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Initiate a withdrawal request for this user to the outside world
   /v1/ledger/withdraw/requests/self:
     get:
       operationId: getLedgerWithdrawRequestsBySelf
-      parameters: []
+      parameters:
+      - explode: true
+        in: query
+        name: status
+        required: false
+        schema:
+          type: string
+        style: form
       responses:
         "200":
           content:
@@ -1721,7 +1848,7 @@ paths:
         world. Note that this does not interact with any external systems; it simply
         deducts the amount from the user's available balance in the ledger. Actual
         transfer of assets must be handled separately.
-      operationId: ledgerWithdrawRequest
+      operationId: ledgerWithdrawRequestSelf
       parameters:
       - explode: false
         in: path
@@ -1758,6 +1885,172 @@ paths:
           description: Internal server error
       summary: Initiate a withdrawal request for the logged in user to the outside
         world
+  /v1/ledger/withdraw/requests/{withdrawal_id}/approve:
+    post:
+      description: "Approve a pending withdrawal request, allowing the transfer of\
+        \ assets to the outside world to proceed. Note that this does not interact\
+        \ with any external systems; it simply updates the status of the withdrawal\
+        \ request in the ledger. Actual transfer of assets must be handled separately."
+      operationId: approveLedgerWithdrawRequest
+      parameters:
+      - explode: false
+        in: path
+        name: withdrawal_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WithdrawalRequestReason"
+        required: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WithdrawalInitiationResponse"
+          description: Withdrawal request approved successfully
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. invalid withdrawal ID format or request\
+            \ is not in a pending state"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Withdrawal request not found
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Forbidden, user does not have permission to approve this withdrawal\
+            \ request"
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Approve a pending withdrawal request
+  /v1/ledger/withdraw/requests/{withdrawal_id}/reject:
+    post:
+      description: "Reject a pending withdrawal request, providing a reason for the\
+        \ rejection. Note that this does not interact with any external systems; it\
+        \ simply updates the status of the withdrawal request in the ledger. Actual\
+        \ transfer of assets must be handled separately."
+      operationId: rejectLedgerWithdrawRequest
+      parameters:
+      - explode: false
+        in: path
+        name: withdrawal_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WithdrawalRequestReason"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WithdrawalInitiationResponse"
+          description: Withdrawal request rejected successfully
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. invalid withdrawal ID format or request\
+            \ is not in a pending state"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Withdrawal request not found
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Forbidden, user does not have permission to reject this withdrawal\
+            \ request"
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Reject a pending withdrawal request
+  /v1/ledger/withdraw/requests/{withdrawal_id}/cancel:
+    post:
+      description: "Cancel a pending withdrawal request, providing an optional reason\
+        \ for the cancellation."
+      operationId: cancelLedgerWithdrawRequest
+      parameters:
+      - explode: false
+        in: path
+        name: withdrawal_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WithdrawalRequestReason"
+        required: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WithdrawalInitiationResponse"
+          description: Withdrawal request cancelled successfully
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. invalid withdrawal ID format or request\
+            \ is not in a pending state"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Withdrawal request not found
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Forbidden, user does not have permission to cancel this withdrawal\
+            \ request"
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Cancel a pending withdrawal request
   /v1/leverage/supply:
     post:
       operationId: leverageSupply
@@ -1881,6 +2174,7 @@ paths:
         \ position with available balance, then collateralize it in a separate step."
   /v1/leverage/unite:
     post:
+      deprecated: true
       description: Combines all isolated positions into a single global position
       operationId: leverageUnite
       requestBody:
@@ -1927,6 +2221,7 @@ paths:
                 $ref: "#/components/schemas/ResponseEnvelope"
           description: Internal server error
       summary: Combines all isolated positions into a single global position
+      x-deprecated-reason: Use close positions and transfer instead of unite
   /v1/leverage/accrued_interest/self:
     get:
       operationId: leverageGetAccruedInterestByUser
@@ -4456,6 +4751,7 @@ components:
         last_update_at: 2000-01-23T04:56:07.000+00:00
         inverse_leverage: inverse_leverage
         cancelled_quantity: cancelled_quantity
+        parent_order_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         filled_quantity: filled_quantity
         order_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         order_book_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -4531,6 +4827,9 @@ components:
           description: An optional client-provided identifier for the order.
           format: text
           type: string
+        parent_order_id:
+          format: uuid
+          type: string
       required:
       - avg_fill_price
       - cancelled_quantity
@@ -4578,6 +4877,7 @@ components:
           last_update_at: 2000-01-23T04:56:07.000+00:00
           inverse_leverage: inverse_leverage
           cancelled_quantity: cancelled_quantity
+          parent_order_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           filled_quantity: filled_quantity
           order_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           order_book_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -4603,6 +4903,7 @@ components:
           last_update_at: 2000-01-23T04:56:07.000+00:00
           inverse_leverage: inverse_leverage
           cancelled_quantity: cancelled_quantity
+          parent_order_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           filled_quantity: filled_quantity
           order_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           order_book_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -4639,6 +4940,7 @@ components:
           last_update_at: 2000-01-23T04:56:07.000+00:00
           inverse_leverage: inverse_leverage
           cancelled_quantity: cancelled_quantity
+          parent_order_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           filled_quantity: filled_quantity
           order_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           order_book_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -4677,6 +4979,7 @@ components:
           last_update_at: 2000-01-23T04:56:07.000+00:00
           inverse_leverage: inverse_leverage
           cancelled_quantity: cancelled_quantity
+          parent_order_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           filled_quantity: filled_quantity
           order_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           order_book_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -4719,6 +5022,7 @@ components:
           last_update_at: 2000-01-23T04:56:07.000+00:00
           inverse_leverage: inverse_leverage
           cancelled_quantity: cancelled_quantity
+          parent_order_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           filled_quantity: filled_quantity
           order_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           order_book_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -4736,17 +5040,17 @@ components:
         side: BUY
         client_order_id: client_order_id
         quantity: quantity
-        trigger_price: trigger_price
+        stop_loss_price: stop_loss_price
         price: price
         kind: LIMIT
         from_global_position: true
         inverse_leverage: inverse_leverage
-        trigger_type: STOP_LOSS
         good_till_date: 2000-01-23T04:56:07.000+00:00
         order_book_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         order_modifiers:
         - LIQUIDATION
         - LIQUIDATION
+        take_profit_price: take_profit_price
       properties:
         quantity:
           type: string
@@ -4772,13 +5076,15 @@ components:
         good_till_date:
           format: date-time
           type: string
-        trigger_price:
-          type: string
-        trigger_type:
-          $ref: "#/components/schemas/TriggerType"
         client_order_id:
           description: An optional client-provided identifier for the order.
           format: text
+          type: string
+        stop_loss_price:
+          description: Stop loss price
+          type: string
+        take_profit_price:
+          description: Take profit price
           type: string
       required:
       - from_global_position
@@ -4793,10 +5099,12 @@ components:
         quote_asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         client_order_id: client_order_id
         quantity: quantity
+        stop_loss_price: stop_loss_price
         kind: LIMIT
         tick: tick
         good_till_date: 2000-01-23T04:56:07.000+00:00
         base_asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        take_profit_price: take_profit_price
         user_balance: user_balance
         price: price
         position_assets:
@@ -4862,6 +5170,12 @@ components:
           items:
             $ref: "#/components/schemas/AssetConfig"
           type: array
+        stop_loss_price:
+          description: Stop loss price
+          type: string
+        take_profit_price:
+          description: Take profit price
+          type: string
       required:
       - inverse_leverage
       - kind
@@ -5700,14 +6014,17 @@ components:
       $ref: "#/components/schemas/SupplyResponseEnvelope"
     WithdrawalInitiation:
       example:
+        reason: reason
         quantity: quantity
         updated_at: 2000-01-23T04:56:07.000+00:00
         user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         withdrawal_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        updated_by: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         created_at: 2000-01-23T04:56:07.000+00:00
         asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        created_by: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         position_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        status: status
+        status: PENDING
       properties:
         withdrawal_id:
           format: uuid
@@ -5724,20 +6041,31 @@ components:
         quantity:
           type: string
         status:
-          type: string
+          $ref: "#/components/schemas/WithdrawalStatus"
         created_at:
           format: date-time
+          type: string
+        created_by:
+          format: uuid
           type: string
         updated_at:
           format: date-time
           type: string
+        updated_by:
+          format: uuid
+          type: string
+        reason:
+          type: string
       required:
       - asset_id
       - created_at
+      - created_by
       - position_id
       - quantity
+      - reason
       - status
       - updated_at
+      - updated_by
       - user_id
       - withdrawal_id
     WithdrawalInitiationResponseEnvelope:
@@ -5752,14 +6080,17 @@ components:
           status_code: 0
           request_id: request_id
         data:
+          reason: reason
           quantity: quantity
           updated_at: 2000-01-23T04:56:07.000+00:00
           user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           withdrawal_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          updated_by: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           created_at: 2000-01-23T04:56:07.000+00:00
           asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          created_by: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           position_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          status: status
+          status: PENDING
         error: error
     WithdrawalInitiationResponse:
       $ref: "#/components/schemas/WithdrawalInitiationResponseEnvelope"
@@ -5777,22 +6108,28 @@ components:
           status_code: 0
           request_id: request_id
         data:
-        - quantity: quantity
+        - reason: reason
+          quantity: quantity
           updated_at: 2000-01-23T04:56:07.000+00:00
           user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           withdrawal_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          updated_by: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           created_at: 2000-01-23T04:56:07.000+00:00
           asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          created_by: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           position_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          status: status
-        - quantity: quantity
+          status: PENDING
+        - reason: reason
+          quantity: quantity
           updated_at: 2000-01-23T04:56:07.000+00:00
           user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           withdrawal_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          updated_by: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           created_at: 2000-01-23T04:56:07.000+00:00
           asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          created_by: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           position_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          status: status
+          status: PENDING
         error: error
     AllWithdrawalInitiationsResponse:
       $ref: "#/components/schemas/AllWithdrawalInitiationsResponseEnvelope"
@@ -6100,6 +6437,14 @@ components:
         error: error
     CurrentLeverageAccruedInterestResponse:
       $ref: "#/components/schemas/CurrentLeverageAccruedInterestResponseEnvelope"
+    WithdrawalRequestReason:
+      example:
+        reason: reason
+      properties:
+        reason:
+          type: string
+      required:
+      - reason
     LiquidityRequest:
       example:
         quantity: quantity
@@ -6241,6 +6586,13 @@ components:
       - quantity0
       - quantity1
       - user_id
+    WithdrawalStatus:
+      enum:
+      - PENDING
+      - COMPLETED
+      - CANCELED
+      - REJECTED
+      type: string
     ListTransactionsResponseEnvelope:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
@@ -7027,6 +7379,7 @@ components:
           last_update_at: 2000-01-23T04:56:07.000+00:00
           inverse_leverage: inverse_leverage
           cancelled_quantity: cancelled_quantity
+          parent_order_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           filled_quantity: filled_quantity
           order_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           order_book_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91

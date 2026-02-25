@@ -74,11 +74,13 @@ ctx = context.WithValue(context.Background(), doraclient.ContextOperationServerV
 
 ## Documentation for API Endpoints
 
-All URIs are relative to *https://localhost:8084*
+All URIs are relative to *https://staging.dora.co*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+*DefaultAPI* | [**ApproveLedgerWithdrawRequest**](docs/DefaultAPI.md#approveledgerwithdrawrequest) | **Post** /v1/ledger/withdraw/requests/{withdrawal_id}/approve | Approve a pending withdrawal request
 *DefaultAPI* | [**CancelAllOpenOrders**](docs/DefaultAPI.md#cancelallopenorders) | **Delete** /v1/orders | Cancel all open orders, if user passes orderbook on query param it will cancel all orders on specific orderbook, admin can cancel user&#39;s orders on specific orderbook
+*DefaultAPI* | [**CancelLedgerWithdrawRequest**](docs/DefaultAPI.md#cancelledgerwithdrawrequest) | **Post** /v1/ledger/withdraw/requests/{withdrawal_id}/cancel | Cancel a pending withdrawal request
 *DefaultAPI* | [**CancelOrderById**](docs/DefaultAPI.md#cancelorderbyid) | **Delete** /v1/orders/{order_id} | Cancel an order by ID
 *DefaultAPI* | [**CheckUserEmailExists**](docs/DefaultAPI.md#checkuseremailexists) | **Get** /v1/user/exists | Check whether a user email exists
 *DefaultAPI* | [**ClaimLeverageGetAccruedInterest**](docs/DefaultAPI.md#claimleveragegetaccruedinterest) | **Post** /v1/leverage/accrued_interest/claim | Claim current accrued leverage interest for a specific user
@@ -90,6 +92,7 @@ Class | Method | HTTP request | Description
 *DefaultAPI* | [**DeleteUser**](docs/DefaultAPI.md#deleteuser) | **Delete** /v1/user/{user_id} | Delete user by ID
 *DefaultAPI* | [**GetAPIKeysForUserID**](docs/DefaultAPI.md#getapikeysforuserid) | **Get** /v1/user/{user_id}/apikey | Get user&#39;s api keys: admin or integrator only
 *DefaultAPI* | [**GetAllAssetPrices**](docs/DefaultAPI.md#getallassetprices) | **Get** /v1/price | Get the current price of all assets
+*DefaultAPI* | [**GetAllWithdrawalRequests**](docs/DefaultAPI.md#getallwithdrawalrequests) | **Get** /v1/ledger/withdraw/requests | Get all withdrawal requests
 *DefaultAPI* | [**GetAssetById**](docs/DefaultAPI.md#getassetbyid) | **Get** /v1/assets/{asset_id} | Get asset by ID
 *DefaultAPI* | [**GetAssetPrice**](docs/DefaultAPI.md#getassetprice) | **Get** /v1/price/asset/{asset_id} | Get the current price of an asset
 *DefaultAPI* | [**GetAssetYTMById**](docs/DefaultAPI.md#getassetytmbyid) | **Get** /v1/assets/{asset_id}/ytm | Get annualized yield to maturity for a bond asset
@@ -106,6 +109,7 @@ Class | Method | HTTP request | Description
 *DefaultAPI* | [**GetLedgerPositionsSelf**](docs/DefaultAPI.md#getledgerpositionsself) | **Get** /v1/ledger/positions/self | Get your own positions
 *DefaultAPI* | [**GetLedgerValueSelf**](docs/DefaultAPI.md#getledgervalueself) | **Get** /v1/ledger/value/self | Get your own available, locked, and borrowed USD value; and realized and unrealized PnL
 *DefaultAPI* | [**GetLedgerWithdrawRequestsBySelf**](docs/DefaultAPI.md#getledgerwithdrawrequestsbyself) | **Get** /v1/ledger/withdraw/requests/self | Get all pending withdrawal requests for the logged in user
+*DefaultAPI* | [**GetLedgerWithdrawRequestsByUserID**](docs/DefaultAPI.md#getledgerwithdrawrequestsbyuserid) | **Get** /v1/ledger/withdraw/requests/{user_id} | Get all pending withdrawal requests for this user
 *DefaultAPI* | [**GetOrderById**](docs/DefaultAPI.md#getorderbyid) | **Get** /v1/orders/{order_id} | Get order by ID
 *DefaultAPI* | [**GetOrderbookById**](docs/DefaultAPI.md#getorderbookbyid) | **Get** /v1/orderbooks/{order_book_id} | Get orderbook by ID
 *DefaultAPI* | [**GetOrderbookDepth**](docs/DefaultAPI.md#getorderbookdepth) | **Get** /v1/orderbooks/{order_book_id}/depth | Get the aggregated price levels for a specific orderbook (L2 market depth)
@@ -130,7 +134,8 @@ Class | Method | HTTP request | Description
 *DefaultAPI* | [**GetUsersAPIKeys**](docs/DefaultAPI.md#getusersapikeys) | **Get** /v1/user/apikey | Get user&#39;s api keys
 *DefaultAPI* | [**LedgerDeposit**](docs/DefaultAPI.md#ledgerdeposit) | **Post** /v1/ledger/deposit/{user_id} | Deposit assets into this user&#39;s account from the outside world
 *DefaultAPI* | [**LedgerWithdraw**](docs/DefaultAPI.md#ledgerwithdraw) | **Post** /v1/ledger/withdraw/{user_id} | Withdraw assets from this user to the outside world
-*DefaultAPI* | [**LedgerWithdrawRequest**](docs/DefaultAPI.md#ledgerwithdrawrequest) | **Post** /v1/ledger/withdraw/requests/self | Initiate a withdrawal request for the logged in user to the outside world
+*DefaultAPI* | [**LedgerWithdrawRequest**](docs/DefaultAPI.md#ledgerwithdrawrequest) | **Post** /v1/ledger/withdraw/requests/{user_id} | Initiate a withdrawal request for this user to the outside world
+*DefaultAPI* | [**LedgerWithdrawRequestSelf**](docs/DefaultAPI.md#ledgerwithdrawrequestself) | **Post** /v1/ledger/withdraw/requests/self | Initiate a withdrawal request for the logged in user to the outside world
 *DefaultAPI* | [**LeverageGetAccruedInterestByUser**](docs/DefaultAPI.md#leveragegetaccruedinterestbyuser) | **Get** /v1/leverage/accrued_interest/self | Get current accrued leverage interest for the user
 *DefaultAPI* | [**LeverageIsolateCollateral**](docs/DefaultAPI.md#leverageisolatecollateral) | **Post** /v1/leverage/isolate_collateral | Create an isolated position by transferring collateral to the position from the user&#39;s global collateral
 *DefaultAPI* | [**LeverageSupply**](docs/DefaultAPI.md#leveragesupply) | **Post** /v1/leverage/supply | Supply leverage for a specific asset
@@ -143,6 +148,7 @@ Class | Method | HTTP request | Description
 *DefaultAPI* | [**ListOrders**](docs/DefaultAPI.md#listorders) | **Get** /v1/orders | List all orders
 *DefaultAPI* | [**ListPositionAccountsSelf**](docs/DefaultAPI.md#listpositionaccountsself) | **Get** /v1/user/self/position_accounts | List all position accounts for the authenticated user
 *DefaultAPI* | [**PayLeverageGetAccruedInterest**](docs/DefaultAPI.md#payleveragegetaccruedinterest) | **Post** /v1/leverage/accrued_interest/pay | Pay current accrued leverage interest for a specific user
+*DefaultAPI* | [**RejectLedgerWithdrawRequest**](docs/DefaultAPI.md#rejectledgerwithdrawrequest) | **Post** /v1/ledger/withdraw/requests/{withdrawal_id}/reject | Reject a pending withdrawal request
 *DefaultAPI* | [**RevokeAPIKeyForUser**](docs/DefaultAPI.md#revokeapikeyforuser) | **Put** /v1/user/apikey/{key_id}/revoke | Revoke apikey for a user
 *DefaultAPI* | [**RevokeAPIKeyForUserID**](docs/DefaultAPI.md#revokeapikeyforuserid) | **Put** /v1/user/{user_id}/apikey/{key_id}/revoke | Revoke apikey for a user: admin or integrator only
 *DefaultAPI* | [**SettleLeverageAccruedInterest**](docs/DefaultAPI.md#settleleverageaccruedinterest) | **Post** /v1/leverage/accrued_interest/settle | Settle current accrued leverage interest for a specific user
@@ -333,6 +339,8 @@ Class | Method | HTTP request | Description
  - [WithdrawResponseEnvelope](docs/WithdrawResponseEnvelope.md)
  - [WithdrawalInitiation](docs/WithdrawalInitiation.md)
  - [WithdrawalInitiationResponseEnvelope](docs/WithdrawalInitiationResponseEnvelope.md)
+ - [WithdrawalRequestReason](docs/WithdrawalRequestReason.md)
+ - [WithdrawalStatus](docs/WithdrawalStatus.md)
 
 
 ## Documentation For Authorization

@@ -22,11 +22,39 @@ func Test_doraclient_DefaultAPIService(t *testing.T) {
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
+	t.Run("Test DefaultAPIService ApproveLedgerWithdrawRequest", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var withdrawalId string
+
+		resp, httpRes, err := apiClient.DefaultAPI.ApproveLedgerWithdrawRequest(context.Background(), withdrawalId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test DefaultAPIService CancelAllOpenOrders", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		resp, httpRes, err := apiClient.DefaultAPI.CancelAllOpenOrders(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DefaultAPIService CancelLedgerWithdrawRequest", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var withdrawalId string
+
+		resp, httpRes, err := apiClient.DefaultAPI.CancelLedgerWithdrawRequest(context.Background(), withdrawalId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -167,6 +195,18 @@ func Test_doraclient_DefaultAPIService(t *testing.T) {
 		t.Skip("skip test")  // remove to run test
 
 		resp, httpRes, err := apiClient.DefaultAPI.GetAllAssetPrices(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DefaultAPIService GetAllWithdrawalRequests", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.DefaultAPI.GetAllWithdrawalRequests(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -377,6 +417,20 @@ func Test_doraclient_DefaultAPIService(t *testing.T) {
 		t.Skip("skip test")  // remove to run test
 
 		resp, httpRes, err := apiClient.DefaultAPI.GetLedgerWithdrawRequestsBySelf(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DefaultAPIService GetLedgerWithdrawRequestsByUserID", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var userId string
+
+		resp, httpRes, err := apiClient.DefaultAPI.GetLedgerWithdrawRequestsByUserID(context.Background(), userId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -725,6 +779,20 @@ func Test_doraclient_DefaultAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test DefaultAPIService LedgerWithdrawRequestSelf", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var userId string
+
+		resp, httpRes, err := apiClient.DefaultAPI.LedgerWithdrawRequestSelf(context.Background(), userId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test DefaultAPIService LeverageGetAccruedInterestByUser", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -866,6 +934,20 @@ func Test_doraclient_DefaultAPIService(t *testing.T) {
 		t.Skip("skip test")  // remove to run test
 
 		resp, httpRes, err := apiClient.DefaultAPI.PayLeverageGetAccruedInterest(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DefaultAPIService RejectLedgerWithdrawRequest", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var withdrawalId string
+
+		resp, httpRes, err := apiClient.DefaultAPI.RejectLedgerWithdrawRequest(context.Background(), withdrawalId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

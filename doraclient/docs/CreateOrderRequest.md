@@ -13,9 +13,9 @@ Name | Type | Description | Notes
 **OrderBookId** | **string** | Required: the order book to submit the order to | 
 **OrderModifiers** | Pointer to [**[]OrderModifierKind**](OrderModifierKind.md) |  | [optional] 
 **GoodTillDate** | Pointer to **time.Time** |  | [optional] 
-**TriggerPrice** | Pointer to **string** |  | [optional] 
-**TriggerType** | Pointer to [**TriggerType**](TriggerType.md) |  | [optional] 
 **ClientOrderId** | Pointer to **string** | An optional client-provided identifier for the order. | [optional] 
+**StopLossPrice** | Pointer to **string** | Stop loss price | [optional] 
+**TakeProfitPrice** | Pointer to **string** | Take profit price | [optional] 
 
 ## Methods
 
@@ -231,56 +231,6 @@ SetGoodTillDate sets GoodTillDate field to given value.
 
 HasGoodTillDate returns a boolean if a field has been set.
 
-### GetTriggerPrice
-
-`func (o *CreateOrderRequest) GetTriggerPrice() string`
-
-GetTriggerPrice returns the TriggerPrice field if non-nil, zero value otherwise.
-
-### GetTriggerPriceOk
-
-`func (o *CreateOrderRequest) GetTriggerPriceOk() (*string, bool)`
-
-GetTriggerPriceOk returns a tuple with the TriggerPrice field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetTriggerPrice
-
-`func (o *CreateOrderRequest) SetTriggerPrice(v string)`
-
-SetTriggerPrice sets TriggerPrice field to given value.
-
-### HasTriggerPrice
-
-`func (o *CreateOrderRequest) HasTriggerPrice() bool`
-
-HasTriggerPrice returns a boolean if a field has been set.
-
-### GetTriggerType
-
-`func (o *CreateOrderRequest) GetTriggerType() TriggerType`
-
-GetTriggerType returns the TriggerType field if non-nil, zero value otherwise.
-
-### GetTriggerTypeOk
-
-`func (o *CreateOrderRequest) GetTriggerTypeOk() (*TriggerType, bool)`
-
-GetTriggerTypeOk returns a tuple with the TriggerType field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetTriggerType
-
-`func (o *CreateOrderRequest) SetTriggerType(v TriggerType)`
-
-SetTriggerType sets TriggerType field to given value.
-
-### HasTriggerType
-
-`func (o *CreateOrderRequest) HasTriggerType() bool`
-
-HasTriggerType returns a boolean if a field has been set.
-
 ### GetClientOrderId
 
 `func (o *CreateOrderRequest) GetClientOrderId() string`
@@ -305,6 +255,56 @@ SetClientOrderId sets ClientOrderId field to given value.
 `func (o *CreateOrderRequest) HasClientOrderId() bool`
 
 HasClientOrderId returns a boolean if a field has been set.
+
+### GetStopLossPrice
+
+`func (o *CreateOrderRequest) GetStopLossPrice() string`
+
+GetStopLossPrice returns the StopLossPrice field if non-nil, zero value otherwise.
+
+### GetStopLossPriceOk
+
+`func (o *CreateOrderRequest) GetStopLossPriceOk() (*string, bool)`
+
+GetStopLossPriceOk returns a tuple with the StopLossPrice field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStopLossPrice
+
+`func (o *CreateOrderRequest) SetStopLossPrice(v string)`
+
+SetStopLossPrice sets StopLossPrice field to given value.
+
+### HasStopLossPrice
+
+`func (o *CreateOrderRequest) HasStopLossPrice() bool`
+
+HasStopLossPrice returns a boolean if a field has been set.
+
+### GetTakeProfitPrice
+
+`func (o *CreateOrderRequest) GetTakeProfitPrice() string`
+
+GetTakeProfitPrice returns the TakeProfitPrice field if non-nil, zero value otherwise.
+
+### GetTakeProfitPriceOk
+
+`func (o *CreateOrderRequest) GetTakeProfitPriceOk() (*string, bool)`
+
+GetTakeProfitPriceOk returns a tuple with the TakeProfitPrice field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTakeProfitPrice
+
+`func (o *CreateOrderRequest) SetTakeProfitPrice(v string)`
+
+SetTakeProfitPrice sets TakeProfitPrice field to given value.
+
+### HasTakeProfitPrice
+
+`func (o *CreateOrderRequest) HasTakeProfitPrice() bool`
+
+HasTakeProfitPrice returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

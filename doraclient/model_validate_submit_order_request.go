@@ -45,6 +45,10 @@ type ValidateSubmitOrderRequest struct {
 	PositionAssets []PositionAsset `json:"position_assets,omitempty"`
 	// Configuration for the assets in the order
 	AssetsConfig []AssetConfig `json:"assets_config,omitempty"`
+	// Stop loss price
+	StopLossPrice *string `json:"stop_loss_price,omitempty"`
+	// Take profit price
+	TakeProfitPrice *string `json:"take_profit_price,omitempty"`
 }
 
 type _ValidateSubmitOrderRequest ValidateSubmitOrderRequest
@@ -440,6 +444,70 @@ func (o *ValidateSubmitOrderRequest) SetAssetsConfig(v []AssetConfig) {
 	o.AssetsConfig = v
 }
 
+// GetStopLossPrice returns the StopLossPrice field value if set, zero value otherwise.
+func (o *ValidateSubmitOrderRequest) GetStopLossPrice() string {
+	if o == nil || IsNil(o.StopLossPrice) {
+		var ret string
+		return ret
+	}
+	return *o.StopLossPrice
+}
+
+// GetStopLossPriceOk returns a tuple with the StopLossPrice field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ValidateSubmitOrderRequest) GetStopLossPriceOk() (*string, bool) {
+	if o == nil || IsNil(o.StopLossPrice) {
+		return nil, false
+	}
+	return o.StopLossPrice, true
+}
+
+// HasStopLossPrice returns a boolean if a field has been set.
+func (o *ValidateSubmitOrderRequest) HasStopLossPrice() bool {
+	if o != nil && !IsNil(o.StopLossPrice) {
+		return true
+	}
+
+	return false
+}
+
+// SetStopLossPrice gets a reference to the given string and assigns it to the StopLossPrice field.
+func (o *ValidateSubmitOrderRequest) SetStopLossPrice(v string) {
+	o.StopLossPrice = &v
+}
+
+// GetTakeProfitPrice returns the TakeProfitPrice field value if set, zero value otherwise.
+func (o *ValidateSubmitOrderRequest) GetTakeProfitPrice() string {
+	if o == nil || IsNil(o.TakeProfitPrice) {
+		var ret string
+		return ret
+	}
+	return *o.TakeProfitPrice
+}
+
+// GetTakeProfitPriceOk returns a tuple with the TakeProfitPrice field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ValidateSubmitOrderRequest) GetTakeProfitPriceOk() (*string, bool) {
+	if o == nil || IsNil(o.TakeProfitPrice) {
+		return nil, false
+	}
+	return o.TakeProfitPrice, true
+}
+
+// HasTakeProfitPrice returns a boolean if a field has been set.
+func (o *ValidateSubmitOrderRequest) HasTakeProfitPrice() bool {
+	if o != nil && !IsNil(o.TakeProfitPrice) {
+		return true
+	}
+
+	return false
+}
+
+// SetTakeProfitPrice gets a reference to the given string and assigns it to the TakeProfitPrice field.
+func (o *ValidateSubmitOrderRequest) SetTakeProfitPrice(v string) {
+	o.TakeProfitPrice = &v
+}
+
 func (o ValidateSubmitOrderRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -476,6 +544,12 @@ func (o ValidateSubmitOrderRequest) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.AssetsConfig) {
 		toSerialize["assets_config"] = o.AssetsConfig
+	}
+	if !IsNil(o.StopLossPrice) {
+		toSerialize["stop_loss_price"] = o.StopLossPrice
+	}
+	if !IsNil(o.TakeProfitPrice) {
+		toSerialize["take_profit_price"] = o.TakeProfitPrice
 	}
 	return toSerialize, nil
 }

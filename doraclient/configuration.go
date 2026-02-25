@@ -96,16 +96,20 @@ func NewConfiguration() *Configuration {
 		Debug:            false,
 		Servers:          ServerConfigurations{
 			{
-				URL: "https://localhost:8084",
-				Description: "local DORA server",
-			},
-			{
 				URL: "https://staging.dora.co",
-				Description: "DORA staging server",
+				Description: "DORA staging API server",
 			},
 			{
-				URL: "ws://localhost:8085",
-				Description: "local DORA WebSocket server",
+				URL: "wss://staging.dora.co",
+				Description: "DORA staging Websocket API server",
+			},
+			{
+				URL: "https://prod.dora.co",
+				Description: "DORA production API server",
+			},
+			{
+				URL: "wss://prod.dora.co",
+				Description: "DORA production Websocket API server",
 			},
 		},
 		OperationServers: map[string]ServerConfigurations{

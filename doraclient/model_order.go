@@ -52,6 +52,7 @@ type Order struct {
 	TriggerType *TriggerType `json:"trigger_type,omitempty"`
 	// An optional client-provided identifier for the order.
 	ClientOrderId *string `json:"client_order_id,omitempty"`
+	ParentOrderId *string `json:"parent_order_id,omitempty"`
 }
 
 type _Order Order
@@ -697,6 +698,38 @@ func (o *Order) SetClientOrderId(v string) {
 	o.ClientOrderId = &v
 }
 
+// GetParentOrderId returns the ParentOrderId field value if set, zero value otherwise.
+func (o *Order) GetParentOrderId() string {
+	if o == nil || IsNil(o.ParentOrderId) {
+		var ret string
+		return ret
+	}
+	return *o.ParentOrderId
+}
+
+// GetParentOrderIdOk returns a tuple with the ParentOrderId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Order) GetParentOrderIdOk() (*string, bool) {
+	if o == nil || IsNil(o.ParentOrderId) {
+		return nil, false
+	}
+	return o.ParentOrderId, true
+}
+
+// HasParentOrderId returns a boolean if a field has been set.
+func (o *Order) HasParentOrderId() bool {
+	if o != nil && !IsNil(o.ParentOrderId) {
+		return true
+	}
+
+	return false
+}
+
+// SetParentOrderId gets a reference to the given string and assigns it to the ParentOrderId field.
+func (o *Order) SetParentOrderId(v string) {
+	o.ParentOrderId = &v
+}
+
 func (o Order) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -743,6 +776,9 @@ func (o Order) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.ClientOrderId) {
 		toSerialize["client_order_id"] = o.ClientOrderId
+	}
+	if !IsNil(o.ParentOrderId) {
+		toSerialize["parent_order_id"] = o.ParentOrderId
 	}
 	return toSerialize, nil
 }

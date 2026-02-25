@@ -9,15 +9,18 @@ Name | Type | Description | Notes
 **PositionId** | **string** |  | 
 **AssetId** | **string** |  | 
 **Quantity** | **string** |  | 
-**Status** | **string** |  | 
+**Status** | [**WithdrawalStatus**](WithdrawalStatus.md) |  | 
 **CreatedAt** | **time.Time** |  | 
+**CreatedBy** | **string** |  | 
 **UpdatedAt** | **time.Time** |  | 
+**UpdatedBy** | **string** |  | 
+**Reason** | **string** |  | 
 
 ## Methods
 
 ### NewWithdrawalInitiation
 
-`func NewWithdrawalInitiation(withdrawalId string, userId string, positionId string, assetId string, quantity string, status string, createdAt time.Time, updatedAt time.Time, ) *WithdrawalInitiation`
+`func NewWithdrawalInitiation(withdrawalId string, userId string, positionId string, assetId string, quantity string, status WithdrawalStatus, createdAt time.Time, createdBy string, updatedAt time.Time, updatedBy string, reason string, ) *WithdrawalInitiation`
 
 NewWithdrawalInitiation instantiates a new WithdrawalInitiation object
 This constructor will assign default values to properties that have it defined,
@@ -134,20 +137,20 @@ SetQuantity sets Quantity field to given value.
 
 ### GetStatus
 
-`func (o *WithdrawalInitiation) GetStatus() string`
+`func (o *WithdrawalInitiation) GetStatus() WithdrawalStatus`
 
 GetStatus returns the Status field if non-nil, zero value otherwise.
 
 ### GetStatusOk
 
-`func (o *WithdrawalInitiation) GetStatusOk() (*string, bool)`
+`func (o *WithdrawalInitiation) GetStatusOk() (*WithdrawalStatus, bool)`
 
 GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetStatus
 
-`func (o *WithdrawalInitiation) SetStatus(v string)`
+`func (o *WithdrawalInitiation) SetStatus(v WithdrawalStatus)`
 
 SetStatus sets Status field to given value.
 
@@ -172,6 +175,26 @@ and a boolean to check if the value has been set.
 SetCreatedAt sets CreatedAt field to given value.
 
 
+### GetCreatedBy
+
+`func (o *WithdrawalInitiation) GetCreatedBy() string`
+
+GetCreatedBy returns the CreatedBy field if non-nil, zero value otherwise.
+
+### GetCreatedByOk
+
+`func (o *WithdrawalInitiation) GetCreatedByOk() (*string, bool)`
+
+GetCreatedByOk returns a tuple with the CreatedBy field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCreatedBy
+
+`func (o *WithdrawalInitiation) SetCreatedBy(v string)`
+
+SetCreatedBy sets CreatedBy field to given value.
+
+
 ### GetUpdatedAt
 
 `func (o *WithdrawalInitiation) GetUpdatedAt() time.Time`
@@ -190,6 +213,46 @@ and a boolean to check if the value has been set.
 `func (o *WithdrawalInitiation) SetUpdatedAt(v time.Time)`
 
 SetUpdatedAt sets UpdatedAt field to given value.
+
+
+### GetUpdatedBy
+
+`func (o *WithdrawalInitiation) GetUpdatedBy() string`
+
+GetUpdatedBy returns the UpdatedBy field if non-nil, zero value otherwise.
+
+### GetUpdatedByOk
+
+`func (o *WithdrawalInitiation) GetUpdatedByOk() (*string, bool)`
+
+GetUpdatedByOk returns a tuple with the UpdatedBy field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUpdatedBy
+
+`func (o *WithdrawalInitiation) SetUpdatedBy(v string)`
+
+SetUpdatedBy sets UpdatedBy field to given value.
+
+
+### GetReason
+
+`func (o *WithdrawalInitiation) GetReason() string`
+
+GetReason returns the Reason field if non-nil, zero value otherwise.
+
+### GetReasonOk
+
+`func (o *WithdrawalInitiation) GetReasonOk() (*string, bool)`
+
+GetReasonOk returns a tuple with the Reason field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReason
+
+`func (o *WithdrawalInitiation) SetReason(v string)`
+
+SetReason sets Reason field to given value.
 
 
 

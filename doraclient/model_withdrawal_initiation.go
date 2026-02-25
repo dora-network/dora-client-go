@@ -27,9 +27,12 @@ type WithdrawalInitiation struct {
 	PositionId string `json:"position_id"`
 	AssetId string `json:"asset_id"`
 	Quantity string `json:"quantity"`
-	Status string `json:"status"`
+	Status WithdrawalStatus `json:"status"`
 	CreatedAt time.Time `json:"created_at"`
+	CreatedBy string `json:"created_by"`
 	UpdatedAt time.Time `json:"updated_at"`
+	UpdatedBy string `json:"updated_by"`
+	Reason string `json:"reason"`
 }
 
 type _WithdrawalInitiation WithdrawalInitiation
@@ -38,7 +41,7 @@ type _WithdrawalInitiation WithdrawalInitiation
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewWithdrawalInitiation(withdrawalId string, userId string, positionId string, assetId string, quantity string, status string, createdAt time.Time, updatedAt time.Time) *WithdrawalInitiation {
+func NewWithdrawalInitiation(withdrawalId string, userId string, positionId string, assetId string, quantity string, status WithdrawalStatus, createdAt time.Time, createdBy string, updatedAt time.Time, updatedBy string, reason string) *WithdrawalInitiation {
 	this := WithdrawalInitiation{}
 	this.WithdrawalId = withdrawalId
 	this.UserId = userId
@@ -47,7 +50,10 @@ func NewWithdrawalInitiation(withdrawalId string, userId string, positionId stri
 	this.Quantity = quantity
 	this.Status = status
 	this.CreatedAt = createdAt
+	this.CreatedBy = createdBy
 	this.UpdatedAt = updatedAt
+	this.UpdatedBy = updatedBy
+	this.Reason = reason
 	return &this
 }
 
@@ -180,9 +186,9 @@ func (o *WithdrawalInitiation) SetQuantity(v string) {
 }
 
 // GetStatus returns the Status field value
-func (o *WithdrawalInitiation) GetStatus() string {
+func (o *WithdrawalInitiation) GetStatus() WithdrawalStatus {
 	if o == nil {
-		var ret string
+		var ret WithdrawalStatus
 		return ret
 	}
 
@@ -191,7 +197,7 @@ func (o *WithdrawalInitiation) GetStatus() string {
 
 // GetStatusOk returns a tuple with the Status field value
 // and a boolean to check if the value has been set.
-func (o *WithdrawalInitiation) GetStatusOk() (*string, bool) {
+func (o *WithdrawalInitiation) GetStatusOk() (*WithdrawalStatus, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -199,7 +205,7 @@ func (o *WithdrawalInitiation) GetStatusOk() (*string, bool) {
 }
 
 // SetStatus sets field value
-func (o *WithdrawalInitiation) SetStatus(v string) {
+func (o *WithdrawalInitiation) SetStatus(v WithdrawalStatus) {
 	o.Status = v
 }
 
@@ -227,6 +233,30 @@ func (o *WithdrawalInitiation) SetCreatedAt(v time.Time) {
 	o.CreatedAt = v
 }
 
+// GetCreatedBy returns the CreatedBy field value
+func (o *WithdrawalInitiation) GetCreatedBy() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.CreatedBy
+}
+
+// GetCreatedByOk returns a tuple with the CreatedBy field value
+// and a boolean to check if the value has been set.
+func (o *WithdrawalInitiation) GetCreatedByOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.CreatedBy, true
+}
+
+// SetCreatedBy sets field value
+func (o *WithdrawalInitiation) SetCreatedBy(v string) {
+	o.CreatedBy = v
+}
+
 // GetUpdatedAt returns the UpdatedAt field value
 func (o *WithdrawalInitiation) GetUpdatedAt() time.Time {
 	if o == nil {
@@ -251,6 +281,54 @@ func (o *WithdrawalInitiation) SetUpdatedAt(v time.Time) {
 	o.UpdatedAt = v
 }
 
+// GetUpdatedBy returns the UpdatedBy field value
+func (o *WithdrawalInitiation) GetUpdatedBy() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.UpdatedBy
+}
+
+// GetUpdatedByOk returns a tuple with the UpdatedBy field value
+// and a boolean to check if the value has been set.
+func (o *WithdrawalInitiation) GetUpdatedByOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.UpdatedBy, true
+}
+
+// SetUpdatedBy sets field value
+func (o *WithdrawalInitiation) SetUpdatedBy(v string) {
+	o.UpdatedBy = v
+}
+
+// GetReason returns the Reason field value
+func (o *WithdrawalInitiation) GetReason() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Reason
+}
+
+// GetReasonOk returns a tuple with the Reason field value
+// and a boolean to check if the value has been set.
+func (o *WithdrawalInitiation) GetReasonOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Reason, true
+}
+
+// SetReason sets field value
+func (o *WithdrawalInitiation) SetReason(v string) {
+	o.Reason = v
+}
+
 func (o WithdrawalInitiation) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -268,7 +346,10 @@ func (o WithdrawalInitiation) ToMap() (map[string]interface{}, error) {
 	toSerialize["quantity"] = o.Quantity
 	toSerialize["status"] = o.Status
 	toSerialize["created_at"] = o.CreatedAt
+	toSerialize["created_by"] = o.CreatedBy
 	toSerialize["updated_at"] = o.UpdatedAt
+	toSerialize["updated_by"] = o.UpdatedBy
+	toSerialize["reason"] = o.Reason
 	return toSerialize, nil
 }
 
@@ -284,7 +365,10 @@ func (o *WithdrawalInitiation) UnmarshalJSON(data []byte) (err error) {
 		"quantity",
 		"status",
 		"created_at",
+		"created_by",
 		"updated_at",
+		"updated_by",
+		"reason",
 	}
 
 	allProperties := make(map[string]interface{})

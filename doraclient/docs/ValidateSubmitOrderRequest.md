@@ -17,6 +17,8 @@ Name | Type | Description | Notes
 **ClientOrderId** | Pointer to **string** | An optional client-provided identifier for the order. | [optional] 
 **PositionAssets** | Pointer to [**[]PositionAsset**](PositionAsset.md) | Full list of assets in the position with their price and collateral weight, required when inverse_leverage &lt; 1 for leverage health checks | [optional] 
 **AssetsConfig** | Pointer to [**[]AssetConfig**](AssetConfig.md) | Configuration for the assets in the order | [optional] 
+**StopLossPrice** | Pointer to **string** | Stop loss price | [optional] 
+**TakeProfitPrice** | Pointer to **string** | Take profit price | [optional] 
 
 ## Methods
 
@@ -331,6 +333,56 @@ SetAssetsConfig sets AssetsConfig field to given value.
 `func (o *ValidateSubmitOrderRequest) HasAssetsConfig() bool`
 
 HasAssetsConfig returns a boolean if a field has been set.
+
+### GetStopLossPrice
+
+`func (o *ValidateSubmitOrderRequest) GetStopLossPrice() string`
+
+GetStopLossPrice returns the StopLossPrice field if non-nil, zero value otherwise.
+
+### GetStopLossPriceOk
+
+`func (o *ValidateSubmitOrderRequest) GetStopLossPriceOk() (*string, bool)`
+
+GetStopLossPriceOk returns a tuple with the StopLossPrice field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStopLossPrice
+
+`func (o *ValidateSubmitOrderRequest) SetStopLossPrice(v string)`
+
+SetStopLossPrice sets StopLossPrice field to given value.
+
+### HasStopLossPrice
+
+`func (o *ValidateSubmitOrderRequest) HasStopLossPrice() bool`
+
+HasStopLossPrice returns a boolean if a field has been set.
+
+### GetTakeProfitPrice
+
+`func (o *ValidateSubmitOrderRequest) GetTakeProfitPrice() string`
+
+GetTakeProfitPrice returns the TakeProfitPrice field if non-nil, zero value otherwise.
+
+### GetTakeProfitPriceOk
+
+`func (o *ValidateSubmitOrderRequest) GetTakeProfitPriceOk() (*string, bool)`
+
+GetTakeProfitPriceOk returns a tuple with the TakeProfitPrice field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTakeProfitPrice
+
+`func (o *ValidateSubmitOrderRequest) SetTakeProfitPrice(v string)`
+
+SetTakeProfitPrice sets TakeProfitPrice field to given value.
+
+### HasTakeProfitPrice
+
+`func (o *ValidateSubmitOrderRequest) HasTakeProfitPrice() bool`
+
+HasTakeProfitPrice returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

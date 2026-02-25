@@ -180,6 +180,8 @@ docs/WithdrawRequest.md
 docs/WithdrawResponseEnvelope.md
 docs/WithdrawalInitiation.md
 docs/WithdrawalInitiationResponseEnvelope.md
+docs/WithdrawalRequestReason.md
+docs/WithdrawalStatus.md
 git_push.sh
 model_all_withdrawal_initiations_response_envelope.go
 model_api_key_response.go
@@ -354,6 +356,8 @@ model_withdraw_request.go
 model_withdraw_response_envelope.go
 model_withdrawal_initiation.go
 model_withdrawal_initiation_response_envelope.go
+model_withdrawal_request_reason.go
+model_withdrawal_status.go
 response.go
 test/api_default_test.go
 utils.go
