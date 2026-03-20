@@ -20,12 +20,16 @@ Name | Type | Description | Notes
 **ShowTutorialCards** | **bool** |  | 
 **NotificationsEnabled** | **bool** |  | 
 **TenantId** | **string** |  | 
+**AllowEmailNotifications** | **bool** |  | 
+**AllowLiquidationsNotifications** | **bool** |  | 
+**AllowDepositWithdrawalNotifications** | **bool** |  | 
+**AllowOrdersNotifications** | **bool** |  | 
 
 ## Methods
 
 ### NewUser
 
-`func NewUser(id string, email string, name string, nativeAssetId string, roles []UserRole, showTutorialCards bool, notificationsEnabled bool, tenantId string, ) *User`
+`func NewUser(id string, email string, name string, nativeAssetId string, roles []UserRole, showTutorialCards bool, notificationsEnabled bool, tenantId string, allowEmailNotifications bool, allowLiquidationsNotifications bool, allowDepositWithdrawalNotifications bool, allowOrdersNotifications bool, ) *User`
 
 NewUser instantiates a new User object
 This constructor will assign default values to properties that have it defined,
@@ -398,6 +402,86 @@ and a boolean to check if the value has been set.
 `func (o *User) SetTenantId(v string)`
 
 SetTenantId sets TenantId field to given value.
+
+
+### GetAllowEmailNotifications
+
+`func (o *User) GetAllowEmailNotifications() bool`
+
+GetAllowEmailNotifications returns the AllowEmailNotifications field if non-nil, zero value otherwise.
+
+### GetAllowEmailNotificationsOk
+
+`func (o *User) GetAllowEmailNotificationsOk() (*bool, bool)`
+
+GetAllowEmailNotificationsOk returns a tuple with the AllowEmailNotifications field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAllowEmailNotifications
+
+`func (o *User) SetAllowEmailNotifications(v bool)`
+
+SetAllowEmailNotifications sets AllowEmailNotifications field to given value.
+
+
+### GetAllowLiquidationsNotifications
+
+`func (o *User) GetAllowLiquidationsNotifications() bool`
+
+GetAllowLiquidationsNotifications returns the AllowLiquidationsNotifications field if non-nil, zero value otherwise.
+
+### GetAllowLiquidationsNotificationsOk
+
+`func (o *User) GetAllowLiquidationsNotificationsOk() (*bool, bool)`
+
+GetAllowLiquidationsNotificationsOk returns a tuple with the AllowLiquidationsNotifications field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAllowLiquidationsNotifications
+
+`func (o *User) SetAllowLiquidationsNotifications(v bool)`
+
+SetAllowLiquidationsNotifications sets AllowLiquidationsNotifications field to given value.
+
+
+### GetAllowDepositWithdrawalNotifications
+
+`func (o *User) GetAllowDepositWithdrawalNotifications() bool`
+
+GetAllowDepositWithdrawalNotifications returns the AllowDepositWithdrawalNotifications field if non-nil, zero value otherwise.
+
+### GetAllowDepositWithdrawalNotificationsOk
+
+`func (o *User) GetAllowDepositWithdrawalNotificationsOk() (*bool, bool)`
+
+GetAllowDepositWithdrawalNotificationsOk returns a tuple with the AllowDepositWithdrawalNotifications field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAllowDepositWithdrawalNotifications
+
+`func (o *User) SetAllowDepositWithdrawalNotifications(v bool)`
+
+SetAllowDepositWithdrawalNotifications sets AllowDepositWithdrawalNotifications field to given value.
+
+
+### GetAllowOrdersNotifications
+
+`func (o *User) GetAllowOrdersNotifications() bool`
+
+GetAllowOrdersNotifications returns the AllowOrdersNotifications field if non-nil, zero value otherwise.
+
+### GetAllowOrdersNotificationsOk
+
+`func (o *User) GetAllowOrdersNotificationsOk() (*bool, bool)`
+
+GetAllowOrdersNotificationsOk returns a tuple with the AllowOrdersNotifications field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAllowOrdersNotifications
+
+`func (o *User) SetAllowOrdersNotifications(v bool)`
+
+SetAllowOrdersNotifications sets AllowOrdersNotifications field to given value.
 
 
 

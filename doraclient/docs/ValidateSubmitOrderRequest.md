@@ -19,6 +19,7 @@ Name | Type | Description | Notes
 **AssetsConfig** | Pointer to [**[]AssetConfig**](AssetConfig.md) | Configuration for the assets in the order | [optional] 
 **StopLossPrice** | Pointer to **string** | Stop loss price | [optional] 
 **TakeProfitPrice** | Pointer to **string** | Take profit price | [optional] 
+**Restrictions** | Pointer to [**map[string]Restriction**](Restriction.md) | Map of restriction keys to Restriction objects | [optional] 
 
 ## Methods
 
@@ -383,6 +384,31 @@ SetTakeProfitPrice sets TakeProfitPrice field to given value.
 `func (o *ValidateSubmitOrderRequest) HasTakeProfitPrice() bool`
 
 HasTakeProfitPrice returns a boolean if a field has been set.
+
+### GetRestrictions
+
+`func (o *ValidateSubmitOrderRequest) GetRestrictions() map[string]Restriction`
+
+GetRestrictions returns the Restrictions field if non-nil, zero value otherwise.
+
+### GetRestrictionsOk
+
+`func (o *ValidateSubmitOrderRequest) GetRestrictionsOk() (*map[string]Restriction, bool)`
+
+GetRestrictionsOk returns a tuple with the Restrictions field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRestrictions
+
+`func (o *ValidateSubmitOrderRequest) SetRestrictions(v map[string]Restriction)`
+
+SetRestrictions sets Restrictions field to given value.
+
+### HasRestrictions
+
+`func (o *ValidateSubmitOrderRequest) HasRestrictions() bool`
+
+HasRestrictions returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

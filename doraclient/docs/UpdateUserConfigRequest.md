@@ -8,6 +8,10 @@ Name | Type | Description | Notes
 **Timezone** | [**UpdateFieldString**](UpdateFieldString.md) | User&#39;s timezone, e.g., &#39;America/New_York&#39;, or an offset. | 
 **ShowTutorialCards** | Pointer to [**UpdateFieldBoolean**](UpdateFieldBoolean.md) | Optional: Whether to show the tutorial. | [optional] 
 **NotificationsEnabled** | Pointer to [**UpdateFieldBoolean**](UpdateFieldBoolean.md) | Optional: Whether to show the notifications. | [optional] 
+**AllowEmailNotifications** | Pointer to [**UpdateFieldBoolean**](UpdateFieldBoolean.md) | Optional: Whether to allow email notifications. | [optional] 
+**AllowLiquidationsNotifications** | Pointer to [**UpdateFieldBoolean**](UpdateFieldBoolean.md) | Optional: Whether to allow liquidations notifications. | [optional] 
+**AllowDepositWithdrawalNotifications** | Pointer to [**UpdateFieldBoolean**](UpdateFieldBoolean.md) | Optional: Whether to allow deposit/withdrawal notifications. | [optional] 
+**AllowOrdersNotifications** | Pointer to [**UpdateFieldBoolean**](UpdateFieldBoolean.md) | Optional: Whether to allow orders notifications. | [optional] 
 
 ## Methods
 
@@ -122,6 +126,106 @@ SetNotificationsEnabled sets NotificationsEnabled field to given value.
 `func (o *UpdateUserConfigRequest) HasNotificationsEnabled() bool`
 
 HasNotificationsEnabled returns a boolean if a field has been set.
+
+### GetAllowEmailNotifications
+
+`func (o *UpdateUserConfigRequest) GetAllowEmailNotifications() UpdateFieldBoolean`
+
+GetAllowEmailNotifications returns the AllowEmailNotifications field if non-nil, zero value otherwise.
+
+### GetAllowEmailNotificationsOk
+
+`func (o *UpdateUserConfigRequest) GetAllowEmailNotificationsOk() (*UpdateFieldBoolean, bool)`
+
+GetAllowEmailNotificationsOk returns a tuple with the AllowEmailNotifications field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAllowEmailNotifications
+
+`func (o *UpdateUserConfigRequest) SetAllowEmailNotifications(v UpdateFieldBoolean)`
+
+SetAllowEmailNotifications sets AllowEmailNotifications field to given value.
+
+### HasAllowEmailNotifications
+
+`func (o *UpdateUserConfigRequest) HasAllowEmailNotifications() bool`
+
+HasAllowEmailNotifications returns a boolean if a field has been set.
+
+### GetAllowLiquidationsNotifications
+
+`func (o *UpdateUserConfigRequest) GetAllowLiquidationsNotifications() UpdateFieldBoolean`
+
+GetAllowLiquidationsNotifications returns the AllowLiquidationsNotifications field if non-nil, zero value otherwise.
+
+### GetAllowLiquidationsNotificationsOk
+
+`func (o *UpdateUserConfigRequest) GetAllowLiquidationsNotificationsOk() (*UpdateFieldBoolean, bool)`
+
+GetAllowLiquidationsNotificationsOk returns a tuple with the AllowLiquidationsNotifications field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAllowLiquidationsNotifications
+
+`func (o *UpdateUserConfigRequest) SetAllowLiquidationsNotifications(v UpdateFieldBoolean)`
+
+SetAllowLiquidationsNotifications sets AllowLiquidationsNotifications field to given value.
+
+### HasAllowLiquidationsNotifications
+
+`func (o *UpdateUserConfigRequest) HasAllowLiquidationsNotifications() bool`
+
+HasAllowLiquidationsNotifications returns a boolean if a field has been set.
+
+### GetAllowDepositWithdrawalNotifications
+
+`func (o *UpdateUserConfigRequest) GetAllowDepositWithdrawalNotifications() UpdateFieldBoolean`
+
+GetAllowDepositWithdrawalNotifications returns the AllowDepositWithdrawalNotifications field if non-nil, zero value otherwise.
+
+### GetAllowDepositWithdrawalNotificationsOk
+
+`func (o *UpdateUserConfigRequest) GetAllowDepositWithdrawalNotificationsOk() (*UpdateFieldBoolean, bool)`
+
+GetAllowDepositWithdrawalNotificationsOk returns a tuple with the AllowDepositWithdrawalNotifications field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAllowDepositWithdrawalNotifications
+
+`func (o *UpdateUserConfigRequest) SetAllowDepositWithdrawalNotifications(v UpdateFieldBoolean)`
+
+SetAllowDepositWithdrawalNotifications sets AllowDepositWithdrawalNotifications field to given value.
+
+### HasAllowDepositWithdrawalNotifications
+
+`func (o *UpdateUserConfigRequest) HasAllowDepositWithdrawalNotifications() bool`
+
+HasAllowDepositWithdrawalNotifications returns a boolean if a field has been set.
+
+### GetAllowOrdersNotifications
+
+`func (o *UpdateUserConfigRequest) GetAllowOrdersNotifications() UpdateFieldBoolean`
+
+GetAllowOrdersNotifications returns the AllowOrdersNotifications field if non-nil, zero value otherwise.
+
+### GetAllowOrdersNotificationsOk
+
+`func (o *UpdateUserConfigRequest) GetAllowOrdersNotificationsOk() (*UpdateFieldBoolean, bool)`
+
+GetAllowOrdersNotificationsOk returns a tuple with the AllowOrdersNotifications field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAllowOrdersNotifications
+
+`func (o *UpdateUserConfigRequest) SetAllowOrdersNotifications(v UpdateFieldBoolean)`
+
+SetAllowOrdersNotifications sets AllowOrdersNotifications field to given value.
+
+### HasAllowOrdersNotifications
+
+`func (o *UpdateUserConfigRequest) HasAllowOrdersNotifications() bool`
+
+HasAllowOrdersNotifications returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

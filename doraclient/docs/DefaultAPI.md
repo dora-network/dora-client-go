@@ -13,11 +13,13 @@ Method | HTTP request | Description
 [**CloseIsolatedPosition**](DefaultAPI.md#CloseIsolatedPosition) | **Post** /v1/positions/close | Close isolated positions, repaying the borrowed
 [**CreateAPIKeyForUser**](DefaultAPI.md#CreateAPIKeyForUser) | **Post** /v1/user/apikey | Create apikey for a user
 [**CreateAPIKeyForUserID**](DefaultAPI.md#CreateAPIKeyForUserID) | **Post** /v1/user/{user_id}/apikey | Create apikey for a user
+[**CreateConditionalOrder**](DefaultAPI.md#CreateConditionalOrder) | **Post** /v1/orders/conditional | Create a new conditional orders
 [**CreateOrder**](DefaultAPI.md#CreateOrder) | **Post** /v1/orders | Create a new order
 [**CreateUser**](DefaultAPI.md#CreateUser) | **Post** /v1/integrators/user | Create a new user
 [**DeleteUser**](DefaultAPI.md#DeleteUser) | **Delete** /v1/user/{user_id} | Delete user by ID
 [**GetAPIKeysForUserID**](DefaultAPI.md#GetAPIKeysForUserID) | **Get** /v1/user/{user_id}/apikey | Get user&#39;s api keys: admin or integrator only
 [**GetAllAssetPrices**](DefaultAPI.md#GetAllAssetPrices) | **Get** /v1/price | Get the current price of all assets
+[**GetAllPositions**](DefaultAPI.md#GetAllPositions) | **Get** /v1/ledger/positions | Get all users&#39; positions
 [**GetAllWithdrawalRequests**](DefaultAPI.md#GetAllWithdrawalRequests) | **Get** /v1/ledger/withdraw/requests | Get all withdrawal requests
 [**GetAssetById**](DefaultAPI.md#GetAssetById) | **Get** /v1/assets/{asset_id} | Get asset by ID
 [**GetAssetPrice**](DefaultAPI.md#GetAssetPrice) | **Get** /v1/price/asset/{asset_id} | Get the current price of an asset
@@ -46,6 +48,7 @@ Method | HTTP request | Description
 [**GetOrderbookTop**](DefaultAPI.md#GetOrderbookTop) | **Get** /v1/orderbooks/{order_book_id}/top | Get the top price levels for a specific orderbook (L1 market depth)
 [**GetPLForSelfByAccount**](DefaultAPI.md#GetPLForSelfByAccount) | **Get** /v1/pl/self | Get account-by-account PL breakdown for the logged in user
 [**GetPoolPrice**](DefaultAPI.md#GetPoolPrice) | **Get** /v1/price/pool/{pool_id} | Get the current price of a pool
+[**GetRealizedPnlSettlements**](DefaultAPI.md#GetRealizedPnlSettlements) | **Get** /v1/realized_pnl_settlements | Get realized P&amp;L settlements with filters
 [**GetTradeById**](DefaultAPI.md#GetTradeById) | **Get** /v1/trades/{trade_id} | Get a trade by ID
 [**GetTrades**](DefaultAPI.md#GetTrades) | **Get** /v1/trades | Get a filtered, paginated list of trades
 [**GetTransactionById**](DefaultAPI.md#GetTransactionById) | **Get** /v1/transactions/{transaction_id} | Get a transaction by ID
@@ -78,6 +81,7 @@ Method | HTTP request | Description
 [**RevokeAPIKeyForUser**](DefaultAPI.md#RevokeAPIKeyForUser) | **Put** /v1/user/apikey/{key_id}/revoke | Revoke apikey for a user
 [**RevokeAPIKeyForUserID**](DefaultAPI.md#RevokeAPIKeyForUserID) | **Put** /v1/user/{user_id}/apikey/{key_id}/revoke | Revoke apikey for a user: admin or integrator only
 [**SettleLeverageAccruedInterest**](DefaultAPI.md#SettleLeverageAccruedInterest) | **Post** /v1/leverage/accrued_interest/settle | Settle current accrued leverage interest for a specific user
+[**SettleRealizedPnlRecord**](DefaultAPI.md#SettleRealizedPnlRecord) | **Put** /v1/realized_pnl_settlements/{settlement_id} | Mark a realized P&amp;L settlement as settled
 [**StreamAssetPrices**](DefaultAPI.md#StreamAssetPrices) | **Get** /v1/prices/stream | Stream real-time asset prices as map objects
 [**StreamCandleData**](DefaultAPI.md#StreamCandleData) | **Get** /v1/charts/{order_book_id}/candle/stream | Get a snapshot of candlestick data from date provided, and open a stream for real-time updates
 [**StreamOrderBookBalances**](DefaultAPI.md#StreamOrderBookBalances) | **Get** /v1/orderbooks/{order_book_id}/balances/stream | Get a snapshot of base and quote balances for an order book and open a stream for real-time updates
@@ -697,6 +701,70 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## CreateConditionalOrder
+
+> CreateConditionalOrderResponseEnvelope CreateConditionalOrder(ctx).CreateConditionalOrderRequest(createConditionalOrderRequest).Execute()
+
+Create a new conditional orders
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+	createConditionalOrderRequest := *openapiclient.NewCreateConditionalOrderRequest("Price_example", "OrderBookId_example", "PositionId_example", "AssetId_example") // CreateConditionalOrderRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.CreateConditionalOrder(context.Background()).CreateConditionalOrderRequest(createConditionalOrderRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.CreateConditionalOrder``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CreateConditionalOrder`: CreateConditionalOrderResponseEnvelope
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.CreateConditionalOrder`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateConditionalOrderRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **createConditionalOrderRequest** | [**CreateConditionalOrderRequest**](CreateConditionalOrderRequest.md) |  | 
+
+### Return type
+
+[**CreateConditionalOrderResponseEnvelope**](CreateConditionalOrderResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## CreateOrder
 
 > CreateOrderResponseEnvelope CreateOrder(ctx).CreateOrderRequest(createOrderRequest).Execute()
@@ -1005,6 +1073,65 @@ Other parameters are passed through a pointer to a apiGetAllAssetPricesRequest s
 ### Return type
 
 [**ListAssetPriceResponseEnvelope**](ListAssetPriceResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetAllPositions
+
+> AllPositionsResponseEnvelope GetAllPositions(ctx).Execute()
+
+Get all users' positions
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.GetAllPositions(context.Background()).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.GetAllPositions``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetAllPositions`: AllPositionsResponseEnvelope
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.GetAllPositions`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+This endpoint does not need any parameter.
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetAllPositionsRequest struct via the builder pattern
+
+
+### Return type
+
+[**AllPositionsResponseEnvelope**](AllPositionsResponseEnvelope.md)
 
 ### Authorization
 
@@ -2870,6 +2997,81 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## GetRealizedPnlSettlements
+
+> GetRealizedPnlSettlementsResponseEnvelope GetRealizedPnlSettlements(ctx).UserId(userId).TenantId(tenantId).PositionId(positionId).CreatedAfter(createdAfter).SettledBefore(settledBefore).IsSettled(isSettled).Execute()
+
+Get realized P&L settlements with filters
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+    "time"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+	userId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string |  (optional)
+	tenantId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string |  (optional)
+	positionId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string |  (optional)
+	createdAfter := time.Now() // time.Time |  (optional)
+	settledBefore := time.Now() // time.Time |  (optional)
+	isSettled := true // bool |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.GetRealizedPnlSettlements(context.Background()).UserId(userId).TenantId(tenantId).PositionId(positionId).CreatedAfter(createdAfter).SettledBefore(settledBefore).IsSettled(isSettled).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.GetRealizedPnlSettlements``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetRealizedPnlSettlements`: GetRealizedPnlSettlementsResponseEnvelope
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.GetRealizedPnlSettlements`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetRealizedPnlSettlementsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **userId** | **string** |  | 
+ **tenantId** | **string** |  | 
+ **positionId** | **string** |  | 
+ **createdAfter** | **time.Time** |  | 
+ **settledBefore** | **time.Time** |  | 
+ **isSettled** | **bool** |  | 
+
+### Return type
+
+[**GetRealizedPnlSettlementsResponseEnvelope**](GetRealizedPnlSettlementsResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetTradeById
 
 > TradeResponseEnvelope GetTradeById(ctx, tradeId).Execute()
@@ -3083,7 +3285,7 @@ No authorization required
 
 ## GetTransactions
 
-> ListTransactionsResponseEnvelope GetTransactions(ctx).Pools(pools).UserIds(userIds).TxKinds(txKinds).Start(start).End(end).Page(page).Limit(limit).Execute()
+> ListTransactionsResponseEnvelope GetTransactions(ctx).Pools(pools).UserIds(userIds).TxKinds(txKinds).Start(start).End(end).TenantId(tenantId).Page(page).Limit(limit).Execute()
 
 Get a filtered, paginated list of transactions
 
@@ -3106,12 +3308,13 @@ func main() {
 	txKinds := []openapiclient.TransactionKind{openapiclient.TransactionKind("ACCRUE_INTEREST")} // []TransactionKind |  (optional)
 	start := time.Now() // time.Time |  (optional)
 	end := time.Now() // time.Time |  (optional)
+	tenantId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string |  (optional)
 	page := int32(56) // int32 |  (optional) (default to 1)
 	limit := int32(56) // int32 |  (optional) (default to 100)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.DefaultAPI.GetTransactions(context.Background()).Pools(pools).UserIds(userIds).TxKinds(txKinds).Start(start).End(end).Page(page).Limit(limit).Execute()
+	resp, r, err := apiClient.DefaultAPI.GetTransactions(context.Background()).Pools(pools).UserIds(userIds).TxKinds(txKinds).Start(start).End(end).TenantId(tenantId).Page(page).Limit(limit).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.GetTransactions``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -3137,6 +3340,7 @@ Name | Type | Description  | Notes
  **txKinds** | [**[]TransactionKind**](TransactionKind.md) |  | 
  **start** | **time.Time** |  | 
  **end** | **time.Time** |  | 
+ **tenantId** | **string** |  | 
  **page** | **int32** |  | [default to 1]
  **limit** | **int32** |  | [default to 100]
 
@@ -5075,6 +5279,74 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## SettleRealizedPnlRecord
+
+> SettleRealizedPnlRecordResponseEnvelope SettleRealizedPnlRecord(ctx, settlementId).Execute()
+
+Mark a realized P&L settlement as settled
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+	settlementId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.SettleRealizedPnlRecord(context.Background(), settlementId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.SettleRealizedPnlRecord``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `SettleRealizedPnlRecord`: SettleRealizedPnlRecordResponseEnvelope
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.SettleRealizedPnlRecord`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**settlementId** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiSettleRealizedPnlRecordRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**SettleRealizedPnlRecordResponseEnvelope**](SettleRealizedPnlRecordResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

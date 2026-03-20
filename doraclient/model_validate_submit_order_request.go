@@ -49,6 +49,8 @@ type ValidateSubmitOrderRequest struct {
 	StopLossPrice *string `json:"stop_loss_price,omitempty"`
 	// Take profit price
 	TakeProfitPrice *string `json:"take_profit_price,omitempty"`
+	// Map of restriction keys to Restriction objects
+	Restrictions map[string]Restriction `json:"restrictions,omitempty"`
 }
 
 type _ValidateSubmitOrderRequest ValidateSubmitOrderRequest
@@ -508,6 +510,38 @@ func (o *ValidateSubmitOrderRequest) SetTakeProfitPrice(v string) {
 	o.TakeProfitPrice = &v
 }
 
+// GetRestrictions returns the Restrictions field value if set, zero value otherwise.
+func (o *ValidateSubmitOrderRequest) GetRestrictions() map[string]Restriction {
+	if o == nil || IsNil(o.Restrictions) {
+		var ret map[string]Restriction
+		return ret
+	}
+	return o.Restrictions
+}
+
+// GetRestrictionsOk returns a tuple with the Restrictions field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ValidateSubmitOrderRequest) GetRestrictionsOk() (map[string]Restriction, bool) {
+	if o == nil || IsNil(o.Restrictions) {
+		return map[string]Restriction{}, false
+	}
+	return o.Restrictions, true
+}
+
+// HasRestrictions returns a boolean if a field has been set.
+func (o *ValidateSubmitOrderRequest) HasRestrictions() bool {
+	if o != nil && !IsNil(o.Restrictions) {
+		return true
+	}
+
+	return false
+}
+
+// SetRestrictions gets a reference to the given map[string]Restriction and assigns it to the Restrictions field.
+func (o *ValidateSubmitOrderRequest) SetRestrictions(v map[string]Restriction) {
+	o.Restrictions = v
+}
+
 func (o ValidateSubmitOrderRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -550,6 +584,9 @@ func (o ValidateSubmitOrderRequest) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.TakeProfitPrice) {
 		toSerialize["take_profit_price"] = o.TakeProfitPrice
+	}
+	if !IsNil(o.Restrictions) {
+		toSerialize["restrictions"] = o.Restrictions
 	}
 	return toSerialize, nil
 }

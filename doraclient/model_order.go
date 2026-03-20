@@ -38,7 +38,11 @@ type Order struct {
 	FilledQuantity string `json:"filled_quantity"`
 	// Quote quantity that has been filled so far.
 	FilledNotional string `json:"filled_notional"`
-	LastUpdateAt *time.Time `json:"last_update_at,omitempty"`
+	// Balance locked to ensure limit buy orders have sufficient balance to be fulfilled
+	LockedQuantity float64 `json:"locked_quantity"`
+	// Borrows locked from the liquidity pool to ensure limit short sell orders have sufficient balance to be fulfilled
+	ImpendingBorrowsQuantity float64 `json:"impending_borrows_quantity"`
+	LastUpdateAt time.Time `json:"last_update_at"`
 	OpenedAt time.Time `json:"opened_at"`
 	InverseLeverage string `json:"inverse_leverage"`
 	Side Side `json:"side"`
@@ -61,7 +65,7 @@ type _Order Order
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewOrder(orderId string, orderBookId string, kind OrderKind, originalPrice string, avgFillPrice string, cancelledQuantity string, openQuantity string, originalQuantity string, filledQuantity string, filledNotional string, openedAt time.Time, inverseLeverage string, side Side, status OrderStatus, userId string, positionId string) *Order {
+func NewOrder(orderId string, orderBookId string, kind OrderKind, originalPrice string, avgFillPrice string, cancelledQuantity string, openQuantity string, originalQuantity string, filledQuantity string, filledNotional string, lockedQuantity float64, impendingBorrowsQuantity float64, lastUpdateAt time.Time, openedAt time.Time, inverseLeverage string, side Side, status OrderStatus, userId string, positionId string) *Order {
 	this := Order{}
 	this.OrderId = orderId
 	this.OrderBookId = orderBookId
@@ -73,6 +77,9 @@ func NewOrder(orderId string, orderBookId string, kind OrderKind, originalPrice 
 	this.OriginalQuantity = originalQuantity
 	this.FilledQuantity = filledQuantity
 	this.FilledNotional = filledNotional
+	this.LockedQuantity = lockedQuantity
+	this.ImpendingBorrowsQuantity = impendingBorrowsQuantity
+	this.LastUpdateAt = lastUpdateAt
 	this.OpenedAt = openedAt
 	this.InverseLeverage = inverseLeverage
 	this.Side = side
@@ -330,36 +337,76 @@ func (o *Order) SetFilledNotional(v string) {
 	o.FilledNotional = v
 }
 
-// GetLastUpdateAt returns the LastUpdateAt field value if set, zero value otherwise.
+// GetLockedQuantity returns the LockedQuantity field value
+func (o *Order) GetLockedQuantity() float64 {
+	if o == nil {
+		var ret float64
+		return ret
+	}
+
+	return o.LockedQuantity
+}
+
+// GetLockedQuantityOk returns a tuple with the LockedQuantity field value
+// and a boolean to check if the value has been set.
+func (o *Order) GetLockedQuantityOk() (*float64, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.LockedQuantity, true
+}
+
+// SetLockedQuantity sets field value
+func (o *Order) SetLockedQuantity(v float64) {
+	o.LockedQuantity = v
+}
+
+// GetImpendingBorrowsQuantity returns the ImpendingBorrowsQuantity field value
+func (o *Order) GetImpendingBorrowsQuantity() float64 {
+	if o == nil {
+		var ret float64
+		return ret
+	}
+
+	return o.ImpendingBorrowsQuantity
+}
+
+// GetImpendingBorrowsQuantityOk returns a tuple with the ImpendingBorrowsQuantity field value
+// and a boolean to check if the value has been set.
+func (o *Order) GetImpendingBorrowsQuantityOk() (*float64, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ImpendingBorrowsQuantity, true
+}
+
+// SetImpendingBorrowsQuantity sets field value
+func (o *Order) SetImpendingBorrowsQuantity(v float64) {
+	o.ImpendingBorrowsQuantity = v
+}
+
+// GetLastUpdateAt returns the LastUpdateAt field value
 func (o *Order) GetLastUpdateAt() time.Time {
-	if o == nil || IsNil(o.LastUpdateAt) {
+	if o == nil {
 		var ret time.Time
 		return ret
 	}
-	return *o.LastUpdateAt
+
+	return o.LastUpdateAt
 }
 
-// GetLastUpdateAtOk returns a tuple with the LastUpdateAt field value if set, nil otherwise
+// GetLastUpdateAtOk returns a tuple with the LastUpdateAt field value
 // and a boolean to check if the value has been set.
 func (o *Order) GetLastUpdateAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.LastUpdateAt) {
+	if o == nil {
 		return nil, false
 	}
-	return o.LastUpdateAt, true
+	return &o.LastUpdateAt, true
 }
 
-// HasLastUpdateAt returns a boolean if a field has been set.
-func (o *Order) HasLastUpdateAt() bool {
-	if o != nil && !IsNil(o.LastUpdateAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetLastUpdateAt gets a reference to the given time.Time and assigns it to the LastUpdateAt field.
+// SetLastUpdateAt sets field value
 func (o *Order) SetLastUpdateAt(v time.Time) {
-	o.LastUpdateAt = &v
+	o.LastUpdateAt = v
 }
 
 // GetOpenedAt returns the OpenedAt field value
@@ -750,9 +797,9 @@ func (o Order) ToMap() (map[string]interface{}, error) {
 	toSerialize["original_quantity"] = o.OriginalQuantity
 	toSerialize["filled_quantity"] = o.FilledQuantity
 	toSerialize["filled_notional"] = o.FilledNotional
-	if !IsNil(o.LastUpdateAt) {
-		toSerialize["last_update_at"] = o.LastUpdateAt
-	}
+	toSerialize["locked_quantity"] = o.LockedQuantity
+	toSerialize["impending_borrows_quantity"] = o.ImpendingBorrowsQuantity
+	toSerialize["last_update_at"] = o.LastUpdateAt
 	toSerialize["opened_at"] = o.OpenedAt
 	toSerialize["inverse_leverage"] = o.InverseLeverage
 	toSerialize["side"] = o.Side
@@ -798,6 +845,9 @@ func (o *Order) UnmarshalJSON(data []byte) (err error) {
 		"original_quantity",
 		"filled_quantity",
 		"filled_notional",
+		"locked_quantity",
+		"impending_borrows_quantity",
+		"last_update_at",
 		"opened_at",
 		"inverse_leverage",
 		"side",

@@ -1203,7 +1203,7 @@ paths:
           type: string
         style: simple
       responses:
-        "204":
+        "200":
           content:
             application/json:
               schema:
@@ -1279,6 +1279,42 @@ paths:
                 $ref: "#/components/schemas/ResponseEnvelope"
           description: Internal server error
       summary: Get order by ID
+  /v1/orders/conditional:
+    post:
+      operationId: createConditionalOrder
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateConditionalOrderRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreateConditionalOrderResponse"
+          description: Conditional orders are created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. missing required fields"
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Unauthorized, user not logged in or does not have access to\
+            \ this orderbook"
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Create a new conditional orders
   /v1/charts/{order_book_id}/candle:
     get:
       operationId: getCandleData
@@ -1402,6 +1438,23 @@ paths:
                 $ref: "#/components/schemas/ResponseEnvelope"
           description: Internal server error
       summary: Get the module object for a single asset ID
+  /v1/ledger/positions:
+    get:
+      operationId: getAllPositions
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AllPositionsResponse"
+          description: User positions
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Get all users' positions
   /v1/ledger/positions/self:
     get:
       operationId: getLedgerPositionsSelf
@@ -2538,6 +2591,14 @@ paths:
         style: form
       - explode: true
         in: query
+        name: tenant_id
+        required: false
+        schema:
+          format: uuid
+          type: string
+        style: form
+      - explode: true
+        in: query
         name: page
         required: false
         schema:
@@ -3639,13 +3700,128 @@ paths:
                 $ref: "#/components/schemas/ResponseEnvelope"
           description: Internal server error
       summary: Get account-by-account PL breakdown for the logged in user
+  /v1/realized_pnl_settlements:
+    get:
+      operationId: getRealizedPnlSettlements
+      parameters:
+      - explode: true
+        in: query
+        name: user_id
+        required: false
+        schema:
+          format: uuid
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: tenant_id
+        required: false
+        schema:
+          format: uuid
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: position_id
+        required: false
+        schema:
+          format: uuid
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: created_after
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: settled_before
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: is_settled
+        required: false
+        schema:
+          type: boolean
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetRealizedPnlSettlementsResponse"
+          description: List of realized P&L settlements with filters applied
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Unauthorized, user is not logged in"
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Forbidden, user does not have access"
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Get realized P&L settlements with filters
+  /v1/realized_pnl_settlements/{settlement_id}:
+    put:
+      operationId: settleRealizedPnlRecord
+      parameters:
+      - explode: false
+        in: path
+        name: settlement_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SettleRealizedPnlRecordResponse"
+          description: The realized P&L settlement record has been marked as settled
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Unauthorized, user is not logged in"
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Forbidden, user does not have access"
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Mark a realized P&L settlement as settled
 components:
   schemas:
     Asset:
       example:
         symbol: symbol
         can_add_liquidity: true
-        max_leverage: 0.3616076749251911
+        max_leverage: 1.361607674925191
         fractionalized_units: 1
         kind: BOND
         can_onboard: true
@@ -3726,8 +3902,7 @@ components:
         can_virtual_borrow:
           type: boolean
         max_leverage:
-          maximum: 1
-          minimum: 0
+          minimum: 1
           type: number
         leverage_interest_rate:
           default: 0
@@ -3835,7 +4010,7 @@ components:
         data:
         - symbol: symbol
           can_add_liquidity: true
-          max_leverage: 0.3616076749251911
+          max_leverage: 1.361607674925191
           fractionalized_units: 1
           kind: BOND
           can_onboard: true
@@ -3869,7 +4044,7 @@ components:
           can_trade: true
         - symbol: symbol
           can_add_liquidity: true
-          max_leverage: 0.3616076749251911
+          max_leverage: 1.361607674925191
           fractionalized_units: 1
           kind: BOND
           can_onboard: true
@@ -3918,7 +4093,7 @@ components:
         data:
           symbol: symbol
           can_add_liquidity: true
-          max_leverage: 0.3616076749251911
+          max_leverage: 1.361607674925191
           fractionalized_units: 1
           kind: BOND
           can_onboard: true
@@ -4255,6 +4430,7 @@ components:
           request_id: request_id
         data:
           tenant_id: tenant_id
+          allow_orders_notifications: true
           closed_at: 2000-01-23T04:56:07.000+00:00
           native_asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           timezone: timezone
@@ -4264,7 +4440,10 @@ components:
           - PUBLIC
           timezone_offset: 0
           show_tutorial_cards: true
+          allow_liquidations_notifications: true
           notifications_enabled: true
+          allow_email_notifications: true
+          allow_deposit_withdrawal_notifications: true
           provider: provider
           verified_at: 2000-01-23T04:56:07.000+00:00
           name: name
@@ -4318,6 +4497,7 @@ components:
     User:
       example:
         tenant_id: tenant_id
+        allow_orders_notifications: true
         closed_at: 2000-01-23T04:56:07.000+00:00
         native_asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         timezone: timezone
@@ -4327,7 +4507,10 @@ components:
         - PUBLIC
         timezone_offset: 0
         show_tutorial_cards: true
+        allow_liquidations_notifications: true
         notifications_enabled: true
+        allow_email_notifications: true
+        allow_deposit_withdrawal_notifications: true
         provider: provider
         verified_at: 2000-01-23T04:56:07.000+00:00
         name: name
@@ -4381,7 +4564,19 @@ components:
           type: boolean
         tenant_id:
           type: string
+        allow_email_notifications:
+          type: boolean
+        allow_liquidations_notifications:
+          type: boolean
+        allow_deposit_withdrawal_notifications:
+          type: boolean
+        allow_orders_notifications:
+          type: boolean
       required:
+      - allow_deposit_withdrawal_notifications
+      - allow_email_notifications
+      - allow_liquidations_notifications
+      - allow_orders_notifications
       - email
       - id
       - name
@@ -4410,7 +4605,19 @@ components:
           type: boolean
         notifications_enabled:
           type: boolean
+        allow_email_notifications:
+          type: boolean
+        allow_liquidations_notifications:
+          type: boolean
+        allow_deposit_withdrawal_notifications:
+          type: boolean
+        allow_orders_notifications:
+          type: boolean
       required:
+      - allow_deposit_withdrawal_notifications
+      - allow_email_notifications
+      - allow_liquidations_notifications
+      - allow_orders_notifications
       - created_at
       - id
       - notifications_enabled
@@ -4421,6 +4628,9 @@ components:
         \ details only. Other properties can only be changed by an admin following\
         \ a manual request by the user."
       example:
+        allow_orders_notifications:
+          update: true
+          value: true
         timezone:
           update: true
           value: value
@@ -4430,7 +4640,16 @@ components:
         show_tutorial_cards:
           update: true
           value: true
+        allow_liquidations_notifications:
+          update: true
+          value: true
         notifications_enabled:
+          update: true
+          value: true
+        allow_email_notifications:
+          update: true
+          value: true
+        allow_deposit_withdrawal_notifications:
           update: true
           value: true
       properties:
@@ -4441,6 +4660,14 @@ components:
         show_tutorial_cards:
           $ref: "#/components/schemas/UpdateFieldBoolean"
         notifications_enabled:
+          $ref: "#/components/schemas/UpdateFieldBoolean"
+        allow_email_notifications:
+          $ref: "#/components/schemas/UpdateFieldBoolean"
+        allow_liquidations_notifications:
+          $ref: "#/components/schemas/UpdateFieldBoolean"
+        allow_deposit_withdrawal_notifications:
+          $ref: "#/components/schemas/UpdateFieldBoolean"
+        allow_orders_notifications:
           $ref: "#/components/schemas/UpdateFieldBoolean"
       required:
       - timezone
@@ -4710,6 +4937,11 @@ components:
       - LIMIT
       - MARKET
       type: string
+    PositionSide:
+      enum:
+      - LONG
+      - SHORT
+      type: string
     OrderStatus:
       enum:
       - OPEN
@@ -4736,26 +4968,28 @@ components:
     Order:
       example:
         original_price: original_price
+        trigger_type: STOP_LOSS
+        filled_notional: filled_notional
+        inverse_leverage: inverse_leverage
+        parent_order_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        filled_quantity: filled_quantity
+        order_book_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         side: BUY
         client_order_id: client_order_id
         original_quantity: original_quantity
         kind: LIMIT
-        trigger_type: STOP_LOSS
         good_till_date: 2000-01-23T04:56:07.000+00:00
         avg_fill_price: avg_fill_price
+        impending_borrows_quantity: impending_borrows_quantity
         order_info: order_info
         opened_at: 2000-01-23T04:56:07.000+00:00
-        filled_notional: filled_notional
         trigger_price: trigger_price
         user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         last_update_at: 2000-01-23T04:56:07.000+00:00
-        inverse_leverage: inverse_leverage
         cancelled_quantity: cancelled_quantity
-        parent_order_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        filled_quantity: filled_quantity
         order_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        order_book_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         open_quantity: open_quantity
+        locked_quantity: locked_quantity
         status: OPEN
         order_modifiers:
         - LIQUIDATION
@@ -4790,6 +5024,16 @@ components:
           type: string
         filled_notional:
           description: Quote quantity that has been filled so far.
+          type: string
+        locked_quantity:
+          description: Balance locked to ensure limit buy orders have sufficient balance
+            to be fulfilled
+          format: decimal
+          type: string
+        impending_borrows_quantity:
+          description: Borrows locked from the liquidity pool to ensure limit short
+            sell orders have sufficient balance to be fulfilled
+          format: decimal
           type: string
         last_update_at:
           format: date-time
@@ -4835,8 +5079,11 @@ components:
       - cancelled_quantity
       - filled_notional
       - filled_quantity
+      - impending_borrows_quantity
       - inverse_leverage
       - kind
+      - last_update_at
+      - locked_quantity
       - open_quantity
       - opened_at
       - order_book_id
@@ -4862,52 +5109,56 @@ components:
           request_id: request_id
         data:
         - original_price: original_price
+          trigger_type: STOP_LOSS
+          filled_notional: filled_notional
+          inverse_leverage: inverse_leverage
+          parent_order_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          filled_quantity: filled_quantity
+          order_book_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           side: BUY
           client_order_id: client_order_id
           original_quantity: original_quantity
           kind: LIMIT
-          trigger_type: STOP_LOSS
           good_till_date: 2000-01-23T04:56:07.000+00:00
           avg_fill_price: avg_fill_price
+          impending_borrows_quantity: impending_borrows_quantity
           order_info: order_info
           opened_at: 2000-01-23T04:56:07.000+00:00
-          filled_notional: filled_notional
           trigger_price: trigger_price
           user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           last_update_at: 2000-01-23T04:56:07.000+00:00
-          inverse_leverage: inverse_leverage
           cancelled_quantity: cancelled_quantity
-          parent_order_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          filled_quantity: filled_quantity
           order_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          order_book_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           open_quantity: open_quantity
+          locked_quantity: locked_quantity
           status: OPEN
           order_modifiers:
           - LIQUIDATION
           - LIQUIDATION
           position_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         - original_price: original_price
+          trigger_type: STOP_LOSS
+          filled_notional: filled_notional
+          inverse_leverage: inverse_leverage
+          parent_order_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          filled_quantity: filled_quantity
+          order_book_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           side: BUY
           client_order_id: client_order_id
           original_quantity: original_quantity
           kind: LIMIT
-          trigger_type: STOP_LOSS
           good_till_date: 2000-01-23T04:56:07.000+00:00
           avg_fill_price: avg_fill_price
+          impending_borrows_quantity: impending_borrows_quantity
           order_info: order_info
           opened_at: 2000-01-23T04:56:07.000+00:00
-          filled_notional: filled_notional
           trigger_price: trigger_price
           user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           last_update_at: 2000-01-23T04:56:07.000+00:00
-          inverse_leverage: inverse_leverage
           cancelled_quantity: cancelled_quantity
-          parent_order_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          filled_quantity: filled_quantity
           order_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          order_book_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           open_quantity: open_quantity
+          locked_quantity: locked_quantity
           status: OPEN
           order_modifiers:
           - LIQUIDATION
@@ -4925,26 +5176,28 @@ components:
       example:
         Val:
           original_price: original_price
+          trigger_type: STOP_LOSS
+          filled_notional: filled_notional
+          inverse_leverage: inverse_leverage
+          parent_order_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          filled_quantity: filled_quantity
+          order_book_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           side: BUY
           client_order_id: client_order_id
           original_quantity: original_quantity
           kind: LIMIT
-          trigger_type: STOP_LOSS
           good_till_date: 2000-01-23T04:56:07.000+00:00
           avg_fill_price: avg_fill_price
+          impending_borrows_quantity: impending_borrows_quantity
           order_info: order_info
           opened_at: 2000-01-23T04:56:07.000+00:00
-          filled_notional: filled_notional
           trigger_price: trigger_price
           user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           last_update_at: 2000-01-23T04:56:07.000+00:00
-          inverse_leverage: inverse_leverage
           cancelled_quantity: cancelled_quantity
-          parent_order_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          filled_quantity: filled_quantity
           order_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          order_book_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           open_quantity: open_quantity
+          locked_quantity: locked_quantity
           status: OPEN
           order_modifiers:
           - LIQUIDATION
@@ -4964,26 +5217,28 @@ components:
       example:
         Val:
           original_price: original_price
+          trigger_type: STOP_LOSS
+          filled_notional: filled_notional
+          inverse_leverage: inverse_leverage
+          parent_order_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          filled_quantity: filled_quantity
+          order_book_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           side: BUY
           client_order_id: client_order_id
           original_quantity: original_quantity
           kind: LIMIT
-          trigger_type: STOP_LOSS
           good_till_date: 2000-01-23T04:56:07.000+00:00
           avg_fill_price: avg_fill_price
+          impending_borrows_quantity: impending_borrows_quantity
           order_info: order_info
           opened_at: 2000-01-23T04:56:07.000+00:00
-          filled_notional: filled_notional
           trigger_price: trigger_price
           user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           last_update_at: 2000-01-23T04:56:07.000+00:00
-          inverse_leverage: inverse_leverage
           cancelled_quantity: cancelled_quantity
-          parent_order_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          filled_quantity: filled_quantity
           order_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          order_book_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           open_quantity: open_quantity
+          locked_quantity: locked_quantity
           status: OPEN
           order_modifiers:
           - LIQUIDATION
@@ -5007,26 +5262,28 @@ components:
           request_id: request_id
         data:
           original_price: original_price
+          trigger_type: STOP_LOSS
+          filled_notional: filled_notional
+          inverse_leverage: inverse_leverage
+          parent_order_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          filled_quantity: filled_quantity
+          order_book_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           side: BUY
           client_order_id: client_order_id
           original_quantity: original_quantity
           kind: LIMIT
-          trigger_type: STOP_LOSS
           good_till_date: 2000-01-23T04:56:07.000+00:00
           avg_fill_price: avg_fill_price
+          impending_borrows_quantity: impending_borrows_quantity
           order_info: order_info
           opened_at: 2000-01-23T04:56:07.000+00:00
-          filled_notional: filled_notional
           trigger_price: trigger_price
           user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           last_update_at: 2000-01-23T04:56:07.000+00:00
-          inverse_leverage: inverse_leverage
           cancelled_quantity: cancelled_quantity
-          parent_order_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          filled_quantity: filled_quantity
           order_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          order_book_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           open_quantity: open_quantity
+          locked_quantity: locked_quantity
           status: OPEN
           order_modifiers:
           - LIQUIDATION
@@ -5101,6 +5358,9 @@ components:
         quantity: quantity
         stop_loss_price: stop_loss_price
         kind: LIMIT
+        restrictions:
+          key:
+            deposit_limit: deposit_limit
         tick: tick
         good_till_date: 2000-01-23T04:56:07.000+00:00
         base_asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -5176,6 +5436,10 @@ components:
         take_profit_price:
           description: Take profit price
           type: string
+        restrictions:
+          additionalProperties:
+            $ref: "#/components/schemas/Restriction"
+          description: Map of restriction keys to Restriction objects
       required:
       - inverse_leverage
       - kind
@@ -5183,6 +5447,67 @@ components:
       - quantity
       - tick
       - user_balance
+    Restriction:
+      example:
+        deposit_limit: deposit_limit
+      properties:
+        deposit_limit:
+          description: Maximum deposit allowed (decimal as string)
+          type: string
+    CreateConditionalOrderRequest:
+      example:
+        stop_loss_price: stop_loss_price
+        price: price
+        asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        order_book_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        position_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        take_profit_price: take_profit_price
+      properties:
+        price:
+          format: decimal
+          type: string
+        order_book_id:
+          description: "Required: the order book to submit the order to"
+          format: uuid
+          type: string
+        position_id:
+          description: "Required: the position to submit the order to"
+          format: uuid
+          type: string
+        asset_id:
+          description: "Required: the asset to submit the order to"
+          format: uuid
+          type: string
+        stop_loss_price:
+          description: Stop loss price
+          format: decimal
+          type: string
+        take_profit_price:
+          description: Take profit price
+          format: decimal
+          type: string
+      required:
+      - asset_id
+      - order_book_id
+      - position_id
+      - price
+    CreateConditionalOrderResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            $ref: "#/components/schemas/CreateConditionalOrderResponseEnvelope_allOf_data"
+      example:
+        metadata:
+          trace_id: trace_id
+          status_code: 0
+          request_id: request_id
+        data:
+          stop_loss_order_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          take_profit_order_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        error: error
+    CreateConditionalOrderResponse:
+      $ref: "#/components/schemas/CreateConditionalOrderResponseEnvelope"
     OrderId:
       example:
         order_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -5386,6 +5711,69 @@ components:
               $ref: "#/components/schemas/Position"
         net_stablecoin_equivalence:
           $ref: "#/components/schemas/TransformedAssets"
+    AllPositions:
+      example:
+        all_positions:
+          key:
+            key:
+              key:
+                supplied: supplied
+                impending_borrows: impending_borrows
+                available: available
+                position_name: position_name
+                pending_withdrawal: pending_withdrawal
+                is_global: true
+                created_at: 2000-01-23T04:56:07.000+00:00
+                asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                avg_entry_price: avg_entry_price
+                borrow_limit: borrow_limit
+                liquidation_threshold: liquidation_threshold
+                id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                locked: locked
+                seq: 1
+                borrowed: borrowed
+      properties:
+        all_positions:
+          additionalProperties:
+            additionalProperties:
+              additionalProperties:
+                $ref: "#/components/schemas/Position"
+      required:
+      - all_positions
+    AllPositionsResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            $ref: "#/components/schemas/AllPositions"
+      example:
+        metadata:
+          trace_id: trace_id
+          status_code: 0
+          request_id: request_id
+        data:
+          all_positions:
+            key:
+              key:
+                key:
+                  supplied: supplied
+                  impending_borrows: impending_borrows
+                  available: available
+                  position_name: position_name
+                  pending_withdrawal: pending_withdrawal
+                  is_global: true
+                  created_at: 2000-01-23T04:56:07.000+00:00
+                  asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                  avg_entry_price: avg_entry_price
+                  borrow_limit: borrow_limit
+                  liquidation_threshold: liquidation_threshold
+                  id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                  locked: locked
+                  seq: 1
+                  borrowed: borrowed
+        error: error
+    AllPositionsResponse:
+      $ref: "#/components/schemas/AllPositionsResponseEnvelope"
     PositionType:
       enum:
       - Owned
@@ -6397,9 +6785,11 @@ components:
       - transaction_id
     CurrentLeverageAccruedInterest:
       example:
+        asset_name: asset_name
         user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         current_accrued_interest_usd: current_accrued_interest_usd
+        asset_symbol: asset_symbol
         position_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
       properties:
         user_id:
@@ -6412,6 +6802,10 @@ components:
           format: uuid
           type: string
         current_accrued_interest_usd:
+          type: string
+        asset_name:
+          type: string
+        asset_symbol:
           type: string
       required:
       - asset_id
@@ -6430,9 +6824,11 @@ components:
           status_code: 0
           request_id: request_id
         data:
+          asset_name: asset_name
           user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           current_accrued_interest_usd: current_accrued_interest_usd
+          asset_symbol: asset_symbol
           position_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         error: error
     CurrentLeverageAccruedInterestResponse:
@@ -6663,7 +7059,7 @@ components:
         Val:
           symbol: symbol
           can_add_liquidity: true
-          max_leverage: 0.3616076749251911
+          max_leverage: 1.361607674925191
           fractionalized_units: 1
           kind: BOND
           can_onboard: true
@@ -7364,26 +7760,28 @@ components:
           request_id: request_id
         data:
           original_price: original_price
+          trigger_type: STOP_LOSS
+          filled_notional: filled_notional
+          inverse_leverage: inverse_leverage
+          parent_order_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          filled_quantity: filled_quantity
+          order_book_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           side: BUY
           client_order_id: client_order_id
           original_quantity: original_quantity
           kind: LIMIT
-          trigger_type: STOP_LOSS
           good_till_date: 2000-01-23T04:56:07.000+00:00
           avg_fill_price: avg_fill_price
+          impending_borrows_quantity: impending_borrows_quantity
           order_info: order_info
           opened_at: 2000-01-23T04:56:07.000+00:00
-          filled_notional: filled_notional
           trigger_price: trigger_price
           user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           last_update_at: 2000-01-23T04:56:07.000+00:00
-          inverse_leverage: inverse_leverage
           cancelled_quantity: cancelled_quantity
-          parent_order_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          filled_quantity: filled_quantity
           order_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          order_book_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           open_quantity: open_quantity
+          locked_quantity: locked_quantity
           status: OPEN
           order_modifiers:
           - LIQUIDATION
@@ -8308,6 +8706,158 @@ components:
         error: error
     PLResponse:
       $ref: "#/components/schemas/PLResponseEnvelope"
+    RealizedPnlSettlement:
+      example:
+        tenant_id: tenant_id
+        realized_usd: realized_usd
+        user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        created_at: 2000-01-23T04:56:07.000+00:00
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        settled_at: 2000-01-23T04:56:07.000+00:00
+        order_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        position_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        id:
+          description: The ID of the realized PnL settlement
+          format: uuid
+          type: string
+        user_id:
+          description: The ID of the user associated with the realized PnL settlement
+          format: uuid
+          type: string
+        tenant_id:
+          description: The ID of the tenant associated with the realized PnL settlement
+          type: string
+        position_id:
+          description: The ID of the position associated with the realized PnL settlement
+          format: uuid
+          type: string
+        order_id:
+          description: The ID of the position-closing order associated with the realized
+            PnL settlement
+          format: uuid
+          type: string
+        realized_usd:
+          description: The amount of realized PnL in USD
+          format: decimal
+          type: string
+        settled_at:
+          description: The timestamp when the realized PnL settlement was settled
+          format: date-time
+          type: string
+        created_at:
+          description: The timestamp when the realized PnL settlement was created
+          format: date-time
+          type: string
+      required:
+      - created_at
+      - id
+      - order_id
+      - position_id
+      - realized_usd
+      - tenant_id
+      - user_id
+    RealizedPnlSettlements:
+      example:
+        settlements:
+        - tenant_id: tenant_id
+          realized_usd: realized_usd
+          user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          created_at: 2000-01-23T04:56:07.000+00:00
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          settled_at: 2000-01-23T04:56:07.000+00:00
+          order_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          position_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - tenant_id: tenant_id
+          realized_usd: realized_usd
+          user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          created_at: 2000-01-23T04:56:07.000+00:00
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          settled_at: 2000-01-23T04:56:07.000+00:00
+          order_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          position_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        tenant_totals:
+          key: tenant_totals
+        user_totals:
+          key: user_totals
+      properties:
+        settlements:
+          description: A list of realized PnL settlements matching the query parameters
+            of the request
+          items:
+            $ref: "#/components/schemas/RealizedPnlSettlement"
+          type: array
+        user_totals:
+          additionalProperties:
+            format: decimal
+            type: string
+          description: A map of user IDs to their total realized PnL in USD across
+            all settlements included in the response
+        tenant_totals:
+          additionalProperties:
+            format: decimal
+            type: string
+          description: A map of tenant IDs to their total realized PnL in USD across
+            all settlements included in the response
+    GetRealizedPnlSettlementsResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            $ref: "#/components/schemas/RealizedPnlSettlements"
+      example:
+        metadata:
+          trace_id: trace_id
+          status_code: 0
+          request_id: request_id
+        data:
+          settlements:
+          - tenant_id: tenant_id
+            realized_usd: realized_usd
+            user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            created_at: 2000-01-23T04:56:07.000+00:00
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            settled_at: 2000-01-23T04:56:07.000+00:00
+            order_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            position_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          - tenant_id: tenant_id
+            realized_usd: realized_usd
+            user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            created_at: 2000-01-23T04:56:07.000+00:00
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            settled_at: 2000-01-23T04:56:07.000+00:00
+            order_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            position_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          tenant_totals:
+            key: tenant_totals
+          user_totals:
+            key: user_totals
+        error: error
+    GetRealizedPnlSettlementsResponse:
+      $ref: "#/components/schemas/GetRealizedPnlSettlementsResponseEnvelope"
+    SettleRealizedPnlRecordResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            $ref: "#/components/schemas/RealizedPnlSettlement"
+      example:
+        metadata:
+          trace_id: trace_id
+          status_code: 0
+          request_id: request_id
+        data:
+          tenant_id: tenant_id
+          realized_usd: realized_usd
+          user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          created_at: 2000-01-23T04:56:07.000+00:00
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          settled_at: 2000-01-23T04:56:07.000+00:00
+          order_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          position_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        error: error
+    SettleRealizedPnlRecordResponse:
+      $ref: "#/components/schemas/SettleRealizedPnlRecordResponseEnvelope"
     PositionAsset:
       example:
         kind: BOND
@@ -8355,6 +8905,17 @@ components:
       - asset_id
       - price
       title: AssetConfig
+    CreateConditionalOrderResponseEnvelope_allOf_data:
+      example:
+        stop_loss_order_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        take_profit_order_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        stop_loss_order_id:
+          format: uuid
+          type: string
+        take_profit_order_id:
+          format: uuid
+          type: string
   securitySchemes:
     bearerAuth:
       bearerFormat: JWT

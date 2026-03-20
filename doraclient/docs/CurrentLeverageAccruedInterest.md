@@ -8,6 +8,8 @@ Name | Type | Description | Notes
 **AssetId** | **string** |  | 
 **PositionId** | **string** |  | 
 **CurrentAccruedInterestUsd** | **string** |  | 
+**AssetName** | Pointer to **string** |  | [optional] 
+**AssetSymbol** | Pointer to **string** |  | [optional] 
 
 ## Methods
 
@@ -107,6 +109,56 @@ and a boolean to check if the value has been set.
 
 SetCurrentAccruedInterestUsd sets CurrentAccruedInterestUsd field to given value.
 
+
+### GetAssetName
+
+`func (o *CurrentLeverageAccruedInterest) GetAssetName() string`
+
+GetAssetName returns the AssetName field if non-nil, zero value otherwise.
+
+### GetAssetNameOk
+
+`func (o *CurrentLeverageAccruedInterest) GetAssetNameOk() (*string, bool)`
+
+GetAssetNameOk returns a tuple with the AssetName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAssetName
+
+`func (o *CurrentLeverageAccruedInterest) SetAssetName(v string)`
+
+SetAssetName sets AssetName field to given value.
+
+### HasAssetName
+
+`func (o *CurrentLeverageAccruedInterest) HasAssetName() bool`
+
+HasAssetName returns a boolean if a field has been set.
+
+### GetAssetSymbol
+
+`func (o *CurrentLeverageAccruedInterest) GetAssetSymbol() string`
+
+GetAssetSymbol returns the AssetSymbol field if non-nil, zero value otherwise.
+
+### GetAssetSymbolOk
+
+`func (o *CurrentLeverageAccruedInterest) GetAssetSymbolOk() (*string, bool)`
+
+GetAssetSymbolOk returns a tuple with the AssetSymbol field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAssetSymbol
+
+`func (o *CurrentLeverageAccruedInterest) SetAssetSymbol(v string)`
+
+SetAssetSymbol sets AssetSymbol field to given value.
+
+### HasAssetSymbol
+
+`func (o *CurrentLeverageAccruedInterest) HasAssetSymbol() bool`
+
+HasAssetSymbol returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -30,6 +30,10 @@ type UserConfig struct {
 	UpdatedAt time.Time `json:"updated_at"`
 	ShowTutorialCards bool `json:"show_tutorial_cards"`
 	NotificationsEnabled bool `json:"notifications_enabled"`
+	AllowEmailNotifications bool `json:"allow_email_notifications"`
+	AllowLiquidationsNotifications bool `json:"allow_liquidations_notifications"`
+	AllowDepositWithdrawalNotifications bool `json:"allow_deposit_withdrawal_notifications"`
+	AllowOrdersNotifications bool `json:"allow_orders_notifications"`
 }
 
 type _UserConfig UserConfig
@@ -38,13 +42,17 @@ type _UserConfig UserConfig
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUserConfig(id string, createdAt time.Time, updatedAt time.Time, showTutorialCards bool, notificationsEnabled bool) *UserConfig {
+func NewUserConfig(id string, createdAt time.Time, updatedAt time.Time, showTutorialCards bool, notificationsEnabled bool, allowEmailNotifications bool, allowLiquidationsNotifications bool, allowDepositWithdrawalNotifications bool, allowOrdersNotifications bool) *UserConfig {
 	this := UserConfig{}
 	this.Id = id
 	this.CreatedAt = createdAt
 	this.UpdatedAt = updatedAt
 	this.ShowTutorialCards = showTutorialCards
 	this.NotificationsEnabled = notificationsEnabled
+	this.AllowEmailNotifications = allowEmailNotifications
+	this.AllowLiquidationsNotifications = allowLiquidationsNotifications
+	this.AllowDepositWithdrawalNotifications = allowDepositWithdrawalNotifications
+	this.AllowOrdersNotifications = allowOrdersNotifications
 	return &this
 }
 
@@ -240,6 +248,102 @@ func (o *UserConfig) SetNotificationsEnabled(v bool) {
 	o.NotificationsEnabled = v
 }
 
+// GetAllowEmailNotifications returns the AllowEmailNotifications field value
+func (o *UserConfig) GetAllowEmailNotifications() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.AllowEmailNotifications
+}
+
+// GetAllowEmailNotificationsOk returns a tuple with the AllowEmailNotifications field value
+// and a boolean to check if the value has been set.
+func (o *UserConfig) GetAllowEmailNotificationsOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.AllowEmailNotifications, true
+}
+
+// SetAllowEmailNotifications sets field value
+func (o *UserConfig) SetAllowEmailNotifications(v bool) {
+	o.AllowEmailNotifications = v
+}
+
+// GetAllowLiquidationsNotifications returns the AllowLiquidationsNotifications field value
+func (o *UserConfig) GetAllowLiquidationsNotifications() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.AllowLiquidationsNotifications
+}
+
+// GetAllowLiquidationsNotificationsOk returns a tuple with the AllowLiquidationsNotifications field value
+// and a boolean to check if the value has been set.
+func (o *UserConfig) GetAllowLiquidationsNotificationsOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.AllowLiquidationsNotifications, true
+}
+
+// SetAllowLiquidationsNotifications sets field value
+func (o *UserConfig) SetAllowLiquidationsNotifications(v bool) {
+	o.AllowLiquidationsNotifications = v
+}
+
+// GetAllowDepositWithdrawalNotifications returns the AllowDepositWithdrawalNotifications field value
+func (o *UserConfig) GetAllowDepositWithdrawalNotifications() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.AllowDepositWithdrawalNotifications
+}
+
+// GetAllowDepositWithdrawalNotificationsOk returns a tuple with the AllowDepositWithdrawalNotifications field value
+// and a boolean to check if the value has been set.
+func (o *UserConfig) GetAllowDepositWithdrawalNotificationsOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.AllowDepositWithdrawalNotifications, true
+}
+
+// SetAllowDepositWithdrawalNotifications sets field value
+func (o *UserConfig) SetAllowDepositWithdrawalNotifications(v bool) {
+	o.AllowDepositWithdrawalNotifications = v
+}
+
+// GetAllowOrdersNotifications returns the AllowOrdersNotifications field value
+func (o *UserConfig) GetAllowOrdersNotifications() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.AllowOrdersNotifications
+}
+
+// GetAllowOrdersNotificationsOk returns a tuple with the AllowOrdersNotifications field value
+// and a boolean to check if the value has been set.
+func (o *UserConfig) GetAllowOrdersNotificationsOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.AllowOrdersNotifications, true
+}
+
+// SetAllowOrdersNotifications sets field value
+func (o *UserConfig) SetAllowOrdersNotifications(v bool) {
+	o.AllowOrdersNotifications = v
+}
+
 func (o UserConfig) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -261,6 +365,10 @@ func (o UserConfig) ToMap() (map[string]interface{}, error) {
 	toSerialize["updated_at"] = o.UpdatedAt
 	toSerialize["show_tutorial_cards"] = o.ShowTutorialCards
 	toSerialize["notifications_enabled"] = o.NotificationsEnabled
+	toSerialize["allow_email_notifications"] = o.AllowEmailNotifications
+	toSerialize["allow_liquidations_notifications"] = o.AllowLiquidationsNotifications
+	toSerialize["allow_deposit_withdrawal_notifications"] = o.AllowDepositWithdrawalNotifications
+	toSerialize["allow_orders_notifications"] = o.AllowOrdersNotifications
 	return toSerialize, nil
 }
 
@@ -274,6 +382,10 @@ func (o *UserConfig) UnmarshalJSON(data []byte) (err error) {
 		"updated_at",
 		"show_tutorial_cards",
 		"notifications_enabled",
+		"allow_email_notifications",
+		"allow_liquidations_notifications",
+		"allow_deposit_withdrawal_notifications",
+		"allow_orders_notifications",
 	}
 
 	allProperties := make(map[string]interface{})

@@ -25,6 +25,8 @@ type CurrentLeverageAccruedInterest struct {
 	AssetId string `json:"asset_id"`
 	PositionId string `json:"position_id"`
 	CurrentAccruedInterestUsd string `json:"current_accrued_interest_usd"`
+	AssetName *string `json:"asset_name,omitempty"`
+	AssetSymbol *string `json:"asset_symbol,omitempty"`
 }
 
 type _CurrentLeverageAccruedInterest CurrentLeverageAccruedInterest
@@ -146,6 +148,70 @@ func (o *CurrentLeverageAccruedInterest) SetCurrentAccruedInterestUsd(v string) 
 	o.CurrentAccruedInterestUsd = v
 }
 
+// GetAssetName returns the AssetName field value if set, zero value otherwise.
+func (o *CurrentLeverageAccruedInterest) GetAssetName() string {
+	if o == nil || IsNil(o.AssetName) {
+		var ret string
+		return ret
+	}
+	return *o.AssetName
+}
+
+// GetAssetNameOk returns a tuple with the AssetName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CurrentLeverageAccruedInterest) GetAssetNameOk() (*string, bool) {
+	if o == nil || IsNil(o.AssetName) {
+		return nil, false
+	}
+	return o.AssetName, true
+}
+
+// HasAssetName returns a boolean if a field has been set.
+func (o *CurrentLeverageAccruedInterest) HasAssetName() bool {
+	if o != nil && !IsNil(o.AssetName) {
+		return true
+	}
+
+	return false
+}
+
+// SetAssetName gets a reference to the given string and assigns it to the AssetName field.
+func (o *CurrentLeverageAccruedInterest) SetAssetName(v string) {
+	o.AssetName = &v
+}
+
+// GetAssetSymbol returns the AssetSymbol field value if set, zero value otherwise.
+func (o *CurrentLeverageAccruedInterest) GetAssetSymbol() string {
+	if o == nil || IsNil(o.AssetSymbol) {
+		var ret string
+		return ret
+	}
+	return *o.AssetSymbol
+}
+
+// GetAssetSymbolOk returns a tuple with the AssetSymbol field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CurrentLeverageAccruedInterest) GetAssetSymbolOk() (*string, bool) {
+	if o == nil || IsNil(o.AssetSymbol) {
+		return nil, false
+	}
+	return o.AssetSymbol, true
+}
+
+// HasAssetSymbol returns a boolean if a field has been set.
+func (o *CurrentLeverageAccruedInterest) HasAssetSymbol() bool {
+	if o != nil && !IsNil(o.AssetSymbol) {
+		return true
+	}
+
+	return false
+}
+
+// SetAssetSymbol gets a reference to the given string and assigns it to the AssetSymbol field.
+func (o *CurrentLeverageAccruedInterest) SetAssetSymbol(v string) {
+	o.AssetSymbol = &v
+}
+
 func (o CurrentLeverageAccruedInterest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -160,6 +226,12 @@ func (o CurrentLeverageAccruedInterest) ToMap() (map[string]interface{}, error) 
 	toSerialize["asset_id"] = o.AssetId
 	toSerialize["position_id"] = o.PositionId
 	toSerialize["current_accrued_interest_usd"] = o.CurrentAccruedInterestUsd
+	if !IsNil(o.AssetName) {
+		toSerialize["asset_name"] = o.AssetName
+	}
+	if !IsNil(o.AssetSymbol) {
+		toSerialize["asset_symbol"] = o.AssetSymbol
+	}
 	return toSerialize, nil
 }
 

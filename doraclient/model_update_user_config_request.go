@@ -29,6 +29,14 @@ type UpdateUserConfigRequest struct {
 	ShowTutorialCards *UpdateFieldBoolean `json:"show_tutorial_cards,omitempty"`
 	// Optional: Whether to show the notifications.
 	NotificationsEnabled *UpdateFieldBoolean `json:"notifications_enabled,omitempty"`
+	// Optional: Whether to allow email notifications.
+	AllowEmailNotifications *UpdateFieldBoolean `json:"allow_email_notifications,omitempty"`
+	// Optional: Whether to allow liquidations notifications.
+	AllowLiquidationsNotifications *UpdateFieldBoolean `json:"allow_liquidations_notifications,omitempty"`
+	// Optional: Whether to allow deposit/withdrawal notifications.
+	AllowDepositWithdrawalNotifications *UpdateFieldBoolean `json:"allow_deposit_withdrawal_notifications,omitempty"`
+	// Optional: Whether to allow orders notifications.
+	AllowOrdersNotifications *UpdateFieldBoolean `json:"allow_orders_notifications,omitempty"`
 }
 
 type _UpdateUserConfigRequest UpdateUserConfigRequest
@@ -171,6 +179,134 @@ func (o *UpdateUserConfigRequest) SetNotificationsEnabled(v UpdateFieldBoolean) 
 	o.NotificationsEnabled = &v
 }
 
+// GetAllowEmailNotifications returns the AllowEmailNotifications field value if set, zero value otherwise.
+func (o *UpdateUserConfigRequest) GetAllowEmailNotifications() UpdateFieldBoolean {
+	if o == nil || IsNil(o.AllowEmailNotifications) {
+		var ret UpdateFieldBoolean
+		return ret
+	}
+	return *o.AllowEmailNotifications
+}
+
+// GetAllowEmailNotificationsOk returns a tuple with the AllowEmailNotifications field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateUserConfigRequest) GetAllowEmailNotificationsOk() (*UpdateFieldBoolean, bool) {
+	if o == nil || IsNil(o.AllowEmailNotifications) {
+		return nil, false
+	}
+	return o.AllowEmailNotifications, true
+}
+
+// HasAllowEmailNotifications returns a boolean if a field has been set.
+func (o *UpdateUserConfigRequest) HasAllowEmailNotifications() bool {
+	if o != nil && !IsNil(o.AllowEmailNotifications) {
+		return true
+	}
+
+	return false
+}
+
+// SetAllowEmailNotifications gets a reference to the given UpdateFieldBoolean and assigns it to the AllowEmailNotifications field.
+func (o *UpdateUserConfigRequest) SetAllowEmailNotifications(v UpdateFieldBoolean) {
+	o.AllowEmailNotifications = &v
+}
+
+// GetAllowLiquidationsNotifications returns the AllowLiquidationsNotifications field value if set, zero value otherwise.
+func (o *UpdateUserConfigRequest) GetAllowLiquidationsNotifications() UpdateFieldBoolean {
+	if o == nil || IsNil(o.AllowLiquidationsNotifications) {
+		var ret UpdateFieldBoolean
+		return ret
+	}
+	return *o.AllowLiquidationsNotifications
+}
+
+// GetAllowLiquidationsNotificationsOk returns a tuple with the AllowLiquidationsNotifications field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateUserConfigRequest) GetAllowLiquidationsNotificationsOk() (*UpdateFieldBoolean, bool) {
+	if o == nil || IsNil(o.AllowLiquidationsNotifications) {
+		return nil, false
+	}
+	return o.AllowLiquidationsNotifications, true
+}
+
+// HasAllowLiquidationsNotifications returns a boolean if a field has been set.
+func (o *UpdateUserConfigRequest) HasAllowLiquidationsNotifications() bool {
+	if o != nil && !IsNil(o.AllowLiquidationsNotifications) {
+		return true
+	}
+
+	return false
+}
+
+// SetAllowLiquidationsNotifications gets a reference to the given UpdateFieldBoolean and assigns it to the AllowLiquidationsNotifications field.
+func (o *UpdateUserConfigRequest) SetAllowLiquidationsNotifications(v UpdateFieldBoolean) {
+	o.AllowLiquidationsNotifications = &v
+}
+
+// GetAllowDepositWithdrawalNotifications returns the AllowDepositWithdrawalNotifications field value if set, zero value otherwise.
+func (o *UpdateUserConfigRequest) GetAllowDepositWithdrawalNotifications() UpdateFieldBoolean {
+	if o == nil || IsNil(o.AllowDepositWithdrawalNotifications) {
+		var ret UpdateFieldBoolean
+		return ret
+	}
+	return *o.AllowDepositWithdrawalNotifications
+}
+
+// GetAllowDepositWithdrawalNotificationsOk returns a tuple with the AllowDepositWithdrawalNotifications field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateUserConfigRequest) GetAllowDepositWithdrawalNotificationsOk() (*UpdateFieldBoolean, bool) {
+	if o == nil || IsNil(o.AllowDepositWithdrawalNotifications) {
+		return nil, false
+	}
+	return o.AllowDepositWithdrawalNotifications, true
+}
+
+// HasAllowDepositWithdrawalNotifications returns a boolean if a field has been set.
+func (o *UpdateUserConfigRequest) HasAllowDepositWithdrawalNotifications() bool {
+	if o != nil && !IsNil(o.AllowDepositWithdrawalNotifications) {
+		return true
+	}
+
+	return false
+}
+
+// SetAllowDepositWithdrawalNotifications gets a reference to the given UpdateFieldBoolean and assigns it to the AllowDepositWithdrawalNotifications field.
+func (o *UpdateUserConfigRequest) SetAllowDepositWithdrawalNotifications(v UpdateFieldBoolean) {
+	o.AllowDepositWithdrawalNotifications = &v
+}
+
+// GetAllowOrdersNotifications returns the AllowOrdersNotifications field value if set, zero value otherwise.
+func (o *UpdateUserConfigRequest) GetAllowOrdersNotifications() UpdateFieldBoolean {
+	if o == nil || IsNil(o.AllowOrdersNotifications) {
+		var ret UpdateFieldBoolean
+		return ret
+	}
+	return *o.AllowOrdersNotifications
+}
+
+// GetAllowOrdersNotificationsOk returns a tuple with the AllowOrdersNotifications field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateUserConfigRequest) GetAllowOrdersNotificationsOk() (*UpdateFieldBoolean, bool) {
+	if o == nil || IsNil(o.AllowOrdersNotifications) {
+		return nil, false
+	}
+	return o.AllowOrdersNotifications, true
+}
+
+// HasAllowOrdersNotifications returns a boolean if a field has been set.
+func (o *UpdateUserConfigRequest) HasAllowOrdersNotifications() bool {
+	if o != nil && !IsNil(o.AllowOrdersNotifications) {
+		return true
+	}
+
+	return false
+}
+
+// SetAllowOrdersNotifications gets a reference to the given UpdateFieldBoolean and assigns it to the AllowOrdersNotifications field.
+func (o *UpdateUserConfigRequest) SetAllowOrdersNotifications(v UpdateFieldBoolean) {
+	o.AllowOrdersNotifications = &v
+}
+
 func (o UpdateUserConfigRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -190,6 +326,18 @@ func (o UpdateUserConfigRequest) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.NotificationsEnabled) {
 		toSerialize["notifications_enabled"] = o.NotificationsEnabled
+	}
+	if !IsNil(o.AllowEmailNotifications) {
+		toSerialize["allow_email_notifications"] = o.AllowEmailNotifications
+	}
+	if !IsNil(o.AllowLiquidationsNotifications) {
+		toSerialize["allow_liquidations_notifications"] = o.AllowLiquidationsNotifications
+	}
+	if !IsNil(o.AllowDepositWithdrawalNotifications) {
+		toSerialize["allow_deposit_withdrawal_notifications"] = o.AllowDepositWithdrawalNotifications
+	}
+	if !IsNil(o.AllowOrdersNotifications) {
+		toSerialize["allow_orders_notifications"] = o.AllowOrdersNotifications
 	}
 	return toSerialize, nil
 }
