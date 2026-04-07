@@ -16,42 +16,42 @@ import (
 	"fmt"
 )
 
-// checks if the PLResponseEnvelope type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &PLResponseEnvelope{}
+// checks if the TransactionsSettlementsResponseEnvelope type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &TransactionsSettlementsResponseEnvelope{}
 
-// PLResponseEnvelope struct for PLResponseEnvelope
-type PLResponseEnvelope struct {
-	Data *PLAccounts `json:"data,omitempty"`
+// TransactionsSettlementsResponseEnvelope struct for TransactionsSettlementsResponseEnvelope
+type TransactionsSettlementsResponseEnvelope struct {
+	Data *TransactionsSettlementsResponse `json:"data,omitempty"`
 	// The error message. Present for error (non-2xx) responses.
 	Error *string `json:"error,omitempty"`
 	// Metadata about the response, including status code and trace information.
 	Metadata Metadata `json:"metadata"`
 }
 
-type _PLResponseEnvelope PLResponseEnvelope
+type _TransactionsSettlementsResponseEnvelope TransactionsSettlementsResponseEnvelope
 
-// NewPLResponseEnvelope instantiates a new PLResponseEnvelope object
+// NewTransactionsSettlementsResponseEnvelope instantiates a new TransactionsSettlementsResponseEnvelope object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPLResponseEnvelope(metadata Metadata) *PLResponseEnvelope {
-	this := PLResponseEnvelope{}
+func NewTransactionsSettlementsResponseEnvelope(metadata Metadata) *TransactionsSettlementsResponseEnvelope {
+	this := TransactionsSettlementsResponseEnvelope{}
 	this.Metadata = metadata
 	return &this
 }
 
-// NewPLResponseEnvelopeWithDefaults instantiates a new PLResponseEnvelope object
+// NewTransactionsSettlementsResponseEnvelopeWithDefaults instantiates a new TransactionsSettlementsResponseEnvelope object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewPLResponseEnvelopeWithDefaults() *PLResponseEnvelope {
-	this := PLResponseEnvelope{}
+func NewTransactionsSettlementsResponseEnvelopeWithDefaults() *TransactionsSettlementsResponseEnvelope {
+	this := TransactionsSettlementsResponseEnvelope{}
 	return &this
 }
 
 // GetData returns the Data field value if set, zero value otherwise.
-func (o *PLResponseEnvelope) GetData() PLAccounts {
+func (o *TransactionsSettlementsResponseEnvelope) GetData() TransactionsSettlementsResponse {
 	if o == nil || IsNil(o.Data) {
-		var ret PLAccounts
+		var ret TransactionsSettlementsResponse
 		return ret
 	}
 	return *o.Data
@@ -59,7 +59,7 @@ func (o *PLResponseEnvelope) GetData() PLAccounts {
 
 // GetDataOk returns a tuple with the Data field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PLResponseEnvelope) GetDataOk() (*PLAccounts, bool) {
+func (o *TransactionsSettlementsResponseEnvelope) GetDataOk() (*TransactionsSettlementsResponse, bool) {
 	if o == nil || IsNil(o.Data) {
 		return nil, false
 	}
@@ -67,7 +67,7 @@ func (o *PLResponseEnvelope) GetDataOk() (*PLAccounts, bool) {
 }
 
 // HasData returns a boolean if a field has been set.
-func (o *PLResponseEnvelope) HasData() bool {
+func (o *TransactionsSettlementsResponseEnvelope) HasData() bool {
 	if o != nil && !IsNil(o.Data) {
 		return true
 	}
@@ -75,13 +75,13 @@ func (o *PLResponseEnvelope) HasData() bool {
 	return false
 }
 
-// SetData gets a reference to the given PLAccounts and assigns it to the Data field.
-func (o *PLResponseEnvelope) SetData(v PLAccounts) {
+// SetData gets a reference to the given TransactionsSettlementsResponse and assigns it to the Data field.
+func (o *TransactionsSettlementsResponseEnvelope) SetData(v TransactionsSettlementsResponse) {
 	o.Data = &v
 }
 
 // GetError returns the Error field value if set, zero value otherwise.
-func (o *PLResponseEnvelope) GetError() string {
+func (o *TransactionsSettlementsResponseEnvelope) GetError() string {
 	if o == nil || IsNil(o.Error) {
 		var ret string
 		return ret
@@ -91,7 +91,7 @@ func (o *PLResponseEnvelope) GetError() string {
 
 // GetErrorOk returns a tuple with the Error field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PLResponseEnvelope) GetErrorOk() (*string, bool) {
+func (o *TransactionsSettlementsResponseEnvelope) GetErrorOk() (*string, bool) {
 	if o == nil || IsNil(o.Error) {
 		return nil, false
 	}
@@ -99,7 +99,7 @@ func (o *PLResponseEnvelope) GetErrorOk() (*string, bool) {
 }
 
 // HasError returns a boolean if a field has been set.
-func (o *PLResponseEnvelope) HasError() bool {
+func (o *TransactionsSettlementsResponseEnvelope) HasError() bool {
 	if o != nil && !IsNil(o.Error) {
 		return true
 	}
@@ -108,12 +108,12 @@ func (o *PLResponseEnvelope) HasError() bool {
 }
 
 // SetError gets a reference to the given string and assigns it to the Error field.
-func (o *PLResponseEnvelope) SetError(v string) {
+func (o *TransactionsSettlementsResponseEnvelope) SetError(v string) {
 	o.Error = &v
 }
 
 // GetMetadata returns the Metadata field value
-func (o *PLResponseEnvelope) GetMetadata() Metadata {
+func (o *TransactionsSettlementsResponseEnvelope) GetMetadata() Metadata {
 	if o == nil {
 		var ret Metadata
 		return ret
@@ -124,7 +124,7 @@ func (o *PLResponseEnvelope) GetMetadata() Metadata {
 
 // GetMetadataOk returns a tuple with the Metadata field value
 // and a boolean to check if the value has been set.
-func (o *PLResponseEnvelope) GetMetadataOk() (*Metadata, bool) {
+func (o *TransactionsSettlementsResponseEnvelope) GetMetadataOk() (*Metadata, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -132,11 +132,11 @@ func (o *PLResponseEnvelope) GetMetadataOk() (*Metadata, bool) {
 }
 
 // SetMetadata sets field value
-func (o *PLResponseEnvelope) SetMetadata(v Metadata) {
+func (o *TransactionsSettlementsResponseEnvelope) SetMetadata(v Metadata) {
 	o.Metadata = v
 }
 
-func (o PLResponseEnvelope) MarshalJSON() ([]byte, error) {
+func (o TransactionsSettlementsResponseEnvelope) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -144,7 +144,7 @@ func (o PLResponseEnvelope) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o PLResponseEnvelope) ToMap() (map[string]interface{}, error) {
+func (o TransactionsSettlementsResponseEnvelope) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
@@ -156,7 +156,7 @@ func (o PLResponseEnvelope) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *PLResponseEnvelope) UnmarshalJSON(data []byte) (err error) {
+func (o *TransactionsSettlementsResponseEnvelope) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -178,53 +178,53 @@ func (o *PLResponseEnvelope) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varPLResponseEnvelope := _PLResponseEnvelope{}
+	varTransactionsSettlementsResponseEnvelope := _TransactionsSettlementsResponseEnvelope{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
 	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPLResponseEnvelope)
+	err = decoder.Decode(&varTransactionsSettlementsResponseEnvelope)
 
 	if err != nil {
 		return err
 	}
 
-	*o = PLResponseEnvelope(varPLResponseEnvelope)
+	*o = TransactionsSettlementsResponseEnvelope(varTransactionsSettlementsResponseEnvelope)
 
 	return err
 }
 
-type NullablePLResponseEnvelope struct {
-	value *PLResponseEnvelope
+type NullableTransactionsSettlementsResponseEnvelope struct {
+	value *TransactionsSettlementsResponseEnvelope
 	isSet bool
 }
 
-func (v NullablePLResponseEnvelope) Get() *PLResponseEnvelope {
+func (v NullableTransactionsSettlementsResponseEnvelope) Get() *TransactionsSettlementsResponseEnvelope {
 	return v.value
 }
 
-func (v *NullablePLResponseEnvelope) Set(val *PLResponseEnvelope) {
+func (v *NullableTransactionsSettlementsResponseEnvelope) Set(val *TransactionsSettlementsResponseEnvelope) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullablePLResponseEnvelope) IsSet() bool {
+func (v NullableTransactionsSettlementsResponseEnvelope) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullablePLResponseEnvelope) Unset() {
+func (v *NullableTransactionsSettlementsResponseEnvelope) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullablePLResponseEnvelope(val *PLResponseEnvelope) *NullablePLResponseEnvelope {
-	return &NullablePLResponseEnvelope{value: val, isSet: true}
+func NewNullableTransactionsSettlementsResponseEnvelope(val *TransactionsSettlementsResponseEnvelope) *NullableTransactionsSettlementsResponseEnvelope {
+	return &NullableTransactionsSettlementsResponseEnvelope{value: val, isSet: true}
 }
 
-func (v NullablePLResponseEnvelope) MarshalJSON() ([]byte, error) {
+func (v NullableTransactionsSettlementsResponseEnvelope) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullablePLResponseEnvelope) UnmarshalJSON(src []byte) error {
+func (v *NullableTransactionsSettlementsResponseEnvelope) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

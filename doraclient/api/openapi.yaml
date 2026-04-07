@@ -1329,7 +1329,7 @@ paths:
       - explode: true
         in: query
         name: start
-        required: false
+        required: true
         schema:
           format: date-time
           type: string
@@ -1337,7 +1337,7 @@ paths:
       - explode: true
         in: query
         name: end
-        required: false
+        required: true
         schema:
           format: date-time
           type: string
@@ -2675,6 +2675,130 @@ paths:
           description: Internal server error
       security: []
       summary: Get a transaction by ID
+  /v1/transactions/settlements:
+    get:
+      operationId: getTransactionsSettlements
+      parameters:
+      - description: Tenant ID to filter settlements
+        explode: true
+        in: query
+        name: tenant_id
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: User ID to filter settlements
+        explode: true
+        in: query
+        name: user_id
+        required: false
+        schema:
+          format: uuid
+          type: string
+        style: form
+      - description: Position ID to filter settlements
+        explode: true
+        in: query
+        name: position_id
+        required: false
+        schema:
+          format: uuid
+          type: string
+        style: form
+      - description: Transaction kind to filter settlements
+        explode: true
+        in: query
+        name: tx_kind
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Filter settlements created after this time
+        explode: true
+        in: query
+        name: created_after
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      - description: Filter settlements settled before this time
+        explode: true
+        in: query
+        name: settled_before
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      - description: Filter settlements by settlement status
+        explode: true
+        in: query
+        name: is_settled
+        required: false
+        schema:
+          type: boolean
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TransactionsSettlementsResponseEnvelope"
+          description: A list of transaction settlements
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Bad request
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: No settlements found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Get transactions settlements with filters
+    put:
+      operationId: settleTransactionsSettlements
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TransactionsSettlementRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TransactionsSettlementsResponse"
+          description: Settlements updated
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Bad request
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: No transactions for settlement found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Settle multiple transactions settlements in batch
   /v1/trades:
     get:
       operationId: getTrades
@@ -5359,12 +5483,15 @@ components:
         stop_loss_price: stop_loss_price
         kind: LIMIT
         restrictions:
-          key:
-            deposit_limit: deposit_limit
+          tenant_id: tenant_id
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          deposit_limit: deposit_limit
+          trade_limit: trade_limit
         tick: tick
         good_till_date: 2000-01-23T04:56:07.000+00:00
         base_asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         take_profit_price: take_profit_price
+        initial_capital: initial_capital
         user_balance: user_balance
         price: price
         position_assets:
@@ -5437,9 +5564,11 @@ components:
           description: Take profit price
           type: string
         restrictions:
-          additionalProperties:
-            $ref: "#/components/schemas/Restriction"
-          description: Map of restriction keys to Restriction objects
+          $ref: "#/components/schemas/TenantRestrictions"
+        initial_capital:
+          description: Initial capital value in USD only used to validate sells with
+            leverage
+          type: string
       required:
       - inverse_leverage
       - kind
@@ -5447,13 +5576,33 @@ components:
       - quantity
       - tick
       - user_balance
-    Restriction:
+    TenantRestrictions:
       example:
+        tenant_id: tenant_id
+        updated_at: 2000-01-23T04:56:07.000+00:00
         deposit_limit: deposit_limit
+        trade_limit: trade_limit
       properties:
-        deposit_limit:
-          description: Maximum deposit allowed (decimal as string)
+        tenant_id:
+          description: Tenant ID
           type: string
+        deposit_limit:
+          description: Maximum allowed deposit for the tenant.
+          format: decimal
+          type: string
+        trade_limit:
+          description: Maximum allowed trade amount for the tenant.
+          format: decimal
+          type: string
+        updated_at:
+          description: Last update timestamp for the restrictions.
+          format: date-time
+          type: string
+      required:
+      - deposit_limit
+      - tenant_id
+      - trade_limit
+      - updated_at
     CreateConditionalOrderRequest:
       example:
         stop_loss_price: stop_loss_price
@@ -5496,7 +5645,7 @@ components:
       - $ref: "#/components/schemas/ResponseEnvelope"
       - properties:
           data:
-            $ref: "#/components/schemas/CreateConditionalOrderResponseEnvelope_allOf_data"
+            $ref: "#/components/schemas/CreateConditionalOrderResponseData"
       example:
         metadata:
           trace_id: trace_id
@@ -7121,6 +7270,138 @@ components:
         error: error
     GetTransactionResponse:
       $ref: "#/components/schemas/TransactionResponseEnvelope"
+    TransactionsSettlement:
+      example:
+        tenant_id: tenant_id
+        user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        quantity_usd: quantity_usd
+        created_at: 2000-01-23T04:56:07.000+00:00
+        tx_kind: tx_kind
+        settled_at: 2000-01-23T04:56:07.000+00:00
+        tx_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        position_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        settled_by: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        tx_id:
+          format: uuid
+          type: string
+        user_id:
+          format: uuid
+          type: string
+        tenant_id:
+          type: string
+        position_id:
+          format: uuid
+          type: string
+        tx_kind:
+          type: string
+        quantity_usd:
+          format: decimal
+          type: string
+        created_at:
+          format: date-time
+          type: string
+        settled_at:
+          format: date-time
+          type: string
+          nullable: true
+        settled_by:
+          format: uuid
+          type: string
+          nullable: true
+      required:
+      - created_at
+      - position_id
+      - quantity_usd
+      - tenant_id
+      - tx_id
+      - tx_kind
+      - user_id
+    TransactionsSettlementsResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            $ref: "#/components/schemas/TransactionsSettlementsResponse"
+      example:
+        metadata:
+          trace_id: trace_id
+          status_code: 0
+          request_id: request_id
+        data:
+          settlements:
+          - tenant_id: tenant_id
+            user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            quantity_usd: quantity_usd
+            created_at: 2000-01-23T04:56:07.000+00:00
+            tx_kind: tx_kind
+            settled_at: 2000-01-23T04:56:07.000+00:00
+            tx_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            position_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            settled_by: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          - tenant_id: tenant_id
+            user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            quantity_usd: quantity_usd
+            created_at: 2000-01-23T04:56:07.000+00:00
+            tx_kind: tx_kind
+            settled_at: 2000-01-23T04:56:07.000+00:00
+            tx_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            position_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            settled_by: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          tenant_totals:
+            key: tenant_totals
+          user_totals:
+            key: user_totals
+        error: error
+    TransactionsSettlementsResponse:
+      example:
+        settlements:
+        - tenant_id: tenant_id
+          user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          quantity_usd: quantity_usd
+          created_at: 2000-01-23T04:56:07.000+00:00
+          tx_kind: tx_kind
+          settled_at: 2000-01-23T04:56:07.000+00:00
+          tx_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          position_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          settled_by: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - tenant_id: tenant_id
+          user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          quantity_usd: quantity_usd
+          created_at: 2000-01-23T04:56:07.000+00:00
+          tx_kind: tx_kind
+          settled_at: 2000-01-23T04:56:07.000+00:00
+          tx_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          position_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          settled_by: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        tenant_totals:
+          key: tenant_totals
+        user_totals:
+          key: user_totals
+      properties:
+        settlements:
+          items:
+            $ref: "#/components/schemas/TransactionsSettlement"
+          type: array
+        user_totals:
+          additionalProperties:
+            format: decimal
+            type: string
+        tenant_totals:
+          additionalProperties:
+            format: decimal
+            type: string
+    TransactionsSettlementRequest:
+      example:
+        tx_ids:
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        tx_ids:
+          items:
+            format: uuid
+            type: string
+          type: array
     ResponseEnvelope:
       description: "Standard response envelope. For 2xx responses, 'data' is set.\
         \ For errors, 'error' is set."
@@ -8905,7 +9186,7 @@ components:
       - asset_id
       - price
       title: AssetConfig
-    CreateConditionalOrderResponseEnvelope_allOf_data:
+    CreateConditionalOrderResponseData:
       example:
         stop_loss_order_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         take_profit_order_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -8916,6 +9197,7 @@ components:
         take_profit_order_id:
           format: uuid
           type: string
+      title: CreateConditionalOrderResponseData
   securitySchemes:
     bearerAuth:
       bearerFormat: JWT

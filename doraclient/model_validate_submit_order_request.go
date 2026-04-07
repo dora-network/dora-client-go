@@ -49,8 +49,9 @@ type ValidateSubmitOrderRequest struct {
 	StopLossPrice *string `json:"stop_loss_price,omitempty"`
 	// Take profit price
 	TakeProfitPrice *string `json:"take_profit_price,omitempty"`
-	// Map of restriction keys to Restriction objects
-	Restrictions map[string]Restriction `json:"restrictions,omitempty"`
+	Restrictions *TenantRestrictions `json:"restrictions,omitempty"`
+	// Initial capital value in USD only used to validate sells with leverage
+	InitialCapital *string `json:"initial_capital,omitempty"`
 }
 
 type _ValidateSubmitOrderRequest ValidateSubmitOrderRequest
@@ -511,19 +512,19 @@ func (o *ValidateSubmitOrderRequest) SetTakeProfitPrice(v string) {
 }
 
 // GetRestrictions returns the Restrictions field value if set, zero value otherwise.
-func (o *ValidateSubmitOrderRequest) GetRestrictions() map[string]Restriction {
+func (o *ValidateSubmitOrderRequest) GetRestrictions() TenantRestrictions {
 	if o == nil || IsNil(o.Restrictions) {
-		var ret map[string]Restriction
+		var ret TenantRestrictions
 		return ret
 	}
-	return o.Restrictions
+	return *o.Restrictions
 }
 
 // GetRestrictionsOk returns a tuple with the Restrictions field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ValidateSubmitOrderRequest) GetRestrictionsOk() (map[string]Restriction, bool) {
+func (o *ValidateSubmitOrderRequest) GetRestrictionsOk() (*TenantRestrictions, bool) {
 	if o == nil || IsNil(o.Restrictions) {
-		return map[string]Restriction{}, false
+		return nil, false
 	}
 	return o.Restrictions, true
 }
@@ -537,9 +538,41 @@ func (o *ValidateSubmitOrderRequest) HasRestrictions() bool {
 	return false
 }
 
-// SetRestrictions gets a reference to the given map[string]Restriction and assigns it to the Restrictions field.
-func (o *ValidateSubmitOrderRequest) SetRestrictions(v map[string]Restriction) {
-	o.Restrictions = v
+// SetRestrictions gets a reference to the given TenantRestrictions and assigns it to the Restrictions field.
+func (o *ValidateSubmitOrderRequest) SetRestrictions(v TenantRestrictions) {
+	o.Restrictions = &v
+}
+
+// GetInitialCapital returns the InitialCapital field value if set, zero value otherwise.
+func (o *ValidateSubmitOrderRequest) GetInitialCapital() string {
+	if o == nil || IsNil(o.InitialCapital) {
+		var ret string
+		return ret
+	}
+	return *o.InitialCapital
+}
+
+// GetInitialCapitalOk returns a tuple with the InitialCapital field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ValidateSubmitOrderRequest) GetInitialCapitalOk() (*string, bool) {
+	if o == nil || IsNil(o.InitialCapital) {
+		return nil, false
+	}
+	return o.InitialCapital, true
+}
+
+// HasInitialCapital returns a boolean if a field has been set.
+func (o *ValidateSubmitOrderRequest) HasInitialCapital() bool {
+	if o != nil && !IsNil(o.InitialCapital) {
+		return true
+	}
+
+	return false
+}
+
+// SetInitialCapital gets a reference to the given string and assigns it to the InitialCapital field.
+func (o *ValidateSubmitOrderRequest) SetInitialCapital(v string) {
+	o.InitialCapital = &v
 }
 
 func (o ValidateSubmitOrderRequest) MarshalJSON() ([]byte, error) {
@@ -587,6 +620,9 @@ func (o ValidateSubmitOrderRequest) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Restrictions) {
 		toSerialize["restrictions"] = o.Restrictions
+	}
+	if !IsNil(o.InitialCapital) {
+		toSerialize["initial_capital"] = o.InitialCapital
 	}
 	return toSerialize, nil
 }

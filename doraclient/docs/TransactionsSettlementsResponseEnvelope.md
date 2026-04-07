@@ -1,98 +1,98 @@
-# CreateConditionalOrderResponseEnvelope
+# TransactionsSettlementsResponseEnvelope
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Data** | Pointer to [**CreateConditionalOrderResponseData**](CreateConditionalOrderResponseData.md) |  | [optional] 
+**Data** | Pointer to [**TransactionsSettlementsResponse**](TransactionsSettlementsResponse.md) |  | [optional] 
 **Error** | Pointer to **string** | The error message. Present for error (non-2xx) responses. | [optional] 
 **Metadata** | [**Metadata**](Metadata.md) | Metadata about the response, including status code and trace information. | 
 
 ## Methods
 
-### NewCreateConditionalOrderResponseEnvelope
+### NewTransactionsSettlementsResponseEnvelope
 
-`func NewCreateConditionalOrderResponseEnvelope(metadata Metadata, ) *CreateConditionalOrderResponseEnvelope`
+`func NewTransactionsSettlementsResponseEnvelope(metadata Metadata, ) *TransactionsSettlementsResponseEnvelope`
 
-NewCreateConditionalOrderResponseEnvelope instantiates a new CreateConditionalOrderResponseEnvelope object
+NewTransactionsSettlementsResponseEnvelope instantiates a new TransactionsSettlementsResponseEnvelope object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewCreateConditionalOrderResponseEnvelopeWithDefaults
+### NewTransactionsSettlementsResponseEnvelopeWithDefaults
 
-`func NewCreateConditionalOrderResponseEnvelopeWithDefaults() *CreateConditionalOrderResponseEnvelope`
+`func NewTransactionsSettlementsResponseEnvelopeWithDefaults() *TransactionsSettlementsResponseEnvelope`
 
-NewCreateConditionalOrderResponseEnvelopeWithDefaults instantiates a new CreateConditionalOrderResponseEnvelope object
+NewTransactionsSettlementsResponseEnvelopeWithDefaults instantiates a new TransactionsSettlementsResponseEnvelope object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetData
 
-`func (o *CreateConditionalOrderResponseEnvelope) GetData() CreateConditionalOrderResponseData`
+`func (o *TransactionsSettlementsResponseEnvelope) GetData() TransactionsSettlementsResponse`
 
 GetData returns the Data field if non-nil, zero value otherwise.
 
 ### GetDataOk
 
-`func (o *CreateConditionalOrderResponseEnvelope) GetDataOk() (*CreateConditionalOrderResponseData, bool)`
+`func (o *TransactionsSettlementsResponseEnvelope) GetDataOk() (*TransactionsSettlementsResponse, bool)`
 
 GetDataOk returns a tuple with the Data field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetData
 
-`func (o *CreateConditionalOrderResponseEnvelope) SetData(v CreateConditionalOrderResponseData)`
+`func (o *TransactionsSettlementsResponseEnvelope) SetData(v TransactionsSettlementsResponse)`
 
 SetData sets Data field to given value.
 
 ### HasData
 
-`func (o *CreateConditionalOrderResponseEnvelope) HasData() bool`
+`func (o *TransactionsSettlementsResponseEnvelope) HasData() bool`
 
 HasData returns a boolean if a field has been set.
 
 ### GetError
 
-`func (o *CreateConditionalOrderResponseEnvelope) GetError() string`
+`func (o *TransactionsSettlementsResponseEnvelope) GetError() string`
 
 GetError returns the Error field if non-nil, zero value otherwise.
 
 ### GetErrorOk
 
-`func (o *CreateConditionalOrderResponseEnvelope) GetErrorOk() (*string, bool)`
+`func (o *TransactionsSettlementsResponseEnvelope) GetErrorOk() (*string, bool)`
 
 GetErrorOk returns a tuple with the Error field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetError
 
-`func (o *CreateConditionalOrderResponseEnvelope) SetError(v string)`
+`func (o *TransactionsSettlementsResponseEnvelope) SetError(v string)`
 
 SetError sets Error field to given value.
 
 ### HasError
 
-`func (o *CreateConditionalOrderResponseEnvelope) HasError() bool`
+`func (o *TransactionsSettlementsResponseEnvelope) HasError() bool`
 
 HasError returns a boolean if a field has been set.
 
 ### GetMetadata
 
-`func (o *CreateConditionalOrderResponseEnvelope) GetMetadata() Metadata`
+`func (o *TransactionsSettlementsResponseEnvelope) GetMetadata() Metadata`
 
 GetMetadata returns the Metadata field if non-nil, zero value otherwise.
 
 ### GetMetadataOk
 
-`func (o *CreateConditionalOrderResponseEnvelope) GetMetadataOk() (*Metadata, bool)`
+`func (o *TransactionsSettlementsResponseEnvelope) GetMetadataOk() (*Metadata, bool)`
 
 GetMetadataOk returns a tuple with the Metadata field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMetadata
 
-`func (o *CreateConditionalOrderResponseEnvelope) SetMetadata(v Metadata)`
+`func (o *TransactionsSettlementsResponseEnvelope) SetMetadata(v Metadata)`
 
 SetMetadata sets Metadata field to given value.
 

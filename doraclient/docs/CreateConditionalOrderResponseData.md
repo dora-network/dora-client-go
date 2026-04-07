@@ -1,4 +1,4 @@
-# CreateConditionalOrderResponseEnvelopeAllOfData
+# CreateConditionalOrderResponseData
 
 ## Properties
 
@@ -9,70 +9,70 @@ Name | Type | Description | Notes
 
 ## Methods
 
-### NewCreateConditionalOrderResponseEnvelopeAllOfData
+### NewCreateConditionalOrderResponseData
 
-`func NewCreateConditionalOrderResponseEnvelopeAllOfData() *CreateConditionalOrderResponseEnvelopeAllOfData`
+`func NewCreateConditionalOrderResponseData() *CreateConditionalOrderResponseData`
 
-NewCreateConditionalOrderResponseEnvelopeAllOfData instantiates a new CreateConditionalOrderResponseEnvelopeAllOfData object
+NewCreateConditionalOrderResponseData instantiates a new CreateConditionalOrderResponseData object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewCreateConditionalOrderResponseEnvelopeAllOfDataWithDefaults
+### NewCreateConditionalOrderResponseDataWithDefaults
 
-`func NewCreateConditionalOrderResponseEnvelopeAllOfDataWithDefaults() *CreateConditionalOrderResponseEnvelopeAllOfData`
+`func NewCreateConditionalOrderResponseDataWithDefaults() *CreateConditionalOrderResponseData`
 
-NewCreateConditionalOrderResponseEnvelopeAllOfDataWithDefaults instantiates a new CreateConditionalOrderResponseEnvelopeAllOfData object
+NewCreateConditionalOrderResponseDataWithDefaults instantiates a new CreateConditionalOrderResponseData object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetStopLossOrderId
 
-`func (o *CreateConditionalOrderResponseEnvelopeAllOfData) GetStopLossOrderId() string`
+`func (o *CreateConditionalOrderResponseData) GetStopLossOrderId() string`
 
 GetStopLossOrderId returns the StopLossOrderId field if non-nil, zero value otherwise.
 
 ### GetStopLossOrderIdOk
 
-`func (o *CreateConditionalOrderResponseEnvelopeAllOfData) GetStopLossOrderIdOk() (*string, bool)`
+`func (o *CreateConditionalOrderResponseData) GetStopLossOrderIdOk() (*string, bool)`
 
 GetStopLossOrderIdOk returns a tuple with the StopLossOrderId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetStopLossOrderId
 
-`func (o *CreateConditionalOrderResponseEnvelopeAllOfData) SetStopLossOrderId(v string)`
+`func (o *CreateConditionalOrderResponseData) SetStopLossOrderId(v string)`
 
 SetStopLossOrderId sets StopLossOrderId field to given value.
 
 ### HasStopLossOrderId
 
-`func (o *CreateConditionalOrderResponseEnvelopeAllOfData) HasStopLossOrderId() bool`
+`func (o *CreateConditionalOrderResponseData) HasStopLossOrderId() bool`
 
 HasStopLossOrderId returns a boolean if a field has been set.
 
 ### GetTakeProfitOrderId
 
-`func (o *CreateConditionalOrderResponseEnvelopeAllOfData) GetTakeProfitOrderId() string`
+`func (o *CreateConditionalOrderResponseData) GetTakeProfitOrderId() string`
 
 GetTakeProfitOrderId returns the TakeProfitOrderId field if non-nil, zero value otherwise.
 
 ### GetTakeProfitOrderIdOk
 
-`func (o *CreateConditionalOrderResponseEnvelopeAllOfData) GetTakeProfitOrderIdOk() (*string, bool)`
+`func (o *CreateConditionalOrderResponseData) GetTakeProfitOrderIdOk() (*string, bool)`
 
 GetTakeProfitOrderIdOk returns a tuple with the TakeProfitOrderId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTakeProfitOrderId
 
-`func (o *CreateConditionalOrderResponseEnvelopeAllOfData) SetTakeProfitOrderId(v string)`
+`func (o *CreateConditionalOrderResponseData) SetTakeProfitOrderId(v string)`
 
 SetTakeProfitOrderId sets TakeProfitOrderId field to given value.
 
 ### HasTakeProfitOrderId
 
-`func (o *CreateConditionalOrderResponseEnvelopeAllOfData) HasTakeProfitOrderId() bool`
+`func (o *CreateConditionalOrderResponseData) HasTakeProfitOrderId() bool`
 
 HasTakeProfitOrderId returns a boolean if a field has been set.
 

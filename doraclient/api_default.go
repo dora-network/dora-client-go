@@ -2943,7 +2943,7 @@ func (r ApiGetAssetsStreamRequest) Until(until time.Time) ApiGetAssetsStreamRequ
 	return r
 }
 
-func (r ApiGetAssetsStreamRequest) Execute() ([]StreamAssetsEntry, *http.Response, error) {
+func (r ApiGetAssetsStreamRequest) Execute() (*StreamAssetsResponse, *http.Response, error) {
 	return r.ApiService.GetAssetsStreamExecute(r)
 }
 
@@ -2961,13 +2961,13 @@ func (a *DefaultAPIService) GetAssetsStream(ctx context.Context) ApiGetAssetsStr
 }
 
 // Execute executes the request
-//  @return []StreamAssetsEntry
-func (a *DefaultAPIService) GetAssetsStreamExecute(r ApiGetAssetsStreamRequest) ([]StreamAssetsEntry, *http.Response, error) {
+//  @return StreamAssetsResponse
+func (a *DefaultAPIService) GetAssetsStreamExecute(r ApiGetAssetsStreamRequest) (*StreamAssetsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  []StreamAssetsEntry
+		localVarReturnValue  *StreamAssetsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DefaultAPIService.GetAssetsStream")
@@ -3137,13 +3137,15 @@ func (a *DefaultAPIService) GetCandleDataExecute(r ApiGetCandleDataRequest) (*Li
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.start == nil {
+		return localVarReturnValue, nil, reportError("start is required and must be specified")
+	}
+	if r.end == nil {
+		return localVarReturnValue, nil, reportError("end is required and must be specified")
+	}
 
-	if r.start != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "start", r.start, "form", "")
-	}
-	if r.end != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "end", r.end, "form", "")
-	}
+	parameterAddToHeaderOrQuery(localVarQueryParams, "start", r.start, "form", "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "end", r.end, "form", "")
 	if r.resolution != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "resolution", r.resolution, "form", "")
 	}
@@ -7240,6 +7242,219 @@ func (a *DefaultAPIService) GetTransactionsExecute(r ApiGetTransactionsRequest) 
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiGetTransactionsSettlementsRequest struct {
+	ctx context.Context
+	ApiService *DefaultAPIService
+	tenantId *string
+	userId *string
+	positionId *string
+	txKind *string
+	createdAfter *time.Time
+	settledBefore *time.Time
+	isSettled *bool
+}
+
+// Tenant ID to filter settlements
+func (r ApiGetTransactionsSettlementsRequest) TenantId(tenantId string) ApiGetTransactionsSettlementsRequest {
+	r.tenantId = &tenantId
+	return r
+}
+
+// User ID to filter settlements
+func (r ApiGetTransactionsSettlementsRequest) UserId(userId string) ApiGetTransactionsSettlementsRequest {
+	r.userId = &userId
+	return r
+}
+
+// Position ID to filter settlements
+func (r ApiGetTransactionsSettlementsRequest) PositionId(positionId string) ApiGetTransactionsSettlementsRequest {
+	r.positionId = &positionId
+	return r
+}
+
+// Transaction kind to filter settlements
+func (r ApiGetTransactionsSettlementsRequest) TxKind(txKind string) ApiGetTransactionsSettlementsRequest {
+	r.txKind = &txKind
+	return r
+}
+
+// Filter settlements created after this time
+func (r ApiGetTransactionsSettlementsRequest) CreatedAfter(createdAfter time.Time) ApiGetTransactionsSettlementsRequest {
+	r.createdAfter = &createdAfter
+	return r
+}
+
+// Filter settlements settled before this time
+func (r ApiGetTransactionsSettlementsRequest) SettledBefore(settledBefore time.Time) ApiGetTransactionsSettlementsRequest {
+	r.settledBefore = &settledBefore
+	return r
+}
+
+// Filter settlements by settlement status
+func (r ApiGetTransactionsSettlementsRequest) IsSettled(isSettled bool) ApiGetTransactionsSettlementsRequest {
+	r.isSettled = &isSettled
+	return r
+}
+
+func (r ApiGetTransactionsSettlementsRequest) Execute() (*TransactionsSettlementsResponseEnvelope, *http.Response, error) {
+	return r.ApiService.GetTransactionsSettlementsExecute(r)
+}
+
+/*
+GetTransactionsSettlements Get transactions settlements with filters
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetTransactionsSettlementsRequest
+*/
+func (a *DefaultAPIService) GetTransactionsSettlements(ctx context.Context) ApiGetTransactionsSettlementsRequest {
+	return ApiGetTransactionsSettlementsRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return TransactionsSettlementsResponseEnvelope
+func (a *DefaultAPIService) GetTransactionsSettlementsExecute(r ApiGetTransactionsSettlementsRequest) (*TransactionsSettlementsResponseEnvelope, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *TransactionsSettlementsResponseEnvelope
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DefaultAPIService.GetTransactionsSettlements")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v1/transactions/settlements"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.tenantId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "tenant_id", r.tenantId, "form", "")
+	}
+	if r.userId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "user_id", r.userId, "form", "")
+	}
+	if r.positionId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "position_id", r.positionId, "form", "")
+	}
+	if r.txKind != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "tx_kind", r.txKind, "form", "")
+	}
+	if r.createdAfter != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "created_after", r.createdAfter, "form", "")
+	}
+	if r.settledBefore != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "settled_before", r.settledBefore, "form", "")
+	}
+	if r.isSettled != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "is_settled", r.isSettled, "form", "")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKeyAuthHeader"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ResponseEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v ResponseEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v ResponseEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiGetUserByIdRequest struct {
 	ctx context.Context
 	ApiService *DefaultAPIService
@@ -7551,7 +7766,7 @@ type ApiGetUserLedgerStreamRequest struct {
 	userId string
 }
 
-func (r ApiGetUserLedgerStreamRequest) Execute() ([]StreamPositionsEntry, *http.Response, error) {
+func (r ApiGetUserLedgerStreamRequest) Execute() (*StreamPositionsResponse, *http.Response, error) {
 	return r.ApiService.GetUserLedgerStreamExecute(r)
 }
 
@@ -7571,13 +7786,13 @@ func (a *DefaultAPIService) GetUserLedgerStream(ctx context.Context, userId stri
 }
 
 // Execute executes the request
-//  @return []StreamPositionsEntry
-func (a *DefaultAPIService) GetUserLedgerStreamExecute(r ApiGetUserLedgerStreamRequest) ([]StreamPositionsEntry, *http.Response, error) {
+//  @return StreamPositionsResponse
+func (a *DefaultAPIService) GetUserLedgerStreamExecute(r ApiGetUserLedgerStreamRequest) (*StreamPositionsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  []StreamPositionsEntry
+		localVarReturnValue  *StreamPositionsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DefaultAPIService.GetUserLedgerStream")
@@ -7716,7 +7931,7 @@ func (r ApiGetUserOrderUpdatesStreamRequest) Since(since time.Time) ApiGetUserOr
 	return r
 }
 
-func (r ApiGetUserOrderUpdatesStreamRequest) Execute() ([]StreamOrderUpdatesEntry, *http.Response, error) {
+func (r ApiGetUserOrderUpdatesStreamRequest) Execute() (*StreamOrderUpdatesResponse, *http.Response, error) {
 	return r.ApiService.GetUserOrderUpdatesStreamExecute(r)
 }
 
@@ -7738,13 +7953,13 @@ func (a *DefaultAPIService) GetUserOrderUpdatesStream(ctx context.Context, userI
 }
 
 // Execute executes the request
-//  @return []StreamOrderUpdatesEntry
-func (a *DefaultAPIService) GetUserOrderUpdatesStreamExecute(r ApiGetUserOrderUpdatesStreamRequest) ([]StreamOrderUpdatesEntry, *http.Response, error) {
+//  @return StreamOrderUpdatesResponse
+func (a *DefaultAPIService) GetUserOrderUpdatesStreamExecute(r ApiGetUserOrderUpdatesStreamRequest) (*StreamOrderUpdatesResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  []StreamOrderUpdatesEntry
+		localVarReturnValue  *StreamOrderUpdatesResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DefaultAPIService.GetUserOrderUpdatesStream")
@@ -7886,7 +8101,7 @@ func (r ApiGetUserOrdersUpdatesStreamAllRequest) Since(since time.Time) ApiGetUs
 	return r
 }
 
-func (r ApiGetUserOrdersUpdatesStreamAllRequest) Execute() ([]StreamOrderUpdatesEntry, *http.Response, error) {
+func (r ApiGetUserOrdersUpdatesStreamAllRequest) Execute() (*StreamOrderUpdatesResponse, *http.Response, error) {
 	return r.ApiService.GetUserOrdersUpdatesStreamAllExecute(r)
 }
 
@@ -7906,13 +8121,13 @@ func (a *DefaultAPIService) GetUserOrdersUpdatesStreamAll(ctx context.Context, u
 }
 
 // Execute executes the request
-//  @return []StreamOrderUpdatesEntry
-func (a *DefaultAPIService) GetUserOrdersUpdatesStreamAllExecute(r ApiGetUserOrdersUpdatesStreamAllRequest) ([]StreamOrderUpdatesEntry, *http.Response, error) {
+//  @return StreamOrderUpdatesResponse
+func (a *DefaultAPIService) GetUserOrdersUpdatesStreamAllExecute(r ApiGetUserOrdersUpdatesStreamAllRequest) (*StreamOrderUpdatesResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  []StreamOrderUpdatesEntry
+		localVarReturnValue  *StreamOrderUpdatesResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DefaultAPIService.GetUserOrdersUpdatesStreamAll")
@@ -8196,7 +8411,7 @@ func (r ApiGetUserTransactionsStreamRequest) Since(since time.Time) ApiGetUserTr
 	return r
 }
 
-func (r ApiGetUserTransactionsStreamRequest) Execute() ([]StreamTransactionsEntry, *http.Response, error) {
+func (r ApiGetUserTransactionsStreamRequest) Execute() (*StreamTransactionsResponse, *http.Response, error) {
 	return r.ApiService.GetUserTransactionsStreamExecute(r)
 }
 
@@ -8216,13 +8431,13 @@ func (a *DefaultAPIService) GetUserTransactionsStream(ctx context.Context, userI
 }
 
 // Execute executes the request
-//  @return []StreamTransactionsEntry
-func (a *DefaultAPIService) GetUserTransactionsStreamExecute(r ApiGetUserTransactionsStreamRequest) ([]StreamTransactionsEntry, *http.Response, error) {
+//  @return StreamTransactionsResponse
+func (a *DefaultAPIService) GetUserTransactionsStreamExecute(r ApiGetUserTransactionsStreamRequest) (*StreamTransactionsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  []StreamTransactionsEntry
+		localVarReturnValue  *StreamTransactionsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DefaultAPIService.GetUserTransactionsStream")
@@ -11993,6 +12208,160 @@ func (a *DefaultAPIService) SettleRealizedPnlRecordExecute(r ApiSettleRealizedPn
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiSettleTransactionsSettlementsRequest struct {
+	ctx context.Context
+	ApiService *DefaultAPIService
+	transactionsSettlementRequest *TransactionsSettlementRequest
+}
+
+func (r ApiSettleTransactionsSettlementsRequest) TransactionsSettlementRequest(transactionsSettlementRequest TransactionsSettlementRequest) ApiSettleTransactionsSettlementsRequest {
+	r.transactionsSettlementRequest = &transactionsSettlementRequest
+	return r
+}
+
+func (r ApiSettleTransactionsSettlementsRequest) Execute() (*TransactionsSettlementsResponse, *http.Response, error) {
+	return r.ApiService.SettleTransactionsSettlementsExecute(r)
+}
+
+/*
+SettleTransactionsSettlements Settle multiple transactions settlements in batch
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiSettleTransactionsSettlementsRequest
+*/
+func (a *DefaultAPIService) SettleTransactionsSettlements(ctx context.Context) ApiSettleTransactionsSettlementsRequest {
+	return ApiSettleTransactionsSettlementsRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return TransactionsSettlementsResponse
+func (a *DefaultAPIService) SettleTransactionsSettlementsExecute(r ApiSettleTransactionsSettlementsRequest) (*TransactionsSettlementsResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPut
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *TransactionsSettlementsResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DefaultAPIService.SettleTransactionsSettlements")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v1/transactions/settlements"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.transactionsSettlementRequest == nil {
+		return localVarReturnValue, nil, reportError("transactionsSettlementRequest is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.transactionsSettlementRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKeyAuthHeader"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ResponseEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v ResponseEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v ResponseEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiStreamAssetPricesRequest struct {
 	ctx context.Context
 	ApiService *DefaultAPIService
@@ -12010,7 +12379,7 @@ func (r ApiStreamAssetPricesRequest) AssetId(assetId string) ApiStreamAssetPrice
 	return r
 }
 
-func (r ApiStreamAssetPricesRequest) Execute() (*map[string]AssetPrice, *http.Response, error) {
+func (r ApiStreamAssetPricesRequest) Execute() (*StreamAssetPricesResponse, *http.Response, error) {
 	return r.ApiService.StreamAssetPricesExecute(r)
 }
 
@@ -12030,13 +12399,13 @@ func (a *DefaultAPIService) StreamAssetPrices(ctx context.Context) ApiStreamAsse
 }
 
 // Execute executes the request
-//  @return map[string]AssetPrice
-func (a *DefaultAPIService) StreamAssetPricesExecute(r ApiStreamAssetPricesRequest) (*map[string]AssetPrice, *http.Response, error) {
+//  @return StreamAssetPricesResponse
+func (a *DefaultAPIService) StreamAssetPricesExecute(r ApiStreamAssetPricesRequest) (*StreamAssetPricesResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *map[string]AssetPrice
+		localVarReturnValue  *StreamAssetPricesResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DefaultAPIService.StreamAssetPrices")
@@ -12149,7 +12518,7 @@ func (r ApiStreamCandleDataRequest) Resolution(resolution CandleResolution) ApiS
 	return r
 }
 
-func (r ApiStreamCandleDataRequest) Execute() ([]StreamCandlesEntry, *http.Response, error) {
+func (r ApiStreamCandleDataRequest) Execute() (*StreamCandlesResponse, *http.Response, error) {
 	return r.ApiService.StreamCandleDataExecute(r)
 }
 
@@ -12169,13 +12538,13 @@ func (a *DefaultAPIService) StreamCandleData(ctx context.Context, orderBookId st
 }
 
 // Execute executes the request
-//  @return []StreamCandlesEntry
-func (a *DefaultAPIService) StreamCandleDataExecute(r ApiStreamCandleDataRequest) ([]StreamCandlesEntry, *http.Response, error) {
+//  @return StreamCandlesResponse
+func (a *DefaultAPIService) StreamCandleDataExecute(r ApiStreamCandleDataRequest) (*StreamCandlesResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  []StreamCandlesEntry
+		localVarReturnValue  *StreamCandlesResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DefaultAPIService.StreamCandleData")
@@ -12294,7 +12663,7 @@ func (r ApiStreamOrderBookBalancesRequest) Since(since time.Time) ApiStreamOrder
 	return r
 }
 
-func (r ApiStreamOrderBookBalancesRequest) Execute() ([]StreamOrderBookBalanceEntry, *http.Response, error) {
+func (r ApiStreamOrderBookBalancesRequest) Execute() (*StreamOrderBookBalancesResponse, *http.Response, error) {
 	return r.ApiService.StreamOrderBookBalancesExecute(r)
 }
 
@@ -12314,13 +12683,13 @@ func (a *DefaultAPIService) StreamOrderBookBalances(ctx context.Context, orderBo
 }
 
 // Execute executes the request
-//  @return []StreamOrderBookBalanceEntry
-func (a *DefaultAPIService) StreamOrderBookBalancesExecute(r ApiStreamOrderBookBalancesRequest) ([]StreamOrderBookBalanceEntry, *http.Response, error) {
+//  @return StreamOrderBookBalancesResponse
+func (a *DefaultAPIService) StreamOrderBookBalancesExecute(r ApiStreamOrderBookBalancesRequest) (*StreamOrderBookBalancesResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  []StreamOrderBookBalanceEntry
+		localVarReturnValue  *StreamOrderBookBalancesResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DefaultAPIService.StreamOrderBookBalances")
@@ -12578,7 +12947,7 @@ func (r ApiStreamTradesRequest) Since(since time.Time) ApiStreamTradesRequest {
 	return r
 }
 
-func (r ApiStreamTradesRequest) Execute() ([]StreamTradesEntry, *http.Response, error) {
+func (r ApiStreamTradesRequest) Execute() (*StreamTradesResponse, *http.Response, error) {
 	return r.ApiService.StreamTradesExecute(r)
 }
 
@@ -12598,13 +12967,13 @@ func (a *DefaultAPIService) StreamTrades(ctx context.Context, orderBookId string
 }
 
 // Execute executes the request
-//  @return []StreamTradesEntry
-func (a *DefaultAPIService) StreamTradesExecute(r ApiStreamTradesRequest) ([]StreamTradesEntry, *http.Response, error) {
+//  @return StreamTradesResponse
+func (a *DefaultAPIService) StreamTradesExecute(r ApiStreamTradesRequest) (*StreamTradesResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  []StreamTradesEntry
+		localVarReturnValue  *StreamTradesResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DefaultAPIService.StreamTrades")

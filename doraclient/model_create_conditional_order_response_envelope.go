@@ -21,7 +21,7 @@ var _ MappedNullable = &CreateConditionalOrderResponseEnvelope{}
 
 // CreateConditionalOrderResponseEnvelope struct for CreateConditionalOrderResponseEnvelope
 type CreateConditionalOrderResponseEnvelope struct {
-	Data *CreateConditionalOrderResponseEnvelopeAllOfData `json:"data,omitempty"`
+	Data *CreateConditionalOrderResponseData `json:"data,omitempty"`
 	// The error message. Present for error (non-2xx) responses.
 	Error *string `json:"error,omitempty"`
 	// Metadata about the response, including status code and trace information.
@@ -49,9 +49,9 @@ func NewCreateConditionalOrderResponseEnvelopeWithDefaults() *CreateConditionalO
 }
 
 // GetData returns the Data field value if set, zero value otherwise.
-func (o *CreateConditionalOrderResponseEnvelope) GetData() CreateConditionalOrderResponseEnvelopeAllOfData {
+func (o *CreateConditionalOrderResponseEnvelope) GetData() CreateConditionalOrderResponseData {
 	if o == nil || IsNil(o.Data) {
-		var ret CreateConditionalOrderResponseEnvelopeAllOfData
+		var ret CreateConditionalOrderResponseData
 		return ret
 	}
 	return *o.Data
@@ -59,7 +59,7 @@ func (o *CreateConditionalOrderResponseEnvelope) GetData() CreateConditionalOrde
 
 // GetDataOk returns a tuple with the Data field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateConditionalOrderResponseEnvelope) GetDataOk() (*CreateConditionalOrderResponseEnvelopeAllOfData, bool) {
+func (o *CreateConditionalOrderResponseEnvelope) GetDataOk() (*CreateConditionalOrderResponseData, bool) {
 	if o == nil || IsNil(o.Data) {
 		return nil, false
 	}
@@ -75,8 +75,8 @@ func (o *CreateConditionalOrderResponseEnvelope) HasData() bool {
 	return false
 }
 
-// SetData gets a reference to the given CreateConditionalOrderResponseEnvelopeAllOfData and assigns it to the Data field.
-func (o *CreateConditionalOrderResponseEnvelope) SetData(v CreateConditionalOrderResponseEnvelopeAllOfData) {
+// SetData gets a reference to the given CreateConditionalOrderResponseData and assigns it to the Data field.
+func (o *CreateConditionalOrderResponseEnvelope) SetData(v CreateConditionalOrderResponseData) {
 	o.Data = &v
 }
 

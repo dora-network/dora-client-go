@@ -664,6 +664,18 @@ func Test_doraclient_DefaultAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test DefaultAPIService GetTransactionsSettlements", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.DefaultAPI.GetTransactionsSettlements(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test DefaultAPIService GetUserById", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -1039,6 +1051,18 @@ func Test_doraclient_DefaultAPIService(t *testing.T) {
 		var settlementId string
 
 		resp, httpRes, err := apiClient.DefaultAPI.SettleRealizedPnlRecord(context.Background(), settlementId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DefaultAPIService SettleTransactionsSettlements", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.DefaultAPI.SettleTransactionsSettlements(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
