@@ -21,7 +21,7 @@ var _ MappedNullable = &ListPositionAccountsResponseEnvelope{}
 
 // ListPositionAccountsResponseEnvelope struct for ListPositionAccountsResponseEnvelope
 type ListPositionAccountsResponseEnvelope struct {
-	Data *PositionAccounts `json:"data,omitempty"`
+	Data []PositionAccount `json:"data,omitempty"`
 	// The error message. Present for error (non-2xx) responses.
 	Error *string `json:"error,omitempty"`
 	// Metadata about the response, including status code and trace information.
@@ -49,17 +49,17 @@ func NewListPositionAccountsResponseEnvelopeWithDefaults() *ListPositionAccounts
 }
 
 // GetData returns the Data field value if set, zero value otherwise.
-func (o *ListPositionAccountsResponseEnvelope) GetData() PositionAccounts {
+func (o *ListPositionAccountsResponseEnvelope) GetData() []PositionAccount {
 	if o == nil || IsNil(o.Data) {
-		var ret PositionAccounts
+		var ret []PositionAccount
 		return ret
 	}
-	return *o.Data
+	return o.Data
 }
 
 // GetDataOk returns a tuple with the Data field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ListPositionAccountsResponseEnvelope) GetDataOk() (*PositionAccounts, bool) {
+func (o *ListPositionAccountsResponseEnvelope) GetDataOk() ([]PositionAccount, bool) {
 	if o == nil || IsNil(o.Data) {
 		return nil, false
 	}
@@ -75,9 +75,9 @@ func (o *ListPositionAccountsResponseEnvelope) HasData() bool {
 	return false
 }
 
-// SetData gets a reference to the given PositionAccounts and assigns it to the Data field.
-func (o *ListPositionAccountsResponseEnvelope) SetData(v PositionAccounts) {
-	o.Data = &v
+// SetData gets a reference to the given []PositionAccount and assigns it to the Data field.
+func (o *ListPositionAccountsResponseEnvelope) SetData(v []PositionAccount) {
+	o.Data = v
 }
 
 // GetError returns the Error field value if set, zero value otherwise.

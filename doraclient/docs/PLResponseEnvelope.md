@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Data** | Pointer to [**PLAccounts**](PLAccounts.md) |  | [optional] 
+**Data** | Pointer to [**[]PLAccount**](PLAccount.md) |  | [optional] 
 **Error** | Pointer to **string** | The error message. Present for error (non-2xx) responses. | [optional] 
 **Metadata** | [**Metadata**](Metadata.md) | Metadata about the response, including status code and trace information. | 
 
@@ -29,20 +29,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetData
 
-`func (o *PLResponseEnvelope) GetData() PLAccounts`
+`func (o *PLResponseEnvelope) GetData() []PLAccount`
 
 GetData returns the Data field if non-nil, zero value otherwise.
 
 ### GetDataOk
 
-`func (o *PLResponseEnvelope) GetDataOk() (*PLAccounts, bool)`
+`func (o *PLResponseEnvelope) GetDataOk() (*[]PLAccount, bool)`
 
 GetDataOk returns a tuple with the Data field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetData
 
-`func (o *PLResponseEnvelope) SetData(v PLAccounts)`
+`func (o *PLResponseEnvelope) SetData(v []PLAccount)`
 
 SetData sets Data field to given value.
 

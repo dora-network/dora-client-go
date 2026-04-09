@@ -1419,7 +1419,7 @@ No authorization required
 
 ## GetAssetsStream
 
-> StreamAssetsResponse GetAssetsStream(ctx).Since(since).Until(until).Execute()
+> []StreamAssetsEntry GetAssetsStream(ctx).Since(since).Until(until).Execute()
 
 Get all inserts or updates for assets
 
@@ -1447,7 +1447,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.GetAssetsStream``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetAssetsStream`: StreamAssetsResponse
+	// response from `GetAssetsStream`: []StreamAssetsEntry
 	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.GetAssetsStream`: %v\n", resp)
 }
 ```
@@ -1468,7 +1468,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**StreamAssetsResponse**](StreamAssetsResponse.md)
+[**[]StreamAssetsEntry**](StreamAssetsEntry.md)
 
 ### Authorization
 
@@ -3579,7 +3579,7 @@ Name | Type | Description  | Notes
 
 ## GetUserLedgerStream
 
-> StreamPositionsResponse GetUserLedgerStream(ctx, userId).Execute()
+> []StreamPositionsEntry GetUserLedgerStream(ctx, userId).Execute()
 
 Get a snapshot of user's ledger updates since a specific time, and opens a stream for further updates
 
@@ -3605,7 +3605,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.GetUserLedgerStream``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetUserLedgerStream`: StreamPositionsResponse
+	// response from `GetUserLedgerStream`: []StreamPositionsEntry
 	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.GetUserLedgerStream`: %v\n", resp)
 }
 ```
@@ -3629,7 +3629,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**StreamPositionsResponse**](StreamPositionsResponse.md)
+[**[]StreamPositionsEntry**](StreamPositionsEntry.md)
 
 ### Authorization
 
@@ -3647,7 +3647,7 @@ Name | Type | Description  | Notes
 
 ## GetUserOrderUpdatesStream
 
-> StreamOrderUpdatesResponse GetUserOrderUpdatesStream(ctx, userId, orderBookId).Since(since).Execute()
+> []StreamOrderUpdatesEntry GetUserOrderUpdatesStream(ctx, userId, orderBookId).Since(since).Execute()
 
 Get a snapshot of user's order updates for the given order book since a specific time, and opens a stream for further updates
 
@@ -3676,7 +3676,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.GetUserOrderUpdatesStream``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetUserOrderUpdatesStream`: StreamOrderUpdatesResponse
+	// response from `GetUserOrderUpdatesStream`: []StreamOrderUpdatesEntry
 	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.GetUserOrderUpdatesStream`: %v\n", resp)
 }
 ```
@@ -3703,7 +3703,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**StreamOrderUpdatesResponse**](StreamOrderUpdatesResponse.md)
+[**[]StreamOrderUpdatesEntry**](StreamOrderUpdatesEntry.md)
 
 ### Authorization
 
@@ -3721,7 +3721,7 @@ Name | Type | Description  | Notes
 
 ## GetUserOrdersUpdatesStreamAll
 
-> StreamOrderUpdatesResponse GetUserOrdersUpdatesStreamAll(ctx, userId).Since(since).Execute()
+> []StreamOrderUpdatesEntry GetUserOrdersUpdatesStreamAll(ctx, userId).Since(since).Execute()
 
 Get a snapshot of user's order updates across all order books since a specific time, and opens a stream for further updates
 
@@ -3749,7 +3749,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.GetUserOrdersUpdatesStreamAll``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetUserOrdersUpdatesStreamAll`: StreamOrderUpdatesResponse
+	// response from `GetUserOrdersUpdatesStreamAll`: []StreamOrderUpdatesEntry
 	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.GetUserOrdersUpdatesStreamAll`: %v\n", resp)
 }
 ```
@@ -3774,7 +3774,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**StreamOrderUpdatesResponse**](StreamOrderUpdatesResponse.md)
+[**[]StreamOrderUpdatesEntry**](StreamOrderUpdatesEntry.md)
 
 ### Authorization
 
@@ -3851,7 +3851,7 @@ Other parameters are passed through a pointer to a apiGetUserSelfRequest struct 
 
 ## GetUserTransactionsStream
 
-> StreamTransactionsResponse GetUserTransactionsStream(ctx, userId).Since(since).Execute()
+> []StreamTransactionsEntry GetUserTransactionsStream(ctx, userId).Since(since).Execute()
 
 Get a snapshot of user's executed transactions since a specific time, and opens a stream for further updates
 
@@ -3879,7 +3879,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.GetUserTransactionsStream``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetUserTransactionsStream`: StreamTransactionsResponse
+	// response from `GetUserTransactionsStream`: []StreamTransactionsEntry
 	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.GetUserTransactionsStream`: %v\n", resp)
 }
 ```
@@ -3904,7 +3904,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**StreamTransactionsResponse**](StreamTransactionsResponse.md)
+[**[]StreamTransactionsEntry**](StreamTransactionsEntry.md)
 
 ### Authorization
 
@@ -5499,7 +5499,7 @@ Name | Type | Description  | Notes
 
 ## StreamAssetPrices
 
-> StreamAssetPricesResponse StreamAssetPrices(ctx).Since(since).AssetId(assetId).Execute()
+> map[string]AssetPrice StreamAssetPrices(ctx).Since(since).AssetId(assetId).Execute()
 
 Stream real-time asset prices as map objects
 
@@ -5529,7 +5529,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.StreamAssetPrices``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `StreamAssetPrices`: StreamAssetPricesResponse
+	// response from `StreamAssetPrices`: map[string]AssetPrice
 	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.StreamAssetPrices`: %v\n", resp)
 }
 ```
@@ -5550,7 +5550,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**StreamAssetPricesResponse**](StreamAssetPricesResponse.md)
+[**map[string]AssetPrice**](AssetPrice.md)
 
 ### Authorization
 
@@ -5568,7 +5568,7 @@ No authorization required
 
 ## StreamCandleData
 
-> StreamCandlesResponse StreamCandleData(ctx, orderBookId).Since(since).Resolution(resolution).Execute()
+> []StreamCandlesEntry StreamCandleData(ctx, orderBookId).Since(since).Resolution(resolution).Execute()
 
 Get a snapshot of candlestick data from date provided, and open a stream for real-time updates
 
@@ -5597,7 +5597,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.StreamCandleData``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `StreamCandleData`: StreamCandlesResponse
+	// response from `StreamCandleData`: []StreamCandlesEntry
 	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.StreamCandleData`: %v\n", resp)
 }
 ```
@@ -5623,7 +5623,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**StreamCandlesResponse**](StreamCandlesResponse.md)
+[**[]StreamCandlesEntry**](StreamCandlesEntry.md)
 
 ### Authorization
 
@@ -5641,7 +5641,7 @@ No authorization required
 
 ## StreamOrderBookBalances
 
-> StreamOrderBookBalancesResponse StreamOrderBookBalances(ctx, orderBookId).Since(since).Execute()
+> []StreamOrderBookBalanceEntry StreamOrderBookBalances(ctx, orderBookId).Since(since).Execute()
 
 Get a snapshot of base and quote balances for an order book and open a stream for real-time updates
 
@@ -5669,7 +5669,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.StreamOrderBookBalances``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `StreamOrderBookBalances`: StreamOrderBookBalancesResponse
+	// response from `StreamOrderBookBalances`: []StreamOrderBookBalanceEntry
 	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.StreamOrderBookBalances`: %v\n", resp)
 }
 ```
@@ -5694,7 +5694,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**StreamOrderBookBalancesResponse**](StreamOrderBookBalancesResponse.md)
+[**[]StreamOrderBookBalanceEntry**](StreamOrderBookBalanceEntry.md)
 
 ### Authorization
 
@@ -5783,7 +5783,7 @@ No authorization required
 
 ## StreamTrades
 
-> StreamTradesResponse StreamTrades(ctx, orderBookId).Since(since).Execute()
+> []StreamTradesEntry StreamTrades(ctx, orderBookId).Since(since).Execute()
 
 Get a snapshot of trades executed on the given order book from a specific date and open a stream for real-time updates
 
@@ -5811,7 +5811,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.StreamTrades``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `StreamTrades`: StreamTradesResponse
+	// response from `StreamTrades`: []StreamTradesEntry
 	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.StreamTrades`: %v\n", resp)
 }
 ```
@@ -5836,7 +5836,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**StreamTradesResponse**](StreamTradesResponse.md)
+[**[]StreamTradesEntry**](StreamTradesEntry.md)
 
 ### Authorization
 
