@@ -20,7 +20,9 @@ var _ MappedNullable = &CreateIntegratorUserRequest{}
 // CreateIntegratorUserRequest struct for CreateIntegratorUserRequest
 type CreateIntegratorUserRequest struct {
 	Email *string
-	Name *string
+	FirstName *string
+	LastName *string
+	CountryOfDomicile *CountryCode
 	NativeAssetId *string
 	PhotoUrl *string
 	Provider *string
@@ -77,36 +79,100 @@ func (o *CreateIntegratorUserRequest) SetEmail(v string) {
 	o.Email = &v
 }
 
-// GetName returns the Name field value if set, zero value otherwise.
-func (o *CreateIntegratorUserRequest) GetName() string {
-	if o == nil || IsNil(o.Name) {
+// GetFirstName returns the FirstName field value if set, zero value otherwise.
+func (o *CreateIntegratorUserRequest) GetFirstName() string {
+	if o == nil || IsNil(o.FirstName) {
 		var ret string
 		return ret
 	}
-	return *o.Name
+	return *o.FirstName
 }
 
-// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// GetFirstNameOk returns a tuple with the FirstName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateIntegratorUserRequest) GetNameOk() (*string, bool) {
-	if o == nil || IsNil(o.Name) {
+func (o *CreateIntegratorUserRequest) GetFirstNameOk() (*string, bool) {
+	if o == nil || IsNil(o.FirstName) {
 		return nil, false
 	}
-	return o.Name, true
+	return o.FirstName, true
 }
 
-// HasName returns a boolean if a field has been set.
-func (o *CreateIntegratorUserRequest) HasName() bool {
-	if o != nil && !IsNil(o.Name) {
+// HasFirstName returns a boolean if a field has been set.
+func (o *CreateIntegratorUserRequest) HasFirstName() bool {
+	if o != nil && !IsNil(o.FirstName) {
 		return true
 	}
 
 	return false
 }
 
-// SetName gets a reference to the given string and assigns it to the Name field.
-func (o *CreateIntegratorUserRequest) SetName(v string) {
-	o.Name = &v
+// SetFirstName gets a reference to the given string and assigns it to the FirstName field.
+func (o *CreateIntegratorUserRequest) SetFirstName(v string) {
+	o.FirstName = &v
+}
+
+// GetLastName returns the LastName field value if set, zero value otherwise.
+func (o *CreateIntegratorUserRequest) GetLastName() string {
+	if o == nil || IsNil(o.LastName) {
+		var ret string
+		return ret
+	}
+	return *o.LastName
+}
+
+// GetLastNameOk returns a tuple with the LastName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateIntegratorUserRequest) GetLastNameOk() (*string, bool) {
+	if o == nil || IsNil(o.LastName) {
+		return nil, false
+	}
+	return o.LastName, true
+}
+
+// HasLastName returns a boolean if a field has been set.
+func (o *CreateIntegratorUserRequest) HasLastName() bool {
+	if o != nil && !IsNil(o.LastName) {
+		return true
+	}
+
+	return false
+}
+
+// SetLastName gets a reference to the given string and assigns it to the LastName field.
+func (o *CreateIntegratorUserRequest) SetLastName(v string) {
+	o.LastName = &v
+}
+
+// GetCountryOfDomicile returns the CountryOfDomicile field value if set, zero value otherwise.
+func (o *CreateIntegratorUserRequest) GetCountryOfDomicile() CountryCode {
+	if o == nil || IsNil(o.CountryOfDomicile) {
+		var ret CountryCode
+		return ret
+	}
+	return *o.CountryOfDomicile
+}
+
+// GetCountryOfDomicileOk returns a tuple with the CountryOfDomicile field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateIntegratorUserRequest) GetCountryOfDomicileOk() (*CountryCode, bool) {
+	if o == nil || IsNil(o.CountryOfDomicile) {
+		return nil, false
+	}
+	return o.CountryOfDomicile, true
+}
+
+// HasCountryOfDomicile returns a boolean if a field has been set.
+func (o *CreateIntegratorUserRequest) HasCountryOfDomicile() bool {
+	if o != nil && !IsNil(o.CountryOfDomicile) {
+		return true
+	}
+
+	return false
+}
+
+// SetCountryOfDomicile gets a reference to the given CountryCode and assigns it to the CountryOfDomicile field.
+func (o *CreateIntegratorUserRequest) SetCountryOfDomicile(v CountryCode) {
+	o.CountryOfDomicile = &v
 }
 
 // GetNativeAssetId returns the NativeAssetId field value if set, zero value otherwise.
@@ -282,8 +348,14 @@ func (o CreateIntegratorUserRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Email) {
 		toSerialize["email"] = o.Email
 	}
-	if !IsNil(o.Name) {
-		toSerialize["name"] = o.Name
+	if !IsNil(o.FirstName) {
+		toSerialize["first_name"] = o.FirstName
+	}
+	if !IsNil(o.LastName) {
+		toSerialize["last_name"] = o.LastName
+	}
+	if !IsNil(o.CountryOfDomicile) {
+		toSerialize["country_of_domicile"] = o.CountryOfDomicile
 	}
 	if !IsNil(o.NativeAssetId) {
 		toSerialize["native_asset_id"] = o.NativeAssetId

@@ -8,7 +8,9 @@ Name | Type | Description | Notes
 **ClosedAt** | Pointer to **time.Time** |  | [optional] 
 **DisabledAt** | Pointer to **time.Time** |  | [optional] 
 **Email** | **string** |  | 
-**Name** | **string** |  | 
+**FirstName** | **string** |  | 
+**LastName** | **string** |  | 
+**CountryOfDomicile** | [**CountryCode**](CountryCode.md) |  | 
 **NativeAssetId** | **string** |  | 
 **PhotoUrl** | Pointer to **string** |  | [optional] 
 **Provider** | Pointer to **string** |  | [optional] 
@@ -29,7 +31,7 @@ Name | Type | Description | Notes
 
 ### NewUser
 
-`func NewUser(id string, email string, name string, nativeAssetId string, roles []UserRole, showTutorialCards bool, notificationsEnabled bool, tenantId string, allowEmailNotifications bool, allowLiquidationsNotifications bool, allowDepositWithdrawalNotifications bool, allowOrdersNotifications bool, ) *User`
+`func NewUser(id string, email string, firstName string, lastName string, countryOfDomicile CountryCode, nativeAssetId string, roles []UserRole, showTutorialCards bool, notificationsEnabled bool, tenantId string, allowEmailNotifications bool, allowLiquidationsNotifications bool, allowDepositWithdrawalNotifications bool, allowOrdersNotifications bool, ) *User`
 
 NewUser instantiates a new User object
 This constructor will assign default values to properties that have it defined,
@@ -134,24 +136,64 @@ and a boolean to check if the value has been set.
 SetEmail sets Email field to given value.
 
 
-### GetName
+### GetFirstName
 
-`func (o *User) GetName() string`
+`func (o *User) GetFirstName() string`
 
-GetName returns the Name field if non-nil, zero value otherwise.
+GetFirstName returns the FirstName field if non-nil, zero value otherwise.
 
-### GetNameOk
+### GetFirstNameOk
 
-`func (o *User) GetNameOk() (*string, bool)`
+`func (o *User) GetFirstNameOk() (*string, bool)`
 
-GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
+GetFirstNameOk returns a tuple with the FirstName field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetName
+### SetFirstName
 
-`func (o *User) SetName(v string)`
+`func (o *User) SetFirstName(v string)`
 
-SetName sets Name field to given value.
+SetFirstName sets FirstName field to given value.
+
+
+### GetLastName
+
+`func (o *User) GetLastName() string`
+
+GetLastName returns the LastName field if non-nil, zero value otherwise.
+
+### GetLastNameOk
+
+`func (o *User) GetLastNameOk() (*string, bool)`
+
+GetLastNameOk returns a tuple with the LastName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLastName
+
+`func (o *User) SetLastName(v string)`
+
+SetLastName sets LastName field to given value.
+
+
+### GetCountryOfDomicile
+
+`func (o *User) GetCountryOfDomicile() CountryCode`
+
+GetCountryOfDomicile returns the CountryOfDomicile field if non-nil, zero value otherwise.
+
+### GetCountryOfDomicileOk
+
+`func (o *User) GetCountryOfDomicileOk() (*CountryCode, bool)`
+
+GetCountryOfDomicileOk returns a tuple with the CountryOfDomicile field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCountryOfDomicile
+
+`func (o *User) SetCountryOfDomicile(v CountryCode)`
+
+SetCountryOfDomicile sets CountryOfDomicile field to given value.
 
 
 ### GetNativeAssetId

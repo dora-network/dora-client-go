@@ -31,6 +31,7 @@ type UserCouponPayment struct {
 	Completed string `json:"completed"`
 	StartedAt time.Time `json:"started_at"`
 	EndedAt time.Time `json:"ended_at"`
+	TransactionId *string `json:"transaction_id,omitempty"`
 }
 
 type _UserCouponPayment UserCouponPayment
@@ -277,6 +278,38 @@ func (o *UserCouponPayment) SetEndedAt(v time.Time) {
 	o.EndedAt = v
 }
 
+// GetTransactionId returns the TransactionId field value if set, zero value otherwise.
+func (o *UserCouponPayment) GetTransactionId() string {
+	if o == nil || IsNil(o.TransactionId) {
+		var ret string
+		return ret
+	}
+	return *o.TransactionId
+}
+
+// GetTransactionIdOk returns a tuple with the TransactionId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UserCouponPayment) GetTransactionIdOk() (*string, bool) {
+	if o == nil || IsNil(o.TransactionId) {
+		return nil, false
+	}
+	return o.TransactionId, true
+}
+
+// HasTransactionId returns a boolean if a field has been set.
+func (o *UserCouponPayment) HasTransactionId() bool {
+	if o != nil && !IsNil(o.TransactionId) {
+		return true
+	}
+
+	return false
+}
+
+// SetTransactionId gets a reference to the given string and assigns it to the TransactionId field.
+func (o *UserCouponPayment) SetTransactionId(v string) {
+	o.TransactionId = &v
+}
+
 func (o UserCouponPayment) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -296,6 +329,9 @@ func (o UserCouponPayment) ToMap() (map[string]interface{}, error) {
 	toSerialize["completed"] = o.Completed
 	toSerialize["started_at"] = o.StartedAt
 	toSerialize["ended_at"] = o.EndedAt
+	if !IsNil(o.TransactionId) {
+		toSerialize["transaction_id"] = o.TransactionId
+	}
 	return toSerialize, nil
 }
 

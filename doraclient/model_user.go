@@ -26,7 +26,9 @@ type User struct {
 	ClosedAt *time.Time `json:"closed_at,omitempty"`
 	DisabledAt *time.Time `json:"disabled_at,omitempty"`
 	Email string `json:"email"`
-	Name string `json:"name"`
+	FirstName string `json:"first_name"`
+	LastName string `json:"last_name"`
+	CountryOfDomicile CountryCode `json:"country_of_domicile"`
 	NativeAssetId string `json:"native_asset_id"`
 	PhotoUrl *string `json:"photo_url,omitempty"`
 	Provider *string `json:"provider,omitempty"`
@@ -52,11 +54,13 @@ type _User User
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUser(id string, email string, name string, nativeAssetId string, roles []UserRole, showTutorialCards bool, notificationsEnabled bool, tenantId string, allowEmailNotifications bool, allowLiquidationsNotifications bool, allowDepositWithdrawalNotifications bool, allowOrdersNotifications bool) *User {
+func NewUser(id string, email string, firstName string, lastName string, countryOfDomicile CountryCode, nativeAssetId string, roles []UserRole, showTutorialCards bool, notificationsEnabled bool, tenantId string, allowEmailNotifications bool, allowLiquidationsNotifications bool, allowDepositWithdrawalNotifications bool, allowOrdersNotifications bool) *User {
 	this := User{}
 	this.Id = id
 	this.Email = email
-	this.Name = name
+	this.FirstName = firstName
+	this.LastName = lastName
+	this.CountryOfDomicile = countryOfDomicile
 	this.NativeAssetId = nativeAssetId
 	this.Roles = roles
 	this.ShowTutorialCards = showTutorialCards
@@ -189,28 +193,76 @@ func (o *User) SetEmail(v string) {
 	o.Email = v
 }
 
-// GetName returns the Name field value
-func (o *User) GetName() string {
+// GetFirstName returns the FirstName field value
+func (o *User) GetFirstName() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.Name
+	return o.FirstName
 }
 
-// GetNameOk returns a tuple with the Name field value
+// GetFirstNameOk returns a tuple with the FirstName field value
 // and a boolean to check if the value has been set.
-func (o *User) GetNameOk() (*string, bool) {
+func (o *User) GetFirstNameOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Name, true
+	return &o.FirstName, true
 }
 
-// SetName sets field value
-func (o *User) SetName(v string) {
-	o.Name = v
+// SetFirstName sets field value
+func (o *User) SetFirstName(v string) {
+	o.FirstName = v
+}
+
+// GetLastName returns the LastName field value
+func (o *User) GetLastName() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.LastName
+}
+
+// GetLastNameOk returns a tuple with the LastName field value
+// and a boolean to check if the value has been set.
+func (o *User) GetLastNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.LastName, true
+}
+
+// SetLastName sets field value
+func (o *User) SetLastName(v string) {
+	o.LastName = v
+}
+
+// GetCountryOfDomicile returns the CountryOfDomicile field value
+func (o *User) GetCountryOfDomicile() CountryCode {
+	if o == nil {
+		var ret CountryCode
+		return ret
+	}
+
+	return o.CountryOfDomicile
+}
+
+// GetCountryOfDomicileOk returns a tuple with the CountryOfDomicile field value
+// and a boolean to check if the value has been set.
+func (o *User) GetCountryOfDomicileOk() (*CountryCode, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.CountryOfDomicile, true
+}
+
+// SetCountryOfDomicile sets field value
+func (o *User) SetCountryOfDomicile(v CountryCode) {
+	o.CountryOfDomicile = v
 }
 
 // GetNativeAssetId returns the NativeAssetId field value
@@ -639,7 +691,9 @@ func (o User) ToMap() (map[string]interface{}, error) {
 		toSerialize["disabled_at"] = o.DisabledAt
 	}
 	toSerialize["email"] = o.Email
-	toSerialize["name"] = o.Name
+	toSerialize["first_name"] = o.FirstName
+	toSerialize["last_name"] = o.LastName
+	toSerialize["country_of_domicile"] = o.CountryOfDomicile
 	toSerialize["native_asset_id"] = o.NativeAssetId
 	if !IsNil(o.PhotoUrl) {
 		toSerialize["photo_url"] = o.PhotoUrl
@@ -677,7 +731,9 @@ func (o *User) UnmarshalJSON(data []byte) (err error) {
 	requiredProperties := []string{
 		"id",
 		"email",
-		"name",
+		"first_name",
+		"last_name",
+		"country_of_domicile",
 		"native_asset_id",
 		"roles",
 		"show_tutorial_cards",

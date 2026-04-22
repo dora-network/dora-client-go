@@ -6343,6 +6343,8 @@ type ApiGetRealizedPnlSettlementsRequest struct {
 	tenantId *string
 	positionId *string
 	createdAfter *time.Time
+	createdBefore *time.Time
+	settledAfter *time.Time
 	settledBefore *time.Time
 	isSettled *bool
 }
@@ -6364,6 +6366,16 @@ func (r ApiGetRealizedPnlSettlementsRequest) PositionId(positionId string) ApiGe
 
 func (r ApiGetRealizedPnlSettlementsRequest) CreatedAfter(createdAfter time.Time) ApiGetRealizedPnlSettlementsRequest {
 	r.createdAfter = &createdAfter
+	return r
+}
+
+func (r ApiGetRealizedPnlSettlementsRequest) CreatedBefore(createdBefore time.Time) ApiGetRealizedPnlSettlementsRequest {
+	r.createdBefore = &createdBefore
+	return r
+}
+
+func (r ApiGetRealizedPnlSettlementsRequest) SettledAfter(settledAfter time.Time) ApiGetRealizedPnlSettlementsRequest {
+	r.settledAfter = &settledAfter
 	return r
 }
 
@@ -6426,6 +6438,12 @@ func (a *DefaultAPIService) GetRealizedPnlSettlementsExecute(r ApiGetRealizedPnl
 	}
 	if r.createdAfter != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "created_after", r.createdAfter, "form", "")
+	}
+	if r.createdBefore != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "created_before", r.createdBefore, "form", "")
+	}
+	if r.settledAfter != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "settled_after", r.settledAfter, "form", "")
 	}
 	if r.settledBefore != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "settled_before", r.settledBefore, "form", "")

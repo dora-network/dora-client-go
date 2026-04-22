@@ -4,15 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**PositionId** | **string** |  | 
 **AssetId** | **string** |  | 
-**Quantity** | **string** |  | 
+**PositionId** | **string** |  | 
 
 ## Methods
 
 ### NewClaimLeverageAccruedInterestRequest
 
-`func NewClaimLeverageAccruedInterestRequest(positionId string, assetId string, quantity string, ) *ClaimLeverageAccruedInterestRequest`
+`func NewClaimLeverageAccruedInterestRequest(assetId string, positionId string, ) *ClaimLeverageAccruedInterestRequest`
 
 NewClaimLeverageAccruedInterestRequest instantiates a new ClaimLeverageAccruedInterestRequest object
 This constructor will assign default values to properties that have it defined,
@@ -26,26 +25,6 @@ will change when the set of required properties is changed
 NewClaimLeverageAccruedInterestRequestWithDefaults instantiates a new ClaimLeverageAccruedInterestRequest object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetPositionId
-
-`func (o *ClaimLeverageAccruedInterestRequest) GetPositionId() string`
-
-GetPositionId returns the PositionId field if non-nil, zero value otherwise.
-
-### GetPositionIdOk
-
-`func (o *ClaimLeverageAccruedInterestRequest) GetPositionIdOk() (*string, bool)`
-
-GetPositionIdOk returns a tuple with the PositionId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetPositionId
-
-`func (o *ClaimLeverageAccruedInterestRequest) SetPositionId(v string)`
-
-SetPositionId sets PositionId field to given value.
-
 
 ### GetAssetId
 
@@ -67,24 +46,24 @@ and a boolean to check if the value has been set.
 SetAssetId sets AssetId field to given value.
 
 
-### GetQuantity
+### GetPositionId
 
-`func (o *ClaimLeverageAccruedInterestRequest) GetQuantity() string`
+`func (o *ClaimLeverageAccruedInterestRequest) GetPositionId() string`
 
-GetQuantity returns the Quantity field if non-nil, zero value otherwise.
+GetPositionId returns the PositionId field if non-nil, zero value otherwise.
 
-### GetQuantityOk
+### GetPositionIdOk
 
-`func (o *ClaimLeverageAccruedInterestRequest) GetQuantityOk() (*string, bool)`
+`func (o *ClaimLeverageAccruedInterestRequest) GetPositionIdOk() (*string, bool)`
 
-GetQuantityOk returns a tuple with the Quantity field if it's non-nil, zero value otherwise
+GetPositionIdOk returns a tuple with the PositionId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetQuantity
+### SetPositionId
 
-`func (o *ClaimLeverageAccruedInterestRequest) SetQuantity(v string)`
+`func (o *ClaimLeverageAccruedInterestRequest) SetPositionId(v string)`
 
-SetQuantity sets Quantity field to given value.
+SetPositionId sets PositionId field to given value.
 
 
 

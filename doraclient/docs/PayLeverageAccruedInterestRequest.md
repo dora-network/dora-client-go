@@ -4,15 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**PositionId** | **string** |  | 
 **AssetId** | **string** |  | 
-**Quantity** | **string** |  | 
+**PositionId** | **string** |  | 
 
 ## Methods
 
 ### NewPayLeverageAccruedInterestRequest
 
-`func NewPayLeverageAccruedInterestRequest(positionId string, assetId string, quantity string, ) *PayLeverageAccruedInterestRequest`
+`func NewPayLeverageAccruedInterestRequest(assetId string, positionId string, ) *PayLeverageAccruedInterestRequest`
 
 NewPayLeverageAccruedInterestRequest instantiates a new PayLeverageAccruedInterestRequest object
 This constructor will assign default values to properties that have it defined,
@@ -26,26 +25,6 @@ will change when the set of required properties is changed
 NewPayLeverageAccruedInterestRequestWithDefaults instantiates a new PayLeverageAccruedInterestRequest object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetPositionId
-
-`func (o *PayLeverageAccruedInterestRequest) GetPositionId() string`
-
-GetPositionId returns the PositionId field if non-nil, zero value otherwise.
-
-### GetPositionIdOk
-
-`func (o *PayLeverageAccruedInterestRequest) GetPositionIdOk() (*string, bool)`
-
-GetPositionIdOk returns a tuple with the PositionId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetPositionId
-
-`func (o *PayLeverageAccruedInterestRequest) SetPositionId(v string)`
-
-SetPositionId sets PositionId field to given value.
-
 
 ### GetAssetId
 
@@ -67,24 +46,24 @@ and a boolean to check if the value has been set.
 SetAssetId sets AssetId field to given value.
 
 
-### GetQuantity
+### GetPositionId
 
-`func (o *PayLeverageAccruedInterestRequest) GetQuantity() string`
+`func (o *PayLeverageAccruedInterestRequest) GetPositionId() string`
 
-GetQuantity returns the Quantity field if non-nil, zero value otherwise.
+GetPositionId returns the PositionId field if non-nil, zero value otherwise.
 
-### GetQuantityOk
+### GetPositionIdOk
 
-`func (o *PayLeverageAccruedInterestRequest) GetQuantityOk() (*string, bool)`
+`func (o *PayLeverageAccruedInterestRequest) GetPositionIdOk() (*string, bool)`
 
-GetQuantityOk returns a tuple with the Quantity field if it's non-nil, zero value otherwise
+GetPositionIdOk returns a tuple with the PositionId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetQuantity
+### SetPositionId
 
-`func (o *PayLeverageAccruedInterestRequest) SetQuantity(v string)`
+`func (o *PayLeverageAccruedInterestRequest) SetPositionId(v string)`
 
-SetQuantity sets Quantity field to given value.
+SetPositionId sets PositionId field to given value.
 
 
 

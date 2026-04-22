@@ -460,7 +460,7 @@ import (
 )
 
 func main() {
-	claimLeverageAccruedInterestRequest := *openapiclient.NewClaimLeverageAccruedInterestRequest("PositionId_example", "AssetId_example", "Quantity_example") // ClaimLeverageAccruedInterestRequest | 
+	claimLeverageAccruedInterestRequest := *openapiclient.NewClaimLeverageAccruedInterestRequest("AssetId_example", "PositionId_example") // ClaimLeverageAccruedInterestRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -3001,7 +3001,7 @@ Name | Type | Description  | Notes
 
 ## GetRealizedPnlSettlements
 
-> GetRealizedPnlSettlementsResponseEnvelope GetRealizedPnlSettlements(ctx).UserId(userId).TenantId(tenantId).PositionId(positionId).CreatedAfter(createdAfter).SettledBefore(settledBefore).IsSettled(isSettled).Execute()
+> GetRealizedPnlSettlementsResponseEnvelope GetRealizedPnlSettlements(ctx).UserId(userId).TenantId(tenantId).PositionId(positionId).CreatedAfter(createdAfter).CreatedBefore(createdBefore).SettledAfter(settledAfter).SettledBefore(settledBefore).IsSettled(isSettled).Execute()
 
 Get realized P&L settlements with filters
 
@@ -3023,12 +3023,14 @@ func main() {
 	tenantId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string |  (optional)
 	positionId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string |  (optional)
 	createdAfter := time.Now() // time.Time |  (optional)
+	createdBefore := time.Now() // time.Time |  (optional)
+	settledAfter := time.Now() // time.Time |  (optional)
 	settledBefore := time.Now() // time.Time |  (optional)
 	isSettled := true // bool |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.DefaultAPI.GetRealizedPnlSettlements(context.Background()).UserId(userId).TenantId(tenantId).PositionId(positionId).CreatedAfter(createdAfter).SettledBefore(settledBefore).IsSettled(isSettled).Execute()
+	resp, r, err := apiClient.DefaultAPI.GetRealizedPnlSettlements(context.Background()).UserId(userId).TenantId(tenantId).PositionId(positionId).CreatedAfter(createdAfter).CreatedBefore(createdBefore).SettledAfter(settledAfter).SettledBefore(settledBefore).IsSettled(isSettled).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.GetRealizedPnlSettlements``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -3053,6 +3055,8 @@ Name | Type | Description  | Notes
  **tenantId** | **string** |  | 
  **positionId** | **string** |  | 
  **createdAfter** | **time.Time** |  | 
+ **createdBefore** | **time.Time** |  | 
+ **settledAfter** | **time.Time** |  | 
  **settledBefore** | **time.Time** |  | 
  **isSettled** | **bool** |  | 
 
@@ -5045,7 +5049,7 @@ import (
 )
 
 func main() {
-	payLeverageAccruedInterestRequest := *openapiclient.NewPayLeverageAccruedInterestRequest("PositionId_example", "AssetId_example", "Quantity_example") // PayLeverageAccruedInterestRequest | 
+	payLeverageAccruedInterestRequest := *openapiclient.NewPayLeverageAccruedInterestRequest("AssetId_example", "PositionId_example") // PayLeverageAccruedInterestRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)

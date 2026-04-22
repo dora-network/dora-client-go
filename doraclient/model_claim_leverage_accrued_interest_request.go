@@ -21,9 +21,8 @@ var _ MappedNullable = &ClaimLeverageAccruedInterestRequest{}
 
 // ClaimLeverageAccruedInterestRequest struct for ClaimLeverageAccruedInterestRequest
 type ClaimLeverageAccruedInterestRequest struct {
-	PositionId string `json:"position_id"`
 	AssetId string `json:"asset_id"`
-	Quantity string `json:"quantity"`
+	PositionId string `json:"position_id"`
 }
 
 type _ClaimLeverageAccruedInterestRequest ClaimLeverageAccruedInterestRequest
@@ -32,11 +31,10 @@ type _ClaimLeverageAccruedInterestRequest ClaimLeverageAccruedInterestRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewClaimLeverageAccruedInterestRequest(positionId string, assetId string, quantity string) *ClaimLeverageAccruedInterestRequest {
+func NewClaimLeverageAccruedInterestRequest(assetId string, positionId string) *ClaimLeverageAccruedInterestRequest {
 	this := ClaimLeverageAccruedInterestRequest{}
-	this.PositionId = positionId
 	this.AssetId = assetId
-	this.Quantity = quantity
+	this.PositionId = positionId
 	return &this
 }
 
@@ -46,30 +44,6 @@ func NewClaimLeverageAccruedInterestRequest(positionId string, assetId string, q
 func NewClaimLeverageAccruedInterestRequestWithDefaults() *ClaimLeverageAccruedInterestRequest {
 	this := ClaimLeverageAccruedInterestRequest{}
 	return &this
-}
-
-// GetPositionId returns the PositionId field value
-func (o *ClaimLeverageAccruedInterestRequest) GetPositionId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.PositionId
-}
-
-// GetPositionIdOk returns a tuple with the PositionId field value
-// and a boolean to check if the value has been set.
-func (o *ClaimLeverageAccruedInterestRequest) GetPositionIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.PositionId, true
-}
-
-// SetPositionId sets field value
-func (o *ClaimLeverageAccruedInterestRequest) SetPositionId(v string) {
-	o.PositionId = v
 }
 
 // GetAssetId returns the AssetId field value
@@ -96,28 +70,28 @@ func (o *ClaimLeverageAccruedInterestRequest) SetAssetId(v string) {
 	o.AssetId = v
 }
 
-// GetQuantity returns the Quantity field value
-func (o *ClaimLeverageAccruedInterestRequest) GetQuantity() string {
+// GetPositionId returns the PositionId field value
+func (o *ClaimLeverageAccruedInterestRequest) GetPositionId() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.Quantity
+	return o.PositionId
 }
 
-// GetQuantityOk returns a tuple with the Quantity field value
+// GetPositionIdOk returns a tuple with the PositionId field value
 // and a boolean to check if the value has been set.
-func (o *ClaimLeverageAccruedInterestRequest) GetQuantityOk() (*string, bool) {
+func (o *ClaimLeverageAccruedInterestRequest) GetPositionIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Quantity, true
+	return &o.PositionId, true
 }
 
-// SetQuantity sets field value
-func (o *ClaimLeverageAccruedInterestRequest) SetQuantity(v string) {
-	o.Quantity = v
+// SetPositionId sets field value
+func (o *ClaimLeverageAccruedInterestRequest) SetPositionId(v string) {
+	o.PositionId = v
 }
 
 func (o ClaimLeverageAccruedInterestRequest) MarshalJSON() ([]byte, error) {
@@ -130,9 +104,8 @@ func (o ClaimLeverageAccruedInterestRequest) MarshalJSON() ([]byte, error) {
 
 func (o ClaimLeverageAccruedInterestRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["position_id"] = o.PositionId
 	toSerialize["asset_id"] = o.AssetId
-	toSerialize["quantity"] = o.Quantity
+	toSerialize["position_id"] = o.PositionId
 	return toSerialize, nil
 }
 
@@ -141,9 +114,8 @@ func (o *ClaimLeverageAccruedInterestRequest) UnmarshalJSON(data []byte) (err er
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"position_id",
 		"asset_id",
-		"quantity",
+		"position_id",
 	}
 
 	allProperties := make(map[string]interface{})

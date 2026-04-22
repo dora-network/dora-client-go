@@ -33,6 +33,7 @@ docs/ClosePositionRequest.md
 docs/ClosePositionResp.md
 docs/ClosePositionResponseEnvelope.md
 docs/Collateral.md
+docs/CountryCode.md
 docs/CouponPayment.md
 docs/CreateAPIKeyData.md
 docs/CreateAPIKeyRequest.md
@@ -225,6 +226,7 @@ model_close_position_request.go
 model_close_position_resp.go
 model_close_position_response_envelope.go
 model_collateral.go
+model_country_code.go
 model_coupon_payment.go
 model_create_api_key_data.go
 model_create_api_key_request.go
