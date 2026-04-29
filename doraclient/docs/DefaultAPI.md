@@ -5,10 +5,9 @@ All URIs are relative to *https://staging.dora.co*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**ApproveLedgerWithdrawRequest**](DefaultAPI.md#ApproveLedgerWithdrawRequest) | **Post** /v1/ledger/withdraw/requests/{withdrawal_id}/approve | Approve a pending withdrawal request
-[**CancelAllOpenOrders**](DefaultAPI.md#CancelAllOpenOrders) | **Delete** /v1/orders | Cancel all open orders, if user passes orderbook on query param it will cancel all orders on specific orderbook, admin can cancel user&#39;s orders on specific orderbook
+[**CancelAllOpenOrders**](DefaultAPI.md#CancelAllOpenOrders) | **Delete** /v1/orders | Cancel all open orders, if user passes orderbook or account_id on query params it will cancel all orders on specific orderbook or account, admin can cancel user&#39;s orders on specific orderbook
 [**CancelLedgerWithdrawRequest**](DefaultAPI.md#CancelLedgerWithdrawRequest) | **Post** /v1/ledger/withdraw/requests/{withdrawal_id}/cancel | Cancel a pending withdrawal request
 [**CancelOrderById**](DefaultAPI.md#CancelOrderById) | **Delete** /v1/orders/{order_id} | Cancel an order by ID
-[**CheckUserEmailExists**](DefaultAPI.md#CheckUserEmailExists) | **Get** /v1/user/exists | Check whether a user email exists
 [**ClaimLeverageGetAccruedInterest**](DefaultAPI.md#ClaimLeverageGetAccruedInterest) | **Post** /v1/leverage/accrued_interest/claim | Claim current accrued leverage interest for a specific user
 [**CloseIsolatedPosition**](DefaultAPI.md#CloseIsolatedPosition) | **Post** /v1/positions/close | Close isolated positions, repaying the borrowed
 [**CreateAPIKeyForUser**](DefaultAPI.md#CreateAPIKeyForUser) | **Post** /v1/user/apikey | Create apikey for a user
@@ -54,13 +53,16 @@ Method | HTTP request | Description
 [**GetTransactionById**](DefaultAPI.md#GetTransactionById) | **Get** /v1/transactions/{transaction_id} | Get a transaction by ID
 [**GetTransactions**](DefaultAPI.md#GetTransactions) | **Get** /v1/transactions | Get a filtered, paginated list of transactions
 [**GetTransactionsSettlements**](DefaultAPI.md#GetTransactionsSettlements) | **Get** /v1/transactions/settlements | Get transactions settlements with filters
+[**GetTransactionsStream**](DefaultAPI.md#GetTransactionsStream) | **Get** /v1/transactions/stream | Get transactions since a specific time, and open a stream for further updates
 [**GetUserById**](DefaultAPI.md#GetUserById) | **Get** /v1/user/{user_id} | Get user by ID (admin only)
 [**GetUserCouponPaymentsStream**](DefaultAPI.md#GetUserCouponPaymentsStream) | **Get** /v1/user/{user_id}/coupon_payments/stream | Stream user&#39;s coupon payment accruals in real time
 [**GetUserLedgerStream**](DefaultAPI.md#GetUserLedgerStream) | **Get** /v1/user/{user_id}/ledger/stream | Get a snapshot of user&#39;s ledger updates since a specific time, and opens a stream for further updates
+[**GetUserLeverageAccruedInterestStream**](DefaultAPI.md#GetUserLeverageAccruedInterestStream) | **Get** /v1/user/{user_id}/leverage/accrued_interest/stream | Stream user&#39;s current leverage accrued interest in real time
 [**GetUserOrderUpdatesStream**](DefaultAPI.md#GetUserOrderUpdatesStream) | **Get** /v1/user/{user_id}/orders/{order_book_id}/updates/stream | Get a snapshot of user&#39;s order updates for the given order book since a specific time, and opens a stream for further updates
 [**GetUserOrdersUpdatesStreamAll**](DefaultAPI.md#GetUserOrdersUpdatesStreamAll) | **Get** /v1/user/{user_id}/orders/all/updates/stream | Get a snapshot of user&#39;s order updates across all order books since a specific time, and opens a stream for further updates
 [**GetUserSelf**](DefaultAPI.md#GetUserSelf) | **Get** /v1/user/self | Get user details for the authenticated user
 [**GetUserTransactionsStream**](DefaultAPI.md#GetUserTransactionsStream) | **Get** /v1/user/{user_id}/transactions/stream | Get a snapshot of user&#39;s executed transactions since a specific time, and opens a stream for further updates
+[**GetUsers**](DefaultAPI.md#GetUsers) | **Get** /v1/user | Get all users (admin only)
 [**GetUsersAPIKeys**](DefaultAPI.md#GetUsersAPIKeys) | **Get** /v1/user/apikey | Get user&#39;s api keys
 [**LedgerDeposit**](DefaultAPI.md#LedgerDeposit) | **Post** /v1/ledger/deposit/{user_id} | Deposit assets into this user&#39;s account from the outside world
 [**LedgerWithdraw**](DefaultAPI.md#LedgerWithdraw) | **Post** /v1/ledger/withdraw/{user_id} | Withdraw assets from this user to the outside world
@@ -171,9 +173,9 @@ Name | Type | Description  | Notes
 
 ## CancelAllOpenOrders
 
-> ListOrdersResponseEnvelope CancelAllOpenOrders(ctx).OrderBookId(orderBookId).UserId(userId).OrderKind(orderKind).Execute()
+> ListOrdersResponseEnvelope CancelAllOpenOrders(ctx).OrderBookId(orderBookId).UserId(userId).AccountId(accountId).OrderKind(orderKind).Execute()
 
-Cancel all open orders, if user passes orderbook on query param it will cancel all orders on specific orderbook, admin can cancel user's orders on specific orderbook
+Cancel all open orders, if user passes orderbook or account_id on query params it will cancel all orders on specific orderbook or account, admin can cancel user's orders on specific orderbook
 
 ### Example
 
@@ -190,11 +192,12 @@ import (
 func main() {
 	orderBookId := "orderBookId_example" // string |  (optional)
 	userId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string |  (optional)
+	accountId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string |  (optional)
 	orderKind := openapiclient.OrderKind("LIMIT") // OrderKind |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.DefaultAPI.CancelAllOpenOrders(context.Background()).OrderBookId(orderBookId).UserId(userId).OrderKind(orderKind).Execute()
+	resp, r, err := apiClient.DefaultAPI.CancelAllOpenOrders(context.Background()).OrderBookId(orderBookId).UserId(userId).AccountId(accountId).OrderKind(orderKind).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.CancelAllOpenOrders``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -217,6 +220,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **orderBookId** | **string** |  | 
  **userId** | **string** |  | 
+ **accountId** | **string** |  | 
  **orderKind** | [**OrderKind**](OrderKind.md) |  | 
 
 ### Return type
@@ -362,70 +366,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**CancelOrderResponseEnvelope**](CancelOrderResponseEnvelope.md)
-
-### Authorization
-
-[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## CheckUserEmailExists
-
-> EmailExistsResponseEnvelope CheckUserEmailExists(ctx).Email(email).Execute()
-
-Check whether a user email exists
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/dora-network/dora-client-go/doraclient"
-)
-
-func main() {
-	email := "email_example" // string | 
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.DefaultAPI.CheckUserEmailExists(context.Background()).Email(email).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.CheckUserEmailExists``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `CheckUserEmailExists`: EmailExistsResponseEnvelope
-	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.CheckUserEmailExists`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiCheckUserEmailExistsRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **email** | **string** |  | 
-
-### Return type
-
-[**EmailExistsResponseEnvelope**](EmailExistsResponseEnvelope.md)
 
 ### Authorization
 
@@ -3445,6 +3385,71 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## GetTransactionsStream
+
+> []StreamTransactionsEntry GetTransactionsStream(ctx).Since(since).Execute()
+
+Get transactions since a specific time, and open a stream for further updates
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+    "time"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+	since := time.Now() // time.Time |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.GetTransactionsStream(context.Background()).Since(since).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.GetTransactionsStream``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetTransactionsStream`: []StreamTransactionsEntry
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.GetTransactionsStream`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetTransactionsStreamRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **since** | **time.Time** |  | 
+
+### Return type
+
+[**[]StreamTransactionsEntry**](StreamTransactionsEntry.md)
+
+### Authorization
+
+[apiKeyAuthQuery](../README.md#apiKeyAuthQuery)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetUserById
 
 > UserEnvelope GetUserById(ctx, userId).Execute()
@@ -3634,6 +3639,74 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**[]StreamPositionsEntry**](StreamPositionsEntry.md)
+
+### Authorization
+
+[apiKeyAuthQuery](../README.md#apiKeyAuthQuery)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetUserLeverageAccruedInterestStream
+
+> StreamCurrentLeverageAccruedInterestResponse GetUserLeverageAccruedInterestStream(ctx, userId).Execute()
+
+Stream user's current leverage accrued interest in real time
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+	userId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.GetUserLeverageAccruedInterestStream(context.Background(), userId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.GetUserLeverageAccruedInterestStream``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetUserLeverageAccruedInterestStream`: StreamCurrentLeverageAccruedInterestResponse
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.GetUserLeverageAccruedInterestStream`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**userId** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetUserLeverageAccruedInterestStreamRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**StreamCurrentLeverageAccruedInterestResponse**](StreamCurrentLeverageAccruedInterestResponse.md)
 
 ### Authorization
 
@@ -3913,6 +3986,82 @@ Name | Type | Description  | Notes
 ### Authorization
 
 [apiKeyAuthQuery](../README.md#apiKeyAuthQuery)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetUsers
+
+> ListUsersResponseEnvelope GetUsers(ctx).Id(id).Limit(limit).Offset(offset).Email(email).FirstName(firstName).LastName(lastName).CountryOfDomicile(countryOfDomicile).Execute()
+
+Get all users (admin only)
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+	id := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string |  (optional)
+	limit := int32(56) // int32 |  (optional) (default to 100)
+	offset := int32(56) // int32 |  (optional) (default to 0)
+	email := "email_example" // string |  (optional)
+	firstName := "firstName_example" // string |  (optional)
+	lastName := "lastName_example" // string |  (optional)
+	countryOfDomicile := openapiclient.CountryCode("AF") // CountryCode |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.GetUsers(context.Background()).Id(id).Limit(limit).Offset(offset).Email(email).FirstName(firstName).LastName(lastName).CountryOfDomicile(countryOfDomicile).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.GetUsers``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetUsers`: ListUsersResponseEnvelope
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.GetUsers`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetUsersRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **string** |  | 
+ **limit** | **int32** |  | [default to 100]
+ **offset** | **int32** |  | [default to 0]
+ **email** | **string** |  | 
+ **firstName** | **string** |  | 
+ **lastName** | **string** |  | 
+ **countryOfDomicile** | [**CountryCode**](CountryCode.md) |  | 
+
+### Return type
+
+[**ListUsersResponseEnvelope**](ListUsersResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

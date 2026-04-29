@@ -16,50 +16,50 @@ import (
 	"fmt"
 )
 
-// checks if the EmailExistsResponseEnvelope type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &EmailExistsResponseEnvelope{}
+// checks if the ListUsersResponseEnvelope type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ListUsersResponseEnvelope{}
 
-// EmailExistsResponseEnvelope struct for EmailExistsResponseEnvelope
-type EmailExistsResponseEnvelope struct {
-	Data *UserExistsResponse `json:"data,omitempty"`
+// ListUsersResponseEnvelope struct for ListUsersResponseEnvelope
+type ListUsersResponseEnvelope struct {
+	Data []User `json:"data,omitempty"`
 	// The error message. Present for error (non-2xx) responses.
 	Error *string `json:"error,omitempty"`
 	// Metadata about the response, including status code and trace information.
 	Metadata Metadata `json:"metadata"`
 }
 
-type _EmailExistsResponseEnvelope EmailExistsResponseEnvelope
+type _ListUsersResponseEnvelope ListUsersResponseEnvelope
 
-// NewEmailExistsResponseEnvelope instantiates a new EmailExistsResponseEnvelope object
+// NewListUsersResponseEnvelope instantiates a new ListUsersResponseEnvelope object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewEmailExistsResponseEnvelope(metadata Metadata) *EmailExistsResponseEnvelope {
-	this := EmailExistsResponseEnvelope{}
+func NewListUsersResponseEnvelope(metadata Metadata) *ListUsersResponseEnvelope {
+	this := ListUsersResponseEnvelope{}
 	this.Metadata = metadata
 	return &this
 }
 
-// NewEmailExistsResponseEnvelopeWithDefaults instantiates a new EmailExistsResponseEnvelope object
+// NewListUsersResponseEnvelopeWithDefaults instantiates a new ListUsersResponseEnvelope object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewEmailExistsResponseEnvelopeWithDefaults() *EmailExistsResponseEnvelope {
-	this := EmailExistsResponseEnvelope{}
+func NewListUsersResponseEnvelopeWithDefaults() *ListUsersResponseEnvelope {
+	this := ListUsersResponseEnvelope{}
 	return &this
 }
 
 // GetData returns the Data field value if set, zero value otherwise.
-func (o *EmailExistsResponseEnvelope) GetData() UserExistsResponse {
+func (o *ListUsersResponseEnvelope) GetData() []User {
 	if o == nil || IsNil(o.Data) {
-		var ret UserExistsResponse
+		var ret []User
 		return ret
 	}
-	return *o.Data
+	return o.Data
 }
 
 // GetDataOk returns a tuple with the Data field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *EmailExistsResponseEnvelope) GetDataOk() (*UserExistsResponse, bool) {
+func (o *ListUsersResponseEnvelope) GetDataOk() ([]User, bool) {
 	if o == nil || IsNil(o.Data) {
 		return nil, false
 	}
@@ -67,7 +67,7 @@ func (o *EmailExistsResponseEnvelope) GetDataOk() (*UserExistsResponse, bool) {
 }
 
 // HasData returns a boolean if a field has been set.
-func (o *EmailExistsResponseEnvelope) HasData() bool {
+func (o *ListUsersResponseEnvelope) HasData() bool {
 	if o != nil && !IsNil(o.Data) {
 		return true
 	}
@@ -75,13 +75,13 @@ func (o *EmailExistsResponseEnvelope) HasData() bool {
 	return false
 }
 
-// SetData gets a reference to the given UserExistsResponse and assigns it to the Data field.
-func (o *EmailExistsResponseEnvelope) SetData(v UserExistsResponse) {
-	o.Data = &v
+// SetData gets a reference to the given []User and assigns it to the Data field.
+func (o *ListUsersResponseEnvelope) SetData(v []User) {
+	o.Data = v
 }
 
 // GetError returns the Error field value if set, zero value otherwise.
-func (o *EmailExistsResponseEnvelope) GetError() string {
+func (o *ListUsersResponseEnvelope) GetError() string {
 	if o == nil || IsNil(o.Error) {
 		var ret string
 		return ret
@@ -91,7 +91,7 @@ func (o *EmailExistsResponseEnvelope) GetError() string {
 
 // GetErrorOk returns a tuple with the Error field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *EmailExistsResponseEnvelope) GetErrorOk() (*string, bool) {
+func (o *ListUsersResponseEnvelope) GetErrorOk() (*string, bool) {
 	if o == nil || IsNil(o.Error) {
 		return nil, false
 	}
@@ -99,7 +99,7 @@ func (o *EmailExistsResponseEnvelope) GetErrorOk() (*string, bool) {
 }
 
 // HasError returns a boolean if a field has been set.
-func (o *EmailExistsResponseEnvelope) HasError() bool {
+func (o *ListUsersResponseEnvelope) HasError() bool {
 	if o != nil && !IsNil(o.Error) {
 		return true
 	}
@@ -108,12 +108,12 @@ func (o *EmailExistsResponseEnvelope) HasError() bool {
 }
 
 // SetError gets a reference to the given string and assigns it to the Error field.
-func (o *EmailExistsResponseEnvelope) SetError(v string) {
+func (o *ListUsersResponseEnvelope) SetError(v string) {
 	o.Error = &v
 }
 
 // GetMetadata returns the Metadata field value
-func (o *EmailExistsResponseEnvelope) GetMetadata() Metadata {
+func (o *ListUsersResponseEnvelope) GetMetadata() Metadata {
 	if o == nil {
 		var ret Metadata
 		return ret
@@ -124,7 +124,7 @@ func (o *EmailExistsResponseEnvelope) GetMetadata() Metadata {
 
 // GetMetadataOk returns a tuple with the Metadata field value
 // and a boolean to check if the value has been set.
-func (o *EmailExistsResponseEnvelope) GetMetadataOk() (*Metadata, bool) {
+func (o *ListUsersResponseEnvelope) GetMetadataOk() (*Metadata, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -132,11 +132,11 @@ func (o *EmailExistsResponseEnvelope) GetMetadataOk() (*Metadata, bool) {
 }
 
 // SetMetadata sets field value
-func (o *EmailExistsResponseEnvelope) SetMetadata(v Metadata) {
+func (o *ListUsersResponseEnvelope) SetMetadata(v Metadata) {
 	o.Metadata = v
 }
 
-func (o EmailExistsResponseEnvelope) MarshalJSON() ([]byte, error) {
+func (o ListUsersResponseEnvelope) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -144,7 +144,7 @@ func (o EmailExistsResponseEnvelope) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o EmailExistsResponseEnvelope) ToMap() (map[string]interface{}, error) {
+func (o ListUsersResponseEnvelope) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
@@ -156,7 +156,7 @@ func (o EmailExistsResponseEnvelope) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *EmailExistsResponseEnvelope) UnmarshalJSON(data []byte) (err error) {
+func (o *ListUsersResponseEnvelope) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -178,53 +178,53 @@ func (o *EmailExistsResponseEnvelope) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varEmailExistsResponseEnvelope := _EmailExistsResponseEnvelope{}
+	varListUsersResponseEnvelope := _ListUsersResponseEnvelope{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
 	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varEmailExistsResponseEnvelope)
+	err = decoder.Decode(&varListUsersResponseEnvelope)
 
 	if err != nil {
 		return err
 	}
 
-	*o = EmailExistsResponseEnvelope(varEmailExistsResponseEnvelope)
+	*o = ListUsersResponseEnvelope(varListUsersResponseEnvelope)
 
 	return err
 }
 
-type NullableEmailExistsResponseEnvelope struct {
-	value *EmailExistsResponseEnvelope
+type NullableListUsersResponseEnvelope struct {
+	value *ListUsersResponseEnvelope
 	isSet bool
 }
 
-func (v NullableEmailExistsResponseEnvelope) Get() *EmailExistsResponseEnvelope {
+func (v NullableListUsersResponseEnvelope) Get() *ListUsersResponseEnvelope {
 	return v.value
 }
 
-func (v *NullableEmailExistsResponseEnvelope) Set(val *EmailExistsResponseEnvelope) {
+func (v *NullableListUsersResponseEnvelope) Set(val *ListUsersResponseEnvelope) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableEmailExistsResponseEnvelope) IsSet() bool {
+func (v NullableListUsersResponseEnvelope) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableEmailExistsResponseEnvelope) Unset() {
+func (v *NullableListUsersResponseEnvelope) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableEmailExistsResponseEnvelope(val *EmailExistsResponseEnvelope) *NullableEmailExistsResponseEnvelope {
-	return &NullableEmailExistsResponseEnvelope{value: val, isSet: true}
+func NewNullableListUsersResponseEnvelope(val *ListUsersResponseEnvelope) *NullableListUsersResponseEnvelope {
+	return &NullableListUsersResponseEnvelope{value: val, isSet: true}
 }
 
-func (v NullableEmailExistsResponseEnvelope) MarshalJSON() ([]byte, error) {
+func (v NullableListUsersResponseEnvelope) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableEmailExistsResponseEnvelope) UnmarshalJSON(src []byte) error {
+func (v *NullableListUsersResponseEnvelope) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

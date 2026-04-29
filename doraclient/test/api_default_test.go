@@ -76,18 +76,6 @@ func Test_doraclient_DefaultAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test DefaultAPIService CheckUserEmailExists", func(t *testing.T) {
-
-		t.Skip("skip test")  // remove to run test
-
-		resp, httpRes, err := apiClient.DefaultAPI.CheckUserEmailExists(context.Background()).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
 	t.Run("Test DefaultAPIService ClaimLeverageGetAccruedInterest", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -676,6 +664,18 @@ func Test_doraclient_DefaultAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test DefaultAPIService GetTransactionsStream", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.DefaultAPI.GetTransactionsStream(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test DefaultAPIService GetUserById", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -711,6 +711,20 @@ func Test_doraclient_DefaultAPIService(t *testing.T) {
 		var userId string
 
 		resp, httpRes, err := apiClient.DefaultAPI.GetUserLedgerStream(context.Background(), userId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DefaultAPIService GetUserLeverageAccruedInterestStream", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var userId string
+
+		resp, httpRes, err := apiClient.DefaultAPI.GetUserLeverageAccruedInterestStream(context.Background(), userId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -766,6 +780,18 @@ func Test_doraclient_DefaultAPIService(t *testing.T) {
 		var userId string
 
 		resp, httpRes, err := apiClient.DefaultAPI.GetUserTransactionsStream(context.Background(), userId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DefaultAPIService GetUsers", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.DefaultAPI.GetUsers(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
