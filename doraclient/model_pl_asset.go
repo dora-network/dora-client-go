@@ -21,6 +21,9 @@ var _ MappedNullable = &PLAsset{}
 
 // PLAsset struct for PLAsset
 type PLAsset struct {
+	// The ID of the asset
+	Id string `json:"id"`
+	Kind AssetKind `json:"kind"`
 	// The symbol of the asset
 	Symbol string `json:"symbol"`
 	// The side of the position (LONG or SHORT)
@@ -60,8 +63,10 @@ type _PLAsset PLAsset
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPLAsset(symbol string, side string, avgEntryPrice string, markPrice string, liquidationPrice string, available string, borrowed string, margin Margin, unrealizedPl string, leverageLimit string, initialCapital string, locked string, unusedCollateral string) *PLAsset {
+func NewPLAsset(id string, kind AssetKind, symbol string, side string, avgEntryPrice string, markPrice string, liquidationPrice string, available string, borrowed string, margin Margin, unrealizedPl string, leverageLimit string, initialCapital string, locked string, unusedCollateral string) *PLAsset {
 	this := PLAsset{}
+	this.Id = id
+	this.Kind = kind
 	this.Symbol = symbol
 	this.Side = side
 	this.AvgEntryPrice = avgEntryPrice
@@ -84,6 +89,54 @@ func NewPLAsset(symbol string, side string, avgEntryPrice string, markPrice stri
 func NewPLAssetWithDefaults() *PLAsset {
 	this := PLAsset{}
 	return &this
+}
+
+// GetId returns the Id field value
+func (o *PLAsset) GetId() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Id
+}
+
+// GetIdOk returns a tuple with the Id field value
+// and a boolean to check if the value has been set.
+func (o *PLAsset) GetIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Id, true
+}
+
+// SetId sets field value
+func (o *PLAsset) SetId(v string) {
+	o.Id = v
+}
+
+// GetKind returns the Kind field value
+func (o *PLAsset) GetKind() AssetKind {
+	if o == nil {
+		var ret AssetKind
+		return ret
+	}
+
+	return o.Kind
+}
+
+// GetKindOk returns a tuple with the Kind field value
+// and a boolean to check if the value has been set.
+func (o *PLAsset) GetKindOk() (*AssetKind, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Kind, true
+}
+
+// SetKind sets field value
+func (o *PLAsset) SetKind(v AssetKind) {
+	o.Kind = v
 }
 
 // GetSymbol returns the Symbol field value
@@ -504,6 +557,8 @@ func (o PLAsset) MarshalJSON() ([]byte, error) {
 
 func (o PLAsset) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	toSerialize["id"] = o.Id
+	toSerialize["kind"] = o.Kind
 	toSerialize["symbol"] = o.Symbol
 	toSerialize["side"] = o.Side
 	toSerialize["avg_entry_price"] = o.AvgEntryPrice
@@ -534,6 +589,8 @@ func (o *PLAsset) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
+		"id",
+		"kind",
 		"symbol",
 		"side",
 		"avg_entry_price",

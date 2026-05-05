@@ -841,6 +841,171 @@ func (a *DefaultAPIService) ClaimLeverageGetAccruedInterestExecute(r ApiClaimLev
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiCloseIsolatedAccountV2Request struct {
+	ctx context.Context
+	ApiService *DefaultAPIService
+	closeAccountRequest *CloseAccountRequest
+}
+
+func (r ApiCloseIsolatedAccountV2Request) CloseAccountRequest(closeAccountRequest CloseAccountRequest) ApiCloseIsolatedAccountV2Request {
+	r.closeAccountRequest = &closeAccountRequest
+	return r
+}
+
+func (r ApiCloseIsolatedAccountV2Request) Execute() (*ClosePositionResponseEnvelope, *http.Response, error) {
+	return r.ApiService.CloseIsolatedAccountV2Execute(r)
+}
+
+/*
+CloseIsolatedAccountV2 Close an isolated account, repaying the borrowed
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCloseIsolatedAccountV2Request
+*/
+func (a *DefaultAPIService) CloseIsolatedAccountV2(ctx context.Context) ApiCloseIsolatedAccountV2Request {
+	return ApiCloseIsolatedAccountV2Request{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return ClosePositionResponseEnvelope
+func (a *DefaultAPIService) CloseIsolatedAccountV2Execute(r ApiCloseIsolatedAccountV2Request) (*ClosePositionResponseEnvelope, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ClosePositionResponseEnvelope
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DefaultAPIService.CloseIsolatedAccountV2")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v2/accounts/close"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.closeAccountRequest == nil {
+		return localVarReturnValue, nil, reportError("closeAccountRequest is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.closeAccountRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKeyAuthHeader"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ResponseEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v ResponseEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v ResponseEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v ResponseEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiCloseIsolatedPositionRequest struct {
 	ctx context.Context
 	ApiService *DefaultAPIService
@@ -1415,6 +1580,171 @@ func (a *DefaultAPIService) CreateConditionalOrderExecute(r ApiCreateConditional
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
+			var v ResponseEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v ResponseEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiCreateNewIsolatedAccountV2Request struct {
+	ctx context.Context
+	ApiService *DefaultAPIService
+	newIsolatedAccountRequestV2 *NewIsolatedAccountRequestV2
+}
+
+func (r ApiCreateNewIsolatedAccountV2Request) NewIsolatedAccountRequestV2(newIsolatedAccountRequestV2 NewIsolatedAccountRequestV2) ApiCreateNewIsolatedAccountV2Request {
+	r.newIsolatedAccountRequestV2 = &newIsolatedAccountRequestV2
+	return r
+}
+
+func (r ApiCreateNewIsolatedAccountV2Request) Execute() (*NewIsolatedAccountResponseV2Envelope, *http.Response, error) {
+	return r.ApiService.CreateNewIsolatedAccountV2Execute(r)
+}
+
+/*
+CreateNewIsolatedAccountV2 Create a new isolated account for a user transferring available assets into the account
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateNewIsolatedAccountV2Request
+*/
+func (a *DefaultAPIService) CreateNewIsolatedAccountV2(ctx context.Context) ApiCreateNewIsolatedAccountV2Request {
+	return ApiCreateNewIsolatedAccountV2Request{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return NewIsolatedAccountResponseV2Envelope
+func (a *DefaultAPIService) CreateNewIsolatedAccountV2Execute(r ApiCreateNewIsolatedAccountV2Request) (*NewIsolatedAccountResponseV2Envelope, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *NewIsolatedAccountResponseV2Envelope
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DefaultAPIService.CreateNewIsolatedAccountV2")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v2/accounts/new_isolated"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.newIsolatedAccountRequestV2 == nil {
+		return localVarReturnValue, nil, reportError("newIsolatedAccountRequestV2 is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.newIsolatedAccountRequestV2
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKeyAuthHeader"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ResponseEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v ResponseEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
 			var v ResponseEnvelope
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -3588,6 +3918,149 @@ func (a *DefaultAPIService) GetL3DepthExecute(r ApiGetL3DepthRequest) (*ListOrde
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
+			var v ResponseEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v ResponseEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v ResponseEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetLedgerAccountsSelfV2Request struct {
+	ctx context.Context
+	ApiService *DefaultAPIService
+}
+
+func (r ApiGetLedgerAccountsSelfV2Request) Execute() (*LedgerAccountsResponseV2Envelope, *http.Response, error) {
+	return r.ApiService.GetLedgerAccountsSelfV2Execute(r)
+}
+
+/*
+GetLedgerAccountsSelfV2 Get your own accounts
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetLedgerAccountsSelfV2Request
+*/
+func (a *DefaultAPIService) GetLedgerAccountsSelfV2(ctx context.Context) ApiGetLedgerAccountsSelfV2Request {
+	return ApiGetLedgerAccountsSelfV2Request{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return LedgerAccountsResponseV2Envelope
+func (a *DefaultAPIService) GetLedgerAccountsSelfV2Execute(r ApiGetLedgerAccountsSelfV2Request) (*LedgerAccountsResponseV2Envelope, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *LedgerAccountsResponseV2Envelope
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DefaultAPIService.GetLedgerAccountsSelfV2")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v2/ledger/accounts/self"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKeyAuthHeader"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
 			var v ResponseEnvelope
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -7135,6 +7608,8 @@ type ApiGetTransactionsSettlementsRequest struct {
 	positionId *string
 	txKind *string
 	createdAfter *time.Time
+	createdBefore *time.Time
+	settledAfter *time.Time
 	settledBefore *time.Time
 	isSettled *bool
 }
@@ -7166,6 +7641,18 @@ func (r ApiGetTransactionsSettlementsRequest) TxKind(txKind string) ApiGetTransa
 // Filter settlements created after this time
 func (r ApiGetTransactionsSettlementsRequest) CreatedAfter(createdAfter time.Time) ApiGetTransactionsSettlementsRequest {
 	r.createdAfter = &createdAfter
+	return r
+}
+
+// Filter settlements created before this time
+func (r ApiGetTransactionsSettlementsRequest) CreatedBefore(createdBefore time.Time) ApiGetTransactionsSettlementsRequest {
+	r.createdBefore = &createdBefore
+	return r
+}
+
+// Filter settlements settled after this time
+func (r ApiGetTransactionsSettlementsRequest) SettledAfter(settledAfter time.Time) ApiGetTransactionsSettlementsRequest {
+	r.settledAfter = &settledAfter
 	return r
 }
 
@@ -7233,6 +7720,12 @@ func (a *DefaultAPIService) GetTransactionsSettlementsExecute(r ApiGetTransactio
 	}
 	if r.createdAfter != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "created_after", r.createdAfter, "form", "")
+	}
+	if r.createdBefore != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "created_before", r.createdBefore, "form", "")
+	}
+	if r.settledAfter != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "settled_after", r.settledAfter, "form", "")
 	}
 	if r.settledBefore != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "settled_before", r.settledBefore, "form", "")
@@ -9851,6 +10344,347 @@ func (a *DefaultAPIService) LeverageGetAccruedInterestByUserExecute(r ApiLeverag
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiLeverageGetHistoricalInterestRatesRequest struct {
+	ctx context.Context
+	ApiService *DefaultAPIService
+	assetId string
+	start *time.Time
+	end *time.Time
+}
+
+func (r ApiLeverageGetHistoricalInterestRatesRequest) Start(start time.Time) ApiLeverageGetHistoricalInterestRatesRequest {
+	r.start = &start
+	return r
+}
+
+func (r ApiLeverageGetHistoricalInterestRatesRequest) End(end time.Time) ApiLeverageGetHistoricalInterestRatesRequest {
+	r.end = &end
+	return r
+}
+
+func (r ApiLeverageGetHistoricalInterestRatesRequest) Execute() (*HistoricalLeverageInterestRatesResponseEnvelope, *http.Response, error) {
+	return r.ApiService.LeverageGetHistoricalInterestRatesExecute(r)
+}
+
+/*
+LeverageGetHistoricalInterestRates Get historical leverage interest rates for a specific asset
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param assetId
+ @return ApiLeverageGetHistoricalInterestRatesRequest
+*/
+func (a *DefaultAPIService) LeverageGetHistoricalInterestRates(ctx context.Context, assetId string) ApiLeverageGetHistoricalInterestRatesRequest {
+	return ApiLeverageGetHistoricalInterestRatesRequest{
+		ApiService: a,
+		ctx: ctx,
+		assetId: assetId,
+	}
+}
+
+// Execute executes the request
+//  @return HistoricalLeverageInterestRatesResponseEnvelope
+func (a *DefaultAPIService) LeverageGetHistoricalInterestRatesExecute(r ApiLeverageGetHistoricalInterestRatesRequest) (*HistoricalLeverageInterestRatesResponseEnvelope, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *HistoricalLeverageInterestRatesResponseEnvelope
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DefaultAPIService.LeverageGetHistoricalInterestRates")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v1/leverage/interest_rate/{asset_id}/historical"
+	localVarPath = strings.Replace(localVarPath, "{"+"asset_id"+"}", url.PathEscape(parameterValueToString(r.assetId, "assetId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.start != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "start", r.start, "form", "")
+	}
+	if r.end != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "end", r.end, "form", "")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKeyAuthHeader"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ResponseEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v ResponseEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v ResponseEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiLeverageGetInterestRateRequest struct {
+	ctx context.Context
+	ApiService *DefaultAPIService
+	assetId string
+	start *time.Time
+	end *time.Time
+}
+
+func (r ApiLeverageGetInterestRateRequest) Start(start time.Time) ApiLeverageGetInterestRateRequest {
+	r.start = &start
+	return r
+}
+
+func (r ApiLeverageGetInterestRateRequest) End(end time.Time) ApiLeverageGetInterestRateRequest {
+	r.end = &end
+	return r
+}
+
+func (r ApiLeverageGetInterestRateRequest) Execute() (*LeverageInterestRateResponseEnvelope, *http.Response, error) {
+	return r.ApiService.LeverageGetInterestRateExecute(r)
+}
+
+/*
+LeverageGetInterestRate Get leverage interest rate for a specific asset
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param assetId
+ @return ApiLeverageGetInterestRateRequest
+*/
+func (a *DefaultAPIService) LeverageGetInterestRate(ctx context.Context, assetId string) ApiLeverageGetInterestRateRequest {
+	return ApiLeverageGetInterestRateRequest{
+		ApiService: a,
+		ctx: ctx,
+		assetId: assetId,
+	}
+}
+
+// Execute executes the request
+//  @return LeverageInterestRateResponseEnvelope
+func (a *DefaultAPIService) LeverageGetInterestRateExecute(r ApiLeverageGetInterestRateRequest) (*LeverageInterestRateResponseEnvelope, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *LeverageInterestRateResponseEnvelope
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DefaultAPIService.LeverageGetInterestRate")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v1/leverage/interest_rate/{asset_id}"
+	localVarPath = strings.Replace(localVarPath, "{"+"asset_id"+"}", url.PathEscape(parameterValueToString(r.assetId, "assetId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.start != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "start", r.start, "form", "")
+	}
+	if r.end != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "end", r.end, "form", "")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKeyAuthHeader"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ResponseEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v ResponseEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v ResponseEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v ResponseEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiLeverageIsolateCollateralRequest struct {
 	ctx context.Context
 	ApiService *DefaultAPIService
@@ -10844,6 +11678,149 @@ func (a *DefaultAPIService) LiquiditySubtractExecute(r ApiLiquiditySubtractReque
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
+			var v ResponseEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v ResponseEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiListAccountsSelfV2Request struct {
+	ctx context.Context
+	ApiService *DefaultAPIService
+}
+
+func (r ApiListAccountsSelfV2Request) Execute() (*ListAccountsResponseV2Envelope, *http.Response, error) {
+	return r.ApiService.ListAccountsSelfV2Execute(r)
+}
+
+/*
+ListAccountsSelfV2 List all accounts for the authenticated user
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiListAccountsSelfV2Request
+*/
+func (a *DefaultAPIService) ListAccountsSelfV2(ctx context.Context) ApiListAccountsSelfV2Request {
+	return ApiListAccountsSelfV2Request{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return ListAccountsResponseV2Envelope
+func (a *DefaultAPIService) ListAccountsSelfV2Execute(r ApiListAccountsSelfV2Request) (*ListAccountsResponseV2Envelope, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ListAccountsResponseV2Envelope
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DefaultAPIService.ListAccountsSelfV2")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v2/user/self/accounts"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKeyAuthHeader"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ResponseEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
 			var v ResponseEnvelope
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -13418,6 +14395,171 @@ func (a *DefaultAPIService) StreamTradesExecute(r ApiStreamTradesRequest) ([]Str
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
+			var v ResponseEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v ResponseEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiTransferAccountBalancesV2Request struct {
+	ctx context.Context
+	ApiService *DefaultAPIService
+	transferAccountBalancesRequest *TransferAccountBalancesRequest
+}
+
+func (r ApiTransferAccountBalancesV2Request) TransferAccountBalancesRequest(transferAccountBalancesRequest TransferAccountBalancesRequest) ApiTransferAccountBalancesV2Request {
+	r.transferAccountBalancesRequest = &transferAccountBalancesRequest
+	return r
+}
+
+func (r ApiTransferAccountBalancesV2Request) Execute() (*TransferAccountBalancesResponseEnvelope, *http.Response, error) {
+	return r.ApiService.TransferAccountBalancesV2Execute(r)
+}
+
+/*
+TransferAccountBalancesV2 Transfer available balance between a user's accounts
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiTransferAccountBalancesV2Request
+*/
+func (a *DefaultAPIService) TransferAccountBalancesV2(ctx context.Context) ApiTransferAccountBalancesV2Request {
+	return ApiTransferAccountBalancesV2Request{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return TransferAccountBalancesResponseEnvelope
+func (a *DefaultAPIService) TransferAccountBalancesV2Execute(r ApiTransferAccountBalancesV2Request) (*TransferAccountBalancesResponseEnvelope, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *TransferAccountBalancesResponseEnvelope
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DefaultAPIService.TransferAccountBalancesV2")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v2/accounts/transfer_balances"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.transferAccountBalancesRequest == nil {
+		return localVarReturnValue, nil, reportError("transferAccountBalancesRequest is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.transferAccountBalancesRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKeyAuthHeader"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ResponseEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v ResponseEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
 			var v ResponseEnvelope
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {

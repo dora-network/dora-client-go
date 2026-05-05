@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**Id** | **string** | The ID of the asset | 
+**Kind** | [**AssetKind**](AssetKind.md) |  | 
 **Symbol** | **string** | The symbol of the asset | 
 **Side** | **string** | The side of the position (LONG or SHORT) | 
 **AvgEntryPrice** | **string** | The average entry price of the position | 
@@ -25,7 +27,7 @@ Name | Type | Description | Notes
 
 ### NewPLAsset
 
-`func NewPLAsset(symbol string, side string, avgEntryPrice string, markPrice string, liquidationPrice string, available string, borrowed string, margin Margin, unrealizedPl string, leverageLimit string, initialCapital string, locked string, unusedCollateral string, ) *PLAsset`
+`func NewPLAsset(id string, kind AssetKind, symbol string, side string, avgEntryPrice string, markPrice string, liquidationPrice string, available string, borrowed string, margin Margin, unrealizedPl string, leverageLimit string, initialCapital string, locked string, unusedCollateral string, ) *PLAsset`
 
 NewPLAsset instantiates a new PLAsset object
 This constructor will assign default values to properties that have it defined,
@@ -39,6 +41,46 @@ will change when the set of required properties is changed
 NewPLAssetWithDefaults instantiates a new PLAsset object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetId
+
+`func (o *PLAsset) GetId() string`
+
+GetId returns the Id field if non-nil, zero value otherwise.
+
+### GetIdOk
+
+`func (o *PLAsset) GetIdOk() (*string, bool)`
+
+GetIdOk returns a tuple with the Id field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetId
+
+`func (o *PLAsset) SetId(v string)`
+
+SetId sets Id field to given value.
+
+
+### GetKind
+
+`func (o *PLAsset) GetKind() AssetKind`
+
+GetKind returns the Kind field if non-nil, zero value otherwise.
+
+### GetKindOk
+
+`func (o *PLAsset) GetKindOk() (*AssetKind, bool)`
+
+GetKindOk returns a tuple with the Kind field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetKind
+
+`func (o *PLAsset) SetKind(v AssetKind)`
+
+SetKind sets Kind field to given value.
+
 
 ### GetSymbol
 

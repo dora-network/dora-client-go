@@ -12,7 +12,11 @@ Name | Type | Description | Notes
 **Description** | **string** |  | 
 **LiquidationWeight** | **float32** |  | 
 **MaxSupply** | **int32** |  | 
-**MaxUtilization** | **int32** |  | 
+**MaxUtilization** | **float32** |  | 
+**MinimumRate** | **float32** |  | 
+**KinkRate** | **float32** |  | 
+**MaximumRate** | **float32** |  | 
+**KinkUtilization** | **float32** |  | 
 **Name** | **string** |  | 
 **Symbol** | **string** |  | 
 **Kind** | [**AssetKind**](AssetKind.md) |  | 
@@ -30,7 +34,7 @@ Name | Type | Description | Notes
 
 ### NewAsset
 
-`func NewAsset(id string, collateralWeight float32, createdAt time.Time, decimals int32, fractionalizedUnits int32, description string, liquidationWeight float32, maxSupply int32, maxUtilization int32, name string, symbol string, kind AssetKind, canAddLiquidity bool, canDirectBorrow bool, canOnboard bool, canTrade bool, canVirtualBorrow bool, maxLeverage float32, ) *Asset`
+`func NewAsset(id string, collateralWeight float32, createdAt time.Time, decimals int32, fractionalizedUnits int32, description string, liquidationWeight float32, maxSupply int32, maxUtilization float32, minimumRate float32, kinkRate float32, maximumRate float32, kinkUtilization float32, name string, symbol string, kind AssetKind, canAddLiquidity bool, canDirectBorrow bool, canOnboard bool, canTrade bool, canVirtualBorrow bool, maxLeverage float32, ) *Asset`
 
 NewAsset instantiates a new Asset object
 This constructor will assign default values to properties that have it defined,
@@ -207,22 +211,102 @@ SetMaxSupply sets MaxSupply field to given value.
 
 ### GetMaxUtilization
 
-`func (o *Asset) GetMaxUtilization() int32`
+`func (o *Asset) GetMaxUtilization() float32`
 
 GetMaxUtilization returns the MaxUtilization field if non-nil, zero value otherwise.
 
 ### GetMaxUtilizationOk
 
-`func (o *Asset) GetMaxUtilizationOk() (*int32, bool)`
+`func (o *Asset) GetMaxUtilizationOk() (*float32, bool)`
 
 GetMaxUtilizationOk returns a tuple with the MaxUtilization field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMaxUtilization
 
-`func (o *Asset) SetMaxUtilization(v int32)`
+`func (o *Asset) SetMaxUtilization(v float32)`
 
 SetMaxUtilization sets MaxUtilization field to given value.
+
+
+### GetMinimumRate
+
+`func (o *Asset) GetMinimumRate() float32`
+
+GetMinimumRate returns the MinimumRate field if non-nil, zero value otherwise.
+
+### GetMinimumRateOk
+
+`func (o *Asset) GetMinimumRateOk() (*float32, bool)`
+
+GetMinimumRateOk returns a tuple with the MinimumRate field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMinimumRate
+
+`func (o *Asset) SetMinimumRate(v float32)`
+
+SetMinimumRate sets MinimumRate field to given value.
+
+
+### GetKinkRate
+
+`func (o *Asset) GetKinkRate() float32`
+
+GetKinkRate returns the KinkRate field if non-nil, zero value otherwise.
+
+### GetKinkRateOk
+
+`func (o *Asset) GetKinkRateOk() (*float32, bool)`
+
+GetKinkRateOk returns a tuple with the KinkRate field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetKinkRate
+
+`func (o *Asset) SetKinkRate(v float32)`
+
+SetKinkRate sets KinkRate field to given value.
+
+
+### GetMaximumRate
+
+`func (o *Asset) GetMaximumRate() float32`
+
+GetMaximumRate returns the MaximumRate field if non-nil, zero value otherwise.
+
+### GetMaximumRateOk
+
+`func (o *Asset) GetMaximumRateOk() (*float32, bool)`
+
+GetMaximumRateOk returns a tuple with the MaximumRate field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMaximumRate
+
+`func (o *Asset) SetMaximumRate(v float32)`
+
+SetMaximumRate sets MaximumRate field to given value.
+
+
+### GetKinkUtilization
+
+`func (o *Asset) GetKinkUtilization() float32`
+
+GetKinkUtilization returns the KinkUtilization field if non-nil, zero value otherwise.
+
+### GetKinkUtilizationOk
+
+`func (o *Asset) GetKinkUtilizationOk() (*float32, bool)`
+
+GetKinkUtilizationOk returns a tuple with the KinkUtilization field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetKinkUtilization
+
+`func (o *Asset) SetKinkUtilization(v float32)`
+
+SetKinkUtilization sets KinkUtilization field to given value.
 
 
 ### GetName

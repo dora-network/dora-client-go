@@ -30,7 +30,11 @@ type Asset struct {
 	Description string `json:"description"`
 	LiquidationWeight float32 `json:"liquidation_weight"`
 	MaxSupply int32 `json:"max_supply"`
-	MaxUtilization int32 `json:"max_utilization"`
+	MaxUtilization float32 `json:"max_utilization"`
+	MinimumRate float32 `json:"minimum_rate"`
+	KinkRate float32 `json:"kink_rate"`
+	MaximumRate float32 `json:"maximum_rate"`
+	KinkUtilization float32 `json:"kink_utilization"`
 	Name string `json:"name"`
 	Symbol string `json:"symbol"`
 	Kind AssetKind `json:"kind"`
@@ -51,7 +55,7 @@ type _Asset Asset
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAsset(id string, collateralWeight float32, createdAt time.Time, decimals int32, fractionalizedUnits int32, description string, liquidationWeight float32, maxSupply int32, maxUtilization int32, name string, symbol string, kind AssetKind, canAddLiquidity bool, canDirectBorrow bool, canOnboard bool, canTrade bool, canVirtualBorrow bool, maxLeverage float32) *Asset {
+func NewAsset(id string, collateralWeight float32, createdAt time.Time, decimals int32, fractionalizedUnits int32, description string, liquidationWeight float32, maxSupply int32, maxUtilization float32, minimumRate float32, kinkRate float32, maximumRate float32, kinkUtilization float32, name string, symbol string, kind AssetKind, canAddLiquidity bool, canDirectBorrow bool, canOnboard bool, canTrade bool, canVirtualBorrow bool, maxLeverage float32) *Asset {
 	this := Asset{}
 	this.Id = id
 	this.CollateralWeight = collateralWeight
@@ -62,6 +66,10 @@ func NewAsset(id string, collateralWeight float32, createdAt time.Time, decimals
 	this.LiquidationWeight = liquidationWeight
 	this.MaxSupply = maxSupply
 	this.MaxUtilization = maxUtilization
+	this.MinimumRate = minimumRate
+	this.KinkRate = kinkRate
+	this.MaximumRate = maximumRate
+	this.KinkUtilization = kinkUtilization
 	this.Name = name
 	this.Symbol = symbol
 	this.Kind = kind
@@ -279,9 +287,9 @@ func (o *Asset) SetMaxSupply(v int32) {
 }
 
 // GetMaxUtilization returns the MaxUtilization field value
-func (o *Asset) GetMaxUtilization() int32 {
+func (o *Asset) GetMaxUtilization() float32 {
 	if o == nil {
-		var ret int32
+		var ret float32
 		return ret
 	}
 
@@ -290,7 +298,7 @@ func (o *Asset) GetMaxUtilization() int32 {
 
 // GetMaxUtilizationOk returns a tuple with the MaxUtilization field value
 // and a boolean to check if the value has been set.
-func (o *Asset) GetMaxUtilizationOk() (*int32, bool) {
+func (o *Asset) GetMaxUtilizationOk() (*float32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -298,8 +306,104 @@ func (o *Asset) GetMaxUtilizationOk() (*int32, bool) {
 }
 
 // SetMaxUtilization sets field value
-func (o *Asset) SetMaxUtilization(v int32) {
+func (o *Asset) SetMaxUtilization(v float32) {
 	o.MaxUtilization = v
+}
+
+// GetMinimumRate returns the MinimumRate field value
+func (o *Asset) GetMinimumRate() float32 {
+	if o == nil {
+		var ret float32
+		return ret
+	}
+
+	return o.MinimumRate
+}
+
+// GetMinimumRateOk returns a tuple with the MinimumRate field value
+// and a boolean to check if the value has been set.
+func (o *Asset) GetMinimumRateOk() (*float32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.MinimumRate, true
+}
+
+// SetMinimumRate sets field value
+func (o *Asset) SetMinimumRate(v float32) {
+	o.MinimumRate = v
+}
+
+// GetKinkRate returns the KinkRate field value
+func (o *Asset) GetKinkRate() float32 {
+	if o == nil {
+		var ret float32
+		return ret
+	}
+
+	return o.KinkRate
+}
+
+// GetKinkRateOk returns a tuple with the KinkRate field value
+// and a boolean to check if the value has been set.
+func (o *Asset) GetKinkRateOk() (*float32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.KinkRate, true
+}
+
+// SetKinkRate sets field value
+func (o *Asset) SetKinkRate(v float32) {
+	o.KinkRate = v
+}
+
+// GetMaximumRate returns the MaximumRate field value
+func (o *Asset) GetMaximumRate() float32 {
+	if o == nil {
+		var ret float32
+		return ret
+	}
+
+	return o.MaximumRate
+}
+
+// GetMaximumRateOk returns a tuple with the MaximumRate field value
+// and a boolean to check if the value has been set.
+func (o *Asset) GetMaximumRateOk() (*float32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.MaximumRate, true
+}
+
+// SetMaximumRate sets field value
+func (o *Asset) SetMaximumRate(v float32) {
+	o.MaximumRate = v
+}
+
+// GetKinkUtilization returns the KinkUtilization field value
+func (o *Asset) GetKinkUtilization() float32 {
+	if o == nil {
+		var ret float32
+		return ret
+	}
+
+	return o.KinkUtilization
+}
+
+// GetKinkUtilizationOk returns a tuple with the KinkUtilization field value
+// and a boolean to check if the value has been set.
+func (o *Asset) GetKinkUtilizationOk() (*float32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.KinkUtilization, true
+}
+
+// SetKinkUtilization sets field value
+func (o *Asset) SetKinkUtilization(v float32) {
+	o.KinkUtilization = v
 }
 
 // GetName returns the Name field value
@@ -633,6 +737,10 @@ func (o Asset) ToMap() (map[string]interface{}, error) {
 	toSerialize["liquidation_weight"] = o.LiquidationWeight
 	toSerialize["max_supply"] = o.MaxSupply
 	toSerialize["max_utilization"] = o.MaxUtilization
+	toSerialize["minimum_rate"] = o.MinimumRate
+	toSerialize["kink_rate"] = o.KinkRate
+	toSerialize["maximum_rate"] = o.MaximumRate
+	toSerialize["kink_utilization"] = o.KinkUtilization
 	toSerialize["name"] = o.Name
 	toSerialize["symbol"] = o.Symbol
 	toSerialize["kind"] = o.Kind
@@ -668,6 +776,10 @@ func (o *Asset) UnmarshalJSON(data []byte) (err error) {
 		"liquidation_weight",
 		"max_supply",
 		"max_utilization",
+		"minimum_rate",
+		"kink_rate",
+		"maximum_rate",
+		"kink_utilization",
 		"name",
 		"symbol",
 		"kind",

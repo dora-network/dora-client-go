@@ -22,7 +22,7 @@ var _ MappedNullable = &UnitedPosition{}
 // UnitedPosition struct for UnitedPosition
 type UnitedPosition struct {
 	GlobalPositionId string `json:"global_position_id"`
-	TransactionIds []string `json:"transaction_ids,omitempty"`
+	TransactionIds []string `json:"transaction_ids"`
 }
 
 type _UnitedPosition UnitedPosition
@@ -31,9 +31,10 @@ type _UnitedPosition UnitedPosition
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUnitedPosition(globalPositionId string) *UnitedPosition {
+func NewUnitedPosition(globalPositionId string, transactionIds []string) *UnitedPosition {
 	this := UnitedPosition{}
 	this.GlobalPositionId = globalPositionId
+	this.TransactionIds = transactionIds
 	return &this
 }
 
@@ -69,34 +70,26 @@ func (o *UnitedPosition) SetGlobalPositionId(v string) {
 	o.GlobalPositionId = v
 }
 
-// GetTransactionIds returns the TransactionIds field value if set, zero value otherwise.
+// GetTransactionIds returns the TransactionIds field value
 func (o *UnitedPosition) GetTransactionIds() []string {
-	if o == nil || IsNil(o.TransactionIds) {
+	if o == nil {
 		var ret []string
 		return ret
 	}
+
 	return o.TransactionIds
 }
 
-// GetTransactionIdsOk returns a tuple with the TransactionIds field value if set, nil otherwise
+// GetTransactionIdsOk returns a tuple with the TransactionIds field value
 // and a boolean to check if the value has been set.
 func (o *UnitedPosition) GetTransactionIdsOk() ([]string, bool) {
-	if o == nil || IsNil(o.TransactionIds) {
+	if o == nil {
 		return nil, false
 	}
 	return o.TransactionIds, true
 }
 
-// HasTransactionIds returns a boolean if a field has been set.
-func (o *UnitedPosition) HasTransactionIds() bool {
-	if o != nil && !IsNil(o.TransactionIds) {
-		return true
-	}
-
-	return false
-}
-
-// SetTransactionIds gets a reference to the given []string and assigns it to the TransactionIds field.
+// SetTransactionIds sets field value
 func (o *UnitedPosition) SetTransactionIds(v []string) {
 	o.TransactionIds = v
 }
@@ -112,9 +105,7 @@ func (o UnitedPosition) MarshalJSON() ([]byte, error) {
 func (o UnitedPosition) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["global_position_id"] = o.GlobalPositionId
-	if !IsNil(o.TransactionIds) {
-		toSerialize["transaction_ids"] = o.TransactionIds
-	}
+	toSerialize["transaction_ids"] = o.TransactionIds
 	return toSerialize, nil
 }
 
@@ -124,6 +115,7 @@ func (o *UnitedPosition) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"global_position_id",
+		"transaction_ids",
 	}
 
 	allProperties := make(map[string]interface{})

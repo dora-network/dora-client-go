@@ -88,6 +88,18 @@ func Test_doraclient_DefaultAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test DefaultAPIService CloseIsolatedAccountV2", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.DefaultAPI.CloseIsolatedAccountV2(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test DefaultAPIService CloseIsolatedPosition", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -131,6 +143,18 @@ func Test_doraclient_DefaultAPIService(t *testing.T) {
 		t.Skip("skip test")  // remove to run test
 
 		resp, httpRes, err := apiClient.DefaultAPI.CreateConditionalOrder(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DefaultAPIService CreateNewIsolatedAccountV2", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.DefaultAPI.CreateNewIsolatedAccountV2(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -343,6 +367,18 @@ func Test_doraclient_DefaultAPIService(t *testing.T) {
 		var orderBookId string
 
 		resp, httpRes, err := apiClient.DefaultAPI.GetL3Depth(context.Background(), orderBookId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DefaultAPIService GetLedgerAccountsSelfV2", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.DefaultAPI.GetLedgerAccountsSelfV2(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -879,6 +915,34 @@ func Test_doraclient_DefaultAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test DefaultAPIService LeverageGetHistoricalInterestRates", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var assetId string
+
+		resp, httpRes, err := apiClient.DefaultAPI.LeverageGetHistoricalInterestRates(context.Background(), assetId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DefaultAPIService LeverageGetInterestRate", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var assetId string
+
+		resp, httpRes, err := apiClient.DefaultAPI.LeverageGetInterestRate(context.Background(), assetId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test DefaultAPIService LeverageIsolateCollateral", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -948,6 +1012,18 @@ func Test_doraclient_DefaultAPIService(t *testing.T) {
 		var poolId string
 
 		resp, httpRes, err := apiClient.DefaultAPI.LiquiditySubtract(context.Background(), poolId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DefaultAPIService ListAccountsSelfV2", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.DefaultAPI.ListAccountsSelfV2(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -1157,6 +1233,18 @@ func Test_doraclient_DefaultAPIService(t *testing.T) {
 		var orderBookId string
 
 		resp, httpRes, err := apiClient.DefaultAPI.StreamTrades(context.Background(), orderBookId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DefaultAPIService TransferAccountBalancesV2", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.DefaultAPI.TransferAccountBalancesV2(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

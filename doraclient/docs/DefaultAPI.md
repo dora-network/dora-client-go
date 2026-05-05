@@ -9,10 +9,12 @@ Method | HTTP request | Description
 [**CancelLedgerWithdrawRequest**](DefaultAPI.md#CancelLedgerWithdrawRequest) | **Post** /v1/ledger/withdraw/requests/{withdrawal_id}/cancel | Cancel a pending withdrawal request
 [**CancelOrderById**](DefaultAPI.md#CancelOrderById) | **Delete** /v1/orders/{order_id} | Cancel an order by ID
 [**ClaimLeverageGetAccruedInterest**](DefaultAPI.md#ClaimLeverageGetAccruedInterest) | **Post** /v1/leverage/accrued_interest/claim | Claim current accrued leverage interest for a specific user
+[**CloseIsolatedAccountV2**](DefaultAPI.md#CloseIsolatedAccountV2) | **Post** /v2/accounts/close | Close an isolated account, repaying the borrowed
 [**CloseIsolatedPosition**](DefaultAPI.md#CloseIsolatedPosition) | **Post** /v1/positions/close | Close isolated positions, repaying the borrowed
 [**CreateAPIKeyForUser**](DefaultAPI.md#CreateAPIKeyForUser) | **Post** /v1/user/apikey | Create apikey for a user
 [**CreateAPIKeyForUserID**](DefaultAPI.md#CreateAPIKeyForUserID) | **Post** /v1/user/{user_id}/apikey | Create apikey for a user
 [**CreateConditionalOrder**](DefaultAPI.md#CreateConditionalOrder) | **Post** /v1/orders/conditional | Create a new conditional orders
+[**CreateNewIsolatedAccountV2**](DefaultAPI.md#CreateNewIsolatedAccountV2) | **Post** /v2/accounts/new_isolated | Create a new isolated account for a user transferring available assets into the account
 [**CreateOrder**](DefaultAPI.md#CreateOrder) | **Post** /v1/orders | Create a new order
 [**CreateUser**](DefaultAPI.md#CreateUser) | **Post** /v1/integrators/user | Create a new user
 [**DeleteUser**](DefaultAPI.md#DeleteUser) | **Delete** /v1/user/{user_id} | Delete user by ID
@@ -29,6 +31,7 @@ Method | HTTP request | Description
 [**GetL1Depth**](DefaultAPI.md#GetL1Depth) | **Get** /v1/orderbooks/{order_book_id}/L1 | Get the top price levels for a specific orderbook (L1 market depth)
 [**GetL2Depth**](DefaultAPI.md#GetL2Depth) | **Get** /v1/orderbooks/{order_book_id}/L2 | Get the aggregated price levels for a specific orderbook (L2 market depth)
 [**GetL3Depth**](DefaultAPI.md#GetL3Depth) | **Get** /v1/orderbooks/{order_book_id}/L3 | Get all open orders for a specific orderbook (L3 market depth)
+[**GetLedgerAccountsSelfV2**](DefaultAPI.md#GetLedgerAccountsSelfV2) | **Get** /v2/ledger/accounts/self | Get your own accounts
 [**GetLedgerBalancesSelf**](DefaultAPI.md#GetLedgerBalancesSelf) | **Get** /v1/ledger/balances/self | Get your own available, locked, and borrowed assets
 [**GetLedgerInterestSelf**](DefaultAPI.md#GetLedgerInterestSelf) | **Get** /v1/ledger/interest/self | Get your own interest
 [**GetLedgerModule**](DefaultAPI.md#GetLedgerModule) | **Get** /v1/ledger/module | Get the entire module object, including unborrowed leverage assets and total leverage trackers
@@ -69,12 +72,15 @@ Method | HTTP request | Description
 [**LedgerWithdrawRequest**](DefaultAPI.md#LedgerWithdrawRequest) | **Post** /v1/ledger/withdraw/requests/{user_id} | Initiate a withdrawal request for this user to the outside world
 [**LedgerWithdrawRequestSelf**](DefaultAPI.md#LedgerWithdrawRequestSelf) | **Post** /v1/ledger/withdraw/requests/self | Initiate a withdrawal request for the logged in user to the outside world
 [**LeverageGetAccruedInterestByUser**](DefaultAPI.md#LeverageGetAccruedInterestByUser) | **Get** /v1/leverage/accrued_interest/self | Get current accrued leverage interest for the user
+[**LeverageGetHistoricalInterestRates**](DefaultAPI.md#LeverageGetHistoricalInterestRates) | **Get** /v1/leverage/interest_rate/{asset_id}/historical | Get historical leverage interest rates for a specific asset
+[**LeverageGetInterestRate**](DefaultAPI.md#LeverageGetInterestRate) | **Get** /v1/leverage/interest_rate/{asset_id} | Get leverage interest rate for a specific asset
 [**LeverageIsolateCollateral**](DefaultAPI.md#LeverageIsolateCollateral) | **Post** /v1/leverage/isolate_collateral | Create an isolated position by transferring collateral to the position from the user&#39;s global collateral
 [**LeverageSupply**](DefaultAPI.md#LeverageSupply) | **Post** /v1/leverage/supply | Supply leverage for a specific asset
 [**LeverageUnite**](DefaultAPI.md#LeverageUnite) | **Post** /v1/leverage/unite | Combines all isolated positions into a single global position
 [**LeverageWithdraw**](DefaultAPI.md#LeverageWithdraw) | **Post** /v1/leverage/withdraw | Withdraw leverage for a specific asset
 [**LiquidityAdd**](DefaultAPI.md#LiquidityAdd) | **Post** /v1/liquidity/pool/{pool_id}/add | Add liquidity to a pool
 [**LiquiditySubtract**](DefaultAPI.md#LiquiditySubtract) | **Post** /v1/liquidity/pool/{pool_id}/remove | Subtract liquidity from a pool
+[**ListAccountsSelfV2**](DefaultAPI.md#ListAccountsSelfV2) | **Get** /v2/user/self/accounts | List all accounts for the authenticated user
 [**ListAssets**](DefaultAPI.md#ListAssets) | **Get** /v1/assets | List assets
 [**ListOrderBooks**](DefaultAPI.md#ListOrderBooks) | **Get** /v1/orderbooks | List order books
 [**ListOrders**](DefaultAPI.md#ListOrders) | **Get** /v1/orders | List all orders
@@ -91,6 +97,7 @@ Method | HTTP request | Description
 [**StreamOrderBookBalances**](DefaultAPI.md#StreamOrderBookBalances) | **Get** /v1/orderbooks/{order_book_id}/balances/stream | Get a snapshot of base and quote balances for an order book and open a stream for real-time updates
 [**StreamOrderbookOpenOrders**](DefaultAPI.md#StreamOrderbookOpenOrders) | **Get** /v1/orderbooks/{order_book_id}/open/stream | Get a snapshot of open orders in an order book and open a stream for real-time updates
 [**StreamTrades**](DefaultAPI.md#StreamTrades) | **Get** /v1/trades/{order_book_id}/stream | Get a snapshot of trades executed on the given order book from a specific date and open a stream for real-time updates
+[**TransferAccountBalancesV2**](DefaultAPI.md#TransferAccountBalancesV2) | **Post** /v2/accounts/transfer_balances | Transfer available balance between a user&#39;s accounts
 [**TransferAvailableBalances**](DefaultAPI.md#TransferAvailableBalances) | **Post** /v1/positions/transfer_balances | Transfer available balance between a user&#39;s accounts (e.g. global to isolated position)
 [**UpdateUserConfig**](DefaultAPI.md#UpdateUserConfig) | **Put** /v1/user/{user_id}/config | Update user configuration by ID
 [**UpdateUserConfigSelf**](DefaultAPI.md#UpdateUserConfigSelf) | **Put** /v1/user/config/self | Update user configuration for the authenticated user
@@ -445,6 +452,70 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## CloseIsolatedAccountV2
+
+> ClosePositionResponseEnvelope CloseIsolatedAccountV2(ctx).CloseAccountRequest(closeAccountRequest).Execute()
+
+Close an isolated account, repaying the borrowed
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+	closeAccountRequest := *openapiclient.NewCloseAccountRequest("AccountId_example", "OrderBookId_example") // CloseAccountRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.CloseIsolatedAccountV2(context.Background()).CloseAccountRequest(closeAccountRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.CloseIsolatedAccountV2``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CloseIsolatedAccountV2`: ClosePositionResponseEnvelope
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.CloseIsolatedAccountV2`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCloseIsolatedAccountV2Request struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **closeAccountRequest** | [**CloseAccountRequest**](CloseAccountRequest.md) |  | 
+
+### Return type
+
+[**ClosePositionResponseEnvelope**](ClosePositionResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## CloseIsolatedPosition
 
 > ClosePositionResponseEnvelope CloseIsolatedPosition(ctx).ClosePositionRequest(closePositionRequest).Execute()
@@ -692,6 +763,70 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**CreateConditionalOrderResponseEnvelope**](CreateConditionalOrderResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CreateNewIsolatedAccountV2
+
+> NewIsolatedAccountResponseV2Envelope CreateNewIsolatedAccountV2(ctx).NewIsolatedAccountRequestV2(newIsolatedAccountRequestV2).Execute()
+
+Create a new isolated account for a user transferring available assets into the account
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+	newIsolatedAccountRequestV2 := *openapiclient.NewNewIsolatedAccountRequestV2("GlobalAccountId_example", "AssetId_example", "Quantity_example") // NewIsolatedAccountRequestV2 | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.CreateNewIsolatedAccountV2(context.Background()).NewIsolatedAccountRequestV2(newIsolatedAccountRequestV2).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.CreateNewIsolatedAccountV2``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CreateNewIsolatedAccountV2`: NewIsolatedAccountResponseV2Envelope
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.CreateNewIsolatedAccountV2`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateNewIsolatedAccountV2Request struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **newIsolatedAccountRequestV2** | [**NewIsolatedAccountRequestV2**](NewIsolatedAccountRequestV2.md) |  | 
+
+### Return type
+
+[**NewIsolatedAccountResponseV2Envelope**](NewIsolatedAccountResponseV2Envelope.md)
 
 ### Authorization
 
@@ -1760,6 +1895,65 @@ Name | Type | Description  | Notes
 ### Authorization
 
 No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetLedgerAccountsSelfV2
+
+> LedgerAccountsResponseV2Envelope GetLedgerAccountsSelfV2(ctx).Execute()
+
+Get your own accounts
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.GetLedgerAccountsSelfV2(context.Background()).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.GetLedgerAccountsSelfV2``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetLedgerAccountsSelfV2`: LedgerAccountsResponseV2Envelope
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.GetLedgerAccountsSelfV2`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+This endpoint does not need any parameter.
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetLedgerAccountsSelfV2Request struct via the builder pattern
+
+
+### Return type
+
+[**LedgerAccountsResponseV2Envelope**](LedgerAccountsResponseV2Envelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -3310,7 +3504,7 @@ No authorization required
 
 ## GetTransactionsSettlements
 
-> TransactionsSettlementsResponseEnvelope GetTransactionsSettlements(ctx).TenantId(tenantId).UserId(userId).PositionId(positionId).TxKind(txKind).CreatedAfter(createdAfter).SettledBefore(settledBefore).IsSettled(isSettled).Execute()
+> TransactionsSettlementsResponseEnvelope GetTransactionsSettlements(ctx).TenantId(tenantId).UserId(userId).PositionId(positionId).TxKind(txKind).CreatedAfter(createdAfter).CreatedBefore(createdBefore).SettledAfter(settledAfter).SettledBefore(settledBefore).IsSettled(isSettled).Execute()
 
 Get transactions settlements with filters
 
@@ -3333,12 +3527,14 @@ func main() {
 	positionId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Position ID to filter settlements (optional)
 	txKind := "txKind_example" // string | Transaction kind to filter settlements (optional)
 	createdAfter := time.Now() // time.Time | Filter settlements created after this time (optional)
+	createdBefore := time.Now() // time.Time | Filter settlements created before this time (optional)
+	settledAfter := time.Now() // time.Time | Filter settlements settled after this time (optional)
 	settledBefore := time.Now() // time.Time | Filter settlements settled before this time (optional)
 	isSettled := true // bool | Filter settlements by settlement status (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.DefaultAPI.GetTransactionsSettlements(context.Background()).TenantId(tenantId).UserId(userId).PositionId(positionId).TxKind(txKind).CreatedAfter(createdAfter).SettledBefore(settledBefore).IsSettled(isSettled).Execute()
+	resp, r, err := apiClient.DefaultAPI.GetTransactionsSettlements(context.Background()).TenantId(tenantId).UserId(userId).PositionId(positionId).TxKind(txKind).CreatedAfter(createdAfter).CreatedBefore(createdBefore).SettledAfter(settledAfter).SettledBefore(settledBefore).IsSettled(isSettled).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.GetTransactionsSettlements``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -3364,6 +3560,8 @@ Name | Type | Description  | Notes
  **positionId** | **string** | Position ID to filter settlements | 
  **txKind** | **string** | Transaction kind to filter settlements | 
  **createdAfter** | **time.Time** | Filter settlements created after this time | 
+ **createdBefore** | **time.Time** | Filter settlements created before this time | 
+ **settledAfter** | **time.Time** | Filter settlements settled after this time | 
  **settledBefore** | **time.Time** | Filter settlements settled before this time | 
  **isSettled** | **bool** | Filter settlements by settlement status | 
 
@@ -4488,6 +4686,152 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## LeverageGetHistoricalInterestRates
+
+> HistoricalLeverageInterestRatesResponseEnvelope LeverageGetHistoricalInterestRates(ctx, assetId).Start(start).End(end).Execute()
+
+Get historical leverage interest rates for a specific asset
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+    "time"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+	assetId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+	start := time.Now() // time.Time |  (optional)
+	end := time.Now() // time.Time |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.LeverageGetHistoricalInterestRates(context.Background(), assetId).Start(start).End(end).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.LeverageGetHistoricalInterestRates``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `LeverageGetHistoricalInterestRates`: HistoricalLeverageInterestRatesResponseEnvelope
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.LeverageGetHistoricalInterestRates`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**assetId** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiLeverageGetHistoricalInterestRatesRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **start** | **time.Time** |  | 
+ **end** | **time.Time** |  | 
+
+### Return type
+
+[**HistoricalLeverageInterestRatesResponseEnvelope**](HistoricalLeverageInterestRatesResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## LeverageGetInterestRate
+
+> LeverageInterestRateResponseEnvelope LeverageGetInterestRate(ctx, assetId).Start(start).End(end).Execute()
+
+Get leverage interest rate for a specific asset
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+    "time"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+	assetId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+	start := time.Now() // time.Time |  (optional)
+	end := time.Now() // time.Time |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.LeverageGetInterestRate(context.Background(), assetId).Start(start).End(end).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.LeverageGetInterestRate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `LeverageGetInterestRate`: LeverageInterestRateResponseEnvelope
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.LeverageGetInterestRate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**assetId** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiLeverageGetInterestRateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **start** | **time.Time** |  | 
+ **end** | **time.Time** |  | 
+
+### Return type
+
+[**LeverageInterestRateResponseEnvelope**](LeverageInterestRateResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## LeverageIsolateCollateral
 
 > IsolateCollateralResponse LeverageIsolateCollateral(ctx).IsolateCollateralRequest(isolateCollateralRequest).Execute()
@@ -4879,6 +5223,65 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ListAccountsSelfV2
+
+> ListAccountsResponseV2Envelope ListAccountsSelfV2(ctx).Execute()
+
+List all accounts for the authenticated user
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.ListAccountsSelfV2(context.Background()).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.ListAccountsSelfV2``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ListAccountsSelfV2`: ListAccountsResponseV2Envelope
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.ListAccountsSelfV2`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+This endpoint does not need any parameter.
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiListAccountsSelfV2Request struct via the builder pattern
+
+
+### Return type
+
+[**ListAccountsResponseV2Envelope**](ListAccountsResponseV2Envelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -5998,6 +6401,70 @@ No authorization required
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## TransferAccountBalancesV2
+
+> TransferAccountBalancesResponseEnvelope TransferAccountBalancesV2(ctx).TransferAccountBalancesRequest(transferAccountBalancesRequest).Execute()
+
+Transfer available balance between a user's accounts
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+	transferAccountBalancesRequest := *openapiclient.NewTransferAccountBalancesRequest("FromAccountId_example", "ToAccountId_example", "AssetId_example", "Quantity_example") // TransferAccountBalancesRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.TransferAccountBalancesV2(context.Background()).TransferAccountBalancesRequest(transferAccountBalancesRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.TransferAccountBalancesV2``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `TransferAccountBalancesV2`: TransferAccountBalancesResponseEnvelope
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.TransferAccountBalancesV2`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiTransferAccountBalancesV2Request struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **transferAccountBalancesRequest** | [**TransferAccountBalancesRequest**](TransferAccountBalancesRequest.md) |  | 
+
+### Return type
+
+[**TransferAccountBalancesResponseEnvelope**](TransferAccountBalancesResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

@@ -5,13 +5,13 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **GlobalPositionId** | **string** |  | 
-**TransactionIds** | Pointer to **[]string** |  | [optional] 
+**TransactionIds** | **[]string** |  | 
 
 ## Methods
 
 ### NewUnitedPosition
 
-`func NewUnitedPosition(globalPositionId string, ) *UnitedPosition`
+`func NewUnitedPosition(globalPositionId string, transactionIds []string, ) *UnitedPosition`
 
 NewUnitedPosition instantiates a new UnitedPosition object
 This constructor will assign default values to properties that have it defined,
@@ -65,11 +65,6 @@ and a boolean to check if the value has been set.
 
 SetTransactionIds sets TransactionIds field to given value.
 
-### HasTransactionIds
-
-`func (o *UnitedPosition) HasTransactionIds() bool`
-
-HasTransactionIds returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
