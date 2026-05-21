@@ -1,15 +1,15 @@
-# OrderBookStatus
+# AssetYieldResolution
 
 ## Enum
 
 
-* `CLOSED` (value: `"CLOSED"`)
+* `_1H` (value: `"1h"`)
 
-* `OPEN` (value: `"OPEN"`)
+* `_1D` (value: `"1d"`)
 
-* `SUSPENDED` (value: `"SUSPENDED"`)
+* `_7D` (value: `"7d"`)
 
-* `TESTING` (value: `"TESTING"`)
+* `_30D` (value: `"30d"`)
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

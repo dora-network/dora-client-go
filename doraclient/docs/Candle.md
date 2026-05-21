@@ -10,13 +10,14 @@ Name | Type | Description | Notes
 **High** | **string** |  | 
 **Low** | **string** |  | 
 **Close** | **string** |  | 
+**Ytm** | **string** |  | 
 **Volume** | **string** |  | 
 
 ## Methods
 
 ### NewCandle
 
-`func NewCandle(orderBookId string, startTimestamp time.Time, open string, high string, low string, close string, volume string, ) *Candle`
+`func NewCandle(orderBookId string, startTimestamp time.Time, open string, high string, low string, close string, ytm string, volume string, ) *Candle`
 
 NewCandle instantiates a new Candle object
 This constructor will assign default values to properties that have it defined,
@@ -149,6 +150,26 @@ and a boolean to check if the value has been set.
 `func (o *Candle) SetClose(v string)`
 
 SetClose sets Close field to given value.
+
+
+### GetYtm
+
+`func (o *Candle) GetYtm() string`
+
+GetYtm returns the Ytm field if non-nil, zero value otherwise.
+
+### GetYtmOk
+
+`func (o *Candle) GetYtmOk() (*string, bool)`
+
+GetYtmOk returns a tuple with the Ytm field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetYtm
+
+`func (o *Candle) SetYtm(v string)`
+
+SetYtm sets Ytm field to given value.
 
 
 ### GetVolume

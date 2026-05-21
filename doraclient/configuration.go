@@ -104,11 +104,11 @@ func NewConfiguration() *Configuration {
 				Description: "DORA staging Websocket API server",
 			},
 			{
-				URL: "https://prod.dora.co",
+				URL: "https://api.dora.co",
 				Description: "DORA production API server",
 			},
 			{
-				URL: "wss://prod.dora.co",
+				URL: "wss://api.dora.co",
 				Description: "DORA production Websocket API server",
 			},
 		},

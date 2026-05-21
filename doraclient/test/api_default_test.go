@@ -292,6 +292,20 @@ func Test_doraclient_DefaultAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test DefaultAPIService GetAssetYieldData", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var assetId string
+
+		resp, httpRes, err := apiClient.DefaultAPI.GetAssetYieldData(context.Background(), assetId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test DefaultAPIService GetAssetsStream", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
