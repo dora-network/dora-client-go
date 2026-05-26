@@ -28,6 +28,7 @@ type Candle struct {
 	High string `json:"high"`
 	Low string `json:"low"`
 	Close string `json:"close"`
+	Ytm string `json:"ytm"`
 	Volume string `json:"volume"`
 }
 
@@ -37,7 +38,7 @@ type _Candle Candle
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCandle(orderBookId string, startTimestamp time.Time, open string, high string, low string, close string, volume string) *Candle {
+func NewCandle(orderBookId string, startTimestamp time.Time, open string, high string, low string, close string, ytm string, volume string) *Candle {
 	this := Candle{}
 	this.OrderBookId = orderBookId
 	this.StartTimestamp = startTimestamp
@@ -45,6 +46,7 @@ func NewCandle(orderBookId string, startTimestamp time.Time, open string, high s
 	this.High = high
 	this.Low = low
 	this.Close = close
+	this.Ytm = ytm
 	this.Volume = volume
 	return &this
 }
@@ -201,6 +203,30 @@ func (o *Candle) SetClose(v string) {
 	o.Close = v
 }
 
+// GetYtm returns the Ytm field value
+func (o *Candle) GetYtm() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Ytm
+}
+
+// GetYtmOk returns a tuple with the Ytm field value
+// and a boolean to check if the value has been set.
+func (o *Candle) GetYtmOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Ytm, true
+}
+
+// SetYtm sets field value
+func (o *Candle) SetYtm(v string) {
+	o.Ytm = v
+}
+
 // GetVolume returns the Volume field value
 func (o *Candle) GetVolume() string {
 	if o == nil {
@@ -241,6 +267,7 @@ func (o Candle) ToMap() (map[string]interface{}, error) {
 	toSerialize["high"] = o.High
 	toSerialize["low"] = o.Low
 	toSerialize["close"] = o.Close
+	toSerialize["ytm"] = o.Ytm
 	toSerialize["volume"] = o.Volume
 	return toSerialize, nil
 }
@@ -256,6 +283,7 @@ func (o *Candle) UnmarshalJSON(data []byte) (err error) {
 		"high",
 		"low",
 		"close",
+		"ytm",
 		"volume",
 	}
 

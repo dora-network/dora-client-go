@@ -23,6 +23,7 @@ const (
 	ORDERBOOKSTATUS_CLOSED OrderBookStatus = "CLOSED"
 	ORDERBOOKSTATUS_OPEN OrderBookStatus = "OPEN"
 	ORDERBOOKSTATUS_SUSPENDED OrderBookStatus = "SUSPENDED"
+	ORDERBOOKSTATUS_TESTING OrderBookStatus = "TESTING"
 )
 
 // All allowed values of OrderBookStatus enum
@@ -30,6 +31,7 @@ var AllowedOrderBookStatusEnumValues = []OrderBookStatus{
 	"CLOSED",
 	"OPEN",
 	"SUSPENDED",
+	"TESTING",
 }
 
 func (v *OrderBookStatus) UnmarshalJSON(src []byte) error {

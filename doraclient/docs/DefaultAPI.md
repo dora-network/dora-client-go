@@ -25,6 +25,7 @@ Method | HTTP request | Description
 [**GetAssetById**](DefaultAPI.md#GetAssetById) | **Get** /v1/assets/{asset_id} | Get asset by ID
 [**GetAssetPrice**](DefaultAPI.md#GetAssetPrice) | **Get** /v1/price/asset/{asset_id} | Get the current price of an asset
 [**GetAssetYTMById**](DefaultAPI.md#GetAssetYTMById) | **Get** /v1/assets/{asset_id}/ytm | Get annualized yield to maturity for a bond asset
+[**GetAssetYieldData**](DefaultAPI.md#GetAssetYieldData) | **Get** /v1/charts/{asset_id}/yield | Get yield chart data for an asset
 [**GetAssetsStream**](DefaultAPI.md#GetAssetsStream) | **Get** /v1/assets/stream | Get all inserts or updates for assets
 [**GetCandleData**](DefaultAPI.md#GetCandleData) | **Get** /v1/charts/{order_book_id}/candle | Get candlestick data for an orderbook
 [**GetCouponPaymentsByAssetId**](DefaultAPI.md#GetCouponPaymentsByAssetId) | **Get** /v1/assets/{asset_id}/coupon_payments | Get coupon payments for a bond asset
@@ -1477,6 +1478,81 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**GetAssetYTMByIDResponseEnvelope**](GetAssetYTMByIDResponseEnvelope.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetAssetYieldData
+
+> ListAssetYieldResponseEnvelope GetAssetYieldData(ctx, assetId).Start(start).End(end).Resolution(resolution).Execute()
+
+Get yield chart data for an asset
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+    "time"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+	assetId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+	start := time.Now() // time.Time | 
+	end := time.Now() // time.Time | 
+	resolution := openapiclient.AssetYieldResolution("1h") // AssetYieldResolution | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.GetAssetYieldData(context.Background(), assetId).Start(start).End(end).Resolution(resolution).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.GetAssetYieldData``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetAssetYieldData`: ListAssetYieldResponseEnvelope
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.GetAssetYieldData`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**assetId** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetAssetYieldDataRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **start** | **time.Time** |  | 
+ **end** | **time.Time** |  | 
+ **resolution** | [**AssetYieldResolution**](AssetYieldResolution.md) |  | 
+
+### Return type
+
+[**ListAssetYieldResponseEnvelope**](ListAssetYieldResponseEnvelope.md)
 
 ### Authorization
 
@@ -5391,7 +5467,7 @@ import (
 )
 
 func main() {
-	status := openapiclient.OrderBookStatus("CLOSED") // OrderBookStatus |  (optional)
+	status := []openapiclient.OrderBookStatus{openapiclient.OrderBookStatus("CLOSED")} // []OrderBookStatus |  (optional)
 	baseAssetId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string |  (optional)
 	quoteAssetId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string |  (optional)
 	page := int32(56) // int32 |  (optional) (default to 1)
@@ -5420,7 +5496,7 @@ Other parameters are passed through a pointer to a apiListOrderBooksRequest stru
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **status** | [**OrderBookStatus**](OrderBookStatus.md) |  | 
+ **status** | [**[]OrderBookStatus**](OrderBookStatus.md) |  | 
  **baseAssetId** | **string** |  | 
  **quoteAssetId** | **string** |  | 
  **page** | **int32** |  | [default to 1]

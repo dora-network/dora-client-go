@@ -99,6 +99,7 @@ Class | Method | HTTP request | Description
 *DefaultAPI* | [**GetAssetById**](docs/DefaultAPI.md#getassetbyid) | **Get** /v1/assets/{asset_id} | Get asset by ID
 *DefaultAPI* | [**GetAssetPrice**](docs/DefaultAPI.md#getassetprice) | **Get** /v1/price/asset/{asset_id} | Get the current price of an asset
 *DefaultAPI* | [**GetAssetYTMById**](docs/DefaultAPI.md#getassetytmbyid) | **Get** /v1/assets/{asset_id}/ytm | Get annualized yield to maturity for a bond asset
+*DefaultAPI* | [**GetAssetYieldData**](docs/DefaultAPI.md#getassetyielddata) | **Get** /v1/charts/{asset_id}/yield | Get yield chart data for an asset
 *DefaultAPI* | [**GetAssetsStream**](docs/DefaultAPI.md#getassetsstream) | **Get** /v1/assets/stream | Get all inserts or updates for assets
 *DefaultAPI* | [**GetCandleData**](docs/DefaultAPI.md#getcandledata) | **Get** /v1/charts/{order_book_id}/candle | Get candlestick data for an orderbook
 *DefaultAPI* | [**GetCouponPaymentsByAssetId**](docs/DefaultAPI.md#getcouponpaymentsbyassetid) | **Get** /v1/assets/{asset_id}/coupon_payments | Get coupon payments for a bond asset
@@ -199,6 +200,8 @@ Class | Method | HTTP request | Description
  - [AssetPriceResponseEnvelope](docs/AssetPriceResponseEnvelope.md)
  - [AssetRequestError](docs/AssetRequestError.md)
  - [AssetYTM](docs/AssetYTM.md)
+ - [AssetYield](docs/AssetYield.md)
+ - [AssetYieldResolution](docs/AssetYieldResolution.md)
  - [BalanceTransfer](docs/BalanceTransfer.md)
  - [BalancesResponse](docs/BalancesResponse.md)
  - [Bond](docs/Bond.md)
@@ -258,6 +261,7 @@ Class | Method | HTTP request | Description
  - [LiquidityResponseEnvelope](docs/LiquidityResponseEnvelope.md)
  - [ListAccountsResponseV2Envelope](docs/ListAccountsResponseV2Envelope.md)
  - [ListAssetPriceResponseEnvelope](docs/ListAssetPriceResponseEnvelope.md)
+ - [ListAssetYieldResponseEnvelope](docs/ListAssetYieldResponseEnvelope.md)
  - [ListCandlesResponseEnvelope](docs/ListCandlesResponseEnvelope.md)
  - [ListCouponPaymentsResponseEnvelope](docs/ListCouponPaymentsResponseEnvelope.md)
  - [ListOrderBookDepthResponseEnvelope](docs/ListOrderBookDepthResponseEnvelope.md)
