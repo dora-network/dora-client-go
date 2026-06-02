@@ -32,6 +32,7 @@ type Transaction struct {
 	UserId string `json:"user_id"`
 	AdminUserId string `json:"admin_user_id"`
 	OrderSide Side `json:"order_side"`
+	InternalTransfer *TransactionInternalTransfer `json:"internal_transfer,omitempty"`
 }
 
 type _Transaction Transaction
@@ -303,6 +304,38 @@ func (o *Transaction) SetOrderSide(v Side) {
 	o.OrderSide = v
 }
 
+// GetInternalTransfer returns the InternalTransfer field value if set, zero value otherwise.
+func (o *Transaction) GetInternalTransfer() TransactionInternalTransfer {
+	if o == nil || IsNil(o.InternalTransfer) {
+		var ret TransactionInternalTransfer
+		return ret
+	}
+	return *o.InternalTransfer
+}
+
+// GetInternalTransferOk returns a tuple with the InternalTransfer field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Transaction) GetInternalTransferOk() (*TransactionInternalTransfer, bool) {
+	if o == nil || IsNil(o.InternalTransfer) {
+		return nil, false
+	}
+	return o.InternalTransfer, true
+}
+
+// HasInternalTransfer returns a boolean if a field has been set.
+func (o *Transaction) HasInternalTransfer() bool {
+	if o != nil && !IsNil(o.InternalTransfer) {
+		return true
+	}
+
+	return false
+}
+
+// SetInternalTransfer gets a reference to the given TransactionInternalTransfer and assigns it to the InternalTransfer field.
+func (o *Transaction) SetInternalTransfer(v TransactionInternalTransfer) {
+	o.InternalTransfer = &v
+}
+
 func (o Transaction) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -323,6 +356,9 @@ func (o Transaction) ToMap() (map[string]interface{}, error) {
 	toSerialize["user_id"] = o.UserId
 	toSerialize["admin_user_id"] = o.AdminUserId
 	toSerialize["order_side"] = o.OrderSide
+	if !IsNil(o.InternalTransfer) {
+		toSerialize["internal_transfer"] = o.InternalTransfer
+	}
 	return toSerialize, nil
 }
 

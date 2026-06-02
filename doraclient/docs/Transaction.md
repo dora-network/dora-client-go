@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **UserId** | **string** |  | 
 **AdminUserId** | **string** |  | 
 **OrderSide** | [**Side**](Side.md) |  | 
+**InternalTransfer** | Pointer to [**TransactionInternalTransfer**](TransactionInternalTransfer.md) |  | [optional] 
 
 ## Methods
 
@@ -233,6 +234,31 @@ and a boolean to check if the value has been set.
 
 SetOrderSide sets OrderSide field to given value.
 
+
+### GetInternalTransfer
+
+`func (o *Transaction) GetInternalTransfer() TransactionInternalTransfer`
+
+GetInternalTransfer returns the InternalTransfer field if non-nil, zero value otherwise.
+
+### GetInternalTransferOk
+
+`func (o *Transaction) GetInternalTransferOk() (*TransactionInternalTransfer, bool)`
+
+GetInternalTransferOk returns a tuple with the InternalTransfer field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInternalTransfer
+
+`func (o *Transaction) SetInternalTransfer(v TransactionInternalTransfer)`
+
+SetInternalTransfer sets InternalTransfer field to given value.
+
+### HasInternalTransfer
+
+`func (o *Transaction) HasInternalTransfer() bool`
+
+HasInternalTransfer returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

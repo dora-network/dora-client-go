@@ -43,6 +43,7 @@ const (
 	TRANSACTIONKIND_COLLATERALIZE TransactionKind = "COLLATERALIZE"
 	TRANSACTIONKIND_DE_COLLATERALIZE TransactionKind = "DE-COLLATERALIZE"
 	TRANSACTIONKIND_COUPON_PAYMENT TransactionKind = "COUPON_PAYMENT"
+	TRANSACTIONKIND_INTERNAL_TRANSFER TransactionKind = "INTERNAL_TRANSFER"
 )
 
 // All allowed values of TransactionKind enum
@@ -70,6 +71,7 @@ var AllowedTransactionKindEnumValues = []TransactionKind{
 	"COLLATERALIZE",
 	"DE-COLLATERALIZE",
 	"COUPON_PAYMENT",
+	"INTERNAL_TRANSFER",
 }
 
 func (v *TransactionKind) UnmarshalJSON(src []byte) error {

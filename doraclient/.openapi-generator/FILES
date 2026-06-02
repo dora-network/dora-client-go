@@ -172,6 +172,7 @@ docs/Trade.md
 docs/TradeRequestError.md
 docs/TradeResponseEnvelope.md
 docs/Transaction.md
+docs/TransactionInternalTransfer.md
 docs/TransactionKind.md
 docs/TransactionRequestError.md
 docs/TransactionResponseEnvelope.md
@@ -385,6 +386,7 @@ model_trade.go
 model_trade_request_error.go
 model_trade_response_envelope.go
 model_transaction.go
+model_transaction_internal_transfer.go
 model_transaction_kind.go
 model_transaction_request_error.go
 model_transaction_response_envelope.go
