@@ -27,7 +27,7 @@ type TransactionsSettlement struct {
 	TenantId string `json:"tenant_id"`
 	PositionId string `json:"position_id"`
 	TxKind string `json:"tx_kind"`
-	QuantityUsd float64 `json:"quantity_usd"`
+	QuantityUsd string `json:"quantity_usd"`
 	CreatedAt time.Time `json:"created_at"`
 	SettledAt *time.Time `json:"settled_at,omitempty"`
 	SettledBy *string `json:"settled_by,omitempty"`
@@ -39,7 +39,7 @@ type _TransactionsSettlement TransactionsSettlement
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTransactionsSettlement(txId string, userId string, tenantId string, positionId string, txKind string, quantityUsd float64, createdAt time.Time) *TransactionsSettlement {
+func NewTransactionsSettlement(txId string, userId string, tenantId string, positionId string, txKind string, quantityUsd string, createdAt time.Time) *TransactionsSettlement {
 	this := TransactionsSettlement{}
 	this.TxId = txId
 	this.UserId = userId
@@ -180,9 +180,9 @@ func (o *TransactionsSettlement) SetTxKind(v string) {
 }
 
 // GetQuantityUsd returns the QuantityUsd field value
-func (o *TransactionsSettlement) GetQuantityUsd() float64 {
+func (o *TransactionsSettlement) GetQuantityUsd() string {
 	if o == nil {
-		var ret float64
+		var ret string
 		return ret
 	}
 
@@ -191,7 +191,7 @@ func (o *TransactionsSettlement) GetQuantityUsd() float64 {
 
 // GetQuantityUsdOk returns a tuple with the QuantityUsd field value
 // and a boolean to check if the value has been set.
-func (o *TransactionsSettlement) GetQuantityUsdOk() (*float64, bool) {
+func (o *TransactionsSettlement) GetQuantityUsdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -199,7 +199,7 @@ func (o *TransactionsSettlement) GetQuantityUsdOk() (*float64, bool) {
 }
 
 // SetQuantityUsd sets field value
-func (o *TransactionsSettlement) SetQuantityUsd(v float64) {
+func (o *TransactionsSettlement) SetQuantityUsd(v string) {
 	o.QuantityUsd = v
 }
 

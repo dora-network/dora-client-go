@@ -20,8 +20,8 @@ var _ MappedNullable = &TransactionsSettlementsResponse{}
 // TransactionsSettlementsResponse struct for TransactionsSettlementsResponse
 type TransactionsSettlementsResponse struct {
 	Settlements []TransactionsSettlement `json:"settlements,omitempty"`
-	UserTotals map[string]float64 `json:"user_totals,omitempty"`
-	TenantTotals map[string]float64 `json:"tenant_totals,omitempty"`
+	UserTotals map[string]string `json:"user_totals,omitempty"`
+	TenantTotals map[string]string `json:"tenant_totals,omitempty"`
 }
 
 // NewTransactionsSettlementsResponse instantiates a new TransactionsSettlementsResponse object
@@ -74,9 +74,9 @@ func (o *TransactionsSettlementsResponse) SetSettlements(v []TransactionsSettlem
 }
 
 // GetUserTotals returns the UserTotals field value if set, zero value otherwise.
-func (o *TransactionsSettlementsResponse) GetUserTotals() map[string]float64 {
+func (o *TransactionsSettlementsResponse) GetUserTotals() map[string]string {
 	if o == nil || IsNil(o.UserTotals) {
-		var ret map[string]float64
+		var ret map[string]string
 		return ret
 	}
 	return o.UserTotals
@@ -84,9 +84,9 @@ func (o *TransactionsSettlementsResponse) GetUserTotals() map[string]float64 {
 
 // GetUserTotalsOk returns a tuple with the UserTotals field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *TransactionsSettlementsResponse) GetUserTotalsOk() (map[string]float64, bool) {
+func (o *TransactionsSettlementsResponse) GetUserTotalsOk() (map[string]string, bool) {
 	if o == nil || IsNil(o.UserTotals) {
-		return map[string]float64{}, false
+		return map[string]string{}, false
 	}
 	return o.UserTotals, true
 }
@@ -100,15 +100,15 @@ func (o *TransactionsSettlementsResponse) HasUserTotals() bool {
 	return false
 }
 
-// SetUserTotals gets a reference to the given map[string]float64 and assigns it to the UserTotals field.
-func (o *TransactionsSettlementsResponse) SetUserTotals(v map[string]float64) {
+// SetUserTotals gets a reference to the given map[string]string and assigns it to the UserTotals field.
+func (o *TransactionsSettlementsResponse) SetUserTotals(v map[string]string) {
 	o.UserTotals = v
 }
 
 // GetTenantTotals returns the TenantTotals field value if set, zero value otherwise.
-func (o *TransactionsSettlementsResponse) GetTenantTotals() map[string]float64 {
+func (o *TransactionsSettlementsResponse) GetTenantTotals() map[string]string {
 	if o == nil || IsNil(o.TenantTotals) {
-		var ret map[string]float64
+		var ret map[string]string
 		return ret
 	}
 	return o.TenantTotals
@@ -116,9 +116,9 @@ func (o *TransactionsSettlementsResponse) GetTenantTotals() map[string]float64 {
 
 // GetTenantTotalsOk returns a tuple with the TenantTotals field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *TransactionsSettlementsResponse) GetTenantTotalsOk() (map[string]float64, bool) {
+func (o *TransactionsSettlementsResponse) GetTenantTotalsOk() (map[string]string, bool) {
 	if o == nil || IsNil(o.TenantTotals) {
-		return map[string]float64{}, false
+		return map[string]string{}, false
 	}
 	return o.TenantTotals, true
 }
@@ -132,8 +132,8 @@ func (o *TransactionsSettlementsResponse) HasTenantTotals() bool {
 	return false
 }
 
-// SetTenantTotals gets a reference to the given map[string]float64 and assigns it to the TenantTotals field.
-func (o *TransactionsSettlementsResponse) SetTenantTotals(v map[string]float64) {
+// SetTenantTotals gets a reference to the given map[string]string and assigns it to the TenantTotals field.
+func (o *TransactionsSettlementsResponse) SetTenantTotals(v map[string]string) {
 	o.TenantTotals = v
 }
 

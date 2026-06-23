@@ -23,10 +23,13 @@ var _ MappedNullable = &LeverageInterestRate{}
 // LeverageInterestRate struct for LeverageInterestRate
 type LeverageInterestRate struct {
 	AssetId string `json:"asset_id"`
-	Utilization float64 `json:"utilization"`
-	AvgUtilization float64 `json:"avg_utilization"`
-	AvgInterestRate float64 `json:"avg_interest_rate"`
-	InterestRate float64 `json:"interest_rate"`
+	Utilization string `json:"utilization"`
+	AvgUtilization string `json:"avg_utilization"`
+	AvgBorrowingYieldRate string `json:"avg_borrowing_yield_rate"`
+	AvgLendingYieldRate string `json:"avg_lending_yield_rate"`
+	BorrowingYieldRate string `json:"borrowing_yield_rate"`
+	LendingYieldRate string `json:"lending_yield_rate"`
+	YieldToMaturity string `json:"yield_to_maturity"`
 	StartTime time.Time `json:"start_time"`
 	EndTime time.Time `json:"end_time"`
 }
@@ -37,13 +40,16 @@ type _LeverageInterestRate LeverageInterestRate
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewLeverageInterestRate(assetId string, utilization float64, avgUtilization float64, avgInterestRate float64, interestRate float64, startTime time.Time, endTime time.Time) *LeverageInterestRate {
+func NewLeverageInterestRate(assetId string, utilization string, avgUtilization string, avgBorrowingYieldRate string, avgLendingYieldRate string, borrowingYieldRate string, lendingYieldRate string, yieldToMaturity string, startTime time.Time, endTime time.Time) *LeverageInterestRate {
 	this := LeverageInterestRate{}
 	this.AssetId = assetId
 	this.Utilization = utilization
 	this.AvgUtilization = avgUtilization
-	this.AvgInterestRate = avgInterestRate
-	this.InterestRate = interestRate
+	this.AvgBorrowingYieldRate = avgBorrowingYieldRate
+	this.AvgLendingYieldRate = avgLendingYieldRate
+	this.BorrowingYieldRate = borrowingYieldRate
+	this.LendingYieldRate = lendingYieldRate
+	this.YieldToMaturity = yieldToMaturity
 	this.StartTime = startTime
 	this.EndTime = endTime
 	return &this
@@ -82,9 +88,9 @@ func (o *LeverageInterestRate) SetAssetId(v string) {
 }
 
 // GetUtilization returns the Utilization field value
-func (o *LeverageInterestRate) GetUtilization() float64 {
+func (o *LeverageInterestRate) GetUtilization() string {
 	if o == nil {
-		var ret float64
+		var ret string
 		return ret
 	}
 
@@ -93,7 +99,7 @@ func (o *LeverageInterestRate) GetUtilization() float64 {
 
 // GetUtilizationOk returns a tuple with the Utilization field value
 // and a boolean to check if the value has been set.
-func (o *LeverageInterestRate) GetUtilizationOk() (*float64, bool) {
+func (o *LeverageInterestRate) GetUtilizationOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -101,14 +107,14 @@ func (o *LeverageInterestRate) GetUtilizationOk() (*float64, bool) {
 }
 
 // SetUtilization sets field value
-func (o *LeverageInterestRate) SetUtilization(v float64) {
+func (o *LeverageInterestRate) SetUtilization(v string) {
 	o.Utilization = v
 }
 
 // GetAvgUtilization returns the AvgUtilization field value
-func (o *LeverageInterestRate) GetAvgUtilization() float64 {
+func (o *LeverageInterestRate) GetAvgUtilization() string {
 	if o == nil {
-		var ret float64
+		var ret string
 		return ret
 	}
 
@@ -117,7 +123,7 @@ func (o *LeverageInterestRate) GetAvgUtilization() float64 {
 
 // GetAvgUtilizationOk returns a tuple with the AvgUtilization field value
 // and a boolean to check if the value has been set.
-func (o *LeverageInterestRate) GetAvgUtilizationOk() (*float64, bool) {
+func (o *LeverageInterestRate) GetAvgUtilizationOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -125,56 +131,128 @@ func (o *LeverageInterestRate) GetAvgUtilizationOk() (*float64, bool) {
 }
 
 // SetAvgUtilization sets field value
-func (o *LeverageInterestRate) SetAvgUtilization(v float64) {
+func (o *LeverageInterestRate) SetAvgUtilization(v string) {
 	o.AvgUtilization = v
 }
 
-// GetAvgInterestRate returns the AvgInterestRate field value
-func (o *LeverageInterestRate) GetAvgInterestRate() float64 {
+// GetAvgBorrowingYieldRate returns the AvgBorrowingYieldRate field value
+func (o *LeverageInterestRate) GetAvgBorrowingYieldRate() string {
 	if o == nil {
-		var ret float64
+		var ret string
 		return ret
 	}
 
-	return o.AvgInterestRate
+	return o.AvgBorrowingYieldRate
 }
 
-// GetAvgInterestRateOk returns a tuple with the AvgInterestRate field value
+// GetAvgBorrowingYieldRateOk returns a tuple with the AvgBorrowingYieldRate field value
 // and a boolean to check if the value has been set.
-func (o *LeverageInterestRate) GetAvgInterestRateOk() (*float64, bool) {
+func (o *LeverageInterestRate) GetAvgBorrowingYieldRateOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.AvgInterestRate, true
+	return &o.AvgBorrowingYieldRate, true
 }
 
-// SetAvgInterestRate sets field value
-func (o *LeverageInterestRate) SetAvgInterestRate(v float64) {
-	o.AvgInterestRate = v
+// SetAvgBorrowingYieldRate sets field value
+func (o *LeverageInterestRate) SetAvgBorrowingYieldRate(v string) {
+	o.AvgBorrowingYieldRate = v
 }
 
-// GetInterestRate returns the InterestRate field value
-func (o *LeverageInterestRate) GetInterestRate() float64 {
+// GetAvgLendingYieldRate returns the AvgLendingYieldRate field value
+func (o *LeverageInterestRate) GetAvgLendingYieldRate() string {
 	if o == nil {
-		var ret float64
+		var ret string
 		return ret
 	}
 
-	return o.InterestRate
+	return o.AvgLendingYieldRate
 }
 
-// GetInterestRateOk returns a tuple with the InterestRate field value
+// GetAvgLendingYieldRateOk returns a tuple with the AvgLendingYieldRate field value
 // and a boolean to check if the value has been set.
-func (o *LeverageInterestRate) GetInterestRateOk() (*float64, bool) {
+func (o *LeverageInterestRate) GetAvgLendingYieldRateOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.InterestRate, true
+	return &o.AvgLendingYieldRate, true
 }
 
-// SetInterestRate sets field value
-func (o *LeverageInterestRate) SetInterestRate(v float64) {
-	o.InterestRate = v
+// SetAvgLendingYieldRate sets field value
+func (o *LeverageInterestRate) SetAvgLendingYieldRate(v string) {
+	o.AvgLendingYieldRate = v
+}
+
+// GetBorrowingYieldRate returns the BorrowingYieldRate field value
+func (o *LeverageInterestRate) GetBorrowingYieldRate() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.BorrowingYieldRate
+}
+
+// GetBorrowingYieldRateOk returns a tuple with the BorrowingYieldRate field value
+// and a boolean to check if the value has been set.
+func (o *LeverageInterestRate) GetBorrowingYieldRateOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.BorrowingYieldRate, true
+}
+
+// SetBorrowingYieldRate sets field value
+func (o *LeverageInterestRate) SetBorrowingYieldRate(v string) {
+	o.BorrowingYieldRate = v
+}
+
+// GetLendingYieldRate returns the LendingYieldRate field value
+func (o *LeverageInterestRate) GetLendingYieldRate() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.LendingYieldRate
+}
+
+// GetLendingYieldRateOk returns a tuple with the LendingYieldRate field value
+// and a boolean to check if the value has been set.
+func (o *LeverageInterestRate) GetLendingYieldRateOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.LendingYieldRate, true
+}
+
+// SetLendingYieldRate sets field value
+func (o *LeverageInterestRate) SetLendingYieldRate(v string) {
+	o.LendingYieldRate = v
+}
+
+// GetYieldToMaturity returns the YieldToMaturity field value
+func (o *LeverageInterestRate) GetYieldToMaturity() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.YieldToMaturity
+}
+
+// GetYieldToMaturityOk returns a tuple with the YieldToMaturity field value
+// and a boolean to check if the value has been set.
+func (o *LeverageInterestRate) GetYieldToMaturityOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.YieldToMaturity, true
+}
+
+// SetYieldToMaturity sets field value
+func (o *LeverageInterestRate) SetYieldToMaturity(v string) {
+	o.YieldToMaturity = v
 }
 
 // GetStartTime returns the StartTime field value
@@ -238,8 +316,11 @@ func (o LeverageInterestRate) ToMap() (map[string]interface{}, error) {
 	toSerialize["asset_id"] = o.AssetId
 	toSerialize["utilization"] = o.Utilization
 	toSerialize["avg_utilization"] = o.AvgUtilization
-	toSerialize["avg_interest_rate"] = o.AvgInterestRate
-	toSerialize["interest_rate"] = o.InterestRate
+	toSerialize["avg_borrowing_yield_rate"] = o.AvgBorrowingYieldRate
+	toSerialize["avg_lending_yield_rate"] = o.AvgLendingYieldRate
+	toSerialize["borrowing_yield_rate"] = o.BorrowingYieldRate
+	toSerialize["lending_yield_rate"] = o.LendingYieldRate
+	toSerialize["yield_to_maturity"] = o.YieldToMaturity
 	toSerialize["start_time"] = o.StartTime
 	toSerialize["end_time"] = o.EndTime
 	return toSerialize, nil
@@ -253,8 +334,11 @@ func (o *LeverageInterestRate) UnmarshalJSON(data []byte) (err error) {
 		"asset_id",
 		"utilization",
 		"avg_utilization",
-		"avg_interest_rate",
-		"interest_rate",
+		"avg_borrowing_yield_rate",
+		"avg_lending_yield_rate",
+		"borrowing_yield_rate",
+		"lending_yield_rate",
+		"yield_to_maturity",
 		"start_time",
 		"end_time",
 	}

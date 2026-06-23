@@ -39,9 +39,9 @@ type Order struct {
 	// Quote quantity that has been filled so far.
 	FilledNotional string `json:"filled_notional"`
 	// Balance locked to ensure limit buy orders have sufficient balance to be fulfilled
-	LockedQuantity float64 `json:"locked_quantity"`
+	LockedQuantity string `json:"locked_quantity"`
 	// Borrows locked from the liquidity pool to ensure limit short sell orders have sufficient balance to be fulfilled
-	ImpendingBorrowsQuantity float64 `json:"impending_borrows_quantity"`
+	ImpendingBorrowsQuantity string `json:"impending_borrows_quantity"`
 	LastUpdateAt time.Time `json:"last_update_at"`
 	OpenedAt time.Time `json:"opened_at"`
 	InverseLeverage string `json:"inverse_leverage"`
@@ -65,7 +65,7 @@ type _Order Order
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewOrder(orderId string, orderBookId string, kind OrderKind, originalPrice string, avgFillPrice string, cancelledQuantity string, openQuantity string, originalQuantity string, filledQuantity string, filledNotional string, lockedQuantity float64, impendingBorrowsQuantity float64, lastUpdateAt time.Time, openedAt time.Time, inverseLeverage string, side Side, status OrderStatus, userId string, positionId string) *Order {
+func NewOrder(orderId string, orderBookId string, kind OrderKind, originalPrice string, avgFillPrice string, cancelledQuantity string, openQuantity string, originalQuantity string, filledQuantity string, filledNotional string, lockedQuantity string, impendingBorrowsQuantity string, lastUpdateAt time.Time, openedAt time.Time, inverseLeverage string, side Side, status OrderStatus, userId string, positionId string) *Order {
 	this := Order{}
 	this.OrderId = orderId
 	this.OrderBookId = orderBookId
@@ -338,9 +338,9 @@ func (o *Order) SetFilledNotional(v string) {
 }
 
 // GetLockedQuantity returns the LockedQuantity field value
-func (o *Order) GetLockedQuantity() float64 {
+func (o *Order) GetLockedQuantity() string {
 	if o == nil {
-		var ret float64
+		var ret string
 		return ret
 	}
 
@@ -349,7 +349,7 @@ func (o *Order) GetLockedQuantity() float64 {
 
 // GetLockedQuantityOk returns a tuple with the LockedQuantity field value
 // and a boolean to check if the value has been set.
-func (o *Order) GetLockedQuantityOk() (*float64, bool) {
+func (o *Order) GetLockedQuantityOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -357,14 +357,14 @@ func (o *Order) GetLockedQuantityOk() (*float64, bool) {
 }
 
 // SetLockedQuantity sets field value
-func (o *Order) SetLockedQuantity(v float64) {
+func (o *Order) SetLockedQuantity(v string) {
 	o.LockedQuantity = v
 }
 
 // GetImpendingBorrowsQuantity returns the ImpendingBorrowsQuantity field value
-func (o *Order) GetImpendingBorrowsQuantity() float64 {
+func (o *Order) GetImpendingBorrowsQuantity() string {
 	if o == nil {
-		var ret float64
+		var ret string
 		return ret
 	}
 
@@ -373,7 +373,7 @@ func (o *Order) GetImpendingBorrowsQuantity() float64 {
 
 // GetImpendingBorrowsQuantityOk returns a tuple with the ImpendingBorrowsQuantity field value
 // and a boolean to check if the value has been set.
-func (o *Order) GetImpendingBorrowsQuantityOk() (*float64, bool) {
+func (o *Order) GetImpendingBorrowsQuantityOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -381,7 +381,7 @@ func (o *Order) GetImpendingBorrowsQuantityOk() (*float64, bool) {
 }
 
 // SetImpendingBorrowsQuantity sets field value
-func (o *Order) SetImpendingBorrowsQuantity(v float64) {
+func (o *Order) SetImpendingBorrowsQuantity(v string) {
 	o.ImpendingBorrowsQuantity = v
 }
 

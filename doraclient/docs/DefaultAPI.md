@@ -73,8 +73,8 @@ Method | HTTP request | Description
 [**LedgerWithdrawRequest**](DefaultAPI.md#LedgerWithdrawRequest) | **Post** /v1/ledger/withdraw/requests/{user_id} | Initiate a withdrawal request for this user to the outside world
 [**LedgerWithdrawRequestSelf**](DefaultAPI.md#LedgerWithdrawRequestSelf) | **Post** /v1/ledger/withdraw/requests/self | Initiate a withdrawal request for the logged in user to the outside world
 [**LeverageGetAccruedInterestByUser**](DefaultAPI.md#LeverageGetAccruedInterestByUser) | **Get** /v1/leverage/accrued_interest/self | Get current accrued leverage interest for the user
-[**LeverageGetHistoricalInterestRates**](DefaultAPI.md#LeverageGetHistoricalInterestRates) | **Get** /v1/leverage/interest_rate/{asset_id}/historical | Get historical leverage interest rates for a specific asset
-[**LeverageGetInterestRate**](DefaultAPI.md#LeverageGetInterestRate) | **Get** /v1/leverage/interest_rate/{asset_id} | Get leverage interest rate for a specific asset
+[**LeverageGetHistoricalInterestRates**](DefaultAPI.md#LeverageGetHistoricalInterestRates) | **Get** /v1/leverage/interest_rate/{asset_id}/historical | Get historical leverage borrowing and lending yields for a specific asset
+[**LeverageGetInterestRate**](DefaultAPI.md#LeverageGetInterestRate) | **Get** /v1/leverage/interest_rate/{asset_id} | Get leverage borrowing and lending yields for a specific asset
 [**LeverageIsolateCollateral**](DefaultAPI.md#LeverageIsolateCollateral) | **Post** /v1/leverage/isolate_collateral | Create an isolated position by transferring collateral to the position from the user&#39;s global collateral
 [**LeverageSupply**](DefaultAPI.md#LeverageSupply) | **Post** /v1/leverage/supply | Supply leverage for a specific asset
 [**LeverageUnite**](DefaultAPI.md#LeverageUnite) | **Post** /v1/leverage/unite | Combines all isolated positions into a single global position
@@ -3712,7 +3712,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apiKeyAuthQuery](../README.md#apiKeyAuthQuery)
+No authorization required
 
 ### HTTP request headers
 
@@ -4766,7 +4766,7 @@ Name | Type | Description  | Notes
 
 > HistoricalLeverageInterestRatesResponseEnvelope LeverageGetHistoricalInterestRates(ctx, assetId).Start(start).End(end).Execute()
 
-Get historical leverage interest rates for a specific asset
+Get historical leverage borrowing and lending yields for a specific asset
 
 ### Example
 
@@ -4839,7 +4839,7 @@ Name | Type | Description  | Notes
 
 > LeverageInterestRateResponseEnvelope LeverageGetInterestRate(ctx, assetId).Start(start).End(end).Execute()
 
-Get leverage interest rate for a specific asset
+Get leverage borrowing and lending yields for a specific asset
 
 ### Example
 
@@ -6131,7 +6131,7 @@ Name | Type | Description  | Notes
 
 ## StreamAssetPrices
 
-> map[string]AssetPrice StreamAssetPrices(ctx).Since(since).AssetId(assetId).Execute()
+> map[string]AssetPrice StreamAssetPrices(ctx).AssetId(assetId).Execute()
 
 Stream real-time asset prices as map objects
 
@@ -6146,17 +6146,15 @@ import (
 	"context"
 	"fmt"
 	"os"
-    "time"
 	openapiclient "github.com/dora-network/dora-client-go/doraclient"
 )
 
 func main() {
-	since := time.Now() // time.Time |  (optional)
 	assetId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.DefaultAPI.StreamAssetPrices(context.Background()).Since(since).AssetId(assetId).Execute()
+	resp, r, err := apiClient.DefaultAPI.StreamAssetPrices(context.Background()).AssetId(assetId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.StreamAssetPrices``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -6177,7 +6175,6 @@ Other parameters are passed through a pointer to a apiStreamAssetPricesRequest s
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **since** | **time.Time** |  | 
  **assetId** | **string** |  | 
 
 ### Return type

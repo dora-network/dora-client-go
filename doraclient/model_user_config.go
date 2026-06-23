@@ -34,6 +34,7 @@ type UserConfig struct {
 	AllowLiquidationsNotifications bool `json:"allow_liquidations_notifications"`
 	AllowDepositWithdrawalNotifications bool `json:"allow_deposit_withdrawal_notifications"`
 	AllowOrdersNotifications bool `json:"allow_orders_notifications"`
+	AllowCopyTrading bool `json:"allow_copy_trading"`
 }
 
 type _UserConfig UserConfig
@@ -42,7 +43,7 @@ type _UserConfig UserConfig
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUserConfig(id string, createdAt time.Time, updatedAt time.Time, showTutorialCards bool, notificationsEnabled bool, allowEmailNotifications bool, allowLiquidationsNotifications bool, allowDepositWithdrawalNotifications bool, allowOrdersNotifications bool) *UserConfig {
+func NewUserConfig(id string, createdAt time.Time, updatedAt time.Time, showTutorialCards bool, notificationsEnabled bool, allowEmailNotifications bool, allowLiquidationsNotifications bool, allowDepositWithdrawalNotifications bool, allowOrdersNotifications bool, allowCopyTrading bool) *UserConfig {
 	this := UserConfig{}
 	this.Id = id
 	this.CreatedAt = createdAt
@@ -53,6 +54,7 @@ func NewUserConfig(id string, createdAt time.Time, updatedAt time.Time, showTuto
 	this.AllowLiquidationsNotifications = allowLiquidationsNotifications
 	this.AllowDepositWithdrawalNotifications = allowDepositWithdrawalNotifications
 	this.AllowOrdersNotifications = allowOrdersNotifications
+	this.AllowCopyTrading = allowCopyTrading
 	return &this
 }
 
@@ -344,6 +346,30 @@ func (o *UserConfig) SetAllowOrdersNotifications(v bool) {
 	o.AllowOrdersNotifications = v
 }
 
+// GetAllowCopyTrading returns the AllowCopyTrading field value
+func (o *UserConfig) GetAllowCopyTrading() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.AllowCopyTrading
+}
+
+// GetAllowCopyTradingOk returns a tuple with the AllowCopyTrading field value
+// and a boolean to check if the value has been set.
+func (o *UserConfig) GetAllowCopyTradingOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.AllowCopyTrading, true
+}
+
+// SetAllowCopyTrading sets field value
+func (o *UserConfig) SetAllowCopyTrading(v bool) {
+	o.AllowCopyTrading = v
+}
+
 func (o UserConfig) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -369,6 +395,7 @@ func (o UserConfig) ToMap() (map[string]interface{}, error) {
 	toSerialize["allow_liquidations_notifications"] = o.AllowLiquidationsNotifications
 	toSerialize["allow_deposit_withdrawal_notifications"] = o.AllowDepositWithdrawalNotifications
 	toSerialize["allow_orders_notifications"] = o.AllowOrdersNotifications
+	toSerialize["allow_copy_trading"] = o.AllowCopyTrading
 	return toSerialize, nil
 }
 
@@ -386,6 +413,7 @@ func (o *UserConfig) UnmarshalJSON(data []byte) (err error) {
 		"allow_liquidations_notifications",
 		"allow_deposit_withdrawal_notifications",
 		"allow_orders_notifications",
+		"allow_copy_trading",
 	}
 
 	allProperties := make(map[string]interface{})

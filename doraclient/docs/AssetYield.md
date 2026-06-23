@@ -7,7 +7,9 @@ Name | Type | Description | Notes
 **AssetId** | **string** |  | 
 **Timestamp** | **time.Time** |  | 
 **Ytm** | **string** |  | 
-**LendingYield** | **string** |  | 
+**BorrowingYieldRate** | **string** |  | 
+**LendingYieldRate** | **string** |  | 
+**Price** | **string** |  | 
 **Tvl** | **string** |  | 
 **TotalYield** | **string** |  | 
 
@@ -15,7 +17,7 @@ Name | Type | Description | Notes
 
 ### NewAssetYield
 
-`func NewAssetYield(assetId string, timestamp time.Time, ytm string, lendingYield string, tvl string, totalYield string, ) *AssetYield`
+`func NewAssetYield(assetId string, timestamp time.Time, ytm string, borrowingYieldRate string, lendingYieldRate string, price string, tvl string, totalYield string, ) *AssetYield`
 
 NewAssetYield instantiates a new AssetYield object
 This constructor will assign default values to properties that have it defined,
@@ -90,24 +92,64 @@ and a boolean to check if the value has been set.
 SetYtm sets Ytm field to given value.
 
 
-### GetLendingYield
+### GetBorrowingYieldRate
 
-`func (o *AssetYield) GetLendingYield() string`
+`func (o *AssetYield) GetBorrowingYieldRate() string`
 
-GetLendingYield returns the LendingYield field if non-nil, zero value otherwise.
+GetBorrowingYieldRate returns the BorrowingYieldRate field if non-nil, zero value otherwise.
 
-### GetLendingYieldOk
+### GetBorrowingYieldRateOk
 
-`func (o *AssetYield) GetLendingYieldOk() (*string, bool)`
+`func (o *AssetYield) GetBorrowingYieldRateOk() (*string, bool)`
 
-GetLendingYieldOk returns a tuple with the LendingYield field if it's non-nil, zero value otherwise
+GetBorrowingYieldRateOk returns a tuple with the BorrowingYieldRate field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetLendingYield
+### SetBorrowingYieldRate
 
-`func (o *AssetYield) SetLendingYield(v string)`
+`func (o *AssetYield) SetBorrowingYieldRate(v string)`
 
-SetLendingYield sets LendingYield field to given value.
+SetBorrowingYieldRate sets BorrowingYieldRate field to given value.
+
+
+### GetLendingYieldRate
+
+`func (o *AssetYield) GetLendingYieldRate() string`
+
+GetLendingYieldRate returns the LendingYieldRate field if non-nil, zero value otherwise.
+
+### GetLendingYieldRateOk
+
+`func (o *AssetYield) GetLendingYieldRateOk() (*string, bool)`
+
+GetLendingYieldRateOk returns a tuple with the LendingYieldRate field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLendingYieldRate
+
+`func (o *AssetYield) SetLendingYieldRate(v string)`
+
+SetLendingYieldRate sets LendingYieldRate field to given value.
+
+
+### GetPrice
+
+`func (o *AssetYield) GetPrice() string`
+
+GetPrice returns the Price field if non-nil, zero value otherwise.
+
+### GetPriceOk
+
+`func (o *AssetYield) GetPriceOk() (*string, bool)`
+
+GetPriceOk returns a tuple with the Price field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPrice
+
+`func (o *AssetYield) SetPrice(v string)`
+
+SetPrice sets Price field to given value.
 
 
 ### GetTvl

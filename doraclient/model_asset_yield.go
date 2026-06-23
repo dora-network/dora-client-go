@@ -25,7 +25,9 @@ type AssetYield struct {
 	AssetId string `json:"asset_id"`
 	Timestamp time.Time `json:"timestamp"`
 	Ytm string `json:"ytm"`
-	LendingYield string `json:"lending_yield"`
+	BorrowingYieldRate string `json:"borrowing_yield_rate"`
+	LendingYieldRate string `json:"lending_yield_rate"`
+	Price string `json:"price"`
 	Tvl string `json:"tvl"`
 	TotalYield string `json:"total_yield"`
 }
@@ -36,12 +38,14 @@ type _AssetYield AssetYield
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAssetYield(assetId string, timestamp time.Time, ytm string, lendingYield string, tvl string, totalYield string) *AssetYield {
+func NewAssetYield(assetId string, timestamp time.Time, ytm string, borrowingYieldRate string, lendingYieldRate string, price string, tvl string, totalYield string) *AssetYield {
 	this := AssetYield{}
 	this.AssetId = assetId
 	this.Timestamp = timestamp
 	this.Ytm = ytm
-	this.LendingYield = lendingYield
+	this.BorrowingYieldRate = borrowingYieldRate
+	this.LendingYieldRate = lendingYieldRate
+	this.Price = price
 	this.Tvl = tvl
 	this.TotalYield = totalYield
 	return &this
@@ -127,28 +131,76 @@ func (o *AssetYield) SetYtm(v string) {
 	o.Ytm = v
 }
 
-// GetLendingYield returns the LendingYield field value
-func (o *AssetYield) GetLendingYield() string {
+// GetBorrowingYieldRate returns the BorrowingYieldRate field value
+func (o *AssetYield) GetBorrowingYieldRate() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.LendingYield
+	return o.BorrowingYieldRate
 }
 
-// GetLendingYieldOk returns a tuple with the LendingYield field value
+// GetBorrowingYieldRateOk returns a tuple with the BorrowingYieldRate field value
 // and a boolean to check if the value has been set.
-func (o *AssetYield) GetLendingYieldOk() (*string, bool) {
+func (o *AssetYield) GetBorrowingYieldRateOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.LendingYield, true
+	return &o.BorrowingYieldRate, true
 }
 
-// SetLendingYield sets field value
-func (o *AssetYield) SetLendingYield(v string) {
-	o.LendingYield = v
+// SetBorrowingYieldRate sets field value
+func (o *AssetYield) SetBorrowingYieldRate(v string) {
+	o.BorrowingYieldRate = v
+}
+
+// GetLendingYieldRate returns the LendingYieldRate field value
+func (o *AssetYield) GetLendingYieldRate() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.LendingYieldRate
+}
+
+// GetLendingYieldRateOk returns a tuple with the LendingYieldRate field value
+// and a boolean to check if the value has been set.
+func (o *AssetYield) GetLendingYieldRateOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.LendingYieldRate, true
+}
+
+// SetLendingYieldRate sets field value
+func (o *AssetYield) SetLendingYieldRate(v string) {
+	o.LendingYieldRate = v
+}
+
+// GetPrice returns the Price field value
+func (o *AssetYield) GetPrice() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Price
+}
+
+// GetPriceOk returns a tuple with the Price field value
+// and a boolean to check if the value has been set.
+func (o *AssetYield) GetPriceOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Price, true
+}
+
+// SetPrice sets field value
+func (o *AssetYield) SetPrice(v string) {
+	o.Price = v
 }
 
 // GetTvl returns the Tvl field value
@@ -212,7 +264,9 @@ func (o AssetYield) ToMap() (map[string]interface{}, error) {
 	toSerialize["asset_id"] = o.AssetId
 	toSerialize["timestamp"] = o.Timestamp
 	toSerialize["ytm"] = o.Ytm
-	toSerialize["lending_yield"] = o.LendingYield
+	toSerialize["borrowing_yield_rate"] = o.BorrowingYieldRate
+	toSerialize["lending_yield_rate"] = o.LendingYieldRate
+	toSerialize["price"] = o.Price
 	toSerialize["tvl"] = o.Tvl
 	toSerialize["total_yield"] = o.TotalYield
 	return toSerialize, nil
@@ -226,7 +280,9 @@ func (o *AssetYield) UnmarshalJSON(data []byte) (err error) {
 		"asset_id",
 		"timestamp",
 		"ytm",
-		"lending_yield",
+		"borrowing_yield_rate",
+		"lending_yield_rate",
+		"price",
 		"tvl",
 		"total_yield",
 	}

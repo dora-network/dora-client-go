@@ -15,12 +15,13 @@ Name | Type | Description | Notes
 **AllowLiquidationsNotifications** | **bool** |  | 
 **AllowDepositWithdrawalNotifications** | **bool** |  | 
 **AllowOrdersNotifications** | **bool** |  | 
+**AllowCopyTrading** | **bool** |  | 
 
 ## Methods
 
 ### NewUserConfig
 
-`func NewUserConfig(id string, createdAt time.Time, updatedAt time.Time, showTutorialCards bool, notificationsEnabled bool, allowEmailNotifications bool, allowLiquidationsNotifications bool, allowDepositWithdrawalNotifications bool, allowOrdersNotifications bool, ) *UserConfig`
+`func NewUserConfig(id string, createdAt time.Time, updatedAt time.Time, showTutorialCards bool, notificationsEnabled bool, allowEmailNotifications bool, allowLiquidationsNotifications bool, allowDepositWithdrawalNotifications bool, allowOrdersNotifications bool, allowCopyTrading bool, ) *UserConfig`
 
 NewUserConfig instantiates a new UserConfig object
 This constructor will assign default values to properties that have it defined,
@@ -263,6 +264,26 @@ and a boolean to check if the value has been set.
 `func (o *UserConfig) SetAllowOrdersNotifications(v bool)`
 
 SetAllowOrdersNotifications sets AllowOrdersNotifications field to given value.
+
+
+### GetAllowCopyTrading
+
+`func (o *UserConfig) GetAllowCopyTrading() bool`
+
+GetAllowCopyTrading returns the AllowCopyTrading field if non-nil, zero value otherwise.
+
+### GetAllowCopyTradingOk
+
+`func (o *UserConfig) GetAllowCopyTradingOk() (*bool, bool)`
+
+GetAllowCopyTradingOk returns a tuple with the AllowCopyTrading field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAllowCopyTrading
+
+`func (o *UserConfig) SetAllowCopyTrading(v bool)`
+
+SetAllowCopyTrading sets AllowCopyTrading field to given value.
 
 
 

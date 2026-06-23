@@ -26,12 +26,13 @@ Name | Type | Description | Notes
 **AllowLiquidationsNotifications** | **bool** |  | 
 **AllowDepositWithdrawalNotifications** | **bool** |  | 
 **AllowOrdersNotifications** | **bool** |  | 
+**AllowCopyTrading** | **bool** |  | 
 
 ## Methods
 
 ### NewUser
 
-`func NewUser(id string, email string, firstName string, lastName string, countryOfDomicile CountryCode, nativeAssetId string, roles []UserRole, showTutorialCards bool, notificationsEnabled bool, tenantId string, allowEmailNotifications bool, allowLiquidationsNotifications bool, allowDepositWithdrawalNotifications bool, allowOrdersNotifications bool, ) *User`
+`func NewUser(id string, email string, firstName string, lastName string, countryOfDomicile CountryCode, nativeAssetId string, roles []UserRole, showTutorialCards bool, notificationsEnabled bool, tenantId string, allowEmailNotifications bool, allowLiquidationsNotifications bool, allowDepositWithdrawalNotifications bool, allowOrdersNotifications bool, allowCopyTrading bool, ) *User`
 
 NewUser instantiates a new User object
 This constructor will assign default values to properties that have it defined,
@@ -524,6 +525,26 @@ and a boolean to check if the value has been set.
 `func (o *User) SetAllowOrdersNotifications(v bool)`
 
 SetAllowOrdersNotifications sets AllowOrdersNotifications field to given value.
+
+
+### GetAllowCopyTrading
+
+`func (o *User) GetAllowCopyTrading() bool`
+
+GetAllowCopyTrading returns the AllowCopyTrading field if non-nil, zero value otherwise.
+
+### GetAllowCopyTradingOk
+
+`func (o *User) GetAllowCopyTradingOk() (*bool, bool)`
+
+GetAllowCopyTradingOk returns a tuple with the AllowCopyTrading field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAllowCopyTrading
+
+`func (o *User) SetAllowCopyTrading(v bool)`
+
+SetAllowCopyTrading sets AllowCopyTrading field to given value.
 
 
 

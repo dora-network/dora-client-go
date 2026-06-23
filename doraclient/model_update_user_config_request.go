@@ -37,6 +37,8 @@ type UpdateUserConfigRequest struct {
 	AllowDepositWithdrawalNotifications *UpdateFieldBoolean `json:"allow_deposit_withdrawal_notifications,omitempty"`
 	// Optional: Whether to allow orders notifications.
 	AllowOrdersNotifications *UpdateFieldBoolean `json:"allow_orders_notifications,omitempty"`
+	// Optional: Whether to allow copy trading.
+	AllowCopyTrading *UpdateFieldBoolean `json:"allow_copy_trading,omitempty"`
 }
 
 type _UpdateUserConfigRequest UpdateUserConfigRequest
@@ -307,6 +309,38 @@ func (o *UpdateUserConfigRequest) SetAllowOrdersNotifications(v UpdateFieldBoole
 	o.AllowOrdersNotifications = &v
 }
 
+// GetAllowCopyTrading returns the AllowCopyTrading field value if set, zero value otherwise.
+func (o *UpdateUserConfigRequest) GetAllowCopyTrading() UpdateFieldBoolean {
+	if o == nil || IsNil(o.AllowCopyTrading) {
+		var ret UpdateFieldBoolean
+		return ret
+	}
+	return *o.AllowCopyTrading
+}
+
+// GetAllowCopyTradingOk returns a tuple with the AllowCopyTrading field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateUserConfigRequest) GetAllowCopyTradingOk() (*UpdateFieldBoolean, bool) {
+	if o == nil || IsNil(o.AllowCopyTrading) {
+		return nil, false
+	}
+	return o.AllowCopyTrading, true
+}
+
+// HasAllowCopyTrading returns a boolean if a field has been set.
+func (o *UpdateUserConfigRequest) HasAllowCopyTrading() bool {
+	if o != nil && !IsNil(o.AllowCopyTrading) {
+		return true
+	}
+
+	return false
+}
+
+// SetAllowCopyTrading gets a reference to the given UpdateFieldBoolean and assigns it to the AllowCopyTrading field.
+func (o *UpdateUserConfigRequest) SetAllowCopyTrading(v UpdateFieldBoolean) {
+	o.AllowCopyTrading = &v
+}
+
 func (o UpdateUserConfigRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -338,6 +372,9 @@ func (o UpdateUserConfigRequest) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.AllowOrdersNotifications) {
 		toSerialize["allow_orders_notifications"] = o.AllowOrdersNotifications
+	}
+	if !IsNil(o.AllowCopyTrading) {
+		toSerialize["allow_copy_trading"] = o.AllowCopyTrading
 	}
 	return toSerialize, nil
 }

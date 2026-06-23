@@ -10,14 +10,18 @@ Name | Type | Description | Notes
 **High** | **string** |  | 
 **Low** | **string** |  | 
 **Close** | **string** |  | 
-**Ytm** | **string** |  | 
+**Ytm** | Pointer to **string** | DEPRECATED: Use close_ytm instead. | [optional] 
+**OpenYtm** | **string** |  | 
+**CloseYtm** | **string** |  | 
+**HighYtm** | **string** |  | 
+**LowYtm** | **string** |  | 
 **Volume** | **string** |  | 
 
 ## Methods
 
 ### NewCandle
 
-`func NewCandle(orderBookId string, startTimestamp time.Time, open string, high string, low string, close string, ytm string, volume string, ) *Candle`
+`func NewCandle(orderBookId string, startTimestamp time.Time, open string, high string, low string, close string, openYtm string, closeYtm string, highYtm string, lowYtm string, volume string, ) *Candle`
 
 NewCandle instantiates a new Candle object
 This constructor will assign default values to properties that have it defined,
@@ -170,6 +174,91 @@ and a boolean to check if the value has been set.
 `func (o *Candle) SetYtm(v string)`
 
 SetYtm sets Ytm field to given value.
+
+### HasYtm
+
+`func (o *Candle) HasYtm() bool`
+
+HasYtm returns a boolean if a field has been set.
+
+### GetOpenYtm
+
+`func (o *Candle) GetOpenYtm() string`
+
+GetOpenYtm returns the OpenYtm field if non-nil, zero value otherwise.
+
+### GetOpenYtmOk
+
+`func (o *Candle) GetOpenYtmOk() (*string, bool)`
+
+GetOpenYtmOk returns a tuple with the OpenYtm field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOpenYtm
+
+`func (o *Candle) SetOpenYtm(v string)`
+
+SetOpenYtm sets OpenYtm field to given value.
+
+
+### GetCloseYtm
+
+`func (o *Candle) GetCloseYtm() string`
+
+GetCloseYtm returns the CloseYtm field if non-nil, zero value otherwise.
+
+### GetCloseYtmOk
+
+`func (o *Candle) GetCloseYtmOk() (*string, bool)`
+
+GetCloseYtmOk returns a tuple with the CloseYtm field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCloseYtm
+
+`func (o *Candle) SetCloseYtm(v string)`
+
+SetCloseYtm sets CloseYtm field to given value.
+
+
+### GetHighYtm
+
+`func (o *Candle) GetHighYtm() string`
+
+GetHighYtm returns the HighYtm field if non-nil, zero value otherwise.
+
+### GetHighYtmOk
+
+`func (o *Candle) GetHighYtmOk() (*string, bool)`
+
+GetHighYtmOk returns a tuple with the HighYtm field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHighYtm
+
+`func (o *Candle) SetHighYtm(v string)`
+
+SetHighYtm sets HighYtm field to given value.
+
+
+### GetLowYtm
+
+`func (o *Candle) GetLowYtm() string`
+
+GetLowYtm returns the LowYtm field if non-nil, zero value otherwise.
+
+### GetLowYtmOk
+
+`func (o *Candle) GetLowYtmOk() (*string, bool)`
+
+GetLowYtmOk returns a tuple with the LowYtm field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLowYtm
+
+`func (o *Candle) SetLowYtm(v string)`
+
+SetLowYtm sets LowYtm field to given value.
 
 
 ### GetVolume

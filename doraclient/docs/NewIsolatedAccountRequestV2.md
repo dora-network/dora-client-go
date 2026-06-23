@@ -6,14 +6,14 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **GlobalAccountId** | **string** |  | 
 **AssetId** | **string** |  | 
-**Quantity** | **float64** |  | 
+**Quantity** | **string** |  | 
 **AccountName** | Pointer to **string** |  | [optional] 
 
 ## Methods
 
 ### NewNewIsolatedAccountRequestV2
 
-`func NewNewIsolatedAccountRequestV2(globalAccountId string, assetId string, quantity float64, ) *NewIsolatedAccountRequestV2`
+`func NewNewIsolatedAccountRequestV2(globalAccountId string, assetId string, quantity string, ) *NewIsolatedAccountRequestV2`
 
 NewNewIsolatedAccountRequestV2 instantiates a new NewIsolatedAccountRequestV2 object
 This constructor will assign default values to properties that have it defined,
@@ -70,20 +70,20 @@ SetAssetId sets AssetId field to given value.
 
 ### GetQuantity
 
-`func (o *NewIsolatedAccountRequestV2) GetQuantity() float64`
+`func (o *NewIsolatedAccountRequestV2) GetQuantity() string`
 
 GetQuantity returns the Quantity field if non-nil, zero value otherwise.
 
 ### GetQuantityOk
 
-`func (o *NewIsolatedAccountRequestV2) GetQuantityOk() (*float64, bool)`
+`func (o *NewIsolatedAccountRequestV2) GetQuantityOk() (*string, bool)`
 
 GetQuantityOk returns a tuple with the Quantity field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetQuantity
 
-`func (o *NewIsolatedAccountRequestV2) SetQuantity(v float64)`
+`func (o *NewIsolatedAccountRequestV2) SetQuantity(v string)`
 
 SetQuantity sets Quantity field to given value.
 

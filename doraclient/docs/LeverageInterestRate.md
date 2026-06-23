@@ -5,10 +5,13 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AssetId** | **string** |  | 
-**Utilization** | **float64** |  | 
-**AvgUtilization** | **float64** |  | 
-**AvgInterestRate** | **float64** |  | 
-**InterestRate** | **float64** |  | 
+**Utilization** | **string** |  | 
+**AvgUtilization** | **string** |  | 
+**AvgBorrowingYieldRate** | **string** |  | 
+**AvgLendingYieldRate** | **string** |  | 
+**BorrowingYieldRate** | **string** |  | 
+**LendingYieldRate** | **string** |  | 
+**YieldToMaturity** | **string** |  | 
 **StartTime** | **time.Time** |  | 
 **EndTime** | **time.Time** |  | 
 
@@ -16,7 +19,7 @@ Name | Type | Description | Notes
 
 ### NewLeverageInterestRate
 
-`func NewLeverageInterestRate(assetId string, utilization float64, avgUtilization float64, avgInterestRate float64, interestRate float64, startTime time.Time, endTime time.Time, ) *LeverageInterestRate`
+`func NewLeverageInterestRate(assetId string, utilization string, avgUtilization string, avgBorrowingYieldRate string, avgLendingYieldRate string, borrowingYieldRate string, lendingYieldRate string, yieldToMaturity string, startTime time.Time, endTime time.Time, ) *LeverageInterestRate`
 
 NewLeverageInterestRate instantiates a new LeverageInterestRate object
 This constructor will assign default values to properties that have it defined,
@@ -53,82 +56,142 @@ SetAssetId sets AssetId field to given value.
 
 ### GetUtilization
 
-`func (o *LeverageInterestRate) GetUtilization() float64`
+`func (o *LeverageInterestRate) GetUtilization() string`
 
 GetUtilization returns the Utilization field if non-nil, zero value otherwise.
 
 ### GetUtilizationOk
 
-`func (o *LeverageInterestRate) GetUtilizationOk() (*float64, bool)`
+`func (o *LeverageInterestRate) GetUtilizationOk() (*string, bool)`
 
 GetUtilizationOk returns a tuple with the Utilization field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetUtilization
 
-`func (o *LeverageInterestRate) SetUtilization(v float64)`
+`func (o *LeverageInterestRate) SetUtilization(v string)`
 
 SetUtilization sets Utilization field to given value.
 
 
 ### GetAvgUtilization
 
-`func (o *LeverageInterestRate) GetAvgUtilization() float64`
+`func (o *LeverageInterestRate) GetAvgUtilization() string`
 
 GetAvgUtilization returns the AvgUtilization field if non-nil, zero value otherwise.
 
 ### GetAvgUtilizationOk
 
-`func (o *LeverageInterestRate) GetAvgUtilizationOk() (*float64, bool)`
+`func (o *LeverageInterestRate) GetAvgUtilizationOk() (*string, bool)`
 
 GetAvgUtilizationOk returns a tuple with the AvgUtilization field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAvgUtilization
 
-`func (o *LeverageInterestRate) SetAvgUtilization(v float64)`
+`func (o *LeverageInterestRate) SetAvgUtilization(v string)`
 
 SetAvgUtilization sets AvgUtilization field to given value.
 
 
-### GetAvgInterestRate
+### GetAvgBorrowingYieldRate
 
-`func (o *LeverageInterestRate) GetAvgInterestRate() float64`
+`func (o *LeverageInterestRate) GetAvgBorrowingYieldRate() string`
 
-GetAvgInterestRate returns the AvgInterestRate field if non-nil, zero value otherwise.
+GetAvgBorrowingYieldRate returns the AvgBorrowingYieldRate field if non-nil, zero value otherwise.
 
-### GetAvgInterestRateOk
+### GetAvgBorrowingYieldRateOk
 
-`func (o *LeverageInterestRate) GetAvgInterestRateOk() (*float64, bool)`
+`func (o *LeverageInterestRate) GetAvgBorrowingYieldRateOk() (*string, bool)`
 
-GetAvgInterestRateOk returns a tuple with the AvgInterestRate field if it's non-nil, zero value otherwise
+GetAvgBorrowingYieldRateOk returns a tuple with the AvgBorrowingYieldRate field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetAvgInterestRate
+### SetAvgBorrowingYieldRate
 
-`func (o *LeverageInterestRate) SetAvgInterestRate(v float64)`
+`func (o *LeverageInterestRate) SetAvgBorrowingYieldRate(v string)`
 
-SetAvgInterestRate sets AvgInterestRate field to given value.
+SetAvgBorrowingYieldRate sets AvgBorrowingYieldRate field to given value.
 
 
-### GetInterestRate
+### GetAvgLendingYieldRate
 
-`func (o *LeverageInterestRate) GetInterestRate() float64`
+`func (o *LeverageInterestRate) GetAvgLendingYieldRate() string`
 
-GetInterestRate returns the InterestRate field if non-nil, zero value otherwise.
+GetAvgLendingYieldRate returns the AvgLendingYieldRate field if non-nil, zero value otherwise.
 
-### GetInterestRateOk
+### GetAvgLendingYieldRateOk
 
-`func (o *LeverageInterestRate) GetInterestRateOk() (*float64, bool)`
+`func (o *LeverageInterestRate) GetAvgLendingYieldRateOk() (*string, bool)`
 
-GetInterestRateOk returns a tuple with the InterestRate field if it's non-nil, zero value otherwise
+GetAvgLendingYieldRateOk returns a tuple with the AvgLendingYieldRate field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetInterestRate
+### SetAvgLendingYieldRate
 
-`func (o *LeverageInterestRate) SetInterestRate(v float64)`
+`func (o *LeverageInterestRate) SetAvgLendingYieldRate(v string)`
 
-SetInterestRate sets InterestRate field to given value.
+SetAvgLendingYieldRate sets AvgLendingYieldRate field to given value.
+
+
+### GetBorrowingYieldRate
+
+`func (o *LeverageInterestRate) GetBorrowingYieldRate() string`
+
+GetBorrowingYieldRate returns the BorrowingYieldRate field if non-nil, zero value otherwise.
+
+### GetBorrowingYieldRateOk
+
+`func (o *LeverageInterestRate) GetBorrowingYieldRateOk() (*string, bool)`
+
+GetBorrowingYieldRateOk returns a tuple with the BorrowingYieldRate field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBorrowingYieldRate
+
+`func (o *LeverageInterestRate) SetBorrowingYieldRate(v string)`
+
+SetBorrowingYieldRate sets BorrowingYieldRate field to given value.
+
+
+### GetLendingYieldRate
+
+`func (o *LeverageInterestRate) GetLendingYieldRate() string`
+
+GetLendingYieldRate returns the LendingYieldRate field if non-nil, zero value otherwise.
+
+### GetLendingYieldRateOk
+
+`func (o *LeverageInterestRate) GetLendingYieldRateOk() (*string, bool)`
+
+GetLendingYieldRateOk returns a tuple with the LendingYieldRate field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLendingYieldRate
+
+`func (o *LeverageInterestRate) SetLendingYieldRate(v string)`
+
+SetLendingYieldRate sets LendingYieldRate field to given value.
+
+
+### GetYieldToMaturity
+
+`func (o *LeverageInterestRate) GetYieldToMaturity() string`
+
+GetYieldToMaturity returns the YieldToMaturity field if non-nil, zero value otherwise.
+
+### GetYieldToMaturityOk
+
+`func (o *LeverageInterestRate) GetYieldToMaturityOk() (*string, bool)`
+
+GetYieldToMaturityOk returns a tuple with the YieldToMaturity field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetYieldToMaturity
+
+`func (o *LeverageInterestRate) SetYieldToMaturity(v string)`
+
+SetYieldToMaturity sets YieldToMaturity field to given value.
 
 
 ### GetStartTime

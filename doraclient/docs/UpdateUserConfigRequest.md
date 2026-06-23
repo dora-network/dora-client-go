@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **AllowLiquidationsNotifications** | Pointer to [**UpdateFieldBoolean**](UpdateFieldBoolean.md) | Optional: Whether to allow liquidations notifications. | [optional] 
 **AllowDepositWithdrawalNotifications** | Pointer to [**UpdateFieldBoolean**](UpdateFieldBoolean.md) | Optional: Whether to allow deposit/withdrawal notifications. | [optional] 
 **AllowOrdersNotifications** | Pointer to [**UpdateFieldBoolean**](UpdateFieldBoolean.md) | Optional: Whether to allow orders notifications. | [optional] 
+**AllowCopyTrading** | Pointer to [**UpdateFieldBoolean**](UpdateFieldBoolean.md) | Optional: Whether to allow copy trading. | [optional] 
 
 ## Methods
 
@@ -226,6 +227,31 @@ SetAllowOrdersNotifications sets AllowOrdersNotifications field to given value.
 `func (o *UpdateUserConfigRequest) HasAllowOrdersNotifications() bool`
 
 HasAllowOrdersNotifications returns a boolean if a field has been set.
+
+### GetAllowCopyTrading
+
+`func (o *UpdateUserConfigRequest) GetAllowCopyTrading() UpdateFieldBoolean`
+
+GetAllowCopyTrading returns the AllowCopyTrading field if non-nil, zero value otherwise.
+
+### GetAllowCopyTradingOk
+
+`func (o *UpdateUserConfigRequest) GetAllowCopyTradingOk() (*UpdateFieldBoolean, bool)`
+
+GetAllowCopyTradingOk returns a tuple with the AllowCopyTrading field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAllowCopyTrading
+
+`func (o *UpdateUserConfigRequest) SetAllowCopyTrading(v UpdateFieldBoolean)`
+
+SetAllowCopyTrading sets AllowCopyTrading field to given value.
+
+### HasAllowCopyTrading
+
+`func (o *UpdateUserConfigRequest) HasAllowCopyTrading() bool`
+
+HasAllowCopyTrading returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
