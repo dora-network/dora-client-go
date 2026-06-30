@@ -5,7 +5,9 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | **string** |  | 
-**Kind** | [**BondKind**](BondKind.md) |  | 
+**Kind** | [**CouponKind**](CouponKind.md) |  | 
+**CouponKind** | Pointer to [**CouponKind**](CouponKind.md) |  | [optional] 
+**BondKind** | Pointer to [**BondKind**](BondKind.md) |  | [optional] 
 **CouponStartAt** | Pointer to **time.Time** |  | [optional] 
 **CreatedAt** | **time.Time** |  | 
 **FinalCouponAt** | Pointer to **time.Time** |  | [optional] 
@@ -22,7 +24,7 @@ Name | Type | Description | Notes
 
 ### NewBond
 
-`func NewBond(id string, kind BondKind, createdAt time.Time, isin string, issuedAt time.Time, issuer string, maturityAt time.Time, principalValue string, paymentsPerYear int32, ) *Bond`
+`func NewBond(id string, kind CouponKind, createdAt time.Time, isin string, issuedAt time.Time, issuer string, maturityAt time.Time, principalValue string, paymentsPerYear int32, ) *Bond`
 
 NewBond instantiates a new Bond object
 This constructor will assign default values to properties that have it defined,
@@ -59,23 +61,73 @@ SetId sets Id field to given value.
 
 ### GetKind
 
-`func (o *Bond) GetKind() BondKind`
+`func (o *Bond) GetKind() CouponKind`
 
 GetKind returns the Kind field if non-nil, zero value otherwise.
 
 ### GetKindOk
 
-`func (o *Bond) GetKindOk() (*BondKind, bool)`
+`func (o *Bond) GetKindOk() (*CouponKind, bool)`
 
 GetKindOk returns a tuple with the Kind field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetKind
 
-`func (o *Bond) SetKind(v BondKind)`
+`func (o *Bond) SetKind(v CouponKind)`
 
 SetKind sets Kind field to given value.
 
+
+### GetCouponKind
+
+`func (o *Bond) GetCouponKind() CouponKind`
+
+GetCouponKind returns the CouponKind field if non-nil, zero value otherwise.
+
+### GetCouponKindOk
+
+`func (o *Bond) GetCouponKindOk() (*CouponKind, bool)`
+
+GetCouponKindOk returns a tuple with the CouponKind field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCouponKind
+
+`func (o *Bond) SetCouponKind(v CouponKind)`
+
+SetCouponKind sets CouponKind field to given value.
+
+### HasCouponKind
+
+`func (o *Bond) HasCouponKind() bool`
+
+HasCouponKind returns a boolean if a field has been set.
+
+### GetBondKind
+
+`func (o *Bond) GetBondKind() BondKind`
+
+GetBondKind returns the BondKind field if non-nil, zero value otherwise.
+
+### GetBondKindOk
+
+`func (o *Bond) GetBondKindOk() (*BondKind, bool)`
+
+GetBondKindOk returns a tuple with the BondKind field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBondKind
+
+`func (o *Bond) SetBondKind(v BondKind)`
+
+SetBondKind sets BondKind field to given value.
+
+### HasBondKind
+
+`func (o *Bond) HasBondKind() bool`
+
+HasBondKind returns a boolean if a field has been set.
 
 ### GetCouponStartAt
 

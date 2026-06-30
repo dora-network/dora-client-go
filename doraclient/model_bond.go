@@ -23,7 +23,9 @@ var _ MappedNullable = &Bond{}
 // Bond struct for Bond
 type Bond struct {
 	Id string `json:"id"`
-	Kind BondKind `json:"kind"`
+	Kind CouponKind `json:"kind"`
+	CouponKind *CouponKind `json:"coupon_kind,omitempty"`
+	BondKind *BondKind `json:"bond_kind,omitempty"`
 	CouponStartAt *time.Time `json:"coupon_start_at,omitempty"`
 	CreatedAt time.Time `json:"created_at"`
 	FinalCouponAt *time.Time `json:"final_coupon_at,omitempty"`
@@ -44,7 +46,7 @@ type _Bond Bond
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBond(id string, kind BondKind, createdAt time.Time, isin string, issuedAt time.Time, issuer string, maturityAt time.Time, principalValue string, paymentsPerYear int32) *Bond {
+func NewBond(id string, kind CouponKind, createdAt time.Time, isin string, issuedAt time.Time, issuer string, maturityAt time.Time, principalValue string, paymentsPerYear int32) *Bond {
 	this := Bond{}
 	this.Id = id
 	this.Kind = kind
@@ -91,9 +93,9 @@ func (o *Bond) SetId(v string) {
 }
 
 // GetKind returns the Kind field value
-func (o *Bond) GetKind() BondKind {
+func (o *Bond) GetKind() CouponKind {
 	if o == nil {
-		var ret BondKind
+		var ret CouponKind
 		return ret
 	}
 
@@ -102,7 +104,7 @@ func (o *Bond) GetKind() BondKind {
 
 // GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
-func (o *Bond) GetKindOk() (*BondKind, bool) {
+func (o *Bond) GetKindOk() (*CouponKind, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -110,8 +112,72 @@ func (o *Bond) GetKindOk() (*BondKind, bool) {
 }
 
 // SetKind sets field value
-func (o *Bond) SetKind(v BondKind) {
+func (o *Bond) SetKind(v CouponKind) {
 	o.Kind = v
+}
+
+// GetCouponKind returns the CouponKind field value if set, zero value otherwise.
+func (o *Bond) GetCouponKind() CouponKind {
+	if o == nil || IsNil(o.CouponKind) {
+		var ret CouponKind
+		return ret
+	}
+	return *o.CouponKind
+}
+
+// GetCouponKindOk returns a tuple with the CouponKind field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Bond) GetCouponKindOk() (*CouponKind, bool) {
+	if o == nil || IsNil(o.CouponKind) {
+		return nil, false
+	}
+	return o.CouponKind, true
+}
+
+// HasCouponKind returns a boolean if a field has been set.
+func (o *Bond) HasCouponKind() bool {
+	if o != nil && !IsNil(o.CouponKind) {
+		return true
+	}
+
+	return false
+}
+
+// SetCouponKind gets a reference to the given CouponKind and assigns it to the CouponKind field.
+func (o *Bond) SetCouponKind(v CouponKind) {
+	o.CouponKind = &v
+}
+
+// GetBondKind returns the BondKind field value if set, zero value otherwise.
+func (o *Bond) GetBondKind() BondKind {
+	if o == nil || IsNil(o.BondKind) {
+		var ret BondKind
+		return ret
+	}
+	return *o.BondKind
+}
+
+// GetBondKindOk returns a tuple with the BondKind field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Bond) GetBondKindOk() (*BondKind, bool) {
+	if o == nil || IsNil(o.BondKind) {
+		return nil, false
+	}
+	return o.BondKind, true
+}
+
+// HasBondKind returns a boolean if a field has been set.
+func (o *Bond) HasBondKind() bool {
+	if o != nil && !IsNil(o.BondKind) {
+		return true
+	}
+
+	return false
+}
+
+// SetBondKind gets a reference to the given BondKind and assigns it to the BondKind field.
+func (o *Bond) SetBondKind(v BondKind) {
+	o.BondKind = &v
 }
 
 // GetCouponStartAt returns the CouponStartAt field value if set, zero value otherwise.
@@ -422,6 +488,12 @@ func (o Bond) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
 	toSerialize["kind"] = o.Kind
+	if !IsNil(o.CouponKind) {
+		toSerialize["coupon_kind"] = o.CouponKind
+	}
+	if !IsNil(o.BondKind) {
+		toSerialize["bond_kind"] = o.BondKind
+	}
 	if !IsNil(o.CouponStartAt) {
 		toSerialize["coupon_start_at"] = o.CouponStartAt
 	}

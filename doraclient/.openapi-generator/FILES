@@ -42,6 +42,7 @@ docs/ClosePositionResp.md
 docs/ClosePositionResponseEnvelope.md
 docs/Collateral.md
 docs/CountryCode.md
+docs/CouponKind.md
 docs/CouponPayment.md
 docs/CreateAPIKeyData.md
 docs/CreateAPIKeyRequest.md
@@ -62,6 +63,7 @@ docs/FundUserRequest.md
 docs/FundUserResponseEnvelope.md
 docs/GetAssetByIDResponseEnvelope.md
 docs/GetAssetYTMByIDResponseEnvelope.md
+docs/GetPnLRankingResponse.md
 docs/GetRealizedPnlSettlementsResponseEnvelope.md
 docs/GetTopOfBookResponseEnvelope.md
 docs/HistoricalLeverageInterestRate.md
@@ -130,6 +132,7 @@ docs/PLSummary.md
 docs/PayLeverageAccruedInterest.md
 docs/PayLeverageAccruedInterestRequest.md
 docs/PayLeverageAccruedInterestResponseEnvelope.md
+docs/PnLRankingResponse.md
 docs/PoolPrice.md
 docs/PoolPriceResponseEnvelope.md
 docs/PoolRequestError.md
@@ -257,6 +260,7 @@ model_close_position_resp.go
 model_close_position_response_envelope.go
 model_collateral.go
 model_country_code.go
+model_coupon_kind.go
 model_coupon_payment.go
 model_create_api_key_data.go
 model_create_api_key_request.go
@@ -276,6 +280,7 @@ model_fund_user_request.go
 model_fund_user_response_envelope.go
 model_get_asset_by_id_response_envelope.go
 model_get_asset_ytmby_id_response_envelope.go
+model_get_pn_l_ranking_response.go
 model_get_realized_pnl_settlements_response_envelope.go
 model_get_top_of_book_response_envelope.go
 model_historical_leverage_interest_rate.go
@@ -344,6 +349,7 @@ model_pl_account.go
 model_pl_asset.go
 model_pl_response_envelope.go
 model_pl_summary.go
+model_pn_l_ranking_response.go
 model_pool_price.go
 model_pool_price_response_envelope.go
 model_pool_request_error.go

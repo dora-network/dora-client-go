@@ -52,6 +52,7 @@ Method | HTTP request | Description
 [**GetPLForSelfByAccount**](DefaultAPI.md#GetPLForSelfByAccount) | **Get** /v1/pl/self | Get account-by-account PL breakdown for the logged in user
 [**GetPoolPrice**](DefaultAPI.md#GetPoolPrice) | **Get** /v1/price/pool/{pool_id} | Get the current price of a pool
 [**GetRealizedPnlSettlements**](DefaultAPI.md#GetRealizedPnlSettlements) | **Get** /v1/realized_pnl_settlements | Get realized P&amp;L settlements with filters
+[**GetTopTradersByPnL**](DefaultAPI.md#GetTopTradersByPnL) | **Get** /v1/user/ranking | Get top traders by PnL
 [**GetTradeById**](DefaultAPI.md#GetTradeById) | **Get** /v1/trades/{trade_id} | Get a trade by ID
 [**GetTrades**](DefaultAPI.md#GetTrades) | **Get** /v1/trades | Get a filtered, paginated list of trades
 [**GetTransactionById**](DefaultAPI.md#GetTransactionById) | **Get** /v1/transactions/{transaction_id} | Get a transaction by ID
@@ -3288,6 +3289,75 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## GetTopTradersByPnL
+
+> GetPnLRankingResponse GetTopTradersByPnL(ctx).Start(start).End(end).Limit(limit).Execute()
+
+Get top traders by PnL
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+    "time"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+	start := time.Now() // time.Time | 
+	end := time.Now() // time.Time | 
+	limit := int32(56) // int32 |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.GetTopTradersByPnL(context.Background()).Start(start).End(end).Limit(limit).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.GetTopTradersByPnL``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetTopTradersByPnL`: GetPnLRankingResponse
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.GetTopTradersByPnL`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetTopTradersByPnLRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **start** | **time.Time** |  | 
+ **end** | **time.Time** |  | 
+ **limit** | **int32** |  | 
+
+### Return type
+
+[**GetPnLRankingResponse**](GetPnLRankingResponse.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetTradeById
 
 > TradeResponseEnvelope GetTradeById(ctx, tradeId).Execute()
@@ -5522,7 +5592,7 @@ Name | Type | Description  | Notes
 
 ## ListOrders
 
-> ListOrdersResponseEnvelope ListOrders(ctx).OrderBookId(orderBookId).Kind(kind).Status(status).Side(side).From(from).To(to).Page(page).Limit(limit).Execute()
+> ListOrdersResponseEnvelope ListOrders(ctx).UserId(userId).OrderBookId(orderBookId).Kind(kind).Status(status).Side(side).From(from).To(to).Page(page).Limit(limit).Execute()
 
 List all orders
 
@@ -5540,6 +5610,7 @@ import (
 )
 
 func main() {
+	userId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Filter by user ID (only allowed if the user has copy trading enabled) (optional)
 	orderBookId := []string{"Inner_example"} // []string |  (optional)
 	kind := []openapiclient.OrderKind{openapiclient.OrderKind("LIMIT")} // []OrderKind |  (optional)
 	status := []openapiclient.OrderStatus{openapiclient.OrderStatus("OPEN")} // []OrderStatus |  (optional)
@@ -5551,7 +5622,7 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.DefaultAPI.ListOrders(context.Background()).OrderBookId(orderBookId).Kind(kind).Status(status).Side(side).From(from).To(to).Page(page).Limit(limit).Execute()
+	resp, r, err := apiClient.DefaultAPI.ListOrders(context.Background()).UserId(userId).OrderBookId(orderBookId).Kind(kind).Status(status).Side(side).From(from).To(to).Page(page).Limit(limit).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.ListOrders``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -5572,6 +5643,7 @@ Other parameters are passed through a pointer to a apiListOrdersRequest struct v
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **userId** | **string** | Filter by user ID (only allowed if the user has copy trading enabled) | 
  **orderBookId** | **[]string** |  | 
  **kind** | [**[]OrderKind**](OrderKind.md) |  | 
  **status** | [**[]OrderStatus**](OrderStatus.md) |  | 

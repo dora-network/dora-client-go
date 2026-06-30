@@ -24,6 +24,12 @@ type AssetConfig struct {
 	AssetId string `json:"asset_id"`
 	// if an asset is a CURRENCY, set 1 USD price,If an asset is a BOND and the price isn't found, set to 0 USD   You can find price details on /price/asset/{asset_id} route
 	Price string `json:"price"`
+	// Optional leverage module available balance for this asset, from /v1/ledger/module/{asset_id}. If provided, validation rejects orders that need to borrow more than the module can supply.
+	ModuleAvailable *string `json:"module_available,omitempty"`
+	// Optional leverage module total supplied balance for this asset, from /v1/ledger/module/{asset_id}. Required with module_available when the asset has max_utilization.
+	ModuleSupplied *string `json:"module_supplied,omitempty"`
+	// Optional leverage module borrowed balance for this asset, from /v1/ledger/module/{asset_id}. Required with module_available when the asset has max_utilization.
+	ModuleBorrowed *string `json:"module_borrowed,omitempty"`
 }
 
 type _AssetConfig AssetConfig
@@ -95,6 +101,102 @@ func (o *AssetConfig) SetPrice(v string) {
 	o.Price = v
 }
 
+// GetModuleAvailable returns the ModuleAvailable field value if set, zero value otherwise.
+func (o *AssetConfig) GetModuleAvailable() string {
+	if o == nil || IsNil(o.ModuleAvailable) {
+		var ret string
+		return ret
+	}
+	return *o.ModuleAvailable
+}
+
+// GetModuleAvailableOk returns a tuple with the ModuleAvailable field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AssetConfig) GetModuleAvailableOk() (*string, bool) {
+	if o == nil || IsNil(o.ModuleAvailable) {
+		return nil, false
+	}
+	return o.ModuleAvailable, true
+}
+
+// HasModuleAvailable returns a boolean if a field has been set.
+func (o *AssetConfig) HasModuleAvailable() bool {
+	if o != nil && !IsNil(o.ModuleAvailable) {
+		return true
+	}
+
+	return false
+}
+
+// SetModuleAvailable gets a reference to the given string and assigns it to the ModuleAvailable field.
+func (o *AssetConfig) SetModuleAvailable(v string) {
+	o.ModuleAvailable = &v
+}
+
+// GetModuleSupplied returns the ModuleSupplied field value if set, zero value otherwise.
+func (o *AssetConfig) GetModuleSupplied() string {
+	if o == nil || IsNil(o.ModuleSupplied) {
+		var ret string
+		return ret
+	}
+	return *o.ModuleSupplied
+}
+
+// GetModuleSuppliedOk returns a tuple with the ModuleSupplied field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AssetConfig) GetModuleSuppliedOk() (*string, bool) {
+	if o == nil || IsNil(o.ModuleSupplied) {
+		return nil, false
+	}
+	return o.ModuleSupplied, true
+}
+
+// HasModuleSupplied returns a boolean if a field has been set.
+func (o *AssetConfig) HasModuleSupplied() bool {
+	if o != nil && !IsNil(o.ModuleSupplied) {
+		return true
+	}
+
+	return false
+}
+
+// SetModuleSupplied gets a reference to the given string and assigns it to the ModuleSupplied field.
+func (o *AssetConfig) SetModuleSupplied(v string) {
+	o.ModuleSupplied = &v
+}
+
+// GetModuleBorrowed returns the ModuleBorrowed field value if set, zero value otherwise.
+func (o *AssetConfig) GetModuleBorrowed() string {
+	if o == nil || IsNil(o.ModuleBorrowed) {
+		var ret string
+		return ret
+	}
+	return *o.ModuleBorrowed
+}
+
+// GetModuleBorrowedOk returns a tuple with the ModuleBorrowed field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AssetConfig) GetModuleBorrowedOk() (*string, bool) {
+	if o == nil || IsNil(o.ModuleBorrowed) {
+		return nil, false
+	}
+	return o.ModuleBorrowed, true
+}
+
+// HasModuleBorrowed returns a boolean if a field has been set.
+func (o *AssetConfig) HasModuleBorrowed() bool {
+	if o != nil && !IsNil(o.ModuleBorrowed) {
+		return true
+	}
+
+	return false
+}
+
+// SetModuleBorrowed gets a reference to the given string and assigns it to the ModuleBorrowed field.
+func (o *AssetConfig) SetModuleBorrowed(v string) {
+	o.ModuleBorrowed = &v
+}
+
 func (o AssetConfig) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -107,6 +209,15 @@ func (o AssetConfig) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["asset_id"] = o.AssetId
 	toSerialize["price"] = o.Price
+	if !IsNil(o.ModuleAvailable) {
+		toSerialize["module_available"] = o.ModuleAvailable
+	}
+	if !IsNil(o.ModuleSupplied) {
+		toSerialize["module_supplied"] = o.ModuleSupplied
+	}
+	if !IsNil(o.ModuleBorrowed) {
+		toSerialize["module_borrowed"] = o.ModuleBorrowed
+	}
 	return toSerialize, nil
 }
 

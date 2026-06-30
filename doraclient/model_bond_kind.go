@@ -20,14 +20,14 @@ type BondKind string
 
 // List of BondKind
 const (
-	BONDKIND_COUPON_PAYING BondKind = "COUPON-PAYING"
-	BONDKIND_PRINCIPAL_ONLY BondKind = "PRINCIPAL-ONLY"
+	BONDKIND_CORPORATE BondKind = "CORPORATE"
+	BONDKIND_TREASURY BondKind = "TREASURY"
 )
 
 // All allowed values of BondKind enum
 var AllowedBondKindEnumValues = []BondKind{
-	"COUPON-PAYING",
-	"PRINCIPAL-ONLY",
+	"CORPORATE",
+	"TREASURY",
 }
 
 func (v *BondKind) UnmarshalJSON(src []byte) error {
