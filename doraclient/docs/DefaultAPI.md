@@ -14,7 +14,6 @@ Method | HTTP request | Description
 [**CreateAPIKeyForUser**](DefaultAPI.md#CreateAPIKeyForUser) | **Post** /v1/user/apikey | Create apikey for a user
 [**CreateAPIKeyForUserID**](DefaultAPI.md#CreateAPIKeyForUserID) | **Post** /v1/user/{user_id}/apikey | Create apikey for a user
 [**CreateConditionalOrder**](DefaultAPI.md#CreateConditionalOrder) | **Post** /v1/orders/conditional | Create a new conditional orders
-[**CreateNewIsolatedAccountV2**](DefaultAPI.md#CreateNewIsolatedAccountV2) | **Post** /v2/accounts/new_isolated | Create a new isolated account for a user transferring available assets into the account
 [**CreateOrder**](DefaultAPI.md#CreateOrder) | **Post** /v1/orders | Create a new order
 [**CreateUser**](DefaultAPI.md#CreateUser) | **Post** /v1/integrators/user | Create a new user
 [**DeleteUser**](DefaultAPI.md#DeleteUser) | **Delete** /v1/user/{user_id} | Delete user by ID
@@ -29,6 +28,7 @@ Method | HTTP request | Description
 [**GetAssetsStream**](DefaultAPI.md#GetAssetsStream) | **Get** /v1/assets/stream | Get all inserts or updates for assets
 [**GetCandleData**](DefaultAPI.md#GetCandleData) | **Get** /v1/charts/{order_book_id}/candle | Get candlestick data for an orderbook
 [**GetCouponPaymentsByAssetId**](DefaultAPI.md#GetCouponPaymentsByAssetId) | **Get** /v1/assets/{asset_id}/coupon_payments | Get coupon payments for a bond asset
+[**GetDepositInstructions**](DefaultAPI.md#GetDepositInstructions) | **Get** /v1/web3/deposit-instructions | Get per-chain instructions for depositing USDC into the Dora vault
 [**GetL1Depth**](DefaultAPI.md#GetL1Depth) | **Get** /v1/orderbooks/{order_book_id}/L1 | Get the top price levels for a specific orderbook (L1 market depth)
 [**GetL2Depth**](DefaultAPI.md#GetL2Depth) | **Get** /v1/orderbooks/{order_book_id}/L2 | Get the aggregated price levels for a specific orderbook (L2 market depth)
 [**GetL3Depth**](DefaultAPI.md#GetL3Depth) | **Get** /v1/orderbooks/{order_book_id}/L3 | Get all open orders for a specific orderbook (L3 market depth)
@@ -84,6 +84,7 @@ Method | HTTP request | Description
 [**LiquiditySubtract**](DefaultAPI.md#LiquiditySubtract) | **Post** /v1/liquidity/pool/{pool_id}/remove | Subtract liquidity from a pool
 [**ListAccountsSelfV2**](DefaultAPI.md#ListAccountsSelfV2) | **Get** /v2/user/self/accounts | List all accounts for the authenticated user
 [**ListAssets**](DefaultAPI.md#ListAssets) | **Get** /v1/assets | List assets
+[**ListDeposits**](DefaultAPI.md#ListDeposits) | **Get** /v1/web3/deposits | List USDC deposits
 [**ListOrderBooks**](DefaultAPI.md#ListOrderBooks) | **Get** /v1/orderbooks | List order books
 [**ListOrders**](DefaultAPI.md#ListOrders) | **Get** /v1/orders | List all orders
 [**ListPositionAccountsSelf**](DefaultAPI.md#ListPositionAccountsSelf) | **Get** /v1/user/self/position_accounts | List all position accounts for the authenticated user
@@ -765,70 +766,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**CreateConditionalOrderResponseEnvelope**](CreateConditionalOrderResponseEnvelope.md)
-
-### Authorization
-
-[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## CreateNewIsolatedAccountV2
-
-> NewIsolatedAccountResponseV2Envelope CreateNewIsolatedAccountV2(ctx).NewIsolatedAccountRequestV2(newIsolatedAccountRequestV2).Execute()
-
-Create a new isolated account for a user transferring available assets into the account
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/dora-network/dora-client-go/doraclient"
-)
-
-func main() {
-	newIsolatedAccountRequestV2 := *openapiclient.NewNewIsolatedAccountRequestV2("GlobalAccountId_example", "AssetId_example", "Quantity_example") // NewIsolatedAccountRequestV2 | 
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.DefaultAPI.CreateNewIsolatedAccountV2(context.Background()).NewIsolatedAccountRequestV2(newIsolatedAccountRequestV2).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.CreateNewIsolatedAccountV2``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `CreateNewIsolatedAccountV2`: NewIsolatedAccountResponseV2Envelope
-	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.CreateNewIsolatedAccountV2`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiCreateNewIsolatedAccountV2Request struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **newIsolatedAccountRequestV2** | [**NewIsolatedAccountRequestV2**](NewIsolatedAccountRequestV2.md) |  | 
-
-### Return type
-
-[**NewIsolatedAccountResponseV2Envelope**](NewIsolatedAccountResponseV2Envelope.md)
 
 ### Authorization
 
@@ -1768,6 +1705,78 @@ Name | Type | Description  | Notes
 ### Authorization
 
 No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetDepositInstructions
+
+> DepositInstructionsResponseEnvelope GetDepositInstructions(ctx).Quantity(quantity).OwnerAddress(ownerAddress).Nonce(nonce).ClientReferenceId(clientReferenceId).Execute()
+
+Get per-chain instructions for depositing USDC into the Dora vault
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+	quantity := "quantity_example" // string | Human-decimal USDC quantity to deposit, e.g. '100.50'. Must be positive, with at most 6 decimal places.
+	ownerAddress := "ownerAddress_example" // string | The user's wallet address as a 0x-prefixed 20-byte hex string. Used as the permit owner.
+	nonce := "nonce_example" // string | The owner's current USDC permit nonce (read client-side), as a non-negative decimal string. It belongs to the single supported chain.
+	clientReferenceId := "clientReferenceId_example" // string | Optional client-supplied reference as a hex string (0x prefix optional), at most 32 bytes. Left-aligned into the deposit call's bytes32 argument. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.GetDepositInstructions(context.Background()).Quantity(quantity).OwnerAddress(ownerAddress).Nonce(nonce).ClientReferenceId(clientReferenceId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.GetDepositInstructions``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetDepositInstructions`: DepositInstructionsResponseEnvelope
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.GetDepositInstructions`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetDepositInstructionsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **quantity** | **string** | Human-decimal USDC quantity to deposit, e.g. &#39;100.50&#39;. Must be positive, with at most 6 decimal places. | 
+ **ownerAddress** | **string** | The user&#39;s wallet address as a 0x-prefixed 20-byte hex string. Used as the permit owner. | 
+ **nonce** | **string** | The owner&#39;s current USDC permit nonce (read client-side), as a non-negative decimal string. It belongs to the single supported chain. | 
+ **clientReferenceId** | **string** | Optional client-supplied reference as a hex string (0x prefix optional), at most 32 bytes. Left-aligned into the deposit call&#39;s bytes32 argument. | 
+
+### Return type
+
+[**DepositInstructionsResponseEnvelope**](DepositInstructionsResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -5518,6 +5527,76 @@ No authorization required
 [[Back to README]](../README.md)
 
 
+## ListDeposits
+
+> ListDepositsResponseEnvelope ListDeposits(ctx).UserId(userId).Page(page).Limit(limit).Execute()
+
+List USDC deposits
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+	userId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Filter by user ID. Non-admin callers may only specify their own user ID. (optional)
+	page := int64(789) // int64 |  (optional) (default to 1)
+	limit := int64(789) // int64 |  (optional) (default to 50)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.ListDeposits(context.Background()).UserId(userId).Page(page).Limit(limit).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.ListDeposits``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ListDeposits`: ListDepositsResponseEnvelope
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.ListDeposits`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiListDepositsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **userId** | **string** | Filter by user ID. Non-admin callers may only specify their own user ID. | 
+ **page** | **int64** |  | [default to 1]
+ **limit** | **int64** |  | [default to 50]
+
+### Return type
+
+[**ListDepositsResponseEnvelope**](ListDepositsResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## ListOrderBooks
 
 > ListOrderbookResponseEnvelope ListOrderBooks(ctx).Status(status).BaseAssetId(baseAssetId).QuoteAssetId(quoteAssetId).Page(page).Limit(limit).Execute()
@@ -5610,7 +5689,7 @@ import (
 )
 
 func main() {
-	userId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Filter by user ID (only allowed if the user has copy trading enabled) (optional)
+	userId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Filter by user ID (only allowed if the user has copy trading enabled, or if the requester is an Admin or Integrator within the same tenant) (optional)
 	orderBookId := []string{"Inner_example"} // []string |  (optional)
 	kind := []openapiclient.OrderKind{openapiclient.OrderKind("LIMIT")} // []OrderKind |  (optional)
 	status := []openapiclient.OrderStatus{openapiclient.OrderStatus("OPEN")} // []OrderStatus |  (optional)
@@ -5643,7 +5722,7 @@ Other parameters are passed through a pointer to a apiListOrdersRequest struct v
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **userId** | **string** | Filter by user ID (only allowed if the user has copy trading enabled) | 
+ **userId** | **string** | Filter by user ID (only allowed if the user has copy trading enabled, or if the requester is an Admin or Integrator within the same tenant) | 
  **orderBookId** | **[]string** |  | 
  **kind** | [**[]OrderKind**](OrderKind.md) |  | 
  **status** | [**[]OrderStatus**](OrderStatus.md) |  | 

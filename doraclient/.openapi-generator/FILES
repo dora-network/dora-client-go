@@ -58,6 +58,12 @@ docs/CurrentLeverageAccruedInterest.md
 docs/CurrentLeverageAccruedInterestResponseEnvelope.md
 docs/DefaultAPI.md
 docs/DefundUserRequest.md
+docs/DepositArgs.md
+docs/DepositCall.md
+docs/DepositInstructionForChain.md
+docs/DepositInstructionsResponse.md
+docs/DepositInstructionsResponseEnvelope.md
+docs/DepositResponse.md
 docs/FundUser.md
 docs/FundUserRequest.md
 docs/FundUserResponseEnvelope.md
@@ -91,6 +97,7 @@ docs/ListAssetPriceResponseEnvelope.md
 docs/ListAssetYieldResponseEnvelope.md
 docs/ListCandlesResponseEnvelope.md
 docs/ListCouponPaymentsResponseEnvelope.md
+docs/ListDepositsResponseEnvelope.md
 docs/ListOrderBookDepthResponseEnvelope.md
 docs/ListOrderbookResponseEnvelope.md
 docs/ListOrdersResponseEnvelope.md
@@ -132,6 +139,9 @@ docs/PLSummary.md
 docs/PayLeverageAccruedInterest.md
 docs/PayLeverageAccruedInterestRequest.md
 docs/PayLeverageAccruedInterestResponseEnvelope.md
+docs/PermitDomain.md
+docs/PermitMessage.md
+docs/PermitTypedData.md
 docs/PnLRankingResponse.md
 docs/PoolPrice.md
 docs/PoolPriceResponseEnvelope.md
@@ -189,6 +199,7 @@ docs/TransferBalancesRequest.md
 docs/TransferBalancesResponseEnvelope.md
 docs/TransformedAssets.md
 docs/TriggerType.md
+docs/TypedDataField.md
 docs/UnitePositionRequest.md
 docs/UnitePositionResponseEnvelope.md
 docs/UnitedPosition.md
@@ -216,6 +227,7 @@ docs/UserValue.md
 docs/UserValueResponseEnvelope.md
 docs/ValidateSubmitOrderRequest.md
 docs/ValidateSubmitOrderResponse.md
+docs/Web3EventStatus.md
 docs/Withdraw.md
 docs/WithdrawRequest.md
 docs/WithdrawResponseEnvelope.md
@@ -275,6 +287,12 @@ model_create_order_response_envelope.go
 model_current_leverage_accrued_interest.go
 model_current_leverage_accrued_interest_response_envelope.go
 model_defund_user_request.go
+model_deposit_args.go
+model_deposit_call.go
+model_deposit_instruction_for_chain.go
+model_deposit_instructions_response.go
+model_deposit_instructions_response_envelope.go
+model_deposit_response.go
 model_fund_user.go
 model_fund_user_request.go
 model_fund_user_response_envelope.go
@@ -308,6 +326,7 @@ model_list_asset_price_response_envelope.go
 model_list_asset_yield_response_envelope.go
 model_list_candles_response_envelope.go
 model_list_coupon_payments_response_envelope.go
+model_list_deposits_response_envelope.go
 model_list_order_book_depth_response_envelope.go
 model_list_orderbook_response_envelope.go
 model_list_orders_response_envelope.go
@@ -345,6 +364,9 @@ model_orderbook_stats_response_envelope.go
 model_pay_leverage_accrued_interest.go
 model_pay_leverage_accrued_interest_request.go
 model_pay_leverage_accrued_interest_response_envelope.go
+model_permit_domain.go
+model_permit_message.go
+model_permit_typed_data.go
 model_pl_account.go
 model_pl_asset.go
 model_pl_response_envelope.go
@@ -406,6 +428,7 @@ model_transfer_balances_request.go
 model_transfer_balances_response_envelope.go
 model_transformed_assets.go
 model_trigger_type.go
+model_typed_data_field.go
 model_unite_position_request.go
 model_unite_position_response_envelope.go
 model_united_position.go
@@ -433,6 +456,7 @@ model_user_value.go
 model_user_value_response_envelope.go
 model_validate_submit_order_request.go
 model_validate_submit_order_response.go
+model_web3_event_status.go
 model_withdraw.go
 model_withdraw_request.go
 model_withdraw_response_envelope.go
