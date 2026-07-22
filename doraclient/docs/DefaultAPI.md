@@ -27,6 +27,7 @@ Method | HTTP request | Description
 [**GetAssetYieldData**](DefaultAPI.md#GetAssetYieldData) | **Get** /v1/charts/{asset_id}/yield | Get yield chart data for an asset
 [**GetAssetsStream**](DefaultAPI.md#GetAssetsStream) | **Get** /v1/assets/stream | Get all inserts or updates for assets
 [**GetCandleData**](DefaultAPI.md#GetCandleData) | **Get** /v1/charts/{order_book_id}/candle | Get candlestick data for an orderbook
+[**GetCopyTraders**](DefaultAPI.md#GetCopyTraders) | **Get** /v1/user/copy_traders | Get list of user IDs with copy trading enabled
 [**GetCouponPaymentsByAssetId**](DefaultAPI.md#GetCouponPaymentsByAssetId) | **Get** /v1/assets/{asset_id}/coupon_payments | Get coupon payments for a bond asset
 [**GetDepositInstructions**](DefaultAPI.md#GetDepositInstructions) | **Get** /v1/web3/deposit-instructions | Get per-chain instructions for depositing USDC into the Dora vault
 [**GetL1Depth**](DefaultAPI.md#GetL1Depth) | **Get** /v1/orderbooks/{order_book_id}/L1 | Get the top price levels for a specific orderbook (L1 market depth)
@@ -90,6 +91,7 @@ Method | HTTP request | Description
 [**ListPositionAccountsSelf**](DefaultAPI.md#ListPositionAccountsSelf) | **Get** /v1/user/self/position_accounts | List all position accounts for the authenticated user
 [**PayLeverageGetAccruedInterest**](DefaultAPI.md#PayLeverageGetAccruedInterest) | **Post** /v1/leverage/accrued_interest/pay | Pay current accrued leverage interest for a specific user
 [**RejectLedgerWithdrawRequest**](DefaultAPI.md#RejectLedgerWithdrawRequest) | **Post** /v1/ledger/withdraw/requests/{withdrawal_id}/reject | Reject a pending withdrawal request
+[**RepayUSD**](DefaultAPI.md#RepayUSD) | **Post** /v1/positions/repay_usd | Repay borrowed USD, then accrue and pay leverage interest
 [**RevokeAPIKeyForUser**](DefaultAPI.md#RevokeAPIKeyForUser) | **Put** /v1/user/apikey/{key_id}/revoke | Revoke apikey for a user
 [**RevokeAPIKeyForUserID**](DefaultAPI.md#RevokeAPIKeyForUserID) | **Put** /v1/user/{user_id}/apikey/{key_id}/revoke | Revoke apikey for a user: admin or integrator only
 [**SettleLeverageAccruedInterest**](DefaultAPI.md#SettleLeverageAccruedInterest) | **Post** /v1/leverage/accrued_interest/settle | Settle current accrued leverage interest for a specific user
@@ -1437,6 +1439,8 @@ No authorization required
 
 Get yield chart data for an asset
 
+
+
 ### Example
 
 ```go
@@ -1648,6 +1652,72 @@ No authorization required
 [[Back to README]](../README.md)
 
 
+## GetCopyTraders
+
+> GetCopyTradersResponse GetCopyTraders(ctx).Page(page).Limit(limit).Execute()
+
+Get list of user IDs with copy trading enabled
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+	page := int32(56) // int32 |  (optional) (default to 1)
+	limit := int32(56) // int32 |  (optional) (default to 100)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.GetCopyTraders(context.Background()).Page(page).Limit(limit).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.GetCopyTraders``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetCopyTraders`: GetCopyTradersResponse
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.GetCopyTraders`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetCopyTradersRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **page** | **int32** |  | [default to 1]
+ **limit** | **int32** |  | [default to 100]
+
+### Return type
+
+[**GetCopyTradersResponse**](GetCopyTradersResponse.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetCouponPaymentsByAssetId
 
 > ListCouponPaymentsResponseEnvelope GetCouponPaymentsByAssetId(ctx, assetId).Execute()
@@ -1737,7 +1807,7 @@ import (
 )
 
 func main() {
-	quantity := "quantity_example" // string | Human-decimal USDC quantity to deposit, e.g. '100.50'. Must be positive, with at most 6 decimal places.
+	quantity := "quantity_example" // float64 | Human-decimal USDC quantity to deposit, e.g. '100.50'. Must be positive, with at most 6 decimal places.
 	ownerAddress := "ownerAddress_example" // string | The user's wallet address as a 0x-prefixed 20-byte hex string. Used as the permit owner.
 	nonce := "nonce_example" // string | The owner's current USDC permit nonce (read client-side), as a non-negative decimal string. It belongs to the single supported chain.
 	clientReferenceId := "clientReferenceId_example" // string | Optional client-supplied reference as a hex string (0x prefix optional), at most 32 bytes. Left-aligned into the deposit call's bytes32 argument. (optional)
@@ -1765,7 +1835,7 @@ Other parameters are passed through a pointer to a apiGetDepositInstructionsRequ
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **quantity** | **string** | Human-decimal USDC quantity to deposit, e.g. &#39;100.50&#39;. Must be positive, with at most 6 decimal places. | 
+ **quantity** | **float64** | Human-decimal USDC quantity to deposit, e.g. &#39;100.50&#39;. Must be positive, with at most 6 decimal places. | 
  **ownerAddress** | **string** | The user&#39;s wallet address as a 0x-prefixed 20-byte hex string. Used as the permit owner. | 
  **nonce** | **string** | The owner&#39;s current USDC permit nonce (read client-side), as a non-negative decimal string. It belongs to the single supported chain. | 
  **clientReferenceId** | **string** | Optional client-supplied reference as a hex string (0x prefix optional), at most 32 bytes. Left-aligned into the deposit call&#39;s bytes32 argument. | 
@@ -2553,6 +2623,8 @@ Name | Type | Description  | Notes
 > OrderResponseEnvelope GetOrderById(ctx, orderId).Execute()
 
 Get order by ID
+
+
 
 ### Example
 
@@ -5930,6 +6002,70 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**WithdrawalInitiationResponseEnvelope**](WithdrawalInitiationResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## RepayUSD
+
+> RepayUSDResponseEnvelope RepayUSD(ctx).RepayUSDRequest(repayUSDRequest).Execute()
+
+Repay borrowed USD, then accrue and pay leverage interest
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+	repayUSDRequest := *openapiclient.NewRepayUSDRequest("PositionId_example") // RepayUSDRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.RepayUSD(context.Background()).RepayUSDRequest(repayUSDRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.RepayUSD``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `RepayUSD`: RepayUSDResponseEnvelope
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.RepayUSD`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiRepayUSDRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **repayUSDRequest** | [**RepayUSDRequest**](RepayUSDRequest.md) |  | 
+
+### Return type
+
+[**RepayUSDResponseEnvelope**](RepayUSDResponseEnvelope.md)
 
 ### Authorization
 

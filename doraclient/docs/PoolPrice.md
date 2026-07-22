@@ -6,13 +6,13 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **PoolId** | **string** |  | 
 **Price** | **string** |  | 
-**Timestamp** | **time.Time** |  | 
+**Time** | **time.Time** |  | 
 
 ## Methods
 
 ### NewPoolPrice
 
-`func NewPoolPrice(poolId string, price string, timestamp time.Time, ) *PoolPrice`
+`func NewPoolPrice(poolId string, price string, time time.Time, ) *PoolPrice`
 
 NewPoolPrice instantiates a new PoolPrice object
 This constructor will assign default values to properties that have it defined,
@@ -67,24 +67,24 @@ and a boolean to check if the value has been set.
 SetPrice sets Price field to given value.
 
 
-### GetTimestamp
+### GetTime
 
-`func (o *PoolPrice) GetTimestamp() time.Time`
+`func (o *PoolPrice) GetTime() time.Time`
 
-GetTimestamp returns the Timestamp field if non-nil, zero value otherwise.
+GetTime returns the Time field if non-nil, zero value otherwise.
 
-### GetTimestampOk
+### GetTimeOk
 
-`func (o *PoolPrice) GetTimestampOk() (*time.Time, bool)`
+`func (o *PoolPrice) GetTimeOk() (*time.Time, bool)`
 
-GetTimestampOk returns a tuple with the Timestamp field if it's non-nil, zero value otherwise
+GetTimeOk returns a tuple with the Time field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetTimestamp
+### SetTime
 
-`func (o *PoolPrice) SetTimestamp(v time.Time)`
+`func (o *PoolPrice) SetTime(v time.Time)`
 
-SetTimestamp sets Timestamp field to given value.
+SetTime sets Time field to given value.
 
 
 

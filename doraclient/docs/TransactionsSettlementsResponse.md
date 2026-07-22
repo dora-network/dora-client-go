@@ -5,8 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Settlements** | Pointer to [**[]TransactionsSettlement**](TransactionsSettlement.md) |  | [optional] 
-**UserTotals** | Pointer to **map[string]string** |  | [optional] 
-**TenantTotals** | Pointer to **map[string]string** |  | [optional] 
+**UserTotals** | Pointer to **map[string]float64** |  | [optional] 
+**TenantTotals** | Pointer to **map[string]float64** |  | [optional] 
 
 ## Methods
 
@@ -54,20 +54,20 @@ HasSettlements returns a boolean if a field has been set.
 
 ### GetUserTotals
 
-`func (o *TransactionsSettlementsResponse) GetUserTotals() map[string]string`
+`func (o *TransactionsSettlementsResponse) GetUserTotals() map[string]float64`
 
 GetUserTotals returns the UserTotals field if non-nil, zero value otherwise.
 
 ### GetUserTotalsOk
 
-`func (o *TransactionsSettlementsResponse) GetUserTotalsOk() (*map[string]string, bool)`
+`func (o *TransactionsSettlementsResponse) GetUserTotalsOk() (*map[string]float64, bool)`
 
 GetUserTotalsOk returns a tuple with the UserTotals field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetUserTotals
 
-`func (o *TransactionsSettlementsResponse) SetUserTotals(v map[string]string)`
+`func (o *TransactionsSettlementsResponse) SetUserTotals(v map[string]float64)`
 
 SetUserTotals sets UserTotals field to given value.
 
@@ -79,20 +79,20 @@ HasUserTotals returns a boolean if a field has been set.
 
 ### GetTenantTotals
 
-`func (o *TransactionsSettlementsResponse) GetTenantTotals() map[string]string`
+`func (o *TransactionsSettlementsResponse) GetTenantTotals() map[string]float64`
 
 GetTenantTotals returns the TenantTotals field if non-nil, zero value otherwise.
 
 ### GetTenantTotalsOk
 
-`func (o *TransactionsSettlementsResponse) GetTenantTotalsOk() (*map[string]string, bool)`
+`func (o *TransactionsSettlementsResponse) GetTenantTotalsOk() (*map[string]float64, bool)`
 
 GetTenantTotalsOk returns a tuple with the TenantTotals field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTenantTotals
 
-`func (o *TransactionsSettlementsResponse) SetTenantTotals(v map[string]string)`
+`func (o *TransactionsSettlementsResponse) SetTenantTotals(v map[string]float64)`
 
 SetTenantTotals sets TenantTotals field to given value.
 

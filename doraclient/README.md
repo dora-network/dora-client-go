@@ -94,6 +94,7 @@ Class | Method | HTTP request | Description
 *DefaultAPI* | [**GetAssetYieldData**](docs/DefaultAPI.md#getassetyielddata) | **Get** /v1/charts/{asset_id}/yield | Get yield chart data for an asset
 *DefaultAPI* | [**GetAssetsStream**](docs/DefaultAPI.md#getassetsstream) | **Get** /v1/assets/stream | Get all inserts or updates for assets
 *DefaultAPI* | [**GetCandleData**](docs/DefaultAPI.md#getcandledata) | **Get** /v1/charts/{order_book_id}/candle | Get candlestick data for an orderbook
+*DefaultAPI* | [**GetCopyTraders**](docs/DefaultAPI.md#getcopytraders) | **Get** /v1/user/copy_traders | Get list of user IDs with copy trading enabled
 *DefaultAPI* | [**GetCouponPaymentsByAssetId**](docs/DefaultAPI.md#getcouponpaymentsbyassetid) | **Get** /v1/assets/{asset_id}/coupon_payments | Get coupon payments for a bond asset
 *DefaultAPI* | [**GetDepositInstructions**](docs/DefaultAPI.md#getdepositinstructions) | **Get** /v1/web3/deposit-instructions | Get per-chain instructions for depositing USDC into the Dora vault
 *DefaultAPI* | [**GetL1Depth**](docs/DefaultAPI.md#getl1depth) | **Get** /v1/orderbooks/{order_book_id}/L1 | Get the top price levels for a specific orderbook (L1 market depth)
@@ -157,6 +158,7 @@ Class | Method | HTTP request | Description
 *DefaultAPI* | [**ListPositionAccountsSelf**](docs/DefaultAPI.md#listpositionaccountsself) | **Get** /v1/user/self/position_accounts | List all position accounts for the authenticated user
 *DefaultAPI* | [**PayLeverageGetAccruedInterest**](docs/DefaultAPI.md#payleveragegetaccruedinterest) | **Post** /v1/leverage/accrued_interest/pay | Pay current accrued leverage interest for a specific user
 *DefaultAPI* | [**RejectLedgerWithdrawRequest**](docs/DefaultAPI.md#rejectledgerwithdrawrequest) | **Post** /v1/ledger/withdraw/requests/{withdrawal_id}/reject | Reject a pending withdrawal request
+*DefaultAPI* | [**RepayUSD**](docs/DefaultAPI.md#repayusd) | **Post** /v1/positions/repay_usd | Repay borrowed USD, then accrue and pay leverage interest
 *DefaultAPI* | [**RevokeAPIKeyForUser**](docs/DefaultAPI.md#revokeapikeyforuser) | **Put** /v1/user/apikey/{key_id}/revoke | Revoke apikey for a user
 *DefaultAPI* | [**RevokeAPIKeyForUserID**](docs/DefaultAPI.md#revokeapikeyforuserid) | **Put** /v1/user/{user_id}/apikey/{key_id}/revoke | Revoke apikey for a user: admin or integrator only
 *DefaultAPI* | [**SettleLeverageAccruedInterest**](docs/DefaultAPI.md#settleleverageaccruedinterest) | **Post** /v1/leverage/accrued_interest/settle | Settle current accrued leverage interest for a specific user
@@ -239,6 +241,7 @@ Class | Method | HTTP request | Description
  - [FundUserResponseEnvelope](docs/FundUserResponseEnvelope.md)
  - [GetAssetByIDResponseEnvelope](docs/GetAssetByIDResponseEnvelope.md)
  - [GetAssetYTMByIDResponseEnvelope](docs/GetAssetYTMByIDResponseEnvelope.md)
+ - [GetCopyTradersResponse](docs/GetCopyTradersResponse.md)
  - [GetPnLRankingResponse](docs/GetPnLRankingResponse.md)
  - [GetRealizedPnlSettlementsResponseEnvelope](docs/GetRealizedPnlSettlementsResponseEnvelope.md)
  - [GetTopOfBookResponseEnvelope](docs/GetTopOfBookResponseEnvelope.md)
@@ -326,6 +329,9 @@ Class | Method | HTTP request | Description
  - [PriceLevel](docs/PriceLevel.md)
  - [RealizedPnlSettlement](docs/RealizedPnlSettlement.md)
  - [RealizedPnlSettlements](docs/RealizedPnlSettlements.md)
+ - [RepayUSDRequest](docs/RepayUSDRequest.md)
+ - [RepayUSDResponseEnvelope](docs/RepayUSDResponseEnvelope.md)
+ - [RepayUSDResult](docs/RepayUSDResult.md)
  - [ResponseEnvelope](docs/ResponseEnvelope.md)
  - [ResponseEnvelopeOfListAssets](docs/ResponseEnvelopeOfListAssets.md)
  - [RevokeAPIKeyData](docs/RevokeAPIKeyData.md)

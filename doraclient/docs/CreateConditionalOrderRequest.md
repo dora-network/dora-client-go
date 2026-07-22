@@ -4,18 +4,18 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Price** | **string** |  | 
+**Price** | **float64** |  | 
 **OrderBookId** | **string** | Required: the order book to submit the order to | 
 **PositionId** | **string** | Required: the position to submit the order to | 
 **AssetId** | **string** | Required: the asset to submit the order to | 
-**StopLossPrice** | Pointer to **string** | Stop loss price | [optional] 
-**TakeProfitPrice** | Pointer to **string** | Take profit price | [optional] 
+**StopLossPrice** | Pointer to **float64** | Stop loss price | [optional] 
+**TakeProfitPrice** | Pointer to **float64** | Take profit price | [optional] 
 
 ## Methods
 
 ### NewCreateConditionalOrderRequest
 
-`func NewCreateConditionalOrderRequest(price string, orderBookId string, positionId string, assetId string, ) *CreateConditionalOrderRequest`
+`func NewCreateConditionalOrderRequest(price float64, orderBookId string, positionId string, assetId string, ) *CreateConditionalOrderRequest`
 
 NewCreateConditionalOrderRequest instantiates a new CreateConditionalOrderRequest object
 This constructor will assign default values to properties that have it defined,
@@ -32,20 +32,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetPrice
 
-`func (o *CreateConditionalOrderRequest) GetPrice() string`
+`func (o *CreateConditionalOrderRequest) GetPrice() float64`
 
 GetPrice returns the Price field if non-nil, zero value otherwise.
 
 ### GetPriceOk
 
-`func (o *CreateConditionalOrderRequest) GetPriceOk() (*string, bool)`
+`func (o *CreateConditionalOrderRequest) GetPriceOk() (*float64, bool)`
 
 GetPriceOk returns a tuple with the Price field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPrice
 
-`func (o *CreateConditionalOrderRequest) SetPrice(v string)`
+`func (o *CreateConditionalOrderRequest) SetPrice(v float64)`
 
 SetPrice sets Price field to given value.
 
@@ -112,20 +112,20 @@ SetAssetId sets AssetId field to given value.
 
 ### GetStopLossPrice
 
-`func (o *CreateConditionalOrderRequest) GetStopLossPrice() string`
+`func (o *CreateConditionalOrderRequest) GetStopLossPrice() float64`
 
 GetStopLossPrice returns the StopLossPrice field if non-nil, zero value otherwise.
 
 ### GetStopLossPriceOk
 
-`func (o *CreateConditionalOrderRequest) GetStopLossPriceOk() (*string, bool)`
+`func (o *CreateConditionalOrderRequest) GetStopLossPriceOk() (*float64, bool)`
 
 GetStopLossPriceOk returns a tuple with the StopLossPrice field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetStopLossPrice
 
-`func (o *CreateConditionalOrderRequest) SetStopLossPrice(v string)`
+`func (o *CreateConditionalOrderRequest) SetStopLossPrice(v float64)`
 
 SetStopLossPrice sets StopLossPrice field to given value.
 
@@ -137,20 +137,20 @@ HasStopLossPrice returns a boolean if a field has been set.
 
 ### GetTakeProfitPrice
 
-`func (o *CreateConditionalOrderRequest) GetTakeProfitPrice() string`
+`func (o *CreateConditionalOrderRequest) GetTakeProfitPrice() float64`
 
 GetTakeProfitPrice returns the TakeProfitPrice field if non-nil, zero value otherwise.
 
 ### GetTakeProfitPriceOk
 
-`func (o *CreateConditionalOrderRequest) GetTakeProfitPriceOk() (*string, bool)`
+`func (o *CreateConditionalOrderRequest) GetTakeProfitPriceOk() (*float64, bool)`
 
 GetTakeProfitPriceOk returns a tuple with the TakeProfitPrice field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTakeProfitPrice
 
-`func (o *CreateConditionalOrderRequest) SetTakeProfitPrice(v string)`
+`func (o *CreateConditionalOrderRequest) SetTakeProfitPrice(v float64)`
 
 SetTakeProfitPrice sets TakeProfitPrice field to given value.
 

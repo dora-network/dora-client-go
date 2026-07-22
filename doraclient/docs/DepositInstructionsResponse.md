@@ -6,14 +6,14 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **UserId** | **string** | The authenticated user the instructions are issued for. | 
 **OwnerAddress** | **string** | The wallet address the instructions were issued for, echoed from the request. | 
-**Quantity** | **string** | Human-decimal USDC deposit quantity, echoed from the request. | 
+**Quantity** | **float64** | Human-decimal USDC deposit quantity, echoed from the request. | 
 **Chains** | [**[]DepositInstructionForChain**](DepositInstructionForChain.md) |  | 
 
 ## Methods
 
 ### NewDepositInstructionsResponse
 
-`func NewDepositInstructionsResponse(userId string, ownerAddress string, quantity string, chains []DepositInstructionForChain, ) *DepositInstructionsResponse`
+`func NewDepositInstructionsResponse(userId string, ownerAddress string, quantity float64, chains []DepositInstructionForChain, ) *DepositInstructionsResponse`
 
 NewDepositInstructionsResponse instantiates a new DepositInstructionsResponse object
 This constructor will assign default values to properties that have it defined,
@@ -70,20 +70,20 @@ SetOwnerAddress sets OwnerAddress field to given value.
 
 ### GetQuantity
 
-`func (o *DepositInstructionsResponse) GetQuantity() string`
+`func (o *DepositInstructionsResponse) GetQuantity() float64`
 
 GetQuantity returns the Quantity field if non-nil, zero value otherwise.
 
 ### GetQuantityOk
 
-`func (o *DepositInstructionsResponse) GetQuantityOk() (*string, bool)`
+`func (o *DepositInstructionsResponse) GetQuantityOk() (*float64, bool)`
 
 GetQuantityOk returns a tuple with the Quantity field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetQuantity
 
-`func (o *DepositInstructionsResponse) SetQuantity(v string)`
+`func (o *DepositInstructionsResponse) SetQuantity(v float64)`
 
 SetQuantity sets Quantity field to given value.
 

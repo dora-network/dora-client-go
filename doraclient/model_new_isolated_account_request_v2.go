@@ -23,7 +23,7 @@ var _ MappedNullable = &NewIsolatedAccountRequestV2{}
 type NewIsolatedAccountRequestV2 struct {
 	GlobalAccountId string `json:"global_account_id"`
 	AssetId string `json:"asset_id"`
-	Quantity string `json:"quantity"`
+	Quantity float64 `json:"quantity"`
 	AccountName *string `json:"account_name,omitempty"`
 }
 
@@ -33,7 +33,7 @@ type _NewIsolatedAccountRequestV2 NewIsolatedAccountRequestV2
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewNewIsolatedAccountRequestV2(globalAccountId string, assetId string, quantity string) *NewIsolatedAccountRequestV2 {
+func NewNewIsolatedAccountRequestV2(globalAccountId string, assetId string, quantity float64) *NewIsolatedAccountRequestV2 {
 	this := NewIsolatedAccountRequestV2{}
 	this.GlobalAccountId = globalAccountId
 	this.AssetId = assetId
@@ -98,9 +98,9 @@ func (o *NewIsolatedAccountRequestV2) SetAssetId(v string) {
 }
 
 // GetQuantity returns the Quantity field value
-func (o *NewIsolatedAccountRequestV2) GetQuantity() string {
+func (o *NewIsolatedAccountRequestV2) GetQuantity() float64 {
 	if o == nil {
-		var ret string
+		var ret float64
 		return ret
 	}
 
@@ -109,7 +109,7 @@ func (o *NewIsolatedAccountRequestV2) GetQuantity() string {
 
 // GetQuantityOk returns a tuple with the Quantity field value
 // and a boolean to check if the value has been set.
-func (o *NewIsolatedAccountRequestV2) GetQuantityOk() (*string, bool) {
+func (o *NewIsolatedAccountRequestV2) GetQuantityOk() (*float64, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -117,7 +117,7 @@ func (o *NewIsolatedAccountRequestV2) GetQuantityOk() (*string, bool) {
 }
 
 // SetQuantity sets field value
-func (o *NewIsolatedAccountRequestV2) SetQuantity(v string) {
+func (o *NewIsolatedAccountRequestV2) SetQuantity(v float64) {
 	o.Quantity = v
 }
 

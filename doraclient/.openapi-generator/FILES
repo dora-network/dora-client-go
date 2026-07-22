@@ -69,6 +69,7 @@ docs/FundUserRequest.md
 docs/FundUserResponseEnvelope.md
 docs/GetAssetByIDResponseEnvelope.md
 docs/GetAssetYTMByIDResponseEnvelope.md
+docs/GetCopyTradersResponse.md
 docs/GetPnLRankingResponse.md
 docs/GetRealizedPnlSettlementsResponseEnvelope.md
 docs/GetTopOfBookResponseEnvelope.md
@@ -156,6 +157,9 @@ docs/PositionType.md
 docs/PriceLevel.md
 docs/RealizedPnlSettlement.md
 docs/RealizedPnlSettlements.md
+docs/RepayUSDRequest.md
+docs/RepayUSDResponseEnvelope.md
+docs/RepayUSDResult.md
 docs/ResponseEnvelope.md
 docs/ResponseEnvelopeOfListAssets.md
 docs/RevokeAPIKeyData.md
@@ -298,6 +302,7 @@ model_fund_user_request.go
 model_fund_user_response_envelope.go
 model_get_asset_by_id_response_envelope.go
 model_get_asset_ytmby_id_response_envelope.go
+model_get_copy_traders_response.go
 model_get_pn_l_ranking_response.go
 model_get_realized_pnl_settlements_response_envelope.go
 model_get_top_of_book_response_envelope.go
@@ -385,6 +390,9 @@ model_position_type.go
 model_price_level.go
 model_realized_pnl_settlement.go
 model_realized_pnl_settlements.go
+model_repay_usd_request.go
+model_repay_usd_response_envelope.go
+model_repay_usd_result.go
 model_response_envelope.go
 model_response_envelope_of_list_assets.go
 model_revoke_api_key_data.go

@@ -620,6 +620,49 @@ paths:
                 $ref: "#/components/schemas/ResponseEnvelope"
           description: Internal server error
       summary: Get top traders by PnL
+  /v1/user/copy_traders:
+    get:
+      operationId: getCopyTraders
+      parameters:
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          minimum: 1
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 100
+          maximum: 100
+          minimum: 1
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetCopyTradersResponse"
+          description: List of user IDs who have allow_copy_trading enabled
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. invalid pagination parameters"
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Get list of user IDs with copy trading enabled
   /v1/orderbooks:
     get:
       operationId: listOrderBooks
@@ -1382,6 +1425,9 @@ paths:
           description: Internal server error
       summary: Cancel an order by ID
     get:
+      description: Get details of a specific order. Traders can only view their own
+        orders. Admins can view any order. Integrators can view orders for users within
+        their tenant.
       operationId: getOrderById
       parameters:
       - explode: false
@@ -1524,6 +1570,9 @@ paths:
       summary: Get candlestick data for an orderbook
   /v1/charts/{asset_id}/yield:
     get:
+      description: "Returns complete yield buckets starting at `start`; `end` is exclusive\
+        \ and a trailing partial bucket is omitted. Requests are limited to 10,000\
+        \ complete buckets."
       operationId: getAssetYieldData
       parameters:
       - explode: false
@@ -1569,7 +1618,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
-          description: "Bad request, e.g. invalid parameters"
+          description: "Bad request, e.g. invalid parameters or more than 10,000 complete\
+            \ buckets"
         "404":
           content:
             application/json:
@@ -1582,6 +1632,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
           description: Internal server error
+        "504":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Yield query exceeded its execution deadline
       security: []
       summary: Get yield chart data for an asset
   /v1/ledger/module:
@@ -1735,6 +1791,54 @@ paths:
           description: Internal server error
       summary: Transfer available balance between a user's accounts (e.g. global to
         isolated position)
+  /v1/positions/repay_usd:
+    post:
+      operationId: repayUSD
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RepayUSDRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RepayUSDResponse"
+          description: USD borrow repaid
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. missing position_id"
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Position or USD asset not found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Position is not eligible for repayment or has no repayable
+            USD balance
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: "Repay borrowed USD, then accrue and pay leverage interest"
   /v1/positions/close:
     post:
       operationId: closeIsolatedPosition
@@ -4516,6 +4620,7 @@ paths:
         name: quantity
         required: true
         schema:
+          format: decimal
           type: string
         style: form
       - description: The user's wallet address as a 0x-prefixed 20-byte hex string.
@@ -4652,6 +4757,8 @@ components:
       - PENDING
       - FINALIZED
       - ORPHANED
+      - USER_NOT_EXIST
+      - DUST
       type: string
     DepositInstructionForChain:
       description: Everything the caller needs to deposit USDC into the Dora vault
@@ -4998,6 +5105,7 @@ components:
           type: string
         quantity:
           description: "Human-decimal USDC deposit quantity, echoed from the request."
+          format: decimal
           type: string
         chains:
           items:
@@ -5144,6 +5252,7 @@ components:
           type: string
         quantity:
           description: Human-decimal USDC value (base units divided by 10^6).
+          format: decimal
           type: string
         client_reference_id:
           description: "Optional client-supplied reference, as a 0x-prefixed hex string."
@@ -6449,6 +6558,7 @@ components:
         first_name:
           type: string
         total_pnl:
+          format: decimal
           type: string
         total_trades:
           type: integer
@@ -6457,6 +6567,7 @@ components:
         losing_trades:
           type: integer
         win_rate:
+          format: decimal
           type: string
       required:
       - first_name
@@ -6697,6 +6808,22 @@ components:
         metadata: ""
     ListOrderBooksResponse:
       $ref: "#/components/schemas/ListOrderbookResponseEnvelope"
+    GetCopyTradersResponse:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            items:
+              format: uuid
+              type: string
+            type: array
+            default: null
+      example:
+        data:
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        error: error
+        metadata: ""
     OrderKind:
       enum:
       - LIMIT
@@ -6793,10 +6920,12 @@ components:
         locked_quantity:
           description: Balance locked to ensure limit buy orders have sufficient balance
             to be fulfilled
+          format: decimal
           type: string
         impending_borrows_quantity:
           description: Borrows locked from the liquidity pool to ensure limit short
             sell orders have sufficient balance to be fulfilled
+          format: decimal
           type: string
         last_update_at:
           format: date-time
@@ -7240,9 +7369,11 @@ components:
           type: string
         deposit_limit:
           description: Maximum allowed deposit for the tenant.
+          format: decimal
           type: string
         trade_limit:
           description: Maximum allowed trade amount for the tenant.
+          format: decimal
           type: string
         updated_at:
           description: Last update timestamp for the restrictions.
@@ -7263,6 +7394,7 @@ components:
         take_profit_price: take_profit_price
       properties:
         price:
+          format: decimal
           type: string
         order_book_id:
           description: "Required: the order book to submit the order to"
@@ -7278,9 +7410,11 @@ components:
           type: string
         stop_loss_price:
           description: Stop loss price
+          format: decimal
           type: string
         take_profit_price:
           description: Take profit price
+          format: decimal
           type: string
       required:
       - asset_id
@@ -8604,18 +8738,25 @@ components:
           format: uuid
           type: string
         utilization:
+          format: decimal
           type: string
         avg_utilization:
+          format: decimal
           type: string
         avg_borrowing_yield_rate:
+          format: decimal
           type: string
         avg_lending_yield_rate:
+          format: decimal
           type: string
         borrowing_yield_rate:
+          format: decimal
           type: string
         lending_yield_rate:
+          format: decimal
           type: string
         yield_to_maturity:
+          format: decimal
           type: string
         start_time:
           format: date-time
@@ -8677,22 +8818,31 @@ components:
           format: date-time
           type: string
         utilization:
+          format: decimal
           type: string
         maximum_utilization:
+          format: decimal
           type: string
         minimum_rate:
+          format: decimal
           type: string
         kink_rate:
+          format: decimal
           type: string
         maximum_rate:
+          format: decimal
           type: string
         kink_utilization:
+          format: decimal
           type: string
         borrowing_yield_rate:
+          format: decimal
           type: string
         lending_yield_rate:
+          format: decimal
           type: string
         yield_to_maturity:
+          format: decimal
           type: string
       required:
       - asset_id
@@ -9142,6 +9292,7 @@ components:
         tx_kind:
           type: string
         quantity_usd:
+          format: decimal
           type: string
         created_at:
           format: date-time
@@ -9228,9 +9379,11 @@ components:
           default: null
         user_totals:
           additionalProperties:
+            format: decimal
             type: string
         tenant_totals:
           additionalProperties:
+            format: decimal
             type: string
     TransactionsSettlementRequest:
       example:
@@ -9334,26 +9487,36 @@ components:
           format: date-time
           type: string
         open:
+          format: decimal
           type: string
         high:
+          format: decimal
           type: string
         low:
+          format: decimal
           type: string
         close:
+          format: decimal
           type: string
         ytm:
           deprecated: true
           description: "DEPRECATED: Use close_ytm instead."
+          format: decimal
           type: string
         open_ytm:
+          format: decimal
           type: string
         close_ytm:
+          format: decimal
           type: string
         high_ytm:
+          format: decimal
           type: string
         low_ytm:
+          format: decimal
           type: string
         volume:
+          format: decimal
           type: string
       required:
       - close
@@ -9590,20 +9753,20 @@ components:
       example:
         pool_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         price: price
-        timestamp: 2000-01-23T04:56:07.000+00:00
+        time: 2000-01-23T04:56:07.000+00:00
       properties:
         pool_id:
           format: uuid
           type: string
         price:
           type: string
-        timestamp:
+        time:
           format: date-time
           type: string
       required:
       - pool_id
       - price
-      - timestamp
+      - time
     PoolPriceResponseEnvelope:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
@@ -9614,7 +9777,7 @@ components:
         data:
           pool_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           price: price
-          timestamp: 2000-01-23T04:56:07.000+00:00
+          time: 2000-01-23T04:56:07.000+00:00
         error: error
         metadata: ""
     GetPoolPriceResponse:
@@ -10215,6 +10378,12 @@ components:
               type: string
             type: array
             default: null
+      example:
+        data:
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        error: error
+        metadata: ""
     LiquidationTargetsResponse:
       $ref: "#/components/schemas/LiquidationTargetsResponseEnvelope"
     LeverageRequestError:
@@ -10324,6 +10493,55 @@ components:
         metadata: ""
     TransferBalancesResponse:
       $ref: "#/components/schemas/TransferBalancesResponseEnvelope"
+    RepayUSDRequest:
+      example:
+        position_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        position_id:
+          format: uuid
+          type: string
+      required:
+      - position_id
+    RepayUSDResult:
+      example:
+        position_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        repaid: repaid
+        transaction_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        position_id:
+          format: uuid
+          type: string
+        asset_id:
+          format: uuid
+          type: string
+        repaid:
+          format: decimal
+          type: string
+        transaction_id:
+          format: uuid
+          type: string
+      required:
+      - asset_id
+      - position_id
+      - repaid
+      - transaction_id
+    RepayUSDResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            $ref: "#/components/schemas/RepayUSDResult"
+      example:
+        data:
+          position_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          repaid: repaid
+          transaction_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        error: error
+        metadata: ""
+    RepayUSDResponse:
+      $ref: "#/components/schemas/RepayUSDResponseEnvelope"
     PositionAccount:
       example:
         position_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -10922,6 +11140,7 @@ components:
           type: string
         realized_usd:
           description: The amount of realized PnL in USD
+          format: decimal
           type: string
         settled_at:
           description: The timestamp when the realized PnL settlement was settled
@@ -10976,21 +11195,25 @@ components:
           default: null
         user_totals:
           additionalProperties:
+            format: decimal
             type: string
           description: A map of user IDs to their total realized PnL in USD across
             all settlements included in the response
         tenant_totals:
           additionalProperties:
+            format: decimal
             type: string
           description: A map of tenant IDs to their total realized PnL in USD across
             all settlements included in the response
         user_totals_unsettled:
           additionalProperties:
+            format: decimal
             type: string
           description: A map of user IDs to their total realized PnL in USD across
             unsettled settlements (where settled_at is null) included in the response
         tenant_totals_unsettled:
           additionalProperties:
+            format: decimal
             type: string
           description: A map of tenant IDs to their total realized PnL in USD across
             unsettled settlements (where settled_at is null) included in the response
@@ -11257,6 +11480,7 @@ components:
           format: uuid
           type: string
         quantity:
+          format: decimal
           type: string
         account_name:
           type: string
@@ -11289,6 +11513,7 @@ components:
           format: uuid
           type: string
         quantity:
+          format: decimal
           type: string
       required:
       - asset_id

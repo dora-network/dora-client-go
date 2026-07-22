@@ -23,6 +23,8 @@ const (
 	WEB3EVENTSTATUS_PENDING Web3EventStatus = "PENDING"
 	WEB3EVENTSTATUS_FINALIZED Web3EventStatus = "FINALIZED"
 	WEB3EVENTSTATUS_ORPHANED Web3EventStatus = "ORPHANED"
+	WEB3EVENTSTATUS_USER_NOT_EXIST Web3EventStatus = "USER_NOT_EXIST"
+	WEB3EVENTSTATUS_DUST Web3EventStatus = "DUST"
 )
 
 // All allowed values of Web3EventStatus enum
@@ -30,6 +32,8 @@ var AllowedWeb3EventStatusEnumValues = []Web3EventStatus{
 	"PENDING",
 	"FINALIZED",
 	"ORPHANED",
+	"USER_NOT_EXIST",
+	"DUST",
 }
 
 func (v *Web3EventStatus) UnmarshalJSON(src []byte) error {

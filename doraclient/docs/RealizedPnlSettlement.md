@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **TenantId** | **string** | The ID of the tenant associated with the realized PnL settlement | 
 **PositionId** | **string** | The ID of the position associated with the realized PnL settlement | 
 **OrderId** | **string** | The ID of the position-closing order associated with the realized PnL settlement | 
-**RealizedUsd** | **string** | The amount of realized PnL in USD | 
+**RealizedUsd** | **float64** | The amount of realized PnL in USD | 
 **SettledAt** | Pointer to **time.Time** | The timestamp when the realized PnL settlement was settled | [optional] 
 **CreatedAt** | **time.Time** | The timestamp when the realized PnL settlement was created | 
 
@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 
 ### NewRealizedPnlSettlement
 
-`func NewRealizedPnlSettlement(id string, userId string, tenantId string, positionId string, orderId string, realizedUsd string, createdAt time.Time, ) *RealizedPnlSettlement`
+`func NewRealizedPnlSettlement(id string, userId string, tenantId string, positionId string, orderId string, realizedUsd float64, createdAt time.Time, ) *RealizedPnlSettlement`
 
 NewRealizedPnlSettlement instantiates a new RealizedPnlSettlement object
 This constructor will assign default values to properties that have it defined,
@@ -134,20 +134,20 @@ SetOrderId sets OrderId field to given value.
 
 ### GetRealizedUsd
 
-`func (o *RealizedPnlSettlement) GetRealizedUsd() string`
+`func (o *RealizedPnlSettlement) GetRealizedUsd() float64`
 
 GetRealizedUsd returns the RealizedUsd field if non-nil, zero value otherwise.
 
 ### GetRealizedUsdOk
 
-`func (o *RealizedPnlSettlement) GetRealizedUsdOk() (*string, bool)`
+`func (o *RealizedPnlSettlement) GetRealizedUsdOk() (*float64, bool)`
 
 GetRealizedUsdOk returns a tuple with the RealizedUsd field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetRealizedUsd
 
-`func (o *RealizedPnlSettlement) SetRealizedUsd(v string)`
+`func (o *RealizedPnlSettlement) SetRealizedUsd(v float64)`
 
 SetRealizedUsd sets RealizedUsd field to given value.
 

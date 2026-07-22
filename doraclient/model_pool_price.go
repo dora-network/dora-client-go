@@ -24,7 +24,7 @@ var _ MappedNullable = &PoolPrice{}
 type PoolPrice struct {
 	PoolId string `json:"pool_id"`
 	Price string `json:"price"`
-	Timestamp time.Time `json:"timestamp"`
+	Time time.Time `json:"time"`
 }
 
 type _PoolPrice PoolPrice
@@ -33,11 +33,11 @@ type _PoolPrice PoolPrice
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPoolPrice(poolId string, price string, timestamp time.Time) *PoolPrice {
+func NewPoolPrice(poolId string, price string, time time.Time) *PoolPrice {
 	this := PoolPrice{}
 	this.PoolId = poolId
 	this.Price = price
-	this.Timestamp = timestamp
+	this.Time = time
 	return &this
 }
 
@@ -97,28 +97,28 @@ func (o *PoolPrice) SetPrice(v string) {
 	o.Price = v
 }
 
-// GetTimestamp returns the Timestamp field value
-func (o *PoolPrice) GetTimestamp() time.Time {
+// GetTime returns the Time field value
+func (o *PoolPrice) GetTime() time.Time {
 	if o == nil {
 		var ret time.Time
 		return ret
 	}
 
-	return o.Timestamp
+	return o.Time
 }
 
-// GetTimestampOk returns a tuple with the Timestamp field value
+// GetTimeOk returns a tuple with the Time field value
 // and a boolean to check if the value has been set.
-func (o *PoolPrice) GetTimestampOk() (*time.Time, bool) {
+func (o *PoolPrice) GetTimeOk() (*time.Time, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Timestamp, true
+	return &o.Time, true
 }
 
-// SetTimestamp sets field value
-func (o *PoolPrice) SetTimestamp(v time.Time) {
-	o.Timestamp = v
+// SetTime sets field value
+func (o *PoolPrice) SetTime(v time.Time) {
+	o.Time = v
 }
 
 func (o PoolPrice) MarshalJSON() ([]byte, error) {
@@ -133,7 +133,7 @@ func (o PoolPrice) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["pool_id"] = o.PoolId
 	toSerialize["price"] = o.Price
-	toSerialize["timestamp"] = o.Timestamp
+	toSerialize["time"] = o.Time
 	return toSerialize, nil
 }
 
@@ -144,7 +144,7 @@ func (o *PoolPrice) UnmarshalJSON(data []byte) (err error) {
 	requiredProperties := []string{
 		"pool_id",
 		"price",
-		"timestamp",
+		"time",
 	}
 
 	allProperties := make(map[string]interface{})

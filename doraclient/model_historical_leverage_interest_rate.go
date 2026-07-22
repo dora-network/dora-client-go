@@ -24,15 +24,15 @@ var _ MappedNullable = &HistoricalLeverageInterestRate{}
 type HistoricalLeverageInterestRate struct {
 	AssetId string `json:"asset_id"`
 	UpdatedAt time.Time `json:"updated_at"`
-	Utilization string `json:"utilization"`
-	MaximumUtilization string `json:"maximum_utilization"`
-	MinimumRate string `json:"minimum_rate"`
-	KinkRate string `json:"kink_rate"`
-	MaximumRate string `json:"maximum_rate"`
-	KinkUtilization string `json:"kink_utilization"`
-	BorrowingYieldRate string `json:"borrowing_yield_rate"`
-	LendingYieldRate string `json:"lending_yield_rate"`
-	YieldToMaturity string `json:"yield_to_maturity"`
+	Utilization float64 `json:"utilization"`
+	MaximumUtilization float64 `json:"maximum_utilization"`
+	MinimumRate float64 `json:"minimum_rate"`
+	KinkRate float64 `json:"kink_rate"`
+	MaximumRate float64 `json:"maximum_rate"`
+	KinkUtilization float64 `json:"kink_utilization"`
+	BorrowingYieldRate float64 `json:"borrowing_yield_rate"`
+	LendingYieldRate float64 `json:"lending_yield_rate"`
+	YieldToMaturity float64 `json:"yield_to_maturity"`
 }
 
 type _HistoricalLeverageInterestRate HistoricalLeverageInterestRate
@@ -41,7 +41,7 @@ type _HistoricalLeverageInterestRate HistoricalLeverageInterestRate
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewHistoricalLeverageInterestRate(assetId string, updatedAt time.Time, utilization string, maximumUtilization string, minimumRate string, kinkRate string, maximumRate string, kinkUtilization string, borrowingYieldRate string, lendingYieldRate string, yieldToMaturity string) *HistoricalLeverageInterestRate {
+func NewHistoricalLeverageInterestRate(assetId string, updatedAt time.Time, utilization float64, maximumUtilization float64, minimumRate float64, kinkRate float64, maximumRate float64, kinkUtilization float64, borrowingYieldRate float64, lendingYieldRate float64, yieldToMaturity float64) *HistoricalLeverageInterestRate {
 	this := HistoricalLeverageInterestRate{}
 	this.AssetId = assetId
 	this.UpdatedAt = updatedAt
@@ -114,9 +114,9 @@ func (o *HistoricalLeverageInterestRate) SetUpdatedAt(v time.Time) {
 }
 
 // GetUtilization returns the Utilization field value
-func (o *HistoricalLeverageInterestRate) GetUtilization() string {
+func (o *HistoricalLeverageInterestRate) GetUtilization() float64 {
 	if o == nil {
-		var ret string
+		var ret float64
 		return ret
 	}
 
@@ -125,7 +125,7 @@ func (o *HistoricalLeverageInterestRate) GetUtilization() string {
 
 // GetUtilizationOk returns a tuple with the Utilization field value
 // and a boolean to check if the value has been set.
-func (o *HistoricalLeverageInterestRate) GetUtilizationOk() (*string, bool) {
+func (o *HistoricalLeverageInterestRate) GetUtilizationOk() (*float64, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -133,14 +133,14 @@ func (o *HistoricalLeverageInterestRate) GetUtilizationOk() (*string, bool) {
 }
 
 // SetUtilization sets field value
-func (o *HistoricalLeverageInterestRate) SetUtilization(v string) {
+func (o *HistoricalLeverageInterestRate) SetUtilization(v float64) {
 	o.Utilization = v
 }
 
 // GetMaximumUtilization returns the MaximumUtilization field value
-func (o *HistoricalLeverageInterestRate) GetMaximumUtilization() string {
+func (o *HistoricalLeverageInterestRate) GetMaximumUtilization() float64 {
 	if o == nil {
-		var ret string
+		var ret float64
 		return ret
 	}
 
@@ -149,7 +149,7 @@ func (o *HistoricalLeverageInterestRate) GetMaximumUtilization() string {
 
 // GetMaximumUtilizationOk returns a tuple with the MaximumUtilization field value
 // and a boolean to check if the value has been set.
-func (o *HistoricalLeverageInterestRate) GetMaximumUtilizationOk() (*string, bool) {
+func (o *HistoricalLeverageInterestRate) GetMaximumUtilizationOk() (*float64, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -157,14 +157,14 @@ func (o *HistoricalLeverageInterestRate) GetMaximumUtilizationOk() (*string, boo
 }
 
 // SetMaximumUtilization sets field value
-func (o *HistoricalLeverageInterestRate) SetMaximumUtilization(v string) {
+func (o *HistoricalLeverageInterestRate) SetMaximumUtilization(v float64) {
 	o.MaximumUtilization = v
 }
 
 // GetMinimumRate returns the MinimumRate field value
-func (o *HistoricalLeverageInterestRate) GetMinimumRate() string {
+func (o *HistoricalLeverageInterestRate) GetMinimumRate() float64 {
 	if o == nil {
-		var ret string
+		var ret float64
 		return ret
 	}
 
@@ -173,7 +173,7 @@ func (o *HistoricalLeverageInterestRate) GetMinimumRate() string {
 
 // GetMinimumRateOk returns a tuple with the MinimumRate field value
 // and a boolean to check if the value has been set.
-func (o *HistoricalLeverageInterestRate) GetMinimumRateOk() (*string, bool) {
+func (o *HistoricalLeverageInterestRate) GetMinimumRateOk() (*float64, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -181,14 +181,14 @@ func (o *HistoricalLeverageInterestRate) GetMinimumRateOk() (*string, bool) {
 }
 
 // SetMinimumRate sets field value
-func (o *HistoricalLeverageInterestRate) SetMinimumRate(v string) {
+func (o *HistoricalLeverageInterestRate) SetMinimumRate(v float64) {
 	o.MinimumRate = v
 }
 
 // GetKinkRate returns the KinkRate field value
-func (o *HistoricalLeverageInterestRate) GetKinkRate() string {
+func (o *HistoricalLeverageInterestRate) GetKinkRate() float64 {
 	if o == nil {
-		var ret string
+		var ret float64
 		return ret
 	}
 
@@ -197,7 +197,7 @@ func (o *HistoricalLeverageInterestRate) GetKinkRate() string {
 
 // GetKinkRateOk returns a tuple with the KinkRate field value
 // and a boolean to check if the value has been set.
-func (o *HistoricalLeverageInterestRate) GetKinkRateOk() (*string, bool) {
+func (o *HistoricalLeverageInterestRate) GetKinkRateOk() (*float64, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -205,14 +205,14 @@ func (o *HistoricalLeverageInterestRate) GetKinkRateOk() (*string, bool) {
 }
 
 // SetKinkRate sets field value
-func (o *HistoricalLeverageInterestRate) SetKinkRate(v string) {
+func (o *HistoricalLeverageInterestRate) SetKinkRate(v float64) {
 	o.KinkRate = v
 }
 
 // GetMaximumRate returns the MaximumRate field value
-func (o *HistoricalLeverageInterestRate) GetMaximumRate() string {
+func (o *HistoricalLeverageInterestRate) GetMaximumRate() float64 {
 	if o == nil {
-		var ret string
+		var ret float64
 		return ret
 	}
 
@@ -221,7 +221,7 @@ func (o *HistoricalLeverageInterestRate) GetMaximumRate() string {
 
 // GetMaximumRateOk returns a tuple with the MaximumRate field value
 // and a boolean to check if the value has been set.
-func (o *HistoricalLeverageInterestRate) GetMaximumRateOk() (*string, bool) {
+func (o *HistoricalLeverageInterestRate) GetMaximumRateOk() (*float64, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -229,14 +229,14 @@ func (o *HistoricalLeverageInterestRate) GetMaximumRateOk() (*string, bool) {
 }
 
 // SetMaximumRate sets field value
-func (o *HistoricalLeverageInterestRate) SetMaximumRate(v string) {
+func (o *HistoricalLeverageInterestRate) SetMaximumRate(v float64) {
 	o.MaximumRate = v
 }
 
 // GetKinkUtilization returns the KinkUtilization field value
-func (o *HistoricalLeverageInterestRate) GetKinkUtilization() string {
+func (o *HistoricalLeverageInterestRate) GetKinkUtilization() float64 {
 	if o == nil {
-		var ret string
+		var ret float64
 		return ret
 	}
 
@@ -245,7 +245,7 @@ func (o *HistoricalLeverageInterestRate) GetKinkUtilization() string {
 
 // GetKinkUtilizationOk returns a tuple with the KinkUtilization field value
 // and a boolean to check if the value has been set.
-func (o *HistoricalLeverageInterestRate) GetKinkUtilizationOk() (*string, bool) {
+func (o *HistoricalLeverageInterestRate) GetKinkUtilizationOk() (*float64, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -253,14 +253,14 @@ func (o *HistoricalLeverageInterestRate) GetKinkUtilizationOk() (*string, bool) 
 }
 
 // SetKinkUtilization sets field value
-func (o *HistoricalLeverageInterestRate) SetKinkUtilization(v string) {
+func (o *HistoricalLeverageInterestRate) SetKinkUtilization(v float64) {
 	o.KinkUtilization = v
 }
 
 // GetBorrowingYieldRate returns the BorrowingYieldRate field value
-func (o *HistoricalLeverageInterestRate) GetBorrowingYieldRate() string {
+func (o *HistoricalLeverageInterestRate) GetBorrowingYieldRate() float64 {
 	if o == nil {
-		var ret string
+		var ret float64
 		return ret
 	}
 
@@ -269,7 +269,7 @@ func (o *HistoricalLeverageInterestRate) GetBorrowingYieldRate() string {
 
 // GetBorrowingYieldRateOk returns a tuple with the BorrowingYieldRate field value
 // and a boolean to check if the value has been set.
-func (o *HistoricalLeverageInterestRate) GetBorrowingYieldRateOk() (*string, bool) {
+func (o *HistoricalLeverageInterestRate) GetBorrowingYieldRateOk() (*float64, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -277,14 +277,14 @@ func (o *HistoricalLeverageInterestRate) GetBorrowingYieldRateOk() (*string, boo
 }
 
 // SetBorrowingYieldRate sets field value
-func (o *HistoricalLeverageInterestRate) SetBorrowingYieldRate(v string) {
+func (o *HistoricalLeverageInterestRate) SetBorrowingYieldRate(v float64) {
 	o.BorrowingYieldRate = v
 }
 
 // GetLendingYieldRate returns the LendingYieldRate field value
-func (o *HistoricalLeverageInterestRate) GetLendingYieldRate() string {
+func (o *HistoricalLeverageInterestRate) GetLendingYieldRate() float64 {
 	if o == nil {
-		var ret string
+		var ret float64
 		return ret
 	}
 
@@ -293,7 +293,7 @@ func (o *HistoricalLeverageInterestRate) GetLendingYieldRate() string {
 
 // GetLendingYieldRateOk returns a tuple with the LendingYieldRate field value
 // and a boolean to check if the value has been set.
-func (o *HistoricalLeverageInterestRate) GetLendingYieldRateOk() (*string, bool) {
+func (o *HistoricalLeverageInterestRate) GetLendingYieldRateOk() (*float64, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -301,14 +301,14 @@ func (o *HistoricalLeverageInterestRate) GetLendingYieldRateOk() (*string, bool)
 }
 
 // SetLendingYieldRate sets field value
-func (o *HistoricalLeverageInterestRate) SetLendingYieldRate(v string) {
+func (o *HistoricalLeverageInterestRate) SetLendingYieldRate(v float64) {
 	o.LendingYieldRate = v
 }
 
 // GetYieldToMaturity returns the YieldToMaturity field value
-func (o *HistoricalLeverageInterestRate) GetYieldToMaturity() string {
+func (o *HistoricalLeverageInterestRate) GetYieldToMaturity() float64 {
 	if o == nil {
-		var ret string
+		var ret float64
 		return ret
 	}
 
@@ -317,7 +317,7 @@ func (o *HistoricalLeverageInterestRate) GetYieldToMaturity() string {
 
 // GetYieldToMaturityOk returns a tuple with the YieldToMaturity field value
 // and a boolean to check if the value has been set.
-func (o *HistoricalLeverageInterestRate) GetYieldToMaturityOk() (*string, bool) {
+func (o *HistoricalLeverageInterestRate) GetYieldToMaturityOk() (*float64, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -325,7 +325,7 @@ func (o *HistoricalLeverageInterestRate) GetYieldToMaturityOk() (*string, bool) 
 }
 
 // SetYieldToMaturity sets field value
-func (o *HistoricalLeverageInterestRate) SetYieldToMaturity(v string) {
+func (o *HistoricalLeverageInterestRate) SetYieldToMaturity(v float64) {
 	o.YieldToMaturity = v
 }
 
