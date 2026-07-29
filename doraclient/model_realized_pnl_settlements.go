@@ -22,13 +22,13 @@ type RealizedPnlSettlements struct {
 	// A list of realized PnL settlements matching the query parameters of the request
 	Settlements []RealizedPnlSettlement `json:"settlements,omitempty"`
 	// A map of user IDs to their total realized PnL in USD across all settlements included in the response
-	UserTotals map[string]float64 `json:"user_totals,omitempty"`
+	UserTotals map[string]string `json:"user_totals,omitempty"`
 	// A map of tenant IDs to their total realized PnL in USD across all settlements included in the response
-	TenantTotals map[string]float64 `json:"tenant_totals,omitempty"`
+	TenantTotals map[string]string `json:"tenant_totals,omitempty"`
 	// A map of user IDs to their total realized PnL in USD across unsettled settlements (where settled_at is null) included in the response
-	UserTotalsUnsettled map[string]float64 `json:"user_totals_unsettled,omitempty"`
+	UserTotalsUnsettled map[string]string `json:"user_totals_unsettled,omitempty"`
 	// A map of tenant IDs to their total realized PnL in USD across unsettled settlements (where settled_at is null) included in the response
-	TenantTotalsUnsettled map[string]float64 `json:"tenant_totals_unsettled,omitempty"`
+	TenantTotalsUnsettled map[string]string `json:"tenant_totals_unsettled,omitempty"`
 }
 
 // NewRealizedPnlSettlements instantiates a new RealizedPnlSettlements object
@@ -81,9 +81,9 @@ func (o *RealizedPnlSettlements) SetSettlements(v []RealizedPnlSettlement) {
 }
 
 // GetUserTotals returns the UserTotals field value if set, zero value otherwise.
-func (o *RealizedPnlSettlements) GetUserTotals() map[string]float64 {
+func (o *RealizedPnlSettlements) GetUserTotals() map[string]string {
 	if o == nil || IsNil(o.UserTotals) {
-		var ret map[string]float64
+		var ret map[string]string
 		return ret
 	}
 	return o.UserTotals
@@ -91,9 +91,9 @@ func (o *RealizedPnlSettlements) GetUserTotals() map[string]float64 {
 
 // GetUserTotalsOk returns a tuple with the UserTotals field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RealizedPnlSettlements) GetUserTotalsOk() (map[string]float64, bool) {
+func (o *RealizedPnlSettlements) GetUserTotalsOk() (map[string]string, bool) {
 	if o == nil || IsNil(o.UserTotals) {
-		return map[string]float64{}, false
+		return map[string]string{}, false
 	}
 	return o.UserTotals, true
 }
@@ -107,15 +107,15 @@ func (o *RealizedPnlSettlements) HasUserTotals() bool {
 	return false
 }
 
-// SetUserTotals gets a reference to the given map[string]float64 and assigns it to the UserTotals field.
-func (o *RealizedPnlSettlements) SetUserTotals(v map[string]float64) {
+// SetUserTotals gets a reference to the given map[string]string and assigns it to the UserTotals field.
+func (o *RealizedPnlSettlements) SetUserTotals(v map[string]string) {
 	o.UserTotals = v
 }
 
 // GetTenantTotals returns the TenantTotals field value if set, zero value otherwise.
-func (o *RealizedPnlSettlements) GetTenantTotals() map[string]float64 {
+func (o *RealizedPnlSettlements) GetTenantTotals() map[string]string {
 	if o == nil || IsNil(o.TenantTotals) {
-		var ret map[string]float64
+		var ret map[string]string
 		return ret
 	}
 	return o.TenantTotals
@@ -123,9 +123,9 @@ func (o *RealizedPnlSettlements) GetTenantTotals() map[string]float64 {
 
 // GetTenantTotalsOk returns a tuple with the TenantTotals field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RealizedPnlSettlements) GetTenantTotalsOk() (map[string]float64, bool) {
+func (o *RealizedPnlSettlements) GetTenantTotalsOk() (map[string]string, bool) {
 	if o == nil || IsNil(o.TenantTotals) {
-		return map[string]float64{}, false
+		return map[string]string{}, false
 	}
 	return o.TenantTotals, true
 }
@@ -139,15 +139,15 @@ func (o *RealizedPnlSettlements) HasTenantTotals() bool {
 	return false
 }
 
-// SetTenantTotals gets a reference to the given map[string]float64 and assigns it to the TenantTotals field.
-func (o *RealizedPnlSettlements) SetTenantTotals(v map[string]float64) {
+// SetTenantTotals gets a reference to the given map[string]string and assigns it to the TenantTotals field.
+func (o *RealizedPnlSettlements) SetTenantTotals(v map[string]string) {
 	o.TenantTotals = v
 }
 
 // GetUserTotalsUnsettled returns the UserTotalsUnsettled field value if set, zero value otherwise.
-func (o *RealizedPnlSettlements) GetUserTotalsUnsettled() map[string]float64 {
+func (o *RealizedPnlSettlements) GetUserTotalsUnsettled() map[string]string {
 	if o == nil || IsNil(o.UserTotalsUnsettled) {
-		var ret map[string]float64
+		var ret map[string]string
 		return ret
 	}
 	return o.UserTotalsUnsettled
@@ -155,9 +155,9 @@ func (o *RealizedPnlSettlements) GetUserTotalsUnsettled() map[string]float64 {
 
 // GetUserTotalsUnsettledOk returns a tuple with the UserTotalsUnsettled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RealizedPnlSettlements) GetUserTotalsUnsettledOk() (map[string]float64, bool) {
+func (o *RealizedPnlSettlements) GetUserTotalsUnsettledOk() (map[string]string, bool) {
 	if o == nil || IsNil(o.UserTotalsUnsettled) {
-		return map[string]float64{}, false
+		return map[string]string{}, false
 	}
 	return o.UserTotalsUnsettled, true
 }
@@ -171,15 +171,15 @@ func (o *RealizedPnlSettlements) HasUserTotalsUnsettled() bool {
 	return false
 }
 
-// SetUserTotalsUnsettled gets a reference to the given map[string]float64 and assigns it to the UserTotalsUnsettled field.
-func (o *RealizedPnlSettlements) SetUserTotalsUnsettled(v map[string]float64) {
+// SetUserTotalsUnsettled gets a reference to the given map[string]string and assigns it to the UserTotalsUnsettled field.
+func (o *RealizedPnlSettlements) SetUserTotalsUnsettled(v map[string]string) {
 	o.UserTotalsUnsettled = v
 }
 
 // GetTenantTotalsUnsettled returns the TenantTotalsUnsettled field value if set, zero value otherwise.
-func (o *RealizedPnlSettlements) GetTenantTotalsUnsettled() map[string]float64 {
+func (o *RealizedPnlSettlements) GetTenantTotalsUnsettled() map[string]string {
 	if o == nil || IsNil(o.TenantTotalsUnsettled) {
-		var ret map[string]float64
+		var ret map[string]string
 		return ret
 	}
 	return o.TenantTotalsUnsettled
@@ -187,9 +187,9 @@ func (o *RealizedPnlSettlements) GetTenantTotalsUnsettled() map[string]float64 {
 
 // GetTenantTotalsUnsettledOk returns a tuple with the TenantTotalsUnsettled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RealizedPnlSettlements) GetTenantTotalsUnsettledOk() (map[string]float64, bool) {
+func (o *RealizedPnlSettlements) GetTenantTotalsUnsettledOk() (map[string]string, bool) {
 	if o == nil || IsNil(o.TenantTotalsUnsettled) {
-		return map[string]float64{}, false
+		return map[string]string{}, false
 	}
 	return o.TenantTotalsUnsettled, true
 }
@@ -203,8 +203,8 @@ func (o *RealizedPnlSettlements) HasTenantTotalsUnsettled() bool {
 	return false
 }
 
-// SetTenantTotalsUnsettled gets a reference to the given map[string]float64 and assigns it to the TenantTotalsUnsettled field.
-func (o *RealizedPnlSettlements) SetTenantTotalsUnsettled(v map[string]float64) {
+// SetTenantTotalsUnsettled gets a reference to the given map[string]string and assigns it to the TenantTotalsUnsettled field.
+func (o *RealizedPnlSettlements) SetTenantTotalsUnsettled(v map[string]string) {
 	o.TenantTotalsUnsettled = v
 }
 

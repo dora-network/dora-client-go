@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **TenantId** | **string** |  | 
 **PositionId** | **string** |  | 
 **TxKind** | **string** |  | 
-**QuantityUsd** | **float64** |  | 
+**QuantityUsd** | **string** |  | 
 **CreatedAt** | **time.Time** |  | 
 **SettledAt** | Pointer to **time.Time** |  | [optional] 
 **SettledBy** | Pointer to **string** |  | [optional] 
@@ -18,7 +18,7 @@ Name | Type | Description | Notes
 
 ### NewTransactionsSettlement
 
-`func NewTransactionsSettlement(txId string, userId string, tenantId string, positionId string, txKind string, quantityUsd float64, createdAt time.Time, ) *TransactionsSettlement`
+`func NewTransactionsSettlement(txId string, userId string, tenantId string, positionId string, txKind string, quantityUsd string, createdAt time.Time, ) *TransactionsSettlement`
 
 NewTransactionsSettlement instantiates a new TransactionsSettlement object
 This constructor will assign default values to properties that have it defined,
@@ -135,20 +135,20 @@ SetTxKind sets TxKind field to given value.
 
 ### GetQuantityUsd
 
-`func (o *TransactionsSettlement) GetQuantityUsd() float64`
+`func (o *TransactionsSettlement) GetQuantityUsd() string`
 
 GetQuantityUsd returns the QuantityUsd field if non-nil, zero value otherwise.
 
 ### GetQuantityUsdOk
 
-`func (o *TransactionsSettlement) GetQuantityUsdOk() (*float64, bool)`
+`func (o *TransactionsSettlement) GetQuantityUsdOk() (*string, bool)`
 
 GetQuantityUsdOk returns a tuple with the QuantityUsd field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetQuantityUsd
 
-`func (o *TransactionsSettlement) SetQuantityUsd(v float64)`
+`func (o *TransactionsSettlement) SetQuantityUsd(v string)`
 
 SetQuantityUsd sets QuantityUsd field to given value.
 

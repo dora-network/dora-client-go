@@ -1807,7 +1807,7 @@ import (
 )
 
 func main() {
-	quantity := "quantity_example" // float64 | Human-decimal USDC quantity to deposit, e.g. '100.50'. Must be positive, with at most 6 decimal places.
+	quantity := "quantity_example" // string | Human-decimal USDC quantity to deposit, e.g. '100.50'. Must be positive, with at most 6 decimal places.
 	ownerAddress := "ownerAddress_example" // string | The user's wallet address as a 0x-prefixed 20-byte hex string. Used as the permit owner.
 	nonce := "nonce_example" // string | The owner's current USDC permit nonce (read client-side), as a non-negative decimal string. It belongs to the single supported chain.
 	clientReferenceId := "clientReferenceId_example" // string | Optional client-supplied reference as a hex string (0x prefix optional), at most 32 bytes. Left-aligned into the deposit call's bytes32 argument. (optional)
@@ -1835,7 +1835,7 @@ Other parameters are passed through a pointer to a apiGetDepositInstructionsRequ
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **quantity** | **float64** | Human-decimal USDC quantity to deposit, e.g. &#39;100.50&#39;. Must be positive, with at most 6 decimal places. | 
+ **quantity** | **string** | Human-decimal USDC quantity to deposit, e.g. &#39;100.50&#39;. Must be positive, with at most 6 decimal places. | 
  **ownerAddress** | **string** | The user&#39;s wallet address as a 0x-prefixed 20-byte hex string. Used as the permit owner. | 
  **nonce** | **string** | The owner&#39;s current USDC permit nonce (read client-side), as a non-negative decimal string. It belongs to the single supported chain. | 
  **clientReferenceId** | **string** | Optional client-supplied reference as a hex string (0x prefix optional), at most 32 bytes. Left-aligned into the deposit call&#39;s bytes32 argument. | 
@@ -3372,9 +3372,11 @@ Name | Type | Description  | Notes
 
 ## GetTopTradersByPnL
 
-> GetPnLRankingResponse GetTopTradersByPnL(ctx).Start(start).End(end).Limit(limit).Execute()
+> GetPnLRankingResponse GetTopTradersByPnL(ctx).Start(start).End(end).Page(page).Limit(limit).All(all).Execute()
 
 Get top traders by PnL
+
+
 
 ### Example
 
@@ -3390,13 +3392,15 @@ import (
 )
 
 func main() {
-	start := time.Now() // time.Time | 
-	end := time.Now() // time.Time | 
-	limit := int32(56) // int32 |  (optional)
+	start := time.Now() // time.Time | Start timestamp (inclusive) in RFC3339 format.
+	end := time.Now() // time.Time | End timestamp (exclusive) in RFC3339 format.
+	page := int32(56) // int32 | 1-based page number for pagination. (optional) (default to 1)
+	limit := int32(56) // int32 | Number of records per page (max 100). Defaults to 100. (optional) (default to 100)
+	all := true // bool | When true, includes users with allow_copy_trading=false. Requires admin role. (optional) (default to false)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.DefaultAPI.GetTopTradersByPnL(context.Background()).Start(start).End(end).Limit(limit).Execute()
+	resp, r, err := apiClient.DefaultAPI.GetTopTradersByPnL(context.Background()).Start(start).End(end).Page(page).Limit(limit).All(all).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.GetTopTradersByPnL``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -3417,9 +3421,11 @@ Other parameters are passed through a pointer to a apiGetTopTradersByPnLRequest 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **start** | **time.Time** |  | 
- **end** | **time.Time** |  | 
- **limit** | **int32** |  | 
+ **start** | **time.Time** | Start timestamp (inclusive) in RFC3339 format. | 
+ **end** | **time.Time** | End timestamp (exclusive) in RFC3339 format. | 
+ **page** | **int32** | 1-based page number for pagination. | [default to 1]
+ **limit** | **int32** | Number of records per page (max 100). Defaults to 100. | [default to 100]
+ **all** | **bool** | When true, includes users with allow_copy_trading&#x3D;false. Requires admin role. | [default to false]
 
 ### Return type
 

@@ -24,7 +24,7 @@ type TransferAccountBalancesRequest struct {
 	FromAccountId string `json:"from_account_id"`
 	ToAccountId string `json:"to_account_id"`
 	AssetId string `json:"asset_id"`
-	Quantity float64 `json:"quantity"`
+	Quantity string `json:"quantity"`
 }
 
 type _TransferAccountBalancesRequest TransferAccountBalancesRequest
@@ -33,7 +33,7 @@ type _TransferAccountBalancesRequest TransferAccountBalancesRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTransferAccountBalancesRequest(fromAccountId string, toAccountId string, assetId string, quantity float64) *TransferAccountBalancesRequest {
+func NewTransferAccountBalancesRequest(fromAccountId string, toAccountId string, assetId string, quantity string) *TransferAccountBalancesRequest {
 	this := TransferAccountBalancesRequest{}
 	this.FromAccountId = fromAccountId
 	this.ToAccountId = toAccountId
@@ -123,9 +123,9 @@ func (o *TransferAccountBalancesRequest) SetAssetId(v string) {
 }
 
 // GetQuantity returns the Quantity field value
-func (o *TransferAccountBalancesRequest) GetQuantity() float64 {
+func (o *TransferAccountBalancesRequest) GetQuantity() string {
 	if o == nil {
-		var ret float64
+		var ret string
 		return ret
 	}
 
@@ -134,7 +134,7 @@ func (o *TransferAccountBalancesRequest) GetQuantity() float64 {
 
 // GetQuantityOk returns a tuple with the Quantity field value
 // and a boolean to check if the value has been set.
-func (o *TransferAccountBalancesRequest) GetQuantityOk() (*float64, bool) {
+func (o *TransferAccountBalancesRequest) GetQuantityOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -142,7 +142,7 @@ func (o *TransferAccountBalancesRequest) GetQuantityOk() (*float64, bool) {
 }
 
 // SetQuantity sets field value
-func (o *TransferAccountBalancesRequest) SetQuantity(v float64) {
+func (o *TransferAccountBalancesRequest) SetQuantity(v string) {
 	o.Quantity = v
 }
 

@@ -573,9 +573,13 @@ paths:
       summary: Verify a user by ID
   /v1/user/ranking:
     get:
+      description: Returns user PnL ranking for the provided time range. By default
+        only users with allow_copy_trading=true are included. Set all=true to include
+        all users; this requires an admin role.
       operationId: getTopTradersByPnL
       parameters:
-      - explode: true
+      - description: Start timestamp (inclusive) in RFC3339 format.
+        explode: true
         in: query
         name: start
         required: true
@@ -583,7 +587,8 @@ paths:
           format: date-time
           type: string
         style: form
-      - explode: true
+      - description: End timestamp (exclusive) in RFC3339 format.
+        explode: true
         in: query
         name: end
         required: true
@@ -591,14 +596,36 @@ paths:
           format: date-time
           type: string
         style: form
-      - explode: true
+      - description: 1-based page number for pagination.
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          minimum: 1
+          type: integer
+        style: form
+      - description: Number of records per page (max 100). Defaults to 100.
+        explode: true
         in: query
         name: limit
         required: false
         schema:
+          default: 100
           maximum: 100
           minimum: 1
           type: integer
+        style: form
+      - description: "When true, includes users with allow_copy_trading=false. Requires\
+          \ admin role."
+        explode: true
+        in: query
+        name: all
+        required: false
+        schema:
+          default: false
+          type: boolean
         style: form
       responses:
         "200":
@@ -612,7 +639,19 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
-          description: "Bad request, e.g. invalid path parameters"
+          description: "Bad request, e.g. invalid query parameters"
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Unauthorized (authentication required when all=true)
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Forbidden (admin role required when all=true)
         "500":
           content:
             application/json:
@@ -4620,7 +4659,6 @@ paths:
         name: quantity
         required: true
         schema:
-          format: decimal
           type: string
         style: form
       - description: The user's wallet address as a 0x-prefixed 20-byte hex string.
@@ -5105,7 +5143,6 @@ components:
           type: string
         quantity:
           description: "Human-decimal USDC deposit quantity, echoed from the request."
-          format: decimal
           type: string
         chains:
           items:
@@ -5252,7 +5289,6 @@ components:
           type: string
         quantity:
           description: Human-decimal USDC value (base units divided by 10^6).
-          format: decimal
           type: string
         client_reference_id:
           description: "Optional client-supplied reference, as a 0x-prefixed hex string."
@@ -6558,7 +6594,6 @@ components:
         first_name:
           type: string
         total_pnl:
-          format: decimal
           type: string
         total_trades:
           type: integer
@@ -6567,7 +6602,6 @@ components:
         losing_trades:
           type: integer
         win_rate:
-          format: decimal
           type: string
       required:
       - first_name
@@ -6920,12 +6954,10 @@ components:
         locked_quantity:
           description: Balance locked to ensure limit buy orders have sufficient balance
             to be fulfilled
-          format: decimal
           type: string
         impending_borrows_quantity:
           description: Borrows locked from the liquidity pool to ensure limit short
             sell orders have sufficient balance to be fulfilled
-          format: decimal
           type: string
         last_update_at:
           format: date-time
@@ -7369,11 +7401,9 @@ components:
           type: string
         deposit_limit:
           description: Maximum allowed deposit for the tenant.
-          format: decimal
           type: string
         trade_limit:
           description: Maximum allowed trade amount for the tenant.
-          format: decimal
           type: string
         updated_at:
           description: Last update timestamp for the restrictions.
@@ -7394,7 +7424,6 @@ components:
         take_profit_price: take_profit_price
       properties:
         price:
-          format: decimal
           type: string
         order_book_id:
           description: "Required: the order book to submit the order to"
@@ -7410,11 +7439,9 @@ components:
           type: string
         stop_loss_price:
           description: Stop loss price
-          format: decimal
           type: string
         take_profit_price:
           description: Take profit price
-          format: decimal
           type: string
       required:
       - asset_id
@@ -8738,25 +8765,18 @@ components:
           format: uuid
           type: string
         utilization:
-          format: decimal
           type: string
         avg_utilization:
-          format: decimal
           type: string
         avg_borrowing_yield_rate:
-          format: decimal
           type: string
         avg_lending_yield_rate:
-          format: decimal
           type: string
         borrowing_yield_rate:
-          format: decimal
           type: string
         lending_yield_rate:
-          format: decimal
           type: string
         yield_to_maturity:
-          format: decimal
           type: string
         start_time:
           format: date-time
@@ -8818,31 +8838,22 @@ components:
           format: date-time
           type: string
         utilization:
-          format: decimal
           type: string
         maximum_utilization:
-          format: decimal
           type: string
         minimum_rate:
-          format: decimal
           type: string
         kink_rate:
-          format: decimal
           type: string
         maximum_rate:
-          format: decimal
           type: string
         kink_utilization:
-          format: decimal
           type: string
         borrowing_yield_rate:
-          format: decimal
           type: string
         lending_yield_rate:
-          format: decimal
           type: string
         yield_to_maturity:
-          format: decimal
           type: string
       required:
       - asset_id
@@ -9292,7 +9303,6 @@ components:
         tx_kind:
           type: string
         quantity_usd:
-          format: decimal
           type: string
         created_at:
           format: date-time
@@ -9379,11 +9389,9 @@ components:
           default: null
         user_totals:
           additionalProperties:
-            format: decimal
             type: string
         tenant_totals:
           additionalProperties:
-            format: decimal
             type: string
     TransactionsSettlementRequest:
       example:
@@ -9487,36 +9495,26 @@ components:
           format: date-time
           type: string
         open:
-          format: decimal
           type: string
         high:
-          format: decimal
           type: string
         low:
-          format: decimal
           type: string
         close:
-          format: decimal
           type: string
         ytm:
           deprecated: true
           description: "DEPRECATED: Use close_ytm instead."
-          format: decimal
           type: string
         open_ytm:
-          format: decimal
           type: string
         close_ytm:
-          format: decimal
           type: string
         high_ytm:
-          format: decimal
           type: string
         low_ytm:
-          format: decimal
           type: string
         volume:
-          format: decimal
           type: string
       required:
       - close
@@ -10516,7 +10514,6 @@ components:
           format: uuid
           type: string
         repaid:
-          format: decimal
           type: string
         transaction_id:
           format: uuid
@@ -11140,7 +11137,6 @@ components:
           type: string
         realized_usd:
           description: The amount of realized PnL in USD
-          format: decimal
           type: string
         settled_at:
           description: The timestamp when the realized PnL settlement was settled
@@ -11195,25 +11191,21 @@ components:
           default: null
         user_totals:
           additionalProperties:
-            format: decimal
             type: string
           description: A map of user IDs to their total realized PnL in USD across
             all settlements included in the response
         tenant_totals:
           additionalProperties:
-            format: decimal
             type: string
           description: A map of tenant IDs to their total realized PnL in USD across
             all settlements included in the response
         user_totals_unsettled:
           additionalProperties:
-            format: decimal
             type: string
           description: A map of user IDs to their total realized PnL in USD across
             unsettled settlements (where settled_at is null) included in the response
         tenant_totals_unsettled:
           additionalProperties:
-            format: decimal
             type: string
           description: A map of tenant IDs to their total realized PnL in USD across
             unsettled settlements (where settled_at is null) included in the response
@@ -11480,7 +11472,6 @@ components:
           format: uuid
           type: string
         quantity:
-          format: decimal
           type: string
         account_name:
           type: string
@@ -11513,7 +11504,6 @@ components:
           format: uuid
           type: string
         quantity:
-          format: decimal
           type: string
       required:
       - asset_id

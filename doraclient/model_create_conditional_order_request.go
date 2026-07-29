@@ -21,7 +21,7 @@ var _ MappedNullable = &CreateConditionalOrderRequest{}
 
 // CreateConditionalOrderRequest struct for CreateConditionalOrderRequest
 type CreateConditionalOrderRequest struct {
-	Price float64 `json:"price"`
+	Price string `json:"price"`
 	// Required: the order book to submit the order to
 	OrderBookId string `json:"order_book_id"`
 	// Required: the position to submit the order to
@@ -29,9 +29,9 @@ type CreateConditionalOrderRequest struct {
 	// Required: the asset to submit the order to
 	AssetId string `json:"asset_id"`
 	// Stop loss price
-	StopLossPrice *float64 `json:"stop_loss_price,omitempty"`
+	StopLossPrice *string `json:"stop_loss_price,omitempty"`
 	// Take profit price
-	TakeProfitPrice *float64 `json:"take_profit_price,omitempty"`
+	TakeProfitPrice *string `json:"take_profit_price,omitempty"`
 }
 
 type _CreateConditionalOrderRequest CreateConditionalOrderRequest
@@ -40,7 +40,7 @@ type _CreateConditionalOrderRequest CreateConditionalOrderRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateConditionalOrderRequest(price float64, orderBookId string, positionId string, assetId string) *CreateConditionalOrderRequest {
+func NewCreateConditionalOrderRequest(price string, orderBookId string, positionId string, assetId string) *CreateConditionalOrderRequest {
 	this := CreateConditionalOrderRequest{}
 	this.Price = price
 	this.OrderBookId = orderBookId
@@ -58,9 +58,9 @@ func NewCreateConditionalOrderRequestWithDefaults() *CreateConditionalOrderReque
 }
 
 // GetPrice returns the Price field value
-func (o *CreateConditionalOrderRequest) GetPrice() float64 {
+func (o *CreateConditionalOrderRequest) GetPrice() string {
 	if o == nil {
-		var ret float64
+		var ret string
 		return ret
 	}
 
@@ -69,7 +69,7 @@ func (o *CreateConditionalOrderRequest) GetPrice() float64 {
 
 // GetPriceOk returns a tuple with the Price field value
 // and a boolean to check if the value has been set.
-func (o *CreateConditionalOrderRequest) GetPriceOk() (*float64, bool) {
+func (o *CreateConditionalOrderRequest) GetPriceOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -77,7 +77,7 @@ func (o *CreateConditionalOrderRequest) GetPriceOk() (*float64, bool) {
 }
 
 // SetPrice sets field value
-func (o *CreateConditionalOrderRequest) SetPrice(v float64) {
+func (o *CreateConditionalOrderRequest) SetPrice(v string) {
 	o.Price = v
 }
 
@@ -154,9 +154,9 @@ func (o *CreateConditionalOrderRequest) SetAssetId(v string) {
 }
 
 // GetStopLossPrice returns the StopLossPrice field value if set, zero value otherwise.
-func (o *CreateConditionalOrderRequest) GetStopLossPrice() float64 {
+func (o *CreateConditionalOrderRequest) GetStopLossPrice() string {
 	if o == nil || IsNil(o.StopLossPrice) {
-		var ret float64
+		var ret string
 		return ret
 	}
 	return *o.StopLossPrice
@@ -164,7 +164,7 @@ func (o *CreateConditionalOrderRequest) GetStopLossPrice() float64 {
 
 // GetStopLossPriceOk returns a tuple with the StopLossPrice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateConditionalOrderRequest) GetStopLossPriceOk() (*float64, bool) {
+func (o *CreateConditionalOrderRequest) GetStopLossPriceOk() (*string, bool) {
 	if o == nil || IsNil(o.StopLossPrice) {
 		return nil, false
 	}
@@ -180,15 +180,15 @@ func (o *CreateConditionalOrderRequest) HasStopLossPrice() bool {
 	return false
 }
 
-// SetStopLossPrice gets a reference to the given float64 and assigns it to the StopLossPrice field.
-func (o *CreateConditionalOrderRequest) SetStopLossPrice(v float64) {
+// SetStopLossPrice gets a reference to the given string and assigns it to the StopLossPrice field.
+func (o *CreateConditionalOrderRequest) SetStopLossPrice(v string) {
 	o.StopLossPrice = &v
 }
 
 // GetTakeProfitPrice returns the TakeProfitPrice field value if set, zero value otherwise.
-func (o *CreateConditionalOrderRequest) GetTakeProfitPrice() float64 {
+func (o *CreateConditionalOrderRequest) GetTakeProfitPrice() string {
 	if o == nil || IsNil(o.TakeProfitPrice) {
-		var ret float64
+		var ret string
 		return ret
 	}
 	return *o.TakeProfitPrice
@@ -196,7 +196,7 @@ func (o *CreateConditionalOrderRequest) GetTakeProfitPrice() float64 {
 
 // GetTakeProfitPriceOk returns a tuple with the TakeProfitPrice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateConditionalOrderRequest) GetTakeProfitPriceOk() (*float64, bool) {
+func (o *CreateConditionalOrderRequest) GetTakeProfitPriceOk() (*string, bool) {
 	if o == nil || IsNil(o.TakeProfitPrice) {
 		return nil, false
 	}
@@ -212,8 +212,8 @@ func (o *CreateConditionalOrderRequest) HasTakeProfitPrice() bool {
 	return false
 }
 
-// SetTakeProfitPrice gets a reference to the given float64 and assigns it to the TakeProfitPrice field.
-func (o *CreateConditionalOrderRequest) SetTakeProfitPrice(v float64) {
+// SetTakeProfitPrice gets a reference to the given string and assigns it to the TakeProfitPrice field.
+func (o *CreateConditionalOrderRequest) SetTakeProfitPrice(v string) {
 	o.TakeProfitPrice = &v
 }
 

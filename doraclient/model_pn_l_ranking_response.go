@@ -23,11 +23,11 @@ var _ MappedNullable = &PnLRankingResponse{}
 type PnLRankingResponse struct {
 	UserId string `json:"user_id"`
 	FirstName string `json:"first_name"`
-	TotalPnl float64 `json:"total_pnl"`
+	TotalPnl string `json:"total_pnl"`
 	TotalTrades int32 `json:"total_trades"`
 	WinningTrades int32 `json:"winning_trades"`
 	LosingTrades int32 `json:"losing_trades"`
-	WinRate float64 `json:"win_rate"`
+	WinRate string `json:"win_rate"`
 }
 
 type _PnLRankingResponse PnLRankingResponse
@@ -36,7 +36,7 @@ type _PnLRankingResponse PnLRankingResponse
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPnLRankingResponse(userId string, firstName string, totalPnl float64, totalTrades int32, winningTrades int32, losingTrades int32, winRate float64) *PnLRankingResponse {
+func NewPnLRankingResponse(userId string, firstName string, totalPnl string, totalTrades int32, winningTrades int32, losingTrades int32, winRate string) *PnLRankingResponse {
 	this := PnLRankingResponse{}
 	this.UserId = userId
 	this.FirstName = firstName
@@ -105,9 +105,9 @@ func (o *PnLRankingResponse) SetFirstName(v string) {
 }
 
 // GetTotalPnl returns the TotalPnl field value
-func (o *PnLRankingResponse) GetTotalPnl() float64 {
+func (o *PnLRankingResponse) GetTotalPnl() string {
 	if o == nil {
-		var ret float64
+		var ret string
 		return ret
 	}
 
@@ -116,7 +116,7 @@ func (o *PnLRankingResponse) GetTotalPnl() float64 {
 
 // GetTotalPnlOk returns a tuple with the TotalPnl field value
 // and a boolean to check if the value has been set.
-func (o *PnLRankingResponse) GetTotalPnlOk() (*float64, bool) {
+func (o *PnLRankingResponse) GetTotalPnlOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -124,7 +124,7 @@ func (o *PnLRankingResponse) GetTotalPnlOk() (*float64, bool) {
 }
 
 // SetTotalPnl sets field value
-func (o *PnLRankingResponse) SetTotalPnl(v float64) {
+func (o *PnLRankingResponse) SetTotalPnl(v string) {
 	o.TotalPnl = v
 }
 
@@ -201,9 +201,9 @@ func (o *PnLRankingResponse) SetLosingTrades(v int32) {
 }
 
 // GetWinRate returns the WinRate field value
-func (o *PnLRankingResponse) GetWinRate() float64 {
+func (o *PnLRankingResponse) GetWinRate() string {
 	if o == nil {
-		var ret float64
+		var ret string
 		return ret
 	}
 
@@ -212,7 +212,7 @@ func (o *PnLRankingResponse) GetWinRate() float64 {
 
 // GetWinRateOk returns a tuple with the WinRate field value
 // and a boolean to check if the value has been set.
-func (o *PnLRankingResponse) GetWinRateOk() (*float64, bool) {
+func (o *PnLRankingResponse) GetWinRateOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -220,7 +220,7 @@ func (o *PnLRankingResponse) GetWinRateOk() (*float64, bool) {
 }
 
 // SetWinRate sets field value
-func (o *PnLRankingResponse) SetWinRate(v float64) {
+func (o *PnLRankingResponse) SetWinRate(v string) {
 	o.WinRate = v
 }
 

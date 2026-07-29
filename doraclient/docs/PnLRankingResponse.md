@@ -6,17 +6,17 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **UserId** | **string** |  | 
 **FirstName** | **string** |  | 
-**TotalPnl** | **float64** |  | 
+**TotalPnl** | **string** |  | 
 **TotalTrades** | **int32** |  | 
 **WinningTrades** | **int32** |  | 
 **LosingTrades** | **int32** |  | 
-**WinRate** | **float64** |  | 
+**WinRate** | **string** |  | 
 
 ## Methods
 
 ### NewPnLRankingResponse
 
-`func NewPnLRankingResponse(userId string, firstName string, totalPnl float64, totalTrades int32, winningTrades int32, losingTrades int32, winRate float64, ) *PnLRankingResponse`
+`func NewPnLRankingResponse(userId string, firstName string, totalPnl string, totalTrades int32, winningTrades int32, losingTrades int32, winRate string, ) *PnLRankingResponse`
 
 NewPnLRankingResponse instantiates a new PnLRankingResponse object
 This constructor will assign default values to properties that have it defined,
@@ -73,20 +73,20 @@ SetFirstName sets FirstName field to given value.
 
 ### GetTotalPnl
 
-`func (o *PnLRankingResponse) GetTotalPnl() float64`
+`func (o *PnLRankingResponse) GetTotalPnl() string`
 
 GetTotalPnl returns the TotalPnl field if non-nil, zero value otherwise.
 
 ### GetTotalPnlOk
 
-`func (o *PnLRankingResponse) GetTotalPnlOk() (*float64, bool)`
+`func (o *PnLRankingResponse) GetTotalPnlOk() (*string, bool)`
 
 GetTotalPnlOk returns a tuple with the TotalPnl field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTotalPnl
 
-`func (o *PnLRankingResponse) SetTotalPnl(v float64)`
+`func (o *PnLRankingResponse) SetTotalPnl(v string)`
 
 SetTotalPnl sets TotalPnl field to given value.
 
@@ -153,20 +153,20 @@ SetLosingTrades sets LosingTrades field to given value.
 
 ### GetWinRate
 
-`func (o *PnLRankingResponse) GetWinRate() float64`
+`func (o *PnLRankingResponse) GetWinRate() string`
 
 GetWinRate returns the WinRate field if non-nil, zero value otherwise.
 
 ### GetWinRateOk
 
-`func (o *PnLRankingResponse) GetWinRateOk() (*float64, bool)`
+`func (o *PnLRankingResponse) GetWinRateOk() (*string, bool)`
 
 GetWinRateOk returns a tuple with the WinRate field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetWinRate
 
-`func (o *PnLRankingResponse) SetWinRate(v float64)`
+`func (o *PnLRankingResponse) SetWinRate(v string)`
 
 SetWinRate sets WinRate field to given value.
 

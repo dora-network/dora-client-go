@@ -3726,14 +3726,14 @@ func (a *DefaultAPIService) GetCouponPaymentsByAssetIdExecute(r ApiGetCouponPaym
 type ApiGetDepositInstructionsRequest struct {
 	ctx context.Context
 	ApiService *DefaultAPIService
-	quantity *float64
+	quantity *string
 	ownerAddress *string
 	nonce *string
 	clientReferenceId *string
 }
 
 // Human-decimal USDC quantity to deposit, e.g. &#39;100.50&#39;. Must be positive, with at most 6 decimal places.
-func (r ApiGetDepositInstructionsRequest) Quantity(quantity float64) ApiGetDepositInstructionsRequest {
+func (r ApiGetDepositInstructionsRequest) Quantity(quantity string) ApiGetDepositInstructionsRequest {
 	r.quantity = &quantity
 	return r
 }
@@ -7255,21 +7255,38 @@ type ApiGetTopTradersByPnLRequest struct {
 	ApiService *DefaultAPIService
 	start *time.Time
 	end *time.Time
+	page *int32
 	limit *int32
+	all *bool
 }
 
+// Start timestamp (inclusive) in RFC3339 format.
 func (r ApiGetTopTradersByPnLRequest) Start(start time.Time) ApiGetTopTradersByPnLRequest {
 	r.start = &start
 	return r
 }
 
+// End timestamp (exclusive) in RFC3339 format.
 func (r ApiGetTopTradersByPnLRequest) End(end time.Time) ApiGetTopTradersByPnLRequest {
 	r.end = &end
 	return r
 }
 
+// 1-based page number for pagination.
+func (r ApiGetTopTradersByPnLRequest) Page(page int32) ApiGetTopTradersByPnLRequest {
+	r.page = &page
+	return r
+}
+
+// Number of records per page (max 100). Defaults to 100.
 func (r ApiGetTopTradersByPnLRequest) Limit(limit int32) ApiGetTopTradersByPnLRequest {
 	r.limit = &limit
+	return r
+}
+
+// When true, includes users with allow_copy_trading&#x3D;false. Requires admin role.
+func (r ApiGetTopTradersByPnLRequest) All(all bool) ApiGetTopTradersByPnLRequest {
+	r.all = &all
 	return r
 }
 
@@ -7279,6 +7296,8 @@ func (r ApiGetTopTradersByPnLRequest) Execute() (*GetPnLRankingResponse, *http.R
 
 /*
 GetTopTradersByPnL Get top traders by PnL
+
+Returns user PnL ranking for the provided time range. By default only users with allow_copy_trading=true are included. Set all=true to include all users; this requires an admin role.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetTopTradersByPnLRequest
@@ -7319,8 +7338,26 @@ func (a *DefaultAPIService) GetTopTradersByPnLExecute(r ApiGetTopTradersByPnLReq
 
 	parameterAddToHeaderOrQuery(localVarQueryParams, "start", r.start, "form", "")
 	parameterAddToHeaderOrQuery(localVarQueryParams, "end", r.end, "form", "")
+	if r.page != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "form", "")
+	} else {
+		var defaultValue int32 = 1
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", defaultValue, "form", "")
+		r.page = &defaultValue
+	}
 	if r.limit != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+	} else {
+		var defaultValue int32 = 100
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "form", "")
+		r.limit = &defaultValue
+	}
+	if r.all != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "all", r.all, "form", "")
+	} else {
+		var defaultValue bool = false
+		parameterAddToHeaderOrQuery(localVarQueryParams, "all", defaultValue, "form", "")
+		r.all = &defaultValue
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -7376,6 +7413,28 @@ func (a *DefaultAPIService) GetTopTradersByPnLExecute(r ApiGetTopTradersByPnLReq
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
+			var v ResponseEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v ResponseEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
 			var v ResponseEnvelope
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
