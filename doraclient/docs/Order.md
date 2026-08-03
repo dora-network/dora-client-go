@@ -14,8 +14,8 @@ Name | Type | Description | Notes
 **OriginalQuantity** | **string** | The original quantity of the order when it was created. | 
 **FilledQuantity** | **string** | Quantity that has been filled so far. | 
 **FilledNotional** | **string** | Quote quantity that has been filled so far. | 
-**LockedQuantity** | **string** | Balance locked to ensure limit buy orders have sufficient balance to be fulfilled | 
-**ImpendingBorrowsQuantity** | **string** | Borrows locked from the liquidity pool to ensure limit short sell orders have sufficient balance to be fulfilled | 
+**LockedQuantity** | **float64** | Balance locked to ensure limit buy orders have sufficient balance to be fulfilled | 
+**ImpendingBorrowsQuantity** | **float64** | Borrows locked from the liquidity pool to ensure limit short sell orders have sufficient balance to be fulfilled | 
 **LastUpdateAt** | **time.Time** |  | 
 **OpenedAt** | **time.Time** |  | 
 **InverseLeverage** | **string** |  | 
@@ -35,7 +35,7 @@ Name | Type | Description | Notes
 
 ### NewOrder
 
-`func NewOrder(orderId string, orderBookId string, kind OrderKind, originalPrice string, avgFillPrice string, cancelledQuantity string, openQuantity string, originalQuantity string, filledQuantity string, filledNotional string, lockedQuantity string, impendingBorrowsQuantity string, lastUpdateAt time.Time, openedAt time.Time, inverseLeverage string, side Side, status OrderStatus, userId string, positionId string, ) *Order`
+`func NewOrder(orderId string, orderBookId string, kind OrderKind, originalPrice string, avgFillPrice string, cancelledQuantity string, openQuantity string, originalQuantity string, filledQuantity string, filledNotional string, lockedQuantity float64, impendingBorrowsQuantity float64, lastUpdateAt time.Time, openedAt time.Time, inverseLeverage string, side Side, status OrderStatus, userId string, positionId string, ) *Order`
 
 NewOrder instantiates a new Order object
 This constructor will assign default values to properties that have it defined,
@@ -252,40 +252,40 @@ SetFilledNotional sets FilledNotional field to given value.
 
 ### GetLockedQuantity
 
-`func (o *Order) GetLockedQuantity() string`
+`func (o *Order) GetLockedQuantity() float64`
 
 GetLockedQuantity returns the LockedQuantity field if non-nil, zero value otherwise.
 
 ### GetLockedQuantityOk
 
-`func (o *Order) GetLockedQuantityOk() (*string, bool)`
+`func (o *Order) GetLockedQuantityOk() (*float64, bool)`
 
 GetLockedQuantityOk returns a tuple with the LockedQuantity field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetLockedQuantity
 
-`func (o *Order) SetLockedQuantity(v string)`
+`func (o *Order) SetLockedQuantity(v float64)`
 
 SetLockedQuantity sets LockedQuantity field to given value.
 
 
 ### GetImpendingBorrowsQuantity
 
-`func (o *Order) GetImpendingBorrowsQuantity() string`
+`func (o *Order) GetImpendingBorrowsQuantity() float64`
 
 GetImpendingBorrowsQuantity returns the ImpendingBorrowsQuantity field if non-nil, zero value otherwise.
 
 ### GetImpendingBorrowsQuantityOk
 
-`func (o *Order) GetImpendingBorrowsQuantityOk() (*string, bool)`
+`func (o *Order) GetImpendingBorrowsQuantityOk() (*float64, bool)`
 
 GetImpendingBorrowsQuantityOk returns a tuple with the ImpendingBorrowsQuantity field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetImpendingBorrowsQuantity
 
-`func (o *Order) SetImpendingBorrowsQuantity(v string)`
+`func (o *Order) SetImpendingBorrowsQuantity(v float64)`
 
 SetImpendingBorrowsQuantity sets ImpendingBorrowsQuantity field to given value.
 

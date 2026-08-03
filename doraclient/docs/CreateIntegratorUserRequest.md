@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **Email** | Pointer to **string** |  | [optional] 
 **FirstName** | Pointer to **string** |  | [optional] 
 **LastName** | Pointer to **string** |  | [optional] 
+**UserName** | Pointer to **string** |  | [optional] 
 **CountryOfDomicile** | Pointer to [**CountryCode**](CountryCode.md) |  | [optional] 
 **NativeAssetId** | Pointer to **string** |  | [optional] 
 **PhotoUrl** | Pointer to **string** |  | [optional] 
@@ -107,6 +108,31 @@ SetLastName sets LastName field to given value.
 `func (o *CreateIntegratorUserRequest) HasLastName() bool`
 
 HasLastName returns a boolean if a field has been set.
+
+### GetUserName
+
+`func (o *CreateIntegratorUserRequest) GetUserName() string`
+
+GetUserName returns the UserName field if non-nil, zero value otherwise.
+
+### GetUserNameOk
+
+`func (o *CreateIntegratorUserRequest) GetUserNameOk() (*string, bool)`
+
+GetUserNameOk returns a tuple with the UserName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUserName
+
+`func (o *CreateIntegratorUserRequest) SetUserName(v string)`
+
+SetUserName sets UserName field to given value.
+
+### HasUserName
+
+`func (o *CreateIntegratorUserRequest) HasUserName() bool`
+
+HasUserName returns a boolean if a field has been set.
 
 ### GetCountryOfDomicile
 

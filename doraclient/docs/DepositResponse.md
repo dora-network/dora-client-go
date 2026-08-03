@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 **ContractAddress** | **string** | Vault contract address as a 0x-prefixed hex string. | 
 **DepositorAddress** | **string** | Address that made the deposit, as a 0x-prefixed hex string. | 
 **UserId** | **string** |  | 
-**Quantity** | **string** | Human-decimal USDC value (base units divided by 10^6). | 
+**Quantity** | **float64** | Human-decimal USDC value (base units divided by 10^6). | 
 **ClientReferenceId** | Pointer to **string** | Optional client-supplied reference, as a 0x-prefixed hex string. | [optional] 
 **Status** | [**Web3EventStatus**](Web3EventStatus.md) |  | 
 **TransactionId** | Pointer to **string** | Internal transaction ID, present once the deposit has been credited. | [optional] 
@@ -24,7 +24,7 @@ Name | Type | Description | Notes
 
 ### NewDepositResponse
 
-`func NewDepositResponse(networkChainId int32, networkName string, chainId string, txHash string, logIndex int32, blockNumber int64, blockTime time.Time, contractAddress string, depositorAddress string, userId string, quantity string, status Web3EventStatus, observedAt time.Time, ) *DepositResponse`
+`func NewDepositResponse(networkChainId int32, networkName string, chainId string, txHash string, logIndex int32, blockNumber int64, blockTime time.Time, contractAddress string, depositorAddress string, userId string, quantity float64, status Web3EventStatus, observedAt time.Time, ) *DepositResponse`
 
 NewDepositResponse instantiates a new DepositResponse object
 This constructor will assign default values to properties that have it defined,
@@ -241,20 +241,20 @@ SetUserId sets UserId field to given value.
 
 ### GetQuantity
 
-`func (o *DepositResponse) GetQuantity() string`
+`func (o *DepositResponse) GetQuantity() float64`
 
 GetQuantity returns the Quantity field if non-nil, zero value otherwise.
 
 ### GetQuantityOk
 
-`func (o *DepositResponse) GetQuantityOk() (*string, bool)`
+`func (o *DepositResponse) GetQuantityOk() (*float64, bool)`
 
 GetQuantityOk returns a tuple with the Quantity field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetQuantity
 
-`func (o *DepositResponse) SetQuantity(v string)`
+`func (o *DepositResponse) SetQuantity(v float64)`
 
 SetQuantity sets Quantity field to given value.
 

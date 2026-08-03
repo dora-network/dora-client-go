@@ -41,6 +41,7 @@ docs/ClosePositionRequest.md
 docs/ClosePositionResp.md
 docs/ClosePositionResponseEnvelope.md
 docs/Collateral.md
+docs/CopyTrader.md
 docs/CountryCode.md
 docs/CouponKind.md
 docs/CouponPayment.md
@@ -275,6 +276,7 @@ model_close_position_request.go
 model_close_position_resp.go
 model_close_position_response_envelope.go
 model_collateral.go
+model_copy_trader.go
 model_country_code.go
 model_coupon_kind.go
 model_coupon_payment.go

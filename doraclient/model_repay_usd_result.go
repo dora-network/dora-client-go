@@ -23,7 +23,7 @@ var _ MappedNullable = &RepayUSDResult{}
 type RepayUSDResult struct {
 	PositionId string `json:"position_id"`
 	AssetId string `json:"asset_id"`
-	Repaid string `json:"repaid"`
+	Repaid float64 `json:"repaid"`
 	TransactionId string `json:"transaction_id"`
 }
 
@@ -33,7 +33,7 @@ type _RepayUSDResult RepayUSDResult
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRepayUSDResult(positionId string, assetId string, repaid string, transactionId string) *RepayUSDResult {
+func NewRepayUSDResult(positionId string, assetId string, repaid float64, transactionId string) *RepayUSDResult {
 	this := RepayUSDResult{}
 	this.PositionId = positionId
 	this.AssetId = assetId
@@ -99,9 +99,9 @@ func (o *RepayUSDResult) SetAssetId(v string) {
 }
 
 // GetRepaid returns the Repaid field value
-func (o *RepayUSDResult) GetRepaid() string {
+func (o *RepayUSDResult) GetRepaid() float64 {
 	if o == nil {
-		var ret string
+		var ret float64
 		return ret
 	}
 
@@ -110,7 +110,7 @@ func (o *RepayUSDResult) GetRepaid() string {
 
 // GetRepaidOk returns a tuple with the Repaid field value
 // and a boolean to check if the value has been set.
-func (o *RepayUSDResult) GetRepaidOk() (*string, bool) {
+func (o *RepayUSDResult) GetRepaidOk() (*float64, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -118,7 +118,7 @@ func (o *RepayUSDResult) GetRepaidOk() (*string, bool) {
 }
 
 // SetRepaid sets field value
-func (o *RepayUSDResult) SetRepaid(v string) {
+func (o *RepayUSDResult) SetRepaid(v float64) {
 	o.Repaid = v
 }
 

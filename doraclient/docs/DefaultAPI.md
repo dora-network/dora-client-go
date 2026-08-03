@@ -27,7 +27,7 @@ Method | HTTP request | Description
 [**GetAssetYieldData**](DefaultAPI.md#GetAssetYieldData) | **Get** /v1/charts/{asset_id}/yield | Get yield chart data for an asset
 [**GetAssetsStream**](DefaultAPI.md#GetAssetsStream) | **Get** /v1/assets/stream | Get all inserts or updates for assets
 [**GetCandleData**](DefaultAPI.md#GetCandleData) | **Get** /v1/charts/{order_book_id}/candle | Get candlestick data for an orderbook
-[**GetCopyTraders**](DefaultAPI.md#GetCopyTraders) | **Get** /v1/user/copy_traders | Get list of user IDs with copy trading enabled
+[**GetCopyTraders**](DefaultAPI.md#GetCopyTraders) | **Get** /v1/user/copy_traders | Get list of users with copy trading enabled
 [**GetCouponPaymentsByAssetId**](DefaultAPI.md#GetCouponPaymentsByAssetId) | **Get** /v1/assets/{asset_id}/coupon_payments | Get coupon payments for a bond asset
 [**GetDepositInstructions**](DefaultAPI.md#GetDepositInstructions) | **Get** /v1/web3/deposit-instructions | Get per-chain instructions for depositing USDC into the Dora vault
 [**GetL1Depth**](DefaultAPI.md#GetL1Depth) | **Get** /v1/orderbooks/{order_book_id}/L1 | Get the top price levels for a specific orderbook (L1 market depth)
@@ -1656,7 +1656,7 @@ No authorization required
 
 > GetCopyTradersResponse GetCopyTraders(ctx).Page(page).Limit(limit).Execute()
 
-Get list of user IDs with copy trading enabled
+Get list of users with copy trading enabled
 
 ### Example
 
@@ -1807,7 +1807,7 @@ import (
 )
 
 func main() {
-	quantity := "quantity_example" // string | Human-decimal USDC quantity to deposit, e.g. '100.50'. Must be positive, with at most 6 decimal places.
+	quantity := "quantity_example" // float64 | Human-decimal USDC quantity to deposit, e.g. '100.50'. Must be positive, with at most 6 decimal places.
 	ownerAddress := "ownerAddress_example" // string | The user's wallet address as a 0x-prefixed 20-byte hex string. Used as the permit owner.
 	nonce := "nonce_example" // string | The owner's current USDC permit nonce (read client-side), as a non-negative decimal string. It belongs to the single supported chain.
 	clientReferenceId := "clientReferenceId_example" // string | Optional client-supplied reference as a hex string (0x prefix optional), at most 32 bytes. Left-aligned into the deposit call's bytes32 argument. (optional)
@@ -1835,7 +1835,7 @@ Other parameters are passed through a pointer to a apiGetDepositInstructionsRequ
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **quantity** | **string** | Human-decimal USDC quantity to deposit, e.g. &#39;100.50&#39;. Must be positive, with at most 6 decimal places. | 
+ **quantity** | **float64** | Human-decimal USDC quantity to deposit, e.g. &#39;100.50&#39;. Must be positive, with at most 6 decimal places. | 
  **ownerAddress** | **string** | The user&#39;s wallet address as a 0x-prefixed 20-byte hex string. Used as the permit owner. | 
  **nonce** | **string** | The owner&#39;s current USDC permit nonce (read client-side), as a non-negative decimal string. It belongs to the single supported chain. | 
  **clientReferenceId** | **string** | Optional client-supplied reference as a hex string (0x prefix optional), at most 32 bytes. Left-aligned into the deposit call&#39;s bytes32 argument. | 

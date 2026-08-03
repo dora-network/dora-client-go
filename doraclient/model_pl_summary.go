@@ -27,6 +27,10 @@ type PLSummary struct {
 	Available string `json:"available"`
 	Health string `json:"health"`
 	Ltv string `json:"ltv"`
+	// The realized profit or loss since account inception
+	RealizedPl string `json:"realized_pl"`
+	// The unrealized profit or loss for the account's current open positions
+	UnrealizedPl string `json:"unrealized_pl"`
 }
 
 type _PLSummary PLSummary
@@ -35,13 +39,15 @@ type _PLSummary PLSummary
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPLSummary(leverage string, accountEquity string, available string, health string, ltv string) *PLSummary {
+func NewPLSummary(leverage string, accountEquity string, available string, health string, ltv string, realizedPl string, unrealizedPl string) *PLSummary {
 	this := PLSummary{}
 	this.Leverage = leverage
 	this.AccountEquity = accountEquity
 	this.Available = available
 	this.Health = health
 	this.Ltv = ltv
+	this.RealizedPl = realizedPl
+	this.UnrealizedPl = unrealizedPl
 	return &this
 }
 
@@ -173,6 +179,54 @@ func (o *PLSummary) SetLtv(v string) {
 	o.Ltv = v
 }
 
+// GetRealizedPl returns the RealizedPl field value
+func (o *PLSummary) GetRealizedPl() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.RealizedPl
+}
+
+// GetRealizedPlOk returns a tuple with the RealizedPl field value
+// and a boolean to check if the value has been set.
+func (o *PLSummary) GetRealizedPlOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.RealizedPl, true
+}
+
+// SetRealizedPl sets field value
+func (o *PLSummary) SetRealizedPl(v string) {
+	o.RealizedPl = v
+}
+
+// GetUnrealizedPl returns the UnrealizedPl field value
+func (o *PLSummary) GetUnrealizedPl() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.UnrealizedPl
+}
+
+// GetUnrealizedPlOk returns a tuple with the UnrealizedPl field value
+// and a boolean to check if the value has been set.
+func (o *PLSummary) GetUnrealizedPlOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.UnrealizedPl, true
+}
+
+// SetUnrealizedPl sets field value
+func (o *PLSummary) SetUnrealizedPl(v string) {
+	o.UnrealizedPl = v
+}
+
 func (o PLSummary) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -188,6 +242,8 @@ func (o PLSummary) ToMap() (map[string]interface{}, error) {
 	toSerialize["available"] = o.Available
 	toSerialize["health"] = o.Health
 	toSerialize["ltv"] = o.Ltv
+	toSerialize["realized_pl"] = o.RealizedPl
+	toSerialize["unrealized_pl"] = o.UnrealizedPl
 	return toSerialize, nil
 }
 
@@ -201,6 +257,8 @@ func (o *PLSummary) UnmarshalJSON(data []byte) (err error) {
 		"available",
 		"health",
 		"ltv",
+		"realized_pl",
+		"unrealized_pl",
 	}
 
 	allProperties := make(map[string]interface{})

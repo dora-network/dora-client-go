@@ -33,7 +33,7 @@ type RealizedPnlSettlement struct {
 	// The ID of the position-closing order associated with the realized PnL settlement
 	OrderId string `json:"order_id"`
 	// The amount of realized PnL in USD
-	RealizedUsd string `json:"realized_usd"`
+	RealizedUsd float64 `json:"realized_usd"`
 	// The timestamp when the realized PnL settlement was settled
 	SettledAt *time.Time `json:"settled_at,omitempty"`
 	// The timestamp when the realized PnL settlement was created
@@ -46,7 +46,7 @@ type _RealizedPnlSettlement RealizedPnlSettlement
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRealizedPnlSettlement(id string, userId string, tenantId string, positionId string, orderId string, realizedUsd string, createdAt time.Time) *RealizedPnlSettlement {
+func NewRealizedPnlSettlement(id string, userId string, tenantId string, positionId string, orderId string, realizedUsd float64, createdAt time.Time) *RealizedPnlSettlement {
 	this := RealizedPnlSettlement{}
 	this.Id = id
 	this.UserId = userId
@@ -187,9 +187,9 @@ func (o *RealizedPnlSettlement) SetOrderId(v string) {
 }
 
 // GetRealizedUsd returns the RealizedUsd field value
-func (o *RealizedPnlSettlement) GetRealizedUsd() string {
+func (o *RealizedPnlSettlement) GetRealizedUsd() float64 {
 	if o == nil {
-		var ret string
+		var ret float64
 		return ret
 	}
 
@@ -198,7 +198,7 @@ func (o *RealizedPnlSettlement) GetRealizedUsd() string {
 
 // GetRealizedUsdOk returns a tuple with the RealizedUsd field value
 // and a boolean to check if the value has been set.
-func (o *RealizedPnlSettlement) GetRealizedUsdOk() (*string, bool) {
+func (o *RealizedPnlSettlement) GetRealizedUsdOk() (*float64, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -206,7 +206,7 @@ func (o *RealizedPnlSettlement) GetRealizedUsdOk() (*string, bool) {
 }
 
 // SetRealizedUsd sets field value
-func (o *RealizedPnlSettlement) SetRealizedUsd(v string) {
+func (o *RealizedPnlSettlement) SetRealizedUsd(v float64) {
 	o.RealizedUsd = v
 }
 

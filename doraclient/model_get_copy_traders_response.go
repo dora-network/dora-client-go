@@ -21,7 +21,7 @@ var _ MappedNullable = &GetCopyTradersResponse{}
 
 // GetCopyTradersResponse struct for GetCopyTradersResponse
 type GetCopyTradersResponse struct {
-	Data []string `json:"data,omitempty"`
+	Data []CopyTrader `json:"data,omitempty"`
 	// The error message. Present for error (non-2xx) responses.
 	Error *string `json:"error,omitempty"`
 	// Metadata about the response, including status code and trace information.
@@ -49,9 +49,9 @@ func NewGetCopyTradersResponseWithDefaults() *GetCopyTradersResponse {
 }
 
 // GetData returns the Data field value if set, zero value otherwise.
-func (o *GetCopyTradersResponse) GetData() []string {
+func (o *GetCopyTradersResponse) GetData() []CopyTrader {
 	if o == nil || IsNil(o.Data) {
-		var ret []string
+		var ret []CopyTrader
 		return ret
 	}
 	return o.Data
@@ -59,7 +59,7 @@ func (o *GetCopyTradersResponse) GetData() []string {
 
 // GetDataOk returns a tuple with the Data field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetCopyTradersResponse) GetDataOk() ([]string, bool) {
+func (o *GetCopyTradersResponse) GetDataOk() ([]CopyTrader, bool) {
 	if o == nil || IsNil(o.Data) {
 		return nil, false
 	}
@@ -75,8 +75,8 @@ func (o *GetCopyTradersResponse) HasData() bool {
 	return false
 }
 
-// SetData gets a reference to the given []string and assigns it to the Data field.
-func (o *GetCopyTradersResponse) SetData(v []string) {
+// SetData gets a reference to the given []CopyTrader and assigns it to the Data field.
+func (o *GetCopyTradersResponse) SetData(v []CopyTrader) {
 	o.Data = v
 }
 

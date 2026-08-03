@@ -688,7 +688,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GetCopyTradersResponse"
-          description: List of user IDs who have allow_copy_trading enabled
+          description: List of users who have allow_copy_trading enabled
         "400":
           content:
             application/json:
@@ -701,7 +701,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
           description: Internal server error
-      summary: Get list of user IDs with copy trading enabled
+      summary: Get list of users with copy trading enabled
   /v1/orderbooks:
     get:
       operationId: listOrderBooks
@@ -4659,6 +4659,7 @@ paths:
         name: quantity
         required: true
         schema:
+          format: decimal
           type: string
         style: form
       - description: The user's wallet address as a 0x-prefixed 20-byte hex string.
@@ -5143,6 +5144,7 @@ components:
           type: string
         quantity:
           description: "Human-decimal USDC deposit quantity, echoed from the request."
+          format: decimal
           type: string
         chains:
           items:
@@ -5289,6 +5291,7 @@ components:
           type: string
         quantity:
           description: Human-decimal USDC value (base units divided by 10^6).
+          format: decimal
           type: string
         client_reference_id:
           description: "Optional client-supplied reference, as a 0x-prefixed hex string."
@@ -5964,6 +5967,7 @@ components:
         email: email
         first_name: first_name
         last_name: last_name
+        user_name: user_name
         country_of_domicile: IN
         native_asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         photo_url: photo_url
@@ -5978,6 +5982,8 @@ components:
         first_name:
           type: string
         last_name:
+          type: string
+        user_name:
           type: string
         country_of_domicile:
           $ref: "#/components/schemas/CountryCode"
@@ -6594,6 +6600,7 @@ components:
         first_name:
           type: string
         total_pnl:
+          format: decimal
           type: string
         total_trades:
           type: integer
@@ -6602,6 +6609,7 @@ components:
         losing_trades:
           type: integer
         win_rate:
+          format: decimal
           type: string
       required:
       - first_name
@@ -6848,16 +6856,30 @@ components:
       - properties:
           data:
             items:
-              format: uuid
-              type: string
+              $ref: "#/components/schemas/CopyTrader"
             type: array
             default: null
       example:
         data:
-        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          user_name: user_name
+        - user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          user_name: user_name
         error: error
         metadata: ""
+    CopyTrader:
+      example:
+        user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        user_name: user_name
+      properties:
+        user_id:
+          format: uuid
+          type: string
+        user_name:
+          type: string
+      required:
+      - user_id
+      - user_name
     OrderKind:
       enum:
       - LIMIT
@@ -6954,10 +6976,12 @@ components:
         locked_quantity:
           description: Balance locked to ensure limit buy orders have sufficient balance
             to be fulfilled
+          format: decimal
           type: string
         impending_borrows_quantity:
           description: Borrows locked from the liquidity pool to ensure limit short
             sell orders have sufficient balance to be fulfilled
+          format: decimal
           type: string
         last_update_at:
           format: date-time
@@ -7401,9 +7425,11 @@ components:
           type: string
         deposit_limit:
           description: Maximum allowed deposit for the tenant.
+          format: decimal
           type: string
         trade_limit:
           description: Maximum allowed trade amount for the tenant.
+          format: decimal
           type: string
         updated_at:
           description: Last update timestamp for the restrictions.
@@ -7424,6 +7450,7 @@ components:
         take_profit_price: take_profit_price
       properties:
         price:
+          format: decimal
           type: string
         order_book_id:
           description: "Required: the order book to submit the order to"
@@ -7439,9 +7466,11 @@ components:
           type: string
         stop_loss_price:
           description: Stop loss price
+          format: decimal
           type: string
         take_profit_price:
           description: Take profit price
+          format: decimal
           type: string
       required:
       - asset_id
@@ -8765,18 +8794,25 @@ components:
           format: uuid
           type: string
         utilization:
+          format: decimal
           type: string
         avg_utilization:
+          format: decimal
           type: string
         avg_borrowing_yield_rate:
+          format: decimal
           type: string
         avg_lending_yield_rate:
+          format: decimal
           type: string
         borrowing_yield_rate:
+          format: decimal
           type: string
         lending_yield_rate:
+          format: decimal
           type: string
         yield_to_maturity:
+          format: decimal
           type: string
         start_time:
           format: date-time
@@ -8838,22 +8874,31 @@ components:
           format: date-time
           type: string
         utilization:
+          format: decimal
           type: string
         maximum_utilization:
+          format: decimal
           type: string
         minimum_rate:
+          format: decimal
           type: string
         kink_rate:
+          format: decimal
           type: string
         maximum_rate:
+          format: decimal
           type: string
         kink_utilization:
+          format: decimal
           type: string
         borrowing_yield_rate:
+          format: decimal
           type: string
         lending_yield_rate:
+          format: decimal
           type: string
         yield_to_maturity:
+          format: decimal
           type: string
       required:
       - asset_id
@@ -9303,6 +9348,7 @@ components:
         tx_kind:
           type: string
         quantity_usd:
+          format: decimal
           type: string
         created_at:
           format: date-time
@@ -9389,9 +9435,11 @@ components:
           default: null
         user_totals:
           additionalProperties:
+            format: decimal
             type: string
         tenant_totals:
           additionalProperties:
+            format: decimal
             type: string
     TransactionsSettlementRequest:
       example:
@@ -9495,26 +9543,36 @@ components:
           format: date-time
           type: string
         open:
+          format: decimal
           type: string
         high:
+          format: decimal
           type: string
         low:
+          format: decimal
           type: string
         close:
+          format: decimal
           type: string
         ytm:
           deprecated: true
           description: "DEPRECATED: Use close_ytm instead."
+          format: decimal
           type: string
         open_ytm:
+          format: decimal
           type: string
         close_ytm:
+          format: decimal
           type: string
         high_ytm:
+          format: decimal
           type: string
         low_ytm:
+          format: decimal
           type: string
         volume:
+          format: decimal
           type: string
       required:
       - close
@@ -10376,12 +10434,6 @@ components:
               type: string
             type: array
             default: null
-      example:
-        data:
-        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        error: error
-        metadata: ""
     LiquidationTargetsResponse:
       $ref: "#/components/schemas/LiquidationTargetsResponseEnvelope"
     LeverageRequestError:
@@ -10514,6 +10566,7 @@ components:
           format: uuid
           type: string
         repaid:
+          format: decimal
           type: string
         transaction_id:
           format: uuid
@@ -10887,6 +10940,8 @@ components:
         available: available
         health: health
         ltv: ltv
+        realized_pl: realized_pl
+        unrealized_pl: unrealized_pl
       properties:
         leverage:
           description: The leverage used to obtain the position on the isolated account
@@ -10899,12 +10954,21 @@ components:
           type: string
         ltv:
           type: string
+        realized_pl:
+          description: The realized profit or loss since account inception
+          type: string
+        unrealized_pl:
+          description: The unrealized profit or loss for the account's current open
+            positions
+          type: string
       required:
       - account_equity
       - available
       - health
       - leverage
       - ltv
+      - realized_pl
+      - unrealized_pl
     PLAccount:
       example:
         account_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -10959,6 +11023,8 @@ components:
           available: available
           health: health
           ltv: ltv
+          realized_pl: realized_pl
+          unrealized_pl: unrealized_pl
       properties:
         account_id:
           description: The ID of the account holding the position
@@ -11048,6 +11114,8 @@ components:
             available: available
             health: health
             ltv: ltv
+            realized_pl: realized_pl
+            unrealized_pl: unrealized_pl
         - account_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           account_name: account_name
           is_global: true
@@ -11100,6 +11168,8 @@ components:
             available: available
             health: health
             ltv: ltv
+            realized_pl: realized_pl
+            unrealized_pl: unrealized_pl
         error: error
         metadata: ""
     PLResponse:
@@ -11137,6 +11207,7 @@ components:
           type: string
         realized_usd:
           description: The amount of realized PnL in USD
+          format: decimal
           type: string
         settled_at:
           description: The timestamp when the realized PnL settlement was settled
@@ -11191,21 +11262,25 @@ components:
           default: null
         user_totals:
           additionalProperties:
+            format: decimal
             type: string
           description: A map of user IDs to their total realized PnL in USD across
             all settlements included in the response
         tenant_totals:
           additionalProperties:
+            format: decimal
             type: string
           description: A map of tenant IDs to their total realized PnL in USD across
             all settlements included in the response
         user_totals_unsettled:
           additionalProperties:
+            format: decimal
             type: string
           description: A map of user IDs to their total realized PnL in USD across
             unsettled settlements (where settled_at is null) included in the response
         tenant_totals_unsettled:
           additionalProperties:
+            format: decimal
             type: string
           description: A map of tenant IDs to their total realized PnL in USD across
             unsettled settlements (where settled_at is null) included in the response
@@ -11472,6 +11547,7 @@ components:
           format: uuid
           type: string
         quantity:
+          format: decimal
           type: string
         account_name:
           type: string
@@ -11504,6 +11580,7 @@ components:
           format: uuid
           type: string
         quantity:
+          format: decimal
           type: string
       required:
       - asset_id

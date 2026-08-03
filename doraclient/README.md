@@ -94,7 +94,7 @@ Class | Method | HTTP request | Description
 *DefaultAPI* | [**GetAssetYieldData**](docs/DefaultAPI.md#getassetyielddata) | **Get** /v1/charts/{asset_id}/yield | Get yield chart data for an asset
 *DefaultAPI* | [**GetAssetsStream**](docs/DefaultAPI.md#getassetsstream) | **Get** /v1/assets/stream | Get all inserts or updates for assets
 *DefaultAPI* | [**GetCandleData**](docs/DefaultAPI.md#getcandledata) | **Get** /v1/charts/{order_book_id}/candle | Get candlestick data for an orderbook
-*DefaultAPI* | [**GetCopyTraders**](docs/DefaultAPI.md#getcopytraders) | **Get** /v1/user/copy_traders | Get list of user IDs with copy trading enabled
+*DefaultAPI* | [**GetCopyTraders**](docs/DefaultAPI.md#getcopytraders) | **Get** /v1/user/copy_traders | Get list of users with copy trading enabled
 *DefaultAPI* | [**GetCouponPaymentsByAssetId**](docs/DefaultAPI.md#getcouponpaymentsbyassetid) | **Get** /v1/assets/{asset_id}/coupon_payments | Get coupon payments for a bond asset
 *DefaultAPI* | [**GetDepositInstructions**](docs/DefaultAPI.md#getdepositinstructions) | **Get** /v1/web3/deposit-instructions | Get per-chain instructions for depositing USDC into the Dora vault
 *DefaultAPI* | [**GetL1Depth**](docs/DefaultAPI.md#getl1depth) | **Get** /v1/orderbooks/{order_book_id}/L1 | Get the top price levels for a specific orderbook (L1 market depth)
@@ -214,6 +214,7 @@ Class | Method | HTTP request | Description
  - [ClosePositionResp](docs/ClosePositionResp.md)
  - [ClosePositionResponseEnvelope](docs/ClosePositionResponseEnvelope.md)
  - [Collateral](docs/Collateral.md)
+ - [CopyTrader](docs/CopyTrader.md)
  - [CountryCode](docs/CountryCode.md)
  - [CouponKind](docs/CouponKind.md)
  - [CouponPayment](docs/CouponPayment.md)

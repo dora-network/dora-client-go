@@ -3465,7 +3465,7 @@ func (r ApiGetCopyTradersRequest) Execute() (*GetCopyTradersResponse, *http.Resp
 }
 
 /*
-GetCopyTraders Get list of user IDs with copy trading enabled
+GetCopyTraders Get list of users with copy trading enabled
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetCopyTradersRequest
@@ -3726,14 +3726,14 @@ func (a *DefaultAPIService) GetCouponPaymentsByAssetIdExecute(r ApiGetCouponPaym
 type ApiGetDepositInstructionsRequest struct {
 	ctx context.Context
 	ApiService *DefaultAPIService
-	quantity *string
+	quantity *float64
 	ownerAddress *string
 	nonce *string
 	clientReferenceId *string
 }
 
 // Human-decimal USDC quantity to deposit, e.g. &#39;100.50&#39;. Must be positive, with at most 6 decimal places.
-func (r ApiGetDepositInstructionsRequest) Quantity(quantity string) ApiGetDepositInstructionsRequest {
+func (r ApiGetDepositInstructionsRequest) Quantity(quantity float64) ApiGetDepositInstructionsRequest {
 	r.quantity = &quantity
 	return r
 }

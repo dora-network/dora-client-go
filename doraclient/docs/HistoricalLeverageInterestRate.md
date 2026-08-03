@@ -6,21 +6,21 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AssetId** | **string** |  | 
 **UpdatedAt** | **time.Time** |  | 
-**Utilization** | **string** |  | 
-**MaximumUtilization** | **string** |  | 
-**MinimumRate** | **string** |  | 
-**KinkRate** | **string** |  | 
-**MaximumRate** | **string** |  | 
-**KinkUtilization** | **string** |  | 
-**BorrowingYieldRate** | **string** |  | 
-**LendingYieldRate** | **string** |  | 
-**YieldToMaturity** | **string** |  | 
+**Utilization** | **float64** |  | 
+**MaximumUtilization** | **float64** |  | 
+**MinimumRate** | **float64** |  | 
+**KinkRate** | **float64** |  | 
+**MaximumRate** | **float64** |  | 
+**KinkUtilization** | **float64** |  | 
+**BorrowingYieldRate** | **float64** |  | 
+**LendingYieldRate** | **float64** |  | 
+**YieldToMaturity** | **float64** |  | 
 
 ## Methods
 
 ### NewHistoricalLeverageInterestRate
 
-`func NewHistoricalLeverageInterestRate(assetId string, updatedAt time.Time, utilization string, maximumUtilization string, minimumRate string, kinkRate string, maximumRate string, kinkUtilization string, borrowingYieldRate string, lendingYieldRate string, yieldToMaturity string, ) *HistoricalLeverageInterestRate`
+`func NewHistoricalLeverageInterestRate(assetId string, updatedAt time.Time, utilization float64, maximumUtilization float64, minimumRate float64, kinkRate float64, maximumRate float64, kinkUtilization float64, borrowingYieldRate float64, lendingYieldRate float64, yieldToMaturity float64, ) *HistoricalLeverageInterestRate`
 
 NewHistoricalLeverageInterestRate instantiates a new HistoricalLeverageInterestRate object
 This constructor will assign default values to properties that have it defined,
@@ -77,180 +77,180 @@ SetUpdatedAt sets UpdatedAt field to given value.
 
 ### GetUtilization
 
-`func (o *HistoricalLeverageInterestRate) GetUtilization() string`
+`func (o *HistoricalLeverageInterestRate) GetUtilization() float64`
 
 GetUtilization returns the Utilization field if non-nil, zero value otherwise.
 
 ### GetUtilizationOk
 
-`func (o *HistoricalLeverageInterestRate) GetUtilizationOk() (*string, bool)`
+`func (o *HistoricalLeverageInterestRate) GetUtilizationOk() (*float64, bool)`
 
 GetUtilizationOk returns a tuple with the Utilization field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetUtilization
 
-`func (o *HistoricalLeverageInterestRate) SetUtilization(v string)`
+`func (o *HistoricalLeverageInterestRate) SetUtilization(v float64)`
 
 SetUtilization sets Utilization field to given value.
 
 
 ### GetMaximumUtilization
 
-`func (o *HistoricalLeverageInterestRate) GetMaximumUtilization() string`
+`func (o *HistoricalLeverageInterestRate) GetMaximumUtilization() float64`
 
 GetMaximumUtilization returns the MaximumUtilization field if non-nil, zero value otherwise.
 
 ### GetMaximumUtilizationOk
 
-`func (o *HistoricalLeverageInterestRate) GetMaximumUtilizationOk() (*string, bool)`
+`func (o *HistoricalLeverageInterestRate) GetMaximumUtilizationOk() (*float64, bool)`
 
 GetMaximumUtilizationOk returns a tuple with the MaximumUtilization field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMaximumUtilization
 
-`func (o *HistoricalLeverageInterestRate) SetMaximumUtilization(v string)`
+`func (o *HistoricalLeverageInterestRate) SetMaximumUtilization(v float64)`
 
 SetMaximumUtilization sets MaximumUtilization field to given value.
 
 
 ### GetMinimumRate
 
-`func (o *HistoricalLeverageInterestRate) GetMinimumRate() string`
+`func (o *HistoricalLeverageInterestRate) GetMinimumRate() float64`
 
 GetMinimumRate returns the MinimumRate field if non-nil, zero value otherwise.
 
 ### GetMinimumRateOk
 
-`func (o *HistoricalLeverageInterestRate) GetMinimumRateOk() (*string, bool)`
+`func (o *HistoricalLeverageInterestRate) GetMinimumRateOk() (*float64, bool)`
 
 GetMinimumRateOk returns a tuple with the MinimumRate field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMinimumRate
 
-`func (o *HistoricalLeverageInterestRate) SetMinimumRate(v string)`
+`func (o *HistoricalLeverageInterestRate) SetMinimumRate(v float64)`
 
 SetMinimumRate sets MinimumRate field to given value.
 
 
 ### GetKinkRate
 
-`func (o *HistoricalLeverageInterestRate) GetKinkRate() string`
+`func (o *HistoricalLeverageInterestRate) GetKinkRate() float64`
 
 GetKinkRate returns the KinkRate field if non-nil, zero value otherwise.
 
 ### GetKinkRateOk
 
-`func (o *HistoricalLeverageInterestRate) GetKinkRateOk() (*string, bool)`
+`func (o *HistoricalLeverageInterestRate) GetKinkRateOk() (*float64, bool)`
 
 GetKinkRateOk returns a tuple with the KinkRate field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetKinkRate
 
-`func (o *HistoricalLeverageInterestRate) SetKinkRate(v string)`
+`func (o *HistoricalLeverageInterestRate) SetKinkRate(v float64)`
 
 SetKinkRate sets KinkRate field to given value.
 
 
 ### GetMaximumRate
 
-`func (o *HistoricalLeverageInterestRate) GetMaximumRate() string`
+`func (o *HistoricalLeverageInterestRate) GetMaximumRate() float64`
 
 GetMaximumRate returns the MaximumRate field if non-nil, zero value otherwise.
 
 ### GetMaximumRateOk
 
-`func (o *HistoricalLeverageInterestRate) GetMaximumRateOk() (*string, bool)`
+`func (o *HistoricalLeverageInterestRate) GetMaximumRateOk() (*float64, bool)`
 
 GetMaximumRateOk returns a tuple with the MaximumRate field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMaximumRate
 
-`func (o *HistoricalLeverageInterestRate) SetMaximumRate(v string)`
+`func (o *HistoricalLeverageInterestRate) SetMaximumRate(v float64)`
 
 SetMaximumRate sets MaximumRate field to given value.
 
 
 ### GetKinkUtilization
 
-`func (o *HistoricalLeverageInterestRate) GetKinkUtilization() string`
+`func (o *HistoricalLeverageInterestRate) GetKinkUtilization() float64`
 
 GetKinkUtilization returns the KinkUtilization field if non-nil, zero value otherwise.
 
 ### GetKinkUtilizationOk
 
-`func (o *HistoricalLeverageInterestRate) GetKinkUtilizationOk() (*string, bool)`
+`func (o *HistoricalLeverageInterestRate) GetKinkUtilizationOk() (*float64, bool)`
 
 GetKinkUtilizationOk returns a tuple with the KinkUtilization field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetKinkUtilization
 
-`func (o *HistoricalLeverageInterestRate) SetKinkUtilization(v string)`
+`func (o *HistoricalLeverageInterestRate) SetKinkUtilization(v float64)`
 
 SetKinkUtilization sets KinkUtilization field to given value.
 
 
 ### GetBorrowingYieldRate
 
-`func (o *HistoricalLeverageInterestRate) GetBorrowingYieldRate() string`
+`func (o *HistoricalLeverageInterestRate) GetBorrowingYieldRate() float64`
 
 GetBorrowingYieldRate returns the BorrowingYieldRate field if non-nil, zero value otherwise.
 
 ### GetBorrowingYieldRateOk
 
-`func (o *HistoricalLeverageInterestRate) GetBorrowingYieldRateOk() (*string, bool)`
+`func (o *HistoricalLeverageInterestRate) GetBorrowingYieldRateOk() (*float64, bool)`
 
 GetBorrowingYieldRateOk returns a tuple with the BorrowingYieldRate field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetBorrowingYieldRate
 
-`func (o *HistoricalLeverageInterestRate) SetBorrowingYieldRate(v string)`
+`func (o *HistoricalLeverageInterestRate) SetBorrowingYieldRate(v float64)`
 
 SetBorrowingYieldRate sets BorrowingYieldRate field to given value.
 
 
 ### GetLendingYieldRate
 
-`func (o *HistoricalLeverageInterestRate) GetLendingYieldRate() string`
+`func (o *HistoricalLeverageInterestRate) GetLendingYieldRate() float64`
 
 GetLendingYieldRate returns the LendingYieldRate field if non-nil, zero value otherwise.
 
 ### GetLendingYieldRateOk
 
-`func (o *HistoricalLeverageInterestRate) GetLendingYieldRateOk() (*string, bool)`
+`func (o *HistoricalLeverageInterestRate) GetLendingYieldRateOk() (*float64, bool)`
 
 GetLendingYieldRateOk returns a tuple with the LendingYieldRate field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetLendingYieldRate
 
-`func (o *HistoricalLeverageInterestRate) SetLendingYieldRate(v string)`
+`func (o *HistoricalLeverageInterestRate) SetLendingYieldRate(v float64)`
 
 SetLendingYieldRate sets LendingYieldRate field to given value.
 
 
 ### GetYieldToMaturity
 
-`func (o *HistoricalLeverageInterestRate) GetYieldToMaturity() string`
+`func (o *HistoricalLeverageInterestRate) GetYieldToMaturity() float64`
 
 GetYieldToMaturity returns the YieldToMaturity field if non-nil, zero value otherwise.
 
 ### GetYieldToMaturityOk
 
-`func (o *HistoricalLeverageInterestRate) GetYieldToMaturityOk() (*string, bool)`
+`func (o *HistoricalLeverageInterestRate) GetYieldToMaturityOk() (*float64, bool)`
 
 GetYieldToMaturityOk returns a tuple with the YieldToMaturity field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetYieldToMaturity
 
-`func (o *HistoricalLeverageInterestRate) SetYieldToMaturity(v string)`
+`func (o *HistoricalLeverageInterestRate) SetYieldToMaturity(v float64)`
 
 SetYieldToMaturity sets YieldToMaturity field to given value.
 

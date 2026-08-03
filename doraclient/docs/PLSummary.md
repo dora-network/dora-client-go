@@ -9,12 +9,14 @@ Name | Type | Description | Notes
 **Available** | **string** |  | 
 **Health** | **string** |  | 
 **Ltv** | **string** |  | 
+**RealizedPl** | **string** | The realized profit or loss since account inception | 
+**UnrealizedPl** | **string** | The unrealized profit or loss for the account&#39;s current open positions | 
 
 ## Methods
 
 ### NewPLSummary
 
-`func NewPLSummary(leverage string, accountEquity string, available string, health string, ltv string, ) *PLSummary`
+`func NewPLSummary(leverage string, accountEquity string, available string, health string, ltv string, realizedPl string, unrealizedPl string, ) *PLSummary`
 
 NewPLSummary instantiates a new PLSummary object
 This constructor will assign default values to properties that have it defined,
@@ -127,6 +129,46 @@ and a boolean to check if the value has been set.
 `func (o *PLSummary) SetLtv(v string)`
 
 SetLtv sets Ltv field to given value.
+
+
+### GetRealizedPl
+
+`func (o *PLSummary) GetRealizedPl() string`
+
+GetRealizedPl returns the RealizedPl field if non-nil, zero value otherwise.
+
+### GetRealizedPlOk
+
+`func (o *PLSummary) GetRealizedPlOk() (*string, bool)`
+
+GetRealizedPlOk returns a tuple with the RealizedPl field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRealizedPl
+
+`func (o *PLSummary) SetRealizedPl(v string)`
+
+SetRealizedPl sets RealizedPl field to given value.
+
+
+### GetUnrealizedPl
+
+`func (o *PLSummary) GetUnrealizedPl() string`
+
+GetUnrealizedPl returns the UnrealizedPl field if non-nil, zero value otherwise.
+
+### GetUnrealizedPlOk
+
+`func (o *PLSummary) GetUnrealizedPlOk() (*string, bool)`
+
+GetUnrealizedPlOk returns a tuple with the UnrealizedPl field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUnrealizedPl
+
+`func (o *PLSummary) SetUnrealizedPl(v string)`
+
+SetUnrealizedPl sets UnrealizedPl field to given value.
 
 
 

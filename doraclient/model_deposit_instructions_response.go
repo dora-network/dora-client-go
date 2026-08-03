@@ -26,7 +26,7 @@ type DepositInstructionsResponse struct {
 	// The wallet address the instructions were issued for, echoed from the request.
 	OwnerAddress string `json:"owner_address"`
 	// Human-decimal USDC deposit quantity, echoed from the request.
-	Quantity string `json:"quantity"`
+	Quantity float64 `json:"quantity"`
 	Chains []DepositInstructionForChain `json:"chains"`
 }
 
@@ -36,7 +36,7 @@ type _DepositInstructionsResponse DepositInstructionsResponse
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDepositInstructionsResponse(userId string, ownerAddress string, quantity string, chains []DepositInstructionForChain) *DepositInstructionsResponse {
+func NewDepositInstructionsResponse(userId string, ownerAddress string, quantity float64, chains []DepositInstructionForChain) *DepositInstructionsResponse {
 	this := DepositInstructionsResponse{}
 	this.UserId = userId
 	this.OwnerAddress = ownerAddress
@@ -102,9 +102,9 @@ func (o *DepositInstructionsResponse) SetOwnerAddress(v string) {
 }
 
 // GetQuantity returns the Quantity field value
-func (o *DepositInstructionsResponse) GetQuantity() string {
+func (o *DepositInstructionsResponse) GetQuantity() float64 {
 	if o == nil {
-		var ret string
+		var ret float64
 		return ret
 	}
 
@@ -113,7 +113,7 @@ func (o *DepositInstructionsResponse) GetQuantity() string {
 
 // GetQuantityOk returns a tuple with the Quantity field value
 // and a boolean to check if the value has been set.
-func (o *DepositInstructionsResponse) GetQuantityOk() (*string, bool) {
+func (o *DepositInstructionsResponse) GetQuantityOk() (*float64, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -121,7 +121,7 @@ func (o *DepositInstructionsResponse) GetQuantityOk() (*string, bool) {
 }
 
 // SetQuantity sets field value
-func (o *DepositInstructionsResponse) SetQuantity(v string) {
+func (o *DepositInstructionsResponse) SetQuantity(v float64) {
 	o.Quantity = v
 }
 

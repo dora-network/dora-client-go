@@ -22,6 +22,7 @@ type CreateIntegratorUserRequest struct {
 	Email *string
 	FirstName *string
 	LastName *string
+	UserName *string
 	CountryOfDomicile *CountryCode
 	NativeAssetId *string
 	PhotoUrl *string
@@ -141,6 +142,38 @@ func (o *CreateIntegratorUserRequest) HasLastName() bool {
 // SetLastName gets a reference to the given string and assigns it to the LastName field.
 func (o *CreateIntegratorUserRequest) SetLastName(v string) {
 	o.LastName = &v
+}
+
+// GetUserName returns the UserName field value if set, zero value otherwise.
+func (o *CreateIntegratorUserRequest) GetUserName() string {
+	if o == nil || IsNil(o.UserName) {
+		var ret string
+		return ret
+	}
+	return *o.UserName
+}
+
+// GetUserNameOk returns a tuple with the UserName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateIntegratorUserRequest) GetUserNameOk() (*string, bool) {
+	if o == nil || IsNil(o.UserName) {
+		return nil, false
+	}
+	return o.UserName, true
+}
+
+// HasUserName returns a boolean if a field has been set.
+func (o *CreateIntegratorUserRequest) HasUserName() bool {
+	if o != nil && !IsNil(o.UserName) {
+		return true
+	}
+
+	return false
+}
+
+// SetUserName gets a reference to the given string and assigns it to the UserName field.
+func (o *CreateIntegratorUserRequest) SetUserName(v string) {
+	o.UserName = &v
 }
 
 // GetCountryOfDomicile returns the CountryOfDomicile field value if set, zero value otherwise.
@@ -353,6 +386,9 @@ func (o CreateIntegratorUserRequest) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.LastName) {
 		toSerialize["last_name"] = o.LastName
+	}
+	if !IsNil(o.UserName) {
+		toSerialize["user_name"] = o.UserName
 	}
 	if !IsNil(o.CountryOfDomicile) {
 		toSerialize["country_of_domicile"] = o.CountryOfDomicile

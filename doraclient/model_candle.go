@@ -24,18 +24,18 @@ var _ MappedNullable = &Candle{}
 type Candle struct {
 	OrderBookId string `json:"order_book_id"`
 	StartTimestamp time.Time `json:"start_timestamp"`
-	Open string `json:"open"`
-	High string `json:"high"`
-	Low string `json:"low"`
-	Close string `json:"close"`
+	Open float64 `json:"open"`
+	High float64 `json:"high"`
+	Low float64 `json:"low"`
+	Close float64 `json:"close"`
 	// DEPRECATED: Use close_ytm instead.
 	// Deprecated
-	Ytm *string `json:"ytm,omitempty"`
-	OpenYtm string `json:"open_ytm"`
-	CloseYtm string `json:"close_ytm"`
-	HighYtm string `json:"high_ytm"`
-	LowYtm string `json:"low_ytm"`
-	Volume string `json:"volume"`
+	Ytm *float64 `json:"ytm,omitempty"`
+	OpenYtm float64 `json:"open_ytm"`
+	CloseYtm float64 `json:"close_ytm"`
+	HighYtm float64 `json:"high_ytm"`
+	LowYtm float64 `json:"low_ytm"`
+	Volume float64 `json:"volume"`
 }
 
 type _Candle Candle
@@ -44,7 +44,7 @@ type _Candle Candle
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCandle(orderBookId string, startTimestamp time.Time, open string, high string, low string, close string, openYtm string, closeYtm string, highYtm string, lowYtm string, volume string) *Candle {
+func NewCandle(orderBookId string, startTimestamp time.Time, open float64, high float64, low float64, close float64, openYtm float64, closeYtm float64, highYtm float64, lowYtm float64, volume float64) *Candle {
 	this := Candle{}
 	this.OrderBookId = orderBookId
 	this.StartTimestamp = startTimestamp
@@ -117,9 +117,9 @@ func (o *Candle) SetStartTimestamp(v time.Time) {
 }
 
 // GetOpen returns the Open field value
-func (o *Candle) GetOpen() string {
+func (o *Candle) GetOpen() float64 {
 	if o == nil {
-		var ret string
+		var ret float64
 		return ret
 	}
 
@@ -128,7 +128,7 @@ func (o *Candle) GetOpen() string {
 
 // GetOpenOk returns a tuple with the Open field value
 // and a boolean to check if the value has been set.
-func (o *Candle) GetOpenOk() (*string, bool) {
+func (o *Candle) GetOpenOk() (*float64, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -136,14 +136,14 @@ func (o *Candle) GetOpenOk() (*string, bool) {
 }
 
 // SetOpen sets field value
-func (o *Candle) SetOpen(v string) {
+func (o *Candle) SetOpen(v float64) {
 	o.Open = v
 }
 
 // GetHigh returns the High field value
-func (o *Candle) GetHigh() string {
+func (o *Candle) GetHigh() float64 {
 	if o == nil {
-		var ret string
+		var ret float64
 		return ret
 	}
 
@@ -152,7 +152,7 @@ func (o *Candle) GetHigh() string {
 
 // GetHighOk returns a tuple with the High field value
 // and a boolean to check if the value has been set.
-func (o *Candle) GetHighOk() (*string, bool) {
+func (o *Candle) GetHighOk() (*float64, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -160,14 +160,14 @@ func (o *Candle) GetHighOk() (*string, bool) {
 }
 
 // SetHigh sets field value
-func (o *Candle) SetHigh(v string) {
+func (o *Candle) SetHigh(v float64) {
 	o.High = v
 }
 
 // GetLow returns the Low field value
-func (o *Candle) GetLow() string {
+func (o *Candle) GetLow() float64 {
 	if o == nil {
-		var ret string
+		var ret float64
 		return ret
 	}
 
@@ -176,7 +176,7 @@ func (o *Candle) GetLow() string {
 
 // GetLowOk returns a tuple with the Low field value
 // and a boolean to check if the value has been set.
-func (o *Candle) GetLowOk() (*string, bool) {
+func (o *Candle) GetLowOk() (*float64, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -184,14 +184,14 @@ func (o *Candle) GetLowOk() (*string, bool) {
 }
 
 // SetLow sets field value
-func (o *Candle) SetLow(v string) {
+func (o *Candle) SetLow(v float64) {
 	o.Low = v
 }
 
 // GetClose returns the Close field value
-func (o *Candle) GetClose() string {
+func (o *Candle) GetClose() float64 {
 	if o == nil {
-		var ret string
+		var ret float64
 		return ret
 	}
 
@@ -200,7 +200,7 @@ func (o *Candle) GetClose() string {
 
 // GetCloseOk returns a tuple with the Close field value
 // and a boolean to check if the value has been set.
-func (o *Candle) GetCloseOk() (*string, bool) {
+func (o *Candle) GetCloseOk() (*float64, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -208,15 +208,15 @@ func (o *Candle) GetCloseOk() (*string, bool) {
 }
 
 // SetClose sets field value
-func (o *Candle) SetClose(v string) {
+func (o *Candle) SetClose(v float64) {
 	o.Close = v
 }
 
 // GetYtm returns the Ytm field value if set, zero value otherwise.
 // Deprecated
-func (o *Candle) GetYtm() string {
+func (o *Candle) GetYtm() float64 {
 	if o == nil || IsNil(o.Ytm) {
-		var ret string
+		var ret float64
 		return ret
 	}
 	return *o.Ytm
@@ -225,7 +225,7 @@ func (o *Candle) GetYtm() string {
 // GetYtmOk returns a tuple with the Ytm field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // Deprecated
-func (o *Candle) GetYtmOk() (*string, bool) {
+func (o *Candle) GetYtmOk() (*float64, bool) {
 	if o == nil || IsNil(o.Ytm) {
 		return nil, false
 	}
@@ -241,16 +241,16 @@ func (o *Candle) HasYtm() bool {
 	return false
 }
 
-// SetYtm gets a reference to the given string and assigns it to the Ytm field.
+// SetYtm gets a reference to the given float64 and assigns it to the Ytm field.
 // Deprecated
-func (o *Candle) SetYtm(v string) {
+func (o *Candle) SetYtm(v float64) {
 	o.Ytm = &v
 }
 
 // GetOpenYtm returns the OpenYtm field value
-func (o *Candle) GetOpenYtm() string {
+func (o *Candle) GetOpenYtm() float64 {
 	if o == nil {
-		var ret string
+		var ret float64
 		return ret
 	}
 
@@ -259,7 +259,7 @@ func (o *Candle) GetOpenYtm() string {
 
 // GetOpenYtmOk returns a tuple with the OpenYtm field value
 // and a boolean to check if the value has been set.
-func (o *Candle) GetOpenYtmOk() (*string, bool) {
+func (o *Candle) GetOpenYtmOk() (*float64, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -267,14 +267,14 @@ func (o *Candle) GetOpenYtmOk() (*string, bool) {
 }
 
 // SetOpenYtm sets field value
-func (o *Candle) SetOpenYtm(v string) {
+func (o *Candle) SetOpenYtm(v float64) {
 	o.OpenYtm = v
 }
 
 // GetCloseYtm returns the CloseYtm field value
-func (o *Candle) GetCloseYtm() string {
+func (o *Candle) GetCloseYtm() float64 {
 	if o == nil {
-		var ret string
+		var ret float64
 		return ret
 	}
 
@@ -283,7 +283,7 @@ func (o *Candle) GetCloseYtm() string {
 
 // GetCloseYtmOk returns a tuple with the CloseYtm field value
 // and a boolean to check if the value has been set.
-func (o *Candle) GetCloseYtmOk() (*string, bool) {
+func (o *Candle) GetCloseYtmOk() (*float64, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -291,14 +291,14 @@ func (o *Candle) GetCloseYtmOk() (*string, bool) {
 }
 
 // SetCloseYtm sets field value
-func (o *Candle) SetCloseYtm(v string) {
+func (o *Candle) SetCloseYtm(v float64) {
 	o.CloseYtm = v
 }
 
 // GetHighYtm returns the HighYtm field value
-func (o *Candle) GetHighYtm() string {
+func (o *Candle) GetHighYtm() float64 {
 	if o == nil {
-		var ret string
+		var ret float64
 		return ret
 	}
 
@@ -307,7 +307,7 @@ func (o *Candle) GetHighYtm() string {
 
 // GetHighYtmOk returns a tuple with the HighYtm field value
 // and a boolean to check if the value has been set.
-func (o *Candle) GetHighYtmOk() (*string, bool) {
+func (o *Candle) GetHighYtmOk() (*float64, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -315,14 +315,14 @@ func (o *Candle) GetHighYtmOk() (*string, bool) {
 }
 
 // SetHighYtm sets field value
-func (o *Candle) SetHighYtm(v string) {
+func (o *Candle) SetHighYtm(v float64) {
 	o.HighYtm = v
 }
 
 // GetLowYtm returns the LowYtm field value
-func (o *Candle) GetLowYtm() string {
+func (o *Candle) GetLowYtm() float64 {
 	if o == nil {
-		var ret string
+		var ret float64
 		return ret
 	}
 
@@ -331,7 +331,7 @@ func (o *Candle) GetLowYtm() string {
 
 // GetLowYtmOk returns a tuple with the LowYtm field value
 // and a boolean to check if the value has been set.
-func (o *Candle) GetLowYtmOk() (*string, bool) {
+func (o *Candle) GetLowYtmOk() (*float64, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -339,14 +339,14 @@ func (o *Candle) GetLowYtmOk() (*string, bool) {
 }
 
 // SetLowYtm sets field value
-func (o *Candle) SetLowYtm(v string) {
+func (o *Candle) SetLowYtm(v float64) {
 	o.LowYtm = v
 }
 
 // GetVolume returns the Volume field value
-func (o *Candle) GetVolume() string {
+func (o *Candle) GetVolume() float64 {
 	if o == nil {
-		var ret string
+		var ret float64
 		return ret
 	}
 
@@ -355,7 +355,7 @@ func (o *Candle) GetVolume() string {
 
 // GetVolumeOk returns a tuple with the Volume field value
 // and a boolean to check if the value has been set.
-func (o *Candle) GetVolumeOk() (*string, bool) {
+func (o *Candle) GetVolumeOk() (*float64, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -363,7 +363,7 @@ func (o *Candle) GetVolumeOk() (*string, bool) {
 }
 
 // SetVolume sets field value
-func (o *Candle) SetVolume(v string) {
+func (o *Candle) SetVolume(v float64) {
 	o.Volume = v
 }
 

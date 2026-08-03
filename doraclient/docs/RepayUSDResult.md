@@ -6,14 +6,14 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **PositionId** | **string** |  | 
 **AssetId** | **string** |  | 
-**Repaid** | **string** |  | 
+**Repaid** | **float64** |  | 
 **TransactionId** | **string** |  | 
 
 ## Methods
 
 ### NewRepayUSDResult
 
-`func NewRepayUSDResult(positionId string, assetId string, repaid string, transactionId string, ) *RepayUSDResult`
+`func NewRepayUSDResult(positionId string, assetId string, repaid float64, transactionId string, ) *RepayUSDResult`
 
 NewRepayUSDResult instantiates a new RepayUSDResult object
 This constructor will assign default values to properties that have it defined,
@@ -70,20 +70,20 @@ SetAssetId sets AssetId field to given value.
 
 ### GetRepaid
 
-`func (o *RepayUSDResult) GetRepaid() string`
+`func (o *RepayUSDResult) GetRepaid() float64`
 
 GetRepaid returns the Repaid field if non-nil, zero value otherwise.
 
 ### GetRepaidOk
 
-`func (o *RepayUSDResult) GetRepaidOk() (*string, bool)`
+`func (o *RepayUSDResult) GetRepaidOk() (*float64, bool)`
 
 GetRepaidOk returns a tuple with the Repaid field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetRepaid
 
-`func (o *RepayUSDResult) SetRepaid(v string)`
+`func (o *RepayUSDResult) SetRepaid(v float64)`
 
 SetRepaid sets Repaid field to given value.
 

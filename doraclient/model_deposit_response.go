@@ -40,7 +40,7 @@ type DepositResponse struct {
 	DepositorAddress string `json:"depositor_address"`
 	UserId string `json:"user_id"`
 	// Human-decimal USDC value (base units divided by 10^6).
-	Quantity string `json:"quantity"`
+	Quantity float64 `json:"quantity"`
 	// Optional client-supplied reference, as a 0x-prefixed hex string.
 	ClientReferenceId *string `json:"client_reference_id,omitempty"`
 	Status Web3EventStatus `json:"status"`
@@ -55,7 +55,7 @@ type _DepositResponse DepositResponse
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDepositResponse(networkChainId int32, networkName string, chainId string, txHash string, logIndex int32, blockNumber int64, blockTime time.Time, contractAddress string, depositorAddress string, userId string, quantity string, status Web3EventStatus, observedAt time.Time) *DepositResponse {
+func NewDepositResponse(networkChainId int32, networkName string, chainId string, txHash string, logIndex int32, blockNumber int64, blockTime time.Time, contractAddress string, depositorAddress string, userId string, quantity float64, status Web3EventStatus, observedAt time.Time) *DepositResponse {
 	this := DepositResponse{}
 	this.NetworkChainId = networkChainId
 	this.NetworkName = networkName
@@ -322,9 +322,9 @@ func (o *DepositResponse) SetUserId(v string) {
 }
 
 // GetQuantity returns the Quantity field value
-func (o *DepositResponse) GetQuantity() string {
+func (o *DepositResponse) GetQuantity() float64 {
 	if o == nil {
-		var ret string
+		var ret float64
 		return ret
 	}
 
@@ -333,7 +333,7 @@ func (o *DepositResponse) GetQuantity() string {
 
 // GetQuantityOk returns a tuple with the Quantity field value
 // and a boolean to check if the value has been set.
-func (o *DepositResponse) GetQuantityOk() (*string, bool) {
+func (o *DepositResponse) GetQuantityOk() (*float64, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -341,7 +341,7 @@ func (o *DepositResponse) GetQuantityOk() (*string, bool) {
 }
 
 // SetQuantity sets field value
-func (o *DepositResponse) SetQuantity(v string) {
+func (o *DepositResponse) SetQuantity(v float64) {
 	o.Quantity = v
 }
 
