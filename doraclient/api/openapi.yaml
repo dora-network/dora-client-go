@@ -5914,6 +5914,7 @@ components:
           email: email
           first_name: first_name
           last_name: last_name
+          user_name: user_name
           country_of_domicile: IN
           native_asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           photo_url: photo_url
@@ -5939,6 +5940,7 @@ components:
           email: email
           first_name: first_name
           last_name: last_name
+          user_name: user_name
           country_of_domicile: IN
           native_asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           photo_url: photo_url
@@ -6026,6 +6028,7 @@ components:
           email: email
           first_name: first_name
           last_name: last_name
+          user_name: user_name
           country_of_domicile: IN
           native_asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           photo_url: photo_url
@@ -6091,6 +6094,7 @@ components:
         email: email
         first_name: first_name
         last_name: last_name
+        user_name: user_name
         country_of_domicile: IN
         native_asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         photo_url: photo_url
@@ -6127,6 +6131,8 @@ components:
         first_name:
           type: string
         last_name:
+          type: string
+        user_name:
           type: string
         country_of_domicile:
           $ref: "#/components/schemas/CountryCode"
@@ -6187,6 +6193,7 @@ components:
       - roles
       - show_tutorial_cards
       - tenant_id
+      - user_name
     UserConfig:
       properties:
         id:

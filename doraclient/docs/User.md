@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **Email** | **string** |  | 
 **FirstName** | **string** |  | 
 **LastName** | **string** |  | 
+**UserName** | **string** |  | 
 **CountryOfDomicile** | [**CountryCode**](CountryCode.md) |  | 
 **NativeAssetId** | **string** |  | 
 **PhotoUrl** | Pointer to **string** |  | [optional] 
@@ -32,7 +33,7 @@ Name | Type | Description | Notes
 
 ### NewUser
 
-`func NewUser(id string, email string, firstName string, lastName string, countryOfDomicile CountryCode, nativeAssetId string, roles []UserRole, showTutorialCards bool, notificationsEnabled bool, tenantId string, allowEmailNotifications bool, allowLiquidationsNotifications bool, allowDepositWithdrawalNotifications bool, allowOrdersNotifications bool, allowCopyTrading bool, ) *User`
+`func NewUser(id string, email string, firstName string, lastName string, userName string, countryOfDomicile CountryCode, nativeAssetId string, roles []UserRole, showTutorialCards bool, notificationsEnabled bool, tenantId string, allowEmailNotifications bool, allowLiquidationsNotifications bool, allowDepositWithdrawalNotifications bool, allowOrdersNotifications bool, allowCopyTrading bool, ) *User`
 
 NewUser instantiates a new User object
 This constructor will assign default values to properties that have it defined,
@@ -175,6 +176,26 @@ and a boolean to check if the value has been set.
 `func (o *User) SetLastName(v string)`
 
 SetLastName sets LastName field to given value.
+
+
+### GetUserName
+
+`func (o *User) GetUserName() string`
+
+GetUserName returns the UserName field if non-nil, zero value otherwise.
+
+### GetUserNameOk
+
+`func (o *User) GetUserNameOk() (*string, bool)`
+
+GetUserNameOk returns a tuple with the UserName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUserName
+
+`func (o *User) SetUserName(v string)`
+
+SetUserName sets UserName field to given value.
 
 
 ### GetCountryOfDomicile

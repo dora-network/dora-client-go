@@ -28,6 +28,7 @@ type User struct {
 	Email string `json:"email"`
 	FirstName string `json:"first_name"`
 	LastName string `json:"last_name"`
+	UserName string `json:"user_name"`
 	CountryOfDomicile CountryCode `json:"country_of_domicile"`
 	NativeAssetId string `json:"native_asset_id"`
 	PhotoUrl *string `json:"photo_url,omitempty"`
@@ -55,12 +56,13 @@ type _User User
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUser(id string, email string, firstName string, lastName string, countryOfDomicile CountryCode, nativeAssetId string, roles []UserRole, showTutorialCards bool, notificationsEnabled bool, tenantId string, allowEmailNotifications bool, allowLiquidationsNotifications bool, allowDepositWithdrawalNotifications bool, allowOrdersNotifications bool, allowCopyTrading bool) *User {
+func NewUser(id string, email string, firstName string, lastName string, userName string, countryOfDomicile CountryCode, nativeAssetId string, roles []UserRole, showTutorialCards bool, notificationsEnabled bool, tenantId string, allowEmailNotifications bool, allowLiquidationsNotifications bool, allowDepositWithdrawalNotifications bool, allowOrdersNotifications bool, allowCopyTrading bool) *User {
 	this := User{}
 	this.Id = id
 	this.Email = email
 	this.FirstName = firstName
 	this.LastName = lastName
+	this.UserName = userName
 	this.CountryOfDomicile = countryOfDomicile
 	this.NativeAssetId = nativeAssetId
 	this.Roles = roles
@@ -241,6 +243,30 @@ func (o *User) GetLastNameOk() (*string, bool) {
 // SetLastName sets field value
 func (o *User) SetLastName(v string) {
 	o.LastName = v
+}
+
+// GetUserName returns the UserName field value
+func (o *User) GetUserName() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.UserName
+}
+
+// GetUserNameOk returns a tuple with the UserName field value
+// and a boolean to check if the value has been set.
+func (o *User) GetUserNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.UserName, true
+}
+
+// SetUserName sets field value
+func (o *User) SetUserName(v string) {
+	o.UserName = v
 }
 
 // GetCountryOfDomicile returns the CountryOfDomicile field value
@@ -719,6 +745,7 @@ func (o User) ToMap() (map[string]interface{}, error) {
 	toSerialize["email"] = o.Email
 	toSerialize["first_name"] = o.FirstName
 	toSerialize["last_name"] = o.LastName
+	toSerialize["user_name"] = o.UserName
 	toSerialize["country_of_domicile"] = o.CountryOfDomicile
 	toSerialize["native_asset_id"] = o.NativeAssetId
 	if !IsNil(o.PhotoUrl) {
@@ -760,6 +787,7 @@ func (o *User) UnmarshalJSON(data []byte) (err error) {
 		"email",
 		"first_name",
 		"last_name",
+		"user_name",
 		"country_of_domicile",
 		"native_asset_id",
 		"roles",
