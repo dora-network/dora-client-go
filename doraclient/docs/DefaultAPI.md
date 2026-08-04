@@ -1807,7 +1807,7 @@ import (
 )
 
 func main() {
-	quantity := "quantity_example" // float64 | Human-decimal USDC quantity to deposit, e.g. '100.50'. Must be positive, with at most 6 decimal places.
+	quantity := "quantity_example" // string | Human-decimal USDC quantity to deposit, e.g. '100.50'. Must be positive, with at most 6 decimal places.
 	ownerAddress := "ownerAddress_example" // string | The user's wallet address as a 0x-prefixed 20-byte hex string. Used as the permit owner.
 	nonce := "nonce_example" // string | The owner's current USDC permit nonce (read client-side), as a non-negative decimal string. It belongs to the single supported chain.
 	clientReferenceId := "clientReferenceId_example" // string | Optional client-supplied reference as a hex string (0x prefix optional), at most 32 bytes. Left-aligned into the deposit call's bytes32 argument. (optional)
@@ -1835,7 +1835,7 @@ Other parameters are passed through a pointer to a apiGetDepositInstructionsRequ
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **quantity** | **float64** | Human-decimal USDC quantity to deposit, e.g. &#39;100.50&#39;. Must be positive, with at most 6 decimal places. | 
+ **quantity** | **string** | Human-decimal USDC quantity to deposit, e.g. &#39;100.50&#39;. Must be positive, with at most 6 decimal places. | 
  **ownerAddress** | **string** | The user&#39;s wallet address as a 0x-prefixed 20-byte hex string. Used as the permit owner. | 
  **nonce** | **string** | The owner&#39;s current USDC permit nonce (read client-side), as a non-negative decimal string. It belongs to the single supported chain. | 
  **clientReferenceId** | **string** | Optional client-supplied reference as a hex string (0x prefix optional), at most 32 bytes. Left-aligned into the deposit call&#39;s bytes32 argument. | 

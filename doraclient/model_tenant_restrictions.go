@@ -25,9 +25,9 @@ type TenantRestrictions struct {
 	// Tenant ID
 	TenantId string `json:"tenant_id"`
 	// Maximum allowed deposit for the tenant.
-	DepositLimit float64 `json:"deposit_limit"`
+	DepositLimit string `json:"deposit_limit"`
 	// Maximum allowed trade amount for the tenant.
-	TradeLimit float64 `json:"trade_limit"`
+	TradeLimit string `json:"trade_limit"`
 	// Last update timestamp for the restrictions.
 	UpdatedAt time.Time `json:"updated_at"`
 }
@@ -38,7 +38,7 @@ type _TenantRestrictions TenantRestrictions
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTenantRestrictions(tenantId string, depositLimit float64, tradeLimit float64, updatedAt time.Time) *TenantRestrictions {
+func NewTenantRestrictions(tenantId string, depositLimit string, tradeLimit string, updatedAt time.Time) *TenantRestrictions {
 	this := TenantRestrictions{}
 	this.TenantId = tenantId
 	this.DepositLimit = depositLimit
@@ -80,9 +80,9 @@ func (o *TenantRestrictions) SetTenantId(v string) {
 }
 
 // GetDepositLimit returns the DepositLimit field value
-func (o *TenantRestrictions) GetDepositLimit() float64 {
+func (o *TenantRestrictions) GetDepositLimit() string {
 	if o == nil {
-		var ret float64
+		var ret string
 		return ret
 	}
 
@@ -91,7 +91,7 @@ func (o *TenantRestrictions) GetDepositLimit() float64 {
 
 // GetDepositLimitOk returns a tuple with the DepositLimit field value
 // and a boolean to check if the value has been set.
-func (o *TenantRestrictions) GetDepositLimitOk() (*float64, bool) {
+func (o *TenantRestrictions) GetDepositLimitOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -99,14 +99,14 @@ func (o *TenantRestrictions) GetDepositLimitOk() (*float64, bool) {
 }
 
 // SetDepositLimit sets field value
-func (o *TenantRestrictions) SetDepositLimit(v float64) {
+func (o *TenantRestrictions) SetDepositLimit(v string) {
 	o.DepositLimit = v
 }
 
 // GetTradeLimit returns the TradeLimit field value
-func (o *TenantRestrictions) GetTradeLimit() float64 {
+func (o *TenantRestrictions) GetTradeLimit() string {
 	if o == nil {
-		var ret float64
+		var ret string
 		return ret
 	}
 
@@ -115,7 +115,7 @@ func (o *TenantRestrictions) GetTradeLimit() float64 {
 
 // GetTradeLimitOk returns a tuple with the TradeLimit field value
 // and a boolean to check if the value has been set.
-func (o *TenantRestrictions) GetTradeLimitOk() (*float64, bool) {
+func (o *TenantRestrictions) GetTradeLimitOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -123,7 +123,7 @@ func (o *TenantRestrictions) GetTradeLimitOk() (*float64, bool) {
 }
 
 // SetTradeLimit sets field value
-func (o *TenantRestrictions) SetTradeLimit(v float64) {
+func (o *TenantRestrictions) SetTradeLimit(v string) {
 	o.TradeLimit = v
 }
 

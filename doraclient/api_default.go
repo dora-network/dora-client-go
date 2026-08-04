@@ -3726,14 +3726,14 @@ func (a *DefaultAPIService) GetCouponPaymentsByAssetIdExecute(r ApiGetCouponPaym
 type ApiGetDepositInstructionsRequest struct {
 	ctx context.Context
 	ApiService *DefaultAPIService
-	quantity *float64
+	quantity *string
 	ownerAddress *string
 	nonce *string
 	clientReferenceId *string
 }
 
 // Human-decimal USDC quantity to deposit, e.g. &#39;100.50&#39;. Must be positive, with at most 6 decimal places.
-func (r ApiGetDepositInstructionsRequest) Quantity(quantity float64) ApiGetDepositInstructionsRequest {
+func (r ApiGetDepositInstructionsRequest) Quantity(quantity string) ApiGetDepositInstructionsRequest {
 	r.quantity = &quantity
 	return r
 }
