@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **LastName** | Pointer to **string** |  | [optional] 
 **UserName** | Pointer to **string** |  | [optional] 
 **CountryOfDomicile** | Pointer to [**CountryCode**](CountryCode.md) |  | [optional] 
-**NativeAssetId** | Pointer to **string** |  | [optional] 
+**NativeAssetId** | Pointer to **string** | Optional: the user&#39;s native asset ID. Must be a CURRENCY asset; defaults to USD. The USDC asset is never allowed for integrator-created users. | [optional] 
 **PhotoUrl** | Pointer to **string** |  | [optional] 
 **Provider** | Pointer to **string** |  | [optional] 
 **ProviderId** | Pointer to **string** |  | [optional] 

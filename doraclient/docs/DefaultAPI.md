@@ -4,17 +4,20 @@ All URIs are relative to *https://staging.dora.co*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**AddTradingChallengeUsers**](DefaultAPI.md#AddTradingChallengeUsers) | **Put** /v1/trading_challenges/add_users | Add users to a trading challenge
 [**ApproveLedgerWithdrawRequest**](DefaultAPI.md#ApproveLedgerWithdrawRequest) | **Post** /v1/ledger/withdraw/requests/{withdrawal_id}/approve | Approve a pending withdrawal request
 [**CancelAllOpenOrders**](DefaultAPI.md#CancelAllOpenOrders) | **Delete** /v1/orders | Cancel all open orders, if user passes orderbook or account_id on query params it will cancel all orders on specific orderbook or account, admin can cancel user&#39;s orders on specific orderbook
 [**CancelLedgerWithdrawRequest**](DefaultAPI.md#CancelLedgerWithdrawRequest) | **Post** /v1/ledger/withdraw/requests/{withdrawal_id}/cancel | Cancel a pending withdrawal request
 [**CancelOrderById**](DefaultAPI.md#CancelOrderById) | **Delete** /v1/orders/{order_id} | Cancel an order by ID
 [**ClaimLeverageGetAccruedInterest**](DefaultAPI.md#ClaimLeverageGetAccruedInterest) | **Post** /v1/leverage/accrued_interest/claim | Claim current accrued leverage interest for a specific user
+[**ClaimTradingChallengePrize**](DefaultAPI.md#ClaimTradingChallengePrize) | **Post** /v1/trading_challenges/{trading_challenge_id}/claim | Claim challenge prize
 [**CloseIsolatedAccountV2**](DefaultAPI.md#CloseIsolatedAccountV2) | **Post** /v2/accounts/close | Close an isolated account, repaying the borrowed
 [**CloseIsolatedPosition**](DefaultAPI.md#CloseIsolatedPosition) | **Post** /v1/positions/close | Close isolated positions, repaying the borrowed
 [**CreateAPIKeyForUser**](DefaultAPI.md#CreateAPIKeyForUser) | **Post** /v1/user/apikey | Create apikey for a user
 [**CreateAPIKeyForUserID**](DefaultAPI.md#CreateAPIKeyForUserID) | **Post** /v1/user/{user_id}/apikey | Create apikey for a user
 [**CreateConditionalOrder**](DefaultAPI.md#CreateConditionalOrder) | **Post** /v1/orders/conditional | Create a new conditional orders
 [**CreateOrder**](DefaultAPI.md#CreateOrder) | **Post** /v1/orders | Create a new order
+[**CreateTradingChallenge**](DefaultAPI.md#CreateTradingChallenge) | **Post** /v1/trading_challenges | Create a trading challenge
 [**CreateUser**](DefaultAPI.md#CreateUser) | **Post** /v1/integrators/user | Create a new user
 [**DeleteUser**](DefaultAPI.md#DeleteUser) | **Delete** /v1/user/{user_id} | Delete user by ID
 [**GetAPIKeysForUserID**](DefaultAPI.md#GetAPIKeysForUserID) | **Get** /v1/user/{user_id}/apikey | Get user&#39;s api keys: admin or integrator only
@@ -27,6 +30,8 @@ Method | HTTP request | Description
 [**GetAssetYieldData**](DefaultAPI.md#GetAssetYieldData) | **Get** /v1/charts/{asset_id}/yield | Get yield chart data for an asset
 [**GetAssetsStream**](DefaultAPI.md#GetAssetsStream) | **Get** /v1/assets/stream | Get all inserts or updates for assets
 [**GetCandleData**](DefaultAPI.md#GetCandleData) | **Get** /v1/charts/{order_book_id}/candle | Get candlestick data for an orderbook
+[**GetCashReserveByUserID**](DefaultAPI.md#GetCashReserveByUserID) | **Get** /v1/accounts/{user_id}/cash_reserve | Get the minimum USD cash reserve requirement for the given user
+[**GetCashReserveSelf**](DefaultAPI.md#GetCashReserveSelf) | **Get** /v1/accounts/self/cash_reserve | Get the minimum USD cash reserve requirement for the logged in user
 [**GetCopyTraders**](DefaultAPI.md#GetCopyTraders) | **Get** /v1/user/copy_traders | Get list of users with copy trading enabled
 [**GetCouponPaymentsByAssetId**](DefaultAPI.md#GetCouponPaymentsByAssetId) | **Get** /v1/assets/{asset_id}/coupon_payments | Get coupon payments for a bond asset
 [**GetDepositInstructions**](DefaultAPI.md#GetDepositInstructions) | **Get** /v1/web3/deposit-instructions | Get per-chain instructions for depositing USDC into the Dora vault
@@ -56,6 +61,9 @@ Method | HTTP request | Description
 [**GetTopTradersByPnL**](DefaultAPI.md#GetTopTradersByPnL) | **Get** /v1/user/ranking | Get top traders by PnL
 [**GetTradeById**](DefaultAPI.md#GetTradeById) | **Get** /v1/trades/{trade_id} | Get a trade by ID
 [**GetTrades**](DefaultAPI.md#GetTrades) | **Get** /v1/trades | Get a filtered, paginated list of trades
+[**GetTradingChallengeByID**](DefaultAPI.md#GetTradingChallengeByID) | **Get** /v1/trading_challenges/{trading_challenge_id} | Get trading challenge by ID
+[**GetTradingChallengeDailySnapshots**](DefaultAPI.md#GetTradingChallengeDailySnapshots) | **Get** /v1/trading_challenges/{trading_challenge_id}/daily_snapshots | Get trading challenge daily snapshots
+[**GetTradingChallengeResults**](DefaultAPI.md#GetTradingChallengeResults) | **Get** /v1/trading_challenges/{trading_challenge_id}/results | Get trading challenge results
 [**GetTransactionById**](DefaultAPI.md#GetTransactionById) | **Get** /v1/transactions/{transaction_id} | Get a transaction by ID
 [**GetTransactions**](DefaultAPI.md#GetTransactions) | **Get** /v1/transactions | Get a filtered, paginated list of transactions
 [**GetTransactionsSettlements**](DefaultAPI.md#GetTransactionsSettlements) | **Get** /v1/transactions/settlements | Get transactions settlements with filters
@@ -89,8 +97,10 @@ Method | HTTP request | Description
 [**ListOrderBooks**](DefaultAPI.md#ListOrderBooks) | **Get** /v1/orderbooks | List order books
 [**ListOrders**](DefaultAPI.md#ListOrders) | **Get** /v1/orders | List all orders
 [**ListPositionAccountsSelf**](DefaultAPI.md#ListPositionAccountsSelf) | **Get** /v1/user/self/position_accounts | List all position accounts for the authenticated user
+[**ListTradingChallenges**](DefaultAPI.md#ListTradingChallenges) | **Get** /v1/trading_challenges | List trading challenges
 [**PayLeverageGetAccruedInterest**](DefaultAPI.md#PayLeverageGetAccruedInterest) | **Post** /v1/leverage/accrued_interest/pay | Pay current accrued leverage interest for a specific user
 [**RejectLedgerWithdrawRequest**](DefaultAPI.md#RejectLedgerWithdrawRequest) | **Post** /v1/ledger/withdraw/requests/{withdrawal_id}/reject | Reject a pending withdrawal request
+[**RemoveTradingChallengeUsers**](DefaultAPI.md#RemoveTradingChallengeUsers) | **Put** /v1/trading_challenges/remove_users | Remove users from a trading challenge
 [**RepayUSD**](DefaultAPI.md#RepayUSD) | **Post** /v1/positions/repay_usd | Repay borrowed USD, then accrue and pay leverage interest
 [**RevokeAPIKeyForUser**](DefaultAPI.md#RevokeAPIKeyForUser) | **Put** /v1/user/apikey/{key_id}/revoke | Revoke apikey for a user
 [**RevokeAPIKeyForUserID**](DefaultAPI.md#RevokeAPIKeyForUserID) | **Put** /v1/user/{user_id}/apikey/{key_id}/revoke | Revoke apikey for a user: admin or integrator only
@@ -109,6 +119,70 @@ Method | HTTP request | Description
 [**ValidateSubmitOrder**](DefaultAPI.md#ValidateSubmitOrder) | **Post** /v1/orders/validate | Validate submit order request data
 [**VerifyUser**](DefaultAPI.md#VerifyUser) | **Put** /v1/user/{user_id}/verify | Verify a user by ID
 
+
+
+## AddTradingChallengeUsers
+
+> TradingChallengeResponseEnvelope AddTradingChallengeUsers(ctx).AddTradingChallengeUsersRequest(addTradingChallengeUsersRequest).Execute()
+
+Add users to a trading challenge
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+	addTradingChallengeUsersRequest := *openapiclient.NewAddTradingChallengeUsersRequest("TradingChallengeId_example", []string{"Users_example"}) // AddTradingChallengeUsersRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.AddTradingChallengeUsers(context.Background()).AddTradingChallengeUsersRequest(addTradingChallengeUsersRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.AddTradingChallengeUsers``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `AddTradingChallengeUsers`: TradingChallengeResponseEnvelope
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.AddTradingChallengeUsers`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiAddTradingChallengeUsersRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **addTradingChallengeUsersRequest** | [**AddTradingChallengeUsersRequest**](AddTradingChallengeUsersRequest.md) |  | 
+
+### Return type
+
+[**TradingChallengeResponseEnvelope**](TradingChallengeResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 
 
 ## ApproveLedgerWithdrawRequest
@@ -450,6 +524,74 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ClaimTradingChallengePrize
+
+> ClaimTradingChallengeResponseEnvelope ClaimTradingChallengePrize(ctx, tradingChallengeId).Execute()
+
+Claim challenge prize
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+	tradingChallengeId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.ClaimTradingChallengePrize(context.Background(), tradingChallengeId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.ClaimTradingChallengePrize``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ClaimTradingChallengePrize`: ClaimTradingChallengeResponseEnvelope
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.ClaimTradingChallengePrize`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**tradingChallengeId** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiClaimTradingChallengePrizeRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**ClaimTradingChallengeResponseEnvelope**](ClaimTradingChallengeResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -832,6 +974,71 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**CreateOrderResponseEnvelope**](CreateOrderResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CreateTradingChallenge
+
+> TradingChallengeResponseEnvelope CreateTradingChallenge(ctx).CreateTradingChallengeRequest(createTradingChallengeRequest).Execute()
+
+Create a trading challenge
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+    "time"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+	createTradingChallengeRequest := *openapiclient.NewCreateTradingChallengeRequest("TenantId_example", "Name_example", openapiclient.TradingChallengeType("TOURNAMENT"), int32(123), time.Now(), time.Now(), "InitialUserBalance_example") // CreateTradingChallengeRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.CreateTradingChallenge(context.Background()).CreateTradingChallengeRequest(createTradingChallengeRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.CreateTradingChallenge``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CreateTradingChallenge`: TradingChallengeResponseEnvelope
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.CreateTradingChallenge`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateTradingChallengeRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **createTradingChallengeRequest** | [**CreateTradingChallengeRequest**](CreateTradingChallengeRequest.md) |  | 
+
+### Return type
+
+[**TradingChallengeResponseEnvelope**](TradingChallengeResponseEnvelope.md)
 
 ### Authorization
 
@@ -1641,6 +1848,137 @@ Name | Type | Description  | Notes
 ### Authorization
 
 No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetCashReserveByUserID
+
+> CashReserveResponseEnvelope GetCashReserveByUserID(ctx, userId).Execute()
+
+Get the minimum USD cash reserve requirement for the given user
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+	userId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.GetCashReserveByUserID(context.Background(), userId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.GetCashReserveByUserID``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetCashReserveByUserID`: CashReserveResponseEnvelope
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.GetCashReserveByUserID`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**userId** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetCashReserveByUserIDRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**CashReserveResponseEnvelope**](CashReserveResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetCashReserveSelf
+
+> CashReserveResponseEnvelope GetCashReserveSelf(ctx).Execute()
+
+Get the minimum USD cash reserve requirement for the logged in user
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.GetCashReserveSelf(context.Background()).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.GetCashReserveSelf``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetCashReserveSelf`: CashReserveResponseEnvelope
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.GetCashReserveSelf`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+This endpoint does not need any parameter.
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetCashReserveSelfRequest struct via the builder pattern
+
+
+### Return type
+
+[**CashReserveResponseEnvelope**](CashReserveResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -3573,6 +3911,212 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**ListTradeResponseEnvelope**](ListTradeResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetTradingChallengeByID
+
+> TradingChallengeResponseEnvelope GetTradingChallengeByID(ctx, tradingChallengeId).Execute()
+
+Get trading challenge by ID
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+	tradingChallengeId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.GetTradingChallengeByID(context.Background(), tradingChallengeId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.GetTradingChallengeByID``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetTradingChallengeByID`: TradingChallengeResponseEnvelope
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.GetTradingChallengeByID`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**tradingChallengeId** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetTradingChallengeByIDRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**TradingChallengeResponseEnvelope**](TradingChallengeResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetTradingChallengeDailySnapshots
+
+> TradingChallengeDailySnapshotsResponseEnvelope GetTradingChallengeDailySnapshots(ctx, tradingChallengeId).Execute()
+
+Get trading challenge daily snapshots
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+	tradingChallengeId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.GetTradingChallengeDailySnapshots(context.Background(), tradingChallengeId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.GetTradingChallengeDailySnapshots``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetTradingChallengeDailySnapshots`: TradingChallengeDailySnapshotsResponseEnvelope
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.GetTradingChallengeDailySnapshots`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**tradingChallengeId** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetTradingChallengeDailySnapshotsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**TradingChallengeDailySnapshotsResponseEnvelope**](TradingChallengeDailySnapshotsResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetTradingChallengeResults
+
+> TradingChallengeResultsResponseEnvelope GetTradingChallengeResults(ctx, tradingChallengeId).Board(board).Execute()
+
+Get trading challenge results
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+	tradingChallengeId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+	board := "board_example" // string | Leaderboard board selector. Defaults to TOP_PNL. (optional) (default to "TOP_PNL")
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.GetTradingChallengeResults(context.Background(), tradingChallengeId).Board(board).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.GetTradingChallengeResults``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetTradingChallengeResults`: TradingChallengeResultsResponseEnvelope
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.GetTradingChallengeResults`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**tradingChallengeId** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetTradingChallengeResultsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **board** | **string** | Leaderboard board selector. Defaults to TOP_PNL. | [default to &quot;TOP_PNL&quot;]
+
+### Return type
+
+[**TradingChallengeResultsResponseEnvelope**](TradingChallengeResultsResponseEnvelope.md)
 
 ### Authorization
 
@@ -5887,6 +6431,79 @@ Other parameters are passed through a pointer to a apiListPositionAccountsSelfRe
 [[Back to README]](../README.md)
 
 
+## ListTradingChallenges
+
+> TradingChallengeListResponseEnvelope ListTradingChallenges(ctx).TenantId(tenantId).Type_(type_).Status(status).Start(start).End(end).Execute()
+
+List trading challenges
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+    "time"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+	tenantId := "tenantId_example" // string |  (optional)
+	type_ := openapiclient.TradingChallengeType("TOURNAMENT") // TradingChallengeType |  (optional)
+	status := openapiclient.TradingChallengeStatus("PENDING") // TradingChallengeStatus |  (optional)
+	start := time.Now() // time.Time |  (optional)
+	end := time.Now() // time.Time |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.ListTradingChallenges(context.Background()).TenantId(tenantId).Type_(type_).Status(status).Start(start).End(end).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.ListTradingChallenges``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ListTradingChallenges`: TradingChallengeListResponseEnvelope
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.ListTradingChallenges`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiListTradingChallengesRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **tenantId** | **string** |  | 
+ **type_** | [**TradingChallengeType**](TradingChallengeType.md) |  | 
+ **status** | [**TradingChallengeStatus**](TradingChallengeStatus.md) |  | 
+ **start** | **time.Time** |  | 
+ **end** | **time.Time** |  | 
+
+### Return type
+
+[**TradingChallengeListResponseEnvelope**](TradingChallengeListResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## PayLeverageGetAccruedInterest
 
 > PayLeverageAccruedInterestResponseEnvelope PayLeverageGetAccruedInterest(ctx).PayLeverageAccruedInterestRequest(payLeverageAccruedInterestRequest).Execute()
@@ -6008,6 +6625,70 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**WithdrawalInitiationResponseEnvelope**](WithdrawalInitiationResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## RemoveTradingChallengeUsers
+
+> TradingChallengeResponseEnvelope RemoveTradingChallengeUsers(ctx).RemoveTradingChallengeUsersRequest(removeTradingChallengeUsersRequest).Execute()
+
+Remove users from a trading challenge
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+	removeTradingChallengeUsersRequest := *openapiclient.NewRemoveTradingChallengeUsersRequest("TradingChallengeId_example", []string{"Users_example"}) // RemoveTradingChallengeUsersRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.RemoveTradingChallengeUsers(context.Background()).RemoveTradingChallengeUsersRequest(removeTradingChallengeUsersRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.RemoveTradingChallengeUsers``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `RemoveTradingChallengeUsers`: TradingChallengeResponseEnvelope
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.RemoveTradingChallengeUsers`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiRemoveTradingChallengeUsersRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **removeTradingChallengeUsersRequest** | [**RemoveTradingChallengeUsersRequest**](RemoveTradingChallengeUsersRequest.md) |  | 
+
+### Return type
+
+[**TradingChallengeResponseEnvelope**](TradingChallengeResponseEnvelope.md)
 
 ### Authorization
 

@@ -24,6 +24,7 @@ type CreateIntegratorUserRequest struct {
 	LastName *string
 	UserName *string
 	CountryOfDomicile *CountryCode
+	// Optional: the user's native asset ID. Must be a CURRENCY asset; defaults to USD. The USDC asset is never allowed for integrator-created users.
 	NativeAssetId *string
 	PhotoUrl *string
 	Provider *string
