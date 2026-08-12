@@ -28,6 +28,7 @@ Name | Type | Description | Notes
 **AllowDepositWithdrawalNotifications** | **bool** |  | 
 **AllowOrdersNotifications** | **bool** |  | 
 **AllowCopyTrading** | **bool** |  | 
+**KycCompletedAt** | Pointer to **time.Time** | When the user completed KYC. Omitted/null if KYC has not been completed. Set via POST /v1/integrators/user/{user_id}/kyc. | [optional] 
 
 ## Methods
 
@@ -567,6 +568,31 @@ and a boolean to check if the value has been set.
 
 SetAllowCopyTrading sets AllowCopyTrading field to given value.
 
+
+### GetKycCompletedAt
+
+`func (o *User) GetKycCompletedAt() time.Time`
+
+GetKycCompletedAt returns the KycCompletedAt field if non-nil, zero value otherwise.
+
+### GetKycCompletedAtOk
+
+`func (o *User) GetKycCompletedAtOk() (*time.Time, bool)`
+
+GetKycCompletedAtOk returns a tuple with the KycCompletedAt field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetKycCompletedAt
+
+`func (o *User) SetKycCompletedAt(v time.Time)`
+
+SetKycCompletedAt sets KycCompletedAt field to given value.
+
+### HasKycCompletedAt
+
+`func (o *User) HasKycCompletedAt() bool`
+
+HasKycCompletedAt returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

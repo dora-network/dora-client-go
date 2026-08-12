@@ -1482,6 +1482,20 @@ func Test_doraclient_DefaultAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test DefaultAPIService UpdateUserKYC", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var userId string
+
+		resp, httpRes, err := apiClient.DefaultAPI.UpdateUserKYC(context.Background(), userId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test DefaultAPIService ValidateSubmitOrder", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test

@@ -48,6 +48,8 @@ type User struct {
 	AllowDepositWithdrawalNotifications bool `json:"allow_deposit_withdrawal_notifications"`
 	AllowOrdersNotifications bool `json:"allow_orders_notifications"`
 	AllowCopyTrading bool `json:"allow_copy_trading"`
+	// When the user completed KYC. Omitted/null if KYC has not been completed. Set via POST /v1/integrators/user/{user_id}/kyc.
+	KycCompletedAt *time.Time `json:"kyc_completed_at,omitempty"`
 }
 
 type _User User
@@ -725,6 +727,38 @@ func (o *User) SetAllowCopyTrading(v bool) {
 	o.AllowCopyTrading = v
 }
 
+// GetKycCompletedAt returns the KycCompletedAt field value if set, zero value otherwise.
+func (o *User) GetKycCompletedAt() time.Time {
+	if o == nil || IsNil(o.KycCompletedAt) {
+		var ret time.Time
+		return ret
+	}
+	return *o.KycCompletedAt
+}
+
+// GetKycCompletedAtOk returns a tuple with the KycCompletedAt field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *User) GetKycCompletedAtOk() (*time.Time, bool) {
+	if o == nil || IsNil(o.KycCompletedAt) {
+		return nil, false
+	}
+	return o.KycCompletedAt, true
+}
+
+// HasKycCompletedAt returns a boolean if a field has been set.
+func (o *User) HasKycCompletedAt() bool {
+	if o != nil && !IsNil(o.KycCompletedAt) {
+		return true
+	}
+
+	return false
+}
+
+// SetKycCompletedAt gets a reference to the given time.Time and assigns it to the KycCompletedAt field.
+func (o *User) SetKycCompletedAt(v time.Time) {
+	o.KycCompletedAt = &v
+}
+
 func (o User) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -775,6 +809,9 @@ func (o User) ToMap() (map[string]interface{}, error) {
 	toSerialize["allow_deposit_withdrawal_notifications"] = o.AllowDepositWithdrawalNotifications
 	toSerialize["allow_orders_notifications"] = o.AllowOrdersNotifications
 	toSerialize["allow_copy_trading"] = o.AllowCopyTrading
+	if !IsNil(o.KycCompletedAt) {
+		toSerialize["kyc_completed_at"] = o.KycCompletedAt
+	}
 	return toSerialize, nil
 }
 

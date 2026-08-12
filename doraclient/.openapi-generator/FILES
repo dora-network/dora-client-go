@@ -229,6 +229,9 @@ docs/UpdateFieldBoolean.md
 docs/UpdateFieldString.md
 docs/UpdateRolesString.md
 docs/UpdateUserConfigRequest.md
+docs/UpdateUserKYCRequest.md
+docs/UpdateUserKYCResponse.md
+docs/UpdateUserKYCResponseEnvelope.md
 docs/User.md
 docs/UserBalanceResponseEnvelope.md
 docs/UserConfig.md
@@ -480,6 +483,9 @@ model_update_field_boolean.go
 model_update_field_string.go
 model_update_roles_string.go
 model_update_user_config_request.go
+model_update_user_kyc_request.go
+model_update_user_kyc_response.go
+model_update_user_kyc_response_envelope.go
 model_user.go
 model_user_balance_response_envelope.go
 model_user_config.go

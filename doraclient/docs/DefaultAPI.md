@@ -116,6 +116,7 @@ Method | HTTP request | Description
 [**TransferAvailableBalances**](DefaultAPI.md#TransferAvailableBalances) | **Post** /v1/positions/transfer_balances | Transfer available balance between a user&#39;s accounts (e.g. global to isolated position)
 [**UpdateUserConfig**](DefaultAPI.md#UpdateUserConfig) | **Put** /v1/user/{user_id}/config | Update user configuration by ID
 [**UpdateUserConfigSelf**](DefaultAPI.md#UpdateUserConfigSelf) | **Put** /v1/user/config/self | Update user configuration for the authenticated user
+[**UpdateUserKYC**](DefaultAPI.md#UpdateUserKYC) | **Post** /v1/integrators/user/{user_id}/kyc | Set or clear a user&#39;s KYC completion timestamp
 [**ValidateSubmitOrder**](DefaultAPI.md#ValidateSubmitOrder) | **Post** /v1/orders/validate | Validate submit order request data
 [**VerifyUser**](DefaultAPI.md#VerifyUser) | **Put** /v1/user/{user_id}/verify | Verify a user by ID
 
@@ -6293,7 +6294,7 @@ Name | Type | Description  | Notes
 
 ## ListOrders
 
-> ListOrdersResponseEnvelope ListOrders(ctx).UserId(userId).OrderBookId(orderBookId).Kind(kind).Status(status).Side(side).From(from).To(to).Page(page).Limit(limit).Execute()
+> ListOrdersResponseEnvelope ListOrders(ctx).UserId(userId).OrderBookId(orderBookId).Kind(kind).Status(status).Side(side).From(from).To(to).Page(page).Limit(limit).ClientOrderId(clientOrderId).Execute()
 
 List all orders
 
@@ -6320,10 +6321,11 @@ func main() {
 	to := time.Now() // time.Time |  (optional)
 	page := int32(56) // int32 |  (optional) (default to 1)
 	limit := int32(56) // int32 |  (optional) (default to 100)
+	clientOrderId := "clientOrderId_example" // string | Filter by client order ID prefix (max 256 characters) (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.DefaultAPI.ListOrders(context.Background()).UserId(userId).OrderBookId(orderBookId).Kind(kind).Status(status).Side(side).From(from).To(to).Page(page).Limit(limit).Execute()
+	resp, r, err := apiClient.DefaultAPI.ListOrders(context.Background()).UserId(userId).OrderBookId(orderBookId).Kind(kind).Status(status).Side(side).From(from).To(to).Page(page).Limit(limit).ClientOrderId(clientOrderId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.ListOrders``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -6353,6 +6355,7 @@ Name | Type | Description  | Notes
  **to** | **time.Time** |  | 
  **page** | **int32** |  | [default to 1]
  **limit** | **int32** |  | [default to 100]
+ **clientOrderId** | **string** | Filter by client order ID prefix (max 256 characters) | 
 
 ### Return type
 
@@ -7702,6 +7705,76 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**UserUpdatedResponseEnvelope**](UserUpdatedResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateUserKYC
+
+> UpdateUserKYCResponseEnvelope UpdateUserKYC(ctx, userId).UpdateUserKYCRequest(updateUserKYCRequest).Execute()
+
+Set or clear a user's KYC completion timestamp
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+	userId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+	updateUserKYCRequest := *openapiclient.NewUpdateUserKYCRequest(false) // UpdateUserKYCRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.UpdateUserKYC(context.Background(), userId).UpdateUserKYCRequest(updateUserKYCRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.UpdateUserKYC``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `UpdateUserKYC`: UpdateUserKYCResponseEnvelope
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.UpdateUserKYC`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**userId** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateUserKYCRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **updateUserKYCRequest** | [**UpdateUserKYCRequest**](UpdateUserKYCRequest.md) |  | 
+
+### Return type
+
+[**UpdateUserKYCResponseEnvelope**](UpdateUserKYCResponseEnvelope.md)
 
 ### Authorization
 
