@@ -35,6 +35,8 @@ type User struct {
 	Provider *string `json:"provider,omitempty"`
 	ProviderId *string `json:"provider_id,omitempty"`
 	Roles []UserRole `json:"roles"`
+	// Competition IDs this user is explicitly allowed to manage when they have COMPETITION_MANAGER role. Empty means no competition-management access.
+	ManagedCompetitionIds []string `json:"managed_competition_ids,omitempty"`
 	// User's timezone, e.g., 'America/New_York', or an offset.
 	Timezone *string `json:"timezone,omitempty"`
 	// timezone offset in seconds
@@ -439,6 +441,38 @@ func (o *User) SetRoles(v []UserRole) {
 	o.Roles = v
 }
 
+// GetManagedCompetitionIds returns the ManagedCompetitionIds field value if set, zero value otherwise.
+func (o *User) GetManagedCompetitionIds() []string {
+	if o == nil || IsNil(o.ManagedCompetitionIds) {
+		var ret []string
+		return ret
+	}
+	return o.ManagedCompetitionIds
+}
+
+// GetManagedCompetitionIdsOk returns a tuple with the ManagedCompetitionIds field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *User) GetManagedCompetitionIdsOk() ([]string, bool) {
+	if o == nil || IsNil(o.ManagedCompetitionIds) {
+		return nil, false
+	}
+	return o.ManagedCompetitionIds, true
+}
+
+// HasManagedCompetitionIds returns a boolean if a field has been set.
+func (o *User) HasManagedCompetitionIds() bool {
+	if o != nil && !IsNil(o.ManagedCompetitionIds) {
+		return true
+	}
+
+	return false
+}
+
+// SetManagedCompetitionIds gets a reference to the given []string and assigns it to the ManagedCompetitionIds field.
+func (o *User) SetManagedCompetitionIds(v []string) {
+	o.ManagedCompetitionIds = v
+}
+
 // GetTimezone returns the Timezone field value if set, zero value otherwise.
 func (o *User) GetTimezone() string {
 	if o == nil || IsNil(o.Timezone) {
@@ -792,6 +826,9 @@ func (o User) ToMap() (map[string]interface{}, error) {
 		toSerialize["provider_id"] = o.ProviderId
 	}
 	toSerialize["roles"] = o.Roles
+	if !IsNil(o.ManagedCompetitionIds) {
+		toSerialize["managed_competition_ids"] = o.ManagedCompetitionIds
+	}
 	if !IsNil(o.Timezone) {
 		toSerialize["timezone"] = o.Timezone
 	}

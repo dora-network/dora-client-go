@@ -6,6 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**AddTradingChallengeUsers**](DefaultAPI.md#AddTradingChallengeUsers) | **Put** /v1/trading_challenges/add_users | Add users to a trading challenge
 [**ApproveLedgerWithdrawRequest**](DefaultAPI.md#ApproveLedgerWithdrawRequest) | **Post** /v1/ledger/withdraw/requests/{withdrawal_id}/approve | Approve a pending withdrawal request
+[**ApproveTradingChallengeRegistrationRequest**](DefaultAPI.md#ApproveTradingChallengeRegistrationRequest) | **Post** /v1/trading_challenges/registration_requests/{request_id}/approve | Approve a trading challenge registration request
 [**CancelAllOpenOrders**](DefaultAPI.md#CancelAllOpenOrders) | **Delete** /v1/orders | Cancel all open orders, if user passes orderbook or account_id on query params it will cancel all orders on specific orderbook or account, admin can cancel user&#39;s orders on specific orderbook
 [**CancelLedgerWithdrawRequest**](DefaultAPI.md#CancelLedgerWithdrawRequest) | **Post** /v1/ledger/withdraw/requests/{withdrawal_id}/cancel | Cancel a pending withdrawal request
 [**CancelOrderById**](DefaultAPI.md#CancelOrderById) | **Delete** /v1/orders/{order_id} | Cancel an order by ID
@@ -70,6 +71,7 @@ Method | HTTP request | Description
 [**GetTransactionsStream**](DefaultAPI.md#GetTransactionsStream) | **Get** /v1/transactions/stream | Get transactions since a specific time, and open a stream for further updates
 [**GetUserById**](DefaultAPI.md#GetUserById) | **Get** /v1/user/{user_id} | Get user by ID (admin only)
 [**GetUserCouponPaymentsStream**](DefaultAPI.md#GetUserCouponPaymentsStream) | **Get** /v1/user/{user_id}/coupon_payments/stream | Stream user&#39;s coupon payment accruals in real time
+[**GetUserDeactivation**](DefaultAPI.md#GetUserDeactivation) | **Get** /v1/user/{user_id}/deactivation | Get the latest account deactivation request for a user
 [**GetUserLedgerStream**](DefaultAPI.md#GetUserLedgerStream) | **Get** /v1/user/{user_id}/ledger/stream | Get a snapshot of user&#39;s ledger updates since a specific time, and opens a stream for further updates
 [**GetUserLeverageAccruedInterestStream**](DefaultAPI.md#GetUserLeverageAccruedInterestStream) | **Get** /v1/user/{user_id}/leverage/accrued_interest/stream | Stream user&#39;s current leverage accrued interest in real time
 [**GetUserOrderUpdatesStream**](DefaultAPI.md#GetUserOrderUpdatesStream) | **Get** /v1/user/{user_id}/orders/{order_book_id}/updates/stream | Get a snapshot of user&#39;s order updates for the given order book since a specific time, and opens a stream for further updates
@@ -97,9 +99,12 @@ Method | HTTP request | Description
 [**ListOrderBooks**](DefaultAPI.md#ListOrderBooks) | **Get** /v1/orderbooks | List order books
 [**ListOrders**](DefaultAPI.md#ListOrders) | **Get** /v1/orders | List all orders
 [**ListPositionAccountsSelf**](DefaultAPI.md#ListPositionAccountsSelf) | **Get** /v1/user/self/position_accounts | List all position accounts for the authenticated user
+[**ListTradingChallengeRegistrationRequests**](DefaultAPI.md#ListTradingChallengeRegistrationRequests) | **Get** /v1/trading_challenges/registration_requests | List trading challenge registration requests
 [**ListTradingChallenges**](DefaultAPI.md#ListTradingChallenges) | **Get** /v1/trading_challenges | List trading challenges
+[**ListUserDeactivations**](DefaultAPI.md#ListUserDeactivations) | **Get** /v1/user/deactivations | Get the current deactivation status across all users
 [**PayLeverageGetAccruedInterest**](DefaultAPI.md#PayLeverageGetAccruedInterest) | **Post** /v1/leverage/accrued_interest/pay | Pay current accrued leverage interest for a specific user
 [**RejectLedgerWithdrawRequest**](DefaultAPI.md#RejectLedgerWithdrawRequest) | **Post** /v1/ledger/withdraw/requests/{withdrawal_id}/reject | Reject a pending withdrawal request
+[**RejectTradingChallengeRegistrationRequest**](DefaultAPI.md#RejectTradingChallengeRegistrationRequest) | **Post** /v1/trading_challenges/registration_requests/{request_id}/reject | Reject a trading challenge registration request
 [**RemoveTradingChallengeUsers**](DefaultAPI.md#RemoveTradingChallengeUsers) | **Put** /v1/trading_challenges/remove_users | Remove users from a trading challenge
 [**RepayUSD**](DefaultAPI.md#RepayUSD) | **Post** /v1/positions/repay_usd | Repay borrowed USD, then accrue and pay leverage interest
 [**RevokeAPIKeyForUser**](DefaultAPI.md#RevokeAPIKeyForUser) | **Put** /v1/user/apikey/{key_id}/revoke | Revoke apikey for a user
@@ -112,8 +117,11 @@ Method | HTTP request | Description
 [**StreamOrderBookBalances**](DefaultAPI.md#StreamOrderBookBalances) | **Get** /v1/orderbooks/{order_book_id}/balances/stream | Get a snapshot of base and quote balances for an order book and open a stream for real-time updates
 [**StreamOrderbookOpenOrders**](DefaultAPI.md#StreamOrderbookOpenOrders) | **Get** /v1/orderbooks/{order_book_id}/open/stream | Get a snapshot of open orders in an order book and open a stream for real-time updates
 [**StreamTrades**](DefaultAPI.md#StreamTrades) | **Get** /v1/trades/{order_book_id}/stream | Get a snapshot of trades executed on the given order book from a specific date and open a stream for real-time updates
+[**TerminateOwnTradingChallengeParticipation**](DefaultAPI.md#TerminateOwnTradingChallengeParticipation) | **Post** /v1/trading_challenges/{trading_challenge_id}/participants/self/terminate | Leave a trading challenge
+[**TerminateTradingChallengeParticipation**](DefaultAPI.md#TerminateTradingChallengeParticipation) | **Post** /v1/trading_challenges/{trading_challenge_id}/participants/{user_id}/terminate | Terminate a participation in a trading challenge
 [**TransferAccountBalancesV2**](DefaultAPI.md#TransferAccountBalancesV2) | **Post** /v2/accounts/transfer_balances | Transfer available balance between a user&#39;s accounts
 [**TransferAvailableBalances**](DefaultAPI.md#TransferAvailableBalances) | **Post** /v1/positions/transfer_balances | Transfer available balance between a user&#39;s accounts (e.g. global to isolated position)
+[**UpdateTradingChallenge**](DefaultAPI.md#UpdateTradingChallenge) | **Put** /v1/trading_challenges/{trading_challenge_id} | Update a trading challenge
 [**UpdateUserConfig**](DefaultAPI.md#UpdateUserConfig) | **Put** /v1/user/{user_id}/config | Update user configuration by ID
 [**UpdateUserConfigSelf**](DefaultAPI.md#UpdateUserConfigSelf) | **Put** /v1/user/config/self | Update user configuration for the authenticated user
 [**UpdateUserKYC**](DefaultAPI.md#UpdateUserKYC) | **Post** /v1/integrators/user/{user_id}/kyc | Set or clear a user&#39;s KYC completion timestamp
@@ -127,6 +135,8 @@ Method | HTTP request | Description
 > TradingChallengeResponseEnvelope AddTradingChallengeUsers(ctx).AddTradingChallengeUsersRequest(addTradingChallengeUsersRequest).Execute()
 
 Add users to a trading challenge
+
+
 
 ### Example
 
@@ -243,6 +253,78 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**WithdrawalInitiationResponseEnvelope**](WithdrawalInitiationResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ApproveTradingChallengeRegistrationRequest
+
+> TradingChallengeRegistrationRequestResponseEnvelope ApproveTradingChallengeRegistrationRequest(ctx, requestId).ReviewTradingChallengeRegistrationRequest(reviewTradingChallengeRegistrationRequest).Execute()
+
+Approve a trading challenge registration request
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+	requestId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+	reviewTradingChallengeRegistrationRequest := *openapiclient.NewReviewTradingChallengeRegistrationRequest() // ReviewTradingChallengeRegistrationRequest |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.ApproveTradingChallengeRegistrationRequest(context.Background(), requestId).ReviewTradingChallengeRegistrationRequest(reviewTradingChallengeRegistrationRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.ApproveTradingChallengeRegistrationRequest``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ApproveTradingChallengeRegistrationRequest`: TradingChallengeRegistrationRequestResponseEnvelope
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.ApproveTradingChallengeRegistrationRequest`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**requestId** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiApproveTradingChallengeRegistrationRequestRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **reviewTradingChallengeRegistrationRequest** | [**ReviewTradingChallengeRegistrationRequest**](ReviewTradingChallengeRegistrationRequest.md) |  | 
+
+### Return type
+
+[**TradingChallengeRegistrationRequestResponseEnvelope**](TradingChallengeRegistrationRequestResponseEnvelope.md)
 
 ### Authorization
 
@@ -537,6 +619,8 @@ Name | Type | Description  | Notes
 > ClaimTradingChallengeResponseEnvelope ClaimTradingChallengePrize(ctx, tradingChallengeId).Execute()
 
 Claim challenge prize
+
+
 
 ### Example
 
@@ -995,6 +1079,8 @@ Name | Type | Description  | Notes
 > TradingChallengeResponseEnvelope CreateTradingChallenge(ctx).CreateTradingChallengeRequest(createTradingChallengeRequest).Execute()
 
 Create a trading challenge
+
+
 
 ### Example
 
@@ -3933,6 +4019,8 @@ Name | Type | Description  | Notes
 
 Get trading challenge by ID
 
+
+
 ### Example
 
 ```go
@@ -4001,6 +4089,8 @@ Name | Type | Description  | Notes
 
 Get trading challenge daily snapshots
 
+
+
 ### Example
 
 ```go
@@ -4068,6 +4158,8 @@ Name | Type | Description  | Notes
 > TradingChallengeResultsResponseEnvelope GetTradingChallengeResults(ctx, tradingChallengeId).Board(board).Execute()
 
 Get trading challenge results
+
+
 
 ### Example
 
@@ -4226,7 +4318,7 @@ func main() {
 	txKinds := []openapiclient.TransactionKind{openapiclient.TransactionKind("ACCRUE_INTEREST")} // []TransactionKind |  (optional)
 	start := time.Now() // time.Time |  (optional)
 	end := time.Now() // time.Time |  (optional)
-	tenantId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string |  (optional)
+	tenantId := "tenantId_example" // string |  (optional)
 	page := int32(56) // int32 |  (optional) (default to 1)
 	limit := int32(56) // int32 |  (optional) (default to 100)
 
@@ -4551,6 +4643,76 @@ Name | Type | Description  | Notes
 ### Authorization
 
 [apiKeyAuthQuery](../README.md#apiKeyAuthQuery)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetUserDeactivation
+
+> UserDeactivationResponseEnvelope GetUserDeactivation(ctx, userId).Execute()
+
+Get the latest account deactivation request for a user
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+	userId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.GetUserDeactivation(context.Background(), userId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.GetUserDeactivation``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetUserDeactivation`: UserDeactivationResponseEnvelope
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.GetUserDeactivation`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**userId** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetUserDeactivationRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**UserDeactivationResponseEnvelope**](UserDeactivationResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -6434,11 +6596,89 @@ Other parameters are passed through a pointer to a apiListPositionAccountsSelfRe
 [[Back to README]](../README.md)
 
 
+## ListTradingChallengeRegistrationRequests
+
+> TradingChallengeRegistrationRequestListResponseEnvelope ListTradingChallengeRegistrationRequests(ctx).TradingChallengeId(tradingChallengeId).UserId(userId).Status(status).TenantId(tenantId).Limit(limit).Offset(offset).Execute()
+
+List trading challenge registration requests
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+	tradingChallengeId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Only requests for this challenge. (optional)
+	userId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Only requests from this user. (optional)
+	status := "status_example" // string | Only requests in this state. (optional)
+	tenantId := "tenantId_example" // string | Admins only; an integrator may only name their own tenant. (optional)
+	limit := int32(56) // int32 | Page size, capped at 1000. (optional) (default to 100)
+	offset := int32(56) // int32 | Rows to skip. (optional) (default to 0)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.ListTradingChallengeRegistrationRequests(context.Background()).TradingChallengeId(tradingChallengeId).UserId(userId).Status(status).TenantId(tenantId).Limit(limit).Offset(offset).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.ListTradingChallengeRegistrationRequests``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ListTradingChallengeRegistrationRequests`: TradingChallengeRegistrationRequestListResponseEnvelope
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.ListTradingChallengeRegistrationRequests`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiListTradingChallengeRegistrationRequestsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **tradingChallengeId** | **string** | Only requests for this challenge. | 
+ **userId** | **string** | Only requests from this user. | 
+ **status** | **string** | Only requests in this state. | 
+ **tenantId** | **string** | Admins only; an integrator may only name their own tenant. | 
+ **limit** | **int32** | Page size, capped at 1000. | [default to 100]
+ **offset** | **int32** | Rows to skip. | [default to 0]
+
+### Return type
+
+[**TradingChallengeRegistrationRequestListResponseEnvelope**](TradingChallengeRegistrationRequestListResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## ListTradingChallenges
 
 > TradingChallengeListResponseEnvelope ListTradingChallenges(ctx).TenantId(tenantId).Type_(type_).Status(status).Start(start).End(end).Execute()
 
 List trading challenges
+
+
 
 ### Example
 
@@ -6492,6 +6732,78 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**TradingChallengeListResponseEnvelope**](TradingChallengeListResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ListUserDeactivations
+
+> UserDeactivationListResponseEnvelope ListUserDeactivations(ctx).Status(status).TenantId(tenantId).TradingChallengeId(tradingChallengeId).UserIds(userIds).Execute()
+
+Get the current deactivation status across all users
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+	status := "status_example" // string | Only return users whose latest request has this status. (optional)
+	tenantId := "tenantId_example" // string | Only return users belonging to this tenant. At most one of tenant_id, trading_challenge_id and user_ids may be passed; combining them is rejected. An integrator whose tenant is not global may only pass their own tenant. (optional)
+	tradingChallengeId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Only return participants of this trading challenge. Mutually exclusive with tenant_id and user_ids. (optional)
+	userIds := "userIds_example" // string | Comma-separated user IDs to return. Mutually exclusive with tenant_id and trading_challenge_id. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.ListUserDeactivations(context.Background()).Status(status).TenantId(tenantId).TradingChallengeId(tradingChallengeId).UserIds(userIds).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.ListUserDeactivations``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ListUserDeactivations`: UserDeactivationListResponseEnvelope
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.ListUserDeactivations`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiListUserDeactivationsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **status** | **string** | Only return users whose latest request has this status. | 
+ **tenantId** | **string** | Only return users belonging to this tenant. At most one of tenant_id, trading_challenge_id and user_ids may be passed; combining them is rejected. An integrator whose tenant is not global may only pass their own tenant. | 
+ **tradingChallengeId** | **string** | Only return participants of this trading challenge. Mutually exclusive with tenant_id and user_ids. | 
+ **userIds** | **string** | Comma-separated user IDs to return. Mutually exclusive with tenant_id and trading_challenge_id. | 
+
+### Return type
+
+[**UserDeactivationListResponseEnvelope**](UserDeactivationListResponseEnvelope.md)
 
 ### Authorization
 
@@ -6643,11 +6955,85 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## RejectTradingChallengeRegistrationRequest
+
+> TradingChallengeRegistrationRequestResponseEnvelope RejectTradingChallengeRegistrationRequest(ctx, requestId).ReviewTradingChallengeRegistrationRequest(reviewTradingChallengeRegistrationRequest).Execute()
+
+Reject a trading challenge registration request
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+	requestId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+	reviewTradingChallengeRegistrationRequest := *openapiclient.NewReviewTradingChallengeRegistrationRequest() // ReviewTradingChallengeRegistrationRequest |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.RejectTradingChallengeRegistrationRequest(context.Background(), requestId).ReviewTradingChallengeRegistrationRequest(reviewTradingChallengeRegistrationRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.RejectTradingChallengeRegistrationRequest``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `RejectTradingChallengeRegistrationRequest`: TradingChallengeRegistrationRequestResponseEnvelope
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.RejectTradingChallengeRegistrationRequest`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**requestId** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiRejectTradingChallengeRegistrationRequestRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **reviewTradingChallengeRegistrationRequest** | [**ReviewTradingChallengeRegistrationRequest**](ReviewTradingChallengeRegistrationRequest.md) |  | 
+
+### Return type
+
+[**TradingChallengeRegistrationRequestResponseEnvelope**](TradingChallengeRegistrationRequestResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## RemoveTradingChallengeUsers
 
 > TradingChallengeResponseEnvelope RemoveTradingChallengeUsers(ctx).RemoveTradingChallengeUsersRequest(removeTradingChallengeUsersRequest).Execute()
 
 Remove users from a trading challenge
+
+
 
 ### Example
 
@@ -7458,6 +7844,149 @@ No authorization required
 [[Back to README]](../README.md)
 
 
+## TerminateOwnTradingChallengeParticipation
+
+> TerminateTradingChallengeResponseEnvelope TerminateOwnTradingChallengeParticipation(ctx, tradingChallengeId).Execute()
+
+Leave a trading challenge
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+	tradingChallengeId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.TerminateOwnTradingChallengeParticipation(context.Background(), tradingChallengeId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.TerminateOwnTradingChallengeParticipation``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `TerminateOwnTradingChallengeParticipation`: TerminateTradingChallengeResponseEnvelope
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.TerminateOwnTradingChallengeParticipation`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**tradingChallengeId** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiTerminateOwnTradingChallengeParticipationRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**TerminateTradingChallengeResponseEnvelope**](TerminateTradingChallengeResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## TerminateTradingChallengeParticipation
+
+> TerminateTradingChallengeResponseEnvelope TerminateTradingChallengeParticipation(ctx, tradingChallengeId, userId).Execute()
+
+Terminate a participation in a trading challenge
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+	tradingChallengeId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+	userId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.TerminateTradingChallengeParticipation(context.Background(), tradingChallengeId, userId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.TerminateTradingChallengeParticipation``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `TerminateTradingChallengeParticipation`: TerminateTradingChallengeResponseEnvelope
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.TerminateTradingChallengeParticipation`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**tradingChallengeId** | **string** |  | 
+**userId** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiTerminateTradingChallengeParticipationRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+[**TerminateTradingChallengeResponseEnvelope**](TerminateTradingChallengeResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## TransferAccountBalancesV2
 
 > TransferAccountBalancesResponseEnvelope TransferAccountBalancesV2(ctx).TransferAccountBalancesRequest(transferAccountBalancesRequest).Execute()
@@ -7571,6 +8100,78 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**TransferBalancesResponseEnvelope**](TransferBalancesResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateTradingChallenge
+
+> TradingChallengeResponseEnvelope UpdateTradingChallenge(ctx, tradingChallengeId).UpdateTradingChallengeRequest(updateTradingChallengeRequest).Execute()
+
+Update a trading challenge
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+	tradingChallengeId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+	updateTradingChallengeRequest := *openapiclient.NewUpdateTradingChallengeRequest() // UpdateTradingChallengeRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.UpdateTradingChallenge(context.Background(), tradingChallengeId).UpdateTradingChallengeRequest(updateTradingChallengeRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.UpdateTradingChallenge``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `UpdateTradingChallenge`: TradingChallengeResponseEnvelope
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.UpdateTradingChallenge`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**tradingChallengeId** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateTradingChallengeRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **updateTradingChallengeRequest** | [**UpdateTradingChallengeRequest**](UpdateTradingChallengeRequest.md) |  | 
+
+### Return type
+
+[**TradingChallengeResponseEnvelope**](TradingChallengeResponseEnvelope.md)
 
 ### Authorization
 

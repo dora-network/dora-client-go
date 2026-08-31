@@ -8,6 +8,8 @@ Name | Type | Description | Notes
 **Kind** | [**CouponKind**](CouponKind.md) |  | 
 **CouponKind** | Pointer to [**CouponKind**](CouponKind.md) |  | [optional] 
 **BondKind** | Pointer to [**BondKind**](BondKind.md) |  | [optional] 
+**BondRunStatus** | Pointer to [**BondRunStatus**](BondRunStatus.md) |  | [optional] 
+**CreditRating** | Pointer to [**CreditRating**](CreditRating.md) |  | [optional] 
 **CouponStartAt** | Pointer to **time.Time** |  | [optional] 
 **CreatedAt** | **time.Time** |  | 
 **FinalCouponAt** | Pointer to **time.Time** |  | [optional] 
@@ -128,6 +130,56 @@ SetBondKind sets BondKind field to given value.
 `func (o *Bond) HasBondKind() bool`
 
 HasBondKind returns a boolean if a field has been set.
+
+### GetBondRunStatus
+
+`func (o *Bond) GetBondRunStatus() BondRunStatus`
+
+GetBondRunStatus returns the BondRunStatus field if non-nil, zero value otherwise.
+
+### GetBondRunStatusOk
+
+`func (o *Bond) GetBondRunStatusOk() (*BondRunStatus, bool)`
+
+GetBondRunStatusOk returns a tuple with the BondRunStatus field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBondRunStatus
+
+`func (o *Bond) SetBondRunStatus(v BondRunStatus)`
+
+SetBondRunStatus sets BondRunStatus field to given value.
+
+### HasBondRunStatus
+
+`func (o *Bond) HasBondRunStatus() bool`
+
+HasBondRunStatus returns a boolean if a field has been set.
+
+### GetCreditRating
+
+`func (o *Bond) GetCreditRating() CreditRating`
+
+GetCreditRating returns the CreditRating field if non-nil, zero value otherwise.
+
+### GetCreditRatingOk
+
+`func (o *Bond) GetCreditRatingOk() (*CreditRating, bool)`
+
+GetCreditRatingOk returns a tuple with the CreditRating field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCreditRating
+
+`func (o *Bond) SetCreditRating(v CreditRating)`
+
+SetCreditRating sets CreditRating field to given value.
+
+### HasCreditRating
+
+`func (o *Bond) HasCreditRating() bool`
+
+HasCreditRating returns a boolean if a field has been set.
 
 ### GetCouponStartAt
 

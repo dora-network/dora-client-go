@@ -34,6 +34,7 @@ type TradingChallengeResult struct {
 	Status *string `json:"status,omitempty"`
 	Crown *string `json:"crown,omitempty"`
 	CreatedAt *time.Time `json:"created_at,omitempty"`
+	DeactivationStatus *string `json:"deactivation_status,omitempty"`
 	CurrentDayDailyVolume *string `json:"current_day_daily_volume,omitempty"`
 	CurrentDayDailyPnl *string `json:"current_day_daily_pnl,omitempty"`
 	CurrentDayTradingDate *string `json:"current_day_trading_date,omitempty"`
@@ -505,6 +506,38 @@ func (o *TradingChallengeResult) SetCreatedAt(v time.Time) {
 	o.CreatedAt = &v
 }
 
+// GetDeactivationStatus returns the DeactivationStatus field value if set, zero value otherwise.
+func (o *TradingChallengeResult) GetDeactivationStatus() string {
+	if o == nil || IsNil(o.DeactivationStatus) {
+		var ret string
+		return ret
+	}
+	return *o.DeactivationStatus
+}
+
+// GetDeactivationStatusOk returns a tuple with the DeactivationStatus field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TradingChallengeResult) GetDeactivationStatusOk() (*string, bool) {
+	if o == nil || IsNil(o.DeactivationStatus) {
+		return nil, false
+	}
+	return o.DeactivationStatus, true
+}
+
+// HasDeactivationStatus returns a boolean if a field has been set.
+func (o *TradingChallengeResult) HasDeactivationStatus() bool {
+	if o != nil && !IsNil(o.DeactivationStatus) {
+		return true
+	}
+
+	return false
+}
+
+// SetDeactivationStatus gets a reference to the given string and assigns it to the DeactivationStatus field.
+func (o *TradingChallengeResult) SetDeactivationStatus(v string) {
+	o.DeactivationStatus = &v
+}
+
 // GetCurrentDayDailyVolume returns the CurrentDayDailyVolume field value if set, zero value otherwise.
 func (o *TradingChallengeResult) GetCurrentDayDailyVolume() string {
 	if o == nil || IsNil(o.CurrentDayDailyVolume) {
@@ -684,6 +717,9 @@ func (o TradingChallengeResult) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.CreatedAt) {
 		toSerialize["created_at"] = o.CreatedAt
+	}
+	if !IsNil(o.DeactivationStatus) {
+		toSerialize["deactivation_status"] = o.DeactivationStatus
 	}
 	if !IsNil(o.CurrentDayDailyVolume) {
 		toSerialize["current_day_daily_volume"] = o.CurrentDayDailyVolume

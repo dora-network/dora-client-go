@@ -27,6 +27,8 @@ const (
 	USERROLE_LIQUIDITY_PROVIDER UserRole = "LIQUIDITY_PROVIDER"
 	USERROLE_TRADER UserRole = "TRADER"
 	USERROLE_INTEGRATOR UserRole = "INTEGRATOR"
+	USERROLE_INDEXER UserRole = "INDEXER"
+	USERROLE_COMPETITION_MANAGER UserRole = "COMPETITION_MANAGER"
 )
 
 // All allowed values of UserRole enum
@@ -38,6 +40,8 @@ var AllowedUserRoleEnumValues = []UserRole{
 	"LIQUIDITY_PROVIDER",
 	"TRADER",
 	"INTEGRATOR",
+	"INDEXER",
+	"COMPETITION_MANAGER",
 }
 
 func (v *UserRole) UnmarshalJSON(src []byte) error {

@@ -24,10 +24,22 @@ type PnLRankingResponse struct {
 	UserId string `json:"user_id"`
 	FirstName string `json:"first_name"`
 	TotalPnl string `json:"total_pnl"`
+	// Cumulative realized PnL across the user's full trading lifetime.
+	RealizedPnl string `json:"realized_pnl"`
 	TotalTrades int32 `json:"total_trades"`
 	WinningTrades int32 `json:"winning_trades"`
 	LosingTrades int32 `json:"losing_trades"`
 	WinRate string `json:"win_rate"`
+	// Executed trading volume for the current UTC day.
+	DailyTradingVolume string `json:"daily_trading_volume"`
+	// Cumulative executed trading volume across all UTC trading days.
+	TotalTradingVolume string `json:"total_trading_volume"`
+	// Number of distinct UTC days on which the user has at least one executed fill.
+	ActiveTradingDays int32 `json:"active_trading_days"`
+	// True once the user has traded on at least 5 distinct UTC days.
+	Activated bool `json:"activated"`
+	// Whether the user is currently considered KYC/verification approved.
+	KycApproved bool `json:"kyc_approved"`
 }
 
 type _PnLRankingResponse PnLRankingResponse
@@ -36,15 +48,21 @@ type _PnLRankingResponse PnLRankingResponse
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPnLRankingResponse(userId string, firstName string, totalPnl string, totalTrades int32, winningTrades int32, losingTrades int32, winRate string) *PnLRankingResponse {
+func NewPnLRankingResponse(userId string, firstName string, totalPnl string, realizedPnl string, totalTrades int32, winningTrades int32, losingTrades int32, winRate string, dailyTradingVolume string, totalTradingVolume string, activeTradingDays int32, activated bool, kycApproved bool) *PnLRankingResponse {
 	this := PnLRankingResponse{}
 	this.UserId = userId
 	this.FirstName = firstName
 	this.TotalPnl = totalPnl
+	this.RealizedPnl = realizedPnl
 	this.TotalTrades = totalTrades
 	this.WinningTrades = winningTrades
 	this.LosingTrades = losingTrades
 	this.WinRate = winRate
+	this.DailyTradingVolume = dailyTradingVolume
+	this.TotalTradingVolume = totalTradingVolume
+	this.ActiveTradingDays = activeTradingDays
+	this.Activated = activated
+	this.KycApproved = kycApproved
 	return &this
 }
 
@@ -126,6 +144,30 @@ func (o *PnLRankingResponse) GetTotalPnlOk() (*string, bool) {
 // SetTotalPnl sets field value
 func (o *PnLRankingResponse) SetTotalPnl(v string) {
 	o.TotalPnl = v
+}
+
+// GetRealizedPnl returns the RealizedPnl field value
+func (o *PnLRankingResponse) GetRealizedPnl() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.RealizedPnl
+}
+
+// GetRealizedPnlOk returns a tuple with the RealizedPnl field value
+// and a boolean to check if the value has been set.
+func (o *PnLRankingResponse) GetRealizedPnlOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.RealizedPnl, true
+}
+
+// SetRealizedPnl sets field value
+func (o *PnLRankingResponse) SetRealizedPnl(v string) {
+	o.RealizedPnl = v
 }
 
 // GetTotalTrades returns the TotalTrades field value
@@ -224,6 +266,126 @@ func (o *PnLRankingResponse) SetWinRate(v string) {
 	o.WinRate = v
 }
 
+// GetDailyTradingVolume returns the DailyTradingVolume field value
+func (o *PnLRankingResponse) GetDailyTradingVolume() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.DailyTradingVolume
+}
+
+// GetDailyTradingVolumeOk returns a tuple with the DailyTradingVolume field value
+// and a boolean to check if the value has been set.
+func (o *PnLRankingResponse) GetDailyTradingVolumeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.DailyTradingVolume, true
+}
+
+// SetDailyTradingVolume sets field value
+func (o *PnLRankingResponse) SetDailyTradingVolume(v string) {
+	o.DailyTradingVolume = v
+}
+
+// GetTotalTradingVolume returns the TotalTradingVolume field value
+func (o *PnLRankingResponse) GetTotalTradingVolume() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.TotalTradingVolume
+}
+
+// GetTotalTradingVolumeOk returns a tuple with the TotalTradingVolume field value
+// and a boolean to check if the value has been set.
+func (o *PnLRankingResponse) GetTotalTradingVolumeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.TotalTradingVolume, true
+}
+
+// SetTotalTradingVolume sets field value
+func (o *PnLRankingResponse) SetTotalTradingVolume(v string) {
+	o.TotalTradingVolume = v
+}
+
+// GetActiveTradingDays returns the ActiveTradingDays field value
+func (o *PnLRankingResponse) GetActiveTradingDays() int32 {
+	if o == nil {
+		var ret int32
+		return ret
+	}
+
+	return o.ActiveTradingDays
+}
+
+// GetActiveTradingDaysOk returns a tuple with the ActiveTradingDays field value
+// and a boolean to check if the value has been set.
+func (o *PnLRankingResponse) GetActiveTradingDaysOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ActiveTradingDays, true
+}
+
+// SetActiveTradingDays sets field value
+func (o *PnLRankingResponse) SetActiveTradingDays(v int32) {
+	o.ActiveTradingDays = v
+}
+
+// GetActivated returns the Activated field value
+func (o *PnLRankingResponse) GetActivated() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.Activated
+}
+
+// GetActivatedOk returns a tuple with the Activated field value
+// and a boolean to check if the value has been set.
+func (o *PnLRankingResponse) GetActivatedOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Activated, true
+}
+
+// SetActivated sets field value
+func (o *PnLRankingResponse) SetActivated(v bool) {
+	o.Activated = v
+}
+
+// GetKycApproved returns the KycApproved field value
+func (o *PnLRankingResponse) GetKycApproved() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.KycApproved
+}
+
+// GetKycApprovedOk returns a tuple with the KycApproved field value
+// and a boolean to check if the value has been set.
+func (o *PnLRankingResponse) GetKycApprovedOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.KycApproved, true
+}
+
+// SetKycApproved sets field value
+func (o *PnLRankingResponse) SetKycApproved(v bool) {
+	o.KycApproved = v
+}
+
 func (o PnLRankingResponse) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -237,10 +399,16 @@ func (o PnLRankingResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize["user_id"] = o.UserId
 	toSerialize["first_name"] = o.FirstName
 	toSerialize["total_pnl"] = o.TotalPnl
+	toSerialize["realized_pnl"] = o.RealizedPnl
 	toSerialize["total_trades"] = o.TotalTrades
 	toSerialize["winning_trades"] = o.WinningTrades
 	toSerialize["losing_trades"] = o.LosingTrades
 	toSerialize["win_rate"] = o.WinRate
+	toSerialize["daily_trading_volume"] = o.DailyTradingVolume
+	toSerialize["total_trading_volume"] = o.TotalTradingVolume
+	toSerialize["active_trading_days"] = o.ActiveTradingDays
+	toSerialize["activated"] = o.Activated
+	toSerialize["kyc_approved"] = o.KycApproved
 	return toSerialize, nil
 }
 
@@ -252,10 +420,16 @@ func (o *PnLRankingResponse) UnmarshalJSON(data []byte) (err error) {
 		"user_id",
 		"first_name",
 		"total_pnl",
+		"realized_pnl",
 		"total_trades",
 		"winning_trades",
 		"losing_trades",
 		"win_rate",
+		"daily_trading_volume",
+		"total_trading_volume",
+		"active_trading_days",
+		"activated",
+		"kyc_approved",
 	}
 
 	allProperties := make(map[string]interface{})

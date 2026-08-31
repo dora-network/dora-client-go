@@ -18,6 +18,7 @@ Name | Type | Description | Notes
 **Status** | Pointer to **string** |  | [optional] 
 **Crown** | Pointer to **string** |  | [optional] 
 **CreatedAt** | Pointer to **time.Time** |  | [optional] 
+**DeactivationStatus** | Pointer to **string** |  | [optional] 
 **CurrentDayDailyVolume** | Pointer to **string** |  | [optional] 
 **CurrentDayDailyPnl** | Pointer to **string** |  | [optional] 
 **CurrentDayTradingDate** | Pointer to **string** |  | [optional] 
@@ -391,6 +392,31 @@ SetCreatedAt sets CreatedAt field to given value.
 `func (o *TradingChallengeResult) HasCreatedAt() bool`
 
 HasCreatedAt returns a boolean if a field has been set.
+
+### GetDeactivationStatus
+
+`func (o *TradingChallengeResult) GetDeactivationStatus() string`
+
+GetDeactivationStatus returns the DeactivationStatus field if non-nil, zero value otherwise.
+
+### GetDeactivationStatusOk
+
+`func (o *TradingChallengeResult) GetDeactivationStatusOk() (*string, bool)`
+
+GetDeactivationStatusOk returns a tuple with the DeactivationStatus field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDeactivationStatus
+
+`func (o *TradingChallengeResult) SetDeactivationStatus(v string)`
+
+SetDeactivationStatus sets DeactivationStatus field to given value.
+
+### HasDeactivationStatus
+
+`func (o *TradingChallengeResult) HasDeactivationStatus() bool`
+
+HasDeactivationStatus returns a boolean if a field has been set.
 
 ### GetCurrentDayDailyVolume
 

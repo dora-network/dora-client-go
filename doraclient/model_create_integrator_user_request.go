@@ -30,6 +30,8 @@ type CreateIntegratorUserRequest struct {
 	Provider *string
 	ProviderId *string
 	Timezone *string
+	// Optional: sign the new user up for this trading challenge. This creates a PENDING registration request that an admin, the tenant's integrator or one of the challenge's managers must approve before the user is actually enrolled. The challenge must belong to the new user's tenant and still be open for entries, otherwise the whole sign-up fails.
+	ChallengeId *string
 }
 
 // NewCreateIntegratorUserRequest instantiates a new CreateIntegratorUserRequest object
@@ -369,6 +371,38 @@ func (o *CreateIntegratorUserRequest) SetTimezone(v string) {
 	o.Timezone = &v
 }
 
+// GetChallengeId returns the ChallengeId field value if set, zero value otherwise.
+func (o *CreateIntegratorUserRequest) GetChallengeId() string {
+	if o == nil || IsNil(o.ChallengeId) {
+		var ret string
+		return ret
+	}
+	return *o.ChallengeId
+}
+
+// GetChallengeIdOk returns a tuple with the ChallengeId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateIntegratorUserRequest) GetChallengeIdOk() (*string, bool) {
+	if o == nil || IsNil(o.ChallengeId) {
+		return nil, false
+	}
+	return o.ChallengeId, true
+}
+
+// HasChallengeId returns a boolean if a field has been set.
+func (o *CreateIntegratorUserRequest) HasChallengeId() bool {
+	if o != nil && !IsNil(o.ChallengeId) {
+		return true
+	}
+
+	return false
+}
+
+// SetChallengeId gets a reference to the given string and assigns it to the ChallengeId field.
+func (o *CreateIntegratorUserRequest) SetChallengeId(v string) {
+	o.ChallengeId = &v
+}
+
 func (o CreateIntegratorUserRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -408,6 +442,9 @@ func (o CreateIntegratorUserRequest) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Timezone) {
 		toSerialize["timezone"] = o.Timezone
+	}
+	if !IsNil(o.ChallengeId) {
+		toSerialize["challenge_id"] = o.ChallengeId
 	}
 	return toSerialize, nil
 }

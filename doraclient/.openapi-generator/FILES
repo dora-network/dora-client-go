@@ -31,6 +31,7 @@ docs/BalanceTransfer.md
 docs/BalancesResponse.md
 docs/Bond.md
 docs/BondKind.md
+docs/BondRunStatus.md
 docs/CancelOrderResponseEnvelope.md
 docs/Candle.md
 docs/CandleResolution.md
@@ -62,6 +63,7 @@ docs/CreateOrUpdateUserResponse.md
 docs/CreateOrderRequest.md
 docs/CreateOrderResponseEnvelope.md
 docs/CreateTradingChallengeRequest.md
+docs/CreditRating.md
 docs/CurrentLeverageAccruedInterest.md
 docs/CurrentLeverageAccruedInterestResponseEnvelope.md
 docs/DefaultAPI.md
@@ -171,6 +173,7 @@ docs/RepayUSDResponseEnvelope.md
 docs/RepayUSDResult.md
 docs/ResponseEnvelope.md
 docs/ResponseEnvelopeOfListAssets.md
+docs/ReviewTradingChallengeRegistrationRequest.md
 docs/RevokeAPIKeyData.md
 docs/RevokeAPIKeyResponseEnvelope.md
 docs/SettleLeverageAccruedInterest.md
@@ -194,6 +197,8 @@ docs/Supply.md
 docs/SupplyRequest.md
 docs/SupplyResponseEnvelope.md
 docs/TenantRestrictions.md
+docs/TerminateTradingChallengeResponse.md
+docs/TerminateTradingChallengeResponseEnvelope.md
 docs/Trade.md
 docs/TradeRequestError.md
 docs/TradeResponseEnvelope.md
@@ -201,6 +206,9 @@ docs/TradingChallenge.md
 docs/TradingChallengeDailySnapshot.md
 docs/TradingChallengeDailySnapshotsResponseEnvelope.md
 docs/TradingChallengeListResponseEnvelope.md
+docs/TradingChallengeRegistrationRequest.md
+docs/TradingChallengeRegistrationRequestListResponseEnvelope.md
+docs/TradingChallengeRegistrationRequestResponseEnvelope.md
 docs/TradingChallengeResponseEnvelope.md
 docs/TradingChallengeResult.md
 docs/TradingChallengeResultsResponseEnvelope.md
@@ -226,8 +234,12 @@ docs/UnitePositionRequest.md
 docs/UnitePositionResponseEnvelope.md
 docs/UnitedPosition.md
 docs/UpdateFieldBoolean.md
+docs/UpdateFieldDateTime.md
+docs/UpdateFieldDecimal.md
+docs/UpdateFieldInteger.md
 docs/UpdateFieldString.md
 docs/UpdateRolesString.md
+docs/UpdateTradingChallengeRequest.md
 docs/UpdateUserConfigRequest.md
 docs/UpdateUserKYCRequest.md
 docs/UpdateUserKYCResponse.md
@@ -240,6 +252,9 @@ docs/UserCouponPayment.md
 docs/UserCouponPaymentAssetSummary.md
 docs/UserCouponPaymentsResponseData.md
 docs/UserCreatedResponseEnvelope.md
+docs/UserDeactivation.md
+docs/UserDeactivationListResponseEnvelope.md
+docs/UserDeactivationResponseEnvelope.md
 docs/UserDeletedResponseEnvelope.md
 docs/UserEnvelope.md
 docs/UserExistsResponse.md
@@ -286,6 +301,7 @@ model_balance_transfer.go
 model_balances_response.go
 model_bond.go
 model_bond_kind.go
+model_bond_run_status.go
 model_cancel_order_response_envelope.go
 model_candle.go
 model_candle_resolution.go
@@ -317,6 +333,7 @@ model_create_or_update_user_response.go
 model_create_order_request.go
 model_create_order_response_envelope.go
 model_create_trading_challenge_request.go
+model_credit_rating.go
 model_current_leverage_accrued_interest.go
 model_current_leverage_accrued_interest_response_envelope.go
 model_defund_user_request.go
@@ -425,6 +442,7 @@ model_repay_usd_response_envelope.go
 model_repay_usd_result.go
 model_response_envelope.go
 model_response_envelope_of_list_assets.go
+model_review_trading_challenge_registration_request.go
 model_revoke_api_key_data.go
 model_revoke_api_key_response_envelope.go
 model_settle_leverage_accrued_interest.go
@@ -448,6 +466,8 @@ model_supply.go
 model_supply_request.go
 model_supply_response_envelope.go
 model_tenant_restrictions.go
+model_terminate_trading_challenge_response.go
+model_terminate_trading_challenge_response_envelope.go
 model_trade.go
 model_trade_request_error.go
 model_trade_response_envelope.go
@@ -455,6 +475,9 @@ model_trading_challenge.go
 model_trading_challenge_daily_snapshot.go
 model_trading_challenge_daily_snapshots_response_envelope.go
 model_trading_challenge_list_response_envelope.go
+model_trading_challenge_registration_request.go
+model_trading_challenge_registration_request_list_response_envelope.go
+model_trading_challenge_registration_request_response_envelope.go
 model_trading_challenge_response_envelope.go
 model_trading_challenge_result.go
 model_trading_challenge_results_response_envelope.go
@@ -480,8 +503,12 @@ model_unite_position_request.go
 model_unite_position_response_envelope.go
 model_united_position.go
 model_update_field_boolean.go
+model_update_field_date_time.go
+model_update_field_decimal.go
+model_update_field_integer.go
 model_update_field_string.go
 model_update_roles_string.go
+model_update_trading_challenge_request.go
 model_update_user_config_request.go
 model_update_user_kyc_request.go
 model_update_user_kyc_response.go
@@ -494,6 +521,9 @@ model_user_coupon_payment.go
 model_user_coupon_payment_asset_summary.go
 model_user_coupon_payments_response_data.go
 model_user_created_response_envelope.go
+model_user_deactivation.go
+model_user_deactivation_list_response_envelope.go
+model_user_deactivation_response_envelope.go
 model_user_deleted_response_envelope.go
 model_user_envelope.go
 model_user_exists_response.go

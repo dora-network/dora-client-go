@@ -26,6 +26,8 @@ type Bond struct {
 	Kind CouponKind `json:"kind"`
 	CouponKind *CouponKind `json:"coupon_kind,omitempty"`
 	BondKind *BondKind `json:"bond_kind,omitempty"`
+	BondRunStatus *BondRunStatus `json:"bond_run_status,omitempty"`
+	CreditRating *CreditRating `json:"credit_rating,omitempty"`
 	CouponStartAt *time.Time `json:"coupon_start_at,omitempty"`
 	CreatedAt time.Time `json:"created_at"`
 	FinalCouponAt *time.Time `json:"final_coupon_at,omitempty"`
@@ -178,6 +180,70 @@ func (o *Bond) HasBondKind() bool {
 // SetBondKind gets a reference to the given BondKind and assigns it to the BondKind field.
 func (o *Bond) SetBondKind(v BondKind) {
 	o.BondKind = &v
+}
+
+// GetBondRunStatus returns the BondRunStatus field value if set, zero value otherwise.
+func (o *Bond) GetBondRunStatus() BondRunStatus {
+	if o == nil || IsNil(o.BondRunStatus) {
+		var ret BondRunStatus
+		return ret
+	}
+	return *o.BondRunStatus
+}
+
+// GetBondRunStatusOk returns a tuple with the BondRunStatus field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Bond) GetBondRunStatusOk() (*BondRunStatus, bool) {
+	if o == nil || IsNil(o.BondRunStatus) {
+		return nil, false
+	}
+	return o.BondRunStatus, true
+}
+
+// HasBondRunStatus returns a boolean if a field has been set.
+func (o *Bond) HasBondRunStatus() bool {
+	if o != nil && !IsNil(o.BondRunStatus) {
+		return true
+	}
+
+	return false
+}
+
+// SetBondRunStatus gets a reference to the given BondRunStatus and assigns it to the BondRunStatus field.
+func (o *Bond) SetBondRunStatus(v BondRunStatus) {
+	o.BondRunStatus = &v
+}
+
+// GetCreditRating returns the CreditRating field value if set, zero value otherwise.
+func (o *Bond) GetCreditRating() CreditRating {
+	if o == nil || IsNil(o.CreditRating) {
+		var ret CreditRating
+		return ret
+	}
+	return *o.CreditRating
+}
+
+// GetCreditRatingOk returns a tuple with the CreditRating field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Bond) GetCreditRatingOk() (*CreditRating, bool) {
+	if o == nil || IsNil(o.CreditRating) {
+		return nil, false
+	}
+	return o.CreditRating, true
+}
+
+// HasCreditRating returns a boolean if a field has been set.
+func (o *Bond) HasCreditRating() bool {
+	if o != nil && !IsNil(o.CreditRating) {
+		return true
+	}
+
+	return false
+}
+
+// SetCreditRating gets a reference to the given CreditRating and assigns it to the CreditRating field.
+func (o *Bond) SetCreditRating(v CreditRating) {
+	o.CreditRating = &v
 }
 
 // GetCouponStartAt returns the CouponStartAt field value if set, zero value otherwise.
@@ -493,6 +559,12 @@ func (o Bond) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.BondKind) {
 		toSerialize["bond_kind"] = o.BondKind
+	}
+	if !IsNil(o.BondRunStatus) {
+		toSerialize["bond_run_status"] = o.BondRunStatus
+	}
+	if !IsNil(o.CreditRating) {
+		toSerialize["credit_rating"] = o.CreditRating
 	}
 	if !IsNil(o.CouponStartAt) {
 		toSerialize["coupon_start_at"] = o.CouponStartAt
