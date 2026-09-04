@@ -31,6 +31,10 @@ type CashReserveResponse struct {
 	RequiredUsd string `json:"required_usd"`
 	// Whether available_usd minus committed_usd is at least required_usd.
 	Satisfied bool `json:"satisfied"`
+	// How much more traded USD notional the user can add to the current settlement period before the reserve stops being covered, for an order that borrows nothing. Null means the fee leg does not constrain the user, because the guard is disabled or the trading fee volume cap is zero.
+	MaxVolumeUsd string `json:"max_volume_usd"`
+	// How much more the user can borrow before the reserve stops being covered, for an order that adds no traded volume. Null means the borrow leg does not constrain the user, because the guard is disabled or the borrowed fraction is zero. The two caps are single axis: a leveraged order consumes both at once and is admissible when notional/max_volume_usd + borrowed/max_borrow_usd <= 1.
+	MaxBorrowUsd string `json:"max_borrow_usd"`
 	Breakdown CashReserveBreakdown `json:"breakdown"`
 }
 
@@ -40,13 +44,15 @@ type _CashReserveResponse CashReserveResponse
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCashReserveResponse(enforced bool, availableUsd string, committedUsd string, requiredUsd string, satisfied bool, breakdown CashReserveBreakdown) *CashReserveResponse {
+func NewCashReserveResponse(enforced bool, availableUsd string, committedUsd string, requiredUsd string, satisfied bool, maxVolumeUsd string, maxBorrowUsd string, breakdown CashReserveBreakdown) *CashReserveResponse {
 	this := CashReserveResponse{}
 	this.Enforced = enforced
 	this.AvailableUsd = availableUsd
 	this.CommittedUsd = committedUsd
 	this.RequiredUsd = requiredUsd
 	this.Satisfied = satisfied
+	this.MaxVolumeUsd = maxVolumeUsd
+	this.MaxBorrowUsd = maxBorrowUsd
 	this.Breakdown = breakdown
 	return &this
 }
@@ -179,6 +185,54 @@ func (o *CashReserveResponse) SetSatisfied(v bool) {
 	o.Satisfied = v
 }
 
+// GetMaxVolumeUsd returns the MaxVolumeUsd field value
+func (o *CashReserveResponse) GetMaxVolumeUsd() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.MaxVolumeUsd
+}
+
+// GetMaxVolumeUsdOk returns a tuple with the MaxVolumeUsd field value
+// and a boolean to check if the value has been set.
+func (o *CashReserveResponse) GetMaxVolumeUsdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.MaxVolumeUsd, true
+}
+
+// SetMaxVolumeUsd sets field value
+func (o *CashReserveResponse) SetMaxVolumeUsd(v string) {
+	o.MaxVolumeUsd = v
+}
+
+// GetMaxBorrowUsd returns the MaxBorrowUsd field value
+func (o *CashReserveResponse) GetMaxBorrowUsd() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.MaxBorrowUsd
+}
+
+// GetMaxBorrowUsdOk returns a tuple with the MaxBorrowUsd field value
+// and a boolean to check if the value has been set.
+func (o *CashReserveResponse) GetMaxBorrowUsdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.MaxBorrowUsd, true
+}
+
+// SetMaxBorrowUsd sets field value
+func (o *CashReserveResponse) SetMaxBorrowUsd(v string) {
+	o.MaxBorrowUsd = v
+}
+
 // GetBreakdown returns the Breakdown field value
 func (o *CashReserveResponse) GetBreakdown() CashReserveBreakdown {
 	if o == nil {
@@ -218,6 +272,8 @@ func (o CashReserveResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize["committed_usd"] = o.CommittedUsd
 	toSerialize["required_usd"] = o.RequiredUsd
 	toSerialize["satisfied"] = o.Satisfied
+	toSerialize["max_volume_usd"] = o.MaxVolumeUsd
+	toSerialize["max_borrow_usd"] = o.MaxBorrowUsd
 	toSerialize["breakdown"] = o.Breakdown
 	return toSerialize, nil
 }
@@ -232,6 +288,8 @@ func (o *CashReserveResponse) UnmarshalJSON(data []byte) (err error) {
 		"committed_usd",
 		"required_usd",
 		"satisfied",
+		"max_volume_usd",
+		"max_borrow_usd",
 		"breakdown",
 	}
 

@@ -25,7 +25,7 @@ type CashReserveBreakdown struct {
 	CompletedPac string `json:"completed_pac"`
 	// Outstanding LAI (leverage accrued interest) the user owes, in USD.
 	OutstandingLai string `json:"outstanding_lai"`
-	// Estimated trading fees for the current settlement period, capped at a configured fraction (1% by default) of the user's traded USD volume since 00:00:00 UTC.
+	// Estimated trading fees for the current settlement period, capped at a configured fraction (1% by default) of the user's traded USD volume since 00:00:00 UTC plus the USD notional their open orders are still going to trade.
 	EstimatedFees string `json:"estimated_fees"`
 	// Configured fraction (10% by default) of the user's total outstanding borrowed value, in USD.
 	BorrowedPortion string `json:"borrowed_portion"`

@@ -74,6 +74,8 @@ docs/DepositInstructionForChain.md
 docs/DepositInstructionsResponse.md
 docs/DepositInstructionsResponseEnvelope.md
 docs/DepositResponse.md
+docs/FeeQuoteResponse.md
+docs/FeeQuoteResponseEnvelope.md
 docs/FundUser.md
 docs/FundUserRequest.md
 docs/FundUserResponseEnvelope.md
@@ -343,6 +345,8 @@ model_deposit_instruction_for_chain.go
 model_deposit_instructions_response.go
 model_deposit_instructions_response_envelope.go
 model_deposit_response.go
+model_fee_quote_response.go
+model_fee_quote_response_envelope.go
 model_fund_user.go
 model_fund_user_request.go
 model_fund_user_response_envelope.go

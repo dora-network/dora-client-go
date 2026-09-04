@@ -21,8 +21,11 @@ var _ MappedNullable = &AddTradingChallengeUsersRequest{}
 
 // AddTradingChallengeUsersRequest struct for AddTradingChallengeUsersRequest
 type AddTradingChallengeUsersRequest struct {
-	TradingChallengeId string `json:"trading_challenge_id"`
-	Users []string `json:"users"`
+	TradingChallengeId string
+	// List of user IDs to add. Provide exactly one of users or emails.
+	Users []string
+	// List of user emails to add. Provide exactly one of users or emails.
+	Emails []string
 }
 
 type _AddTradingChallengeUsersRequest AddTradingChallengeUsersRequest
@@ -31,10 +34,8 @@ type _AddTradingChallengeUsersRequest AddTradingChallengeUsersRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAddTradingChallengeUsersRequest(tradingChallengeId string, users []string) *AddTradingChallengeUsersRequest {
+func NewAddTradingChallengeUsersRequest(tradingChallengeId string) *AddTradingChallengeUsersRequest {
 	this := AddTradingChallengeUsersRequest{}
-	this.TradingChallengeId = tradingChallengeId
-	this.Users = users
 	return &this
 }
 
@@ -70,28 +71,68 @@ func (o *AddTradingChallengeUsersRequest) SetTradingChallengeId(v string) {
 	o.TradingChallengeId = v
 }
 
-// GetUsers returns the Users field value
+// GetUsers returns the Users field value if set, zero value otherwise.
 func (o *AddTradingChallengeUsersRequest) GetUsers() []string {
-	if o == nil {
+	if o == nil || IsNil(o.Users) {
 		var ret []string
 		return ret
 	}
-
 	return o.Users
 }
 
-// GetUsersOk returns a tuple with the Users field value
+// GetUsersOk returns a tuple with the Users field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AddTradingChallengeUsersRequest) GetUsersOk() ([]string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Users) {
 		return nil, false
 	}
 	return o.Users, true
 }
 
-// SetUsers sets field value
+// HasUsers returns a boolean if a field has been set.
+func (o *AddTradingChallengeUsersRequest) HasUsers() bool {
+	if o != nil && !IsNil(o.Users) {
+		return true
+	}
+
+	return false
+}
+
+// SetUsers gets a reference to the given []string and assigns it to the Users field.
 func (o *AddTradingChallengeUsersRequest) SetUsers(v []string) {
 	o.Users = v
+}
+
+// GetEmails returns the Emails field value if set, zero value otherwise.
+func (o *AddTradingChallengeUsersRequest) GetEmails() []string {
+	if o == nil || IsNil(o.Emails) {
+		var ret []string
+		return ret
+	}
+	return o.Emails
+}
+
+// GetEmailsOk returns a tuple with the Emails field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AddTradingChallengeUsersRequest) GetEmailsOk() ([]string, bool) {
+	if o == nil || IsNil(o.Emails) {
+		return nil, false
+	}
+	return o.Emails, true
+}
+
+// HasEmails returns a boolean if a field has been set.
+func (o *AddTradingChallengeUsersRequest) HasEmails() bool {
+	if o != nil && !IsNil(o.Emails) {
+		return true
+	}
+
+	return false
+}
+
+// SetEmails gets a reference to the given []string and assigns it to the Emails field.
+func (o *AddTradingChallengeUsersRequest) SetEmails(v []string) {
+	o.Emails = v
 }
 
 func (o AddTradingChallengeUsersRequest) MarshalJSON() ([]byte, error) {
@@ -105,7 +146,12 @@ func (o AddTradingChallengeUsersRequest) MarshalJSON() ([]byte, error) {
 func (o AddTradingChallengeUsersRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["trading_challenge_id"] = o.TradingChallengeId
-	toSerialize["users"] = o.Users
+	if !IsNil(o.Users) {
+		toSerialize["users"] = o.Users
+	}
+	if !IsNil(o.Emails) {
+		toSerialize["emails"] = o.Emails
+	}
 	return toSerialize, nil
 }
 
@@ -115,7 +161,6 @@ func (o *AddTradingChallengeUsersRequest) UnmarshalJSON(data []byte) (err error)
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"trading_challenge_id",
-		"users",
 	}
 
 	allProperties := make(map[string]interface{})

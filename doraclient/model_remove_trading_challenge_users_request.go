@@ -21,8 +21,11 @@ var _ MappedNullable = &RemoveTradingChallengeUsersRequest{}
 
 // RemoveTradingChallengeUsersRequest struct for RemoveTradingChallengeUsersRequest
 type RemoveTradingChallengeUsersRequest struct {
-	TradingChallengeId string `json:"trading_challenge_id"`
-	Users []string `json:"users"`
+	TradingChallengeId string
+	// List of user IDs to remove. Provide exactly one of users or emails.
+	Users []string
+	// List of user emails to remove. Provide exactly one of users or emails.
+	Emails []string
 }
 
 type _RemoveTradingChallengeUsersRequest RemoveTradingChallengeUsersRequest
@@ -31,10 +34,8 @@ type _RemoveTradingChallengeUsersRequest RemoveTradingChallengeUsersRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRemoveTradingChallengeUsersRequest(tradingChallengeId string, users []string) *RemoveTradingChallengeUsersRequest {
+func NewRemoveTradingChallengeUsersRequest(tradingChallengeId string) *RemoveTradingChallengeUsersRequest {
 	this := RemoveTradingChallengeUsersRequest{}
-	this.TradingChallengeId = tradingChallengeId
-	this.Users = users
 	return &this
 }
 
@@ -70,28 +71,68 @@ func (o *RemoveTradingChallengeUsersRequest) SetTradingChallengeId(v string) {
 	o.TradingChallengeId = v
 }
 
-// GetUsers returns the Users field value
+// GetUsers returns the Users field value if set, zero value otherwise.
 func (o *RemoveTradingChallengeUsersRequest) GetUsers() []string {
-	if o == nil {
+	if o == nil || IsNil(o.Users) {
 		var ret []string
 		return ret
 	}
-
 	return o.Users
 }
 
-// GetUsersOk returns a tuple with the Users field value
+// GetUsersOk returns a tuple with the Users field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RemoveTradingChallengeUsersRequest) GetUsersOk() ([]string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Users) {
 		return nil, false
 	}
 	return o.Users, true
 }
 
-// SetUsers sets field value
+// HasUsers returns a boolean if a field has been set.
+func (o *RemoveTradingChallengeUsersRequest) HasUsers() bool {
+	if o != nil && !IsNil(o.Users) {
+		return true
+	}
+
+	return false
+}
+
+// SetUsers gets a reference to the given []string and assigns it to the Users field.
 func (o *RemoveTradingChallengeUsersRequest) SetUsers(v []string) {
 	o.Users = v
+}
+
+// GetEmails returns the Emails field value if set, zero value otherwise.
+func (o *RemoveTradingChallengeUsersRequest) GetEmails() []string {
+	if o == nil || IsNil(o.Emails) {
+		var ret []string
+		return ret
+	}
+	return o.Emails
+}
+
+// GetEmailsOk returns a tuple with the Emails field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RemoveTradingChallengeUsersRequest) GetEmailsOk() ([]string, bool) {
+	if o == nil || IsNil(o.Emails) {
+		return nil, false
+	}
+	return o.Emails, true
+}
+
+// HasEmails returns a boolean if a field has been set.
+func (o *RemoveTradingChallengeUsersRequest) HasEmails() bool {
+	if o != nil && !IsNil(o.Emails) {
+		return true
+	}
+
+	return false
+}
+
+// SetEmails gets a reference to the given []string and assigns it to the Emails field.
+func (o *RemoveTradingChallengeUsersRequest) SetEmails(v []string) {
+	o.Emails = v
 }
 
 func (o RemoveTradingChallengeUsersRequest) MarshalJSON() ([]byte, error) {
@@ -105,7 +146,12 @@ func (o RemoveTradingChallengeUsersRequest) MarshalJSON() ([]byte, error) {
 func (o RemoveTradingChallengeUsersRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["trading_challenge_id"] = o.TradingChallengeId
-	toSerialize["users"] = o.Users
+	if !IsNil(o.Users) {
+		toSerialize["users"] = o.Users
+	}
+	if !IsNil(o.Emails) {
+		toSerialize["emails"] = o.Emails
+	}
 	return toSerialize, nil
 }
 
@@ -115,7 +161,6 @@ func (o *RemoveTradingChallengeUsersRequest) UnmarshalJSON(data []byte) (err err
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"trading_challenge_id",
-		"users",
 	}
 
 	allProperties := make(map[string]interface{})

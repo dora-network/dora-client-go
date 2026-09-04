@@ -80,6 +80,7 @@ Method | HTTP request | Description
 [**GetUserTransactionsStream**](DefaultAPI.md#GetUserTransactionsStream) | **Get** /v1/user/{user_id}/transactions/stream | Get a snapshot of user&#39;s executed transactions since a specific time, and opens a stream for further updates
 [**GetUsers**](DefaultAPI.md#GetUsers) | **Get** /v1/user | Get all users (admin only)
 [**GetUsersAPIKeys**](DefaultAPI.md#GetUsersAPIKeys) | **Get** /v1/user/apikey | Get user&#39;s api keys
+[**GetWithdrawalFeeQuote**](DefaultAPI.md#GetWithdrawalFeeQuote) | **Get** /v1/web3/withdrawals/fee-quote | Estimate the network fee to withdraw USDC via web3
 [**LedgerDeposit**](DefaultAPI.md#LedgerDeposit) | **Post** /v1/ledger/deposit/{user_id} | Deposit assets into this user&#39;s account from the outside world
 [**LedgerWithdraw**](DefaultAPI.md#LedgerWithdraw) | **Post** /v1/ledger/withdraw/{user_id} | Withdraw assets from this user to the outside world
 [**LedgerWithdrawRequest**](DefaultAPI.md#LedgerWithdrawRequest) | **Post** /v1/ledger/withdraw/requests/{user_id} | Initiate a withdrawal request for this user to the outside world
@@ -151,7 +152,7 @@ import (
 )
 
 func main() {
-	addTradingChallengeUsersRequest := *openapiclient.NewAddTradingChallengeUsersRequest("TradingChallengeId_example", []string{"Users_example"}) // AddTradingChallengeUsersRequest | 
+	addTradingChallengeUsersRequest := *openapiclient.NewAddTradingChallengeUsersRequest("TradingChallengeId_example") // AddTradingChallengeUsersRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -5270,6 +5271,74 @@ Other parameters are passed through a pointer to a apiGetUsersAPIKeysRequest str
 [[Back to README]](../README.md)
 
 
+## GetWithdrawalFeeQuote
+
+> FeeQuoteResponseEnvelope GetWithdrawalFeeQuote(ctx).To(to).Quantity(quantity).Execute()
+
+Estimate the network fee to withdraw USDC via web3
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+	to := "to_example" // string | The destination wallet address as a 0x-prefixed 20-byte hex string. Must not be the zero address.
+	quantity := "quantity_example" // string | Human-decimal USDC quantity to withdraw, e.g. '100.50'. Must be positive.
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.GetWithdrawalFeeQuote(context.Background()).To(to).Quantity(quantity).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.GetWithdrawalFeeQuote``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetWithdrawalFeeQuote`: FeeQuoteResponseEnvelope
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.GetWithdrawalFeeQuote`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetWithdrawalFeeQuoteRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **to** | **string** | The destination wallet address as a 0x-prefixed 20-byte hex string. Must not be the zero address. | 
+ **quantity** | **string** | Human-decimal USDC quantity to withdraw, e.g. &#39;100.50&#39;. Must be positive. | 
+
+### Return type
+
+[**FeeQuoteResponseEnvelope**](FeeQuoteResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## LedgerDeposit
 
 > FundUserResponseEnvelope LedgerDeposit(ctx, userId).FundUserRequest(fundUserRequest).Execute()
@@ -7048,7 +7117,7 @@ import (
 )
 
 func main() {
-	removeTradingChallengeUsersRequest := *openapiclient.NewRemoveTradingChallengeUsersRequest("TradingChallengeId_example", []string{"Users_example"}) // RemoveTradingChallengeUsersRequest | 
+	removeTradingChallengeUsersRequest := *openapiclient.NewRemoveTradingChallengeUsersRequest("TradingChallengeId_example") // RemoveTradingChallengeUsersRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
