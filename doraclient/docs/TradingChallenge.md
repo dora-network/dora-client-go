@@ -24,6 +24,8 @@ Name | Type | Description | Notes
 **LastProcessedAt** | Pointer to **time.Time** |  | [optional] 
 **Users** | Pointer to **[]string** |  | [optional] 
 **UsersCount** | **int32** |  | 
+**Qr** | Pointer to [**TradingChallengeQR**](TradingChallengeQR.md) |  | [optional] 
+**WorstCaseExposure** | Pointer to **string** | For QR_PROMO, max_users multiplied by initial_user_balance plus max_reward_amount. | [optional] 
 
 ## Methods
 
@@ -458,6 +460,56 @@ and a boolean to check if the value has been set.
 
 SetUsersCount sets UsersCount field to given value.
 
+
+### GetQr
+
+`func (o *TradingChallenge) GetQr() TradingChallengeQR`
+
+GetQr returns the Qr field if non-nil, zero value otherwise.
+
+### GetQrOk
+
+`func (o *TradingChallenge) GetQrOk() (*TradingChallengeQR, bool)`
+
+GetQrOk returns a tuple with the Qr field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetQr
+
+`func (o *TradingChallenge) SetQr(v TradingChallengeQR)`
+
+SetQr sets Qr field to given value.
+
+### HasQr
+
+`func (o *TradingChallenge) HasQr() bool`
+
+HasQr returns a boolean if a field has been set.
+
+### GetWorstCaseExposure
+
+`func (o *TradingChallenge) GetWorstCaseExposure() string`
+
+GetWorstCaseExposure returns the WorstCaseExposure field if non-nil, zero value otherwise.
+
+### GetWorstCaseExposureOk
+
+`func (o *TradingChallenge) GetWorstCaseExposureOk() (*string, bool)`
+
+GetWorstCaseExposureOk returns a tuple with the WorstCaseExposure field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetWorstCaseExposure
+
+`func (o *TradingChallenge) SetWorstCaseExposure(v string)`
+
+SetWorstCaseExposure sets WorstCaseExposure field to given value.
+
+### HasWorstCaseExposure
+
+`func (o *TradingChallenge) HasWorstCaseExposure() bool`
+
+HasWorstCaseExposure returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -22,12 +22,14 @@ type TradingChallengeType string
 const (
 	TRADINGCHALLENGETYPE_TOURNAMENT TradingChallengeType = "TOURNAMENT"
 	TRADINGCHALLENGETYPE_CASH TradingChallengeType = "CASH"
+	TRADINGCHALLENGETYPE_QR_PROMO TradingChallengeType = "QR_PROMO"
 )
 
 // All allowed values of TradingChallengeType enum
 var AllowedTradingChallengeTypeEnumValues = []TradingChallengeType{
 	"TOURNAMENT",
 	"CASH",
+	"QR_PROMO",
 }
 
 func (v *TradingChallengeType) UnmarshalJSON(src []byte) error {

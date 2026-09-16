@@ -62,6 +62,18 @@ func Test_doraclient_DefaultAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test DefaultAPIService AssignAffiliateReferral", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.DefaultAPI.AssignAffiliateReferral(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test DefaultAPIService CancelAllOpenOrders", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -107,6 +119,20 @@ func Test_doraclient_DefaultAPIService(t *testing.T) {
 		t.Skip("skip test")  // remove to run test
 
 		resp, httpRes, err := apiClient.DefaultAPI.ClaimLeverageGetAccruedInterest(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DefaultAPIService ClaimPromoLink", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var token string
+
+		resp, httpRes, err := apiClient.DefaultAPI.ClaimPromoLink(context.Background(), token).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -178,6 +204,18 @@ func Test_doraclient_DefaultAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test DefaultAPIService CreateAffiliateProgram", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.DefaultAPI.CreateAffiliateProgram(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test DefaultAPIService CreateConditionalOrder", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -226,6 +264,18 @@ func Test_doraclient_DefaultAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test DefaultAPIService CreateWithdrawal", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.DefaultAPI.CreateWithdrawal(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test DefaultAPIService DeleteUser", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -240,6 +290,20 @@ func Test_doraclient_DefaultAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test DefaultAPIService ExportPromoLinksCSV", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var batchId string
+
+		resp, httpRes, err := apiClient.DefaultAPI.ExportPromoLinksCSV(context.Background(), batchId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test DefaultAPIService GetAPIKeysForUserID", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -247,6 +311,20 @@ func Test_doraclient_DefaultAPIService(t *testing.T) {
 		var userId string
 
 		resp, httpRes, err := apiClient.DefaultAPI.GetAPIKeysForUserID(context.Background(), userId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DefaultAPIService GetAffiliateProgram", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var programId string
+
+		resp, httpRes, err := apiClient.DefaultAPI.GetAffiliateProgram(context.Background(), programId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -728,6 +806,20 @@ func Test_doraclient_DefaultAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test DefaultAPIService GetPromoAttribution", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var tradingChallengeId string
+
+		resp, httpRes, err := apiClient.DefaultAPI.GetPromoAttribution(context.Background(), tradingChallengeId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test DefaultAPIService GetRealizedPnlSettlements", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -1019,11 +1111,39 @@ func Test_doraclient_DefaultAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test DefaultAPIService GetWithdrawal", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var withdrawalId string
+
+		resp, httpRes, err := apiClient.DefaultAPI.GetWithdrawal(context.Background(), withdrawalId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test DefaultAPIService GetWithdrawalFeeQuote", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		resp, httpRes, err := apiClient.DefaultAPI.GetWithdrawalFeeQuote(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DefaultAPIService IssuePromoLinkBatch", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var tradingChallengeId string
+
+		resp, httpRes, err := apiClient.DefaultAPI.IssuePromoLinkBatch(context.Background(), tradingChallengeId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -1215,6 +1335,61 @@ func Test_doraclient_DefaultAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test DefaultAPIService ListAffiliateCashFlows", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var programId string
+		var userId string
+
+		resp, httpRes, err := apiClient.DefaultAPI.ListAffiliateCashFlows(context.Background(), programId, userId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DefaultAPIService ListAffiliatePrograms", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.DefaultAPI.ListAffiliatePrograms(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DefaultAPIService ListAffiliateReferrals", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var programId string
+
+		resp, httpRes, err := apiClient.DefaultAPI.ListAffiliateReferrals(context.Background(), programId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DefaultAPIService ListAffiliateReferrers", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var programId string
+
+		resp, httpRes, err := apiClient.DefaultAPI.ListAffiliateReferrers(context.Background(), programId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test DefaultAPIService ListAssets", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -1263,11 +1438,51 @@ func Test_doraclient_DefaultAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test DefaultAPIService ListOwnAffiliateMemberships", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.DefaultAPI.ListOwnAffiliateMemberships(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test DefaultAPIService ListPositionAccountsSelf", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		resp, httpRes, err := apiClient.DefaultAPI.ListPositionAccountsSelf(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DefaultAPIService ListPromoLinkBatches", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var tradingChallengeId string
+
+		resp, httpRes, err := apiClient.DefaultAPI.ListPromoLinkBatches(context.Background(), tradingChallengeId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DefaultAPIService ListPromoLinks", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var batchId string
+
+		resp, httpRes, err := apiClient.DefaultAPI.ListPromoLinks(context.Background(), batchId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -1311,11 +1526,51 @@ func Test_doraclient_DefaultAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test DefaultAPIService ListWithdrawals", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.DefaultAPI.ListWithdrawals(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DefaultAPIService LookupAffiliateCode", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var code string
+
+		resp, httpRes, err := apiClient.DefaultAPI.LookupAffiliateCode(context.Background(), code).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test DefaultAPIService PayLeverageGetAccruedInterest", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		resp, httpRes, err := apiClient.DefaultAPI.PayLeverageGetAccruedInterest(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DefaultAPIService RegisterAffiliateReferrer", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var programId string
+
+		resp, httpRes, err := apiClient.DefaultAPI.RegisterAffiliateReferrer(context.Background(), programId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -1363,11 +1618,39 @@ func Test_doraclient_DefaultAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test DefaultAPIService RenderPromoLinkQR", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var linkId string
+
+		resp, httpRes, err := apiClient.DefaultAPI.RenderPromoLinkQR(context.Background(), linkId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test DefaultAPIService RepayUSD", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		resp, httpRes, err := apiClient.DefaultAPI.RepayUSD(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DefaultAPIService ResolvePromoClaim", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var token string
+
+		resp, httpRes, err := apiClient.DefaultAPI.ResolvePromoClaim(context.Background(), token).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -1397,6 +1680,20 @@ func Test_doraclient_DefaultAPIService(t *testing.T) {
 		var keyId string
 
 		resp, httpRes, err := apiClient.DefaultAPI.RevokeAPIKeyForUserID(context.Background(), userId, keyId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DefaultAPIService RevokePromoLink", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var linkId string
+
+		resp, httpRes, err := apiClient.DefaultAPI.RevokePromoLink(context.Background(), linkId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -1556,6 +1853,20 @@ func Test_doraclient_DefaultAPIService(t *testing.T) {
 		t.Skip("skip test")  // remove to run test
 
 		resp, httpRes, err := apiClient.DefaultAPI.TransferAvailableBalances(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DefaultAPIService UpdateAffiliateProgram", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var programId string
+
+		resp, httpRes, err := apiClient.DefaultAPI.UpdateAffiliateProgram(context.Background(), programId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

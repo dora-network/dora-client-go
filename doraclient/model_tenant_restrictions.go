@@ -24,8 +24,8 @@ var _ MappedNullable = &TenantRestrictions{}
 type TenantRestrictions struct {
 	// Tenant ID
 	TenantId string `json:"tenant_id"`
-	// Maximum allowed deposit for the tenant.
-	DepositLimit string `json:"deposit_limit"`
+	// Maximum allowed deposit for the tenant per day.
+	DailyDepositLimit string `json:"daily_deposit_limit"`
 	// Maximum allowed trade amount for the tenant.
 	TradeLimit string `json:"trade_limit"`
 	// Last update timestamp for the restrictions.
@@ -38,10 +38,10 @@ type _TenantRestrictions TenantRestrictions
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTenantRestrictions(tenantId string, depositLimit string, tradeLimit string, updatedAt time.Time) *TenantRestrictions {
+func NewTenantRestrictions(tenantId string, dailyDepositLimit string, tradeLimit string, updatedAt time.Time) *TenantRestrictions {
 	this := TenantRestrictions{}
 	this.TenantId = tenantId
-	this.DepositLimit = depositLimit
+	this.DailyDepositLimit = dailyDepositLimit
 	this.TradeLimit = tradeLimit
 	this.UpdatedAt = updatedAt
 	return &this
@@ -79,28 +79,28 @@ func (o *TenantRestrictions) SetTenantId(v string) {
 	o.TenantId = v
 }
 
-// GetDepositLimit returns the DepositLimit field value
-func (o *TenantRestrictions) GetDepositLimit() string {
+// GetDailyDepositLimit returns the DailyDepositLimit field value
+func (o *TenantRestrictions) GetDailyDepositLimit() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.DepositLimit
+	return o.DailyDepositLimit
 }
 
-// GetDepositLimitOk returns a tuple with the DepositLimit field value
+// GetDailyDepositLimitOk returns a tuple with the DailyDepositLimit field value
 // and a boolean to check if the value has been set.
-func (o *TenantRestrictions) GetDepositLimitOk() (*string, bool) {
+func (o *TenantRestrictions) GetDailyDepositLimitOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.DepositLimit, true
+	return &o.DailyDepositLimit, true
 }
 
-// SetDepositLimit sets field value
-func (o *TenantRestrictions) SetDepositLimit(v string) {
-	o.DepositLimit = v
+// SetDailyDepositLimit sets field value
+func (o *TenantRestrictions) SetDailyDepositLimit(v string) {
+	o.DailyDepositLimit = v
 }
 
 // GetTradeLimit returns the TradeLimit field value
@@ -162,7 +162,7 @@ func (o TenantRestrictions) MarshalJSON() ([]byte, error) {
 func (o TenantRestrictions) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["tenant_id"] = o.TenantId
-	toSerialize["deposit_limit"] = o.DepositLimit
+	toSerialize["daily_deposit_limit"] = o.DailyDepositLimit
 	toSerialize["trade_limit"] = o.TradeLimit
 	toSerialize["updated_at"] = o.UpdatedAt
 	return toSerialize, nil
@@ -174,7 +174,7 @@ func (o *TenantRestrictions) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"tenant_id",
-		"deposit_limit",
+		"daily_deposit_limit",
 		"trade_limit",
 		"updated_at",
 	}

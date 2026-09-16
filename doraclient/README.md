@@ -74,21 +74,27 @@ Class | Method | HTTP request | Description
 *DefaultAPI* | [**AddTradingChallengeUsers**](docs/DefaultAPI.md#addtradingchallengeusers) | **Put** /v1/trading_challenges/add_users | Add users to a trading challenge
 *DefaultAPI* | [**ApproveLedgerWithdrawRequest**](docs/DefaultAPI.md#approveledgerwithdrawrequest) | **Post** /v1/ledger/withdraw/requests/{withdrawal_id}/approve | Approve a pending withdrawal request
 *DefaultAPI* | [**ApproveTradingChallengeRegistrationRequest**](docs/DefaultAPI.md#approvetradingchallengeregistrationrequest) | **Post** /v1/trading_challenges/registration_requests/{request_id}/approve | Approve a trading challenge registration request
+*DefaultAPI* | [**AssignAffiliateReferral**](docs/DefaultAPI.md#assignaffiliatereferral) | **Post** /v1/affiliate_referrals/self | Assign your affiliate referrer
 *DefaultAPI* | [**CancelAllOpenOrders**](docs/DefaultAPI.md#cancelallopenorders) | **Delete** /v1/orders | Cancel all open orders, if user passes orderbook or account_id on query params it will cancel all orders on specific orderbook or account, admin can cancel user&#39;s orders on specific orderbook
 *DefaultAPI* | [**CancelLedgerWithdrawRequest**](docs/DefaultAPI.md#cancelledgerwithdrawrequest) | **Post** /v1/ledger/withdraw/requests/{withdrawal_id}/cancel | Cancel a pending withdrawal request
 *DefaultAPI* | [**CancelOrderById**](docs/DefaultAPI.md#cancelorderbyid) | **Delete** /v1/orders/{order_id} | Cancel an order by ID
 *DefaultAPI* | [**ClaimLeverageGetAccruedInterest**](docs/DefaultAPI.md#claimleveragegetaccruedinterest) | **Post** /v1/leverage/accrued_interest/claim | Claim current accrued leverage interest for a specific user
+*DefaultAPI* | [**ClaimPromoLink**](docs/DefaultAPI.md#claimpromolink) | **Post** /v1/promo/claim/{token} | Claim a public QR promotion link
 *DefaultAPI* | [**ClaimTradingChallengePrize**](docs/DefaultAPI.md#claimtradingchallengeprize) | **Post** /v1/trading_challenges/{trading_challenge_id}/claim | Claim challenge prize
 *DefaultAPI* | [**CloseIsolatedAccountV2**](docs/DefaultAPI.md#closeisolatedaccountv2) | **Post** /v2/accounts/close | Close an isolated account, repaying the borrowed
 *DefaultAPI* | [**CloseIsolatedPosition**](docs/DefaultAPI.md#closeisolatedposition) | **Post** /v1/positions/close | Close isolated positions, repaying the borrowed
 *DefaultAPI* | [**CreateAPIKeyForUser**](docs/DefaultAPI.md#createapikeyforuser) | **Post** /v1/user/apikey | Create apikey for a user
 *DefaultAPI* | [**CreateAPIKeyForUserID**](docs/DefaultAPI.md#createapikeyforuserid) | **Post** /v1/user/{user_id}/apikey | Create apikey for a user
+*DefaultAPI* | [**CreateAffiliateProgram**](docs/DefaultAPI.md#createaffiliateprogram) | **Post** /v1/affiliate_programs | Create an affiliate program
 *DefaultAPI* | [**CreateConditionalOrder**](docs/DefaultAPI.md#createconditionalorder) | **Post** /v1/orders/conditional | Create a new conditional orders
 *DefaultAPI* | [**CreateOrder**](docs/DefaultAPI.md#createorder) | **Post** /v1/orders | Create a new order
 *DefaultAPI* | [**CreateTradingChallenge**](docs/DefaultAPI.md#createtradingchallenge) | **Post** /v1/trading_challenges | Create a trading challenge
 *DefaultAPI* | [**CreateUser**](docs/DefaultAPI.md#createuser) | **Post** /v1/integrators/user | Create a new user
+*DefaultAPI* | [**CreateWithdrawal**](docs/DefaultAPI.md#createwithdrawal) | **Post** /v1/web3/withdrawals | Create a USDC withdrawal request
 *DefaultAPI* | [**DeleteUser**](docs/DefaultAPI.md#deleteuser) | **Delete** /v1/user/{user_id} | Delete user by ID
+*DefaultAPI* | [**ExportPromoLinksCSV**](docs/DefaultAPI.md#exportpromolinkscsv) | **Get** /v1/link_batches/{batch_id}/links.csv | Export promotional links as CSV
 *DefaultAPI* | [**GetAPIKeysForUserID**](docs/DefaultAPI.md#getapikeysforuserid) | **Get** /v1/user/{user_id}/apikey | Get user&#39;s api keys: admin or integrator only
+*DefaultAPI* | [**GetAffiliateProgram**](docs/DefaultAPI.md#getaffiliateprogram) | **Get** /v1/affiliate_programs/{program_id} | Get an affiliate program
 *DefaultAPI* | [**GetAllAssetPrices**](docs/DefaultAPI.md#getallassetprices) | **Get** /v1/price | Get the current price of all assets
 *DefaultAPI* | [**GetAllPositions**](docs/DefaultAPI.md#getallpositions) | **Get** /v1/ledger/positions | Get all users&#39; positions
 *DefaultAPI* | [**GetAllWithdrawalRequests**](docs/DefaultAPI.md#getallwithdrawalrequests) | **Get** /v1/ledger/withdraw/requests | Get all withdrawal requests
@@ -125,6 +131,7 @@ Class | Method | HTTP request | Description
 *DefaultAPI* | [**GetOrderbookTop**](docs/DefaultAPI.md#getorderbooktop) | **Get** /v1/orderbooks/{order_book_id}/top | Get the top price levels for a specific orderbook (L1 market depth)
 *DefaultAPI* | [**GetPLForSelfByAccount**](docs/DefaultAPI.md#getplforselfbyaccount) | **Get** /v1/pl/self | Get account-by-account PL breakdown for the logged in user
 *DefaultAPI* | [**GetPoolPrice**](docs/DefaultAPI.md#getpoolprice) | **Get** /v1/price/pool/{pool_id} | Get the current price of a pool
+*DefaultAPI* | [**GetPromoAttribution**](docs/DefaultAPI.md#getpromoattribution) | **Get** /v1/trading_challenges/{trading_challenge_id}/attribution | Get promotional source attribution
 *DefaultAPI* | [**GetRealizedPnlSettlements**](docs/DefaultAPI.md#getrealizedpnlsettlements) | **Get** /v1/realized_pnl_settlements | Get realized P&amp;L settlements with filters
 *DefaultAPI* | [**GetTopTradersByPnL**](docs/DefaultAPI.md#gettoptradersbypnl) | **Get** /v1/user/ranking | Get top traders by PnL
 *DefaultAPI* | [**GetTradeById**](docs/DefaultAPI.md#gettradebyid) | **Get** /v1/trades/{trade_id} | Get a trade by ID
@@ -147,7 +154,9 @@ Class | Method | HTTP request | Description
 *DefaultAPI* | [**GetUserTransactionsStream**](docs/DefaultAPI.md#getusertransactionsstream) | **Get** /v1/user/{user_id}/transactions/stream | Get a snapshot of user&#39;s executed transactions since a specific time, and opens a stream for further updates
 *DefaultAPI* | [**GetUsers**](docs/DefaultAPI.md#getusers) | **Get** /v1/user | Get all users (admin only)
 *DefaultAPI* | [**GetUsersAPIKeys**](docs/DefaultAPI.md#getusersapikeys) | **Get** /v1/user/apikey | Get user&#39;s api keys
+*DefaultAPI* | [**GetWithdrawal**](docs/DefaultAPI.md#getwithdrawal) | **Get** /v1/web3/withdrawals/{withdrawal_id} | Get a USDC withdrawal by ID
 *DefaultAPI* | [**GetWithdrawalFeeQuote**](docs/DefaultAPI.md#getwithdrawalfeequote) | **Get** /v1/web3/withdrawals/fee-quote | Estimate the network fee to withdraw USDC via web3
+*DefaultAPI* | [**IssuePromoLinkBatch**](docs/DefaultAPI.md#issuepromolinkbatch) | **Post** /v1/trading_challenges/{trading_challenge_id}/link_batches | Issue a promotional link batch
 *DefaultAPI* | [**LedgerDeposit**](docs/DefaultAPI.md#ledgerdeposit) | **Post** /v1/ledger/deposit/{user_id} | Deposit assets into this user&#39;s account from the outside world
 *DefaultAPI* | [**LedgerWithdraw**](docs/DefaultAPI.md#ledgerwithdraw) | **Post** /v1/ledger/withdraw/{user_id} | Withdraw assets from this user to the outside world
 *DefaultAPI* | [**LedgerWithdrawRequest**](docs/DefaultAPI.md#ledgerwithdrawrequest) | **Post** /v1/ledger/withdraw/requests/{user_id} | Initiate a withdrawal request for this user to the outside world
@@ -162,21 +171,34 @@ Class | Method | HTTP request | Description
 *DefaultAPI* | [**LiquidityAdd**](docs/DefaultAPI.md#liquidityadd) | **Post** /v1/liquidity/pool/{pool_id}/add | Add liquidity to a pool
 *DefaultAPI* | [**LiquiditySubtract**](docs/DefaultAPI.md#liquiditysubtract) | **Post** /v1/liquidity/pool/{pool_id}/remove | Subtract liquidity from a pool
 *DefaultAPI* | [**ListAccountsSelfV2**](docs/DefaultAPI.md#listaccountsselfv2) | **Get** /v2/user/self/accounts | List all accounts for the authenticated user
+*DefaultAPI* | [**ListAffiliateCashFlows**](docs/DefaultAPI.md#listaffiliatecashflows) | **Get** /v1/affiliate_programs/{program_id}/referrals/{user_id}/cash_flows | List a referred user&#39;s customer cash flows
+*DefaultAPI* | [**ListAffiliatePrograms**](docs/DefaultAPI.md#listaffiliateprograms) | **Get** /v1/affiliate_programs | List affiliate programs
+*DefaultAPI* | [**ListAffiliateReferrals**](docs/DefaultAPI.md#listaffiliatereferrals) | **Get** /v1/affiliate_programs/{program_id}/referrals | List referred users and activity
+*DefaultAPI* | [**ListAffiliateReferrers**](docs/DefaultAPI.md#listaffiliatereferrers) | **Get** /v1/affiliate_programs/{program_id}/referrers | List program referrers
 *DefaultAPI* | [**ListAssets**](docs/DefaultAPI.md#listassets) | **Get** /v1/assets | List assets
 *DefaultAPI* | [**ListDeposits**](docs/DefaultAPI.md#listdeposits) | **Get** /v1/web3/deposits | List USDC deposits
 *DefaultAPI* | [**ListOrderBooks**](docs/DefaultAPI.md#listorderbooks) | **Get** /v1/orderbooks | List order books
 *DefaultAPI* | [**ListOrders**](docs/DefaultAPI.md#listorders) | **Get** /v1/orders | List all orders
+*DefaultAPI* | [**ListOwnAffiliateMemberships**](docs/DefaultAPI.md#listownaffiliatememberships) | **Get** /v1/affiliate_referrers/self | List your affiliate memberships
 *DefaultAPI* | [**ListPositionAccountsSelf**](docs/DefaultAPI.md#listpositionaccountsself) | **Get** /v1/user/self/position_accounts | List all position accounts for the authenticated user
+*DefaultAPI* | [**ListPromoLinkBatches**](docs/DefaultAPI.md#listpromolinkbatches) | **Get** /v1/trading_challenges/{trading_challenge_id}/link_batches | List promotional link batches
+*DefaultAPI* | [**ListPromoLinks**](docs/DefaultAPI.md#listpromolinks) | **Get** /v1/link_batches/{batch_id}/links | List promotional links
 *DefaultAPI* | [**ListTradingChallengeRegistrationRequests**](docs/DefaultAPI.md#listtradingchallengeregistrationrequests) | **Get** /v1/trading_challenges/registration_requests | List trading challenge registration requests
 *DefaultAPI* | [**ListTradingChallenges**](docs/DefaultAPI.md#listtradingchallenges) | **Get** /v1/trading_challenges | List trading challenges
 *DefaultAPI* | [**ListUserDeactivations**](docs/DefaultAPI.md#listuserdeactivations) | **Get** /v1/user/deactivations | Get the current deactivation status across all users
+*DefaultAPI* | [**ListWithdrawals**](docs/DefaultAPI.md#listwithdrawals) | **Get** /v1/web3/withdrawals | List USDC withdrawals
+*DefaultAPI* | [**LookupAffiliateCode**](docs/DefaultAPI.md#lookupaffiliatecode) | **Get** /v1/affiliate_codes/{code} | Look up a reusable referral code
 *DefaultAPI* | [**PayLeverageGetAccruedInterest**](docs/DefaultAPI.md#payleveragegetaccruedinterest) | **Post** /v1/leverage/accrued_interest/pay | Pay current accrued leverage interest for a specific user
+*DefaultAPI* | [**RegisterAffiliateReferrer**](docs/DefaultAPI.md#registeraffiliatereferrer) | **Post** /v1/affiliate_programs/{program_id}/referrers | Register an existing user as a referrer
 *DefaultAPI* | [**RejectLedgerWithdrawRequest**](docs/DefaultAPI.md#rejectledgerwithdrawrequest) | **Post** /v1/ledger/withdraw/requests/{withdrawal_id}/reject | Reject a pending withdrawal request
 *DefaultAPI* | [**RejectTradingChallengeRegistrationRequest**](docs/DefaultAPI.md#rejecttradingchallengeregistrationrequest) | **Post** /v1/trading_challenges/registration_requests/{request_id}/reject | Reject a trading challenge registration request
 *DefaultAPI* | [**RemoveTradingChallengeUsers**](docs/DefaultAPI.md#removetradingchallengeusers) | **Put** /v1/trading_challenges/remove_users | Remove users from a trading challenge
+*DefaultAPI* | [**RenderPromoLinkQR**](docs/DefaultAPI.md#renderpromolinkqr) | **Get** /v1/promo_links/{link_id}/qr | Render a promotional link QR code
 *DefaultAPI* | [**RepayUSD**](docs/DefaultAPI.md#repayusd) | **Post** /v1/positions/repay_usd | Repay borrowed USD, then accrue and pay leverage interest
+*DefaultAPI* | [**ResolvePromoClaim**](docs/DefaultAPI.md#resolvepromoclaim) | **Get** /v1/promo/claim/{token} | Resolve a public QR promotion claim link
 *DefaultAPI* | [**RevokeAPIKeyForUser**](docs/DefaultAPI.md#revokeapikeyforuser) | **Put** /v1/user/apikey/{key_id}/revoke | Revoke apikey for a user
 *DefaultAPI* | [**RevokeAPIKeyForUserID**](docs/DefaultAPI.md#revokeapikeyforuserid) | **Put** /v1/user/{user_id}/apikey/{key_id}/revoke | Revoke apikey for a user: admin or integrator only
+*DefaultAPI* | [**RevokePromoLink**](docs/DefaultAPI.md#revokepromolink) | **Post** /v1/promo_links/{link_id}/revoke | Revoke a promotional link
 *DefaultAPI* | [**SettleLeverageAccruedInterest**](docs/DefaultAPI.md#settleleverageaccruedinterest) | **Post** /v1/leverage/accrued_interest/settle | Settle current accrued leverage interest for a specific user
 *DefaultAPI* | [**SettleRealizedPnlRecord**](docs/DefaultAPI.md#settlerealizedpnlrecord) | **Put** /v1/realized_pnl_settlements/{settlement_id} | Mark a realized P&amp;L settlement as settled
 *DefaultAPI* | [**SettleTransactionsSettlements**](docs/DefaultAPI.md#settletransactionssettlements) | **Put** /v1/transactions/settlements | Settle multiple transactions settlements in batch
@@ -189,6 +211,7 @@ Class | Method | HTTP request | Description
 *DefaultAPI* | [**TerminateTradingChallengeParticipation**](docs/DefaultAPI.md#terminatetradingchallengeparticipation) | **Post** /v1/trading_challenges/{trading_challenge_id}/participants/{user_id}/terminate | Terminate a participation in a trading challenge
 *DefaultAPI* | [**TransferAccountBalancesV2**](docs/DefaultAPI.md#transferaccountbalancesv2) | **Post** /v2/accounts/transfer_balances | Transfer available balance between a user&#39;s accounts
 *DefaultAPI* | [**TransferAvailableBalances**](docs/DefaultAPI.md#transferavailablebalances) | **Post** /v1/positions/transfer_balances | Transfer available balance between a user&#39;s accounts (e.g. global to isolated position)
+*DefaultAPI* | [**UpdateAffiliateProgram**](docs/DefaultAPI.md#updateaffiliateprogram) | **Put** /v1/affiliate_programs/{program_id} | Update an affiliate program
 *DefaultAPI* | [**UpdateTradingChallenge**](docs/DefaultAPI.md#updatetradingchallenge) | **Put** /v1/trading_challenges/{trading_challenge_id} | Update a trading challenge
 *DefaultAPI* | [**UpdateUserConfig**](docs/DefaultAPI.md#updateuserconfig) | **Put** /v1/user/{user_id}/config | Update user configuration by ID
 *DefaultAPI* | [**UpdateUserConfigSelf**](docs/DefaultAPI.md#updateuserconfigself) | **Put** /v1/user/config/self | Update user configuration for the authenticated user
@@ -208,6 +231,23 @@ Class | Method | HTTP request | Description
  - [AccountSummaryV2](docs/AccountSummaryV2.md)
  - [AccountV2](docs/AccountV2.md)
  - [AddTradingChallengeUsersRequest](docs/AddTradingChallengeUsersRequest.md)
+ - [AffiliateAttribution](docs/AffiliateAttribution.md)
+ - [AffiliateAttributionEnvelope](docs/AffiliateAttributionEnvelope.md)
+ - [AffiliateCashFlow](docs/AffiliateCashFlow.md)
+ - [AffiliateCashFlowReport](docs/AffiliateCashFlowReport.md)
+ - [AffiliateCashFlowReportEnvelope](docs/AffiliateCashFlowReportEnvelope.md)
+ - [AffiliateError](docs/AffiliateError.md)
+ - [AffiliateMembership](docs/AffiliateMembership.md)
+ - [AffiliateMembershipListEnvelope](docs/AffiliateMembershipListEnvelope.md)
+ - [AffiliateProgram](docs/AffiliateProgram.md)
+ - [AffiliateProgramEnvelope](docs/AffiliateProgramEnvelope.md)
+ - [AffiliateProgramListEnvelope](docs/AffiliateProgramListEnvelope.md)
+ - [AffiliateReferral](docs/AffiliateReferral.md)
+ - [AffiliateReferralReport](docs/AffiliateReferralReport.md)
+ - [AffiliateReferralReportEnvelope](docs/AffiliateReferralReportEnvelope.md)
+ - [AffiliateReferrer](docs/AffiliateReferrer.md)
+ - [AffiliateReferrerEnvelope](docs/AffiliateReferrerEnvelope.md)
+ - [AffiliateReferrerListEnvelope](docs/AffiliateReferrerListEnvelope.md)
  - [AllPositions](docs/AllPositions.md)
  - [AllPositionsResponseEnvelope](docs/AllPositionsResponseEnvelope.md)
  - [AllWithdrawalInitiationsResponseEnvelope](docs/AllWithdrawalInitiationsResponseEnvelope.md)
@@ -220,6 +260,7 @@ Class | Method | HTTP request | Description
  - [AssetYTM](docs/AssetYTM.md)
  - [AssetYield](docs/AssetYield.md)
  - [AssetYieldResolution](docs/AssetYieldResolution.md)
+ - [AssignAffiliateReferralRequest](docs/AssignAffiliateReferralRequest.md)
  - [BalanceTransfer](docs/BalanceTransfer.md)
  - [BalancesResponse](docs/BalancesResponse.md)
  - [Bond](docs/Bond.md)
@@ -234,6 +275,7 @@ Class | Method | HTTP request | Description
  - [ClaimLeverageAccruedInterest](docs/ClaimLeverageAccruedInterest.md)
  - [ClaimLeverageAccruedInterestRequest](docs/ClaimLeverageAccruedInterestRequest.md)
  - [ClaimLeverageAccruedInterestResponseEnvelope](docs/ClaimLeverageAccruedInterestResponseEnvelope.md)
+ - [ClaimPromoLinkRequest](docs/ClaimPromoLinkRequest.md)
  - [ClaimTradingChallengeResponse](docs/ClaimTradingChallengeResponse.md)
  - [ClaimTradingChallengeResponseEnvelope](docs/ClaimTradingChallengeResponseEnvelope.md)
  - [CloseAccountRequest](docs/CloseAccountRequest.md)
@@ -248,6 +290,7 @@ Class | Method | HTTP request | Description
  - [CreateAPIKeyData](docs/CreateAPIKeyData.md)
  - [CreateAPIKeyRequest](docs/CreateAPIKeyRequest.md)
  - [CreateAPIKeyResponseEnvelope](docs/CreateAPIKeyResponseEnvelope.md)
+ - [CreateAffiliateProgramRequest](docs/CreateAffiliateProgramRequest.md)
  - [CreateConditionalOrderRequest](docs/CreateConditionalOrderRequest.md)
  - [CreateConditionalOrderResponseData](docs/CreateConditionalOrderResponseData.md)
  - [CreateConditionalOrderResponseEnvelope](docs/CreateConditionalOrderResponseEnvelope.md)
@@ -255,7 +298,9 @@ Class | Method | HTTP request | Description
  - [CreateOrUpdateUserResponse](docs/CreateOrUpdateUserResponse.md)
  - [CreateOrderRequest](docs/CreateOrderRequest.md)
  - [CreateOrderResponseEnvelope](docs/CreateOrderResponseEnvelope.md)
+ - [CreateTradingChallengeQRRequest](docs/CreateTradingChallengeQRRequest.md)
  - [CreateTradingChallengeRequest](docs/CreateTradingChallengeRequest.md)
+ - [CreateWithdrawalRequest](docs/CreateWithdrawalRequest.md)
  - [CreditRating](docs/CreditRating.md)
  - [CurrentLeverageAccruedInterest](docs/CurrentLeverageAccruedInterest.md)
  - [CurrentLeverageAccruedInterestResponseEnvelope](docs/CurrentLeverageAccruedInterestResponseEnvelope.md)
@@ -284,6 +329,10 @@ Class | Method | HTTP request | Description
  - [IsolateCollateralResponse](docs/IsolateCollateralResponse.md)
  - [IsolatedCollateral](docs/IsolatedCollateral.md)
  - [IsolatedPosition](docs/IsolatedPosition.md)
+ - [IssuePromoLinkBatchRequest](docs/IssuePromoLinkBatchRequest.md)
+ - [IssuePromoLinkBatchResponse](docs/IssuePromoLinkBatchResponse.md)
+ - [IssuePromoLinkBatchResponseAllOfData](docs/IssuePromoLinkBatchResponseAllOfData.md)
+ - [IssuedPromoLink](docs/IssuedPromoLink.md)
  - [LedgerAccountsResponseV2Envelope](docs/LedgerAccountsResponseV2Envelope.md)
  - [LedgerModuleByAssetResponseEnvelope](docs/LedgerModuleByAssetResponseEnvelope.md)
  - [LedgerModuleResponseEnvelope](docs/LedgerModuleResponseEnvelope.md)
@@ -312,6 +361,7 @@ Class | Method | HTTP request | Description
  - [ListTransactionsResponseEnvelope](docs/ListTransactionsResponseEnvelope.md)
  - [ListUserCouponPaymentsResponseEnvelope](docs/ListUserCouponPaymentsResponseEnvelope.md)
  - [ListUsersResponseEnvelope](docs/ListUsersResponseEnvelope.md)
+ - [ListWithdrawalsResponseEnvelope](docs/ListWithdrawalsResponseEnvelope.md)
  - [LiveOrderbook](docs/LiveOrderbook.md)
  - [Margin](docs/Margin.md)
  - [Metadata](docs/Metadata.md)
@@ -348,6 +398,8 @@ Class | Method | HTTP request | Description
  - [PermitMessage](docs/PermitMessage.md)
  - [PermitTypedData](docs/PermitTypedData.md)
  - [PnLRankingResponse](docs/PnLRankingResponse.md)
+ - [PnLRankingResponses](docs/PnLRankingResponses.md)
+ - [PnLRankingSummary](docs/PnLRankingSummary.md)
  - [PoolPrice](docs/PoolPrice.md)
  - [PoolPriceResponseEnvelope](docs/PoolPriceResponseEnvelope.md)
  - [PoolRequestError](docs/PoolRequestError.md)
@@ -359,8 +411,23 @@ Class | Method | HTTP request | Description
  - [PositionSide](docs/PositionSide.md)
  - [PositionType](docs/PositionType.md)
  - [PriceLevel](docs/PriceLevel.md)
+ - [PromoAttributionResponse](docs/PromoAttributionResponse.md)
+ - [PromoAttributionResponseAllOfData](docs/PromoAttributionResponseAllOfData.md)
+ - [PromoAttributionSource](docs/PromoAttributionSource.md)
+ - [PromoClaimResponseEnvelope](docs/PromoClaimResponseEnvelope.md)
+ - [PromoClaimResponseEnvelopeAllOfData](docs/PromoClaimResponseEnvelopeAllOfData.md)
+ - [PromoClaimState](docs/PromoClaimState.md)
+ - [PromoLinkAdmin](docs/PromoLinkAdmin.md)
+ - [PromoLinkBatchListResponse](docs/PromoLinkBatchListResponse.md)
+ - [PromoLinkBatchListResponseAllOfData](docs/PromoLinkBatchListResponseAllOfData.md)
+ - [PromoLinkBatchSummary](docs/PromoLinkBatchSummary.md)
+ - [PromoLinkListResponse](docs/PromoLinkListResponse.md)
+ - [PromoLinkListResponseAllOfData](docs/PromoLinkListResponseAllOfData.md)
+ - [PromoLinkStatus](docs/PromoLinkStatus.md)
+ - [PromoSourceType](docs/PromoSourceType.md)
  - [RealizedPnlSettlement](docs/RealizedPnlSettlement.md)
  - [RealizedPnlSettlements](docs/RealizedPnlSettlements.md)
+ - [RegisterAffiliateReferrerRequest](docs/RegisterAffiliateReferrerRequest.md)
  - [RemoveTradingChallengeUsersRequest](docs/RemoveTradingChallengeUsersRequest.md)
  - [RepayUSDRequest](docs/RepayUSDRequest.md)
  - [RepayUSDResponseEnvelope](docs/RepayUSDResponseEnvelope.md)
@@ -370,6 +437,9 @@ Class | Method | HTTP request | Description
  - [ReviewTradingChallengeRegistrationRequest](docs/ReviewTradingChallengeRegistrationRequest.md)
  - [RevokeAPIKeyData](docs/RevokeAPIKeyData.md)
  - [RevokeAPIKeyResponseEnvelope](docs/RevokeAPIKeyResponseEnvelope.md)
+ - [RevokePromoLinkRequest](docs/RevokePromoLinkRequest.md)
+ - [RevokePromoLinkResponse](docs/RevokePromoLinkResponse.md)
+ - [RevokePromoLinkResponseAllOfData](docs/RevokePromoLinkResponseAllOfData.md)
  - [SettleLeverageAccruedInterest](docs/SettleLeverageAccruedInterest.md)
  - [SettleLeverageAccruedInterestRequest](docs/SettleLeverageAccruedInterestRequest.md)
  - [SettleLeverageAccruedInterestResponseEnvelope](docs/SettleLeverageAccruedInterestResponseEnvelope.md)
@@ -400,6 +470,7 @@ Class | Method | HTTP request | Description
  - [TradingChallengeDailySnapshot](docs/TradingChallengeDailySnapshot.md)
  - [TradingChallengeDailySnapshotsResponseEnvelope](docs/TradingChallengeDailySnapshotsResponseEnvelope.md)
  - [TradingChallengeListResponseEnvelope](docs/TradingChallengeListResponseEnvelope.md)
+ - [TradingChallengeQR](docs/TradingChallengeQR.md)
  - [TradingChallengeRegistrationRequest](docs/TradingChallengeRegistrationRequest.md)
  - [TradingChallengeRegistrationRequestListResponseEnvelope](docs/TradingChallengeRegistrationRequestListResponseEnvelope.md)
  - [TradingChallengeRegistrationRequestResponseEnvelope](docs/TradingChallengeRegistrationRequestResponseEnvelope.md)
@@ -427,6 +498,10 @@ Class | Method | HTTP request | Description
  - [UnitePositionRequest](docs/UnitePositionRequest.md)
  - [UnitePositionResponseEnvelope](docs/UnitePositionResponseEnvelope.md)
  - [UnitedPosition](docs/UnitedPosition.md)
+ - [UpdateAffiliateProgramRequest](docs/UpdateAffiliateProgramRequest.md)
+ - [UpdateAffiliateProgramRequestDescription](docs/UpdateAffiliateProgramRequestDescription.md)
+ - [UpdateAffiliateProgramRequestIsActive](docs/UpdateAffiliateProgramRequestIsActive.md)
+ - [UpdateAffiliateProgramRequestName](docs/UpdateAffiliateProgramRequestName.md)
  - [UpdateFieldBoolean](docs/UpdateFieldBoolean.md)
  - [UpdateFieldDateTime](docs/UpdateFieldDateTime.md)
  - [UpdateFieldDecimal](docs/UpdateFieldDecimal.md)
@@ -462,12 +537,15 @@ Class | Method | HTTP request | Description
  - [ValidateSubmitOrderRequest](docs/ValidateSubmitOrderRequest.md)
  - [ValidateSubmitOrderResponse](docs/ValidateSubmitOrderResponse.md)
  - [Web3EventStatus](docs/Web3EventStatus.md)
+ - [Web3WithdrawalStatus](docs/Web3WithdrawalStatus.md)
  - [Withdraw](docs/Withdraw.md)
  - [WithdrawRequest](docs/WithdrawRequest.md)
  - [WithdrawResponseEnvelope](docs/WithdrawResponseEnvelope.md)
  - [WithdrawalInitiation](docs/WithdrawalInitiation.md)
  - [WithdrawalInitiationResponseEnvelope](docs/WithdrawalInitiationResponseEnvelope.md)
  - [WithdrawalRequestReason](docs/WithdrawalRequestReason.md)
+ - [WithdrawalResponse](docs/WithdrawalResponse.md)
+ - [WithdrawalResponseEnvelope](docs/WithdrawalResponseEnvelope.md)
  - [WithdrawalStatus](docs/WithdrawalStatus.md)
 
 

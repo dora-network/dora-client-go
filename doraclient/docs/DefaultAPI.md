@@ -7,21 +7,27 @@ Method | HTTP request | Description
 [**AddTradingChallengeUsers**](DefaultAPI.md#AddTradingChallengeUsers) | **Put** /v1/trading_challenges/add_users | Add users to a trading challenge
 [**ApproveLedgerWithdrawRequest**](DefaultAPI.md#ApproveLedgerWithdrawRequest) | **Post** /v1/ledger/withdraw/requests/{withdrawal_id}/approve | Approve a pending withdrawal request
 [**ApproveTradingChallengeRegistrationRequest**](DefaultAPI.md#ApproveTradingChallengeRegistrationRequest) | **Post** /v1/trading_challenges/registration_requests/{request_id}/approve | Approve a trading challenge registration request
+[**AssignAffiliateReferral**](DefaultAPI.md#AssignAffiliateReferral) | **Post** /v1/affiliate_referrals/self | Assign your affiliate referrer
 [**CancelAllOpenOrders**](DefaultAPI.md#CancelAllOpenOrders) | **Delete** /v1/orders | Cancel all open orders, if user passes orderbook or account_id on query params it will cancel all orders on specific orderbook or account, admin can cancel user&#39;s orders on specific orderbook
 [**CancelLedgerWithdrawRequest**](DefaultAPI.md#CancelLedgerWithdrawRequest) | **Post** /v1/ledger/withdraw/requests/{withdrawal_id}/cancel | Cancel a pending withdrawal request
 [**CancelOrderById**](DefaultAPI.md#CancelOrderById) | **Delete** /v1/orders/{order_id} | Cancel an order by ID
 [**ClaimLeverageGetAccruedInterest**](DefaultAPI.md#ClaimLeverageGetAccruedInterest) | **Post** /v1/leverage/accrued_interest/claim | Claim current accrued leverage interest for a specific user
+[**ClaimPromoLink**](DefaultAPI.md#ClaimPromoLink) | **Post** /v1/promo/claim/{token} | Claim a public QR promotion link
 [**ClaimTradingChallengePrize**](DefaultAPI.md#ClaimTradingChallengePrize) | **Post** /v1/trading_challenges/{trading_challenge_id}/claim | Claim challenge prize
 [**CloseIsolatedAccountV2**](DefaultAPI.md#CloseIsolatedAccountV2) | **Post** /v2/accounts/close | Close an isolated account, repaying the borrowed
 [**CloseIsolatedPosition**](DefaultAPI.md#CloseIsolatedPosition) | **Post** /v1/positions/close | Close isolated positions, repaying the borrowed
 [**CreateAPIKeyForUser**](DefaultAPI.md#CreateAPIKeyForUser) | **Post** /v1/user/apikey | Create apikey for a user
 [**CreateAPIKeyForUserID**](DefaultAPI.md#CreateAPIKeyForUserID) | **Post** /v1/user/{user_id}/apikey | Create apikey for a user
+[**CreateAffiliateProgram**](DefaultAPI.md#CreateAffiliateProgram) | **Post** /v1/affiliate_programs | Create an affiliate program
 [**CreateConditionalOrder**](DefaultAPI.md#CreateConditionalOrder) | **Post** /v1/orders/conditional | Create a new conditional orders
 [**CreateOrder**](DefaultAPI.md#CreateOrder) | **Post** /v1/orders | Create a new order
 [**CreateTradingChallenge**](DefaultAPI.md#CreateTradingChallenge) | **Post** /v1/trading_challenges | Create a trading challenge
 [**CreateUser**](DefaultAPI.md#CreateUser) | **Post** /v1/integrators/user | Create a new user
+[**CreateWithdrawal**](DefaultAPI.md#CreateWithdrawal) | **Post** /v1/web3/withdrawals | Create a USDC withdrawal request
 [**DeleteUser**](DefaultAPI.md#DeleteUser) | **Delete** /v1/user/{user_id} | Delete user by ID
+[**ExportPromoLinksCSV**](DefaultAPI.md#ExportPromoLinksCSV) | **Get** /v1/link_batches/{batch_id}/links.csv | Export promotional links as CSV
 [**GetAPIKeysForUserID**](DefaultAPI.md#GetAPIKeysForUserID) | **Get** /v1/user/{user_id}/apikey | Get user&#39;s api keys: admin or integrator only
+[**GetAffiliateProgram**](DefaultAPI.md#GetAffiliateProgram) | **Get** /v1/affiliate_programs/{program_id} | Get an affiliate program
 [**GetAllAssetPrices**](DefaultAPI.md#GetAllAssetPrices) | **Get** /v1/price | Get the current price of all assets
 [**GetAllPositions**](DefaultAPI.md#GetAllPositions) | **Get** /v1/ledger/positions | Get all users&#39; positions
 [**GetAllWithdrawalRequests**](DefaultAPI.md#GetAllWithdrawalRequests) | **Get** /v1/ledger/withdraw/requests | Get all withdrawal requests
@@ -58,6 +64,7 @@ Method | HTTP request | Description
 [**GetOrderbookTop**](DefaultAPI.md#GetOrderbookTop) | **Get** /v1/orderbooks/{order_book_id}/top | Get the top price levels for a specific orderbook (L1 market depth)
 [**GetPLForSelfByAccount**](DefaultAPI.md#GetPLForSelfByAccount) | **Get** /v1/pl/self | Get account-by-account PL breakdown for the logged in user
 [**GetPoolPrice**](DefaultAPI.md#GetPoolPrice) | **Get** /v1/price/pool/{pool_id} | Get the current price of a pool
+[**GetPromoAttribution**](DefaultAPI.md#GetPromoAttribution) | **Get** /v1/trading_challenges/{trading_challenge_id}/attribution | Get promotional source attribution
 [**GetRealizedPnlSettlements**](DefaultAPI.md#GetRealizedPnlSettlements) | **Get** /v1/realized_pnl_settlements | Get realized P&amp;L settlements with filters
 [**GetTopTradersByPnL**](DefaultAPI.md#GetTopTradersByPnL) | **Get** /v1/user/ranking | Get top traders by PnL
 [**GetTradeById**](DefaultAPI.md#GetTradeById) | **Get** /v1/trades/{trade_id} | Get a trade by ID
@@ -80,7 +87,9 @@ Method | HTTP request | Description
 [**GetUserTransactionsStream**](DefaultAPI.md#GetUserTransactionsStream) | **Get** /v1/user/{user_id}/transactions/stream | Get a snapshot of user&#39;s executed transactions since a specific time, and opens a stream for further updates
 [**GetUsers**](DefaultAPI.md#GetUsers) | **Get** /v1/user | Get all users (admin only)
 [**GetUsersAPIKeys**](DefaultAPI.md#GetUsersAPIKeys) | **Get** /v1/user/apikey | Get user&#39;s api keys
+[**GetWithdrawal**](DefaultAPI.md#GetWithdrawal) | **Get** /v1/web3/withdrawals/{withdrawal_id} | Get a USDC withdrawal by ID
 [**GetWithdrawalFeeQuote**](DefaultAPI.md#GetWithdrawalFeeQuote) | **Get** /v1/web3/withdrawals/fee-quote | Estimate the network fee to withdraw USDC via web3
+[**IssuePromoLinkBatch**](DefaultAPI.md#IssuePromoLinkBatch) | **Post** /v1/trading_challenges/{trading_challenge_id}/link_batches | Issue a promotional link batch
 [**LedgerDeposit**](DefaultAPI.md#LedgerDeposit) | **Post** /v1/ledger/deposit/{user_id} | Deposit assets into this user&#39;s account from the outside world
 [**LedgerWithdraw**](DefaultAPI.md#LedgerWithdraw) | **Post** /v1/ledger/withdraw/{user_id} | Withdraw assets from this user to the outside world
 [**LedgerWithdrawRequest**](DefaultAPI.md#LedgerWithdrawRequest) | **Post** /v1/ledger/withdraw/requests/{user_id} | Initiate a withdrawal request for this user to the outside world
@@ -95,21 +104,34 @@ Method | HTTP request | Description
 [**LiquidityAdd**](DefaultAPI.md#LiquidityAdd) | **Post** /v1/liquidity/pool/{pool_id}/add | Add liquidity to a pool
 [**LiquiditySubtract**](DefaultAPI.md#LiquiditySubtract) | **Post** /v1/liquidity/pool/{pool_id}/remove | Subtract liquidity from a pool
 [**ListAccountsSelfV2**](DefaultAPI.md#ListAccountsSelfV2) | **Get** /v2/user/self/accounts | List all accounts for the authenticated user
+[**ListAffiliateCashFlows**](DefaultAPI.md#ListAffiliateCashFlows) | **Get** /v1/affiliate_programs/{program_id}/referrals/{user_id}/cash_flows | List a referred user&#39;s customer cash flows
+[**ListAffiliatePrograms**](DefaultAPI.md#ListAffiliatePrograms) | **Get** /v1/affiliate_programs | List affiliate programs
+[**ListAffiliateReferrals**](DefaultAPI.md#ListAffiliateReferrals) | **Get** /v1/affiliate_programs/{program_id}/referrals | List referred users and activity
+[**ListAffiliateReferrers**](DefaultAPI.md#ListAffiliateReferrers) | **Get** /v1/affiliate_programs/{program_id}/referrers | List program referrers
 [**ListAssets**](DefaultAPI.md#ListAssets) | **Get** /v1/assets | List assets
 [**ListDeposits**](DefaultAPI.md#ListDeposits) | **Get** /v1/web3/deposits | List USDC deposits
 [**ListOrderBooks**](DefaultAPI.md#ListOrderBooks) | **Get** /v1/orderbooks | List order books
 [**ListOrders**](DefaultAPI.md#ListOrders) | **Get** /v1/orders | List all orders
+[**ListOwnAffiliateMemberships**](DefaultAPI.md#ListOwnAffiliateMemberships) | **Get** /v1/affiliate_referrers/self | List your affiliate memberships
 [**ListPositionAccountsSelf**](DefaultAPI.md#ListPositionAccountsSelf) | **Get** /v1/user/self/position_accounts | List all position accounts for the authenticated user
+[**ListPromoLinkBatches**](DefaultAPI.md#ListPromoLinkBatches) | **Get** /v1/trading_challenges/{trading_challenge_id}/link_batches | List promotional link batches
+[**ListPromoLinks**](DefaultAPI.md#ListPromoLinks) | **Get** /v1/link_batches/{batch_id}/links | List promotional links
 [**ListTradingChallengeRegistrationRequests**](DefaultAPI.md#ListTradingChallengeRegistrationRequests) | **Get** /v1/trading_challenges/registration_requests | List trading challenge registration requests
 [**ListTradingChallenges**](DefaultAPI.md#ListTradingChallenges) | **Get** /v1/trading_challenges | List trading challenges
 [**ListUserDeactivations**](DefaultAPI.md#ListUserDeactivations) | **Get** /v1/user/deactivations | Get the current deactivation status across all users
+[**ListWithdrawals**](DefaultAPI.md#ListWithdrawals) | **Get** /v1/web3/withdrawals | List USDC withdrawals
+[**LookupAffiliateCode**](DefaultAPI.md#LookupAffiliateCode) | **Get** /v1/affiliate_codes/{code} | Look up a reusable referral code
 [**PayLeverageGetAccruedInterest**](DefaultAPI.md#PayLeverageGetAccruedInterest) | **Post** /v1/leverage/accrued_interest/pay | Pay current accrued leverage interest for a specific user
+[**RegisterAffiliateReferrer**](DefaultAPI.md#RegisterAffiliateReferrer) | **Post** /v1/affiliate_programs/{program_id}/referrers | Register an existing user as a referrer
 [**RejectLedgerWithdrawRequest**](DefaultAPI.md#RejectLedgerWithdrawRequest) | **Post** /v1/ledger/withdraw/requests/{withdrawal_id}/reject | Reject a pending withdrawal request
 [**RejectTradingChallengeRegistrationRequest**](DefaultAPI.md#RejectTradingChallengeRegistrationRequest) | **Post** /v1/trading_challenges/registration_requests/{request_id}/reject | Reject a trading challenge registration request
 [**RemoveTradingChallengeUsers**](DefaultAPI.md#RemoveTradingChallengeUsers) | **Put** /v1/trading_challenges/remove_users | Remove users from a trading challenge
+[**RenderPromoLinkQR**](DefaultAPI.md#RenderPromoLinkQR) | **Get** /v1/promo_links/{link_id}/qr | Render a promotional link QR code
 [**RepayUSD**](DefaultAPI.md#RepayUSD) | **Post** /v1/positions/repay_usd | Repay borrowed USD, then accrue and pay leverage interest
+[**ResolvePromoClaim**](DefaultAPI.md#ResolvePromoClaim) | **Get** /v1/promo/claim/{token} | Resolve a public QR promotion claim link
 [**RevokeAPIKeyForUser**](DefaultAPI.md#RevokeAPIKeyForUser) | **Put** /v1/user/apikey/{key_id}/revoke | Revoke apikey for a user
 [**RevokeAPIKeyForUserID**](DefaultAPI.md#RevokeAPIKeyForUserID) | **Put** /v1/user/{user_id}/apikey/{key_id}/revoke | Revoke apikey for a user: admin or integrator only
+[**RevokePromoLink**](DefaultAPI.md#RevokePromoLink) | **Post** /v1/promo_links/{link_id}/revoke | Revoke a promotional link
 [**SettleLeverageAccruedInterest**](DefaultAPI.md#SettleLeverageAccruedInterest) | **Post** /v1/leverage/accrued_interest/settle | Settle current accrued leverage interest for a specific user
 [**SettleRealizedPnlRecord**](DefaultAPI.md#SettleRealizedPnlRecord) | **Put** /v1/realized_pnl_settlements/{settlement_id} | Mark a realized P&amp;L settlement as settled
 [**SettleTransactionsSettlements**](DefaultAPI.md#SettleTransactionsSettlements) | **Put** /v1/transactions/settlements | Settle multiple transactions settlements in batch
@@ -122,6 +144,7 @@ Method | HTTP request | Description
 [**TerminateTradingChallengeParticipation**](DefaultAPI.md#TerminateTradingChallengeParticipation) | **Post** /v1/trading_challenges/{trading_challenge_id}/participants/{user_id}/terminate | Terminate a participation in a trading challenge
 [**TransferAccountBalancesV2**](DefaultAPI.md#TransferAccountBalancesV2) | **Post** /v2/accounts/transfer_balances | Transfer available balance between a user&#39;s accounts
 [**TransferAvailableBalances**](DefaultAPI.md#TransferAvailableBalances) | **Post** /v1/positions/transfer_balances | Transfer available balance between a user&#39;s accounts (e.g. global to isolated position)
+[**UpdateAffiliateProgram**](DefaultAPI.md#UpdateAffiliateProgram) | **Put** /v1/affiliate_programs/{program_id} | Update an affiliate program
 [**UpdateTradingChallenge**](DefaultAPI.md#UpdateTradingChallenge) | **Put** /v1/trading_challenges/{trading_challenge_id} | Update a trading challenge
 [**UpdateUserConfig**](DefaultAPI.md#UpdateUserConfig) | **Put** /v1/user/{user_id}/config | Update user configuration by ID
 [**UpdateUserConfigSelf**](DefaultAPI.md#UpdateUserConfigSelf) | **Put** /v1/user/config/self | Update user configuration for the authenticated user
@@ -326,6 +349,72 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**TradingChallengeRegistrationRequestResponseEnvelope**](TradingChallengeRegistrationRequestResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## AssignAffiliateReferral
+
+> AffiliateAttributionEnvelope AssignAffiliateReferral(ctx).AssignAffiliateReferralRequest(assignAffiliateReferralRequest).Execute()
+
+Assign your affiliate referrer
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+	assignAffiliateReferralRequest := *openapiclient.NewAssignAffiliateReferralRequest("TEAM-42") // AssignAffiliateReferralRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.AssignAffiliateReferral(context.Background()).AssignAffiliateReferralRequest(assignAffiliateReferralRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.AssignAffiliateReferral``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `AssignAffiliateReferral`: AffiliateAttributionEnvelope
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.AssignAffiliateReferral`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiAssignAffiliateReferralRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **assignAffiliateReferralRequest** | [**AssignAffiliateReferralRequest**](AssignAffiliateReferralRequest.md) |  | 
+
+### Return type
+
+[**AffiliateAttributionEnvelope**](AffiliateAttributionEnvelope.md)
 
 ### Authorization
 
@@ -604,6 +693,76 @@ Name | Type | Description  | Notes
 ### Authorization
 
 [apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ClaimPromoLink
+
+> PromoClaimResponseEnvelope ClaimPromoLink(ctx, token).ClaimPromoLinkRequest(claimPromoLinkRequest).Execute()
+
+Claim a public QR promotion link
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+	token := "token_example" // string | Opaque bearer claim token
+	claimPromoLinkRequest := *openapiclient.NewClaimPromoLinkRequest("Email_example") // ClaimPromoLinkRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.ClaimPromoLink(context.Background(), token).ClaimPromoLinkRequest(claimPromoLinkRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.ClaimPromoLink``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ClaimPromoLink`: PromoClaimResponseEnvelope
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.ClaimPromoLink`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**token** | **string** | Opaque bearer claim token | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiClaimPromoLinkRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **claimPromoLinkRequest** | [**ClaimPromoLinkRequest**](ClaimPromoLinkRequest.md) |  | 
+
+### Return type
+
+[**PromoClaimResponseEnvelope**](PromoClaimResponseEnvelope.md)
+
+### Authorization
+
+No authorization required
 
 ### HTTP request headers
 
@@ -947,6 +1106,72 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## CreateAffiliateProgram
+
+> AffiliateProgramEnvelope CreateAffiliateProgram(ctx).CreateAffiliateProgramRequest(createAffiliateProgramRequest).Execute()
+
+Create an affiliate program
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+	createAffiliateProgramRequest := *openapiclient.NewCreateAffiliateProgramRequest("TenantId_example", "Name_example") // CreateAffiliateProgramRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.CreateAffiliateProgram(context.Background()).CreateAffiliateProgramRequest(createAffiliateProgramRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.CreateAffiliateProgram``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CreateAffiliateProgram`: AffiliateProgramEnvelope
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.CreateAffiliateProgram`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateAffiliateProgramRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **createAffiliateProgramRequest** | [**CreateAffiliateProgramRequest**](CreateAffiliateProgramRequest.md) |  | 
+
+### Return type
+
+[**AffiliateProgramEnvelope**](AffiliateProgramEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## CreateConditionalOrder
 
 > CreateConditionalOrderResponseEnvelope CreateConditionalOrder(ctx).CreateConditionalOrderRequest(createConditionalOrderRequest).Execute()
@@ -1206,6 +1431,72 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## CreateWithdrawal
+
+> WithdrawalResponseEnvelope CreateWithdrawal(ctx).CreateWithdrawalRequest(createWithdrawalRequest).Execute()
+
+Create a USDC withdrawal request
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+	createWithdrawalRequest := *openapiclient.NewCreateWithdrawalRequest("WithdrawalId_example", "ToAddress_example", "Quantity_example") // CreateWithdrawalRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.CreateWithdrawal(context.Background()).CreateWithdrawalRequest(createWithdrawalRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.CreateWithdrawal``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CreateWithdrawal`: WithdrawalResponseEnvelope
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.CreateWithdrawal`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateWithdrawalRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **createWithdrawalRequest** | [**CreateWithdrawalRequest**](CreateWithdrawalRequest.md) |  | 
+
+### Return type
+
+[**WithdrawalResponseEnvelope**](WithdrawalResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## DeleteUser
 
 > UserDeletedResponseEnvelope DeleteUser(ctx, userId).Execute()
@@ -1274,6 +1565,76 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## ExportPromoLinksCSV
+
+> string ExportPromoLinksCSV(ctx, batchId).Execute()
+
+Export promotional links as CSV
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+	batchId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.ExportPromoLinksCSV(context.Background(), batchId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.ExportPromoLinksCSV``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ExportPromoLinksCSV`: string
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.ExportPromoLinksCSV`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**batchId** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiExportPromoLinksCSVRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+**string**
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: text/csv
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetAPIKeysForUserID
 
 > APIKeyResponseEnvelope GetAPIKeysForUserID(ctx, userId).Execute()
@@ -1327,6 +1688,76 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**APIKeyResponseEnvelope**](APIKeyResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetAffiliateProgram
+
+> AffiliateProgramEnvelope GetAffiliateProgram(ctx, programId).Execute()
+
+Get an affiliate program
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+	programId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.GetAffiliateProgram(context.Background(), programId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.GetAffiliateProgram``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetAffiliateProgram`: AffiliateProgramEnvelope
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.GetAffiliateProgram`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**programId** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetAffiliateProgramRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**AffiliateProgramEnvelope**](AffiliateProgramEnvelope.md)
 
 ### Authorization
 
@@ -1877,6 +2308,8 @@ No authorization required
 > ListCandlesResponseEnvelope GetCandleData(ctx, orderBookId).Start(start).End(end).Resolution(resolution).Execute()
 
 Get candlestick data for an orderbook
+
+
 
 ### Example
 
@@ -3717,6 +4150,76 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## GetPromoAttribution
+
+> PromoAttributionResponse GetPromoAttribution(ctx, tradingChallengeId).Execute()
+
+Get promotional source attribution
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+	tradingChallengeId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.GetPromoAttribution(context.Background(), tradingChallengeId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.GetPromoAttribution``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetPromoAttribution`: PromoAttributionResponse
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.GetPromoAttribution`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**tradingChallengeId** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetPromoAttributionRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**PromoAttributionResponse**](PromoAttributionResponse.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetRealizedPnlSettlements
 
 > GetRealizedPnlSettlementsResponseEnvelope GetRealizedPnlSettlements(ctx).UserId(userId).TenantId(tenantId).PositionId(positionId).CreatedAfter(createdAfter).CreatedBefore(createdBefore).SettledAfter(settledAfter).SettledBefore(settledBefore).IsSettled(isSettled).Execute()
@@ -5271,6 +5774,76 @@ Other parameters are passed through a pointer to a apiGetUsersAPIKeysRequest str
 [[Back to README]](../README.md)
 
 
+## GetWithdrawal
+
+> WithdrawalResponseEnvelope GetWithdrawal(ctx, withdrawalId).Execute()
+
+Get a USDC withdrawal by ID
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+	withdrawalId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The withdrawal ID.
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.GetWithdrawal(context.Background(), withdrawalId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.GetWithdrawal``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetWithdrawal`: WithdrawalResponseEnvelope
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.GetWithdrawal`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**withdrawalId** | **string** | The withdrawal ID. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetWithdrawalRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**WithdrawalResponseEnvelope**](WithdrawalResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetWithdrawalFeeQuote
 
 > FeeQuoteResponseEnvelope GetWithdrawalFeeQuote(ctx).To(to).Quantity(quantity).Execute()
@@ -5332,6 +5905,80 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## IssuePromoLinkBatch
+
+> IssuePromoLinkBatchResponse IssuePromoLinkBatch(ctx, tradingChallengeId).IdempotencyKey(idempotencyKey).IssuePromoLinkBatchRequest(issuePromoLinkBatchRequest).Execute()
+
+Issue a promotional link batch
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+	tradingChallengeId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+	idempotencyKey := "idempotencyKey_example" // string | 
+	issuePromoLinkBatchRequest := *openapiclient.NewIssuePromoLinkBatchRequest(openapiclient.PromoSourceType("KOL"), "SourceId_example", int32(123)) // IssuePromoLinkBatchRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.IssuePromoLinkBatch(context.Background(), tradingChallengeId).IdempotencyKey(idempotencyKey).IssuePromoLinkBatchRequest(issuePromoLinkBatchRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.IssuePromoLinkBatch``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `IssuePromoLinkBatch`: IssuePromoLinkBatchResponse
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.IssuePromoLinkBatch`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**tradingChallengeId** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiIssuePromoLinkBatchRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **idempotencyKey** | **string** |  | 
+ **issuePromoLinkBatchRequest** | [**IssuePromoLinkBatchRequest**](IssuePromoLinkBatchRequest.md) |  | 
+
+### Return type
+
+[**IssuePromoLinkBatchResponse**](IssuePromoLinkBatchResponse.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -6298,6 +6945,306 @@ Other parameters are passed through a pointer to a apiListAccountsSelfV2Request 
 [[Back to README]](../README.md)
 
 
+## ListAffiliateCashFlows
+
+> AffiliateCashFlowReportEnvelope ListAffiliateCashFlows(ctx, programId, userId).Limit(limit).Page(page).Execute()
+
+List a referred user's customer cash flows
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+	programId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+	userId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+	limit := int32(56) // int32 |  (optional) (default to 100)
+	page := int32(56) // int32 | One-based page; the resulting offset must not exceed 2147483647. Results sort by created_at then id descending. (optional) (default to 1)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.ListAffiliateCashFlows(context.Background(), programId, userId).Limit(limit).Page(page).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.ListAffiliateCashFlows``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ListAffiliateCashFlows`: AffiliateCashFlowReportEnvelope
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.ListAffiliateCashFlows`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**programId** | **string** |  | 
+**userId** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiListAffiliateCashFlowsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **limit** | **int32** |  | [default to 100]
+ **page** | **int32** | One-based page; the resulting offset must not exceed 2147483647. Results sort by created_at then id descending. | [default to 1]
+
+### Return type
+
+[**AffiliateCashFlowReportEnvelope**](AffiliateCashFlowReportEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ListAffiliatePrograms
+
+> AffiliateProgramListEnvelope ListAffiliatePrograms(ctx).TenantId(tenantId).Limit(limit).Page(page).Execute()
+
+List affiliate programs
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+	tenantId := "tenantId_example" // string | Integrators default to their own tenant and cannot select another. Admins may select any tenant. (optional)
+	limit := int32(56) // int32 |  (optional) (default to 100)
+	page := int32(56) // int32 | One-based page; the resulting offset must not exceed 2147483647. Results sort by created_at then id descending. (optional) (default to 1)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.ListAffiliatePrograms(context.Background()).TenantId(tenantId).Limit(limit).Page(page).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.ListAffiliatePrograms``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ListAffiliatePrograms`: AffiliateProgramListEnvelope
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.ListAffiliatePrograms`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiListAffiliateProgramsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **tenantId** | **string** | Integrators default to their own tenant and cannot select another. Admins may select any tenant. | 
+ **limit** | **int32** |  | [default to 100]
+ **page** | **int32** | One-based page; the resulting offset must not exceed 2147483647. Results sort by created_at then id descending. | [default to 1]
+
+### Return type
+
+[**AffiliateProgramListEnvelope**](AffiliateProgramListEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ListAffiliateReferrals
+
+> AffiliateReferralReportEnvelope ListAffiliateReferrals(ctx, programId).Date(date).ReferrerId(referrerId).Limit(limit).Page(page).Execute()
+
+List referred users and activity
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+    "time"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+	programId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+	date := time.Now() // string |  (optional)
+	referrerId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string |  (optional)
+	limit := int32(56) // int32 |  (optional) (default to 100)
+	page := int32(56) // int32 | One-based page; the resulting offset must not exceed 2147483647. Results sort by attribution created_at then user_id descending. (optional) (default to 1)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.ListAffiliateReferrals(context.Background(), programId).Date(date).ReferrerId(referrerId).Limit(limit).Page(page).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.ListAffiliateReferrals``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ListAffiliateReferrals`: AffiliateReferralReportEnvelope
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.ListAffiliateReferrals`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**programId** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiListAffiliateReferralsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **date** | **string** |  | 
+ **referrerId** | **string** |  | 
+ **limit** | **int32** |  | [default to 100]
+ **page** | **int32** | One-based page; the resulting offset must not exceed 2147483647. Results sort by attribution created_at then user_id descending. | [default to 1]
+
+### Return type
+
+[**AffiliateReferralReportEnvelope**](AffiliateReferralReportEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ListAffiliateReferrers
+
+> AffiliateReferrerListEnvelope ListAffiliateReferrers(ctx, programId).Limit(limit).Page(page).Execute()
+
+List program referrers
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+	programId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+	limit := int32(56) // int32 |  (optional) (default to 100)
+	page := int32(56) // int32 | One-based page; the resulting offset must not exceed 2147483647. Results sort by created_at then id descending. (optional) (default to 1)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.ListAffiliateReferrers(context.Background(), programId).Limit(limit).Page(page).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.ListAffiliateReferrers``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ListAffiliateReferrers`: AffiliateReferrerListEnvelope
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.ListAffiliateReferrers`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**programId** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiListAffiliateReferrersRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **limit** | **int32** |  | [default to 100]
+ **page** | **int32** | One-based page; the resulting offset must not exceed 2147483647. Results sort by created_at then id descending. | [default to 1]
+
+### Return type
+
+[**AffiliateReferrerListEnvelope**](AffiliateReferrerListEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## ListAssets
 
 > ResponseEnvelopeOfListAssets ListAssets(ctx).CreatedAfter(createdAfter).CreatedBefore(createdBefore).AssetKind(assetKind).CanAddLiquidity(canAddLiquidity).CanDirectBorrow(canDirectBorrow).CanOnboard(canOnboard).CanTrade(canTrade).CanVirtualBorrow(canVirtualBorrow).Page(page).Limit(limit).Execute()
@@ -6606,6 +7553,74 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## ListOwnAffiliateMemberships
+
+> AffiliateMembershipListEnvelope ListOwnAffiliateMemberships(ctx).Limit(limit).Page(page).Execute()
+
+List your affiliate memberships
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+	limit := int32(56) // int32 |  (optional) (default to 100)
+	page := int32(56) // int32 | One-based page; the resulting offset must not exceed 2147483647. Results sort by created_at then id descending. (optional) (default to 1)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.ListOwnAffiliateMemberships(context.Background()).Limit(limit).Page(page).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.ListOwnAffiliateMemberships``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ListOwnAffiliateMemberships`: AffiliateMembershipListEnvelope
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.ListOwnAffiliateMemberships`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiListOwnAffiliateMembershipsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **limit** | **int32** |  | [default to 100]
+ **page** | **int32** | One-based page; the resulting offset must not exceed 2147483647. Results sort by created_at then id descending. | [default to 1]
+
+### Return type
+
+[**AffiliateMembershipListEnvelope**](AffiliateMembershipListEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## ListPositionAccountsSelf
 
 > ListPositionAccountsResponseEnvelope ListPositionAccountsSelf(ctx).Execute()
@@ -6650,6 +7665,154 @@ Other parameters are passed through a pointer to a apiListPositionAccountsSelfRe
 ### Return type
 
 [**ListPositionAccountsResponseEnvelope**](ListPositionAccountsResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ListPromoLinkBatches
+
+> PromoLinkBatchListResponse ListPromoLinkBatches(ctx, tradingChallengeId).Execute()
+
+List promotional link batches
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+	tradingChallengeId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.ListPromoLinkBatches(context.Background(), tradingChallengeId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.ListPromoLinkBatches``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ListPromoLinkBatches`: PromoLinkBatchListResponse
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.ListPromoLinkBatches`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**tradingChallengeId** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiListPromoLinkBatchesRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**PromoLinkBatchListResponse**](PromoLinkBatchListResponse.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ListPromoLinks
+
+> PromoLinkListResponse ListPromoLinks(ctx, batchId).Limit(limit).Cursor(cursor).Status(status).Reveal(reveal).Execute()
+
+List promotional links
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+	batchId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+	limit := int32(56) // int32 |  (optional) (default to 100)
+	cursor := "cursor_example" // string |  (optional)
+	status := openapiclient.PromoLinkStatus("ISSUED") // PromoLinkStatus |  (optional)
+	reveal := true // bool |  (optional) (default to false)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.ListPromoLinks(context.Background(), batchId).Limit(limit).Cursor(cursor).Status(status).Reveal(reveal).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.ListPromoLinks``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ListPromoLinks`: PromoLinkListResponse
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.ListPromoLinks`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**batchId** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiListPromoLinksRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **limit** | **int32** |  | [default to 100]
+ **cursor** | **string** |  | 
+ **status** | [**PromoLinkStatus**](PromoLinkStatus.md) |  | 
+ **reveal** | **bool** |  | [default to false]
+
+### Return type
+
+[**PromoLinkListResponse**](PromoLinkListResponse.md)
 
 ### Authorization
 
@@ -6888,6 +8051,150 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## ListWithdrawals
+
+> ListWithdrawalsResponseEnvelope ListWithdrawals(ctx).UserId(userId).Status(status).Page(page).Limit(limit).Execute()
+
+List USDC withdrawals
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+	userId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Filter by user ID. Non-admin callers may only specify their own user ID. (optional)
+	status := openapiclient.Web3WithdrawalStatus("PENDING") // Web3WithdrawalStatus | Filter by withdrawal status. (optional)
+	page := int64(789) // int64 |  (optional) (default to 1)
+	limit := int64(789) // int64 |  (optional) (default to 50)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.ListWithdrawals(context.Background()).UserId(userId).Status(status).Page(page).Limit(limit).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.ListWithdrawals``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ListWithdrawals`: ListWithdrawalsResponseEnvelope
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.ListWithdrawals`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiListWithdrawalsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **userId** | **string** | Filter by user ID. Non-admin callers may only specify their own user ID. | 
+ **status** | [**Web3WithdrawalStatus**](Web3WithdrawalStatus.md) | Filter by withdrawal status. | 
+ **page** | **int64** |  | [default to 1]
+ **limit** | **int64** |  | [default to 50]
+
+### Return type
+
+[**ListWithdrawalsResponseEnvelope**](ListWithdrawalsResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## LookupAffiliateCode
+
+> AffiliateReferrerEnvelope LookupAffiliateCode(ctx, code).TenantId(tenantId).Execute()
+
+Look up a reusable referral code
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+	code := "code_example" // string | 
+	tenantId := "tenantId_example" // string | Integrators default to their own tenant and cannot select another. Admins may select any tenant. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.LookupAffiliateCode(context.Background(), code).TenantId(tenantId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.LookupAffiliateCode``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `LookupAffiliateCode`: AffiliateReferrerEnvelope
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.LookupAffiliateCode`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**code** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiLookupAffiliateCodeRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **tenantId** | **string** | Integrators default to their own tenant and cannot select another. Admins may select any tenant. | 
+
+### Return type
+
+[**AffiliateReferrerEnvelope**](AffiliateReferrerEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## PayLeverageGetAccruedInterest
 
 > PayLeverageAccruedInterestResponseEnvelope PayLeverageGetAccruedInterest(ctx).PayLeverageAccruedInterestRequest(payLeverageAccruedInterestRequest).Execute()
@@ -6937,6 +8244,78 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**PayLeverageAccruedInterestResponseEnvelope**](PayLeverageAccruedInterestResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## RegisterAffiliateReferrer
+
+> AffiliateReferrerEnvelope RegisterAffiliateReferrer(ctx, programId).RegisterAffiliateReferrerRequest(registerAffiliateReferrerRequest).Execute()
+
+Register an existing user as a referrer
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+	programId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+	registerAffiliateReferrerRequest := *openapiclient.NewRegisterAffiliateReferrerRequest("UserId_example") // RegisterAffiliateReferrerRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.RegisterAffiliateReferrer(context.Background(), programId).RegisterAffiliateReferrerRequest(registerAffiliateReferrerRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.RegisterAffiliateReferrer``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `RegisterAffiliateReferrer`: AffiliateReferrerEnvelope
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.RegisterAffiliateReferrer`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**programId** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiRegisterAffiliateReferrerRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **registerAffiliateReferrerRequest** | [**RegisterAffiliateReferrerRequest**](RegisterAffiliateReferrerRequest.md) |  | 
+
+### Return type
+
+[**AffiliateReferrerEnvelope**](AffiliateReferrerEnvelope.md)
 
 ### Authorization
 
@@ -7162,6 +8541,82 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## RenderPromoLinkQR
+
+> string RenderPromoLinkQR(ctx, linkId).Size(size).Format(format).Ec(ec).Execute()
+
+Render a promotional link QR code
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+	linkId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+	size := int32(56) // int32 |  (optional) (default to 512)
+	format := "format_example" // string |  (optional) (default to "png")
+	ec := "ec_example" // string |  (optional) (default to "M")
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.RenderPromoLinkQR(context.Background(), linkId).Size(size).Format(format).Ec(ec).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.RenderPromoLinkQR``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `RenderPromoLinkQR`: string
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.RenderPromoLinkQR`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**linkId** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiRenderPromoLinkQRRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **size** | **int32** |  | [default to 512]
+ **format** | **string** |  | [default to &quot;png&quot;]
+ **ec** | **string** |  | [default to &quot;M&quot;]
+
+### Return type
+
+**string**
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: image/png
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## RepayUSD
 
 > RepayUSDResponseEnvelope RepayUSD(ctx).RepayUSDRequest(repayUSDRequest).Execute()
@@ -7219,6 +8674,74 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ResolvePromoClaim
+
+> PromoClaimResponseEnvelope ResolvePromoClaim(ctx, token).Execute()
+
+Resolve a public QR promotion claim link
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+	token := "token_example" // string | Opaque bearer claim token
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.ResolvePromoClaim(context.Background(), token).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.ResolvePromoClaim``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ResolvePromoClaim`: PromoClaimResponseEnvelope
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.ResolvePromoClaim`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**token** | **string** | Opaque bearer claim token | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiResolvePromoClaimRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**PromoClaimResponseEnvelope**](PromoClaimResponseEnvelope.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -7358,6 +8881,78 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## RevokePromoLink
+
+> RevokePromoLinkResponse RevokePromoLink(ctx, linkId).RevokePromoLinkRequest(revokePromoLinkRequest).Execute()
+
+Revoke a promotional link
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+	linkId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+	revokePromoLinkRequest := *openapiclient.NewRevokePromoLinkRequest("Reason_example") // RevokePromoLinkRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.RevokePromoLink(context.Background(), linkId).RevokePromoLinkRequest(revokePromoLinkRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.RevokePromoLink``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `RevokePromoLink`: RevokePromoLinkResponse
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.RevokePromoLink`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**linkId** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiRevokePromoLinkRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **revokePromoLinkRequest** | [**RevokePromoLinkRequest**](RevokePromoLinkRequest.md) |  | 
+
+### Return type
+
+[**RevokePromoLinkResponse**](RevokePromoLinkResponse.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -8169,6 +9764,78 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**TransferBalancesResponseEnvelope**](TransferBalancesResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateAffiliateProgram
+
+> AffiliateProgramEnvelope UpdateAffiliateProgram(ctx, programId).UpdateAffiliateProgramRequest(updateAffiliateProgramRequest).Execute()
+
+Update an affiliate program
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+	programId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+	updateAffiliateProgramRequest := *openapiclient.NewUpdateAffiliateProgramRequest() // UpdateAffiliateProgramRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.UpdateAffiliateProgram(context.Background(), programId).UpdateAffiliateProgramRequest(updateAffiliateProgramRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.UpdateAffiliateProgram``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `UpdateAffiliateProgram`: AffiliateProgramEnvelope
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.UpdateAffiliateProgram`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**programId** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateAffiliateProgramRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **updateAffiliateProgramRequest** | [**UpdateAffiliateProgramRequest**](UpdateAffiliateProgramRequest.md) |  | 
+
+### Return type
+
+[**AffiliateProgramEnvelope**](AffiliateProgramEnvelope.md)
 
 ### Authorization
 

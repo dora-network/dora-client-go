@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **TenantId** | **string** | Tenant ID | 
-**DepositLimit** | **string** | Maximum allowed deposit for the tenant. | 
+**DailyDepositLimit** | **string** | Maximum allowed deposit for the tenant per day. | 
 **TradeLimit** | **string** | Maximum allowed trade amount for the tenant. | 
 **UpdatedAt** | **time.Time** | Last update timestamp for the restrictions. | 
 
@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 
 ### NewTenantRestrictions
 
-`func NewTenantRestrictions(tenantId string, depositLimit string, tradeLimit string, updatedAt time.Time, ) *TenantRestrictions`
+`func NewTenantRestrictions(tenantId string, dailyDepositLimit string, tradeLimit string, updatedAt time.Time, ) *TenantRestrictions`
 
 NewTenantRestrictions instantiates a new TenantRestrictions object
 This constructor will assign default values to properties that have it defined,
@@ -48,24 +48,24 @@ and a boolean to check if the value has been set.
 SetTenantId sets TenantId field to given value.
 
 
-### GetDepositLimit
+### GetDailyDepositLimit
 
-`func (o *TenantRestrictions) GetDepositLimit() string`
+`func (o *TenantRestrictions) GetDailyDepositLimit() string`
 
-GetDepositLimit returns the DepositLimit field if non-nil, zero value otherwise.
+GetDailyDepositLimit returns the DailyDepositLimit field if non-nil, zero value otherwise.
 
-### GetDepositLimitOk
+### GetDailyDepositLimitOk
 
-`func (o *TenantRestrictions) GetDepositLimitOk() (*string, bool)`
+`func (o *TenantRestrictions) GetDailyDepositLimitOk() (*string, bool)`
 
-GetDepositLimitOk returns a tuple with the DepositLimit field if it's non-nil, zero value otherwise
+GetDailyDepositLimitOk returns a tuple with the DailyDepositLimit field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetDepositLimit
+### SetDailyDepositLimit
 
-`func (o *TenantRestrictions) SetDepositLimit(v string)`
+`func (o *TenantRestrictions) SetDailyDepositLimit(v string)`
 
-SetDepositLimit sets DepositLimit field to given value.
+SetDailyDepositLimit sets DailyDepositLimit field to given value.
 
 
 ### GetTradeLimit

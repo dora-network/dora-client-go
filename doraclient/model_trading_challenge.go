@@ -43,6 +43,9 @@ type TradingChallenge struct {
 	LastProcessedAt *time.Time `json:"last_processed_at,omitempty"`
 	Users []string `json:"users,omitempty"`
 	UsersCount int32 `json:"users_count"`
+	Qr *TradingChallengeQR `json:"qr,omitempty"`
+	// For QR_PROMO, max_users multiplied by initial_user_balance plus max_reward_amount.
+	WorstCaseExposure *string `json:"worst_case_exposure,omitempty"`
 }
 
 type _TradingChallenge TradingChallenge
@@ -585,6 +588,70 @@ func (o *TradingChallenge) SetUsersCount(v int32) {
 	o.UsersCount = v
 }
 
+// GetQr returns the Qr field value if set, zero value otherwise.
+func (o *TradingChallenge) GetQr() TradingChallengeQR {
+	if o == nil || IsNil(o.Qr) {
+		var ret TradingChallengeQR
+		return ret
+	}
+	return *o.Qr
+}
+
+// GetQrOk returns a tuple with the Qr field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TradingChallenge) GetQrOk() (*TradingChallengeQR, bool) {
+	if o == nil || IsNil(o.Qr) {
+		return nil, false
+	}
+	return o.Qr, true
+}
+
+// HasQr returns a boolean if a field has been set.
+func (o *TradingChallenge) HasQr() bool {
+	if o != nil && !IsNil(o.Qr) {
+		return true
+	}
+
+	return false
+}
+
+// SetQr gets a reference to the given TradingChallengeQR and assigns it to the Qr field.
+func (o *TradingChallenge) SetQr(v TradingChallengeQR) {
+	o.Qr = &v
+}
+
+// GetWorstCaseExposure returns the WorstCaseExposure field value if set, zero value otherwise.
+func (o *TradingChallenge) GetWorstCaseExposure() string {
+	if o == nil || IsNil(o.WorstCaseExposure) {
+		var ret string
+		return ret
+	}
+	return *o.WorstCaseExposure
+}
+
+// GetWorstCaseExposureOk returns a tuple with the WorstCaseExposure field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TradingChallenge) GetWorstCaseExposureOk() (*string, bool) {
+	if o == nil || IsNil(o.WorstCaseExposure) {
+		return nil, false
+	}
+	return o.WorstCaseExposure, true
+}
+
+// HasWorstCaseExposure returns a boolean if a field has been set.
+func (o *TradingChallenge) HasWorstCaseExposure() bool {
+	if o != nil && !IsNil(o.WorstCaseExposure) {
+		return true
+	}
+
+	return false
+}
+
+// SetWorstCaseExposure gets a reference to the given string and assigns it to the WorstCaseExposure field.
+func (o *TradingChallenge) SetWorstCaseExposure(v string) {
+	o.WorstCaseExposure = &v
+}
+
 func (o TradingChallenge) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -621,6 +688,12 @@ func (o TradingChallenge) ToMap() (map[string]interface{}, error) {
 		toSerialize["users"] = o.Users
 	}
 	toSerialize["users_count"] = o.UsersCount
+	if !IsNil(o.Qr) {
+		toSerialize["qr"] = o.Qr
+	}
+	if !IsNil(o.WorstCaseExposure) {
+		toSerialize["worst_case_exposure"] = o.WorstCaseExposure
+	}
 	return toSerialize, nil
 }
 

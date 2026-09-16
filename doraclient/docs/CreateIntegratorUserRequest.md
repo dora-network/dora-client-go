@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ReferralCode** | Pointer to **string** | Optional affiliate code, normalized to uppercase. Accepted only when creating a new account in the program owning tenant. One immutable attribution per user account; a later signup/linking call cannot add or replace it. Invalid or inactive codes fail signup atomically. Independent of QR acquisition attribution. Existing unassigned users can instead use POST /v1/affiliate_referrals/self; earlier activity is excluded. | [optional] 
+**SignupSource** | Pointer to **string** | Optional client-reported HTTP(S) signup site URL, used only with referral_code. When omitted, a valid HTTP(S) Origin header is used; other origins are ignored. Only the hostname is stored, without path, query, credentials or fragment. Unknown if neither supplies a usable hostname. Ignored when referral_code is empty. It does not select or authenticate the tenant. | [optional] 
 **Email** | Pointer to **string** |  | [optional] 
 **FirstName** | Pointer to **string** |  | [optional] 
 **LastName** | Pointer to **string** |  | [optional] 
@@ -34,6 +36,56 @@ will change when the set of required properties is changed
 NewCreateIntegratorUserRequestWithDefaults instantiates a new CreateIntegratorUserRequest object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetReferralCode
+
+`func (o *CreateIntegratorUserRequest) GetReferralCode() string`
+
+GetReferralCode returns the ReferralCode field if non-nil, zero value otherwise.
+
+### GetReferralCodeOk
+
+`func (o *CreateIntegratorUserRequest) GetReferralCodeOk() (*string, bool)`
+
+GetReferralCodeOk returns a tuple with the ReferralCode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReferralCode
+
+`func (o *CreateIntegratorUserRequest) SetReferralCode(v string)`
+
+SetReferralCode sets ReferralCode field to given value.
+
+### HasReferralCode
+
+`func (o *CreateIntegratorUserRequest) HasReferralCode() bool`
+
+HasReferralCode returns a boolean if a field has been set.
+
+### GetSignupSource
+
+`func (o *CreateIntegratorUserRequest) GetSignupSource() string`
+
+GetSignupSource returns the SignupSource field if non-nil, zero value otherwise.
+
+### GetSignupSourceOk
+
+`func (o *CreateIntegratorUserRequest) GetSignupSourceOk() (*string, bool)`
+
+GetSignupSourceOk returns a tuple with the SignupSource field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSignupSource
+
+`func (o *CreateIntegratorUserRequest) SetSignupSource(v string)`
+
+SetSignupSource sets SignupSource field to given value.
+
+### HasSignupSource
+
+`func (o *CreateIntegratorUserRequest) HasSignupSource() bool`
+
+HasSignupSource returns a boolean if a field has been set.
 
 ### GetEmail
 

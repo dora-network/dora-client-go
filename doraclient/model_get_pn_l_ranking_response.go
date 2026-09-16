@@ -21,7 +21,7 @@ var _ MappedNullable = &GetPnLRankingResponse{}
 
 // GetPnLRankingResponse struct for GetPnLRankingResponse
 type GetPnLRankingResponse struct {
-	Data []PnLRankingResponse `json:"data,omitempty"`
+	Data *PnLRankingResponses `json:"data,omitempty"`
 	// The error message. Present for error (non-2xx) responses.
 	Error *string `json:"error,omitempty"`
 	// Metadata about the response, including status code and trace information.
@@ -49,17 +49,17 @@ func NewGetPnLRankingResponseWithDefaults() *GetPnLRankingResponse {
 }
 
 // GetData returns the Data field value if set, zero value otherwise.
-func (o *GetPnLRankingResponse) GetData() []PnLRankingResponse {
+func (o *GetPnLRankingResponse) GetData() PnLRankingResponses {
 	if o == nil || IsNil(o.Data) {
-		var ret []PnLRankingResponse
+		var ret PnLRankingResponses
 		return ret
 	}
-	return o.Data
+	return *o.Data
 }
 
 // GetDataOk returns a tuple with the Data field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetPnLRankingResponse) GetDataOk() ([]PnLRankingResponse, bool) {
+func (o *GetPnLRankingResponse) GetDataOk() (*PnLRankingResponses, bool) {
 	if o == nil || IsNil(o.Data) {
 		return nil, false
 	}
@@ -75,9 +75,9 @@ func (o *GetPnLRankingResponse) HasData() bool {
 	return false
 }
 
-// SetData gets a reference to the given []PnLRankingResponse and assigns it to the Data field.
-func (o *GetPnLRankingResponse) SetData(v []PnLRankingResponse) {
-	o.Data = v
+// SetData gets a reference to the given PnLRankingResponses and assigns it to the Data field.
+func (o *GetPnLRankingResponse) SetData(v PnLRankingResponses) {
+	o.Data = &v
 }
 
 // GetError returns the Error field value if set, zero value otherwise.

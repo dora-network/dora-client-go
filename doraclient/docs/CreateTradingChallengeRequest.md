@@ -19,6 +19,7 @@ Name | Type | Description | Notes
 **AvgDailyVolumeCondition** | Pointer to **string** |  | [optional] 
 **MinimumEquityPercentageCondition** | Pointer to **int32** |  | [optional] 
 **Users** | Pointer to **[]string** |  | [optional] 
+**Qr** | Pointer to [**CreateTradingChallengeQRRequest**](CreateTradingChallengeQRRequest.md) | Required for QR_PROMO and rejected for other challenge types. QR_PROMO requests must omit users. | [optional] 
 
 ## Methods
 
@@ -378,6 +379,31 @@ SetUsers sets Users field to given value.
 `func (o *CreateTradingChallengeRequest) HasUsers() bool`
 
 HasUsers returns a boolean if a field has been set.
+
+### GetQr
+
+`func (o *CreateTradingChallengeRequest) GetQr() CreateTradingChallengeQRRequest`
+
+GetQr returns the Qr field if non-nil, zero value otherwise.
+
+### GetQrOk
+
+`func (o *CreateTradingChallengeRequest) GetQrOk() (*CreateTradingChallengeQRRequest, bool)`
+
+GetQrOk returns a tuple with the Qr field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetQr
+
+`func (o *CreateTradingChallengeRequest) SetQr(v CreateTradingChallengeQRRequest)`
+
+SetQr sets Qr field to given value.
+
+### HasQr
+
+`func (o *CreateTradingChallengeRequest) HasQr() bool`
+
+HasQr returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

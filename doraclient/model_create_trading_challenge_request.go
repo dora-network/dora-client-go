@@ -38,6 +38,8 @@ type CreateTradingChallengeRequest struct {
 	AvgDailyVolumeCondition *string `json:"avg_daily_volume_condition,omitempty"`
 	MinimumEquityPercentageCondition *int32 `json:"minimum_equity_percentage_condition,omitempty"`
 	Users []string `json:"users,omitempty"`
+	// Required for QR_PROMO and rejected for other challenge types. QR_PROMO requests must omit users.
+	Qr *CreateTradingChallengeQRRequest `json:"qr,omitempty"`
 }
 
 type _CreateTradingChallengeRequest CreateTradingChallengeRequest
@@ -490,6 +492,38 @@ func (o *CreateTradingChallengeRequest) SetUsers(v []string) {
 	o.Users = v
 }
 
+// GetQr returns the Qr field value if set, zero value otherwise.
+func (o *CreateTradingChallengeRequest) GetQr() CreateTradingChallengeQRRequest {
+	if o == nil || IsNil(o.Qr) {
+		var ret CreateTradingChallengeQRRequest
+		return ret
+	}
+	return *o.Qr
+}
+
+// GetQrOk returns a tuple with the Qr field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateTradingChallengeRequest) GetQrOk() (*CreateTradingChallengeQRRequest, bool) {
+	if o == nil || IsNil(o.Qr) {
+		return nil, false
+	}
+	return o.Qr, true
+}
+
+// HasQr returns a boolean if a field has been set.
+func (o *CreateTradingChallengeRequest) HasQr() bool {
+	if o != nil && !IsNil(o.Qr) {
+		return true
+	}
+
+	return false
+}
+
+// SetQr gets a reference to the given CreateTradingChallengeQRRequest and assigns it to the Qr field.
+func (o *CreateTradingChallengeRequest) SetQr(v CreateTradingChallengeQRRequest) {
+	o.Qr = &v
+}
+
 func (o CreateTradingChallengeRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -530,6 +564,9 @@ func (o CreateTradingChallengeRequest) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Users) {
 		toSerialize["users"] = o.Users
+	}
+	if !IsNil(o.Qr) {
+		toSerialize["qr"] = o.Qr
 	}
 	return toSerialize, nil
 }
