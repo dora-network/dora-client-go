@@ -9957,6 +9957,170 @@ func (a *DefaultAPIService) GetTradesExecute(r ApiGetTradesRequest) (*ListTradeR
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiGetTradingChallengeAllResultsRequest struct {
+	ctx context.Context
+	ApiService *DefaultAPIService
+	board *string
+	start *string
+	end *string
+	tradingChallengeType *TradingChallengeType
+}
+
+// Leaderboard board selector.
+func (r ApiGetTradingChallengeAllResultsRequest) Board(board string) ApiGetTradingChallengeAllResultsRequest {
+	r.board = &board
+	return r
+}
+
+// Inclusive start date in YYYY-MM-DD format.
+func (r ApiGetTradingChallengeAllResultsRequest) Start(start string) ApiGetTradingChallengeAllResultsRequest {
+	r.start = &start
+	return r
+}
+
+// Inclusive end date in YYYY-MM-DD format.
+func (r ApiGetTradingChallengeAllResultsRequest) End(end string) ApiGetTradingChallengeAllResultsRequest {
+	r.end = &end
+	return r
+}
+
+// Challenge type to include in aggregation.
+func (r ApiGetTradingChallengeAllResultsRequest) TradingChallengeType(tradingChallengeType TradingChallengeType) ApiGetTradingChallengeAllResultsRequest {
+	r.tradingChallengeType = &tradingChallengeType
+	return r
+}
+
+func (r ApiGetTradingChallengeAllResultsRequest) Execute() (*TradingChallengeAllResultsResponseEnvelope, *http.Response, error) {
+	return r.ApiService.GetTradingChallengeAllResultsExecute(r)
+}
+
+/*
+GetTradingChallengeAllResults Get combined results across all trading challenge
+
+List trading challenge leaderboard/results filtered by board, trading_challenge_type, start date and end date across all challenges.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetTradingChallengeAllResultsRequest
+*/
+func (a *DefaultAPIService) GetTradingChallengeAllResults(ctx context.Context) ApiGetTradingChallengeAllResultsRequest {
+	return ApiGetTradingChallengeAllResultsRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return TradingChallengeAllResultsResponseEnvelope
+func (a *DefaultAPIService) GetTradingChallengeAllResultsExecute(r ApiGetTradingChallengeAllResultsRequest) (*TradingChallengeAllResultsResponseEnvelope, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *TradingChallengeAllResultsResponseEnvelope
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DefaultAPIService.GetTradingChallengeAllResults")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v1/trading_challenges/all/results"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.board == nil {
+		return localVarReturnValue, nil, reportError("board is required and must be specified")
+	}
+	if r.start == nil {
+		return localVarReturnValue, nil, reportError("start is required and must be specified")
+	}
+	if r.end == nil {
+		return localVarReturnValue, nil, reportError("end is required and must be specified")
+	}
+	if r.tradingChallengeType == nil {
+		return localVarReturnValue, nil, reportError("tradingChallengeType is required and must be specified")
+	}
+
+	parameterAddToHeaderOrQuery(localVarQueryParams, "board", r.board, "form", "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "start", r.start, "form", "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "end", r.end, "form", "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "trading_challenge_type", r.tradingChallengeType, "form", "")
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ResponseEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v ResponseEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiGetTradingChallengeByIDRequest struct {
 	ctx context.Context
 	ApiService *DefaultAPIService
@@ -10297,7 +10461,7 @@ func (r ApiGetTradingChallengeResultsRequest) Execute() (*TradingChallengeResult
 /*
 GetTradingChallengeResults Get trading challenge results
 
-List challenge leaderboard/results. COMPETITION_MANAGER can access only assigned challenge IDs.
+List challenge leaderboard/results. Public endpoint.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param tradingChallengeId
@@ -10357,20 +10521,6 @@ func (a *DefaultAPIService) GetTradingChallengeResultsExecute(r ApiGetTradingCha
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["apiKeyAuthHeader"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["Authorization"] = key
-			}
-		}
-	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -10394,17 +10544,6 @@ func (a *DefaultAPIService) GetTradingChallengeResultsExecute(r ApiGetTradingCha
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v ResponseEnvelope
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
 			var v ResponseEnvelope
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {

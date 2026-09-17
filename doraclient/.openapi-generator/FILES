@@ -252,6 +252,8 @@ docs/Trade.md
 docs/TradeRequestError.md
 docs/TradeResponseEnvelope.md
 docs/TradingChallenge.md
+docs/TradingChallengeAllResult.md
+docs/TradingChallengeAllResultsResponseEnvelope.md
 docs/TradingChallengeDailySnapshot.md
 docs/TradingChallengeDailySnapshotsResponseEnvelope.md
 docs/TradingChallengeListResponseEnvelope.md
@@ -578,6 +580,8 @@ model_trade.go
 model_trade_request_error.go
 model_trade_response_envelope.go
 model_trading_challenge.go
+model_trading_challenge_all_result.go
+model_trading_challenge_all_results_response_envelope.go
 model_trading_challenge_daily_snapshot.go
 model_trading_challenge_daily_snapshots_response_envelope.go
 model_trading_challenge_list_response_envelope.go

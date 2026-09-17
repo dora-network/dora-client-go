@@ -136,6 +136,7 @@ Class | Method | HTTP request | Description
 *DefaultAPI* | [**GetTopTradersByPnL**](docs/DefaultAPI.md#gettoptradersbypnl) | **Get** /v1/user/ranking | Get top traders by PnL
 *DefaultAPI* | [**GetTradeById**](docs/DefaultAPI.md#gettradebyid) | **Get** /v1/trades/{trade_id} | Get a trade by ID
 *DefaultAPI* | [**GetTrades**](docs/DefaultAPI.md#gettrades) | **Get** /v1/trades | Get a filtered, paginated list of trades
+*DefaultAPI* | [**GetTradingChallengeAllResults**](docs/DefaultAPI.md#gettradingchallengeallresults) | **Get** /v1/trading_challenges/all/results | Get combined results across all trading challenge
 *DefaultAPI* | [**GetTradingChallengeByID**](docs/DefaultAPI.md#gettradingchallengebyid) | **Get** /v1/trading_challenges/{trading_challenge_id} | Get trading challenge by ID
 *DefaultAPI* | [**GetTradingChallengeDailySnapshots**](docs/DefaultAPI.md#gettradingchallengedailysnapshots) | **Get** /v1/trading_challenges/{trading_challenge_id}/daily_snapshots | Get trading challenge daily snapshots
 *DefaultAPI* | [**GetTradingChallengeResults**](docs/DefaultAPI.md#gettradingchallengeresults) | **Get** /v1/trading_challenges/{trading_challenge_id}/results | Get trading challenge results
@@ -467,6 +468,8 @@ Class | Method | HTTP request | Description
  - [TradeRequestError](docs/TradeRequestError.md)
  - [TradeResponseEnvelope](docs/TradeResponseEnvelope.md)
  - [TradingChallenge](docs/TradingChallenge.md)
+ - [TradingChallengeAllResult](docs/TradingChallengeAllResult.md)
+ - [TradingChallengeAllResultsResponseEnvelope](docs/TradingChallengeAllResultsResponseEnvelope.md)
  - [TradingChallengeDailySnapshot](docs/TradingChallengeDailySnapshot.md)
  - [TradingChallengeDailySnapshotsResponseEnvelope](docs/TradingChallengeDailySnapshotsResponseEnvelope.md)
  - [TradingChallengeListResponseEnvelope](docs/TradingChallengeListResponseEnvelope.md)

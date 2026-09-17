@@ -69,6 +69,7 @@ Method | HTTP request | Description
 [**GetTopTradersByPnL**](DefaultAPI.md#GetTopTradersByPnL) | **Get** /v1/user/ranking | Get top traders by PnL
 [**GetTradeById**](DefaultAPI.md#GetTradeById) | **Get** /v1/trades/{trade_id} | Get a trade by ID
 [**GetTrades**](DefaultAPI.md#GetTrades) | **Get** /v1/trades | Get a filtered, paginated list of trades
+[**GetTradingChallengeAllResults**](DefaultAPI.md#GetTradingChallengeAllResults) | **Get** /v1/trading_challenges/all/results | Get combined results across all trading challenge
 [**GetTradingChallengeByID**](DefaultAPI.md#GetTradingChallengeByID) | **Get** /v1/trading_challenges/{trading_challenge_id} | Get trading challenge by ID
 [**GetTradingChallengeDailySnapshots**](DefaultAPI.md#GetTradingChallengeDailySnapshots) | **Get** /v1/trading_challenges/{trading_challenge_id}/daily_snapshots | Get trading challenge daily snapshots
 [**GetTradingChallengeResults**](DefaultAPI.md#GetTradingChallengeResults) | **Get** /v1/trading_challenges/{trading_challenge_id}/results | Get trading challenge results
@@ -4517,6 +4518,79 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## GetTradingChallengeAllResults
+
+> TradingChallengeAllResultsResponseEnvelope GetTradingChallengeAllResults(ctx).Board(board).Start(start).End(end).TradingChallengeType(tradingChallengeType).Execute()
+
+Get combined results across all trading challenge
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+    "time"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+	board := "board_example" // string | Leaderboard board selector.
+	start := time.Now() // string | Inclusive start date in YYYY-MM-DD format.
+	end := time.Now() // string | Inclusive end date in YYYY-MM-DD format.
+	tradingChallengeType := openapiclient.TradingChallengeType("TOURNAMENT") // TradingChallengeType | Challenge type to include in aggregation.
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.GetTradingChallengeAllResults(context.Background()).Board(board).Start(start).End(end).TradingChallengeType(tradingChallengeType).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.GetTradingChallengeAllResults``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetTradingChallengeAllResults`: TradingChallengeAllResultsResponseEnvelope
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.GetTradingChallengeAllResults`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetTradingChallengeAllResultsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **board** | **string** | Leaderboard board selector. | 
+ **start** | **string** | Inclusive start date in YYYY-MM-DD format. | 
+ **end** | **string** | Inclusive end date in YYYY-MM-DD format. | 
+ **tradingChallengeType** | [**TradingChallengeType**](TradingChallengeType.md) | Challenge type to include in aggregation. | 
+
+### Return type
+
+[**TradingChallengeAllResultsResponseEnvelope**](TradingChallengeAllResultsResponseEnvelope.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetTradingChallengeByID
 
 > TradingChallengeResponseEnvelope GetTradingChallengeByID(ctx, tradingChallengeId).Execute()
@@ -4717,7 +4791,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+No authorization required
 
 ### HTTP request headers
 
