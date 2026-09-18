@@ -148,6 +148,7 @@ docs/ListUserCouponPaymentsResponseEnvelope.md
 docs/ListUsersResponseEnvelope.md
 docs/ListWithdrawalsResponseEnvelope.md
 docs/LiveOrderbook.md
+docs/LockWithdrawalFeeRequest.md
 docs/Margin.md
 docs/Metadata.md
 docs/ModuleBalance.md
@@ -245,6 +246,10 @@ docs/StreamUserCouponPaymentsResponse.md
 docs/Supply.md
 docs/SupplyRequest.md
 docs/SupplyResponseEnvelope.md
+docs/TenantGuaranteeFundHistory.md
+docs/TenantGuaranteeFundHistoryResponseEnvelope.md
+docs/TenantGuaranteeFundRow.md
+docs/TenantGuaranteeFundSummary.md
 docs/TenantRestrictions.md
 docs/TerminateTradingChallengeResponse.md
 docs/TerminateTradingChallengeResponseEnvelope.md
@@ -476,6 +481,7 @@ model_list_user_coupon_payments_response_envelope.go
 model_list_users_response_envelope.go
 model_list_withdrawals_response_envelope.go
 model_live_orderbook.go
+model_lock_withdrawal_fee_request.go
 model_margin.go
 model_metadata.go
 model_module_balance.go
@@ -573,6 +579,10 @@ model_stream_user_coupon_payments_response.go
 model_supply.go
 model_supply_request.go
 model_supply_response_envelope.go
+model_tenant_guarantee_fund_history.go
+model_tenant_guarantee_fund_history_response_envelope.go
+model_tenant_guarantee_fund_row.go
+model_tenant_guarantee_fund_summary.go
 model_tenant_restrictions.go
 model_terminate_trading_challenge_response.go
 model_terminate_trading_challenge_response_envelope.go

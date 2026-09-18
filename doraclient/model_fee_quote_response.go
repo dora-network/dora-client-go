@@ -20,11 +20,13 @@ import (
 // checks if the FeeQuoteResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &FeeQuoteResponse{}
 
-// FeeQuoteResponse The estimated network fee to withdraw USDC via web3, alongside a signed, TTL-bound quote token the client submits with a later withdrawal so the server can validate the fee it was quoted.
+// FeeQuoteResponse The estimated network fee for one approved USDC withdrawal, alongside a signed, TTL-bound quote token bound to that withdrawal. Submit the token to PUT /v1/web3/withdrawals/{withdrawal_id} to reserve the quoted fee.
 type FeeQuoteResponse struct {
-	// The withdrawal destination address, echoed from the request.
+	// The withdrawal this quote was issued for. The quote token is bound to it and cannot be redeemed against any other withdrawal.
+	WithdrawalId string `json:"withdrawal_id"`
+	// The withdrawal destination address, read from the withdrawal row.
 	To string `json:"to"`
-	// Human-decimal USDC withdrawal quantity, echoed from the request.
+	// Human-decimal USDC withdrawal quantity, read from the withdrawal row.
 	Quantity string `json:"quantity"`
 	// The estimated network fee, in human USDC.
 	Fee string `json:"fee"`
@@ -32,7 +34,7 @@ type FeeQuoteResponse struct {
 	FeeBaseUnits string `json:"fee_base_units"`
 	// EVM chain ID the quote was computed for.
 	ChainId string `json:"chain_id"`
-	// Signed, TTL-bound quote token to submit with a later withdrawal so the server can validate the fee it was quoted.
+	// Signed, TTL-bound quote token to submit to PUT /v1/web3/withdrawals/{withdrawal_id} so the server can validate the fee it quoted. It names the withdrawal it was issued for.
 	QuoteToken string `json:"quote_token"`
 	// When the quote token expires.
 	ExpiresAt time.Time `json:"expires_at"`
@@ -44,8 +46,9 @@ type _FeeQuoteResponse FeeQuoteResponse
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFeeQuoteResponse(to string, quantity string, fee string, feeBaseUnits string, chainId string, quoteToken string, expiresAt time.Time) *FeeQuoteResponse {
+func NewFeeQuoteResponse(withdrawalId string, to string, quantity string, fee string, feeBaseUnits string, chainId string, quoteToken string, expiresAt time.Time) *FeeQuoteResponse {
 	this := FeeQuoteResponse{}
+	this.WithdrawalId = withdrawalId
 	this.To = to
 	this.Quantity = quantity
 	this.Fee = fee
@@ -62,6 +65,30 @@ func NewFeeQuoteResponse(to string, quantity string, fee string, feeBaseUnits st
 func NewFeeQuoteResponseWithDefaults() *FeeQuoteResponse {
 	this := FeeQuoteResponse{}
 	return &this
+}
+
+// GetWithdrawalId returns the WithdrawalId field value
+func (o *FeeQuoteResponse) GetWithdrawalId() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.WithdrawalId
+}
+
+// GetWithdrawalIdOk returns a tuple with the WithdrawalId field value
+// and a boolean to check if the value has been set.
+func (o *FeeQuoteResponse) GetWithdrawalIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.WithdrawalId, true
+}
+
+// SetWithdrawalId sets field value
+func (o *FeeQuoteResponse) SetWithdrawalId(v string) {
+	o.WithdrawalId = v
 }
 
 // GetTo returns the To field value
@@ -242,6 +269,7 @@ func (o FeeQuoteResponse) MarshalJSON() ([]byte, error) {
 
 func (o FeeQuoteResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	toSerialize["withdrawal_id"] = o.WithdrawalId
 	toSerialize["to"] = o.To
 	toSerialize["quantity"] = o.Quantity
 	toSerialize["fee"] = o.Fee
@@ -257,6 +285,7 @@ func (o *FeeQuoteResponse) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
+		"withdrawal_id",
 		"to",
 		"quantity",
 		"fee",

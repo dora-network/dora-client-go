@@ -1550,6 +1550,20 @@ func Test_doraclient_DefaultAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test DefaultAPIService LockWithdrawalFee", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var withdrawalId string
+
+		resp, httpRes, err := apiClient.DefaultAPI.LockWithdrawalFee(context.Background(), withdrawalId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test DefaultAPIService LookupAffiliateCode", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -1812,6 +1826,20 @@ func Test_doraclient_DefaultAPIService(t *testing.T) {
 		var orderBookId string
 
 		resp, httpRes, err := apiClient.DefaultAPI.StreamTrades(context.Background(), orderBookId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DefaultAPIService TenantGuaranteeFundHistory", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var tenantId string
+
+		resp, httpRes, err := apiClient.DefaultAPI.TenantGuaranteeFundHistory(context.Background(), tenantId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

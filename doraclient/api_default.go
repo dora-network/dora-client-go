@@ -4676,7 +4676,7 @@ func (r ApiGetAssetYieldDataRequest) Execute() (*ListAssetYieldResponseEnvelope,
 /*
 GetAssetYieldData Get yield chart data for an asset
 
-Returns complete yield buckets starting at `start`; `end` is exclusive and a trailing partial bucket is omitted. Requests are limited to 10,000 complete buckets.
+Returns complete yield buckets starting at `start`; `end` is exclusive and a trailing partial bucket is omitted. Requests are limited to 10,000 complete buckets. Public callers may query only the last month. Authenticated callers may query up to the last six months. If credentials are supplied but invalid, the request is rejected as unauthorized.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param assetId
@@ -4740,6 +4740,20 @@ func (a *DefaultAPIService) GetAssetYieldDataExecute(r ApiGetAssetYieldDataReque
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKeyAuthHeader"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -4999,7 +5013,7 @@ func (r ApiGetCandleDataRequest) Execute() (*ListCandlesResponseEnvelope, *http.
 /*
 GetCandleData Get candlestick data for an orderbook
 
-Returns candle data in the requested [start, end) range for the selected resolution. Responses are capped to the most recent 5,000 candles per request.
+Returns candle data in the requested [start, end) range for the selected resolution, capped to the most recent 5,000 candles per request. Public callers may query data from up to the last month, while authenticated callers may query up to the last six months (requests with invalid credentials will be rejected as unauthorized).
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param orderBookId
@@ -5062,6 +5076,20 @@ func (a *DefaultAPIService) GetCandleDataExecute(r ApiGetCandleDataRequest) (*Li
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKeyAuthHeader"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -9784,6 +9812,8 @@ func (r ApiGetTradesRequest) Execute() (*ListTradeResponseEnvelope, *http.Respon
 /*
 GetTrades Get a filtered, paginated list of trades
 
+Role-based date window: public callers are limited to the last month; authenticated callers may query up to the last six months. If `start` is omitted it defaults to the role-based minimum. If credentials are supplied but invalid, the request is rejected as unauthorized.
+
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetTradesRequest
 */
@@ -10783,6 +10813,8 @@ func (r ApiGetTransactionsRequest) Execute() (*ListTransactionsResponseEnvelope,
 /*
 GetTransactions Get a filtered, paginated list of transactions
 
+Role-based date window: public callers are limited to the last month; authenticated callers may query up to the last six months. If `start` is omitted it defaults to the role-based minimum. If credentials are supplied but invalid, the request is rejected as unauthorized.
+
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetTransactionsRequest
 */
@@ -10886,6 +10918,20 @@ func (a *DefaultAPIService) GetTransactionsExecute(r ApiGetTransactionsRequest) 
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKeyAuthHeader"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -13221,19 +13267,12 @@ func (a *DefaultAPIService) GetWithdrawalExecute(r ApiGetWithdrawalRequest) (*Wi
 type ApiGetWithdrawalFeeQuoteRequest struct {
 	ctx context.Context
 	ApiService *DefaultAPIService
-	to *string
-	quantity *string
+	withdrawalId *string
 }
 
-// The destination wallet address as a 0x-prefixed 20-byte hex string. Must not be the zero address.
-func (r ApiGetWithdrawalFeeQuoteRequest) To(to string) ApiGetWithdrawalFeeQuoteRequest {
-	r.to = &to
-	return r
-}
-
-// Human-decimal USDC quantity to withdraw, e.g. &#39;100.50&#39;. Must be positive.
-func (r ApiGetWithdrawalFeeQuoteRequest) Quantity(quantity string) ApiGetWithdrawalFeeQuoteRequest {
-	r.quantity = &quantity
+// The withdrawal to quote a fee for. It must belong to the caller and be in status APPROVED_WITHOUT_FEE; the destination and quantity are read from it rather than supplied here.
+func (r ApiGetWithdrawalFeeQuoteRequest) WithdrawalId(withdrawalId string) ApiGetWithdrawalFeeQuoteRequest {
+	r.withdrawalId = &withdrawalId
 	return r
 }
 
@@ -13244,7 +13283,7 @@ func (r ApiGetWithdrawalFeeQuoteRequest) Execute() (*FeeQuoteResponseEnvelope, *
 /*
 GetWithdrawalFeeQuote Estimate the network fee to withdraw USDC via web3
 
-Examines on-chain conditions and simulates a withdrawal transaction to estimate the fee a user needs to pay for a withdrawal. The fee is not charged when the withdrawal is requested; the quote is redeemed later, when the fee is locked as part of approval. Restricted to DORA tenant users whose native asset is USDC.
+Examines on-chain conditions and simulates the named withdrawal to estimate the network fee the user must reserve before it can be submitted on-chain. The withdrawal must already exist, belong to the caller, and have been approved by an admin (status APPROVED_WITHOUT_FEE); its destination and quantity are read from the row, not taken from the request. The returned quote token is bound to that one withdrawal and is redeemed at PUT /v1/web3/withdrawals/{withdrawal_id}, which reserves the fee and moves the withdrawal to APPROVED. Restricted to DORA tenant users whose native asset is USDC.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetWithdrawalFeeQuoteRequest
@@ -13276,15 +13315,11 @@ func (a *DefaultAPIService) GetWithdrawalFeeQuoteExecute(r ApiGetWithdrawalFeeQu
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.to == nil {
-		return localVarReturnValue, nil, reportError("to is required and must be specified")
-	}
-	if r.quantity == nil {
-		return localVarReturnValue, nil, reportError("quantity is required and must be specified")
+	if r.withdrawalId == nil {
+		return localVarReturnValue, nil, reportError("withdrawalId is required and must be specified")
 	}
 
-	parameterAddToHeaderOrQuery(localVarQueryParams, "to", r.to, "form", "")
-	parameterAddToHeaderOrQuery(localVarQueryParams, "quantity", r.quantity, "form", "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "withdrawal_id", r.withdrawalId, "form", "")
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -13361,6 +13396,28 @@ func (a *DefaultAPIService) GetWithdrawalFeeQuoteExecute(r ApiGetWithdrawalFeeQu
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
+			var v ResponseEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v ResponseEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
 			var v ResponseEnvelope
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -19000,6 +19057,221 @@ func (a *DefaultAPIService) ListWithdrawalsExecute(r ApiListWithdrawalsRequest) 
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiLockWithdrawalFeeRequest struct {
+	ctx context.Context
+	ApiService *DefaultAPIService
+	withdrawalId string
+	lockWithdrawalFeeRequest *LockWithdrawalFeeRequest
+}
+
+func (r ApiLockWithdrawalFeeRequest) LockWithdrawalFeeRequest(lockWithdrawalFeeRequest LockWithdrawalFeeRequest) ApiLockWithdrawalFeeRequest {
+	r.lockWithdrawalFeeRequest = &lockWithdrawalFeeRequest
+	return r
+}
+
+func (r ApiLockWithdrawalFeeRequest) Execute() (*WithdrawalResponseEnvelope, *http.Response, error) {
+	return r.ApiService.LockWithdrawalFeeExecute(r)
+}
+
+/*
+LockWithdrawalFee Lock the network fee for an approved USDC withdrawal
+
+Redeems a fee quote against a withdrawal an admin has approved. The quoted fee is reserved on top of the quantity reserved when the request was created, so the same risk checks the request cleared are run again for it: an active trading challenge, a deactivated account, account health, the minimum cash reserve, and overdue coupon payments. A fee that would take the caller below the minimum cash reserve is refused and nothing is reserved.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param withdrawalId The withdrawal to redeem the quote against. It must be owned by the caller and be in status APPROVED_WITHOUT_FEE.
+ @return ApiLockWithdrawalFeeRequest
+*/
+func (a *DefaultAPIService) LockWithdrawalFee(ctx context.Context, withdrawalId string) ApiLockWithdrawalFeeRequest {
+	return ApiLockWithdrawalFeeRequest{
+		ApiService: a,
+		ctx: ctx,
+		withdrawalId: withdrawalId,
+	}
+}
+
+// Execute executes the request
+//  @return WithdrawalResponseEnvelope
+func (a *DefaultAPIService) LockWithdrawalFeeExecute(r ApiLockWithdrawalFeeRequest) (*WithdrawalResponseEnvelope, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPut
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *WithdrawalResponseEnvelope
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DefaultAPIService.LockWithdrawalFee")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v1/web3/withdrawals/{withdrawal_id}"
+	localVarPath = strings.Replace(localVarPath, "{"+"withdrawal_id"+"}", url.PathEscape(parameterValueToString(r.withdrawalId, "withdrawalId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.lockWithdrawalFeeRequest == nil {
+		return localVarReturnValue, nil, reportError("lockWithdrawalFeeRequest is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.lockWithdrawalFeeRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKeyAuthHeader"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ResponseEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v ResponseEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ResponseEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v ResponseEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v ResponseEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 410 {
+			var v ResponseEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v ResponseEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 503 {
+			var v ResponseEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiLookupAffiliateCodeRequest struct {
 	ctx context.Context
 	ApiService *DefaultAPIService
@@ -22021,6 +22293,196 @@ func (a *DefaultAPIService) StreamTradesExecute(r ApiStreamTradesRequest) ([]Str
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
+			var v ResponseEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v ResponseEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiTenantGuaranteeFundHistoryRequest struct {
+	ctx context.Context
+	ApiService *DefaultAPIService
+	tenantId string
+	startDate *time.Time
+	endDate *time.Time
+	txKind *string
+}
+
+// Optional inclusive lower bound for updated_at (RFC3339).
+func (r ApiTenantGuaranteeFundHistoryRequest) StartDate(startDate time.Time) ApiTenantGuaranteeFundHistoryRequest {
+	r.startDate = &startDate
+	return r
+}
+
+// Optional inclusive upper bound for updated_at (RFC3339).
+func (r ApiTenantGuaranteeFundHistoryRequest) EndDate(endDate time.Time) ApiTenantGuaranteeFundHistoryRequest {
+	r.endDate = &endDate
+	return r
+}
+
+// Optional transaction kind filter.
+func (r ApiTenantGuaranteeFundHistoryRequest) TxKind(txKind string) ApiTenantGuaranteeFundHistoryRequest {
+	r.txKind = &txKind
+	return r
+}
+
+func (r ApiTenantGuaranteeFundHistoryRequest) Execute() (*TenantGuaranteeFundHistoryResponseEnvelope, *http.Response, error) {
+	return r.ApiService.TenantGuaranteeFundHistoryExecute(r)
+}
+
+/*
+TenantGuaranteeFundHistory List guarantee fund ledger rows and totals by transaction kind for a tenant.
+
+Returns guarantee fund ledger rows for a tenant filtered by updated_at range and tx_kind, with totals_by_tx_kind summary.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param tenantId
+ @return ApiTenantGuaranteeFundHistoryRequest
+*/
+func (a *DefaultAPIService) TenantGuaranteeFundHistory(ctx context.Context, tenantId string) ApiTenantGuaranteeFundHistoryRequest {
+	return ApiTenantGuaranteeFundHistoryRequest{
+		ApiService: a,
+		ctx: ctx,
+		tenantId: tenantId,
+	}
+}
+
+// Execute executes the request
+//  @return TenantGuaranteeFundHistoryResponseEnvelope
+func (a *DefaultAPIService) TenantGuaranteeFundHistoryExecute(r ApiTenantGuaranteeFundHistoryRequest) (*TenantGuaranteeFundHistoryResponseEnvelope, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *TenantGuaranteeFundHistoryResponseEnvelope
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DefaultAPIService.TenantGuaranteeFundHistory")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v1/tenants/{tenant_id}/guarantee_fund"
+	localVarPath = strings.Replace(localVarPath, "{"+"tenant_id"+"}", url.PathEscape(parameterValueToString(r.tenantId, "tenantId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.startDate != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "start_date", r.startDate, "form", "")
+	}
+	if r.endDate != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "end_date", r.endDate, "form", "")
+	}
+	if r.txKind != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "tx_kind", r.txKind, "form", "")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKeyAuthHeader"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ResponseEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v ResponseEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
 			var v ResponseEnvelope
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {

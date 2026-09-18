@@ -121,6 +121,7 @@ Method | HTTP request | Description
 [**ListTradingChallenges**](DefaultAPI.md#ListTradingChallenges) | **Get** /v1/trading_challenges | List trading challenges
 [**ListUserDeactivations**](DefaultAPI.md#ListUserDeactivations) | **Get** /v1/user/deactivations | Get the current deactivation status across all users
 [**ListWithdrawals**](DefaultAPI.md#ListWithdrawals) | **Get** /v1/web3/withdrawals | List USDC withdrawals
+[**LockWithdrawalFee**](DefaultAPI.md#LockWithdrawalFee) | **Put** /v1/web3/withdrawals/{withdrawal_id} | Lock the network fee for an approved USDC withdrawal
 [**LookupAffiliateCode**](DefaultAPI.md#LookupAffiliateCode) | **Get** /v1/affiliate_codes/{code} | Look up a reusable referral code
 [**PayLeverageGetAccruedInterest**](DefaultAPI.md#PayLeverageGetAccruedInterest) | **Post** /v1/leverage/accrued_interest/pay | Pay current accrued leverage interest for a specific user
 [**RegisterAffiliateReferrer**](DefaultAPI.md#RegisterAffiliateReferrer) | **Post** /v1/affiliate_programs/{program_id}/referrers | Register an existing user as a referrer
@@ -141,6 +142,7 @@ Method | HTTP request | Description
 [**StreamOrderBookBalances**](DefaultAPI.md#StreamOrderBookBalances) | **Get** /v1/orderbooks/{order_book_id}/balances/stream | Get a snapshot of base and quote balances for an order book and open a stream for real-time updates
 [**StreamOrderbookOpenOrders**](DefaultAPI.md#StreamOrderbookOpenOrders) | **Get** /v1/orderbooks/{order_book_id}/open/stream | Get a snapshot of open orders in an order book and open a stream for real-time updates
 [**StreamTrades**](DefaultAPI.md#StreamTrades) | **Get** /v1/trades/{order_book_id}/stream | Get a snapshot of trades executed on the given order book from a specific date and open a stream for real-time updates
+[**TenantGuaranteeFundHistory**](DefaultAPI.md#TenantGuaranteeFundHistory) | **Get** /v1/tenants/{tenant_id}/guarantee_fund | List guarantee fund ledger rows and totals by transaction kind for a tenant.
 [**TerminateOwnTradingChallengeParticipation**](DefaultAPI.md#TerminateOwnTradingChallengeParticipation) | **Post** /v1/trading_challenges/{trading_challenge_id}/participants/self/terminate | Leave a trading challenge
 [**TerminateTradingChallengeParticipation**](DefaultAPI.md#TerminateTradingChallengeParticipation) | **Post** /v1/trading_challenges/{trading_challenge_id}/participants/{user_id}/terminate | Terminate a participation in a trading challenge
 [**TransferAccountBalancesV2**](DefaultAPI.md#TransferAccountBalancesV2) | **Post** /v2/accounts/transfer_balances | Transfer available balance between a user&#39;s accounts
@@ -2225,7 +2227,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -2369,7 +2371,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -4449,6 +4451,8 @@ No authorization required
 
 Get a filtered, paginated list of trades
 
+
+
 ### Example
 
 ```go
@@ -4877,6 +4881,8 @@ No authorization required
 
 Get a filtered, paginated list of transactions
 
+
+
 ### Example
 
 ```go
@@ -4938,7 +4944,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -5920,7 +5926,7 @@ Name | Type | Description  | Notes
 
 ## GetWithdrawalFeeQuote
 
-> FeeQuoteResponseEnvelope GetWithdrawalFeeQuote(ctx).To(to).Quantity(quantity).Execute()
+> FeeQuoteResponseEnvelope GetWithdrawalFeeQuote(ctx).WithdrawalId(withdrawalId).Execute()
 
 Estimate the network fee to withdraw USDC via web3
 
@@ -5939,12 +5945,11 @@ import (
 )
 
 func main() {
-	to := "to_example" // string | The destination wallet address as a 0x-prefixed 20-byte hex string. Must not be the zero address.
-	quantity := "quantity_example" // string | Human-decimal USDC quantity to withdraw, e.g. '100.50'. Must be positive.
+	withdrawalId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The withdrawal to quote a fee for. It must belong to the caller and be in status APPROVED_WITHOUT_FEE; the destination and quantity are read from it rather than supplied here.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.DefaultAPI.GetWithdrawalFeeQuote(context.Background()).To(to).Quantity(quantity).Execute()
+	resp, r, err := apiClient.DefaultAPI.GetWithdrawalFeeQuote(context.Background()).WithdrawalId(withdrawalId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.GetWithdrawalFeeQuote``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -5965,8 +5970,7 @@ Other parameters are passed through a pointer to a apiGetWithdrawalFeeQuoteReque
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **to** | **string** | The destination wallet address as a 0x-prefixed 20-byte hex string. Must not be the zero address. | 
- **quantity** | **string** | Human-decimal USDC quantity to withdraw, e.g. &#39;100.50&#39;. Must be positive. | 
+ **withdrawalId** | **string** | The withdrawal to quote a fee for. It must belong to the caller and be in status APPROVED_WITHOUT_FEE; the destination and quantity are read from it rather than supplied here. | 
 
 ### Return type
 
@@ -8197,6 +8201,78 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## LockWithdrawalFee
+
+> WithdrawalResponseEnvelope LockWithdrawalFee(ctx, withdrawalId).LockWithdrawalFeeRequest(lockWithdrawalFeeRequest).Execute()
+
+Lock the network fee for an approved USDC withdrawal
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+	withdrawalId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The withdrawal to redeem the quote against. It must be owned by the caller and be in status APPROVED_WITHOUT_FEE.
+	lockWithdrawalFeeRequest := *openapiclient.NewLockWithdrawalFeeRequest("QuoteToken_example") // LockWithdrawalFeeRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.LockWithdrawalFee(context.Background(), withdrawalId).LockWithdrawalFeeRequest(lockWithdrawalFeeRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.LockWithdrawalFee``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `LockWithdrawalFee`: WithdrawalResponseEnvelope
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.LockWithdrawalFee`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**withdrawalId** | **string** | The withdrawal to redeem the quote against. It must be owned by the caller and be in status APPROVED_WITHOUT_FEE. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiLockWithdrawalFeeRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **lockWithdrawalFeeRequest** | [**LockWithdrawalFeeRequest**](LockWithdrawalFeeRequest.md) |  | 
+
+### Return type
+
+[**WithdrawalResponseEnvelope**](WithdrawalResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## LookupAffiliateCode
 
 > AffiliateReferrerEnvelope LookupAffiliateCode(ctx, code).TenantId(tenantId).Execute()
@@ -9571,6 +9647,83 @@ Name | Type | Description  | Notes
 ### Authorization
 
 No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## TenantGuaranteeFundHistory
+
+> TenantGuaranteeFundHistoryResponseEnvelope TenantGuaranteeFundHistory(ctx, tenantId).StartDate(startDate).EndDate(endDate).TxKind(txKind).Execute()
+
+List guarantee fund ledger rows and totals by transaction kind for a tenant.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+    "time"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+	tenantId := "tenantId_example" // string | 
+	startDate := time.Now() // time.Time | Optional inclusive lower bound for updated_at (RFC3339). (optional)
+	endDate := time.Now() // time.Time | Optional inclusive upper bound for updated_at (RFC3339). (optional)
+	txKind := "txKind_example" // string | Optional transaction kind filter. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.TenantGuaranteeFundHistory(context.Background(), tenantId).StartDate(startDate).EndDate(endDate).TxKind(txKind).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.TenantGuaranteeFundHistory``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `TenantGuaranteeFundHistory`: TenantGuaranteeFundHistoryResponseEnvelope
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.TenantGuaranteeFundHistory`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**tenantId** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiTenantGuaranteeFundHistoryRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **startDate** | **time.Time** | Optional inclusive lower bound for updated_at (RFC3339). | 
+ **endDate** | **time.Time** | Optional inclusive upper bound for updated_at (RFC3339). | 
+ **txKind** | **string** | Optional transaction kind filter. | 
+
+### Return type
+
+[**TenantGuaranteeFundHistoryResponseEnvelope**](TenantGuaranteeFundHistoryResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

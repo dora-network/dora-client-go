@@ -4,19 +4,20 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**To** | **string** | The withdrawal destination address, echoed from the request. | 
-**Quantity** | **string** | Human-decimal USDC withdrawal quantity, echoed from the request. | 
+**WithdrawalId** | **string** | The withdrawal this quote was issued for. The quote token is bound to it and cannot be redeemed against any other withdrawal. | 
+**To** | **string** | The withdrawal destination address, read from the withdrawal row. | 
+**Quantity** | **string** | Human-decimal USDC withdrawal quantity, read from the withdrawal row. | 
 **Fee** | **string** | The estimated network fee, in human USDC. | 
 **FeeBaseUnits** | **string** | The estimated network fee, in micro-USDC base units. | 
 **ChainId** | **string** | EVM chain ID the quote was computed for. | 
-**QuoteToken** | **string** | Signed, TTL-bound quote token to submit with a later withdrawal so the server can validate the fee it was quoted. | 
+**QuoteToken** | **string** | Signed, TTL-bound quote token to submit to PUT /v1/web3/withdrawals/{withdrawal_id} so the server can validate the fee it quoted. It names the withdrawal it was issued for. | 
 **ExpiresAt** | **time.Time** | When the quote token expires. | 
 
 ## Methods
 
 ### NewFeeQuoteResponse
 
-`func NewFeeQuoteResponse(to string, quantity string, fee string, feeBaseUnits string, chainId string, quoteToken string, expiresAt time.Time, ) *FeeQuoteResponse`
+`func NewFeeQuoteResponse(withdrawalId string, to string, quantity string, fee string, feeBaseUnits string, chainId string, quoteToken string, expiresAt time.Time, ) *FeeQuoteResponse`
 
 NewFeeQuoteResponse instantiates a new FeeQuoteResponse object
 This constructor will assign default values to properties that have it defined,
@@ -30,6 +31,26 @@ will change when the set of required properties is changed
 NewFeeQuoteResponseWithDefaults instantiates a new FeeQuoteResponse object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetWithdrawalId
+
+`func (o *FeeQuoteResponse) GetWithdrawalId() string`
+
+GetWithdrawalId returns the WithdrawalId field if non-nil, zero value otherwise.
+
+### GetWithdrawalIdOk
+
+`func (o *FeeQuoteResponse) GetWithdrawalIdOk() (*string, bool)`
+
+GetWithdrawalIdOk returns a tuple with the WithdrawalId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetWithdrawalId
+
+`func (o *FeeQuoteResponse) SetWithdrawalId(v string)`
+
+SetWithdrawalId sets WithdrawalId field to given value.
+
 
 ### GetTo
 

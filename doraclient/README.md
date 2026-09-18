@@ -188,6 +188,7 @@ Class | Method | HTTP request | Description
 *DefaultAPI* | [**ListTradingChallenges**](docs/DefaultAPI.md#listtradingchallenges) | **Get** /v1/trading_challenges | List trading challenges
 *DefaultAPI* | [**ListUserDeactivations**](docs/DefaultAPI.md#listuserdeactivations) | **Get** /v1/user/deactivations | Get the current deactivation status across all users
 *DefaultAPI* | [**ListWithdrawals**](docs/DefaultAPI.md#listwithdrawals) | **Get** /v1/web3/withdrawals | List USDC withdrawals
+*DefaultAPI* | [**LockWithdrawalFee**](docs/DefaultAPI.md#lockwithdrawalfee) | **Put** /v1/web3/withdrawals/{withdrawal_id} | Lock the network fee for an approved USDC withdrawal
 *DefaultAPI* | [**LookupAffiliateCode**](docs/DefaultAPI.md#lookupaffiliatecode) | **Get** /v1/affiliate_codes/{code} | Look up a reusable referral code
 *DefaultAPI* | [**PayLeverageGetAccruedInterest**](docs/DefaultAPI.md#payleveragegetaccruedinterest) | **Post** /v1/leverage/accrued_interest/pay | Pay current accrued leverage interest for a specific user
 *DefaultAPI* | [**RegisterAffiliateReferrer**](docs/DefaultAPI.md#registeraffiliatereferrer) | **Post** /v1/affiliate_programs/{program_id}/referrers | Register an existing user as a referrer
@@ -208,6 +209,7 @@ Class | Method | HTTP request | Description
 *DefaultAPI* | [**StreamOrderBookBalances**](docs/DefaultAPI.md#streamorderbookbalances) | **Get** /v1/orderbooks/{order_book_id}/balances/stream | Get a snapshot of base and quote balances for an order book and open a stream for real-time updates
 *DefaultAPI* | [**StreamOrderbookOpenOrders**](docs/DefaultAPI.md#streamorderbookopenorders) | **Get** /v1/orderbooks/{order_book_id}/open/stream | Get a snapshot of open orders in an order book and open a stream for real-time updates
 *DefaultAPI* | [**StreamTrades**](docs/DefaultAPI.md#streamtrades) | **Get** /v1/trades/{order_book_id}/stream | Get a snapshot of trades executed on the given order book from a specific date and open a stream for real-time updates
+*DefaultAPI* | [**TenantGuaranteeFundHistory**](docs/DefaultAPI.md#tenantguaranteefundhistory) | **Get** /v1/tenants/{tenant_id}/guarantee_fund | List guarantee fund ledger rows and totals by transaction kind for a tenant.
 *DefaultAPI* | [**TerminateOwnTradingChallengeParticipation**](docs/DefaultAPI.md#terminateowntradingchallengeparticipation) | **Post** /v1/trading_challenges/{trading_challenge_id}/participants/self/terminate | Leave a trading challenge
 *DefaultAPI* | [**TerminateTradingChallengeParticipation**](docs/DefaultAPI.md#terminatetradingchallengeparticipation) | **Post** /v1/trading_challenges/{trading_challenge_id}/participants/{user_id}/terminate | Terminate a participation in a trading challenge
 *DefaultAPI* | [**TransferAccountBalancesV2**](docs/DefaultAPI.md#transferaccountbalancesv2) | **Post** /v2/accounts/transfer_balances | Transfer available balance between a user&#39;s accounts
@@ -364,6 +366,7 @@ Class | Method | HTTP request | Description
  - [ListUsersResponseEnvelope](docs/ListUsersResponseEnvelope.md)
  - [ListWithdrawalsResponseEnvelope](docs/ListWithdrawalsResponseEnvelope.md)
  - [LiveOrderbook](docs/LiveOrderbook.md)
+ - [LockWithdrawalFeeRequest](docs/LockWithdrawalFeeRequest.md)
  - [Margin](docs/Margin.md)
  - [Metadata](docs/Metadata.md)
  - [ModuleBalance](docs/ModuleBalance.md)
@@ -461,6 +464,10 @@ Class | Method | HTTP request | Description
  - [Supply](docs/Supply.md)
  - [SupplyRequest](docs/SupplyRequest.md)
  - [SupplyResponseEnvelope](docs/SupplyResponseEnvelope.md)
+ - [TenantGuaranteeFundHistory](docs/TenantGuaranteeFundHistory.md)
+ - [TenantGuaranteeFundHistoryResponseEnvelope](docs/TenantGuaranteeFundHistoryResponseEnvelope.md)
+ - [TenantGuaranteeFundRow](docs/TenantGuaranteeFundRow.md)
+ - [TenantGuaranteeFundSummary](docs/TenantGuaranteeFundSummary.md)
  - [TenantRestrictions](docs/TenantRestrictions.md)
  - [TerminateTradingChallengeResponse](docs/TerminateTradingChallengeResponse.md)
  - [TerminateTradingChallengeResponseEnvelope](docs/TerminateTradingChallengeResponseEnvelope.md)
