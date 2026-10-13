@@ -114,6 +114,20 @@ func Test_doraclient_DefaultAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test DefaultAPIService CancelWithdrawal", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var withdrawalId string
+
+		resp, httpRes, err := apiClient.DefaultAPI.CancelWithdrawal(context.Background(), withdrawalId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test DefaultAPIService ClaimLeverageGetAccruedInterest", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -147,6 +161,18 @@ func Test_doraclient_DefaultAPIService(t *testing.T) {
 		var tradingChallengeId string
 
 		resp, httpRes, err := apiClient.DefaultAPI.ClaimTradingChallengePrize(context.Background(), tradingChallengeId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DefaultAPIService CloseAllIsolatedPositions", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.DefaultAPI.CloseAllIsolatedPositions(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -269,6 +295,20 @@ func Test_doraclient_DefaultAPIService(t *testing.T) {
 		t.Skip("skip test")  // remove to run test
 
 		resp, httpRes, err := apiClient.DefaultAPI.CreateWithdrawal(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DefaultAPIService CustomizeAffiliateReferrerCode", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var referrerId string
+
+		resp, httpRes, err := apiClient.DefaultAPI.CustomizeAffiliateReferrerCode(context.Background(), referrerId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -436,6 +476,20 @@ func Test_doraclient_DefaultAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test DefaultAPIService GetAutoRebalanceAccountStatusV2", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var accountId string
+
+		resp, httpRes, err := apiClient.DefaultAPI.GetAutoRebalanceAccountStatusV2(context.Background(), accountId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test DefaultAPIService GetCandleData", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -507,6 +561,18 @@ func Test_doraclient_DefaultAPIService(t *testing.T) {
 		t.Skip("skip test")  // remove to run test
 
 		resp, httpRes, err := apiClient.DefaultAPI.GetDepositInstructions(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DefaultAPIService GetGlobalLeaderboard", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.DefaultAPI.GetGlobalLeaderboard(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -820,6 +886,20 @@ func Test_doraclient_DefaultAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test DefaultAPIService GetQRRewardPreview", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var tradingChallengeId string
+
+		resp, httpRes, err := apiClient.DefaultAPI.GetQRRewardPreview(context.Background(), tradingChallengeId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test DefaultAPIService GetRealizedPnlSettlements", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -863,18 +943,6 @@ func Test_doraclient_DefaultAPIService(t *testing.T) {
 		t.Skip("skip test")  // remove to run test
 
 		resp, httpRes, err := apiClient.DefaultAPI.GetTrades(context.Background()).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test DefaultAPIService GetTradingChallengeAllResults", func(t *testing.T) {
-
-		t.Skip("skip test")  // remove to run test
-
-		resp, httpRes, err := apiClient.DefaultAPI.GetTradingChallengeAllResults(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -1407,6 +1475,30 @@ func Test_doraclient_DefaultAPIService(t *testing.T) {
 		t.Skip("skip test")  // remove to run test
 
 		resp, httpRes, err := apiClient.DefaultAPI.ListAssets(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DefaultAPIService ListAutoRebalanceConfigsV2", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.DefaultAPI.ListAutoRebalanceConfigsV2(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DefaultAPIService ListAutoRebalanceStatusesV2", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.DefaultAPI.ListAutoRebalanceStatusesV2(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -1961,6 +2053,18 @@ func Test_doraclient_DefaultAPIService(t *testing.T) {
 		var userId string
 
 		resp, httpRes, err := apiClient.DefaultAPI.UpdateUserKYC(context.Background(), userId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DefaultAPIService UpsertAutoRebalanceConfigsV2", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.DefaultAPI.UpsertAutoRebalanceConfigsV2(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

@@ -27,9 +27,11 @@ type AffiliateReferrer struct {
 	// Owning tenant for administration. This does not define a referral destination.
 	TenantId string `json:"tenant_id"`
 	UserId string `json:"user_id"`
-	// Reusable referral code, stored uppercase. Letters, digits, hyphens and underscores are accepted; the first character must be a letter or digit. Matching is case-insensitive. Separate from QR claim tokens.
+	// Current code to share; previously issued codes remain valid. Stored uppercase and unique across all programs and tenants.
 	ReferralCode string `json:"referral_code" validate:"regexp=^[A-Z0-9][A-Z0-9_-]{2,63}$"`
 	CreatedAt time.Time `json:"created_at"`
+	// When the owner used their one code change; null until then.
+	CustomizedAt NullableTime `json:"customized_at"`
 }
 
 type _AffiliateReferrer AffiliateReferrer
@@ -38,7 +40,7 @@ type _AffiliateReferrer AffiliateReferrer
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAffiliateReferrer(id string, programId string, tenantId string, userId string, referralCode string, createdAt time.Time) *AffiliateReferrer {
+func NewAffiliateReferrer(id string, programId string, tenantId string, userId string, referralCode string, createdAt time.Time, customizedAt NullableTime) *AffiliateReferrer {
 	this := AffiliateReferrer{}
 	this.Id = id
 	this.ProgramId = programId
@@ -46,6 +48,7 @@ func NewAffiliateReferrer(id string, programId string, tenantId string, userId s
 	this.UserId = userId
 	this.ReferralCode = referralCode
 	this.CreatedAt = createdAt
+	this.CustomizedAt = customizedAt
 	return &this
 }
 
@@ -201,6 +204,32 @@ func (o *AffiliateReferrer) SetCreatedAt(v time.Time) {
 	o.CreatedAt = v
 }
 
+// GetCustomizedAt returns the CustomizedAt field value
+// If the value is explicit nil, the zero value for time.Time will be returned
+func (o *AffiliateReferrer) GetCustomizedAt() time.Time {
+	if o == nil || o.CustomizedAt.Get() == nil {
+		var ret time.Time
+		return ret
+	}
+
+	return *o.CustomizedAt.Get()
+}
+
+// GetCustomizedAtOk returns a tuple with the CustomizedAt field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *AffiliateReferrer) GetCustomizedAtOk() (*time.Time, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.CustomizedAt.Get(), o.CustomizedAt.IsSet()
+}
+
+// SetCustomizedAt sets field value
+func (o *AffiliateReferrer) SetCustomizedAt(v time.Time) {
+	o.CustomizedAt.Set(&v)
+}
+
 func (o AffiliateReferrer) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -217,6 +246,7 @@ func (o AffiliateReferrer) ToMap() (map[string]interface{}, error) {
 	toSerialize["user_id"] = o.UserId
 	toSerialize["referral_code"] = o.ReferralCode
 	toSerialize["created_at"] = o.CreatedAt
+	toSerialize["customized_at"] = o.CustomizedAt.Get()
 	return toSerialize, nil
 }
 
@@ -231,6 +261,7 @@ func (o *AffiliateReferrer) UnmarshalJSON(data []byte) (err error) {
 		"user_id",
 		"referral_code",
 		"created_at",
+		"customized_at",
 	}
 
 	allProperties := make(map[string]interface{})

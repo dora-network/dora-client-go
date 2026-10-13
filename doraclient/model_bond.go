@@ -35,6 +35,8 @@ type Bond struct {
 	IssuedAt time.Time `json:"issued_at"`
 	Issuer string `json:"issuer"`
 	MaturityAt time.Time `json:"maturity_at"`
+	// Years until maturity from the current date (negative for matured bonds)
+	Tenor float32 `json:"tenor"`
 	PrincipalValue string `json:"principal_value"`
 	PaymentsPerYear int32 `json:"payments_per_year"`
 	// Coupon payment frequency in nanoseconds (minimum 1000 i.e. 1 microsecond)
@@ -48,7 +50,7 @@ type _Bond Bond
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBond(id string, kind CouponKind, createdAt time.Time, isin string, issuedAt time.Time, issuer string, maturityAt time.Time, principalValue string, paymentsPerYear int32) *Bond {
+func NewBond(id string, kind CouponKind, createdAt time.Time, isin string, issuedAt time.Time, issuer string, maturityAt time.Time, tenor float32, principalValue string, paymentsPerYear int32) *Bond {
 	this := Bond{}
 	this.Id = id
 	this.Kind = kind
@@ -57,6 +59,7 @@ func NewBond(id string, kind CouponKind, createdAt time.Time, isin string, issue
 	this.IssuedAt = issuedAt
 	this.Issuer = issuer
 	this.MaturityAt = maturityAt
+	this.Tenor = tenor
 	this.PrincipalValue = principalValue
 	this.PaymentsPerYear = paymentsPerYear
 	return &this
@@ -430,6 +433,30 @@ func (o *Bond) SetMaturityAt(v time.Time) {
 	o.MaturityAt = v
 }
 
+// GetTenor returns the Tenor field value
+func (o *Bond) GetTenor() float32 {
+	if o == nil {
+		var ret float32
+		return ret
+	}
+
+	return o.Tenor
+}
+
+// GetTenorOk returns a tuple with the Tenor field value
+// and a boolean to check if the value has been set.
+func (o *Bond) GetTenorOk() (*float32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Tenor, true
+}
+
+// SetTenor sets field value
+func (o *Bond) SetTenor(v float32) {
+	o.Tenor = v
+}
+
 // GetPrincipalValue returns the PrincipalValue field value
 func (o *Bond) GetPrincipalValue() string {
 	if o == nil {
@@ -577,6 +604,7 @@ func (o Bond) ToMap() (map[string]interface{}, error) {
 	toSerialize["issued_at"] = o.IssuedAt
 	toSerialize["issuer"] = o.Issuer
 	toSerialize["maturity_at"] = o.MaturityAt
+	toSerialize["tenor"] = o.Tenor
 	toSerialize["principal_value"] = o.PrincipalValue
 	toSerialize["payments_per_year"] = o.PaymentsPerYear
 	if !IsNil(o.PaymentsEvery) {
@@ -600,6 +628,7 @@ func (o *Bond) UnmarshalJSON(data []byte) (err error) {
 		"issued_at",
 		"issuer",
 		"maturity_at",
+		"tenor",
 		"principal_value",
 		"payments_per_year",
 	}

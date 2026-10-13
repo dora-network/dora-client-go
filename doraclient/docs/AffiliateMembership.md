@@ -8,16 +8,18 @@ Name | Type | Description | Notes
 **ProgramId** | **string** |  | 
 **TenantId** | **string** | Owning tenant for administration. This does not define a referral destination. | 
 **UserId** | **string** |  | 
-**ReferralCode** | **string** | Reusable referral code, stored uppercase. Letters, digits, hyphens and underscores are accepted; the first character must be a letter or digit. Matching is case-insensitive. Separate from QR claim tokens. | 
+**ReferralCode** | **string** | Current code to share; previously issued codes remain valid. | 
 **CreatedAt** | **time.Time** |  | 
 **ProgramName** | **string** |  | 
 **IsActive** | **bool** |  | 
+**CustomizedAt** | **NullableTime** |  | 
+**CanCustomize** | **bool** | True when this membership has not used its one-time code change, including while the program is inactive. | 
 
 ## Methods
 
 ### NewAffiliateMembership
 
-`func NewAffiliateMembership(id string, programId string, tenantId string, userId string, referralCode string, createdAt time.Time, programName string, isActive bool, ) *AffiliateMembership`
+`func NewAffiliateMembership(id string, programId string, tenantId string, userId string, referralCode string, createdAt time.Time, programName string, isActive bool, customizedAt NullableTime, canCustomize bool, ) *AffiliateMembership`
 
 NewAffiliateMembership instantiates a new AffiliateMembership object
 This constructor will assign default values to properties that have it defined,
@@ -190,6 +192,56 @@ and a boolean to check if the value has been set.
 `func (o *AffiliateMembership) SetIsActive(v bool)`
 
 SetIsActive sets IsActive field to given value.
+
+
+### GetCustomizedAt
+
+`func (o *AffiliateMembership) GetCustomizedAt() time.Time`
+
+GetCustomizedAt returns the CustomizedAt field if non-nil, zero value otherwise.
+
+### GetCustomizedAtOk
+
+`func (o *AffiliateMembership) GetCustomizedAtOk() (*time.Time, bool)`
+
+GetCustomizedAtOk returns a tuple with the CustomizedAt field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCustomizedAt
+
+`func (o *AffiliateMembership) SetCustomizedAt(v time.Time)`
+
+SetCustomizedAt sets CustomizedAt field to given value.
+
+
+### SetCustomizedAtNil
+
+`func (o *AffiliateMembership) SetCustomizedAtNil(b bool)`
+
+ SetCustomizedAtNil sets the value for CustomizedAt to be an explicit nil
+
+### UnsetCustomizedAt
+`func (o *AffiliateMembership) UnsetCustomizedAt()`
+
+UnsetCustomizedAt ensures that no value is present for CustomizedAt, not even an explicit nil
+### GetCanCustomize
+
+`func (o *AffiliateMembership) GetCanCustomize() bool`
+
+GetCanCustomize returns the CanCustomize field if non-nil, zero value otherwise.
+
+### GetCanCustomizeOk
+
+`func (o *AffiliateMembership) GetCanCustomizeOk() (*bool, bool)`
+
+GetCanCustomizeOk returns a tuple with the CanCustomize field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCanCustomize
+
+`func (o *AffiliateMembership) SetCanCustomize(v bool)`
+
+SetCanCustomize sets CanCustomize field to given value.
 
 
 

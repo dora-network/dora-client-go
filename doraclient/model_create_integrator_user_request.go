@@ -28,7 +28,7 @@ type CreateIntegratorUserRequest struct {
 	LastName *string
 	UserName *string
 	CountryOfDomicile *CountryCode
-	// Optional: the user's native asset ID. Must be a CURRENCY asset; defaults to USD. The USDC asset is never allowed for integrator-created users.
+	// Optional: the user's native asset ID. Must be a CURRENCY asset; defaults to USD. The USDC asset is only allowed for users created under a tenant with is_web3_enabled set, and their accounts and positions still use the USD asset.
 	NativeAssetId *string
 	PhotoUrl *string
 	Provider *string

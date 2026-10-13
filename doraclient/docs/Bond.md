@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **IssuedAt** | **time.Time** |  | 
 **Issuer** | **string** |  | 
 **MaturityAt** | **time.Time** |  | 
+**Tenor** | **float32** | Years until maturity from the current date (negative for matured bonds) | 
 **PrincipalValue** | **string** |  | 
 **PaymentsPerYear** | **int32** |  | 
 **PaymentsEvery** | Pointer to **int64** | Coupon payment frequency in nanoseconds (minimum 1000 i.e. 1 microsecond) | [optional] 
@@ -26,7 +27,7 @@ Name | Type | Description | Notes
 
 ### NewBond
 
-`func NewBond(id string, kind CouponKind, createdAt time.Time, isin string, issuedAt time.Time, issuer string, maturityAt time.Time, principalValue string, paymentsPerYear int32, ) *Bond`
+`func NewBond(id string, kind CouponKind, createdAt time.Time, isin string, issuedAt time.Time, issuer string, maturityAt time.Time, tenor float32, principalValue string, paymentsPerYear int32, ) *Bond`
 
 NewBond instantiates a new Bond object
 This constructor will assign default values to properties that have it defined,
@@ -329,6 +330,26 @@ and a boolean to check if the value has been set.
 `func (o *Bond) SetMaturityAt(v time.Time)`
 
 SetMaturityAt sets MaturityAt field to given value.
+
+
+### GetTenor
+
+`func (o *Bond) GetTenor() float32`
+
+GetTenor returns the Tenor field if non-nil, zero value otherwise.
+
+### GetTenorOk
+
+`func (o *Bond) GetTenorOk() (*float32, bool)`
+
+GetTenorOk returns a tuple with the Tenor field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTenor
+
+`func (o *Bond) SetTenor(v float32)`
+
+SetTenor sets Tenor field to given value.
 
 
 ### GetPrincipalValue

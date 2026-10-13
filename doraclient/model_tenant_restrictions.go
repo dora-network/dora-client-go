@@ -24,7 +24,7 @@ var _ MappedNullable = &TenantRestrictions{}
 type TenantRestrictions struct {
 	// Tenant ID
 	TenantId string `json:"tenant_id"`
-	// Maximum allowed deposit for the tenant per day.
+	// Maximum allowed USD deposit per user per day for this tenant.
 	DailyDepositLimit string `json:"daily_deposit_limit"`
 	// Maximum allowed trade amount for the tenant.
 	TradeLimit string `json:"trade_limit"`

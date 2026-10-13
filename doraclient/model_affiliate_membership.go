@@ -27,11 +27,14 @@ type AffiliateMembership struct {
 	// Owning tenant for administration. This does not define a referral destination.
 	TenantId string `json:"tenant_id"`
 	UserId string `json:"user_id"`
-	// Reusable referral code, stored uppercase. Letters, digits, hyphens and underscores are accepted; the first character must be a letter or digit. Matching is case-insensitive. Separate from QR claim tokens.
+	// Current code to share; previously issued codes remain valid.
 	ReferralCode string `json:"referral_code" validate:"regexp=^[A-Z0-9][A-Z0-9_-]{2,63}$"`
 	CreatedAt time.Time `json:"created_at"`
 	ProgramName string `json:"program_name"`
 	IsActive bool `json:"is_active"`
+	CustomizedAt NullableTime `json:"customized_at"`
+	// True when this membership has not used its one-time code change, including while the program is inactive.
+	CanCustomize bool `json:"can_customize"`
 }
 
 type _AffiliateMembership AffiliateMembership
@@ -40,7 +43,7 @@ type _AffiliateMembership AffiliateMembership
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAffiliateMembership(id string, programId string, tenantId string, userId string, referralCode string, createdAt time.Time, programName string, isActive bool) *AffiliateMembership {
+func NewAffiliateMembership(id string, programId string, tenantId string, userId string, referralCode string, createdAt time.Time, programName string, isActive bool, customizedAt NullableTime, canCustomize bool) *AffiliateMembership {
 	this := AffiliateMembership{}
 	this.Id = id
 	this.ProgramId = programId
@@ -50,6 +53,8 @@ func NewAffiliateMembership(id string, programId string, tenantId string, userId
 	this.CreatedAt = createdAt
 	this.ProgramName = programName
 	this.IsActive = isActive
+	this.CustomizedAt = customizedAt
+	this.CanCustomize = canCustomize
 	return &this
 }
 
@@ -253,6 +258,56 @@ func (o *AffiliateMembership) SetIsActive(v bool) {
 	o.IsActive = v
 }
 
+// GetCustomizedAt returns the CustomizedAt field value
+// If the value is explicit nil, the zero value for time.Time will be returned
+func (o *AffiliateMembership) GetCustomizedAt() time.Time {
+	if o == nil || o.CustomizedAt.Get() == nil {
+		var ret time.Time
+		return ret
+	}
+
+	return *o.CustomizedAt.Get()
+}
+
+// GetCustomizedAtOk returns a tuple with the CustomizedAt field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *AffiliateMembership) GetCustomizedAtOk() (*time.Time, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.CustomizedAt.Get(), o.CustomizedAt.IsSet()
+}
+
+// SetCustomizedAt sets field value
+func (o *AffiliateMembership) SetCustomizedAt(v time.Time) {
+	o.CustomizedAt.Set(&v)
+}
+
+// GetCanCustomize returns the CanCustomize field value
+func (o *AffiliateMembership) GetCanCustomize() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.CanCustomize
+}
+
+// GetCanCustomizeOk returns a tuple with the CanCustomize field value
+// and a boolean to check if the value has been set.
+func (o *AffiliateMembership) GetCanCustomizeOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.CanCustomize, true
+}
+
+// SetCanCustomize sets field value
+func (o *AffiliateMembership) SetCanCustomize(v bool) {
+	o.CanCustomize = v
+}
+
 func (o AffiliateMembership) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -271,6 +326,8 @@ func (o AffiliateMembership) ToMap() (map[string]interface{}, error) {
 	toSerialize["created_at"] = o.CreatedAt
 	toSerialize["program_name"] = o.ProgramName
 	toSerialize["is_active"] = o.IsActive
+	toSerialize["customized_at"] = o.CustomizedAt.Get()
+	toSerialize["can_customize"] = o.CanCustomize
 	return toSerialize, nil
 }
 
@@ -287,6 +344,8 @@ func (o *AffiliateMembership) UnmarshalJSON(data []byte) (err error) {
 		"created_at",
 		"program_name",
 		"is_active",
+		"customized_at",
+		"can_customize",
 	}
 
 	allProperties := make(map[string]interface{})

@@ -78,9 +78,11 @@ Class | Method | HTTP request | Description
 *DefaultAPI* | [**CancelAllOpenOrders**](docs/DefaultAPI.md#cancelallopenorders) | **Delete** /v1/orders | Cancel all open orders, if user passes orderbook or account_id on query params it will cancel all orders on specific orderbook or account, admin can cancel user&#39;s orders on specific orderbook
 *DefaultAPI* | [**CancelLedgerWithdrawRequest**](docs/DefaultAPI.md#cancelledgerwithdrawrequest) | **Post** /v1/ledger/withdraw/requests/{withdrawal_id}/cancel | Cancel a pending withdrawal request
 *DefaultAPI* | [**CancelOrderById**](docs/DefaultAPI.md#cancelorderbyid) | **Delete** /v1/orders/{order_id} | Cancel an order by ID
+*DefaultAPI* | [**CancelWithdrawal**](docs/DefaultAPI.md#cancelwithdrawal) | **Delete** /v1/web3/withdrawals/{withdrawal_id} | Cancel the caller&#39;s own USDC withdrawal
 *DefaultAPI* | [**ClaimLeverageGetAccruedInterest**](docs/DefaultAPI.md#claimleveragegetaccruedinterest) | **Post** /v1/leverage/accrued_interest/claim | Claim current accrued leverage interest for a specific user
 *DefaultAPI* | [**ClaimPromoLink**](docs/DefaultAPI.md#claimpromolink) | **Post** /v1/promo/claim/{token} | Claim a public QR promotion link
 *DefaultAPI* | [**ClaimTradingChallengePrize**](docs/DefaultAPI.md#claimtradingchallengeprize) | **Post** /v1/trading_challenges/{trading_challenge_id}/claim | Claim challenge prize
+*DefaultAPI* | [**CloseAllIsolatedPositions**](docs/DefaultAPI.md#closeallisolatedpositions) | **Post** /v1/positions/close/all | Close all open isolated positions in one request
 *DefaultAPI* | [**CloseIsolatedAccountV2**](docs/DefaultAPI.md#closeisolatedaccountv2) | **Post** /v2/accounts/close | Close an isolated account, repaying the borrowed
 *DefaultAPI* | [**CloseIsolatedPosition**](docs/DefaultAPI.md#closeisolatedposition) | **Post** /v1/positions/close | Close isolated positions, repaying the borrowed
 *DefaultAPI* | [**CreateAPIKeyForUser**](docs/DefaultAPI.md#createapikeyforuser) | **Post** /v1/user/apikey | Create apikey for a user
@@ -91,6 +93,7 @@ Class | Method | HTTP request | Description
 *DefaultAPI* | [**CreateTradingChallenge**](docs/DefaultAPI.md#createtradingchallenge) | **Post** /v1/trading_challenges | Create a trading challenge
 *DefaultAPI* | [**CreateUser**](docs/DefaultAPI.md#createuser) | **Post** /v1/integrators/user | Create a new user
 *DefaultAPI* | [**CreateWithdrawal**](docs/DefaultAPI.md#createwithdrawal) | **Post** /v1/web3/withdrawals | Create a USDC withdrawal request
+*DefaultAPI* | [**CustomizeAffiliateReferrerCode**](docs/DefaultAPI.md#customizeaffiliatereferrercode) | **Put** /v1/affiliate_referrers/{referrer_id}/code | Change an affiliate referral code
 *DefaultAPI* | [**DeleteUser**](docs/DefaultAPI.md#deleteuser) | **Delete** /v1/user/{user_id} | Delete user by ID
 *DefaultAPI* | [**ExportPromoLinksCSV**](docs/DefaultAPI.md#exportpromolinkscsv) | **Get** /v1/link_batches/{batch_id}/links.csv | Export promotional links as CSV
 *DefaultAPI* | [**GetAPIKeysForUserID**](docs/DefaultAPI.md#getapikeysforuserid) | **Get** /v1/user/{user_id}/apikey | Get user&#39;s api keys: admin or integrator only
@@ -103,12 +106,14 @@ Class | Method | HTTP request | Description
 *DefaultAPI* | [**GetAssetYTMById**](docs/DefaultAPI.md#getassetytmbyid) | **Get** /v1/assets/{asset_id}/ytm | Get annualized yield to maturity for a bond asset
 *DefaultAPI* | [**GetAssetYieldData**](docs/DefaultAPI.md#getassetyielddata) | **Get** /v1/charts/{asset_id}/yield | Get yield chart data for an asset
 *DefaultAPI* | [**GetAssetsStream**](docs/DefaultAPI.md#getassetsstream) | **Get** /v1/assets/stream | Get all inserts or updates for assets
+*DefaultAPI* | [**GetAutoRebalanceAccountStatusV2**](docs/DefaultAPI.md#getautorebalanceaccountstatusv2) | **Get** /v2/accounts/auto_rebalance/config/{account_id} | Get auto-rebalance configuration and live status for one isolated account
 *DefaultAPI* | [**GetCandleData**](docs/DefaultAPI.md#getcandledata) | **Get** /v1/charts/{order_book_id}/candle | Get candlestick data for an orderbook
 *DefaultAPI* | [**GetCashReserveByUserID**](docs/DefaultAPI.md#getcashreservebyuserid) | **Get** /v1/accounts/{user_id}/cash_reserve | Get the minimum USD cash reserve requirement for the given user
 *DefaultAPI* | [**GetCashReserveSelf**](docs/DefaultAPI.md#getcashreserveself) | **Get** /v1/accounts/self/cash_reserve | Get the minimum USD cash reserve requirement for the logged in user
 *DefaultAPI* | [**GetCopyTraders**](docs/DefaultAPI.md#getcopytraders) | **Get** /v1/user/copy_traders | Get list of users with copy trading enabled
 *DefaultAPI* | [**GetCouponPaymentsByAssetId**](docs/DefaultAPI.md#getcouponpaymentsbyassetid) | **Get** /v1/assets/{asset_id}/coupon_payments | Get coupon payments for a bond asset
 *DefaultAPI* | [**GetDepositInstructions**](docs/DefaultAPI.md#getdepositinstructions) | **Get** /v1/web3/deposit-instructions | Get per-chain instructions for depositing USDC into the Dora vault
+*DefaultAPI* | [**GetGlobalLeaderboard**](docs/DefaultAPI.md#getgloballeaderboard) | **Get** /v1/trading/global_leaderboard | Get global leaderboard
 *DefaultAPI* | [**GetL1Depth**](docs/DefaultAPI.md#getl1depth) | **Get** /v1/orderbooks/{order_book_id}/L1 | Get the top price levels for a specific orderbook (L1 market depth)
 *DefaultAPI* | [**GetL2Depth**](docs/DefaultAPI.md#getl2depth) | **Get** /v1/orderbooks/{order_book_id}/L2 | Get the aggregated price levels for a specific orderbook (L2 market depth)
 *DefaultAPI* | [**GetL3Depth**](docs/DefaultAPI.md#getl3depth) | **Get** /v1/orderbooks/{order_book_id}/L3 | Get all open orders for a specific orderbook (L3 market depth)
@@ -132,11 +137,11 @@ Class | Method | HTTP request | Description
 *DefaultAPI* | [**GetPLForSelfByAccount**](docs/DefaultAPI.md#getplforselfbyaccount) | **Get** /v1/pl/self | Get account-by-account PL breakdown for the logged in user
 *DefaultAPI* | [**GetPoolPrice**](docs/DefaultAPI.md#getpoolprice) | **Get** /v1/price/pool/{pool_id} | Get the current price of a pool
 *DefaultAPI* | [**GetPromoAttribution**](docs/DefaultAPI.md#getpromoattribution) | **Get** /v1/trading_challenges/{trading_challenge_id}/attribution | Get promotional source attribution
+*DefaultAPI* | [**GetQRRewardPreview**](docs/DefaultAPI.md#getqrrewardpreview) | **Get** /v1/trading_challenges/{trading_challenge_id}/reward | Preview QR reward eligibility
 *DefaultAPI* | [**GetRealizedPnlSettlements**](docs/DefaultAPI.md#getrealizedpnlsettlements) | **Get** /v1/realized_pnl_settlements | Get realized P&amp;L settlements with filters
 *DefaultAPI* | [**GetTopTradersByPnL**](docs/DefaultAPI.md#gettoptradersbypnl) | **Get** /v1/user/ranking | Get top traders by PnL
 *DefaultAPI* | [**GetTradeById**](docs/DefaultAPI.md#gettradebyid) | **Get** /v1/trades/{trade_id} | Get a trade by ID
 *DefaultAPI* | [**GetTrades**](docs/DefaultAPI.md#gettrades) | **Get** /v1/trades | Get a filtered, paginated list of trades
-*DefaultAPI* | [**GetTradingChallengeAllResults**](docs/DefaultAPI.md#gettradingchallengeallresults) | **Get** /v1/trading_challenges/all/results | Get combined results across all trading challenge
 *DefaultAPI* | [**GetTradingChallengeByID**](docs/DefaultAPI.md#gettradingchallengebyid) | **Get** /v1/trading_challenges/{trading_challenge_id} | Get trading challenge by ID
 *DefaultAPI* | [**GetTradingChallengeDailySnapshots**](docs/DefaultAPI.md#gettradingchallengedailysnapshots) | **Get** /v1/trading_challenges/{trading_challenge_id}/daily_snapshots | Get trading challenge daily snapshots
 *DefaultAPI* | [**GetTradingChallengeResults**](docs/DefaultAPI.md#gettradingchallengeresults) | **Get** /v1/trading_challenges/{trading_challenge_id}/results | Get trading challenge results
@@ -177,6 +182,8 @@ Class | Method | HTTP request | Description
 *DefaultAPI* | [**ListAffiliateReferrals**](docs/DefaultAPI.md#listaffiliatereferrals) | **Get** /v1/affiliate_programs/{program_id}/referrals | List referred users and activity
 *DefaultAPI* | [**ListAffiliateReferrers**](docs/DefaultAPI.md#listaffiliatereferrers) | **Get** /v1/affiliate_programs/{program_id}/referrers | List program referrers
 *DefaultAPI* | [**ListAssets**](docs/DefaultAPI.md#listassets) | **Get** /v1/assets | List assets
+*DefaultAPI* | [**ListAutoRebalanceConfigsV2**](docs/DefaultAPI.md#listautorebalanceconfigsv2) | **Get** /v2/accounts/auto_rebalance/config | List auto-rebalance configuration for the authenticated user&#39;s isolated accounts
+*DefaultAPI* | [**ListAutoRebalanceStatusesV2**](docs/DefaultAPI.md#listautorebalancestatusesv2) | **Get** /v2/accounts/auto_rebalance/status | List auto-rebalance status for the authenticated user&#39;s isolated accounts, including disabled configs
 *DefaultAPI* | [**ListDeposits**](docs/DefaultAPI.md#listdeposits) | **Get** /v1/web3/deposits | List USDC deposits
 *DefaultAPI* | [**ListOrderBooks**](docs/DefaultAPI.md#listorderbooks) | **Get** /v1/orderbooks | List order books
 *DefaultAPI* | [**ListOrders**](docs/DefaultAPI.md#listorders) | **Get** /v1/orders | List all orders
@@ -219,6 +226,7 @@ Class | Method | HTTP request | Description
 *DefaultAPI* | [**UpdateUserConfig**](docs/DefaultAPI.md#updateuserconfig) | **Put** /v1/user/{user_id}/config | Update user configuration by ID
 *DefaultAPI* | [**UpdateUserConfigSelf**](docs/DefaultAPI.md#updateuserconfigself) | **Put** /v1/user/config/self | Update user configuration for the authenticated user
 *DefaultAPI* | [**UpdateUserKYC**](docs/DefaultAPI.md#updateuserkyc) | **Post** /v1/integrators/user/{user_id}/kyc | Set or clear a user&#39;s KYC completion timestamp
+*DefaultAPI* | [**UpsertAutoRebalanceConfigsV2**](docs/DefaultAPI.md#upsertautorebalanceconfigsv2) | **Put** /v2/accounts/auto_rebalance/config | Create or update auto-rebalance configuration for one or more isolated accounts
 *DefaultAPI* | [**ValidateSubmitOrder**](docs/DefaultAPI.md#validatesubmitorder) | **Post** /v1/orders/validate | Validate submit order request data
 *DefaultAPI* | [**VerifyUser**](docs/DefaultAPI.md#verifyuser) | **Put** /v1/user/{user_id}/verify | Verify a user by ID
 
@@ -264,6 +272,9 @@ Class | Method | HTTP request | Description
  - [AssetYield](docs/AssetYield.md)
  - [AssetYieldResolution](docs/AssetYieldResolution.md)
  - [AssignAffiliateReferralRequest](docs/AssignAffiliateReferralRequest.md)
+ - [AutoRebalanceConfigStatus](docs/AutoRebalanceConfigStatus.md)
+ - [AutoRebalanceConfigUpsert](docs/AutoRebalanceConfigUpsert.md)
+ - [AutoRebalanceConfigsData](docs/AutoRebalanceConfigsData.md)
  - [BalanceTransfer](docs/BalanceTransfer.md)
  - [BalancesResponse](docs/BalancesResponse.md)
  - [Bond](docs/Bond.md)
@@ -282,6 +293,8 @@ Class | Method | HTTP request | Description
  - [ClaimTradingChallengeResponse](docs/ClaimTradingChallengeResponse.md)
  - [ClaimTradingChallengeResponseEnvelope](docs/ClaimTradingChallengeResponseEnvelope.md)
  - [CloseAccountRequest](docs/CloseAccountRequest.md)
+ - [CloseAllPositionsItem](docs/CloseAllPositionsItem.md)
+ - [CloseAllPositionsResponseEnvelope](docs/CloseAllPositionsResponseEnvelope.md)
  - [ClosePositionRequest](docs/ClosePositionRequest.md)
  - [ClosePositionResp](docs/ClosePositionResp.md)
  - [ClosePositionResponseEnvelope](docs/ClosePositionResponseEnvelope.md)
@@ -307,6 +320,7 @@ Class | Method | HTTP request | Description
  - [CreditRating](docs/CreditRating.md)
  - [CurrentLeverageAccruedInterest](docs/CurrentLeverageAccruedInterest.md)
  - [CurrentLeverageAccruedInterestResponseEnvelope](docs/CurrentLeverageAccruedInterestResponseEnvelope.md)
+ - [CustomizeAffiliateReferrerCodeRequest](docs/CustomizeAffiliateReferrerCodeRequest.md)
  - [DefundUserRequest](docs/DefundUserRequest.md)
  - [DepositArgs](docs/DepositArgs.md)
  - [DepositCall](docs/DepositCall.md)
@@ -321,10 +335,13 @@ Class | Method | HTTP request | Description
  - [FundUserResponseEnvelope](docs/FundUserResponseEnvelope.md)
  - [GetAssetByIDResponseEnvelope](docs/GetAssetByIDResponseEnvelope.md)
  - [GetAssetYTMByIDResponseEnvelope](docs/GetAssetYTMByIDResponseEnvelope.md)
+ - [GetAutoRebalanceAccountStatusResponseEnvelope](docs/GetAutoRebalanceAccountStatusResponseEnvelope.md)
  - [GetCopyTradersResponse](docs/GetCopyTradersResponse.md)
  - [GetPnLRankingResponse](docs/GetPnLRankingResponse.md)
  - [GetRealizedPnlSettlementsResponseEnvelope](docs/GetRealizedPnlSettlementsResponseEnvelope.md)
  - [GetTopOfBookResponseEnvelope](docs/GetTopOfBookResponseEnvelope.md)
+ - [GlobalLeaderboardResponseEnvelope](docs/GlobalLeaderboardResponseEnvelope.md)
+ - [GlobalLeaderboardResult](docs/GlobalLeaderboardResult.md)
  - [HistoricalLeverageInterestRate](docs/HistoricalLeverageInterestRate.md)
  - [HistoricalLeverageInterestRates](docs/HistoricalLeverageInterestRates.md)
  - [HistoricalLeverageInterestRatesResponseEnvelope](docs/HistoricalLeverageInterestRatesResponseEnvelope.md)
@@ -352,6 +369,7 @@ Class | Method | HTTP request | Description
  - [ListAccountsResponseV2Envelope](docs/ListAccountsResponseV2Envelope.md)
  - [ListAssetPriceResponseEnvelope](docs/ListAssetPriceResponseEnvelope.md)
  - [ListAssetYieldResponseEnvelope](docs/ListAssetYieldResponseEnvelope.md)
+ - [ListAutoRebalanceConfigsResponseEnvelope](docs/ListAutoRebalanceConfigsResponseEnvelope.md)
  - [ListCandlesResponseEnvelope](docs/ListCandlesResponseEnvelope.md)
  - [ListCouponPaymentsResponseEnvelope](docs/ListCouponPaymentsResponseEnvelope.md)
  - [ListDepositsResponseEnvelope](docs/ListDepositsResponseEnvelope.md)
@@ -429,6 +447,8 @@ Class | Method | HTTP request | Description
  - [PromoLinkListResponseAllOfData](docs/PromoLinkListResponseAllOfData.md)
  - [PromoLinkStatus](docs/PromoLinkStatus.md)
  - [PromoSourceType](docs/PromoSourceType.md)
+ - [QRRewardPreview](docs/QRRewardPreview.md)
+ - [QRRewardPreviewEnvelope](docs/QRRewardPreviewEnvelope.md)
  - [RealizedPnlSettlement](docs/RealizedPnlSettlement.md)
  - [RealizedPnlSettlements](docs/RealizedPnlSettlements.md)
  - [RegisterAffiliateReferrerRequest](docs/RegisterAffiliateReferrerRequest.md)
@@ -475,8 +495,6 @@ Class | Method | HTTP request | Description
  - [TradeRequestError](docs/TradeRequestError.md)
  - [TradeResponseEnvelope](docs/TradeResponseEnvelope.md)
  - [TradingChallenge](docs/TradingChallenge.md)
- - [TradingChallengeAllResult](docs/TradingChallengeAllResult.md)
- - [TradingChallengeAllResultsResponseEnvelope](docs/TradingChallengeAllResultsResponseEnvelope.md)
  - [TradingChallengeDailySnapshot](docs/TradingChallengeDailySnapshot.md)
  - [TradingChallengeDailySnapshotsResponseEnvelope](docs/TradingChallengeDailySnapshotsResponseEnvelope.md)
  - [TradingChallengeListResponseEnvelope](docs/TradingChallengeListResponseEnvelope.md)
@@ -523,6 +541,8 @@ Class | Method | HTTP request | Description
  - [UpdateUserKYCRequest](docs/UpdateUserKYCRequest.md)
  - [UpdateUserKYCResponse](docs/UpdateUserKYCResponse.md)
  - [UpdateUserKYCResponseEnvelope](docs/UpdateUserKYCResponseEnvelope.md)
+ - [UpsertAutoRebalanceConfigsRequest](docs/UpsertAutoRebalanceConfigsRequest.md)
+ - [UpsertAutoRebalanceConfigsResponseEnvelope](docs/UpsertAutoRebalanceConfigsResponseEnvelope.md)
  - [User](docs/User.md)
  - [UserBalanceResponseEnvelope](docs/UserBalanceResponseEnvelope.md)
  - [UserConfig](docs/UserConfig.md)
@@ -544,6 +564,7 @@ Class | Method | HTTP request | Description
  - [UserUpdatedResponseEnvelope](docs/UserUpdatedResponseEnvelope.md)
  - [UserValue](docs/UserValue.md)
  - [UserValueResponseEnvelope](docs/UserValueResponseEnvelope.md)
+ - [UsersTag](docs/UsersTag.md)
  - [ValidateSubmitOrderRequest](docs/ValidateSubmitOrderRequest.md)
  - [ValidateSubmitOrderResponse](docs/ValidateSubmitOrderResponse.md)
  - [Web3EventStatus](docs/Web3EventStatus.md)

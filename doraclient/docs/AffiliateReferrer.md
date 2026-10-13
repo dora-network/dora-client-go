@@ -8,14 +8,15 @@ Name | Type | Description | Notes
 **ProgramId** | **string** |  | 
 **TenantId** | **string** | Owning tenant for administration. This does not define a referral destination. | 
 **UserId** | **string** |  | 
-**ReferralCode** | **string** | Reusable referral code, stored uppercase. Letters, digits, hyphens and underscores are accepted; the first character must be a letter or digit. Matching is case-insensitive. Separate from QR claim tokens. | 
+**ReferralCode** | **string** | Current code to share; previously issued codes remain valid. Stored uppercase and unique across all programs and tenants. | 
 **CreatedAt** | **time.Time** |  | 
+**CustomizedAt** | **NullableTime** | When the owner used their one code change; null until then. | 
 
 ## Methods
 
 ### NewAffiliateReferrer
 
-`func NewAffiliateReferrer(id string, programId string, tenantId string, userId string, referralCode string, createdAt time.Time, ) *AffiliateReferrer`
+`func NewAffiliateReferrer(id string, programId string, tenantId string, userId string, referralCode string, createdAt time.Time, customizedAt NullableTime, ) *AffiliateReferrer`
 
 NewAffiliateReferrer instantiates a new AffiliateReferrer object
 This constructor will assign default values to properties that have it defined,
@@ -150,6 +151,36 @@ and a boolean to check if the value has been set.
 SetCreatedAt sets CreatedAt field to given value.
 
 
+### GetCustomizedAt
+
+`func (o *AffiliateReferrer) GetCustomizedAt() time.Time`
+
+GetCustomizedAt returns the CustomizedAt field if non-nil, zero value otherwise.
+
+### GetCustomizedAtOk
+
+`func (o *AffiliateReferrer) GetCustomizedAtOk() (*time.Time, bool)`
+
+GetCustomizedAtOk returns a tuple with the CustomizedAt field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCustomizedAt
+
+`func (o *AffiliateReferrer) SetCustomizedAt(v time.Time)`
+
+SetCustomizedAt sets CustomizedAt field to given value.
+
+
+### SetCustomizedAtNil
+
+`func (o *AffiliateReferrer) SetCustomizedAtNil(b bool)`
+
+ SetCustomizedAtNil sets the value for CustomizedAt to be an explicit nil
+
+### UnsetCustomizedAt
+`func (o *AffiliateReferrer) UnsetCustomizedAt()`
+
+UnsetCustomizedAt ensures that no value is present for CustomizedAt, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

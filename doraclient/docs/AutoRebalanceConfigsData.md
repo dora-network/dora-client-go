@@ -1,0 +1,51 @@
+# AutoRebalanceConfigsData
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**Configs** | [**[]AutoRebalanceConfigStatus**](AutoRebalanceConfigStatus.md) |  | 
+
+## Methods
+
+### NewAutoRebalanceConfigsData
+
+`func NewAutoRebalanceConfigsData(configs []AutoRebalanceConfigStatus, ) *AutoRebalanceConfigsData`
+
+NewAutoRebalanceConfigsData instantiates a new AutoRebalanceConfigsData object
+This constructor will assign default values to properties that have it defined,
+and makes sure properties required by API are set, but the set of arguments
+will change when the set of required properties is changed
+
+### NewAutoRebalanceConfigsDataWithDefaults
+
+`func NewAutoRebalanceConfigsDataWithDefaults() *AutoRebalanceConfigsData`
+
+NewAutoRebalanceConfigsDataWithDefaults instantiates a new AutoRebalanceConfigsData object
+This constructor will only assign default values to properties that have it defined,
+but it doesn't guarantee that properties required by API are set
+
+### GetConfigs
+
+`func (o *AutoRebalanceConfigsData) GetConfigs() []AutoRebalanceConfigStatus`
+
+GetConfigs returns the Configs field if non-nil, zero value otherwise.
+
+### GetConfigsOk
+
+`func (o *AutoRebalanceConfigsData) GetConfigsOk() (*[]AutoRebalanceConfigStatus, bool)`
+
+GetConfigsOk returns a tuple with the Configs field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetConfigs
+
+`func (o *AutoRebalanceConfigsData) SetConfigs(v []AutoRebalanceConfigStatus)`
+
+SetConfigs sets Configs field to given value.
+
+
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

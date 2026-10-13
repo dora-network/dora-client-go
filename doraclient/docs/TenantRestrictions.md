@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **TenantId** | **string** | Tenant ID | 
-**DailyDepositLimit** | **string** | Maximum allowed deposit for the tenant per day. | 
+**DailyDepositLimit** | **string** | Maximum allowed USD deposit per user per day for this tenant. | 
 **TradeLimit** | **string** | Maximum allowed trade amount for the tenant. | 
 **UpdatedAt** | **time.Time** | Last update timestamp for the restrictions. | 
 

@@ -31,6 +31,7 @@ type AffiliateAttribution struct {
 	SignupSource string `json:"signup_source"`
 	// Immutable assignment time; activity begins counting from this timestamp.
 	CreatedAt time.Time `json:"created_at"`
+	// Exact code the user entered, retained when the referrer changes their primary code.
 	ReferralCode string `json:"referral_code" validate:"regexp=^[A-Z0-9][A-Z0-9_-]{2,63}$"`
 }
 

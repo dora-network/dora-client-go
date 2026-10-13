@@ -16,50 +16,50 @@ import (
 	"fmt"
 )
 
-// checks if the TradingChallengeAllResultsResponseEnvelope type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &TradingChallengeAllResultsResponseEnvelope{}
+// checks if the QRRewardPreviewEnvelope type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &QRRewardPreviewEnvelope{}
 
-// TradingChallengeAllResultsResponseEnvelope struct for TradingChallengeAllResultsResponseEnvelope
-type TradingChallengeAllResultsResponseEnvelope struct {
-	Data []TradingChallengeAllResult `json:"data,omitempty"`
+// QRRewardPreviewEnvelope struct for QRRewardPreviewEnvelope
+type QRRewardPreviewEnvelope struct {
+	Data *QRRewardPreview `json:"data,omitempty"`
 	// The error message. Present for error (non-2xx) responses.
 	Error *string `json:"error,omitempty"`
 	// Metadata about the response, including status code and trace information.
 	Metadata Metadata `json:"metadata"`
 }
 
-type _TradingChallengeAllResultsResponseEnvelope TradingChallengeAllResultsResponseEnvelope
+type _QRRewardPreviewEnvelope QRRewardPreviewEnvelope
 
-// NewTradingChallengeAllResultsResponseEnvelope instantiates a new TradingChallengeAllResultsResponseEnvelope object
+// NewQRRewardPreviewEnvelope instantiates a new QRRewardPreviewEnvelope object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTradingChallengeAllResultsResponseEnvelope(metadata Metadata) *TradingChallengeAllResultsResponseEnvelope {
-	this := TradingChallengeAllResultsResponseEnvelope{}
+func NewQRRewardPreviewEnvelope(metadata Metadata) *QRRewardPreviewEnvelope {
+	this := QRRewardPreviewEnvelope{}
 	this.Metadata = metadata
 	return &this
 }
 
-// NewTradingChallengeAllResultsResponseEnvelopeWithDefaults instantiates a new TradingChallengeAllResultsResponseEnvelope object
+// NewQRRewardPreviewEnvelopeWithDefaults instantiates a new QRRewardPreviewEnvelope object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewTradingChallengeAllResultsResponseEnvelopeWithDefaults() *TradingChallengeAllResultsResponseEnvelope {
-	this := TradingChallengeAllResultsResponseEnvelope{}
+func NewQRRewardPreviewEnvelopeWithDefaults() *QRRewardPreviewEnvelope {
+	this := QRRewardPreviewEnvelope{}
 	return &this
 }
 
 // GetData returns the Data field value if set, zero value otherwise.
-func (o *TradingChallengeAllResultsResponseEnvelope) GetData() []TradingChallengeAllResult {
+func (o *QRRewardPreviewEnvelope) GetData() QRRewardPreview {
 	if o == nil || IsNil(o.Data) {
-		var ret []TradingChallengeAllResult
+		var ret QRRewardPreview
 		return ret
 	}
-	return o.Data
+	return *o.Data
 }
 
 // GetDataOk returns a tuple with the Data field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *TradingChallengeAllResultsResponseEnvelope) GetDataOk() ([]TradingChallengeAllResult, bool) {
+func (o *QRRewardPreviewEnvelope) GetDataOk() (*QRRewardPreview, bool) {
 	if o == nil || IsNil(o.Data) {
 		return nil, false
 	}
@@ -67,7 +67,7 @@ func (o *TradingChallengeAllResultsResponseEnvelope) GetDataOk() ([]TradingChall
 }
 
 // HasData returns a boolean if a field has been set.
-func (o *TradingChallengeAllResultsResponseEnvelope) HasData() bool {
+func (o *QRRewardPreviewEnvelope) HasData() bool {
 	if o != nil && !IsNil(o.Data) {
 		return true
 	}
@@ -75,13 +75,13 @@ func (o *TradingChallengeAllResultsResponseEnvelope) HasData() bool {
 	return false
 }
 
-// SetData gets a reference to the given []TradingChallengeAllResult and assigns it to the Data field.
-func (o *TradingChallengeAllResultsResponseEnvelope) SetData(v []TradingChallengeAllResult) {
-	o.Data = v
+// SetData gets a reference to the given QRRewardPreview and assigns it to the Data field.
+func (o *QRRewardPreviewEnvelope) SetData(v QRRewardPreview) {
+	o.Data = &v
 }
 
 // GetError returns the Error field value if set, zero value otherwise.
-func (o *TradingChallengeAllResultsResponseEnvelope) GetError() string {
+func (o *QRRewardPreviewEnvelope) GetError() string {
 	if o == nil || IsNil(o.Error) {
 		var ret string
 		return ret
@@ -91,7 +91,7 @@ func (o *TradingChallengeAllResultsResponseEnvelope) GetError() string {
 
 // GetErrorOk returns a tuple with the Error field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *TradingChallengeAllResultsResponseEnvelope) GetErrorOk() (*string, bool) {
+func (o *QRRewardPreviewEnvelope) GetErrorOk() (*string, bool) {
 	if o == nil || IsNil(o.Error) {
 		return nil, false
 	}
@@ -99,7 +99,7 @@ func (o *TradingChallengeAllResultsResponseEnvelope) GetErrorOk() (*string, bool
 }
 
 // HasError returns a boolean if a field has been set.
-func (o *TradingChallengeAllResultsResponseEnvelope) HasError() bool {
+func (o *QRRewardPreviewEnvelope) HasError() bool {
 	if o != nil && !IsNil(o.Error) {
 		return true
 	}
@@ -108,12 +108,12 @@ func (o *TradingChallengeAllResultsResponseEnvelope) HasError() bool {
 }
 
 // SetError gets a reference to the given string and assigns it to the Error field.
-func (o *TradingChallengeAllResultsResponseEnvelope) SetError(v string) {
+func (o *QRRewardPreviewEnvelope) SetError(v string) {
 	o.Error = &v
 }
 
 // GetMetadata returns the Metadata field value
-func (o *TradingChallengeAllResultsResponseEnvelope) GetMetadata() Metadata {
+func (o *QRRewardPreviewEnvelope) GetMetadata() Metadata {
 	if o == nil {
 		var ret Metadata
 		return ret
@@ -124,7 +124,7 @@ func (o *TradingChallengeAllResultsResponseEnvelope) GetMetadata() Metadata {
 
 // GetMetadataOk returns a tuple with the Metadata field value
 // and a boolean to check if the value has been set.
-func (o *TradingChallengeAllResultsResponseEnvelope) GetMetadataOk() (*Metadata, bool) {
+func (o *QRRewardPreviewEnvelope) GetMetadataOk() (*Metadata, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -132,11 +132,11 @@ func (o *TradingChallengeAllResultsResponseEnvelope) GetMetadataOk() (*Metadata,
 }
 
 // SetMetadata sets field value
-func (o *TradingChallengeAllResultsResponseEnvelope) SetMetadata(v Metadata) {
+func (o *QRRewardPreviewEnvelope) SetMetadata(v Metadata) {
 	o.Metadata = v
 }
 
-func (o TradingChallengeAllResultsResponseEnvelope) MarshalJSON() ([]byte, error) {
+func (o QRRewardPreviewEnvelope) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -144,7 +144,7 @@ func (o TradingChallengeAllResultsResponseEnvelope) MarshalJSON() ([]byte, error
 	return json.Marshal(toSerialize)
 }
 
-func (o TradingChallengeAllResultsResponseEnvelope) ToMap() (map[string]interface{}, error) {
+func (o QRRewardPreviewEnvelope) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
@@ -156,7 +156,7 @@ func (o TradingChallengeAllResultsResponseEnvelope) ToMap() (map[string]interfac
 	return toSerialize, nil
 }
 
-func (o *TradingChallengeAllResultsResponseEnvelope) UnmarshalJSON(data []byte) (err error) {
+func (o *QRRewardPreviewEnvelope) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -178,53 +178,53 @@ func (o *TradingChallengeAllResultsResponseEnvelope) UnmarshalJSON(data []byte) 
 		}
 	}
 
-	varTradingChallengeAllResultsResponseEnvelope := _TradingChallengeAllResultsResponseEnvelope{}
+	varQRRewardPreviewEnvelope := _QRRewardPreviewEnvelope{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
 	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varTradingChallengeAllResultsResponseEnvelope)
+	err = decoder.Decode(&varQRRewardPreviewEnvelope)
 
 	if err != nil {
 		return err
 	}
 
-	*o = TradingChallengeAllResultsResponseEnvelope(varTradingChallengeAllResultsResponseEnvelope)
+	*o = QRRewardPreviewEnvelope(varQRRewardPreviewEnvelope)
 
 	return err
 }
 
-type NullableTradingChallengeAllResultsResponseEnvelope struct {
-	value *TradingChallengeAllResultsResponseEnvelope
+type NullableQRRewardPreviewEnvelope struct {
+	value *QRRewardPreviewEnvelope
 	isSet bool
 }
 
-func (v NullableTradingChallengeAllResultsResponseEnvelope) Get() *TradingChallengeAllResultsResponseEnvelope {
+func (v NullableQRRewardPreviewEnvelope) Get() *QRRewardPreviewEnvelope {
 	return v.value
 }
 
-func (v *NullableTradingChallengeAllResultsResponseEnvelope) Set(val *TradingChallengeAllResultsResponseEnvelope) {
+func (v *NullableQRRewardPreviewEnvelope) Set(val *QRRewardPreviewEnvelope) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableTradingChallengeAllResultsResponseEnvelope) IsSet() bool {
+func (v NullableQRRewardPreviewEnvelope) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableTradingChallengeAllResultsResponseEnvelope) Unset() {
+func (v *NullableQRRewardPreviewEnvelope) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableTradingChallengeAllResultsResponseEnvelope(val *TradingChallengeAllResultsResponseEnvelope) *NullableTradingChallengeAllResultsResponseEnvelope {
-	return &NullableTradingChallengeAllResultsResponseEnvelope{value: val, isSet: true}
+func NewNullableQRRewardPreviewEnvelope(val *QRRewardPreviewEnvelope) *NullableQRRewardPreviewEnvelope {
+	return &NullableQRRewardPreviewEnvelope{value: val, isSet: true}
 }
 
-func (v NullableTradingChallengeAllResultsResponseEnvelope) MarshalJSON() ([]byte, error) {
+func (v NullableQRRewardPreviewEnvelope) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableTradingChallengeAllResultsResponseEnvelope) UnmarshalJSON(src []byte) error {
+func (v *NullableQRRewardPreviewEnvelope) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

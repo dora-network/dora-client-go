@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **TenantId** | **string** |  | 
 **SignupSource** | **string** | Signup hostname when assigned at signup; empty for an assignment made later. | 
 **CreatedAt** | **time.Time** | Immutable assignment time; activity begins counting from this timestamp. | 
-**ReferralCode** | **string** |  | 
+**ReferralCode** | **string** | Exact code the user entered, retained when the referrer changes their primary code. | 
 
 ## Methods
 

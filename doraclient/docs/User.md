@@ -24,18 +24,20 @@ Name | Type | Description | Notes
 **ShowTutorialCards** | **bool** |  | 
 **NotificationsEnabled** | **bool** |  | 
 **TenantId** | **string** |  | 
+**UsedReferralCode** | **string** | Exact affiliate code this user applied at signup or later. Empty when no code has been applied; distinct from codes the user owns. | 
 **AllowEmailNotifications** | **bool** |  | 
 **AllowLiquidationsNotifications** | **bool** |  | 
 **AllowDepositWithdrawalNotifications** | **bool** |  | 
 **AllowOrdersNotifications** | **bool** |  | 
 **AllowCopyTrading** | **bool** |  | 
 **KycCompletedAt** | Pointer to **time.Time** | When the user completed KYC. Omitted/null if KYC has not been completed. Set via POST /v1/integrators/user/{user_id}/kyc. | [optional] 
+**Tag** | Pointer to [**[]UsersTag**](UsersTag.md) | Tags assigned to the user by an admin. Set via PUT /v1/users/{user_id}/tag. | [optional] 
 
 ## Methods
 
 ### NewUser
 
-`func NewUser(id string, email string, firstName string, lastName string, userName string, countryOfDomicile CountryCode, nativeAssetId string, roles []UserRole, showTutorialCards bool, notificationsEnabled bool, tenantId string, allowEmailNotifications bool, allowLiquidationsNotifications bool, allowDepositWithdrawalNotifications bool, allowOrdersNotifications bool, allowCopyTrading bool, ) *User`
+`func NewUser(id string, email string, firstName string, lastName string, userName string, countryOfDomicile CountryCode, nativeAssetId string, roles []UserRole, showTutorialCards bool, notificationsEnabled bool, tenantId string, usedReferralCode string, allowEmailNotifications bool, allowLiquidationsNotifications bool, allowDepositWithdrawalNotifications bool, allowOrdersNotifications bool, allowCopyTrading bool, ) *User`
 
 NewUser instantiates a new User object
 This constructor will assign default values to properties that have it defined,
@@ -495,6 +497,26 @@ and a boolean to check if the value has been set.
 SetTenantId sets TenantId field to given value.
 
 
+### GetUsedReferralCode
+
+`func (o *User) GetUsedReferralCode() string`
+
+GetUsedReferralCode returns the UsedReferralCode field if non-nil, zero value otherwise.
+
+### GetUsedReferralCodeOk
+
+`func (o *User) GetUsedReferralCodeOk() (*string, bool)`
+
+GetUsedReferralCodeOk returns a tuple with the UsedReferralCode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUsedReferralCode
+
+`func (o *User) SetUsedReferralCode(v string)`
+
+SetUsedReferralCode sets UsedReferralCode field to given value.
+
+
 ### GetAllowEmailNotifications
 
 `func (o *User) GetAllowEmailNotifications() bool`
@@ -619,6 +641,31 @@ SetKycCompletedAt sets KycCompletedAt field to given value.
 `func (o *User) HasKycCompletedAt() bool`
 
 HasKycCompletedAt returns a boolean if a field has been set.
+
+### GetTag
+
+`func (o *User) GetTag() []UsersTag`
+
+GetTag returns the Tag field if non-nil, zero value otherwise.
+
+### GetTagOk
+
+`func (o *User) GetTagOk() (*[]UsersTag, bool)`
+
+GetTagOk returns a tuple with the Tag field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTag
+
+`func (o *User) SetTag(v []UsersTag)`
+
+SetTag sets Tag field to given value.
+
+### HasTag
+
+`func (o *User) HasTag() bool`
+
+HasTag returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

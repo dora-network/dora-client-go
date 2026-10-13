@@ -14,11 +14,11 @@ import (
 	"encoding/json"
 )
 
-// checks if the TradingChallengeAllResult type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &TradingChallengeAllResult{}
+// checks if the GlobalLeaderboardResult type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &GlobalLeaderboardResult{}
 
-// TradingChallengeAllResult struct for TradingChallengeAllResult
-type TradingChallengeAllResult struct {
+// GlobalLeaderboardResult struct for GlobalLeaderboardResult
+type GlobalLeaderboardResult struct {
 	UserId *string `json:"user_id,omitempty"`
 	UserName *string `json:"user_name,omitempty"`
 	CumVolume *string `json:"cum_volume,omitempty"`
@@ -26,28 +26,29 @@ type TradingChallengeAllResult struct {
 	ActiveDays *int32 `json:"active_days,omitempty"`
 	CumTrades *int32 `json:"cum_trades,omitempty"`
 	AccountValue *string `json:"account_value,omitempty"`
+	// Cumulative pnl as a percentage of total TRADING_CHALLENGE_DEPOSIT and EXTERNAL_DEPOSIT quantities.
 	PnlPct *string `json:"pnl_pct,omitempty"`
 }
 
-// NewTradingChallengeAllResult instantiates a new TradingChallengeAllResult object
+// NewGlobalLeaderboardResult instantiates a new GlobalLeaderboardResult object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTradingChallengeAllResult() *TradingChallengeAllResult {
-	this := TradingChallengeAllResult{}
+func NewGlobalLeaderboardResult() *GlobalLeaderboardResult {
+	this := GlobalLeaderboardResult{}
 	return &this
 }
 
-// NewTradingChallengeAllResultWithDefaults instantiates a new TradingChallengeAllResult object
+// NewGlobalLeaderboardResultWithDefaults instantiates a new GlobalLeaderboardResult object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewTradingChallengeAllResultWithDefaults() *TradingChallengeAllResult {
-	this := TradingChallengeAllResult{}
+func NewGlobalLeaderboardResultWithDefaults() *GlobalLeaderboardResult {
+	this := GlobalLeaderboardResult{}
 	return &this
 }
 
 // GetUserId returns the UserId field value if set, zero value otherwise.
-func (o *TradingChallengeAllResult) GetUserId() string {
+func (o *GlobalLeaderboardResult) GetUserId() string {
 	if o == nil || IsNil(o.UserId) {
 		var ret string
 		return ret
@@ -57,7 +58,7 @@ func (o *TradingChallengeAllResult) GetUserId() string {
 
 // GetUserIdOk returns a tuple with the UserId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *TradingChallengeAllResult) GetUserIdOk() (*string, bool) {
+func (o *GlobalLeaderboardResult) GetUserIdOk() (*string, bool) {
 	if o == nil || IsNil(o.UserId) {
 		return nil, false
 	}
@@ -65,7 +66,7 @@ func (o *TradingChallengeAllResult) GetUserIdOk() (*string, bool) {
 }
 
 // HasUserId returns a boolean if a field has been set.
-func (o *TradingChallengeAllResult) HasUserId() bool {
+func (o *GlobalLeaderboardResult) HasUserId() bool {
 	if o != nil && !IsNil(o.UserId) {
 		return true
 	}
@@ -74,12 +75,12 @@ func (o *TradingChallengeAllResult) HasUserId() bool {
 }
 
 // SetUserId gets a reference to the given string and assigns it to the UserId field.
-func (o *TradingChallengeAllResult) SetUserId(v string) {
+func (o *GlobalLeaderboardResult) SetUserId(v string) {
 	o.UserId = &v
 }
 
 // GetUserName returns the UserName field value if set, zero value otherwise.
-func (o *TradingChallengeAllResult) GetUserName() string {
+func (o *GlobalLeaderboardResult) GetUserName() string {
 	if o == nil || IsNil(o.UserName) {
 		var ret string
 		return ret
@@ -89,7 +90,7 @@ func (o *TradingChallengeAllResult) GetUserName() string {
 
 // GetUserNameOk returns a tuple with the UserName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *TradingChallengeAllResult) GetUserNameOk() (*string, bool) {
+func (o *GlobalLeaderboardResult) GetUserNameOk() (*string, bool) {
 	if o == nil || IsNil(o.UserName) {
 		return nil, false
 	}
@@ -97,7 +98,7 @@ func (o *TradingChallengeAllResult) GetUserNameOk() (*string, bool) {
 }
 
 // HasUserName returns a boolean if a field has been set.
-func (o *TradingChallengeAllResult) HasUserName() bool {
+func (o *GlobalLeaderboardResult) HasUserName() bool {
 	if o != nil && !IsNil(o.UserName) {
 		return true
 	}
@@ -106,12 +107,12 @@ func (o *TradingChallengeAllResult) HasUserName() bool {
 }
 
 // SetUserName gets a reference to the given string and assigns it to the UserName field.
-func (o *TradingChallengeAllResult) SetUserName(v string) {
+func (o *GlobalLeaderboardResult) SetUserName(v string) {
 	o.UserName = &v
 }
 
 // GetCumVolume returns the CumVolume field value if set, zero value otherwise.
-func (o *TradingChallengeAllResult) GetCumVolume() string {
+func (o *GlobalLeaderboardResult) GetCumVolume() string {
 	if o == nil || IsNil(o.CumVolume) {
 		var ret string
 		return ret
@@ -121,7 +122,7 @@ func (o *TradingChallengeAllResult) GetCumVolume() string {
 
 // GetCumVolumeOk returns a tuple with the CumVolume field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *TradingChallengeAllResult) GetCumVolumeOk() (*string, bool) {
+func (o *GlobalLeaderboardResult) GetCumVolumeOk() (*string, bool) {
 	if o == nil || IsNil(o.CumVolume) {
 		return nil, false
 	}
@@ -129,7 +130,7 @@ func (o *TradingChallengeAllResult) GetCumVolumeOk() (*string, bool) {
 }
 
 // HasCumVolume returns a boolean if a field has been set.
-func (o *TradingChallengeAllResult) HasCumVolume() bool {
+func (o *GlobalLeaderboardResult) HasCumVolume() bool {
 	if o != nil && !IsNil(o.CumVolume) {
 		return true
 	}
@@ -138,12 +139,12 @@ func (o *TradingChallengeAllResult) HasCumVolume() bool {
 }
 
 // SetCumVolume gets a reference to the given string and assigns it to the CumVolume field.
-func (o *TradingChallengeAllResult) SetCumVolume(v string) {
+func (o *GlobalLeaderboardResult) SetCumVolume(v string) {
 	o.CumVolume = &v
 }
 
 // GetCumPnl returns the CumPnl field value if set, zero value otherwise.
-func (o *TradingChallengeAllResult) GetCumPnl() string {
+func (o *GlobalLeaderboardResult) GetCumPnl() string {
 	if o == nil || IsNil(o.CumPnl) {
 		var ret string
 		return ret
@@ -153,7 +154,7 @@ func (o *TradingChallengeAllResult) GetCumPnl() string {
 
 // GetCumPnlOk returns a tuple with the CumPnl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *TradingChallengeAllResult) GetCumPnlOk() (*string, bool) {
+func (o *GlobalLeaderboardResult) GetCumPnlOk() (*string, bool) {
 	if o == nil || IsNil(o.CumPnl) {
 		return nil, false
 	}
@@ -161,7 +162,7 @@ func (o *TradingChallengeAllResult) GetCumPnlOk() (*string, bool) {
 }
 
 // HasCumPnl returns a boolean if a field has been set.
-func (o *TradingChallengeAllResult) HasCumPnl() bool {
+func (o *GlobalLeaderboardResult) HasCumPnl() bool {
 	if o != nil && !IsNil(o.CumPnl) {
 		return true
 	}
@@ -170,12 +171,12 @@ func (o *TradingChallengeAllResult) HasCumPnl() bool {
 }
 
 // SetCumPnl gets a reference to the given string and assigns it to the CumPnl field.
-func (o *TradingChallengeAllResult) SetCumPnl(v string) {
+func (o *GlobalLeaderboardResult) SetCumPnl(v string) {
 	o.CumPnl = &v
 }
 
 // GetActiveDays returns the ActiveDays field value if set, zero value otherwise.
-func (o *TradingChallengeAllResult) GetActiveDays() int32 {
+func (o *GlobalLeaderboardResult) GetActiveDays() int32 {
 	if o == nil || IsNil(o.ActiveDays) {
 		var ret int32
 		return ret
@@ -185,7 +186,7 @@ func (o *TradingChallengeAllResult) GetActiveDays() int32 {
 
 // GetActiveDaysOk returns a tuple with the ActiveDays field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *TradingChallengeAllResult) GetActiveDaysOk() (*int32, bool) {
+func (o *GlobalLeaderboardResult) GetActiveDaysOk() (*int32, bool) {
 	if o == nil || IsNil(o.ActiveDays) {
 		return nil, false
 	}
@@ -193,7 +194,7 @@ func (o *TradingChallengeAllResult) GetActiveDaysOk() (*int32, bool) {
 }
 
 // HasActiveDays returns a boolean if a field has been set.
-func (o *TradingChallengeAllResult) HasActiveDays() bool {
+func (o *GlobalLeaderboardResult) HasActiveDays() bool {
 	if o != nil && !IsNil(o.ActiveDays) {
 		return true
 	}
@@ -202,12 +203,12 @@ func (o *TradingChallengeAllResult) HasActiveDays() bool {
 }
 
 // SetActiveDays gets a reference to the given int32 and assigns it to the ActiveDays field.
-func (o *TradingChallengeAllResult) SetActiveDays(v int32) {
+func (o *GlobalLeaderboardResult) SetActiveDays(v int32) {
 	o.ActiveDays = &v
 }
 
 // GetCumTrades returns the CumTrades field value if set, zero value otherwise.
-func (o *TradingChallengeAllResult) GetCumTrades() int32 {
+func (o *GlobalLeaderboardResult) GetCumTrades() int32 {
 	if o == nil || IsNil(o.CumTrades) {
 		var ret int32
 		return ret
@@ -217,7 +218,7 @@ func (o *TradingChallengeAllResult) GetCumTrades() int32 {
 
 // GetCumTradesOk returns a tuple with the CumTrades field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *TradingChallengeAllResult) GetCumTradesOk() (*int32, bool) {
+func (o *GlobalLeaderboardResult) GetCumTradesOk() (*int32, bool) {
 	if o == nil || IsNil(o.CumTrades) {
 		return nil, false
 	}
@@ -225,7 +226,7 @@ func (o *TradingChallengeAllResult) GetCumTradesOk() (*int32, bool) {
 }
 
 // HasCumTrades returns a boolean if a field has been set.
-func (o *TradingChallengeAllResult) HasCumTrades() bool {
+func (o *GlobalLeaderboardResult) HasCumTrades() bool {
 	if o != nil && !IsNil(o.CumTrades) {
 		return true
 	}
@@ -234,12 +235,12 @@ func (o *TradingChallengeAllResult) HasCumTrades() bool {
 }
 
 // SetCumTrades gets a reference to the given int32 and assigns it to the CumTrades field.
-func (o *TradingChallengeAllResult) SetCumTrades(v int32) {
+func (o *GlobalLeaderboardResult) SetCumTrades(v int32) {
 	o.CumTrades = &v
 }
 
 // GetAccountValue returns the AccountValue field value if set, zero value otherwise.
-func (o *TradingChallengeAllResult) GetAccountValue() string {
+func (o *GlobalLeaderboardResult) GetAccountValue() string {
 	if o == nil || IsNil(o.AccountValue) {
 		var ret string
 		return ret
@@ -249,7 +250,7 @@ func (o *TradingChallengeAllResult) GetAccountValue() string {
 
 // GetAccountValueOk returns a tuple with the AccountValue field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *TradingChallengeAllResult) GetAccountValueOk() (*string, bool) {
+func (o *GlobalLeaderboardResult) GetAccountValueOk() (*string, bool) {
 	if o == nil || IsNil(o.AccountValue) {
 		return nil, false
 	}
@@ -257,7 +258,7 @@ func (o *TradingChallengeAllResult) GetAccountValueOk() (*string, bool) {
 }
 
 // HasAccountValue returns a boolean if a field has been set.
-func (o *TradingChallengeAllResult) HasAccountValue() bool {
+func (o *GlobalLeaderboardResult) HasAccountValue() bool {
 	if o != nil && !IsNil(o.AccountValue) {
 		return true
 	}
@@ -266,12 +267,12 @@ func (o *TradingChallengeAllResult) HasAccountValue() bool {
 }
 
 // SetAccountValue gets a reference to the given string and assigns it to the AccountValue field.
-func (o *TradingChallengeAllResult) SetAccountValue(v string) {
+func (o *GlobalLeaderboardResult) SetAccountValue(v string) {
 	o.AccountValue = &v
 }
 
 // GetPnlPct returns the PnlPct field value if set, zero value otherwise.
-func (o *TradingChallengeAllResult) GetPnlPct() string {
+func (o *GlobalLeaderboardResult) GetPnlPct() string {
 	if o == nil || IsNil(o.PnlPct) {
 		var ret string
 		return ret
@@ -281,7 +282,7 @@ func (o *TradingChallengeAllResult) GetPnlPct() string {
 
 // GetPnlPctOk returns a tuple with the PnlPct field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *TradingChallengeAllResult) GetPnlPctOk() (*string, bool) {
+func (o *GlobalLeaderboardResult) GetPnlPctOk() (*string, bool) {
 	if o == nil || IsNil(o.PnlPct) {
 		return nil, false
 	}
@@ -289,7 +290,7 @@ func (o *TradingChallengeAllResult) GetPnlPctOk() (*string, bool) {
 }
 
 // HasPnlPct returns a boolean if a field has been set.
-func (o *TradingChallengeAllResult) HasPnlPct() bool {
+func (o *GlobalLeaderboardResult) HasPnlPct() bool {
 	if o != nil && !IsNil(o.PnlPct) {
 		return true
 	}
@@ -298,11 +299,11 @@ func (o *TradingChallengeAllResult) HasPnlPct() bool {
 }
 
 // SetPnlPct gets a reference to the given string and assigns it to the PnlPct field.
-func (o *TradingChallengeAllResult) SetPnlPct(v string) {
+func (o *GlobalLeaderboardResult) SetPnlPct(v string) {
 	o.PnlPct = &v
 }
 
-func (o TradingChallengeAllResult) MarshalJSON() ([]byte, error) {
+func (o GlobalLeaderboardResult) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -310,7 +311,7 @@ func (o TradingChallengeAllResult) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o TradingChallengeAllResult) ToMap() (map[string]interface{}, error) {
+func (o GlobalLeaderboardResult) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.UserId) {
 		toSerialize["user_id"] = o.UserId
@@ -339,38 +340,38 @@ func (o TradingChallengeAllResult) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-type NullableTradingChallengeAllResult struct {
-	value *TradingChallengeAllResult
+type NullableGlobalLeaderboardResult struct {
+	value *GlobalLeaderboardResult
 	isSet bool
 }
 
-func (v NullableTradingChallengeAllResult) Get() *TradingChallengeAllResult {
+func (v NullableGlobalLeaderboardResult) Get() *GlobalLeaderboardResult {
 	return v.value
 }
 
-func (v *NullableTradingChallengeAllResult) Set(val *TradingChallengeAllResult) {
+func (v *NullableGlobalLeaderboardResult) Set(val *GlobalLeaderboardResult) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableTradingChallengeAllResult) IsSet() bool {
+func (v NullableGlobalLeaderboardResult) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableTradingChallengeAllResult) Unset() {
+func (v *NullableGlobalLeaderboardResult) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableTradingChallengeAllResult(val *TradingChallengeAllResult) *NullableTradingChallengeAllResult {
-	return &NullableTradingChallengeAllResult{value: val, isSet: true}
+func NewNullableGlobalLeaderboardResult(val *GlobalLeaderboardResult) *NullableGlobalLeaderboardResult {
+	return &NullableGlobalLeaderboardResult{value: val, isSet: true}
 }
 
-func (v NullableTradingChallengeAllResult) MarshalJSON() ([]byte, error) {
+func (v NullableGlobalLeaderboardResult) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableTradingChallengeAllResult) UnmarshalJSON(src []byte) error {
+func (v *NullableGlobalLeaderboardResult) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

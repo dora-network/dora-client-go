@@ -12,6 +12,7 @@ package doraclient
 
 import (
 	"encoding/json"
+	"time"
 	"bytes"
 	"fmt"
 )
@@ -24,6 +25,10 @@ type ClaimTradingChallengeResponse struct {
 	TradingChallengeId string `json:"trading_challenge_id"`
 	UserId string `json:"user_id"`
 	Status string `json:"status"`
+	// Fixed QR reward, present for REWARD_PENDING_KYC.
+	RewardAmount *string `json:"reward_amount,omitempty"`
+	KycUrl *string `json:"kyc_url,omitempty"`
+	RewardDeadlineAt *time.Time `json:"reward_deadline_at,omitempty"`
 }
 
 type _ClaimTradingChallengeResponse ClaimTradingChallengeResponse
@@ -120,6 +125,102 @@ func (o *ClaimTradingChallengeResponse) SetStatus(v string) {
 	o.Status = v
 }
 
+// GetRewardAmount returns the RewardAmount field value if set, zero value otherwise.
+func (o *ClaimTradingChallengeResponse) GetRewardAmount() string {
+	if o == nil || IsNil(o.RewardAmount) {
+		var ret string
+		return ret
+	}
+	return *o.RewardAmount
+}
+
+// GetRewardAmountOk returns a tuple with the RewardAmount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ClaimTradingChallengeResponse) GetRewardAmountOk() (*string, bool) {
+	if o == nil || IsNil(o.RewardAmount) {
+		return nil, false
+	}
+	return o.RewardAmount, true
+}
+
+// HasRewardAmount returns a boolean if a field has been set.
+func (o *ClaimTradingChallengeResponse) HasRewardAmount() bool {
+	if o != nil && !IsNil(o.RewardAmount) {
+		return true
+	}
+
+	return false
+}
+
+// SetRewardAmount gets a reference to the given string and assigns it to the RewardAmount field.
+func (o *ClaimTradingChallengeResponse) SetRewardAmount(v string) {
+	o.RewardAmount = &v
+}
+
+// GetKycUrl returns the KycUrl field value if set, zero value otherwise.
+func (o *ClaimTradingChallengeResponse) GetKycUrl() string {
+	if o == nil || IsNil(o.KycUrl) {
+		var ret string
+		return ret
+	}
+	return *o.KycUrl
+}
+
+// GetKycUrlOk returns a tuple with the KycUrl field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ClaimTradingChallengeResponse) GetKycUrlOk() (*string, bool) {
+	if o == nil || IsNil(o.KycUrl) {
+		return nil, false
+	}
+	return o.KycUrl, true
+}
+
+// HasKycUrl returns a boolean if a field has been set.
+func (o *ClaimTradingChallengeResponse) HasKycUrl() bool {
+	if o != nil && !IsNil(o.KycUrl) {
+		return true
+	}
+
+	return false
+}
+
+// SetKycUrl gets a reference to the given string and assigns it to the KycUrl field.
+func (o *ClaimTradingChallengeResponse) SetKycUrl(v string) {
+	o.KycUrl = &v
+}
+
+// GetRewardDeadlineAt returns the RewardDeadlineAt field value if set, zero value otherwise.
+func (o *ClaimTradingChallengeResponse) GetRewardDeadlineAt() time.Time {
+	if o == nil || IsNil(o.RewardDeadlineAt) {
+		var ret time.Time
+		return ret
+	}
+	return *o.RewardDeadlineAt
+}
+
+// GetRewardDeadlineAtOk returns a tuple with the RewardDeadlineAt field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ClaimTradingChallengeResponse) GetRewardDeadlineAtOk() (*time.Time, bool) {
+	if o == nil || IsNil(o.RewardDeadlineAt) {
+		return nil, false
+	}
+	return o.RewardDeadlineAt, true
+}
+
+// HasRewardDeadlineAt returns a boolean if a field has been set.
+func (o *ClaimTradingChallengeResponse) HasRewardDeadlineAt() bool {
+	if o != nil && !IsNil(o.RewardDeadlineAt) {
+		return true
+	}
+
+	return false
+}
+
+// SetRewardDeadlineAt gets a reference to the given time.Time and assigns it to the RewardDeadlineAt field.
+func (o *ClaimTradingChallengeResponse) SetRewardDeadlineAt(v time.Time) {
+	o.RewardDeadlineAt = &v
+}
+
 func (o ClaimTradingChallengeResponse) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -133,6 +234,15 @@ func (o ClaimTradingChallengeResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize["trading_challenge_id"] = o.TradingChallengeId
 	toSerialize["user_id"] = o.UserId
 	toSerialize["status"] = o.Status
+	if !IsNil(o.RewardAmount) {
+		toSerialize["reward_amount"] = o.RewardAmount
+	}
+	if !IsNil(o.KycUrl) {
+		toSerialize["kyc_url"] = o.KycUrl
+	}
+	if !IsNil(o.RewardDeadlineAt) {
+		toSerialize["reward_deadline_at"] = o.RewardDeadlineAt
+	}
 	return toSerialize, nil
 }
 

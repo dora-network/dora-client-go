@@ -11,9 +11,11 @@ Method | HTTP request | Description
 [**CancelAllOpenOrders**](DefaultAPI.md#CancelAllOpenOrders) | **Delete** /v1/orders | Cancel all open orders, if user passes orderbook or account_id on query params it will cancel all orders on specific orderbook or account, admin can cancel user&#39;s orders on specific orderbook
 [**CancelLedgerWithdrawRequest**](DefaultAPI.md#CancelLedgerWithdrawRequest) | **Post** /v1/ledger/withdraw/requests/{withdrawal_id}/cancel | Cancel a pending withdrawal request
 [**CancelOrderById**](DefaultAPI.md#CancelOrderById) | **Delete** /v1/orders/{order_id} | Cancel an order by ID
+[**CancelWithdrawal**](DefaultAPI.md#CancelWithdrawal) | **Delete** /v1/web3/withdrawals/{withdrawal_id} | Cancel the caller&#39;s own USDC withdrawal
 [**ClaimLeverageGetAccruedInterest**](DefaultAPI.md#ClaimLeverageGetAccruedInterest) | **Post** /v1/leverage/accrued_interest/claim | Claim current accrued leverage interest for a specific user
 [**ClaimPromoLink**](DefaultAPI.md#ClaimPromoLink) | **Post** /v1/promo/claim/{token} | Claim a public QR promotion link
 [**ClaimTradingChallengePrize**](DefaultAPI.md#ClaimTradingChallengePrize) | **Post** /v1/trading_challenges/{trading_challenge_id}/claim | Claim challenge prize
+[**CloseAllIsolatedPositions**](DefaultAPI.md#CloseAllIsolatedPositions) | **Post** /v1/positions/close/all | Close all open isolated positions in one request
 [**CloseIsolatedAccountV2**](DefaultAPI.md#CloseIsolatedAccountV2) | **Post** /v2/accounts/close | Close an isolated account, repaying the borrowed
 [**CloseIsolatedPosition**](DefaultAPI.md#CloseIsolatedPosition) | **Post** /v1/positions/close | Close isolated positions, repaying the borrowed
 [**CreateAPIKeyForUser**](DefaultAPI.md#CreateAPIKeyForUser) | **Post** /v1/user/apikey | Create apikey for a user
@@ -24,6 +26,7 @@ Method | HTTP request | Description
 [**CreateTradingChallenge**](DefaultAPI.md#CreateTradingChallenge) | **Post** /v1/trading_challenges | Create a trading challenge
 [**CreateUser**](DefaultAPI.md#CreateUser) | **Post** /v1/integrators/user | Create a new user
 [**CreateWithdrawal**](DefaultAPI.md#CreateWithdrawal) | **Post** /v1/web3/withdrawals | Create a USDC withdrawal request
+[**CustomizeAffiliateReferrerCode**](DefaultAPI.md#CustomizeAffiliateReferrerCode) | **Put** /v1/affiliate_referrers/{referrer_id}/code | Change an affiliate referral code
 [**DeleteUser**](DefaultAPI.md#DeleteUser) | **Delete** /v1/user/{user_id} | Delete user by ID
 [**ExportPromoLinksCSV**](DefaultAPI.md#ExportPromoLinksCSV) | **Get** /v1/link_batches/{batch_id}/links.csv | Export promotional links as CSV
 [**GetAPIKeysForUserID**](DefaultAPI.md#GetAPIKeysForUserID) | **Get** /v1/user/{user_id}/apikey | Get user&#39;s api keys: admin or integrator only
@@ -36,12 +39,14 @@ Method | HTTP request | Description
 [**GetAssetYTMById**](DefaultAPI.md#GetAssetYTMById) | **Get** /v1/assets/{asset_id}/ytm | Get annualized yield to maturity for a bond asset
 [**GetAssetYieldData**](DefaultAPI.md#GetAssetYieldData) | **Get** /v1/charts/{asset_id}/yield | Get yield chart data for an asset
 [**GetAssetsStream**](DefaultAPI.md#GetAssetsStream) | **Get** /v1/assets/stream | Get all inserts or updates for assets
+[**GetAutoRebalanceAccountStatusV2**](DefaultAPI.md#GetAutoRebalanceAccountStatusV2) | **Get** /v2/accounts/auto_rebalance/config/{account_id} | Get auto-rebalance configuration and live status for one isolated account
 [**GetCandleData**](DefaultAPI.md#GetCandleData) | **Get** /v1/charts/{order_book_id}/candle | Get candlestick data for an orderbook
 [**GetCashReserveByUserID**](DefaultAPI.md#GetCashReserveByUserID) | **Get** /v1/accounts/{user_id}/cash_reserve | Get the minimum USD cash reserve requirement for the given user
 [**GetCashReserveSelf**](DefaultAPI.md#GetCashReserveSelf) | **Get** /v1/accounts/self/cash_reserve | Get the minimum USD cash reserve requirement for the logged in user
 [**GetCopyTraders**](DefaultAPI.md#GetCopyTraders) | **Get** /v1/user/copy_traders | Get list of users with copy trading enabled
 [**GetCouponPaymentsByAssetId**](DefaultAPI.md#GetCouponPaymentsByAssetId) | **Get** /v1/assets/{asset_id}/coupon_payments | Get coupon payments for a bond asset
 [**GetDepositInstructions**](DefaultAPI.md#GetDepositInstructions) | **Get** /v1/web3/deposit-instructions | Get per-chain instructions for depositing USDC into the Dora vault
+[**GetGlobalLeaderboard**](DefaultAPI.md#GetGlobalLeaderboard) | **Get** /v1/trading/global_leaderboard | Get global leaderboard
 [**GetL1Depth**](DefaultAPI.md#GetL1Depth) | **Get** /v1/orderbooks/{order_book_id}/L1 | Get the top price levels for a specific orderbook (L1 market depth)
 [**GetL2Depth**](DefaultAPI.md#GetL2Depth) | **Get** /v1/orderbooks/{order_book_id}/L2 | Get the aggregated price levels for a specific orderbook (L2 market depth)
 [**GetL3Depth**](DefaultAPI.md#GetL3Depth) | **Get** /v1/orderbooks/{order_book_id}/L3 | Get all open orders for a specific orderbook (L3 market depth)
@@ -65,11 +70,11 @@ Method | HTTP request | Description
 [**GetPLForSelfByAccount**](DefaultAPI.md#GetPLForSelfByAccount) | **Get** /v1/pl/self | Get account-by-account PL breakdown for the logged in user
 [**GetPoolPrice**](DefaultAPI.md#GetPoolPrice) | **Get** /v1/price/pool/{pool_id} | Get the current price of a pool
 [**GetPromoAttribution**](DefaultAPI.md#GetPromoAttribution) | **Get** /v1/trading_challenges/{trading_challenge_id}/attribution | Get promotional source attribution
+[**GetQRRewardPreview**](DefaultAPI.md#GetQRRewardPreview) | **Get** /v1/trading_challenges/{trading_challenge_id}/reward | Preview QR reward eligibility
 [**GetRealizedPnlSettlements**](DefaultAPI.md#GetRealizedPnlSettlements) | **Get** /v1/realized_pnl_settlements | Get realized P&amp;L settlements with filters
 [**GetTopTradersByPnL**](DefaultAPI.md#GetTopTradersByPnL) | **Get** /v1/user/ranking | Get top traders by PnL
 [**GetTradeById**](DefaultAPI.md#GetTradeById) | **Get** /v1/trades/{trade_id} | Get a trade by ID
 [**GetTrades**](DefaultAPI.md#GetTrades) | **Get** /v1/trades | Get a filtered, paginated list of trades
-[**GetTradingChallengeAllResults**](DefaultAPI.md#GetTradingChallengeAllResults) | **Get** /v1/trading_challenges/all/results | Get combined results across all trading challenge
 [**GetTradingChallengeByID**](DefaultAPI.md#GetTradingChallengeByID) | **Get** /v1/trading_challenges/{trading_challenge_id} | Get trading challenge by ID
 [**GetTradingChallengeDailySnapshots**](DefaultAPI.md#GetTradingChallengeDailySnapshots) | **Get** /v1/trading_challenges/{trading_challenge_id}/daily_snapshots | Get trading challenge daily snapshots
 [**GetTradingChallengeResults**](DefaultAPI.md#GetTradingChallengeResults) | **Get** /v1/trading_challenges/{trading_challenge_id}/results | Get trading challenge results
@@ -110,6 +115,8 @@ Method | HTTP request | Description
 [**ListAffiliateReferrals**](DefaultAPI.md#ListAffiliateReferrals) | **Get** /v1/affiliate_programs/{program_id}/referrals | List referred users and activity
 [**ListAffiliateReferrers**](DefaultAPI.md#ListAffiliateReferrers) | **Get** /v1/affiliate_programs/{program_id}/referrers | List program referrers
 [**ListAssets**](DefaultAPI.md#ListAssets) | **Get** /v1/assets | List assets
+[**ListAutoRebalanceConfigsV2**](DefaultAPI.md#ListAutoRebalanceConfigsV2) | **Get** /v2/accounts/auto_rebalance/config | List auto-rebalance configuration for the authenticated user&#39;s isolated accounts
+[**ListAutoRebalanceStatusesV2**](DefaultAPI.md#ListAutoRebalanceStatusesV2) | **Get** /v2/accounts/auto_rebalance/status | List auto-rebalance status for the authenticated user&#39;s isolated accounts, including disabled configs
 [**ListDeposits**](DefaultAPI.md#ListDeposits) | **Get** /v1/web3/deposits | List USDC deposits
 [**ListOrderBooks**](DefaultAPI.md#ListOrderBooks) | **Get** /v1/orderbooks | List order books
 [**ListOrders**](DefaultAPI.md#ListOrders) | **Get** /v1/orders | List all orders
@@ -152,6 +159,7 @@ Method | HTTP request | Description
 [**UpdateUserConfig**](DefaultAPI.md#UpdateUserConfig) | **Put** /v1/user/{user_id}/config | Update user configuration by ID
 [**UpdateUserConfigSelf**](DefaultAPI.md#UpdateUserConfigSelf) | **Put** /v1/user/config/self | Update user configuration for the authenticated user
 [**UpdateUserKYC**](DefaultAPI.md#UpdateUserKYC) | **Post** /v1/integrators/user/{user_id}/kyc | Set or clear a user&#39;s KYC completion timestamp
+[**UpsertAutoRebalanceConfigsV2**](DefaultAPI.md#UpsertAutoRebalanceConfigsV2) | **Put** /v2/accounts/auto_rebalance/config | Create or update auto-rebalance configuration for one or more isolated accounts
 [**ValidateSubmitOrder**](DefaultAPI.md#ValidateSubmitOrder) | **Post** /v1/orders/validate | Validate submit order request data
 [**VerifyUser**](DefaultAPI.md#VerifyUser) | **Put** /v1/user/{user_id}/verify | Verify a user by ID
 
@@ -643,6 +651,76 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## CancelWithdrawal
+
+> WithdrawalResponseEnvelope CancelWithdrawal(ctx, withdrawalId).Execute()
+
+Cancel the caller's own USDC withdrawal
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+	withdrawalId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The withdrawal to cancel. It must be owned by the caller and be in status PENDING or APPROVED_WITHOUT_FEE.
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.CancelWithdrawal(context.Background(), withdrawalId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.CancelWithdrawal``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CancelWithdrawal`: WithdrawalResponseEnvelope
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.CancelWithdrawal`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**withdrawalId** | **string** | The withdrawal to cancel. It must be owned by the caller and be in status PENDING or APPROVED_WITHOUT_FEE. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCancelWithdrawalRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**WithdrawalResponseEnvelope**](WithdrawalResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## ClaimLeverageGetAccruedInterest
 
 > ClaimLeverageAccruedInterestResponseEnvelope ClaimLeverageGetAccruedInterest(ctx).ClaimLeverageAccruedInterestRequest(claimLeverageAccruedInterestRequest).Execute()
@@ -832,6 +910,65 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**ClaimTradingChallengeResponseEnvelope**](ClaimTradingChallengeResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CloseAllIsolatedPositions
+
+> CloseAllPositionsResponseEnvelope CloseAllIsolatedPositions(ctx).Execute()
+
+Close all open isolated positions in one request
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.CloseAllIsolatedPositions(context.Background()).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.CloseAllIsolatedPositions``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CloseAllIsolatedPositions`: CloseAllPositionsResponseEnvelope
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.CloseAllIsolatedPositions`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+This endpoint does not need any parameter.
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCloseAllIsolatedPositionsRequest struct via the builder pattern
+
+
+### Return type
+
+[**CloseAllPositionsResponseEnvelope**](CloseAllPositionsResponseEnvelope.md)
 
 ### Authorization
 
@@ -1485,6 +1622,78 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**WithdrawalResponseEnvelope**](WithdrawalResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CustomizeAffiliateReferrerCode
+
+> AffiliateReferrerEnvelope CustomizeAffiliateReferrerCode(ctx, referrerId).CustomizeAffiliateReferrerCodeRequest(customizeAffiliateReferrerCodeRequest).Execute()
+
+Change an affiliate referral code
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+	referrerId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+	customizeAffiliateReferrerCodeRequest := *openapiclient.NewCustomizeAffiliateReferrerCodeRequest("BRENT") // CustomizeAffiliateReferrerCodeRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.CustomizeAffiliateReferrerCode(context.Background(), referrerId).CustomizeAffiliateReferrerCodeRequest(customizeAffiliateReferrerCodeRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.CustomizeAffiliateReferrerCode``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CustomizeAffiliateReferrerCode`: AffiliateReferrerEnvelope
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.CustomizeAffiliateReferrerCode`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**referrerId** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCustomizeAffiliateReferrerCodeRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **customizeAffiliateReferrerCodeRequest** | [**CustomizeAffiliateReferrerCodeRequest**](CustomizeAffiliateReferrerCodeRequest.md) |  | 
+
+### Return type
+
+[**AffiliateReferrerEnvelope**](AffiliateReferrerEnvelope.md)
 
 ### Authorization
 
@@ -2306,6 +2515,74 @@ No authorization required
 [[Back to README]](../README.md)
 
 
+## GetAutoRebalanceAccountStatusV2
+
+> GetAutoRebalanceAccountStatusResponseEnvelope GetAutoRebalanceAccountStatusV2(ctx, accountId).Execute()
+
+Get auto-rebalance configuration and live status for one isolated account
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+	accountId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.GetAutoRebalanceAccountStatusV2(context.Background(), accountId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.GetAutoRebalanceAccountStatusV2``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetAutoRebalanceAccountStatusV2`: GetAutoRebalanceAccountStatusResponseEnvelope
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.GetAutoRebalanceAccountStatusV2`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**accountId** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetAutoRebalanceAccountStatusV2Request struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**GetAutoRebalanceAccountStatusResponseEnvelope**](GetAutoRebalanceAccountStatusResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetCandleData
 
 > ListCandlesResponseEnvelope GetCandleData(ctx, orderBookId).Start(start).End(end).Resolution(resolution).Execute()
@@ -2709,6 +2986,77 @@ Name | Type | Description  | Notes
 ### Authorization
 
 [apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetGlobalLeaderboard
+
+> GlobalLeaderboardResponseEnvelope GetGlobalLeaderboard(ctx).Start(start).End(end).Limit(limit).Offset(offset).Execute()
+
+Get global leaderboard
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+    "time"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+	start := time.Now() // string | Inclusive start date in YYYY-MM-DD format.
+	end := time.Now() // string | Inclusive end date in YYYY-MM-DD format.
+	limit := int32(56) // int32 | Maximum number of rows to return. Defaults to 100. (optional) (default to 100)
+	offset := int32(56) // int32 | Number of rows to skip before collecting the result set. (optional) (default to 0)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.GetGlobalLeaderboard(context.Background()).Start(start).End(end).Limit(limit).Offset(offset).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.GetGlobalLeaderboard``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetGlobalLeaderboard`: GlobalLeaderboardResponseEnvelope
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.GetGlobalLeaderboard`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetGlobalLeaderboardRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **start** | **string** | Inclusive start date in YYYY-MM-DD format. | 
+ **end** | **string** | Inclusive end date in YYYY-MM-DD format. | 
+ **limit** | **int32** | Maximum number of rows to return. Defaults to 100. | [default to 100]
+ **offset** | **int32** | Number of rows to skip before collecting the result set. | [default to 0]
+
+### Return type
+
+[**GlobalLeaderboardResponseEnvelope**](GlobalLeaderboardResponseEnvelope.md)
+
+### Authorization
+
+No authorization required
 
 ### HTTP request headers
 
@@ -4223,6 +4571,76 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## GetQRRewardPreview
+
+> QRRewardPreviewEnvelope GetQRRewardPreview(ctx, tradingChallengeId).Execute()
+
+Preview QR reward eligibility
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+	tradingChallengeId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.GetQRRewardPreview(context.Background(), tradingChallengeId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.GetQRRewardPreview``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetQRRewardPreview`: QRRewardPreviewEnvelope
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.GetQRRewardPreview`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**tradingChallengeId** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetQRRewardPreviewRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**QRRewardPreviewEnvelope**](QRRewardPreviewEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetRealizedPnlSettlements
 
 > GetRealizedPnlSettlementsResponseEnvelope GetRealizedPnlSettlements(ctx).UserId(userId).TenantId(tenantId).PositionId(positionId).CreatedAfter(createdAfter).CreatedBefore(createdBefore).SettledAfter(settledAfter).SettledBefore(settledBefore).IsSettled(isSettled).Execute()
@@ -4511,79 +4929,6 @@ Name | Type | Description  | Notes
 ### Authorization
 
 [apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## GetTradingChallengeAllResults
-
-> TradingChallengeAllResultsResponseEnvelope GetTradingChallengeAllResults(ctx).Board(board).Start(start).End(end).TradingChallengeType(tradingChallengeType).Execute()
-
-Get combined results across all trading challenge
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-    "time"
-	openapiclient "github.com/dora-network/dora-client-go/doraclient"
-)
-
-func main() {
-	board := "board_example" // string | Leaderboard board selector.
-	start := time.Now() // string | Inclusive start date in YYYY-MM-DD format.
-	end := time.Now() // string | Inclusive end date in YYYY-MM-DD format.
-	tradingChallengeType := openapiclient.TradingChallengeType("TOURNAMENT") // TradingChallengeType | Challenge type to include in aggregation.
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.DefaultAPI.GetTradingChallengeAllResults(context.Background()).Board(board).Start(start).End(end).TradingChallengeType(tradingChallengeType).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.GetTradingChallengeAllResults``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `GetTradingChallengeAllResults`: TradingChallengeAllResultsResponseEnvelope
-	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.GetTradingChallengeAllResults`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetTradingChallengeAllResultsRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **board** | **string** | Leaderboard board selector. | 
- **start** | **string** | Inclusive start date in YYYY-MM-DD format. | 
- **end** | **string** | Inclusive end date in YYYY-MM-DD format. | 
- **tradingChallengeType** | [**TradingChallengeType**](TradingChallengeType.md) | Challenge type to include in aggregation. | 
-
-### Return type
-
-[**TradingChallengeAllResultsResponseEnvelope**](TradingChallengeAllResultsResponseEnvelope.md)
-
-### Authorization
-
-No authorization required
 
 ### HTTP request headers
 
@@ -7395,6 +7740,124 @@ Name | Type | Description  | Notes
 ### Authorization
 
 No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ListAutoRebalanceConfigsV2
+
+> ListAutoRebalanceConfigsResponseEnvelope ListAutoRebalanceConfigsV2(ctx).Execute()
+
+List auto-rebalance configuration for the authenticated user's isolated accounts
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.ListAutoRebalanceConfigsV2(context.Background()).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.ListAutoRebalanceConfigsV2``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ListAutoRebalanceConfigsV2`: ListAutoRebalanceConfigsResponseEnvelope
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.ListAutoRebalanceConfigsV2`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+This endpoint does not need any parameter.
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiListAutoRebalanceConfigsV2Request struct via the builder pattern
+
+
+### Return type
+
+[**ListAutoRebalanceConfigsResponseEnvelope**](ListAutoRebalanceConfigsResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ListAutoRebalanceStatusesV2
+
+> ListAutoRebalanceConfigsResponseEnvelope ListAutoRebalanceStatusesV2(ctx).Execute()
+
+List auto-rebalance status for the authenticated user's isolated accounts, including disabled configs
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.ListAutoRebalanceStatusesV2(context.Background()).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.ListAutoRebalanceStatusesV2``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ListAutoRebalanceStatusesV2`: ListAutoRebalanceConfigsResponseEnvelope
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.ListAutoRebalanceStatusesV2`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+This endpoint does not need any parameter.
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiListAutoRebalanceStatusesV2Request struct via the builder pattern
+
+
+### Return type
+
+[**ListAutoRebalanceConfigsResponseEnvelope**](ListAutoRebalanceConfigsResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -10339,6 +10802,70 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**UpdateUserKYCResponseEnvelope**](UpdateUserKYCResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpsertAutoRebalanceConfigsV2
+
+> UpsertAutoRebalanceConfigsResponseEnvelope UpsertAutoRebalanceConfigsV2(ctx).UpsertAutoRebalanceConfigsRequest(upsertAutoRebalanceConfigsRequest).Execute()
+
+Create or update auto-rebalance configuration for one or more isolated accounts
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+	upsertAutoRebalanceConfigsRequest := *openapiclient.NewUpsertAutoRebalanceConfigsRequest([]openapiclient.AutoRebalanceConfigUpsert{*openapiclient.NewAutoRebalanceConfigUpsert("AccountId_example", false, "MinUtilization_example", "MaxUtilization_example")}) // UpsertAutoRebalanceConfigsRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.UpsertAutoRebalanceConfigsV2(context.Background()).UpsertAutoRebalanceConfigsRequest(upsertAutoRebalanceConfigsRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.UpsertAutoRebalanceConfigsV2``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `UpsertAutoRebalanceConfigsV2`: UpsertAutoRebalanceConfigsResponseEnvelope
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.UpsertAutoRebalanceConfigsV2`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpsertAutoRebalanceConfigsV2Request struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **upsertAutoRebalanceConfigsRequest** | [**UpsertAutoRebalanceConfigsRequest**](UpsertAutoRebalanceConfigsRequest.md) |  | 
+
+### Return type
+
+[**UpsertAutoRebalanceConfigsResponseEnvelope**](UpsertAutoRebalanceConfigsResponseEnvelope.md)
 
 ### Authorization
 

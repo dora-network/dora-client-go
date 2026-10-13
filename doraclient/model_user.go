@@ -45,6 +45,8 @@ type User struct {
 	ShowTutorialCards bool `json:"show_tutorial_cards"`
 	NotificationsEnabled bool `json:"notifications_enabled"`
 	TenantId string `json:"tenant_id"`
+	// Exact affiliate code this user applied at signup or later. Empty when no code has been applied; distinct from codes the user owns.
+	UsedReferralCode string `json:"used_referral_code"`
 	AllowEmailNotifications bool `json:"allow_email_notifications"`
 	AllowLiquidationsNotifications bool `json:"allow_liquidations_notifications"`
 	AllowDepositWithdrawalNotifications bool `json:"allow_deposit_withdrawal_notifications"`
@@ -52,6 +54,8 @@ type User struct {
 	AllowCopyTrading bool `json:"allow_copy_trading"`
 	// When the user completed KYC. Omitted/null if KYC has not been completed. Set via POST /v1/integrators/user/{user_id}/kyc.
 	KycCompletedAt *time.Time `json:"kyc_completed_at,omitempty"`
+	// Tags assigned to the user by an admin. Set via PUT /v1/users/{user_id}/tag.
+	Tag []UsersTag `json:"tag,omitempty"`
 }
 
 type _User User
@@ -60,7 +64,7 @@ type _User User
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUser(id string, email string, firstName string, lastName string, userName string, countryOfDomicile CountryCode, nativeAssetId string, roles []UserRole, showTutorialCards bool, notificationsEnabled bool, tenantId string, allowEmailNotifications bool, allowLiquidationsNotifications bool, allowDepositWithdrawalNotifications bool, allowOrdersNotifications bool, allowCopyTrading bool) *User {
+func NewUser(id string, email string, firstName string, lastName string, userName string, countryOfDomicile CountryCode, nativeAssetId string, roles []UserRole, showTutorialCards bool, notificationsEnabled bool, tenantId string, usedReferralCode string, allowEmailNotifications bool, allowLiquidationsNotifications bool, allowDepositWithdrawalNotifications bool, allowOrdersNotifications bool, allowCopyTrading bool) *User {
 	this := User{}
 	this.Id = id
 	this.Email = email
@@ -73,6 +77,7 @@ func NewUser(id string, email string, firstName string, lastName string, userNam
 	this.ShowTutorialCards = showTutorialCards
 	this.NotificationsEnabled = notificationsEnabled
 	this.TenantId = tenantId
+	this.UsedReferralCode = usedReferralCode
 	this.AllowEmailNotifications = allowEmailNotifications
 	this.AllowLiquidationsNotifications = allowLiquidationsNotifications
 	this.AllowDepositWithdrawalNotifications = allowDepositWithdrawalNotifications
@@ -641,6 +646,30 @@ func (o *User) SetTenantId(v string) {
 	o.TenantId = v
 }
 
+// GetUsedReferralCode returns the UsedReferralCode field value
+func (o *User) GetUsedReferralCode() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.UsedReferralCode
+}
+
+// GetUsedReferralCodeOk returns a tuple with the UsedReferralCode field value
+// and a boolean to check if the value has been set.
+func (o *User) GetUsedReferralCodeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.UsedReferralCode, true
+}
+
+// SetUsedReferralCode sets field value
+func (o *User) SetUsedReferralCode(v string) {
+	o.UsedReferralCode = v
+}
+
 // GetAllowEmailNotifications returns the AllowEmailNotifications field value
 func (o *User) GetAllowEmailNotifications() bool {
 	if o == nil {
@@ -793,6 +822,38 @@ func (o *User) SetKycCompletedAt(v time.Time) {
 	o.KycCompletedAt = &v
 }
 
+// GetTag returns the Tag field value if set, zero value otherwise.
+func (o *User) GetTag() []UsersTag {
+	if o == nil || IsNil(o.Tag) {
+		var ret []UsersTag
+		return ret
+	}
+	return o.Tag
+}
+
+// GetTagOk returns a tuple with the Tag field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *User) GetTagOk() ([]UsersTag, bool) {
+	if o == nil || IsNil(o.Tag) {
+		return nil, false
+	}
+	return o.Tag, true
+}
+
+// HasTag returns a boolean if a field has been set.
+func (o *User) HasTag() bool {
+	if o != nil && !IsNil(o.Tag) {
+		return true
+	}
+
+	return false
+}
+
+// SetTag gets a reference to the given []UsersTag and assigns it to the Tag field.
+func (o *User) SetTag(v []UsersTag) {
+	o.Tag = v
+}
+
 func (o User) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -841,6 +902,7 @@ func (o User) ToMap() (map[string]interface{}, error) {
 	toSerialize["show_tutorial_cards"] = o.ShowTutorialCards
 	toSerialize["notifications_enabled"] = o.NotificationsEnabled
 	toSerialize["tenant_id"] = o.TenantId
+	toSerialize["used_referral_code"] = o.UsedReferralCode
 	toSerialize["allow_email_notifications"] = o.AllowEmailNotifications
 	toSerialize["allow_liquidations_notifications"] = o.AllowLiquidationsNotifications
 	toSerialize["allow_deposit_withdrawal_notifications"] = o.AllowDepositWithdrawalNotifications
@@ -848,6 +910,9 @@ func (o User) ToMap() (map[string]interface{}, error) {
 	toSerialize["allow_copy_trading"] = o.AllowCopyTrading
 	if !IsNil(o.KycCompletedAt) {
 		toSerialize["kyc_completed_at"] = o.KycCompletedAt
+	}
+	if !IsNil(o.Tag) {
+		toSerialize["tag"] = o.Tag
 	}
 	return toSerialize, nil
 }
@@ -868,6 +933,7 @@ func (o *User) UnmarshalJSON(data []byte) (err error) {
 		"show_tutorial_cards",
 		"notifications_enabled",
 		"tenant_id",
+		"used_referral_code",
 		"allow_email_notifications",
 		"allow_liquidations_notifications",
 		"allow_deposit_withdrawal_notifications",

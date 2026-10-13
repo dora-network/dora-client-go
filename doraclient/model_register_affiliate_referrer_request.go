@@ -23,7 +23,7 @@ var _ MappedNullable = &RegisterAffiliateReferrerRequest{}
 type RegisterAffiliateReferrerRequest struct {
 	// Existing, nonzero DORA user ID in the program owning tenant.
 	UserId string `json:"user_id"`
-	// Optional custom code: 3 to 64 letters, digits, hyphens or underscores after trimming, starting with a letter or digit. Stored uppercase and unique across all programs and tenants. Omitted, null or empty generates a random code.
+	// Optional custom code: 3 to 64 letters, digits, hyphens or underscores after trimming, starting with a letter or digit. Stored uppercase and unique across all programs and tenants. Omitted, null or empty generates a random 12-character code.
 	ReferralCode NullableString `json:"referral_code,omitempty"`
 }
 

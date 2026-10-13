@@ -7,6 +7,9 @@ Name | Type | Description | Notes
 **TradingChallengeId** | **string** |  | 
 **UserId** | **string** |  | 
 **Status** | **string** |  | 
+**RewardAmount** | Pointer to **string** | Fixed QR reward, present for REWARD_PENDING_KYC. | [optional] 
+**KycUrl** | Pointer to **string** |  | [optional] 
+**RewardDeadlineAt** | Pointer to **time.Time** |  | [optional] 
 
 ## Methods
 
@@ -86,6 +89,81 @@ and a boolean to check if the value has been set.
 
 SetStatus sets Status field to given value.
 
+
+### GetRewardAmount
+
+`func (o *ClaimTradingChallengeResponse) GetRewardAmount() string`
+
+GetRewardAmount returns the RewardAmount field if non-nil, zero value otherwise.
+
+### GetRewardAmountOk
+
+`func (o *ClaimTradingChallengeResponse) GetRewardAmountOk() (*string, bool)`
+
+GetRewardAmountOk returns a tuple with the RewardAmount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRewardAmount
+
+`func (o *ClaimTradingChallengeResponse) SetRewardAmount(v string)`
+
+SetRewardAmount sets RewardAmount field to given value.
+
+### HasRewardAmount
+
+`func (o *ClaimTradingChallengeResponse) HasRewardAmount() bool`
+
+HasRewardAmount returns a boolean if a field has been set.
+
+### GetKycUrl
+
+`func (o *ClaimTradingChallengeResponse) GetKycUrl() string`
+
+GetKycUrl returns the KycUrl field if non-nil, zero value otherwise.
+
+### GetKycUrlOk
+
+`func (o *ClaimTradingChallengeResponse) GetKycUrlOk() (*string, bool)`
+
+GetKycUrlOk returns a tuple with the KycUrl field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetKycUrl
+
+`func (o *ClaimTradingChallengeResponse) SetKycUrl(v string)`
+
+SetKycUrl sets KycUrl field to given value.
+
+### HasKycUrl
+
+`func (o *ClaimTradingChallengeResponse) HasKycUrl() bool`
+
+HasKycUrl returns a boolean if a field has been set.
+
+### GetRewardDeadlineAt
+
+`func (o *ClaimTradingChallengeResponse) GetRewardDeadlineAt() time.Time`
+
+GetRewardDeadlineAt returns the RewardDeadlineAt field if non-nil, zero value otherwise.
+
+### GetRewardDeadlineAtOk
+
+`func (o *ClaimTradingChallengeResponse) GetRewardDeadlineAtOk() (*time.Time, bool)`
+
+GetRewardDeadlineAtOk returns a tuple with the RewardDeadlineAt field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRewardDeadlineAt
+
+`func (o *ClaimTradingChallengeResponse) SetRewardDeadlineAt(v time.Time)`
+
+SetRewardDeadlineAt sets RewardDeadlineAt field to given value.
+
+### HasRewardDeadlineAt
+
+`func (o *ClaimTradingChallengeResponse) HasRewardDeadlineAt() bool`
+
+HasRewardDeadlineAt returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
