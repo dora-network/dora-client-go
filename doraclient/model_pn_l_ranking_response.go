@@ -34,6 +34,10 @@ type PnLRankingResponse struct {
 	DailyTradingVolume string `json:"daily_trading_volume"`
 	// Cumulative executed trading volume across all UTC trading days.
 	TotalTradingVolume string `json:"total_trading_volume"`
+	// total_trading_volume divided by active_trading_days. 0 if the user has no active trading days.
+	AvgDailyVolume string `json:"avg_daily_volume"`
+	// Executed trading volume within [start, end) divided by the number of requested days elapsed so far (end clamped to now, partial days rounded up). 0 if start is in the future.
+	AvgDailyVolumeOnNDays string `json:"avg_daily_volume_on_n_days"`
 	// Number of distinct UTC days on which the user has at least one executed fill.
 	ActiveTradingDays int32 `json:"active_trading_days"`
 	// True once the user has traded on at least 5 distinct UTC days.
@@ -48,7 +52,7 @@ type _PnLRankingResponse PnLRankingResponse
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPnLRankingResponse(userId string, firstName string, totalPnl string, realizedPnl string, totalTrades int32, winningTrades int32, losingTrades int32, winRate string, dailyTradingVolume string, totalTradingVolume string, activeTradingDays int32, activated bool, kycApproved bool) *PnLRankingResponse {
+func NewPnLRankingResponse(userId string, firstName string, totalPnl string, realizedPnl string, totalTrades int32, winningTrades int32, losingTrades int32, winRate string, dailyTradingVolume string, totalTradingVolume string, avgDailyVolume string, avgDailyVolumeOnNDays string, activeTradingDays int32, activated bool, kycApproved bool) *PnLRankingResponse {
 	this := PnLRankingResponse{}
 	this.UserId = userId
 	this.FirstName = firstName
@@ -60,6 +64,8 @@ func NewPnLRankingResponse(userId string, firstName string, totalPnl string, rea
 	this.WinRate = winRate
 	this.DailyTradingVolume = dailyTradingVolume
 	this.TotalTradingVolume = totalTradingVolume
+	this.AvgDailyVolume = avgDailyVolume
+	this.AvgDailyVolumeOnNDays = avgDailyVolumeOnNDays
 	this.ActiveTradingDays = activeTradingDays
 	this.Activated = activated
 	this.KycApproved = kycApproved
@@ -314,6 +320,54 @@ func (o *PnLRankingResponse) SetTotalTradingVolume(v string) {
 	o.TotalTradingVolume = v
 }
 
+// GetAvgDailyVolume returns the AvgDailyVolume field value
+func (o *PnLRankingResponse) GetAvgDailyVolume() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.AvgDailyVolume
+}
+
+// GetAvgDailyVolumeOk returns a tuple with the AvgDailyVolume field value
+// and a boolean to check if the value has been set.
+func (o *PnLRankingResponse) GetAvgDailyVolumeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.AvgDailyVolume, true
+}
+
+// SetAvgDailyVolume sets field value
+func (o *PnLRankingResponse) SetAvgDailyVolume(v string) {
+	o.AvgDailyVolume = v
+}
+
+// GetAvgDailyVolumeOnNDays returns the AvgDailyVolumeOnNDays field value
+func (o *PnLRankingResponse) GetAvgDailyVolumeOnNDays() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.AvgDailyVolumeOnNDays
+}
+
+// GetAvgDailyVolumeOnNDaysOk returns a tuple with the AvgDailyVolumeOnNDays field value
+// and a boolean to check if the value has been set.
+func (o *PnLRankingResponse) GetAvgDailyVolumeOnNDaysOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.AvgDailyVolumeOnNDays, true
+}
+
+// SetAvgDailyVolumeOnNDays sets field value
+func (o *PnLRankingResponse) SetAvgDailyVolumeOnNDays(v string) {
+	o.AvgDailyVolumeOnNDays = v
+}
+
 // GetActiveTradingDays returns the ActiveTradingDays field value
 func (o *PnLRankingResponse) GetActiveTradingDays() int32 {
 	if o == nil {
@@ -406,6 +460,8 @@ func (o PnLRankingResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize["win_rate"] = o.WinRate
 	toSerialize["daily_trading_volume"] = o.DailyTradingVolume
 	toSerialize["total_trading_volume"] = o.TotalTradingVolume
+	toSerialize["avg_daily_volume"] = o.AvgDailyVolume
+	toSerialize["avg_daily_volume_on_n_days"] = o.AvgDailyVolumeOnNDays
 	toSerialize["active_trading_days"] = o.ActiveTradingDays
 	toSerialize["activated"] = o.Activated
 	toSerialize["kyc_approved"] = o.KycApproved
@@ -427,6 +483,8 @@ func (o *PnLRankingResponse) UnmarshalJSON(data []byte) (err error) {
 		"win_rate",
 		"daily_trading_volume",
 		"total_trading_volume",
+		"avg_daily_volume",
+		"avg_daily_volume_on_n_days",
 		"active_trading_days",
 		"activated",
 		"kyc_approved",

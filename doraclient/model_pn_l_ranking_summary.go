@@ -25,6 +25,10 @@ type PnLRankingSummary struct {
 	AllUsersDailyTradingVolume string `json:"all_users_daily_trading_volume"`
 	// Sum of total_trading_volume across all users matching ranking filters before pagination.
 	AllUsersTotalTradingVolume string `json:"all_users_total_trading_volume"`
+	// all_users_total_trading_volume divided by the number of distinct UTC days on which any matching user had an executed fill. 0 if there are none.
+	AllUsersAvgDailyTradingVolume string `json:"all_users_avg_daily_trading_volume"`
+	// Executed trading volume within [start, end) across all users matching ranking filters, divided by the number of requested days elapsed so far (end clamped to now, partial days rounded up). 0 if start is in the future.
+	AllUsersAvgDailyTradingVolumeOnNDays string `json:"all_users_avg_daily_trading_volume_on_n_days"`
 }
 
 type _PnLRankingSummary PnLRankingSummary
@@ -33,10 +37,12 @@ type _PnLRankingSummary PnLRankingSummary
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPnLRankingSummary(allUsersDailyTradingVolume string, allUsersTotalTradingVolume string) *PnLRankingSummary {
+func NewPnLRankingSummary(allUsersDailyTradingVolume string, allUsersTotalTradingVolume string, allUsersAvgDailyTradingVolume string, allUsersAvgDailyTradingVolumeOnNDays string) *PnLRankingSummary {
 	this := PnLRankingSummary{}
 	this.AllUsersDailyTradingVolume = allUsersDailyTradingVolume
 	this.AllUsersTotalTradingVolume = allUsersTotalTradingVolume
+	this.AllUsersAvgDailyTradingVolume = allUsersAvgDailyTradingVolume
+	this.AllUsersAvgDailyTradingVolumeOnNDays = allUsersAvgDailyTradingVolumeOnNDays
 	return &this
 }
 
@@ -96,6 +102,54 @@ func (o *PnLRankingSummary) SetAllUsersTotalTradingVolume(v string) {
 	o.AllUsersTotalTradingVolume = v
 }
 
+// GetAllUsersAvgDailyTradingVolume returns the AllUsersAvgDailyTradingVolume field value
+func (o *PnLRankingSummary) GetAllUsersAvgDailyTradingVolume() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.AllUsersAvgDailyTradingVolume
+}
+
+// GetAllUsersAvgDailyTradingVolumeOk returns a tuple with the AllUsersAvgDailyTradingVolume field value
+// and a boolean to check if the value has been set.
+func (o *PnLRankingSummary) GetAllUsersAvgDailyTradingVolumeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.AllUsersAvgDailyTradingVolume, true
+}
+
+// SetAllUsersAvgDailyTradingVolume sets field value
+func (o *PnLRankingSummary) SetAllUsersAvgDailyTradingVolume(v string) {
+	o.AllUsersAvgDailyTradingVolume = v
+}
+
+// GetAllUsersAvgDailyTradingVolumeOnNDays returns the AllUsersAvgDailyTradingVolumeOnNDays field value
+func (o *PnLRankingSummary) GetAllUsersAvgDailyTradingVolumeOnNDays() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.AllUsersAvgDailyTradingVolumeOnNDays
+}
+
+// GetAllUsersAvgDailyTradingVolumeOnNDaysOk returns a tuple with the AllUsersAvgDailyTradingVolumeOnNDays field value
+// and a boolean to check if the value has been set.
+func (o *PnLRankingSummary) GetAllUsersAvgDailyTradingVolumeOnNDaysOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.AllUsersAvgDailyTradingVolumeOnNDays, true
+}
+
+// SetAllUsersAvgDailyTradingVolumeOnNDays sets field value
+func (o *PnLRankingSummary) SetAllUsersAvgDailyTradingVolumeOnNDays(v string) {
+	o.AllUsersAvgDailyTradingVolumeOnNDays = v
+}
+
 func (o PnLRankingSummary) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -108,6 +162,8 @@ func (o PnLRankingSummary) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["all_users_daily_trading_volume"] = o.AllUsersDailyTradingVolume
 	toSerialize["all_users_total_trading_volume"] = o.AllUsersTotalTradingVolume
+	toSerialize["all_users_avg_daily_trading_volume"] = o.AllUsersAvgDailyTradingVolume
+	toSerialize["all_users_avg_daily_trading_volume_on_n_days"] = o.AllUsersAvgDailyTradingVolumeOnNDays
 	return toSerialize, nil
 }
 
@@ -118,6 +174,8 @@ func (o *PnLRankingSummary) UnmarshalJSON(data []byte) (err error) {
 	requiredProperties := []string{
 		"all_users_daily_trading_volume",
 		"all_users_total_trading_volume",
+		"all_users_avg_daily_trading_volume",
+		"all_users_avg_daily_trading_volume_on_n_days",
 	}
 
 	allProperties := make(map[string]interface{})

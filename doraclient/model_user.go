@@ -37,6 +37,8 @@ type User struct {
 	Roles []UserRole `json:"roles"`
 	// Competition IDs this user is explicitly allowed to manage when they have COMPETITION_MANAGER role. Empty means no competition-management access.
 	ManagedCompetitionIds []string `json:"managed_competition_ids,omitempty"`
+	// Affiliate program IDs this user is explicitly allowed to manage when they have AFFILIATE_MANAGER role. Empty means no affiliate-management access.
+	ManagedAffiliateProgramIds []string `json:"managed_affiliate_program_ids,omitempty"`
 	// User's timezone, e.g., 'America/New_York', or an offset.
 	Timezone *string `json:"timezone,omitempty"`
 	// timezone offset in seconds
@@ -478,6 +480,38 @@ func (o *User) SetManagedCompetitionIds(v []string) {
 	o.ManagedCompetitionIds = v
 }
 
+// GetManagedAffiliateProgramIds returns the ManagedAffiliateProgramIds field value if set, zero value otherwise.
+func (o *User) GetManagedAffiliateProgramIds() []string {
+	if o == nil || IsNil(o.ManagedAffiliateProgramIds) {
+		var ret []string
+		return ret
+	}
+	return o.ManagedAffiliateProgramIds
+}
+
+// GetManagedAffiliateProgramIdsOk returns a tuple with the ManagedAffiliateProgramIds field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *User) GetManagedAffiliateProgramIdsOk() ([]string, bool) {
+	if o == nil || IsNil(o.ManagedAffiliateProgramIds) {
+		return nil, false
+	}
+	return o.ManagedAffiliateProgramIds, true
+}
+
+// HasManagedAffiliateProgramIds returns a boolean if a field has been set.
+func (o *User) HasManagedAffiliateProgramIds() bool {
+	if o != nil && !IsNil(o.ManagedAffiliateProgramIds) {
+		return true
+	}
+
+	return false
+}
+
+// SetManagedAffiliateProgramIds gets a reference to the given []string and assigns it to the ManagedAffiliateProgramIds field.
+func (o *User) SetManagedAffiliateProgramIds(v []string) {
+	o.ManagedAffiliateProgramIds = v
+}
+
 // GetTimezone returns the Timezone field value if set, zero value otherwise.
 func (o *User) GetTimezone() string {
 	if o == nil || IsNil(o.Timezone) {
@@ -889,6 +923,9 @@ func (o User) ToMap() (map[string]interface{}, error) {
 	toSerialize["roles"] = o.Roles
 	if !IsNil(o.ManagedCompetitionIds) {
 		toSerialize["managed_competition_ids"] = o.ManagedCompetitionIds
+	}
+	if !IsNil(o.ManagedAffiliateProgramIds) {
+		toSerialize["managed_affiliate_program_ids"] = o.ManagedAffiliateProgramIds
 	}
 	if !IsNil(o.Timezone) {
 		toSerialize["timezone"] = o.Timezone

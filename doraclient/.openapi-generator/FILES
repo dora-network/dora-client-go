@@ -53,6 +53,7 @@ docs/BalancesResponse.md
 docs/Bond.md
 docs/BondKind.md
 docs/BondRunStatus.md
+docs/BulkOrderResult.md
 docs/CancelOrderResponseEnvelope.md
 docs/Candle.md
 docs/CandleResolution.md
@@ -87,6 +88,9 @@ docs/CreateIntegratorUserRequest.md
 docs/CreateOrUpdateUserResponse.md
 docs/CreateOrderRequest.md
 docs/CreateOrderResponseEnvelope.md
+docs/CreateOrdersBulkRequest.md
+docs/CreateOrdersBulkResponse.md
+docs/CreateOrdersBulkResponseAllOfData.md
 docs/CreateTradingChallengeQRRequest.md
 docs/CreateTradingChallengeRequest.md
 docs/CreateWithdrawalRequest.md
@@ -400,6 +404,7 @@ model_balances_response.go
 model_bond.go
 model_bond_kind.go
 model_bond_run_status.go
+model_bulk_order_result.go
 model_cancel_order_response_envelope.go
 model_candle.go
 model_candle_resolution.go
@@ -434,6 +439,9 @@ model_create_integrator_user_request.go
 model_create_or_update_user_response.go
 model_create_order_request.go
 model_create_order_response_envelope.go
+model_create_orders_bulk_request.go
+model_create_orders_bulk_response.go
+model_create_orders_bulk_response_all_of_data.go
 model_create_trading_challenge_qr_request.go
 model_create_trading_challenge_request.go
 model_create_withdrawal_request.go

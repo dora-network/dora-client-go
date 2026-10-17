@@ -14,6 +14,8 @@ Name | Type | Description | Notes
 **WinRate** | **string** |  | 
 **DailyTradingVolume** | **string** | Executed trading volume for the current UTC day. | 
 **TotalTradingVolume** | **string** | Cumulative executed trading volume across all UTC trading days. | 
+**AvgDailyVolume** | **string** | total_trading_volume divided by active_trading_days. 0 if the user has no active trading days. | 
+**AvgDailyVolumeOnNDays** | **string** | Executed trading volume within [start, end) divided by the number of requested days elapsed so far (end clamped to now, partial days rounded up). 0 if start is in the future. | 
 **ActiveTradingDays** | **int32** | Number of distinct UTC days on which the user has at least one executed fill. | 
 **Activated** | **bool** | True once the user has traded on at least 5 distinct UTC days. | 
 **KycApproved** | **bool** | Whether the user is currently considered KYC/verification approved. | 
@@ -22,7 +24,7 @@ Name | Type | Description | Notes
 
 ### NewPnLRankingResponse
 
-`func NewPnLRankingResponse(userId string, firstName string, totalPnl string, realizedPnl string, totalTrades int32, winningTrades int32, losingTrades int32, winRate string, dailyTradingVolume string, totalTradingVolume string, activeTradingDays int32, activated bool, kycApproved bool, ) *PnLRankingResponse`
+`func NewPnLRankingResponse(userId string, firstName string, totalPnl string, realizedPnl string, totalTrades int32, winningTrades int32, losingTrades int32, winRate string, dailyTradingVolume string, totalTradingVolume string, avgDailyVolume string, avgDailyVolumeOnNDays string, activeTradingDays int32, activated bool, kycApproved bool, ) *PnLRankingResponse`
 
 NewPnLRankingResponse instantiates a new PnLRankingResponse object
 This constructor will assign default values to properties that have it defined,
@@ -235,6 +237,46 @@ and a boolean to check if the value has been set.
 `func (o *PnLRankingResponse) SetTotalTradingVolume(v string)`
 
 SetTotalTradingVolume sets TotalTradingVolume field to given value.
+
+
+### GetAvgDailyVolume
+
+`func (o *PnLRankingResponse) GetAvgDailyVolume() string`
+
+GetAvgDailyVolume returns the AvgDailyVolume field if non-nil, zero value otherwise.
+
+### GetAvgDailyVolumeOk
+
+`func (o *PnLRankingResponse) GetAvgDailyVolumeOk() (*string, bool)`
+
+GetAvgDailyVolumeOk returns a tuple with the AvgDailyVolume field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAvgDailyVolume
+
+`func (o *PnLRankingResponse) SetAvgDailyVolume(v string)`
+
+SetAvgDailyVolume sets AvgDailyVolume field to given value.
+
+
+### GetAvgDailyVolumeOnNDays
+
+`func (o *PnLRankingResponse) GetAvgDailyVolumeOnNDays() string`
+
+GetAvgDailyVolumeOnNDays returns the AvgDailyVolumeOnNDays field if non-nil, zero value otherwise.
+
+### GetAvgDailyVolumeOnNDaysOk
+
+`func (o *PnLRankingResponse) GetAvgDailyVolumeOnNDaysOk() (*string, bool)`
+
+GetAvgDailyVolumeOnNDaysOk returns a tuple with the AvgDailyVolumeOnNDays field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAvgDailyVolumeOnNDays
+
+`func (o *PnLRankingResponse) SetAvgDailyVolumeOnNDays(v string)`
+
+SetAvgDailyVolumeOnNDays sets AvgDailyVolumeOnNDays field to given value.
 
 
 ### GetActiveTradingDays

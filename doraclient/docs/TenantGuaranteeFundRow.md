@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **TenantId** | **string** |  | 
 **Seq** | **int64** |  | 
 **Available** | **string** |  | 
+**TransactionAmount** | **string** |  | 
 **TxKind** | **string** |  | 
 **UpdatedAt** | **time.Time** |  | 
 
@@ -15,7 +16,7 @@ Name | Type | Description | Notes
 
 ### NewTenantGuaranteeFundRow
 
-`func NewTenantGuaranteeFundRow(id string, tenantId string, seq int64, available string, txKind string, updatedAt time.Time, ) *TenantGuaranteeFundRow`
+`func NewTenantGuaranteeFundRow(id string, tenantId string, seq int64, available string, transactionAmount string, txKind string, updatedAt time.Time, ) *TenantGuaranteeFundRow`
 
 NewTenantGuaranteeFundRow instantiates a new TenantGuaranteeFundRow object
 This constructor will assign default values to properties that have it defined,
@@ -108,6 +109,26 @@ and a boolean to check if the value has been set.
 `func (o *TenantGuaranteeFundRow) SetAvailable(v string)`
 
 SetAvailable sets Available field to given value.
+
+
+### GetTransactionAmount
+
+`func (o *TenantGuaranteeFundRow) GetTransactionAmount() string`
+
+GetTransactionAmount returns the TransactionAmount field if non-nil, zero value otherwise.
+
+### GetTransactionAmountOk
+
+`func (o *TenantGuaranteeFundRow) GetTransactionAmountOk() (*string, bool)`
+
+GetTransactionAmountOk returns a tuple with the TransactionAmount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTransactionAmount
+
+`func (o *TenantGuaranteeFundRow) SetTransactionAmount(v string)`
+
+SetTransactionAmount sets TransactionAmount field to given value.
 
 
 ### GetTxKind

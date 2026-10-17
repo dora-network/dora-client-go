@@ -8,7 +8,8 @@ Name | Type | Description | Notes
 **ProgramId** | **string** |  | 
 **ReferrerId** | **string** |  | 
 **ReferrerUserId** | **string** |  | 
-**TenantId** | **string** |  | 
+**TenantId** | **string** | Tenant that owns the referrer and the program. A referrer in a global tenant may refer users of any tenant. | 
+**ReferredTenantId** | **string** | Tenant that owns the referred user. Differs from tenant_id only when a global tenant&#39;s referrer referred the user. | 
 **SignupSource** | **string** | Signup hostname when assigned at signup; empty for an assignment made later. | 
 **CreatedAt** | **time.Time** | Immutable assignment time; activity begins counting from this timestamp. | 
 **ReferralCode** | **string** | Exact code the user entered, retained when the referrer changes their primary code. | 
@@ -17,7 +18,7 @@ Name | Type | Description | Notes
 
 ### NewAffiliateAttribution
 
-`func NewAffiliateAttribution(referredUserId string, programId string, referrerId string, referrerUserId string, tenantId string, signupSource string, createdAt time.Time, referralCode string, ) *AffiliateAttribution`
+`func NewAffiliateAttribution(referredUserId string, programId string, referrerId string, referrerUserId string, tenantId string, referredTenantId string, signupSource string, createdAt time.Time, referralCode string, ) *AffiliateAttribution`
 
 NewAffiliateAttribution instantiates a new AffiliateAttribution object
 This constructor will assign default values to properties that have it defined,
@@ -130,6 +131,26 @@ and a boolean to check if the value has been set.
 `func (o *AffiliateAttribution) SetTenantId(v string)`
 
 SetTenantId sets TenantId field to given value.
+
+
+### GetReferredTenantId
+
+`func (o *AffiliateAttribution) GetReferredTenantId() string`
+
+GetReferredTenantId returns the ReferredTenantId field if non-nil, zero value otherwise.
+
+### GetReferredTenantIdOk
+
+`func (o *AffiliateAttribution) GetReferredTenantIdOk() (*string, bool)`
+
+GetReferredTenantIdOk returns a tuple with the ReferredTenantId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReferredTenantId
+
+`func (o *AffiliateAttribution) SetReferredTenantId(v string)`
+
+SetReferredTenantId sets ReferredTenantId field to given value.
 
 
 ### GetSignupSource

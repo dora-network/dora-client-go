@@ -26,7 +26,10 @@ type AffiliateAttribution struct {
 	ProgramId string `json:"program_id"`
 	ReferrerId string `json:"referrer_id"`
 	ReferrerUserId string `json:"referrer_user_id"`
+	// Tenant that owns the referrer and the program. A referrer in a global tenant may refer users of any tenant.
 	TenantId string `json:"tenant_id"`
+	// Tenant that owns the referred user. Differs from tenant_id only when a global tenant's referrer referred the user.
+	ReferredTenantId string `json:"referred_tenant_id"`
 	// Signup hostname when assigned at signup; empty for an assignment made later.
 	SignupSource string `json:"signup_source"`
 	// Immutable assignment time; activity begins counting from this timestamp.
@@ -41,13 +44,14 @@ type _AffiliateAttribution AffiliateAttribution
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAffiliateAttribution(referredUserId string, programId string, referrerId string, referrerUserId string, tenantId string, signupSource string, createdAt time.Time, referralCode string) *AffiliateAttribution {
+func NewAffiliateAttribution(referredUserId string, programId string, referrerId string, referrerUserId string, tenantId string, referredTenantId string, signupSource string, createdAt time.Time, referralCode string) *AffiliateAttribution {
 	this := AffiliateAttribution{}
 	this.ReferredUserId = referredUserId
 	this.ProgramId = programId
 	this.ReferrerId = referrerId
 	this.ReferrerUserId = referrerUserId
 	this.TenantId = tenantId
+	this.ReferredTenantId = referredTenantId
 	this.SignupSource = signupSource
 	this.CreatedAt = createdAt
 	this.ReferralCode = referralCode
@@ -182,6 +186,30 @@ func (o *AffiliateAttribution) SetTenantId(v string) {
 	o.TenantId = v
 }
 
+// GetReferredTenantId returns the ReferredTenantId field value
+func (o *AffiliateAttribution) GetReferredTenantId() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.ReferredTenantId
+}
+
+// GetReferredTenantIdOk returns a tuple with the ReferredTenantId field value
+// and a boolean to check if the value has been set.
+func (o *AffiliateAttribution) GetReferredTenantIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ReferredTenantId, true
+}
+
+// SetReferredTenantId sets field value
+func (o *AffiliateAttribution) SetReferredTenantId(v string) {
+	o.ReferredTenantId = v
+}
+
 // GetSignupSource returns the SignupSource field value
 func (o *AffiliateAttribution) GetSignupSource() string {
 	if o == nil {
@@ -269,6 +297,7 @@ func (o AffiliateAttribution) ToMap() (map[string]interface{}, error) {
 	toSerialize["referrer_id"] = o.ReferrerId
 	toSerialize["referrer_user_id"] = o.ReferrerUserId
 	toSerialize["tenant_id"] = o.TenantId
+	toSerialize["referred_tenant_id"] = o.ReferredTenantId
 	toSerialize["signup_source"] = o.SignupSource
 	toSerialize["created_at"] = o.CreatedAt
 	toSerialize["referral_code"] = o.ReferralCode
@@ -285,6 +314,7 @@ func (o *AffiliateAttribution) UnmarshalJSON(data []byte) (err error) {
 		"referrer_id",
 		"referrer_user_id",
 		"tenant_id",
+		"referred_tenant_id",
 		"signup_source",
 		"created_at",
 		"referral_code",

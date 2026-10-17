@@ -26,6 +26,7 @@ type TenantGuaranteeFundRow struct {
 	TenantId string `json:"tenant_id"`
 	Seq int64 `json:"seq"`
 	Available string `json:"available"`
+	TransactionAmount string `json:"transaction_amount"`
 	TxKind string `json:"tx_kind"`
 	UpdatedAt time.Time `json:"updated_at"`
 }
@@ -36,12 +37,13 @@ type _TenantGuaranteeFundRow TenantGuaranteeFundRow
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTenantGuaranteeFundRow(id string, tenantId string, seq int64, available string, txKind string, updatedAt time.Time) *TenantGuaranteeFundRow {
+func NewTenantGuaranteeFundRow(id string, tenantId string, seq int64, available string, transactionAmount string, txKind string, updatedAt time.Time) *TenantGuaranteeFundRow {
 	this := TenantGuaranteeFundRow{}
 	this.Id = id
 	this.TenantId = tenantId
 	this.Seq = seq
 	this.Available = available
+	this.TransactionAmount = transactionAmount
 	this.TxKind = txKind
 	this.UpdatedAt = updatedAt
 	return &this
@@ -151,6 +153,30 @@ func (o *TenantGuaranteeFundRow) SetAvailable(v string) {
 	o.Available = v
 }
 
+// GetTransactionAmount returns the TransactionAmount field value
+func (o *TenantGuaranteeFundRow) GetTransactionAmount() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.TransactionAmount
+}
+
+// GetTransactionAmountOk returns a tuple with the TransactionAmount field value
+// and a boolean to check if the value has been set.
+func (o *TenantGuaranteeFundRow) GetTransactionAmountOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.TransactionAmount, true
+}
+
+// SetTransactionAmount sets field value
+func (o *TenantGuaranteeFundRow) SetTransactionAmount(v string) {
+	o.TransactionAmount = v
+}
+
 // GetTxKind returns the TxKind field value
 func (o *TenantGuaranteeFundRow) GetTxKind() string {
 	if o == nil {
@@ -213,6 +239,7 @@ func (o TenantGuaranteeFundRow) ToMap() (map[string]interface{}, error) {
 	toSerialize["tenant_id"] = o.TenantId
 	toSerialize["seq"] = o.Seq
 	toSerialize["available"] = o.Available
+	toSerialize["transaction_amount"] = o.TransactionAmount
 	toSerialize["tx_kind"] = o.TxKind
 	toSerialize["updated_at"] = o.UpdatedAt
 	return toSerialize, nil
@@ -227,6 +254,7 @@ func (o *TenantGuaranteeFundRow) UnmarshalJSON(data []byte) (err error) {
 		"tenant_id",
 		"seq",
 		"available",
+		"transaction_amount",
 		"tx_kind",
 		"updated_at",
 	}

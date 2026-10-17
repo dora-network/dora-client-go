@@ -18,6 +18,7 @@ Name | Type | Description | Notes
 **ProviderId** | Pointer to **string** |  | [optional] 
 **Roles** | [**[]UserRole**](UserRole.md) |  | 
 **ManagedCompetitionIds** | Pointer to **[]string** | Competition IDs this user is explicitly allowed to manage when they have COMPETITION_MANAGER role. Empty means no competition-management access. | [optional] 
+**ManagedAffiliateProgramIds** | Pointer to **[]string** | Affiliate program IDs this user is explicitly allowed to manage when they have AFFILIATE_MANAGER role. Empty means no affiliate-management access. | [optional] 
 **Timezone** | Pointer to **string** | User&#39;s timezone, e.g., &#39;America/New_York&#39;, or an offset. | [optional] 
 **TimezoneOffset** | Pointer to **int32** | timezone offset in seconds | [optional] 
 **VerifiedAt** | Pointer to **time.Time** |  | [optional] 
@@ -361,6 +362,31 @@ SetManagedCompetitionIds sets ManagedCompetitionIds field to given value.
 `func (o *User) HasManagedCompetitionIds() bool`
 
 HasManagedCompetitionIds returns a boolean if a field has been set.
+
+### GetManagedAffiliateProgramIds
+
+`func (o *User) GetManagedAffiliateProgramIds() []string`
+
+GetManagedAffiliateProgramIds returns the ManagedAffiliateProgramIds field if non-nil, zero value otherwise.
+
+### GetManagedAffiliateProgramIdsOk
+
+`func (o *User) GetManagedAffiliateProgramIdsOk() (*[]string, bool)`
+
+GetManagedAffiliateProgramIdsOk returns a tuple with the ManagedAffiliateProgramIds field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetManagedAffiliateProgramIds
+
+`func (o *User) SetManagedAffiliateProgramIds(v []string)`
+
+SetManagedAffiliateProgramIds sets ManagedAffiliateProgramIds field to given value.
+
+### HasManagedAffiliateProgramIds
+
+`func (o *User) HasManagedAffiliateProgramIds() bool`
+
+HasManagedAffiliateProgramIds returns a boolean if a field has been set.
 
 ### GetTimezone
 

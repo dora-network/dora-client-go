@@ -25,6 +25,7 @@ const (
 	WEB3EVENTSTATUS_ORPHANED Web3EventStatus = "ORPHANED"
 	WEB3EVENTSTATUS_USER_NOT_EXIST Web3EventStatus = "USER_NOT_EXIST"
 	WEB3EVENTSTATUS_DUST Web3EventStatus = "DUST"
+	WEB3EVENTSTATUS_UNMATCHED Web3EventStatus = "UNMATCHED"
 )
 
 // All allowed values of Web3EventStatus enum
@@ -34,6 +35,7 @@ var AllowedWeb3EventStatusEnumValues = []Web3EventStatus{
 	"ORPHANED",
 	"USER_NOT_EXIST",
 	"DUST",
+	"UNMATCHED",
 }
 
 func (v *Web3EventStatus) UnmarshalJSON(src []byte) error {

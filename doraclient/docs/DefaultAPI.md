@@ -23,6 +23,7 @@ Method | HTTP request | Description
 [**CreateAffiliateProgram**](DefaultAPI.md#CreateAffiliateProgram) | **Post** /v1/affiliate_programs | Create an affiliate program
 [**CreateConditionalOrder**](DefaultAPI.md#CreateConditionalOrder) | **Post** /v1/orders/conditional | Create a new conditional orders
 [**CreateOrder**](DefaultAPI.md#CreateOrder) | **Post** /v1/orders | Create a new order
+[**CreateOrdersBulk**](DefaultAPI.md#CreateOrdersBulk) | **Post** /v1/orders/bulk | Create many orders at once
 [**CreateTradingChallenge**](DefaultAPI.md#CreateTradingChallenge) | **Post** /v1/trading_challenges | Create a trading challenge
 [**CreateUser**](DefaultAPI.md#CreateUser) | **Post** /v1/integrators/user | Create a new user
 [**CreateWithdrawal**](DefaultAPI.md#CreateWithdrawal) | **Post** /v1/web3/withdrawals | Create a USDC withdrawal request
@@ -31,6 +32,7 @@ Method | HTTP request | Description
 [**ExportPromoLinksCSV**](DefaultAPI.md#ExportPromoLinksCSV) | **Get** /v1/link_batches/{batch_id}/links.csv | Export promotional links as CSV
 [**GetAPIKeysForUserID**](DefaultAPI.md#GetAPIKeysForUserID) | **Get** /v1/user/{user_id}/apikey | Get user&#39;s api keys: admin or integrator only
 [**GetAffiliateProgram**](DefaultAPI.md#GetAffiliateProgram) | **Get** /v1/affiliate_programs/{program_id} | Get an affiliate program
+[**GetAffiliateReferrerCode**](DefaultAPI.md#GetAffiliateReferrerCode) | **Get** /v1/affiliate_referrers/{referrer_id}/code | Get a referrer&#39;s current code
 [**GetAllAssetPrices**](DefaultAPI.md#GetAllAssetPrices) | **Get** /v1/price | Get the current price of all assets
 [**GetAllPositions**](DefaultAPI.md#GetAllPositions) | **Get** /v1/ledger/positions | Get all users&#39; positions
 [**GetAllWithdrawalRequests**](DefaultAPI.md#GetAllWithdrawalRequests) | **Get** /v1/ledger/withdraw/requests | Get all withdrawal requests
@@ -134,6 +136,7 @@ Method | HTTP request | Description
 [**RegisterAffiliateReferrer**](DefaultAPI.md#RegisterAffiliateReferrer) | **Post** /v1/affiliate_programs/{program_id}/referrers | Register an existing user as a referrer
 [**RejectLedgerWithdrawRequest**](DefaultAPI.md#RejectLedgerWithdrawRequest) | **Post** /v1/ledger/withdraw/requests/{withdrawal_id}/reject | Reject a pending withdrawal request
 [**RejectTradingChallengeRegistrationRequest**](DefaultAPI.md#RejectTradingChallengeRegistrationRequest) | **Post** /v1/trading_challenges/registration_requests/{request_id}/reject | Reject a trading challenge registration request
+[**RemoveAffiliateReferrer**](DefaultAPI.md#RemoveAffiliateReferrer) | **Delete** /v1/affiliate_programs/{program_id}/referrers/{referrer_id} | Remove a referrer from a program
 [**RemoveTradingChallengeUsers**](DefaultAPI.md#RemoveTradingChallengeUsers) | **Put** /v1/trading_challenges/remove_users | Remove users from a trading challenge
 [**RenderPromoLinkQR**](DefaultAPI.md#RenderPromoLinkQR) | **Get** /v1/promo_links/{link_id}/qr | Render a promotional link QR code
 [**RepayUSD**](DefaultAPI.md#RepayUSD) | **Post** /v1/positions/repay_usd | Repay borrowed USD, then accrue and pay leverage interest
@@ -1440,6 +1443,72 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## CreateOrdersBulk
+
+> CreateOrdersBulkResponse CreateOrdersBulk(ctx).CreateOrdersBulkRequest(createOrdersBulkRequest).Execute()
+
+Create many orders at once
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+	createOrdersBulkRequest := *openapiclient.NewCreateOrdersBulkRequest([]openapiclient.CreateOrderRequest{*openapiclient.NewCreateOrderRequest("Quantity_example", "InverseLeverage_example", openapiclient.OrderKind("LIMIT"), openapiclient.Side("BUY"), false, "OrderBookId_example")}) // CreateOrdersBulkRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.CreateOrdersBulk(context.Background()).CreateOrdersBulkRequest(createOrdersBulkRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.CreateOrdersBulk``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CreateOrdersBulk`: CreateOrdersBulkResponse
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.CreateOrdersBulk`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateOrdersBulkRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **createOrdersBulkRequest** | [**CreateOrdersBulkRequest**](CreateOrdersBulkRequest.md) |  | 
+
+### Return type
+
+[**CreateOrdersBulkResponse**](CreateOrdersBulkResponse.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## CreateTradingChallenge
 
 > TradingChallengeResponseEnvelope CreateTradingChallenge(ctx).CreateTradingChallengeRequest(createTradingChallengeRequest).Execute()
@@ -1970,6 +2039,76 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**AffiliateProgramEnvelope**](AffiliateProgramEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetAffiliateReferrerCode
+
+> AffiliateReferrerEnvelope GetAffiliateReferrerCode(ctx, referrerId).Execute()
+
+Get a referrer's current code
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+	referrerId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.GetAffiliateReferrerCode(context.Background(), referrerId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.GetAffiliateReferrerCode``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetAffiliateReferrerCode`: AffiliateReferrerEnvelope
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.GetAffiliateReferrerCode`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**referrerId** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetAffiliateReferrerCodeRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**AffiliateReferrerEnvelope**](AffiliateReferrerEnvelope.md)
 
 ### Authorization
 
@@ -4865,7 +5004,7 @@ No authorization required
 
 ## GetTrades
 
-> ListTradeResponseEnvelope GetTrades(ctx).OrderBookIds(orderBookIds).UserIds(userIds).Start(start).End(end).Page(page).Limit(limit).Execute()
+> ListTradeResponseEnvelope GetTrades(ctx).OrderBookIds(orderBookIds).UserIds(userIds).ExcludeUserIds(excludeUserIds).Start(start).End(end).Page(page).Limit(limit).Execute()
 
 Get a filtered, paginated list of trades
 
@@ -4887,6 +5026,7 @@ import (
 func main() {
 	orderBookIds := []string{"Inner_example"} // []string |  (optional)
 	userIds := []string{"Inner_example"} // []string |  (optional)
+	excludeUserIds := []string{"Inner_example"} // []string | Leave out the trades of these users. Requires order_book_ids, and may not be combined with user_ids; a request that breaks either rule is rejected rather than served without the exclusion. (optional)
 	start := time.Now() // time.Time |  (optional)
 	end := time.Now() // time.Time |  (optional)
 	page := int32(56) // int32 |  (optional) (default to 1)
@@ -4894,7 +5034,7 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.DefaultAPI.GetTrades(context.Background()).OrderBookIds(orderBookIds).UserIds(userIds).Start(start).End(end).Page(page).Limit(limit).Execute()
+	resp, r, err := apiClient.DefaultAPI.GetTrades(context.Background()).OrderBookIds(orderBookIds).UserIds(userIds).ExcludeUserIds(excludeUserIds).Start(start).End(end).Page(page).Limit(limit).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.GetTrades``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -4917,6 +5057,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **orderBookIds** | **[]string** |  | 
  **userIds** | **[]string** |  | 
+ **excludeUserIds** | **[]string** | Leave out the trades of these users. Requires order_book_ids, and may not be combined with user_ids; a request that breaks either rule is rejected rather than served without the exclusion. | 
  **start** | **time.Time** |  | 
  **end** | **time.Time** |  | 
  **page** | **int32** |  | [default to 1]
@@ -9081,6 +9222,79 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## RemoveAffiliateReferrer
+
+> AffiliateReferrerEnvelope RemoveAffiliateReferrer(ctx, programId, referrerId).Execute()
+
+Remove a referrer from a program
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/dora-network/dora-client-go/doraclient"
+)
+
+func main() {
+	programId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+	referrerId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.RemoveAffiliateReferrer(context.Background(), programId, referrerId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.RemoveAffiliateReferrer``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `RemoveAffiliateReferrer`: AffiliateReferrerEnvelope
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.RemoveAffiliateReferrer`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**programId** | **string** |  | 
+**referrerId** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiRemoveAffiliateReferrerRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+[**AffiliateReferrerEnvelope**](AffiliateReferrerEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
